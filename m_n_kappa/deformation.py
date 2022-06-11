@@ -75,10 +75,6 @@ class MKappaCurvesAlongBeam:
             for position in self.positions()
         ]
 
-    def _compute_m_kappa_curve(self, position: float) -> list:
-        """m_kappa_curve at given position"""
-        return dict(filter(lambda x: x["position"] == position))["curve"]
-
     def positions(self) -> list:
         """position between elements"""
         return [number * self.element_length for number in range(1, self.elements)]
@@ -91,11 +87,14 @@ class MKappaCurvesAlongBeam:
 
 
 class BeamCurvatures:
+
+    """compute the curvatures of a beam"""
+
+    __slots__ = "_m_kappa_curves", "_beam_length"
+
     def __init__(self, m_kappa_curves: list):
         self._m_kappa_curves = m_kappa_curves
-        self._beam_length = max(self.m_kappa_curves, key=lambda x: x["position"])[
-            "position"
-        ]
+        self._beam_length = self._determine_beam_length()
 
     @property
     def beam_length(self) -> float:
@@ -105,9 +104,13 @@ class BeamCurvatures:
     def m_kappa_curves(self) -> list:
         return self._m_kappa_curves
 
-    def beam_curvatures(self, load: float) -> list:
+    def compute(self, load: float) -> list:
         """give the curvatures of the beam at a given load"""
         return self._curvatures_at_supports() + self._curvatures_within_supports(load)
+
+    def _determine_beam_length(self):
+        """determines beam length from the list of m_kappa_curves"""
+        return max(self.m_kappa_curves, key=lambda x: x["position"])["position"]
 
     def _curvatures_at_supports(self) -> list:
         """curvatures at the supports (are always zero in case of single span beams)"""
@@ -126,7 +129,7 @@ class BeamCurvatures:
             for m_kappa in self.m_kappa_curves
         ]
 
-    def _moment(self, position, load):
+    def _moment(self, position: float, load: float) -> float:
         """compute moment at given position under given load"""
         return internalforces.SingleSpanUniformLoad(self.beam_length, load).moment(
             position
@@ -135,7 +138,11 @@ class BeamCurvatures:
     def _curvature(self, position: float, load: float) -> float:
         """curvature at given position and load"""
         moment = self._moment(position, load)
-        return m_kappa_curve(position).curvature(moment)
+        return self._m_kappa_curve(position).curvature(moment)
+
+    def _m_kappa_curve(self, position: float) -> list:
+        """m_kappa_curve at given position"""
+        return dict(filter(lambda x: x["position"] == position))["curve"]
 
 
 class DeformationByCurvatures:
@@ -234,7 +241,7 @@ class DeformationByCurvatures:
 
     def __sort_by_position(self):
         """sorts the beam-curvatures by position"""
-        sort(self._beam_curvatures, key=lambda x: x["position"])
+        sorted(self._beam_curvatures, key=lambda x: x["position"])
 
 
 class AllDeformation:
