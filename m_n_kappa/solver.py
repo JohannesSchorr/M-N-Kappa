@@ -1,5 +1,5 @@
-import general
-import function
+from . import general
+from . import function
 
 
 class Solver:

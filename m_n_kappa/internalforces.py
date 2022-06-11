@@ -1,6 +1,6 @@
 import abc
 
-import general
+from . import general
 
 """
 Internal Forces

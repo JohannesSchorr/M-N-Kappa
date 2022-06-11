@@ -1,7 +1,7 @@
 import abc
 import math
 
-import general
+from . import general
 
 
 class Material:

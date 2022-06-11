@@ -8,9 +8,9 @@ Procedure
 
 """
 # import general
-import section
-import points
-import internalforces
+from . import section
+from . import points
+from . import internalforces
 
 
 class MKappaCurvesAlongBeam:
@@ -217,7 +217,7 @@ class DeformationByCurvatures:
             for m_curvature in zip(moments, self.curvatures)
         ]
 
-    def _single_load(self, position: float) -> internaforces.SingleSpanSingleLoads:
+    def _single_load(self, position: float) -> internalforces.SingleSpanSingleLoads:
         """internal forces with load at given position"""
         return internalforces.SingleSpanSingleLoads(self.beam_length, [position, 1.0])
 

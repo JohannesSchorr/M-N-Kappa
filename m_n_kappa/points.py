@@ -1,6 +1,6 @@
-import general
-import section
-import solver
+from . import general
+from . import section
+from . import solver
 
 """
 

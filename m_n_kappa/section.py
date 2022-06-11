@@ -1,9 +1,9 @@
 import abc
 import time
 
-import general
-import geometry
-import material
+from . import general
+from . import geometry
+from . import material
 
 
 class Section:

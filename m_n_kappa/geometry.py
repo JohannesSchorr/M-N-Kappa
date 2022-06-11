@@ -1,8 +1,8 @@
 import abc
 
-import general
-import material
-import section
+from . import general
+from . import material
+from . import section
 
 """
 Geometries
