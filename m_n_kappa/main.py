@@ -1,4 +1,4 @@
-from . import material
+import material
 
 concrete = material.Concrete(f_cm=68)
 
