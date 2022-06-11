@@ -1,6 +1,7 @@
 from . import general
 from . import section
 from . import solver
+from . import points
 
 
 class MKappaCurvePoints:
@@ -284,7 +285,7 @@ class MKappaCurve:
             self._compute_positive_curvature_failure()
             self._compute_positive_curvature_intermediate()
 
-    def _compute_values(self, m_kappa: MKappa, material: str = None):
+    def _compute_values(self, m_kappa: points.MKappa, material: str = None):
         if m_kappa.successful:
             self._save_values(
                 m_kappa.moment,
@@ -306,7 +307,7 @@ class MKappaCurve:
         maximum_curvature: float,
         minimum_curvature: float,
     ):
-        return MKappaByStrainPosition(
+        return points.MKappaByStrainPosition(
             self.cross_section,
             strain_position=position_strain,
             strain_at_position=strain_at_position,
@@ -423,7 +424,7 @@ class MKappaCurveCurvature:
         maximum_curvature: float,
         minimum_curvature: float,
     ):
-        return MKappaByStrainPosition(
+        return points.MKappaByStrainPosition(
             self.cross_section,
             strain_position=strain_position,
             strain_at_position=strain_at_position,
