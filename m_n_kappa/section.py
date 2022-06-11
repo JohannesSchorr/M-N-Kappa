@@ -4,6 +4,7 @@ import time
 from . import general
 from . import geometry
 from . import material
+from . import crosssection
 
 
 class Section:
@@ -38,10 +39,10 @@ class Section:
     def _build_crosssection(self, other):
         if isinstance(other, Section):
             sections = [self, other]
-            return Crosssection(sections)
-        elif isinstance(other, Crosssection):
+            return crosssection.Crosssection(sections)
+        elif isinstance(other, crosssection.Crosssection):
             sections = other.sections + [self]
-            return Crosssection(sections)
+            return crosssection.Crosssection(sections)
         else:
             raise TypeError(
                 f'unsupported operand type(s) for +: "{type(self)}" and "{type(other)}"'
