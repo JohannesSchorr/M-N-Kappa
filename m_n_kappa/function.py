@@ -155,7 +155,7 @@ class Linear(General):
     def function(self, variable_value: float):
         return self.slope * variable_value + self.intersection
 
-    def integration(self, variable_value: float):
+    def integration(self, variable_value: float, constant: float = 0.0):
         return (
             (1.0 / 2.0) * self.slope * variable_value ** (2.0)
             + self.intersection * variable_value
