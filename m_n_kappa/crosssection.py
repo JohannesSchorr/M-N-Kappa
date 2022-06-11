@@ -306,8 +306,8 @@ class ComputationCrosssectionStrain(ComputationCrosssection):
     def compute_split_sections(self) -> list:
         return self.compute_sections
 
-    def _create_section(self, section):
-        return section.ComputationSectionStrain(section, self.strain)
+    def _create_section(self, basic_section):
+        return section.ComputationSectionStrain(basic_section, self.strain)
 
     def _print_results(self):
         text = [
@@ -415,7 +415,7 @@ class ComputationCrosssectionCurvature(ComputationCrosssection):
         return f"ComputationCrosssection(sections=sections, curvature={self.curvature}, neutral_axis={self.neutral_axis})"
 
     @property
-    def compute_split_sections(self):
+    def compute_split_sections(self) -> list:
         """sections split at material points"""
         return self._compute_split_sections
 
@@ -432,13 +432,13 @@ class ComputationCrosssectionCurvature(ComputationCrosssection):
     def get_material_points_inside_curvature(self):
         """gives the points included between the curvature and zero strain"""
         strain_positions = []
-        for section in self.compute_sections:
-            strain_positions += section.material_points_inside_curvature()
+        for basic_section in self.compute_sections:
+            strain_positions += basic_section.material_points_inside_curvature()
         return strain_positions
 
-    def _create_section(self, section):
+    def _create_section(self, basic_section):
         return section.ComputationSectionCurvature(
-            section, self.curvature, self.neutral_axis
+            basic_section, self.curvature, self.neutral_axis
         )
 
     def _create_computation_split_sections(self):
@@ -623,12 +623,6 @@ class MaximumCurvature(Curvature):
             print("positive curvature failure")
         # print(f'Strain: {strain}, Position: {position}, Maximum Curvatures: {curvatures}, Maximum Curvature: {min(curvatures)}')
         return min(curvatures)
-
-    def __remove_smaller_strains(self, strain, position_strains):
-        return list(filter(lambda x: strain < x[1], position_strains))
-
-    def __remove_higher_strains(self, strain, position_strains):
-        return list(filter(lambda x: x[1] < strain, position_strains))
 
 
 class MinimumCurvature(Curvature):
