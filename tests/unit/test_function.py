@@ -24,7 +24,7 @@ class TestPolynominal(unittest.TestCase):
     func = function.Polynominal(data, variable=0, target=1)
 
     def test_a(self):
-        self.assertAlmostEqual(self.func.a, -0.13888, places=5)
+        self.assertAlmostEqual(self.func.a, -0.13888, places=4)
 
 
 if __name__ == "__main__":

@@ -166,7 +166,7 @@ class TestSteelBilinear(unittest.TestCase):
 
     def test_epsilon_y(self):
         epsilon_y = self.f_y / 210000.0
-        self.assertEqual(self.steel.epsilon_y, self.epsilon_y)
+        self.assertEqual(self.steel.epsilon_y, epsilon_y)
 
     def test_stress_strain(self):
         self.assertEqual(
