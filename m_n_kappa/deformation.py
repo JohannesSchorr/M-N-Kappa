@@ -7,7 +7,7 @@ Procedure
   3. deformation at position where maximum moment is expected (for each moment point)
 
 """
-from . import section
+from . import crosssection
 from . import curves
 from . import internalforces
 
@@ -26,7 +26,7 @@ class MKappaCurvesAlongBeam:
 
     def __init__(
         self,
-        crosssection: section.Crosssection,
+        crosssection: crosssection.Crosssection,
         beam_length: float,
         elements: int = 10,
         loading_type: str = "uniform",
@@ -43,7 +43,7 @@ class MKappaCurvesAlongBeam:
         return self._beam_length
 
     @property
-    def crosssection(self) -> section.Crosssection:
+    def crosssection(self) -> crosssection.Crosssection:
         """crosssection of the beam"""
         return self._crosssection
 

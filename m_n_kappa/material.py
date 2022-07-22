@@ -697,19 +697,3 @@ class Reinforcement(Steel):
     @property
     def class_name(self):
         return "Reinforcement"
-
-
-if __name__ == "__main__":
-
-    concrete = Concrete(f_cm=30)
-    print(concrete)
-
-    steel = Steel(f_y=300)
-    print(steel)
-
-    reinforcement = Reinforcement(f_y=500, f_u=550, epsilon_u=0.15)
-    print(reinforcement)
-
-    # print(steel.material_points_position(curvature=0.0002, neutral_axis=10))
-
-    print(reinforcement.get_intermediate_strains(-0.15, 0.15))

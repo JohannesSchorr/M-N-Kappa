@@ -1,5 +1,5 @@
+from . import crosssection
 from . import general
-from . import section
 from . import solver
 from . import points
 
@@ -78,7 +78,7 @@ class MKappaCurve:
 
     def __init__(
         self,
-        cross_section: section.Crosssection,
+        cross_section: crosssection.Crosssection,
         include_positive_curvature: bool = True,
         include_negative_curvature: bool = False,
     ):
@@ -87,7 +87,7 @@ class MKappaCurve:
 
         Parameters
         ----------
-        cross_section : section.Crosssection
+        cross_section : crosssection.Crosssection
                 cross section to compute
         include_positive_curvature : bool
                 if True than positive curvature values are computed
@@ -363,7 +363,7 @@ class MKappaCurveCurvature:
 
         Parameters
         ----------
-        cross_section : section.Crosssection
+        cross_section : crosssection.Crosssection
 
         maximum_curvature : float
 
@@ -443,7 +443,7 @@ class MKappaAtAxialForce:
             2.
     """
 
-    def __init__(self, cross_section: section.Crosssection, axial_force: float):
+    def __init__(self, cross_section: crosssection.Crosssection, axial_force: float):
         self._cross_section = cross_section
         self._axial_force = axial_force
 
@@ -475,7 +475,7 @@ class MNZeroCurvature:
 
     def __init__(
         self,
-        cross_section: section.Crosssection,
+        cross_section: crosssection.Crosssection,
         input_section_type: str,
         input_strain: float,
         counter_lower_strain: float,
@@ -489,7 +489,7 @@ class MNZeroCurvature:
 
         Paramters
         ---------
-        cross_section : section.Crosssection
+        cross_section : crosssection.Crosssection
                 given cross-section
         input_section_type : str
                 section where strain is applied to
@@ -597,7 +597,7 @@ class MNZeroCurvature:
         return self._computations
 
     @property
-    def cross_section(self) -> section.Crosssection:
+    def cross_section(self) -> crosssection.Crosssection:
         return self._cross_section
 
     @property
@@ -637,7 +637,7 @@ class MNZeroCurvature:
         return self._other_axial_force
 
     @property
-    def other_cross_section(self) -> section.Crosssection:
+    def other_cross_section(self) -> crosssection.Crosssection:
         return self._other_cross_section
 
     @property
@@ -696,7 +696,7 @@ class MNZeroCurvature:
                 break
 
     def other_maximum_strain(self) -> float:
-        cross_section = section.Crosssection(self.other_sections())
+        cross_section = crosssection.Crosssection(self.other_sections())
         if self.input_strain < 0.0:
             return cross_section.maximum_positive_strain()
         else:
@@ -712,7 +712,7 @@ class MNZeroCurvature:
             return False
 
     def _create_crosssection(self, sections, strain):
-        return section.ComputationCrosssectionStrain(sections, strain)
+        return crosssection.ComputationCrosssectionStrain(sections, strain)
 
     def _guess_new_strain(self):
         return self.solver(
@@ -751,13 +751,13 @@ class MNZeroCurvatureCurve:
         "_m_n_points",
     )
 
-    def __init__(self, cross_section: section.Crosssection):
+    def __init__(self, cross_section: crosssection.Crosssection):
         """
         Initialization
 
         Parameters
         ----------
-        cross_section : section.Crosssection
+        cross_section : crosssection.Crosssection
                 crosssection to compute
         """
         self._cross_section = cross_section
@@ -983,7 +983,7 @@ class MNZeroCurvatureCurve:
             return False
 
     def _create_crosssection(self, sections, strain):
-        return section.ComputationCrosssectionStrain(sections, strain)
+        return crosssection.ComputationCrosssectionStrain(sections, strain)
 
     def compute_m_n_points(self) -> None:
         for starting_point in self.axial_force_starting_points:
@@ -1032,12 +1032,12 @@ class MNZeroCurvatureCurve:
 class MCurvatureCurve:
     """ """
 
-    def __init__(self, cross_section: section.Crosssection, axial_force: float):
+    def __init__(self, cross_section: crosssection.Crosssection, axial_force: float):
         self._cross_section = cross_section
         self._axial_force: float
 
     @property
-    def cross_section(self) -> section.Crosssection:
+    def cross_section(self) -> crosssection.Crosssection:
         return self._cross_section
 
     @property
@@ -1057,13 +1057,13 @@ class MNCurvatureCurve:
             1.
     """
 
-    def __init__(self, cross_section: section.Crosssection, m_n_points: list):
+    def __init__(self, cross_section: crosssection.Crosssection, m_n_points: list):
         """
         Initialization
 
         Parameters
         ----------
-        cross_section : section.Crosssection
+        cross_section : crosssection.Crosssection
                 cross_section
         m_n_points : list
                 list of computed moment-axial-force-points without curvature
@@ -1092,7 +1092,7 @@ class MNCurvatureCurve:
         )
 
     @property
-    def cross_section(self) -> section.Crosssection:
+    def cross_section(self) -> crosssection.Crosssection:
         return self._cross_section
 
     @property

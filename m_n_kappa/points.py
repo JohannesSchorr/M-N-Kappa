@@ -1,5 +1,6 @@
 from . import general
 from . import section
+from . import crosssection
 from . import solver
 
 """
@@ -16,7 +17,7 @@ class MKappa:
 
     def __init__(
         self,
-        cross_section: section.Crosssection,
+        cross_section: crosssection.Crosssection,
         applied_axial_force: float = 0.0,
         maximum_iterations: int = 10,
         axial_force_tolerance: float = 5.0,
@@ -27,13 +28,13 @@ class MKappa:
 
         Parameters
         ----------
-        cross_section : section.Crossection
-                cross-section to compute
+        cross_section : crosssection.Crossection
+            cross-section to compute
         maximum_curvature : float
-                maximum positive or negative allowed curvature
+           maximum positive or negative allowed curvature
         minimum_curvature : float
-                minimum positive or negative allowed curvature
-                (needs same sign as maximum_curvature)
+            minnimum positive or negative allowed curvature
+            (needs same sign as maximum_curvature)
         strain_position : float
                 position of the given strain (Default: None)
         strain_at_postion : float
@@ -241,7 +242,7 @@ class MKappa:
         pass
 
     def _get_compute_cross_section(self):
-        return section.ComputationCrosssectionCurvature(
+        return crosssection.ComputationCrosssectionCurvature(
             sections=self.cross_section.sections,
             curvature=self.curvature,
             neutral_axis=self.neutral_axis,
@@ -317,7 +318,7 @@ class MKappaByStrainPosition(MKappa):
 
     def __init__(
         self,
-        cross_section: section.Crosssection,
+        cross_section: crosssection.Crosssection,
         maximum_curvature: float,
         minimum_curvature: float,
         strain_position: float,
@@ -332,7 +333,7 @@ class MKappaByStrainPosition(MKappa):
 
         Parameters
         ----------
-        cross_section : section.Crossection
+        cross_section : crosssection.Crossection
                 cross-section to compute
         maximum_curvature : float
                 maximum positive or negative allowed curvature
@@ -436,7 +437,7 @@ class MKappaByConstantCurvature(MKappa):
 
     def __init__(
         self,
-        cross_section,
+        cross_section: crosssection.Crosssection,
         applied_curvature: float,
         maximum_neutral_axis: float,
         minimum_neutral_axis: float,
@@ -450,7 +451,7 @@ class MKappaByConstantCurvature(MKappa):
 
         Parameters
         ----------
-        cross_section : section.Crossection
+        cross_section : crosssection.Crossection
                 cross-section to compute
         maximum_neutral_axis : float
                 maximum allowed neutral-axis

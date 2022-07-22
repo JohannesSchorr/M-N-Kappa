@@ -567,7 +567,7 @@ if __name__ == "__main__":
     # print(strain_section)
     strain_section = ComputationSectionStrain(concrete_section, strain=-0.002)
     # print(strain_section)
-
+    """
     # cs = CrosssectionBoundaries(sections=[concrete_section, steel_section])
     # print(cs.maximum_positive_curvature)
     cs = Crosssection(sections=[concrete_section, steel_section])
@@ -588,3 +588,4 @@ if __name__ == "__main__":
 
     end = time.clock()
     print(end - start)
+    """
