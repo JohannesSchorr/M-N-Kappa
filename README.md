@@ -42,8 +42,10 @@ pip install m-n-kappa
 Deformation
 
 ## Todo
-- computation of single-span systems (no consideration of shear connectors)
-- computation of single-span systems considering load-slip behaviour of shear connectors
+- computation of single-span systems (no consideration of shear connectors) + testing + validation
+- computation of single-span systems considering load-slip behaviour of shear connectors + testing + validation 
 - computation of multi-span systems
+- Presentation of results (i.e. in Jupyter Notebooks, Altair, Plotly)
 - Documentation
+- Publication on Github and pypi
 - Enhancement of performance writing several methods/classes in [Rust](https://www.rust-lang.org/)
