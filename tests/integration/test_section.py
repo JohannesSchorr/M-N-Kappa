@@ -1,19 +1,25 @@
-import unittest
+from m_n_kappa.section import (
+    Section,
+    ComputationSectionStrain,
+    ComputationSectionCurvature,
+)
+from m_n_kappa.geometry import Rectangle
+from m_n_kappa.material import Steel
 
-from m_n_kappa import section, geometry, material
+from unittest import TestCase, main
 
-rectangle = geometry.Rectangle(0.0, 10.0, 10.0)
-steel = material.Steel(355.0)
+rectangle = Rectangle(0.0, 10.0, 10.0)
+steel = Steel(355.0)
 my_section = rectangle + steel
 
 
-class TestCombineMaterialGeometry(unittest.TestCase):
-
-    my_section_1 = rectangle + steel
-    my_section_2 = section.Section(geometry=rectangle, material=steel)
+class TestCombineMaterialGeometry(TestCase):
+    def setUp(self):
+        self.my_section_1 = rectangle + steel
+        self.my_section_2 = Section(geometry=rectangle, material=steel)
 
     def test_combine_material_and_geometry_type(self):
-        self.assertEqual(type(self.my_section_1), section.Section)
+        self.assertEqual(type(self.my_section_1), Section)
 
     def test_combine_material_and_geometry(self):
         self.assertEqual(self.my_section_1, self.my_section_2)
@@ -28,11 +34,11 @@ class TestCombineMaterialGeometry(unittest.TestCase):
         self.assertEqual(self.my_section_1.geometry, rectangle)
 
 
-class TestComputationSectionStrain(unittest.TestCase):
-
-    strain = 0.001
-    computation_section = section.ComputationSectionStrain(my_section, strain)
-    stress = strain * steel.E_a
+class TestComputationSectionStrain(TestCase):
+    def setUp(self):
+        self.strain = 0.001
+        self.computation_section = ComputationSectionStrain(my_section, self.strain)
+        self.stress = self.strain * steel.E_a
 
     def test_strain(self):
         self.assertEqual(self.computation_section.strain, self.strain)
@@ -74,24 +80,24 @@ class TestComputationSectionStrain(unittest.TestCase):
         self.assertEqual(self.computation_section.geometry, rectangle)
 
 
-class TestComputationSectionCurvature(unittest.TestCase):
-
-    curvature = 0.00001
-    neutral_axis = my_section.geometry.bottom_edge
-    computation_section = section.ComputationSectionCurvature(
-        my_section, curvature=curvature, neutral_axis=neutral_axis
-    )
-    lever_arm = my_section.geometry.top_edge + 1.0 / 3.0 * (
-        my_section.geometry.bottom_edge - my_section.geometry.top_edge
-    )
-    axial_force = (
-        (-1)
-        * rectangle.area
-        * curvature
-        * (rectangle.bottom_edge - rectangle.top_edge)
-        * steel.E_a
-        * 0.5
-    )
+class TestComputationSectionCurvature(TestCase):
+    def setUp(self): 
+        self.curvature = 0.00001
+        self.neutral_axis = my_section.geometry.bottom_edge
+        self.computation_section = ComputationSectionCurvature(
+            my_section, curvature=self.curvature, neutral_axis=self.neutral_axis
+        )
+        self.lever_arm = my_section.geometry.top_edge + 1.0 / 3.0 * (
+            my_section.geometry.bottom_edge - my_section.geometry.top_edge
+        )
+        self.axial_force = (
+            (-1)
+            * rectangle.area
+            * self.curvature
+            * (rectangle.bottom_edge - rectangle.top_edge)
+            * steel.E_a
+            * 0.5
+        )
 
     def test_material(self):
         self.assertEqual(self.computation_section.material, steel)
@@ -130,4 +136,4 @@ class TestComputationSectionCurvature(unittest.TestCase):
 
 
 if __name__ == "__main__":
-    unittest.main()
+    main()

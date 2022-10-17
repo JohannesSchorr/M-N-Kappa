@@ -1,23 +1,29 @@
-import unittest
+from m_n_kappa.crosssection import (
+    Crosssection,
+    ComputationCrosssectionCurvature,
+    ComputationCrosssectionStrain,
+)
+from m_n_kappa.material import Concrete, Steel
+from m_n_kappa.geometry import Rectangle
 
-from m_n_kappa import crosssection, material, geometry
+from unittest import TestCase, main
 
 # Concrete section
-concrete = material.Concrete(f_cm=30)
-concrete_rectangle = geometry.Rectangle(top_edge=0.0, bottom_edge=20, width=10)
+concrete = Concrete(f_cm=30)
+concrete_rectangle = Rectangle(top_edge=0.0, bottom_edge=20, width=10)
 concrete_section = concrete + concrete_rectangle
 
 # Steel section
-steel = material.Steel(f_y=355, epsilon_u=0.2)
-steel_rectangle = geometry.Rectangle(top_edge=20, bottom_edge=30, width=10)
+steel = Steel(f_y=355, epsilon_u=0.2)
+steel_rectangle = Rectangle(top_edge=20, bottom_edge=30, width=10)
 steel_section = steel + steel_rectangle
 
 sections = [concrete_section, steel_section]
 
 
-class TestCrosssection(unittest.TestCase):
-
-    cs = crosssection.Crosssection([concrete_section, steel_section])
+class TestCrosssection(TestCase):
+    def setUp(self):
+        self.cs = Crosssection([concrete_section, steel_section])
 
     def test_sections(self):
         self.assertListEqual(self.cs.sections, [concrete_section, steel_section])
@@ -58,10 +64,10 @@ class TestCrosssection(unittest.TestCase):
         self.assertEqual(self.cs.maximum_negative_strain(), steel.minimum_strain)
 
 
-class TestComputationCrosssectionStrain1(unittest.TestCase):
-
-    strain = 0.1
-    cs = crosssection.ComputationCrosssectionStrain(sections, strain)
+class TestComputationCrosssectionStrain1(TestCase):
+    def setUp(self):
+        self.strain = 0.1
+        self.cs = ComputationCrosssectionStrain(sections, self.strain)
 
     def test_strain(self):
         self.assertEqual(self.cs.strain, self.strain)
@@ -81,10 +87,10 @@ class TestComputationCrosssectionStrain1(unittest.TestCase):
         self.assertGreaterEqual(self.cs.slab_sections_moment(), 0.0)
 
 
-class TestComputationCrosssectionStrain2(unittest.TestCase):
-
-    strain = -0.001
-    cs = crosssection.ComputationCrosssectionStrain(sections, strain)
+class TestComputationCrosssectionStrain2(TestCase):
+    def setUp(self):
+        self.strain = -0.001
+        self.cs = ComputationCrosssectionStrain(sections, self.strain)
 
     def test_strain(self):
         self.assertEqual(self.cs.strain, self.strain)
@@ -104,13 +110,13 @@ class TestComputationCrosssectionStrain2(unittest.TestCase):
         self.assertLessEqual(self.cs.slab_sections_moment(), 0.0)
 
 
-class TestComputationCrosssectionCurvature(unittest.TestCase):
-
-    curvature = 0.0001
-    neutral_axis = 20.0
-    cs = crosssection.ComputationCrosssectionCurvature(
-        sections, curvature, neutral_axis
-    )
+class TestComputationCrosssectionCurvature(TestCase):
+    def setUp(self):
+        self.curvature = 0.0001
+        self.neutral_axis = 20.0
+        self.cs = ComputationCrosssectionCurvature(
+            sections, self.curvature, self.neutral_axis
+        )
 
     def test_curvature(self):
         self.assertEqual(self.cs.curvature, self.curvature)
@@ -123,4 +129,4 @@ class TestComputationCrosssectionCurvature(unittest.TestCase):
 
 
 if __name__ == "__main__":
-    unittest.main()
+    main()

@@ -1,15 +1,18 @@
-import unittest
+from m_n_kappa.material import Concrete, Steel
+from m_n_kappa.geometry import Rectangle
+from m_n_kappa.deformation import MKappaCurvesAlongBeam, BeamCurvatures
+from m_n_kappa.curves import MKappaCurvePoints
 
-from m_n_kappa import material, geometry, deformation, points
+from unittest import TestCase, main
 
 # Concrete section
-concrete = material.Concrete(f_cm=30)
-concrete_rectangle = geometry.Rectangle(top_edge=0.0, bottom_edge=20, width=10)
+concrete = Concrete(f_cm=30)
+concrete_rectangle = Rectangle(top_edge=0.0, bottom_edge=20, width=10)
 concrete_section = concrete + concrete_rectangle
 
 # Steel section
-steel = material.Steel(f_y=355, epsilon_u=0.2)
-steel_rectangle = geometry.Rectangle(top_edge=20, bottom_edge=30, width=10)
+steel = Steel(f_y=355, epsilon_u=0.2)
+steel_rectangle = Rectangle(top_edge=20, bottom_edge=30, width=10)
 steel_section = steel + steel_rectangle
 
 # Crosssection
@@ -20,15 +23,13 @@ element_number = 10
 load = 15
 
 # compute M-Kappa curves along the beam
-m_kappa_curves = deformation.MKappaCurvesAlongBeam(
-    crosssection=cs, beam_length=beam_length
-)
+m_kappa_curves = MKappaCurvesAlongBeam(crosssection=cs, beam_length=beam_length)
 
 # compute Beam-Curvatures
-beam_curvatures = deformation.BeamCurvatures(m_kappa_curves.m_kappa_curves, beam_length)
+beam_curvatures = BeamCurvatures(m_kappa_curves.m_kappa_curves, beam_length)
 
 
-class TestMKappaCurvesAlongBeam(unittest.TestCase):
+class TestMKappaCurvesAlongBeam(TestCase):
     def test_crosssection(self):
         self.assertEqual(m_kappa_curves.crosssection, cs)
 
@@ -51,7 +52,7 @@ class TestMKappaCurvesAlongBeam(unittest.TestCase):
         for index in range(len(m_kappa_curves.m_kappa_curves)):
             self.assertEqual(
                 type(m_kappa_curves.m_kappa_curves[index]["curve"]),
-                points.MKappaCurvePoints,
+                MKappaCurvePoints,
             )
 
     def test_elements(self):
@@ -70,7 +71,7 @@ class TestMKappaCurvesAlongBeam(unittest.TestCase):
         )
 
 
-class TestBeamCurvatures(unittest.TestCase):
+class TestBeamCurvatures(TestCase):
     def test_beam_length(self):
         self.assertEqual(beam_curvatures.beam_length, beam_length)
 
@@ -83,7 +84,7 @@ class TestBeamCurvatures(unittest.TestCase):
     def test_m_kappa_curve(self):
         self.assertEqual(
             type(beam_curvatures._m_kappa_curve(0.5 * beam_length)),
-            points.MKappaCurvePoints,
+            MKappaCurvePoints,
         )
 
     def test_compute(self):
@@ -91,4 +92,4 @@ class TestBeamCurvatures(unittest.TestCase):
 
 
 if __name__ == "__main__":
-    unittest.main()
+    main()

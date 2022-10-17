@@ -1,6 +1,12 @@
 import unittest
 
-from m_n_kappa import width
+from m_n_kappa.width import (
+    StateMeta,
+    MembranStateHarmonicLoading,
+    MembranStateLineLoading,
+    BendingStateHarmonicLoading,
+    BendingStateLineLoading,
+)
 
 
 """
@@ -11,8 +17,10 @@ Kuhlmann, U.; Rieg, A. Mittragende Betongurtbreite niedriger Verbundträger, AiF
 
 
 class TestStateMeta(unittest.TestCase):
-
-    test_state = width.StateMeta(slab_width=2.0, beam_length=1.0, mu=0.0, sequences=55)
+    def setUp(self):
+        self.test_state = StateMeta(
+            slab_width=2.0, beam_length=1.0, mu=0.0, sequences=55
+        )
 
     def test_sinh(self):
         self.assertEqual(self.test_state.sinh(0), 0)
@@ -22,16 +30,16 @@ class TestStateMeta(unittest.TestCase):
 
 
 class TestMembranStateHarmonicLoading(unittest.TestCase):
-
-    test_state_1 = width.MembranStateHarmonicLoading(
-        slab_width=2.0, beam_length=1.0, mu=0.0
-    )
-    test_state_2 = width.MembranStateHarmonicLoading(
-        slab_width=1.0, beam_length=1.0, mu=0.0
-    )
-    test_state_3 = width.MembranStateHarmonicLoading(
-        slab_width=0.4, beam_length=1.0, mu=0.0
-    )
+    def setUp(self):
+        self.test_state_1 = MembranStateHarmonicLoading(
+            slab_width=2.0, beam_length=1.0, mu=0.0
+        )
+        self.test_state_2 = MembranStateHarmonicLoading(
+            slab_width=1.0, beam_length=1.0, mu=0.0
+        )
+        self.test_state_3 = MembranStateHarmonicLoading(
+            slab_width=0.4, beam_length=1.0, mu=0.0
+        )
 
     def test_b_over_l(self):
         self.assertEqual(self.test_state_2.one_web.b_over_l, 1.0)
@@ -77,10 +85,10 @@ class TestMembranStateHarmonicLoading(unittest.TestCase):
 
 
 class TestMembrandStateLineLoading(unittest.TestCase):
-
-    test_state = width.MembranStateLineLoading(
-        slab_width=2.0, beam_length=1.0, mu=0.0, sequences=55
-    )
+    def setUp(self):
+        self.test_state = MembranStateLineLoading(
+            slab_width=2.0, beam_length=1.0, mu=0.0, sequences=55
+        )
 
     def test_mu(self):
         self.assertEqual(self.test_state.multiple_webs.mu, 0)
@@ -112,7 +120,7 @@ class TestMembrandStateLineLoading(unittest.TestCase):
         )
 
     def test_ratio_2_for_multiple_webs(self):
-        test_state = width.MembranStateLineLoading(
+        test_state = MembranStateLineLoading(
             slab_width=1.0, beam_length=1.0, mu=0.0, sequences=55
         )
         self.assertAlmostEqual(
@@ -120,7 +128,7 @@ class TestMembrandStateLineLoading(unittest.TestCase):
         )
 
     def test_ratio_3_for_multiple_webs(self):
-        test_state = width.MembranStateLineLoading(
+        test_state = MembranStateLineLoading(
             slab_width=0.2, beam_length=1.0, mu=0.0, sequences=55
         )
         self.assertAlmostEqual(
@@ -130,9 +138,7 @@ class TestMembrandStateLineLoading(unittest.TestCase):
 
 class TestBendingStateHarmonicLoading(unittest.TestCase):
 
-    test_state = width.BendingStateHarmonicLoading(
-        slab_width=2.0, beam_length=1.0, mu=0.0
-    )
+    test_state = BendingStateHarmonicLoading(slab_width=2.0, beam_length=1.0, mu=0.0)
 
     def test_compare_two_and_one_web(self):
         """
@@ -162,11 +168,11 @@ class TestBendingStateHarmonicLoading(unittest.TestCase):
 
 
 class TestBendingStateLineLoading(unittest.TestCase):
-
-    test_state = width.BendingStateLineLoading(
-        slab_width=2.0, beam_length=1.0, mu=0.0, sequences=30
-    )
-    position = 0.0
+    def setUp(self):
+        self.test_state = BendingStateLineLoading(
+            slab_width=2.0, beam_length=1.0, mu=0.0, sequences=30
+        )
+        self.position = 0.0
 
     def test_compare_two_and_one_web(self):
         """

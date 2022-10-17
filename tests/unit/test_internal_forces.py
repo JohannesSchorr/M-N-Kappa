@@ -1,13 +1,13 @@
-import unittest
+from unittest import TestCase, main
 
-from m_n_kappa import internalforces
+from m_n_kappa.internalforces import SingleSpan
 
 
-class TestSingleSpanUniformLoad(unittest.TestCase):
-
-    beam_length = 10.0
-    load = 20.0
-    forces = internalforces.SingleSpan(length=beam_length, uniform_load=load)
+class TestSingleSpanUniformLoad(TestCase):
+    def setUp(self):
+        self.beam_length = 10.0
+        self.load = 20.0
+        self.forces = SingleSpan(length=self.beam_length, uniform_load=self.load)
 
     def test_moment(self):
         self.assertEqual(
@@ -53,13 +53,13 @@ class TestSingleSpanUniformLoad(unittest.TestCase):
         self.assertEqual(self.forces.loading, self.load * self.beam_length)
 
 
-class TestSingleSpanSingleLoad(unittest.TestCase):
-
-    beam_length = 10.0
-    load = 10.0
-    forces = internalforces.SingleSpan(
-        length=beam_length, loads=[[0.5 * beam_length, load]]
-    )
+class TestSingleSpanSingleLoad(TestCase):
+    def setUp(self):
+        self.beam_length = 10.0
+        self.load = 10.0
+        self.forces = SingleSpan(
+            length=self.beam_length, loads=[[0.5 * self.beam_length, self.load]]
+        )
 
     def test_transversal_shear_support_left(self):
         self.assertEqual(self.forces.transversal_shear_support_left, 0.5 * self.load)
@@ -86,4 +86,4 @@ class TestSingleSpanSingleLoad(unittest.TestCase):
 
 
 if __name__ == "__main__":
-    unittest.main()
+    main()

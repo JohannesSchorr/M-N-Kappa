@@ -1,9 +1,9 @@
-import unittest
+from m_n_kappa.material import Material, Concrete, ConcreteCompressionNonlinear, Steel
 
-from m_n_kappa import material
+from unittest import TestCase, main
 
 
-class TestMaterial(unittest.TestCase):
+class TestMaterial(TestCase):
 
     stress_strain_list = [
         [-100.0, -1.0],
@@ -13,9 +13,7 @@ class TestMaterial(unittest.TestCase):
         [150.0, 2.0],
     ]
     section_type = "slab"
-    my_material = material.Material(
-        section_type=section_type, stress_strain=stress_strain_list
-    )
+    my_material = Material(section_type=section_type, stress_strain=stress_strain_list)
 
     def test_stress_strain(self):
         self.assertListEqual(self.my_material.stress_strain, self.stress_strain_list)
@@ -83,11 +81,12 @@ class TestMaterial(unittest.TestCase):
         self.my_material.sort_strains_ascending()
 
 
-class TestConcrete(unittest.TestCase):
+class TestConcrete(TestCase):
     """Test general-functions of material-module"""
 
-    f_cm = 35.0
-    concrete = material.Concrete(f_cm=f_cm)
+    def setUp(self):
+        self.f_cm = 35.0
+        self.concrete = Concrete(f_cm=self.f_cm)
 
     def test_f_cm(self):
         self.assertEqual(self.concrete.f_cm, self.f_cm)
@@ -96,15 +95,16 @@ class TestConcrete(unittest.TestCase):
         self.assertEqual(self.concrete.compression_stress_strain_type, "Nonlinear")
 
 
-class TestConcreteCompressionNonlinear(unittest.TestCase):
+class TestConcreteCompressionNonlinear(TestCase):
 
     """Test Concrete-class of material-module with non-linear stress-strain relationship"""
 
-    f_cm = 35.0
-    concrete = material.Concrete(f_cm=f_cm)
-    compression = material.ConcreteCompressionNonlinear(
-        f_cm, concrete.epsilon_y, concrete.E_cm
-    )
+    def setUp(self):
+        self.f_cm = 35.0
+        self.concrete = Concrete(f_cm=self.f_cm)
+        self.compression = ConcreteCompressionNonlinear(
+            self.f_cm, self.concrete.epsilon_y, self.concrete.E_cm
+        )
 
     def test_f_cm(self):
         self.assertEqual(self.compression.f_cm, self.f_cm)
@@ -127,11 +127,11 @@ class TestConcreteCompressionNonlinear(unittest.TestCase):
         )
 
 
-class TestSteel(unittest.TestCase):
-
-    f_y = 355.0
-    f_u = 500.0
-    steel = material.Steel(f_y=f_y, f_u=f_u)
+class TestSteel(TestCase):
+    def setUp(self):
+        self.f_y = 355.0
+        self.f_u = 500.0
+        self.steel = Steel(f_y=self.f_y, f_u=self.f_u)
 
     def test_f_y(self):
         self.assertEqual(self.steel.f_y, self.f_y)
@@ -148,12 +148,12 @@ class TestSteel(unittest.TestCase):
         )
 
 
-class TestSteelBilinear(unittest.TestCase):
-
-    f_y = 355.0
-    f_u = 500.0
-    epsilon_u = 0.15
-    steel = material.Steel(f_y=f_y, f_u=f_u, epsilon_u=epsilon_u)
+class TestSteelBilinear(TestCase):
+    def setUp(self):
+        self.f_y = 355.0
+        self.f_u = 500.0
+        self.epsilon_u = 0.15
+        self.steel = Steel(f_y=self.f_y, f_u=self.f_u, epsilon_u=self.epsilon_u)
 
     def test_f_y(self):
         self.assertEqual(self.steel.f_y, self.f_y)
@@ -182,4 +182,4 @@ class TestSteelBilinear(unittest.TestCase):
 
 
 if __name__ == "__main__":
-    unittest.main()
+    main()
