@@ -1,7 +1,7 @@
-from . import crosssection
-from . import general
-from . import solver
-from . import points
+from .crosssection import Crosssection, ComputationCrosssectionStrain
+from .general import interpolation, print_sections, print_chapter, str_start_end, remove_duplicates
+from .solver import Solver, Newton
+from .points import MKappa, MKappaByStrainPosition, MKappaByStrainPosition
 
 
 class MKappaCurvePoints:
@@ -41,7 +41,7 @@ class MKappaCurvePoints:
     def curvature(self, by_moment: float):
         """get curvature at given moment"""
         point_index = self.determine_index(by_moment)
-        return general.interpolation(
+        return interpolation(
             by_moment,
             self.moment_curvature(point_index),
             self.moment_curvature(point_index + 1),
@@ -78,7 +78,7 @@ class MKappaCurve:
 
     def __init__(
         self,
-        cross_section: crosssection.Crosssection,
+        cross_section: Crosssection,
         include_positive_curvature: bool = True,
         include_negative_curvature: bool = False,
     ):
@@ -87,7 +87,7 @@ class MKappaCurve:
 
         Parameters
         ----------
-        cross_section : crosssection.Crosssection
+        cross_section : Crosssection
                 cross section to compute
         include_positive_curvature : bool
                 if True than positive curvature values are computed
@@ -110,7 +110,7 @@ class MKappaCurve:
     def __repr__(self):
         return f"MKappaCurve(cross_section=cross_section)"
 
-    @general.str_start_end
+    @str_start_end
     def __str__(self):
         text = [
             self._print_title(),
@@ -118,13 +118,13 @@ class MKappaCurve:
             self._print_m_kappa_points(),
             self._print_legend(),
         ]
-        return general.print_chapter(text)
+        return print_chapter(text)
 
     def _print_title(self) -> str:
-        return general.print_sections(["MKappaCurve", len("MKappaCurve") * "="])
+        return print_sections(["MKappaCurve", len("MKappaCurve") * "="])
 
     def _print_initialization(self) -> str:
-        return general.print_chapter(
+        return print_chapter(
             ["Initialization", "--------------", self.__repr__()]
         )
 
@@ -152,7 +152,7 @@ class MKappaCurve:
         text.append(
             "--------------------------------------------------------------------------"
         )
-        return general.print_sections(text)
+        return print_sections(text)
 
     def _print_legend(self):
         text = [
@@ -168,7 +168,7 @@ class MKappaCurve:
             "\t"
             + 'Material:     material where "Strain" and "Position" are taken from',
         ]
-        return general.print_sections(text)
+        return print_sections(text)
 
     @property
     def boundaries(self):
@@ -285,7 +285,7 @@ class MKappaCurve:
             self._compute_positive_curvature_failure()
             self._compute_positive_curvature_intermediate()
 
-    def _compute_values(self, m_kappa: points.MKappa, material: str = None):
+    def _compute_values(self, m_kappa: MKappa, material: str = None):
         if m_kappa.successful:
             self._save_values(
                 m_kappa.moment,
@@ -307,7 +307,7 @@ class MKappaCurve:
         maximum_curvature: float,
         minimum_curvature: float,
     ):
-        return points.MKappaByStrainPosition(
+        return MKappaByStrainPosition(
             self.cross_section,
             strain_position=position_strain,
             strain_at_position=strain_at_position,
@@ -363,7 +363,7 @@ class MKappaCurveCurvature:
 
         Parameters
         ----------
-        cross_section : crosssection.Crosssection
+        cross_section : Crosssection
 
         maximum_curvature : float
 
@@ -424,7 +424,7 @@ class MKappaCurveCurvature:
         maximum_curvature: float,
         minimum_curvature: float,
     ):
-        return points.MKappaByStrainPosition(
+        return MKappaByStrainPosition(
             self.cross_section,
             strain_position=strain_position,
             strain_at_position=strain_at_position,
@@ -443,7 +443,7 @@ class MKappaAtAxialForce:
             2.
     """
 
-    def __init__(self, cross_section: crosssection.Crosssection, axial_force: float):
+    def __init__(self, cross_section: Crosssection, axial_force: float):
         self._cross_section = cross_section
         self._axial_force = axial_force
 
@@ -475,21 +475,21 @@ class MNZeroCurvature:
 
     def __init__(
         self,
-        cross_section: crosssection.Crosssection,
+        cross_section: Crosssection,
         input_section_type: str,
         input_strain: float,
         counter_lower_strain: float,
         counter_upper_strain: float,
         axial_force_tolerance: float = 5.0,
         maximum_iterations: int = 10,
-        solver: solver.Solver = solver.Newton,
+        solver: Solver = Newton,
     ):
         """
         Initialization
 
         Paramters
         ---------
-        cross_section : crosssection.Crosssection
+        cross_section : Crosssection
                 given cross-section
         input_section_type : str
                 section where strain is applied to
@@ -531,15 +531,15 @@ class MNZeroCurvature:
             self._print_other_sections_result(),
             self._print_other_sections_iterations(),
         ]
-        return general.print_chapter(text)
+        return print_chapter(text)
 
     def _print_title(self) -> str:
-        return general.print_sections(
+        return print_sections(
             [self.__class__.__name__, len(self.__class__.__name__) * "="]
         )
 
     def _print_initalization(self) -> str:
-        return general.print_sections(
+        return print_sections(
             ["Initialization", len("Initialization") * "-"], self.__repr__()
         )
 
@@ -552,7 +552,7 @@ class MNZeroCurvature:
             f"axial-force: {self.axial_force}",
             f"moment: {self.input_sections_moment()}",
         ]
-        return general.print_sections(text)
+        return print_sections(text)
 
     def _print_other_sections_result(self) -> str:
         text = [
@@ -562,7 +562,7 @@ class MNZeroCurvature:
             f"axial-force: {self.other_axial_force}",
             f"moment: {self.other_sections_moment()}",
         ]
-        return general.print_sections(text)
+        return print_sections(text)
 
     def _print_other_sections_iterations(self) -> str:
         text = [
@@ -582,7 +582,7 @@ class MNZeroCurvature:
                 )
             )
         text.append("----------------------------")
-        return general.print_sections(text)
+        return print_sections(text)
 
     @property
     def axial_force(self) -> float:
@@ -597,7 +597,7 @@ class MNZeroCurvature:
         return self._computations
 
     @property
-    def cross_section(self) -> crosssection.Crosssection:
+    def cross_section(self) -> Crosssection:
         return self._cross_section
 
     @property
@@ -637,7 +637,7 @@ class MNZeroCurvature:
         return self._other_axial_force
 
     @property
-    def other_cross_section(self) -> crosssection.Crosssection:
+    def other_cross_section(self) -> Crosssection:
         return self._other_cross_section
 
     @property
@@ -696,7 +696,7 @@ class MNZeroCurvature:
                 break
 
     def other_maximum_strain(self) -> float:
-        cross_section = crosssection.Crosssection(self.other_sections())
+        cross_section = Crosssection(self.other_sections())
         if self.input_strain < 0.0:
             return cross_section.maximum_positive_strain()
         else:
@@ -712,7 +712,7 @@ class MNZeroCurvature:
             return False
 
     def _create_crosssection(self, sections, strain):
-        return crosssection.ComputationCrosssectionStrain(sections, strain)
+        return ComputationCrosssectionStrain(sections, strain)
 
     def _guess_new_strain(self):
         return self.solver(
@@ -751,13 +751,13 @@ class MNZeroCurvatureCurve:
         "_m_n_points",
     )
 
-    def __init__(self, cross_section: crosssection.Crosssection):
+    def __init__(self, cross_section: Crosssection):
         """
         Initialization
 
         Parameters
         ----------
-        cross_section : crosssection.Crosssection
+        cross_section : Crosssection
                 crosssection to compute
         """
         self._cross_section = cross_section
@@ -771,7 +771,7 @@ class MNZeroCurvatureCurve:
     def __repr__(self):
         return "MNZeroCurvatureCurve(cross_section=cross_section)"
 
-    @general.str_start_end
+    @str_start_end
     def __str__(self) -> str:
         text = [
             self._print_title(),
@@ -780,15 +780,15 @@ class MNZeroCurvatureCurve:
             self._print_axial_force_table(),
             self._print_m_n_points_table(),
         ]
-        return general.print_chapter(text)
+        return print_chapter(text)
 
     def _print_title(self) -> str:
-        return general.print_sections(
+        return print_sections(
             [self.__class__.__name__, len(self.__class__.__name__) * "="]
         )
 
     def _print_initialization(self) -> str:
-        return general.print_sections(
+        return print_sections(
             ["Initialization", len("Initialization") * "-", self.__repr__()]
         )
 
@@ -803,7 +803,7 @@ class MNZeroCurvatureCurve:
             results,
             "-------------------------------------",
         ]
-        return general.print_sections(text)
+        return print_sections(text)
 
     def _print_section_results_table(self) -> str:
         return self._print_results_table(
@@ -811,7 +811,7 @@ class MNZeroCurvatureCurve:
         )
 
     def _print_section_results(self) -> str:
-        return general.print_sections(
+        return print_sections(
             [
                 self._print_section_result(section_result)
                 for section_result in self.section_results
@@ -826,7 +826,7 @@ class MNZeroCurvatureCurve:
         return " | ".join(line)
 
     def _print_axial_force_starting_points(self) -> str:
-        return general.print_sections(
+        return print_sections(
             [
                 self._print_section_result(starting_point)
                 for starting_point in self.axial_force_starting_points
@@ -849,10 +849,10 @@ class MNZeroCurvatureCurve:
             self._print_m_n_points_table_content(),
             "-------------------------------------------------------",
         ]
-        return general.print_sections(text)
+        return print_sections(text)
 
     def _print_m_n_points_table_content(self) -> str:
-        return general.print_sections(
+        return print_sections(
             [self._print_m_n_point_row(m_n_point) for m_n_point in self.m_n_points]
         )
 
@@ -895,7 +895,7 @@ class MNZeroCurvatureCurve:
         section_strains = []
         for section in self.cross_section.sections:
             section_strains += section.section_strains()
-        return general.remove_duplicates(section_strains)
+        return remove_duplicates(section_strains)
 
     def compute_section_axial_forces(self):
         for section_strain in self._get_section_strains():
@@ -983,7 +983,7 @@ class MNZeroCurvatureCurve:
             return False
 
     def _create_crosssection(self, sections, strain):
-        return crosssection.ComputationCrosssectionStrain(sections, strain)
+        return ComputationCrosssectionStrain(sections, strain)
 
     def compute_m_n_points(self) -> None:
         for starting_point in self.axial_force_starting_points:
@@ -1032,12 +1032,12 @@ class MNZeroCurvatureCurve:
 class MCurvatureCurve:
     """ """
 
-    def __init__(self, cross_section: crosssection.Crosssection, axial_force: float):
+    def __init__(self, cross_section: Crosssection, axial_force: float):
         self._cross_section = cross_section
         self._axial_force: float
 
     @property
-    def cross_section(self) -> crosssection.Crosssection:
+    def cross_section(self) -> Crosssection:
         return self._cross_section
 
     @property
@@ -1057,13 +1057,13 @@ class MNCurvatureCurve:
             1.
     """
 
-    def __init__(self, cross_section: crosssection.Crosssection, m_n_points: list):
+    def __init__(self, cross_section: Crosssection, m_n_points: list):
         """
         Initialization
 
         Parameters
         ----------
-        cross_section : crosssection.Crosssection
+        cross_section : Crosssection
                 cross_section
         m_n_points : list
                 list of computed moment-axial-force-points without curvature
@@ -1076,23 +1076,23 @@ class MNCurvatureCurve:
     def __repr__(self):
         return f"MNCurvatureCurve(cross_section={self.cross_section}, m_n_points={self.m_n_points})"
 
-    @general.str_start_end
+    @str_start_end
     def __str__(self):
         text = []
-        return general.print_chapter(text)
+        return print_chapter(text)
 
     def _print_title(self) -> str:
-        return general.print_sections(
+        return print_sections(
             [self.__class__.__name__, len(self.__class__.__name__) * "="]
         )
 
     def _print_initialization(self) -> str:
-        return general.print_sections(
+        return print_sections(
             ["Initialization", "--------------", self.__repr__()]
         )
 
     @property
-    def cross_section(self) -> crosssection.Crosssection:
+    def cross_section(self) -> Crosssection:
         return self._cross_section
 
     @property

@@ -1,6 +1,6 @@
-import abc
+from abc import ABC, abstractmethod, abstractproperty
 
-from . import general
+from .general import str_start_end
 
 """
 Internal Forces
@@ -21,38 +21,38 @@ To Do
 """
 
 
-class ABCBeam(abc.ABC):
-    @abc.abstractproperty
+class ABCBeam(ABC):
+    @abstractproperty
     def loading(self):
         ...
 
-    @abc.abstractmethod
+    @abstractmethod
     def moment(self, at_position):
         ...
 
-    @abc.abstractmethod
+    @abstractmethod
     def transversal_shear(self, at_position):
         ...
 
 
-class ABCSingleSpan(abc.ABC):
-    @abc.abstractproperty
+class ABCSingleSpan(ABC):
+    @abstractproperty
     def loading(self):
         ...
 
-    @abc.abstractmethod
+    @abstractmethod
     def moment(self, at_position):
         ...
 
-    @abc.abstractmethod
+    @abstractmethod
     def transversal_shear(self, at_position):
         ...
 
-    @abc.abstractproperty
+    @abstractproperty
     def transversal_shear_support_left(self):
         ...
 
-    @abc.abstractproperty
+    @abstractproperty
     def transversal_shear_support_right(self):
         ...
 
@@ -129,7 +129,7 @@ class SingleSpanSingleLoads(ABCSingleSpan):
         self._length = length
         self._loads = loads
 
-    @general.str_start_end
+    @str_start_end
     def __str__(self):
         text = [
             "Single span with single loads",
@@ -217,7 +217,7 @@ class SingleSpanUniformLoad(ABCSingleSpan):
         self._length = length
         self._load = load
 
-    @general.str_start_end
+    @str_start_end
     def __str__(self):
         text = [
             "Single span with uniform load",

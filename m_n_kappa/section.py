@@ -1,10 +1,10 @@
-import abc
-import time
-
-from . import general
-from . import geometry
-from . import material
-from . import crosssection
+from .general import (
+    str_start_end,
+    print_chapter,
+    print_sections,
+    position,
+    strain,
+)
 
 
 class Section:
@@ -37,12 +37,14 @@ class Section:
         return self._build_crosssection(other)
 
     def _build_crosssection(self, other):
+        from .crosssection import Crosssection
+
         if isinstance(other, Section):
             sections = [self, other]
-            return crosssection.Crosssection(sections)
-        elif isinstance(other, crosssection.Crosssection):
+            return Crosssection(sections)
+        elif isinstance(other, Crosssection):
             sections = other.sections + [self]
-            return crosssection.Crosssection(sections)
+            return Crosssection(sections)
         else:
             raise TypeError(
                 f'unsupported operand type(s) for +: "{type(self)}" and "{type(other)}"'
@@ -51,7 +53,7 @@ class Section:
     def __eq__(self, other):
         return self._material == other._material and self._geometry == other._geometry
 
-    @general.str_start_end
+    @str_start_end
     def __str__(self):
         text = [
             self._print_title(),
@@ -59,27 +61,23 @@ class Section:
             self._print_geometry(),
             self._print_material(),
         ]
-        return general.print_chapter(text)
+        return print_chapter(text)
 
     def _print_title(self) -> str:
-        return general.print_sections(
+        return print_sections(
             [self.__class__.__name__, len(self.__class__.__name__) * "="]
         )
 
     def _print_initialization(self) -> str:
-        return general.print_sections(
+        return print_sections(
             ["Initialization", len("Initialization") * "-", self.__repr__()]
         )
 
     def _print_geometry(self) -> str:
-        return general.print_sections(
-            ["Geometry", "--------", self.geometry.__repr__()]
-        )
+        return print_sections(["Geometry", "--------", self.geometry.__repr__()])
 
     def _print_material(self) -> str:
-        return general.print_sections(
-            ["Material", "--------", self.material.__repr__()]
-        )
+        return print_sections(["Material", "--------", self.material.__repr__()])
 
     @property
     def section_type(self) -> str:
@@ -264,7 +262,7 @@ class ComputationSection(Section):
             "lever arm:   " + "z = {:10.1f} mm".format(self.lever_arm()),
             "moment:      " + "M = {:10.1f} Nmm".format(self.moment()),
         ]
-        return general.print_sections(text)
+        return print_sections(text)
 
 
 class ComputationSectionStrain(ComputationSection):
@@ -303,7 +301,7 @@ class ComputationSectionStrain(ComputationSection):
     def __repr__(self):
         return f"ComputationSectionStrain(section={self.section.__repr__()}, strain={self.strain})"
 
-    @general.str_start_end
+    @str_start_end
     def __str__(self):
         text = [
             self._print_title(),
@@ -311,7 +309,7 @@ class ComputationSectionStrain(ComputationSection):
             self._print_geometry(),
             self._print_results(),
         ]
-        return general.print_chapter(text)
+        return print_chapter(text)
 
     @property
     def strain(self) -> float:
@@ -373,7 +371,7 @@ class ComputationSectionCurvature(ComputationSection):
     def __repr__(self):
         return f"CompuationSectionCurvature(section={self.section.__class__.__name__}, curvature={self.curvature}, neutral_axis={self.neutral_axis})"
 
-    @general.str_start_end
+    @str_start_end
     def __str__(self):
         text = [
             self._print_title(),
@@ -382,7 +380,7 @@ class ComputationSectionCurvature(ComputationSection):
             self._print_material(),
             self._print_results(),
         ]
-        return general.print_chapter(text)
+        return print_chapter(text)
 
     def _print_geometry(self) -> str:
         text = ["Geometry", "--------", "type: " + self.geometry.__class__.__name__]
@@ -404,7 +402,7 @@ class ComputationSectionCurvature(ComputationSection):
                     self.geometry.area, self.geometry.centroid
                 )
             ]
-        return general.print_sections(text)
+        return print_sections(text)
 
     def _print_material(self) -> str:
         text = ["Material", "--------"]
@@ -419,7 +417,7 @@ class ComputationSectionCurvature(ComputationSection):
             ]
         else:
             text += ["stress {:.1f} N/mm^2".format(self.edges_stress[0])]
-        return general.print_sections(text)
+        return print_sections(text)
 
     @property
     def curvature(self) -> float:
@@ -500,7 +498,7 @@ class ComputationSectionCurvature(ComputationSection):
         ]
 
     def __get_strain_by_position(self, position: float):
-        return general.strain(
+        return strain(
             neutral_axis=self.neutral_axis, curvature=self.curvature, position=position
         )
 
@@ -525,7 +523,7 @@ class ComputationSectionCurvature(ComputationSection):
         return positions
 
     def __compute_position(self, strain: float):
-        return general.position(
+        return position(
             curvature=self.curvature,
             neutral_axis=self.neutral_axis,
             strain_at_position=strain,
@@ -533,13 +531,16 @@ class ComputationSectionCurvature(ComputationSection):
 
 
 if __name__ == "__main__":
+    from geometry import Rectangle
+    from material import Concrete, Steel
+    from time import clock
 
-    start = time.clock()
-    concrete = material.Concrete(f_cm=30)
-    concrete_rectangle = geometry.Rectangle(top_edge=0, bottom_edge=20, width=10)
+    start = clock()
+    concrete = Concrete(f_cm=30)
+    concrete_rectangle = Rectangle(top_edge=0, bottom_edge=20, width=10)
 
-    steel = material.Steel(f_y=355, epsilon_u=0.2)
-    steel_rectangle = geometry.Rectangle(top_edge=20, bottom_edge=30, width=10)
+    steel = Steel(f_y=355, epsilon_u=0.2)
+    steel_rectangle = Rectangle(top_edge=20, bottom_edge=30, width=10)
 
     concrete_section = Section(geometry=concrete_rectangle, material=concrete)
     steel_section = Section(geometry=steel_rectangle, material=steel)

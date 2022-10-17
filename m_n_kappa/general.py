@@ -1,4 +1,4 @@
-import itertools
+from itertools import groupby
 
 
 def curvature(neutral_axis: float, position: float, strain_at_position: float):
@@ -35,7 +35,7 @@ def neutral_axis(strain_at_position: float, curvature: float, position: float):
 
 def remove_duplicates(list_of_lists: list) -> list:
     # list_of_lists.sort()
-    return [sublist for sublist, _ in itertools.groupby(list_of_lists)]
+    return [sublist for sublist, _ in groupby(list_of_lists)]
 
 
 def positive_sign(list_of_lists: list) -> list:

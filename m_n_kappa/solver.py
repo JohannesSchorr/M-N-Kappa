@@ -1,8 +1,10 @@
-from . import general
-from . import function
+from .general import str_start_end
+from .function import Polynominal, Linear
 
 
 class Solver:
+
+    """Meta Solver-Class"""
 
     __slots__ = (
         "_data",
@@ -40,7 +42,7 @@ class Solver:
     def __repr__(self):
         return f"{self.__class__.__name__}(data=data, target={self.target}, variable={self.variable}, target_value={self.target_value})"
 
-    @general.str_start_end
+    @str_start_end
     def __str__(self):
         text = [
             self._print_title(),
@@ -198,11 +200,11 @@ class Newton(Solver):
 
     def _set_function(self):
         if len(self.data) > 2:
-            self._function = function.Polynominal(
+            self._function = Polynominal(
                 data=self.data, variable=self.variable, target=self.target
             )
         else:
-            self._function = function.Linear(
+            self._function = Linear(
                 data=self.data, variable=self.variable, target=self.target
             )
 

@@ -1,18 +1,18 @@
-import abc
+from abc import ABC, abstractmethod
 
-from . import general
+from .general import print_sections, print_chapter, str_start_end
 
 
-class Function(abc.ABC):
-    @abc.abstractmethod
+class Function(ABC):
+    @abstractmethod
     def derivate(self, variable_value: float):
         ...
 
-    @abc.abstractmethod
+    @abstractmethod
     def function(self, variable_value: float):
         ...
 
-    @abc.abstractmethod
+    @abstractmethod
     def integration(self, variable_value: float):
         ...
 
@@ -41,7 +41,7 @@ class General(Function):
     def __repr__(self):
         return f"{self.__class__.__name__}(data=data[[variable, target]], variable={self.variable}, target={self.target})"
 
-    @general.str_start_end
+    @str_start_end
     def __str__(self):
         text = [
             self._print_title(),
@@ -50,30 +50,28 @@ class General(Function):
             self._print_derivate(),
             self._print_integration(),
         ]
-        return general.print_chapter(text)
+        return print_chapter(text)
 
     def _print_title(self) -> str:
-        return general.print_sections(
+        return print_sections(
             [self.__class__.__name__, len(self.__class__.__name__) * "="]
         )
 
     def _print_initialization(self) -> str:
-        return general.print_sections(
-            ["Initialization", "--------------", self.__repr__()]
-        )
+        return print_sections(["Initialization", "--------------", self.__repr__()])
 
     def _print_function(self) -> str:
-        return general.print_sections(
+        return print_sections(
             ["Function", "--------", "f(x) = " + self._function_repr()]
         )
 
     def _print_derivate(self) -> str:
-        return general.print_sections(
+        return print_sections(
             ["Derivate", "--------", "f'(x) = " + self._derivate_repr()]
         )
 
     def _print_integration(self) -> str:
-        return general.print_sections(
+        return print_sections(
             ["Integration", "-----------", "F(x) = " + self._integration_repr()]
         )
 

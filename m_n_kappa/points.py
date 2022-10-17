@@ -1,7 +1,12 @@
-from . import general
-from . import section
-from . import crosssection
-from . import solver
+from .general import (
+    print_sections,
+    print_chapter,
+    str_start_end,
+    curvature,
+    neutral_axis,
+)
+from .crosssection import Crosssection, ComputationCrosssectionCurvature
+from .solver import Solver, Newton
 
 """
 
@@ -17,11 +22,11 @@ class MKappa:
 
     def __init__(
         self,
-        cross_section: crosssection.Crosssection,
+        cross_section: Crosssection,
         applied_axial_force: float = 0.0,
         maximum_iterations: int = 10,
         axial_force_tolerance: float = 5.0,
-        solver: solver.Solver = solver.Newton,
+        solver: Solver = Newton,
     ):
         """
         Initialization
@@ -64,7 +69,7 @@ class MKappa:
     def __repr__(self):
         return f"MKappa(cross_section=CrossSection, applied_axial_force={self.applied_axial_force}, maximum_iterations={self.maximum_iterations})"
 
-    @general.str_start_end
+    @str_start_end
     def __str__(self):
         text = [
             self._print_title(),
@@ -72,15 +77,13 @@ class MKappa:
             self._print_iterations(),
             self._print_results(),
         ]
-        return general.print_chapter(text)
+        return print_chapter(text)
 
     def _print_title(self) -> str:
-        return general.print_sections(["MKappa", len("MKappa") * "="])
+        return print_sections(["MKappa", len("MKappa") * "="])
 
     def _print_initialization(self):
-        return general.print_sections(
-            ["Initialization", "--------------", self.__repr__()]
-        )
+        return print_sections(["Initialization", "--------------", self.__repr__()])
 
     def _print_iterations(self):
         text = [
@@ -103,7 +106,7 @@ class MKappa:
                 )
             )
         text.append("---------------------------------------------")
-        return general.print_sections(text)
+        return print_sections(text)
 
     def _print_results(self) -> str:
         text = [
@@ -113,7 +116,7 @@ class MKappa:
             "\t" + "M = {:.2f}".format(self.moment),
             "\t" + "Kappa = {:.5f}".format(self.curvature),
         ]
-        return general.print_sections(text)
+        return print_sections(text)
 
     @property
     def applied_axial_force(self):
@@ -242,7 +245,7 @@ class MKappa:
         pass
 
     def _get_compute_cross_section(self):
-        return crosssection.ComputationCrosssectionCurvature(
+        return ComputationCrosssectionCurvature(
             sections=self.cross_section.sections,
             curvature=self.curvature,
             neutral_axis=self.neutral_axis,
@@ -318,7 +321,7 @@ class MKappaByStrainPosition(MKappa):
 
     def __init__(
         self,
-        cross_section: crosssection.Crosssection,
+        cross_section: Crosssection,
         maximum_curvature: float,
         minimum_curvature: float,
         strain_position: float,
@@ -326,7 +329,7 @@ class MKappaByStrainPosition(MKappa):
         applied_axial_force: float = 0.0,
         maximum_iterations: int = 10,
         axial_force_tolerance: float = 5.0,
-        solver: solver.Solver = solver.Newton,
+        solver: Solver = Newton,
     ):
         """
         Initialization
@@ -402,14 +405,14 @@ class MKappaByStrainPosition(MKappa):
             self.compute()
 
     def _compute_new_curvature(self):
-        return general.curvature(
+        return curvature(
             neutral_axis=self.neutral_axis,
             position=self.strain_position,
             strain_at_position=self.strain_at_position,
         )
 
     def _compute_neutral_axis(self):
-        return general.neutral_axis(
+        return neutral_axis(
             strain_at_position=self.strain_at_position,
             curvature=self.curvature,
             position=self.strain_position,
@@ -437,14 +440,14 @@ class MKappaByConstantCurvature(MKappa):
 
     def __init__(
         self,
-        cross_section: crosssection.Crosssection,
+        cross_section: Crosssection,
         applied_curvature: float,
         maximum_neutral_axis: float,
         minimum_neutral_axis: float,
         applied_axial_force,
         maximum_iterations=10,
         axial_force_tolerance=5,
-        solver=solver.Newton,
+        solver=Newton,
     ):
         """
         Initialization

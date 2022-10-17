@@ -7,65 +7,30 @@ Procedure
   3. deformation at position where maximum moment is expected (for each moment point)
 
 """
-from . import crosssection
-from . import curves
-from . import internalforces
+from dataclasses import dataclass
+from .crosssection import Crosssection
+from .curves import MKappaCurve
+from .internalforces import SingleSpanSingleLoads, SingleSpanUniformLoad
 
 
+@dataclass
 class MKappaCurvesAlongBeam:
 
     """computes M-Kappa Curves along the beam"""
 
-    __slots__ = (
-        "_crosssection",
-        "_beam_length",
-        "_elements",
-        "_m_kappa_curves",
-        "_loading_type",
-    )
+    crosssection: Crosssection
+    beam_length: float
+    elements: int = 10
+    loading_type: str = "uniform"
+    m_kappa_curves: list = None
 
-    def __init__(
-        self,
-        crosssection: crosssection.Crosssection,
-        beam_length: float,
-        elements: int = 10,
-        loading_type: str = "uniform",
-    ):
-        self._crosssection = crosssection
-        self._beam_length = beam_length
-        self._elements = elements
-        self._loading_type = loading_type
-        self._m_kappa_curves = self._compute_m_kappa_curves()
-
-    @property
-    def beam_length(self) -> float:
-        """length of the investigated beam"""
-        return self._beam_length
-
-    @property
-    def crosssection(self) -> crosssection.Crosssection:
-        """crosssection of the beam"""
-        return self._crosssection
-
-    @property
-    def elements(self) -> int:
-        """number of elements"""
-        return self._elements
+    def __post_init__(self):
+        self.m_kappa_curves = self._compute_m_kappa_curves()
 
     @property
     def element_length(self) -> float:
         """length of an individual element"""
         return self.beam_length / self.elements
-
-    @property
-    def m_kappa_curves(self) -> list:
-        """list of m_kappa_curves"""
-        return self._m_kappa_curves
-
-    @property
-    def loading_type(self) -> str:
-        """loading-type"""
-        return self._loading_type
 
     def positions(self) -> list:
         """position between elements"""
@@ -78,11 +43,9 @@ class MKappaCurvesAlongBeam:
             for position in self.positions()
         ]
 
-    def _m_kappa(self, position: float):
+    def _m_kappa(self, position: float) -> MKappaCurve:
         """compute M-Kappa-Curve at specific position"""
-        return curves.MKappaCurve(
-            self.crosssection, position
-        ).m_kappa_points  # Todo: position
+        return MKappaCurve(self.crosssection, position).m_kappa_points  # Todo: position
 
 
 class BeamCurvatures:
@@ -126,11 +89,9 @@ class BeamCurvatures:
             for m_kappa in self.m_kappa_curves
         ]
 
-    def _moment(self, position: float, load: float) -> float:
+    def _moment(self, position: float, load: float) -> SingleSpanUniformLoad:
         """compute moment at given position under given load"""
-        return internalforces.SingleSpanUniformLoad(self.beam_length, load).moment(
-            position
-        )
+        return SingleSpanUniformLoad(self.beam_length, load).moment(position)
 
     def _curvature(self, position: float, load: float) -> float:
         """curvature at given position and load"""
@@ -186,7 +147,7 @@ class DeformationByCurvatures:
             for position in self.positions
         ]
 
-    def deformation(self, position):
+    def deformation(self, position) -> float:
         """compute the deformation at given position"""
         return sum(self.incremental_deformations(position))
 
@@ -194,7 +155,7 @@ class DeformationByCurvatures:
         """compute element-length of element indicated by index"""
         return self.positions[index + 1] - self.positions[index]
 
-    def _incremental_deformations(self, position: float):
+    def _incremental_deformations(self, position: float) -> list:
         """compute the incremental deformations of each element"""
         moment_curvature = self._moments_times_curvatures(position)
         return [
@@ -215,7 +176,7 @@ class DeformationByCurvatures:
         """
         return 0.5 * (lst[index] + lst[index + 1])
 
-    def _moments_times_curvatures(self, position: float):
+    def _moments_times_curvatures(self, position: float) -> list:
         """multiply moments with curvatures"""
         moments = self._single_load_moments(position)
         return [
@@ -223,9 +184,9 @@ class DeformationByCurvatures:
             for m_curvature in zip(moments, self.curvatures)
         ]
 
-    def _single_load(self, position: float) -> internalforces.SingleSpanSingleLoads:
+    def _single_load(self, position: float) -> SingleSpanSingleLoads:
         """internal forces with load at given position"""
-        return internalforces.SingleSpanSingleLoads(self.beam_length, [position, 1.0])
+        return SingleSpanSingleLoads(self.beam_length, [position, 1.0])
 
     def _single_load_moments(self, single_load_position: float) -> list:
         """moments by single load at existing positions"""
@@ -251,7 +212,7 @@ class AllDeformation:
         Returns
         -------
         list[dict]
-                list with deformations at positions in case of given beam-curvatures
+            list with deformations at positions in case of given beam-curvatures
         """
         beam_curvatures = self.beam_curvatures(load)
         return DeformationByCurvatures(beam_curvatures).deformations()
@@ -259,4 +220,5 @@ class AllDeformation:
 
 if __name__ == "__main__":
 
-    pass
+    all_deformations = AllDeformation()
+    print(all_deformations.deformations(10))

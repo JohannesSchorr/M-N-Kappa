@@ -1,5 +1,5 @@
-import math
-import decimal
+from math import sin, sinh, pi, cos, cosh
+from decimal import Decimal
 
 """
 References
@@ -54,19 +54,19 @@ class StateMeta:
 
     @property
     def pi(self):
-        return math.pi
+        return pi
 
     def sin(self, value: float) -> float:
-        return math.sin(value)
+        return sin(value)
 
     def sinh(self, value: float) -> float:
-        return math.sinh(value)
+        return sinh(value)
 
     def cos(self, value: float) -> float:
-        return math.cos(value)
+        return cos(value)
 
     def cosh(self, value: float) -> float:
-        return math.cosh(value)
+        return cosh(value)
 
     def _nominator_sum(self, position):
         return sum(self._nominator_list(position))
@@ -100,7 +100,7 @@ class StateMeta:
 
 class StateMetaDecimal(StateMeta):
 
-    """compute all relevant numbers in decimal.Decimal()'s"""
+    """compute all relevant numbers in Decimal()'s"""
 
     def __init__(
         self,
@@ -109,39 +109,39 @@ class StateMetaDecimal(StateMeta):
         mu: float = 0.2,
         sequences: int = 10,
     ):
-        self._slab_width = decimal.Decimal(slab_width)
-        self._beam_length = decimal.Decimal(beam_length)
-        self._mu = decimal.Decimal(mu)
+        self._slab_width = Decimal(slab_width)
+        self._beam_length = Decimal(beam_length)
+        self._mu = Decimal(mu)
         self._sequences = sequences
 
     @property
     def pi(self):
-        return decimal.Decimal(math.pi)
+        return Decimal(pi)
 
-    def sin(self, value) -> decimal.Decimal:
-        return decimal.Decimal(math.sin(float(value)))
+    def sin(self, value) -> Decimal:
+        return Decimal(sin(float(value)))
 
-    def sinh(self, value: float) -> decimal.Decimal:
+    def sinh(self, value: float) -> Decimal:
         """
         References
         ----------
         url='https://de.wikipedia.org/wiki/Sinus_hyperbolicus_und_Kosinus_hyperbolicus', visite on: 29/05/2022
         """
-        return decimal.Decimal(0.5) * (
-            decimal.Decimal(value).exp() - decimal.Decimal((-1) * value).exp()
+        return Decimal(0.5) * (
+            Decimal(value).exp() - Decimal((-1) * value).exp()
         )
 
-    def cos(self, value) -> decimal.Decimal:
-        return decimal.Decimal(math.cos(float(value)))
+    def cos(self, value) -> Decimal:
+        return Decimal(cos(float(value)))
 
-    def cosh(self, value: float) -> decimal.Decimal:
+    def cosh(self, value: float) -> Decimal:
         """
         References
         ----------
         url='https://de.wikipedia.org/wiki/Sinus_hyperbolicus_und_Kosinus_hyperbolicus', visite on: 29/05/2022
         """
-        return decimal.Decimal(0.5) * (
-            decimal.Decimal(value).exp() + decimal.Decimal((-1) * value).exp()
+        return Decimal(0.5) * (
+            Decimal(value).exp() + Decimal((-1) * value).exp()
         )
 
 
@@ -288,7 +288,7 @@ class MembranStateLineLoadingMultipleWebs(StateMetaDecimal):
 
     def ratio_beff_to_b(self, position: float):
         """see Eq. 5-49 in Kuhlmann, Rieg (2004)"""
-        position = decimal.Decimal(position)
+        position = Decimal(position)
         return float(
             (-1)
             * (2 / self.pi)
@@ -299,21 +299,21 @@ class MembranStateLineLoadingMultipleWebs(StateMetaDecimal):
 
     def alpha_k(self, sequence):
         """see Eq. 5-46 in Kuhlmann, Rieg (2004)"""
-        return decimal.Decimal((2 * sequence - 1) * self.pi / self.beam_length)
+        return Decimal((2 * sequence - 1) * self.pi / self.beam_length)
 
     def _nominator(self, position: float, sequence: int):
         """see Eq. 5-49 in Kuhlmann, Rieg (2004)"""
-        return decimal.Decimal(
+        return Decimal(
             (-1) ** (sequence - 1)
-            * decimal.Decimal(1 / (2 * sequence - 1) ** (3))
+            * Decimal(1 / (2 * sequence - 1) ** (3))
             * self.cos(self.alpha_k(sequence) * position)
         )
 
     def _determinator(self, position: float, sequence: int):  #
         """see Eq. 5-49 in Kuhlmann, Rieg (2004)"""
-        return decimal.Decimal(
+        return Decimal(
             (-1) ** (sequence - 1)
-            * decimal.Decimal(1 / (2 * sequence - 1) ** (2))
+            * Decimal(1 / (2 * sequence - 1) ** (2))
             * self.cos(self.alpha_k(sequence) * position)
             * (
                 self._A(sequence) * self.cosh(self.alpha_k(sequence) * self.slab_width)
@@ -324,8 +324,8 @@ class MembranStateLineLoadingMultipleWebs(StateMetaDecimal):
     def _A(self, sequence: int):
         """see Eq. 5-50 in Kuhlmann, Rieg (2004)"""
         alpha_k = self.alpha_k(sequence) * self.slab_width
-        return decimal.Decimal(
-            decimal.Decimal(1 / (2 * sequence - 1))
+        return Decimal(
+            Decimal(1 / (2 * sequence - 1))
             * (
                 (1 + self.mu) * alpha_k * self.cosh(alpha_k)
                 - (1 - self.mu) * self.sinh(alpha_k)
@@ -336,9 +336,9 @@ class MembranStateLineLoadingMultipleWebs(StateMetaDecimal):
     def _B(self, sequence: int):
         """see Eq. 5-51 in Kuhlmann, Rieg (2004)"""
         alpha_k = self.alpha_k(sequence) * self.slab_width
-        return decimal.Decimal(
+        return Decimal(
             (-1)
-            * decimal.Decimal(1 / (2 * sequence - 1))
+            * Decimal(1 / (2 * sequence - 1))
             * (1 + self.mu)
             * (alpha_k * self.sinh(alpha_k) + 2 * self.cosh(alpha_k))
             / (self.sinh(alpha_k))
@@ -356,10 +356,10 @@ class MembranStateLineLoadingOneWeb(StateMetaDecimal):
 
     def ratio_beff_to_b(self, position):
         """see Eq. 5-58 in Kuhlmann, Rieg (2004)"""
-        position = decimal.Decimal(position)
+        position = Decimal(position)
         return float(
             (2 / self.pi)
-            * decimal.Decimal(1 / self.b_over_l)
+            * Decimal(1 / self.b_over_l)
             * (self._nominator_sum(position) / self._determinator_sum(position))
         )
 
@@ -370,18 +370,18 @@ class MembranStateLineLoadingOneWeb(StateMetaDecimal):
     def _nominator(self, position, sequence):
         """see Eq. 5-58 in Kuhlmann, Rieg (2004)"""
         alpha_k = self._alpha_k(sequence) * position
-        return decimal.Decimal(
+        return Decimal(
             (-1) ** (sequence - 1)
-            * decimal.Decimal(1 / (2 * sequence - 1) ** (3))
+            * Decimal(1 / (2 * sequence - 1) ** (3))
             * self.cos(alpha_k)
         )
 
     def _determinator(self, position, sequence):
         """see Eq. 5-58 in Kuhlmann, Rieg (2004)"""
         alpha_k = self._alpha_k(sequence) * position
-        return decimal.Decimal(
+        return Decimal(
             (-1) ** (sequence - 1)
-            * decimal.Decimal(1 / (2 * sequence - 1) ** (2))
+            * Decimal(1 / (2 * sequence - 1) ** (2))
             * self.cos(alpha_k)
             * (self._A(sequence) + 2 * self._B(sequence))
         )
@@ -430,7 +430,7 @@ class MembranStateSingleLoadOneWeb(StateMetaDecimal):
 
     def ratio_beff_to_b(self, position):
         """see Eq. 5-68 in Kuhlmann, Rieg (2004)"""
-        position = decimal.Decimal(position)
+        position = Decimal(position)
         return float(
             (-1)
             * (1 / self.pi)
@@ -441,13 +441,13 @@ class MembranStateSingleLoadOneWeb(StateMetaDecimal):
     def _nominator(self, position, sequence):
         """see Eq. 5-68 in Kuhlmann, Rieg (2004)"""
         alpha_x = (2 * sequence - 1) * self.alpha * position
-        return decimal.Decimal(1 / (2 * sequence - 1) ** (2)) * self.cos(alpha_x)
+        return Decimal(1 / (2 * sequence - 1) ** (2)) * self.cos(alpha_x)
 
     def _determinator(self, position, sequence):
         """see Eq. 5-68 in Kuhlmann, Rieg (2004)"""
         alpha_x = (2 * sequence - 1) * self.alpha * position
         return (
-            decimal.Decimal(1 / (2 * sequence - 1))
+            Decimal(1 / (2 * sequence - 1))
             * self.cos(alpha_x)
             * (self._A(sequence) + 2 * self._B(sequence))
         )
@@ -563,7 +563,7 @@ class BendingStateLineLoadingMultipleWebs(StateMetaDecimal):
 
     def ratio_beff_to_b(self, position: float):
         """see Eq. 5-114 in Kuhlmann, Rieg (2004)"""
-        position = decimal.Decimal(position)
+        position = Decimal(position)
         return float(
             (2 / self.pi)
             * (1 / self.b_over_l)
@@ -575,17 +575,17 @@ class BendingStateLineLoadingMultipleWebs(StateMetaDecimal):
 
     def _nominator(self, position, sequence):
         """see Eq. 5-114 in Kuhlmann, Rieg (2004)"""
-        return decimal.Decimal(
+        return Decimal(
             (-1) ** (sequence - 1)
-            * decimal.Decimal(1 / (2 * sequence - 1) ** (3))
+            * Decimal(1 / (2 * sequence - 1) ** (3))
             * self.cos(self._alpha_k(sequence) * position)
         )
 
     def _determinator(self, position, sequence):
         """see Eq. 5-114 in Kuhlmann, Rieg (2004)"""
-        return decimal.Decimal(
+        return Decimal(
             (-1) ** (sequence - 1)
-            * decimal.Decimal(1 / (2 * sequence - 1) ** (2))
+            * Decimal(1 / (2 * sequence - 1) ** (2))
             * (
                 (1 - self.mu)
                 * self._A(sequence)
@@ -623,7 +623,7 @@ class BendingStateLineLoadingOneWeb(StateMetaDecimal):
 
     def ratio_beff_to_b(self, position: float):
         """see Eq. 5-126 in Kuhlmann, Rieg (2004)"""
-        position = decimal.Decimal(position)
+        position = Decimal(position)
         return float(
             (-1)
             * (2 / self.pi)
@@ -637,17 +637,17 @@ class BendingStateLineLoadingOneWeb(StateMetaDecimal):
 
     def _nominator(self, position, sequence):
         """see Eq. 5-126 in Kuhlmann, Rieg (2004)"""
-        return decimal.Decimal(
+        return Decimal(
             (-1) ** (sequence - 1)
-            * decimal.Decimal(1 / (2 * sequence - 1) ** (3))
+            * Decimal(1 / (2 * sequence - 1) ** (3))
             * self.cos(self.alpha_k(sequence) * position)
         )
 
     def _determinator(self, position, sequence):
         """see Eq. 5-126 in Kuhlmann, Rieg (2004)"""
-        return decimal.Decimal(
+        return Decimal(
             (-1) ** (sequence - 1)
-            * decimal.Decimal(1 / (2 * sequence - 1) ** (2))
+            * Decimal(1 / (2 * sequence - 1) ** (2))
             * self.cos(self.alpha_k(sequence) * position)
             * ((1 - self.mu) * self._A(sequence) + 2 * self.mu * self._B(sequence))
         )
@@ -655,7 +655,7 @@ class BendingStateLineLoadingOneWeb(StateMetaDecimal):
     def _A(self, sequence: int):
         """see Eq. 5-127 in Kuhlmann, Rieg (2004)"""
         alpha_k = self.alpha_k(sequence) * self.slab_width
-        return decimal.Decimal(
+        return Decimal(
             (1 / (1 - self.mu))
             * (
                 (
@@ -673,7 +673,7 @@ class BendingStateLineLoadingOneWeb(StateMetaDecimal):
     def _B(self, sequence: int):
         """see Eq. 5-128 in Kuhlmann, Rieg (2004)"""
         alpha_k = self.alpha_k(sequence) * self.slab_width
-        return decimal.Decimal(
+        return Decimal(
             ((3 + self.mu) * self.cosh(alpha_k) - (1 + self.mu))
             / (
                 (1 + self.mu) * alpha_k
@@ -716,7 +716,7 @@ class BendingStateSingleLoadOneWeb(StateMetaDecimal):
 
     def ratio_beff_to_b(self, position):
         """see Eq. 5-139 in Kuhlmann, Rieg (2004)"""
-        position = decimal.Decimal(position)
+        position = Decimal(position)
         return float(
             (-1)
             * (2 / self.pi)
@@ -731,13 +731,13 @@ class BendingStateSingleLoadOneWeb(StateMetaDecimal):
     def _nominator(self, position, sequence):
         """see Eq. 5-139 in Kuhlmann, Rieg (2004)"""
         alpha_k = self.alpha_k(sequence) * position
-        return decimal.Decimal(1 / (2 * sequence - 1) ** (2)) * self.cos(alpha_k)
+        return Decimal(1 / (2 * sequence - 1) ** (2)) * self.cos(alpha_k)
 
     def _determinator(self, position, sequence):
         """see Eq. 5-139 in Kuhlmann, Rieg (2004)"""
         alpha_k = self.alpha_k(sequence) * position
         return (
-            decimal.Decimal(1 / (2 * sequence - 1))
+            Decimal(1 / (2 * sequence - 1))
             * self.cos(alpha_k)
             * ((1 - self.mu) * self._A(sequence) + 2 * self.mu * self._B(sequence))
         )

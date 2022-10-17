@@ -1,7 +1,14 @@
-import abc
+from abc import abstractmethod, ABC
 
-from . import general
-from . import section
+from .general import (
+    str_start_end,
+    print_chapter,
+    print_sections,
+    curvature_by_points,
+    curvature_by_points,
+    neutral_axis,
+)
+from .section import Section, ComputationSectionStrain, ComputationSectionCurvature
 
 
 class Crosssection:
@@ -23,7 +30,7 @@ class Crosssection:
     def __next__(self):
         return self._section_iterator.__next__()
 
-    @general.str_start_end
+    @str_start_end
     def __str__(self):
         text = [
             self._print_title(),
@@ -31,15 +38,15 @@ class Crosssection:
             self._print_geometry(),
             self._print_sections(),
         ]
-        return general.print_chapter(text)
+        return print_chapter(text)
 
     def _print_title(self) -> str:
-        return general.print_sections(
+        return print_sections(
             [self.__class__.__name__, len(self.__class__.__name__) * "="]
         )
 
     def _print_initialization(self) -> str:
-        return general.print_sections(
+        return print_sections(
             ["Initialization", len("Initialization") * "-", self.__repr__()]
         )
 
@@ -84,7 +91,7 @@ class Crosssection:
     def top_edge(self) -> float:
         return self._top_edge
 
-    def add_section(self, section: section.Section):
+    def add_section(self, section: Section):
         if self.sections is None:
             self._sections = [section]
         else:
@@ -98,7 +105,7 @@ class Crosssection:
                 self.top_edge, self.bottom_edge
             ),
         ]
-        return general.print_sections(text)
+        return print_sections(text)
 
     def _print_sections(self):
         text = [
@@ -107,7 +114,7 @@ class Crosssection:
         ]
         for section in self.sections:
             text.append(section.__repr__())
-        return general.print_sections(text)
+        return print_sections(text)
 
     def sections_of_type(self, type: str):
         return [section for section in self.sections if section.section_type == type]
@@ -139,7 +146,7 @@ class Crosssection:
 
 
 class ComputationCrosssection(Crosssection):
-    @general.str_start_end
+    @str_start_end
     def __str__(self):
         text = [
             self._print_title(),
@@ -149,7 +156,7 @@ class ComputationCrosssection(Crosssection):
             self._print_sections_results(),
             self._print_results(),
         ]
-        return general.print_chapter(text)
+        return print_chapter(text)
 
     @property
     def compute_sections(self):
@@ -231,7 +238,7 @@ class ComputationCrosssection(Crosssection):
                 "\t" + f"Material: {section.material.__repr__()}",
             ]
             section_index += 1
-        return general.print_sections(text)
+        return print_sections(text)
 
     def _print_all_sections_results(self):
         text = [
@@ -239,7 +246,7 @@ class ComputationCrosssection(Crosssection):
             "\t" + "N = {:.1f} N".format(self.total_axial_force()),
             "\t" + "M = {:.1f} Nmm".format(self.total_moment()),
         ]
-        return general.print_sections(text)
+        return print_sections(text)
 
     def _print_girder_sections_results(self):
         text = [
@@ -247,7 +254,7 @@ class ComputationCrosssection(Crosssection):
             "\t" + "N_a = {:.1f} N".format(self.girder_sections_axial_force()),
             "\t" + "M_a = {:.1f} Nmm".format(self.girder_sections_moment()),
         ]
-        return general.print_sections(text)
+        return print_sections(text)
 
     def _print_slab_sections_results(self):
         text = [
@@ -255,7 +262,7 @@ class ComputationCrosssection(Crosssection):
             "\t" + "N_c = {:.1f} N".format(self.slab_sections_axial_force()),
             "\t" + "M_c = {:.1f} Nmm".format(self.slab_sections_moment()),
         ]
-        return general.print_sections(text)
+        return print_sections(text)
 
     def _print_sections_results(self):
         text = ["Axial Forces, Moment", "--------------------"]
@@ -264,7 +271,7 @@ class ComputationCrosssection(Crosssection):
         if len(self.slab_sections) > 0:
             text += [self._print_slab_sections_results(), ""]
         text.append(self._print_all_sections_results())
-        return general.print_sections(text)
+        return print_sections(text)
 
     def _print_results(self) -> str:
         pass
@@ -307,7 +314,7 @@ class ComputationCrosssectionStrain(ComputationCrosssection):
         return self.compute_sections
 
     def _create_section(self, basic_section):
-        return section.ComputationSectionStrain(basic_section, self.strain)
+        return ComputationSectionStrain(basic_section, self.strain)
 
     def _print_results(self):
         text = [
@@ -322,7 +329,7 @@ class ComputationCrosssectionStrain(ComputationCrosssection):
         text.append(
             "-------------------------------------------------------------------------------"
         )
-        return general.print_sections(text)
+        return print_sections(text)
 
 
 class ComputationCrosssectionStrainAdd(ComputationCrosssectionStrain):
@@ -437,7 +444,7 @@ class ComputationCrosssectionCurvature(ComputationCrosssection):
         return strain_positions
 
     def _create_section(self, basic_section):
-        return section.ComputationSectionCurvature(
+        return ComputationSectionCurvature(
             basic_section, self.curvature, self.neutral_axis
         )
 
@@ -460,7 +467,7 @@ class ComputationCrosssectionCurvature(ComputationCrosssection):
         text.append(
             "------------------------------------------------------------------------------------------------------------"
         )
-        return general.print_sections(text)
+        return print_sections(text)
 
 
 class Bound:
@@ -495,13 +502,13 @@ class Bound:
         return self._strain
 
 
-class Curvature(abc.ABC):
-    @abc.abstractmethod
+class Curvature(ABC):
+    @abstractmethod
     def compute(self, strain: float, position: float):
         ...
 
     def _curvature_by_points(self, position_1, strain_1, position_2, strain_2):
-        return general.curvature_by_points(
+        return curvature_by_points(
             top_edge=position_1,
             top_strain=strain_1,
             bottom_edge=position_2,
@@ -817,7 +824,7 @@ class CrosssectionBoundaries(Crosssection):
     def __repr__(self):
         return "CrosssectionBoundaries(sections=sections)"
 
-    @general.str_start_end
+    @str_start_end
     def __str__(self):
         text = [
             self._print_title(),
@@ -827,17 +834,13 @@ class CrosssectionBoundaries(Crosssection):
             self._print_start_values(),
             self._print_sections(),
         ]
-        return general.print_chapter(text)
+        return print_chapter(text)
 
     def _print_title(self):
-        return general.print_sections(
-            ["CrosssectionBoundaries", "----------------------"]
-        )
+        return print_sections(["CrosssectionBoundaries", "----------------------"])
 
     def _print_initialization(self) -> str:
-        return general.print_sections(
-            ["Initialization", "--------------", self.__repr__()]
-        )
+        return print_sections(["Initialization", "--------------", self.__repr__()])
 
     def _print_boundary_curvatures(self):
         text = [
@@ -866,7 +869,7 @@ class CrosssectionBoundaries(Crosssection):
                 self.maximum_negative_curvature["bottom_edge"][1],
             ),
         ]
-        return general.print_sections(text)
+        return print_sections(text)
 
     def _print_start_values(self):
         text = [
@@ -875,7 +878,7 @@ class CrosssectionBoundaries(Crosssection):
             f"positive curvature: strain={self._positive_start_strain} | position={self._positive_start_position}",
             f"negative curvature: strain={self._negative_start_strain} | position={self._negative_start_position}",
         ]
-        return general.print_sections(text)
+        return print_sections(text)
 
     @property
     def maximum_positive_curvature(self):
@@ -938,7 +941,7 @@ class CrosssectionBoundaries(Crosssection):
                 if top_edge_strain[position_index] < bottom_edge_strain[position_index]:
                     curvatures.append(
                         {
-                            "curvature": general.curvature_by_points(
+                            "curvature": curvature_by_points(
                                 top_edge=top_edge_strain[position_index],
                                 bottom_edge=bottom_edge_strain[position_index],
                                 top_strain=top_edge_strain[strain_index],
@@ -1000,7 +1003,7 @@ class CrosssectionBoundaries(Crosssection):
         self.__set_negative_curvature_start_values()
 
     def __compute_neutral_axis(self, curvature: float, strain_position: list):
-        return general.neutral_axis(
+        return neutral_axis(
             curvature=curvature,
             strain_at_position=strain_position[1],
             position=strain_position[0],

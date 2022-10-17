@@ -1,8 +1,8 @@
-import abc
+from abc import ABC, abstractmethod
 
-from . import general
-from . import material
-from . import section
+from .general import print_sections, str_start_end
+from .material import Material
+from .section import Section
 
 """
 Geometries
@@ -18,41 +18,41 @@ Currently available
 """
 
 
-class Geometry(abc.ABC):
+class Geometry(ABC):
 
     """basic geometry class"""
 
-    def __add__(self, other: material.Material):
+    def __add__(self, other: Material):
         return self._build_section(other)
 
-    def __radd__(self, other: material.Material):
+    def __radd__(self, other: Material):
         return self._build_section(other)
 
-    def _build_section(self, other: material.Material):
-        if isinstance(other, material.Material):
-            return section.Section(geometry=self, material=other)
+    def _build_section(self, other: Material):
+        if isinstance(other, Material):
+            return Section(geometry=self, material=other)
         else:
             raise TypeError(
                 f'unsupported operand type(s) for +: "{type(self)}" and "{type(other)}"'
             )
 
-    @abc.abstractmethod
+    @abstractmethod
     def area(self):
         ...
 
-    @abc.abstractmethod
+    @abstractmethod
     def centroid(self):
         ...
 
-    # @abc.abstractmethod
+    # @abstractmethod
     # def width(self):
     # 	...
 
-    @abc.abstractmethod
+    @abstractmethod
     def split(self, at_points):
         ...
 
-    @abc.abstractmethod
+    @abstractmethod
     def edges(self):
         ...
 
@@ -77,7 +77,7 @@ class Rectangle(Geometry):
     def __repr__(self):
         return f"Rectangle(top_edge={self.top_edge}, bottom_edge={self.bottom_edge}, width={self.width})"
 
-    @general.str_start_end
+    @str_start_end
     def __str__(self):
         text = [
             "Rectangle",
@@ -157,7 +157,7 @@ class Circle(Geometry):
     def __repr__(self):
         return f"Circle(diameter={self.diameter}, centroid={self.centroid})"
 
-    @general.str_start_end
+    @str_start_end
     def __str__(self):
         text = [
             "Circle",
@@ -214,7 +214,7 @@ class Trapazoid(Geometry):
     def __repr__(self):
         return f"Trapazoid(top_edge={self.top_edge}, bottom_edge={self.bottom_edge}, top_width={self.top_width}, bottom_width={self.bottom_width})"
 
-    @general.str_start_end
+    @str_start_end
     def __str__(self):
         text = [
             "Trapazoid",
@@ -229,7 +229,7 @@ class Trapazoid(Geometry):
             "Area: {:.2f}".format(self.area),
             "Centroid: {:.2f}".format(self.centroid),
         ]
-        return general.print_sections(text)
+        return print_sections(text)
 
     def __eq__(self, other):
         return (

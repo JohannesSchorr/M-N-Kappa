@@ -1,7 +1,15 @@
-import abc
-import math
+from abc import ABC, abstractmethod, abstractproperty
+from math import log
 
-from . import general
+from .general import (
+    print_chapter,
+    print_sections,
+    interpolation,
+    negative_sign,
+    positive_sign,
+    str_start_end,
+    remove_duplicates,
+)
 
 
 class Material:
@@ -34,18 +42,16 @@ class Material:
             self._print_initialization(),
             self._print_stress_strains(),
         ]
-        return general.print_chapter(text)
+        return print_chapter(text)
 
     def _print_title(self) -> str:
         class_name = self.__class__.__name__
-        return general.print_sections(
+        return print_sections(
             [class_name, len(class_name) * "=", "section-type: " + self.section_type]
         )
 
     def _print_initialization(self) -> str:
-        return general.print_sections(
-            ["Initialization", "--------------", self.__repr__()]
-        )
+        return print_sections(["Initialization", "--------------", self.__repr__()])
 
     def _print_stress_strains(self) -> str:
         text = [
@@ -57,10 +63,10 @@ class Material:
             self._print_stress_strain_points(),
             "-----------------------",
         ]
-        return general.print_sections(text)
+        return print_sections(text)
 
     def _print_stress_strain_points(self) -> str:
-        return general.print_sections(
+        return print_sections(
             [
                 " {:9.2f} | {:9.5f}".format(point[0], point[1])
                 for point in self.stress_strain
@@ -192,14 +198,14 @@ class Material:
         return round(strain, 7)
 
     def _interpolate_stress(self, strain: float, material_index: int) -> float:
-        return general.interpolation(
+        return interpolation(
             position=strain,
             first_pair=self.stress_strain[material_index],
             second_pair=self.stress_strain[material_index + 1],
         )
 
 
-class ConcreteCompression(abc.ABC):
+class ConcreteCompression(ABC):
     def __init__(self, f_cm: float, yield_strain: float, E_cm: float):
         self._f_cm = f_cm
         self._yield_strain = yield_strain
@@ -221,21 +227,21 @@ class ConcreteCompression(abc.ABC):
     def f_ck(self) -> float:
         return self.f_cm - 8.0
 
-    @abc.abstractproperty
+    @abstractproperty
     def c(self) -> float:
         """strain at maximum stress"""
         ...
 
-    @abc.abstractproperty
+    @abstractproperty
     def cu(self) -> float:
         """strain at failure"""
         ...
 
-    @abc.abstractproperty
+    @abstractproperty
     def strains(self) -> list:
         ...
 
-    @abc.abstractmethod
+    @abstractmethod
     def stress(self, strain) -> float:
         ...
 
@@ -243,7 +249,7 @@ class ConcreteCompression(abc.ABC):
         stress_strain = [[0.0, 0.0]]
         for epsilon in self.strains:
             stress_strain.append([self.stress(epsilon), epsilon])
-        return general.negative_sign(stress_strain)
+        return negative_sign(stress_strain)
 
 
 class ConcreteCompressionNonlinear(ConcreteCompression):
@@ -373,7 +379,7 @@ class ConcreteTension:
             if self.f_ck <= 50.0:
                 return 0.3 * self.f_cm
             else:
-                return 2.12 * math.log(1.0 + 0.1 * self.f_cm)
+                return 2.12 * log(1.0 + 0.1 * self.f_cm)
         else:
             return self._f_ctm
 
@@ -383,7 +389,7 @@ class ConcreteTension:
             stress_strain.append([self.f_ctm, self.yield_strain])
             stress_strain.append([0.0, self.yield_strain + 0.000001])
         stress_strain.append([0.0, 10.0])
-        return general.positive_sign(stress_strain)
+        return positive_sign(stress_strain)
 
     @property
     def use_tension(self) -> bool:
@@ -414,7 +420,7 @@ class Concrete(Material):
     def __repr__(self):
         return f"Concrete(f_cm={self.f_cm}, f_ctm={self._f_ctm}, use_tension={self.use_tension}, stress_strain_type={self.stress_strain_type})"
 
-    @general.str_start_end
+    @str_start_end
     def __str__(self):
         text = [
             self._print_title(),
@@ -424,10 +430,10 @@ class Concrete(Material):
             self._print_tensile_values(),
             self._print_stress_strains(),
         ]
-        return general.print_chapter(text)
+        return print_chapter(text)
 
     def _print_elastic_values(self) -> str:
-        return general.print_sections(
+        return print_sections(
             [
                 "Elastic",
                 "-------",
@@ -446,7 +452,7 @@ class Concrete(Material):
                 self.epsilon_c, self.epsilon_cu
             ),
         ]
-        return general.print_sections(text)
+        return print_sections(text)
 
     def _print_tensile_values(self) -> str:
         text = [
@@ -454,7 +460,7 @@ class Concrete(Material):
             "----------------",
             "f_ctm = {:.1f} N/mm^2".format(self.f_ctm),
         ]
-        return general.print_sections(text)
+        return print_sections(text)
 
     @property
     def compression(self):
@@ -529,7 +535,7 @@ class Concrete(Material):
 
     def __build_stress_strain(self):
         stress_strains = self.compression.stress_strain() + self.tension.stress_strain()
-        stress_strains = general.remove_duplicates(stress_strains)
+        stress_strains = remove_duplicates(stress_strains)
         stress_strains.sort(key=lambda x: x[1], reverse=False)
         return stress_strains
 
@@ -555,7 +561,7 @@ class Steel(Material):
     def class_name(self):
         return "Steel"
 
-    @general.str_start_end
+    @str_start_end
     def __str__(self):
         text = [
             self.class_name,
@@ -677,16 +683,16 @@ class Steel(Material):
 
     @property
     def tension_stress_strain(self):
-        return general.positive_sign(self.stress_strain_standard())
+        return positive_sign(self.stress_strain_standard())
 
     @property
     def compression_stress_strain(self):
-        return general.negative_sign(self.stress_strain_standard())
+        return negative_sign(self.stress_strain_standard())
 
     def __build_stress_strain(self):
         stress_strains = self.compression_stress_strain + self.tension_stress_strain
         stress_strains.sort()
-        return general.remove_duplicates(stress_strains)
+        return remove_duplicates(stress_strains)
 
 
 class Reinforcement(Steel):
