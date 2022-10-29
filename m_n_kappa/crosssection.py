@@ -15,7 +15,7 @@ class Crosssection:
 
     """Combines a number of sections"""
 
-    def __init__(self, sections: list = None):
+    def __init__(self, sections: list[Section] = None):
         self._sections = sections
         self._top_edge = self.__compute_top_edge()
         self._bottom_edge = self.__compute_bottom_edge()
@@ -71,11 +71,11 @@ class Crosssection:
         return 0.5 * (self.bottom_edge + self.top_edge)
 
     @property
-    def sections(self) -> list:
+    def sections(self) -> list[Section]:
         return self._sections
 
     @property
-    def slab_sections(self) -> list:
+    def slab_sections(self) -> list[Section]:
         return self.sections_of_type(type="slab")
 
     @property
@@ -215,7 +215,7 @@ class ComputationCrosssection(Crosssection):
         axial_forces = self._sections_axial_force(sections)
         return sum(axial_forces)
 
-    def _sections_axial_force(self, sections) -> list:
+    def _sections_axial_force(self, sections: list[Section]) -> list:
         return [section.axial_force for section in sections]
 
     def _moment(self, sections):
