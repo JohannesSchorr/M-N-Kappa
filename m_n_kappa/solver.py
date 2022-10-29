@@ -96,7 +96,7 @@ class Solver:
     def x_n(self):
         return self.data[0][self.variable]
 
-    def compute(self):
+    def compute(self) -> float:
         pass
 
     def _prepare(self):
@@ -207,19 +207,3 @@ class Newton(Solver):
             self._function = Linear(
                 data=self.data, variable=self.variable, target=self.target
             )
-
-
-if __name__ == "__main__":
-
-    data = [
-        [0, 2],
-        [-5, -3],
-        # [4, 1],
-    ]
-
-    solver = Bisection(data=data, target=1, variable=0)
-    print(solver)
-
-    solver = Newton
-    solver = solver(data=data, target=1, variable=0)
-    print(solver)
