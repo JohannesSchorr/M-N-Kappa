@@ -29,8 +29,6 @@ class MKappa:
         solver: Solver = Newton,
     ):
         """
-        Initialization
-
         Parameters
         ----------
         cross_section : crosssection.Crossection
