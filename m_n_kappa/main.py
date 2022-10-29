@@ -1,5 +1,21 @@
 import material
 
+"""
+General Procedure
+=================
+1. Create Crossection
+1.1 Material + Geometry --> Section 
+1.2 Section + Section --> Crosssection
+
+2. Loading 
+- Define loading arrangement
+- Define explicit load-case
+
+3. Beam
+- Crossection + beam-length + loading
+--> Get load-deformation-curve
+
+"""
 concrete = material.Concrete(f_cm=68)
 
 print(concrete.f_ck)
