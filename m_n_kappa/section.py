@@ -1,3 +1,4 @@
+from dataclasses import dataclass
 from .general import (
     str_start_end,
     print_chapter,
@@ -5,6 +6,16 @@ from .general import (
     position,
     strain,
 )
+
+
+@dataclass
+class StrainPosition:
+
+    """Container for strains at a position within a given material"""
+
+    strain: float
+    position: float
+    material: str
 
 
 class Section:
@@ -47,7 +58,7 @@ class Section:
             return Crosssection(sections)
         else:
             raise TypeError(
-                f'unsupported operand type(s) for +: "{type(self)}" and "{type(other)}"'
+                f'unsupported operand section_type(s) for +: "{type(self)}" and "{type(other)}"'
             )
 
     def __eq__(self, other):
@@ -118,8 +129,8 @@ class Section:
 
     def section_strains(self) -> list:
         return [
-            {"section-type": self.section_type, "strain": strain}
-            for strain in self.material_strains()
+            {"section-section_type": self.section_type, "strain_value": strain_value}
+            for strain_value in self.material_strains()
         ]
 
 
@@ -267,7 +278,7 @@ class ComputationSection(Section):
 
 class ComputationSectionStrain(ComputationSection):
 
-    """compute section  under a constant strain"""
+    """compute section  under a constant strain_value"""
 
     __slots__ = (
         "_section",
@@ -288,7 +299,7 @@ class ComputationSectionStrain(ComputationSection):
         section : Section
                 section to compute
         strain : float
-                given strain to compute
+                given strain_value to compute
         """
         self._section = section
         self._strain = strain
@@ -299,7 +310,7 @@ class ComputationSectionStrain(ComputationSection):
         self._axial_force = self._compute_axial_force()
 
     def __repr__(self):
-        return f"ComputationSectionStrain(section={self.section.__repr__()}, strain={self.strain})"
+        return f"ComputationSectionStrain(section={self.section.__repr__()}, strain_value={self.strain})"
 
     @str_start_end
     def __str__(self):
@@ -356,7 +367,7 @@ class ComputationSectionCurvature(ComputationSection):
         curvature : float
                 curvature to apply to the section
         neutral axis : float
-                point where the strain is zero
+                point where the strain_value is zero
         """
         self._section = section
         self._curvature = curvature
@@ -369,7 +380,7 @@ class ComputationSectionCurvature(ComputationSection):
         self._axial_force = self._compute_axial_force()
 
     def __repr__(self):
-        return f"CompuationSectionCurvature(section={self.section.__class__.__name__}, curvature={self.curvature}, neutral_axis={self.neutral_axis})"
+        return f"CompuationSectionCurvature(section={self.section.__class__.__name__}, curvature={self.curvature}, neutral_axis_value={self.neutral_axis})"
 
     @str_start_end
     def __str__(self):
@@ -383,13 +394,13 @@ class ComputationSectionCurvature(ComputationSection):
         return print_chapter(text)
 
     def _print_geometry(self) -> str:
-        text = ["Geometry", "--------", "type: " + self.geometry.__class__.__name__]
+        text = ["Geometry", "--------", "section_type: " + self.geometry.__class__.__name__]
         if len(self.geometry.edges) > 1:
             text += [
                 "top_edge: {:.1f} | bottom_edge: {:.1f}".format(
                     self.geometry.edges[0], self.geometry.edges[1]
                 ),
-                "width-formula: {:.1f} * position + {:.1f}".format(
+                "width-formula: {:.1f} * position_value + {:.1f}".format(
                     self.geometry.width_slope, self.geometry.width_interception
                 ),
                 "top_strain: {:.5f} | bottom_strain: {:.5f}".format(
@@ -411,7 +422,7 @@ class ComputationSectionCurvature(ComputationSection):
                 "top_stress {:.1f} N/mm^2 | bottom_stress {:.1f} N/mm^2".format(
                     self.edges_stress[0], self.edges_stress[1]
                 ),
-                "stress-formula: {:.1f} * position + {:.1f}".format(
+                "stress-formula: {:.1f} * position_value + {:.1f}".format(
                     self.stress_slope, self.stress_interception
                 ),
             ]
@@ -453,28 +464,28 @@ class ComputationSectionCurvature(ComputationSection):
 
     def material_points_inside_curvature(self):
         strain_position = []
-        for strain_index, strain in enumerate(self._edges_strain):
-            if strain_index == self.__get_allowed_position_index(strain):
+        for strain_index, strain_value in enumerate(self._edges_strain):
+            if strain_index == self.__get_allowed_position_index(strain_value):
                 for intermediate_strain in self.material.get_intermediate_strains(
-                    strain
+                    strain_value
                 ):
                     strain_position.append(
-                        {
-                            "strain": intermediate_strain,
-                            "position": self.geometry.edges[strain_index],
-                            "material": self.material.__class__.__name__,
-                        }
+                        StrainPosition(
+                            intermediate_strain,
+                            self.geometry.edges[strain_index],
+                            self.material.__class__.__name__
+                        )
                     )
         return strain_position
 
-    def __get_allowed_position_index(self, strain: float) -> int:
+    def __get_allowed_position_index(self, strain_value: float) -> int:
         if self.curvature > 0.0:
-            if strain > 0.0:
+            if strain_value > 0.0:
                 return 1  # bottom_edge
             else:
                 return 0  # top_edge
         else:
-            if strain > 0.0:
+            if strain_value > 0.0:
                 return 0  # top_edge
             else:
                 return 1  # bottom_edge
@@ -494,12 +505,12 @@ class ComputationSectionCurvature(ComputationSection):
 
     def _get_edges_strain(self) -> list:
         return [
-            self.__get_strain_by_position(position) for position in self.geometry.edges
+            self.__get_strain_by_position(position_value) for position_value in self.geometry.edges
         ]
 
-    def __get_strain_by_position(self, position: float):
+    def __get_strain_by_position(self, position_value: float):
         return strain(
-            neutral_axis=self.neutral_axis, curvature=self.curvature, position=position
+            neutral_axis_value=self.neutral_axis, curvature=self.curvature, position=position_value
         )
 
     def __get_sub_geometries(self):
@@ -518,75 +529,13 @@ class ComputationSectionCurvature(ComputationSection):
     def __material_points_position(self) -> list:
         positions = []
         for stress_strain in self.material.stress_strain:
-            position = self.__compute_position(strain=stress_strain[1])
-            positions.append(position)
+            position_value = self.__compute_position(strain_value=stress_strain[1])
+            positions.append(position_value)
         return positions
 
-    def __compute_position(self, strain: float):
+    def __compute_position(self, strain_value: float):
         return position(
             curvature=self.curvature,
             neutral_axis=self.neutral_axis,
-            strain_at_position=strain,
+            strain_at_position=strain_value,
         )
-
-
-if __name__ == "__main__":
-    from geometry import Rectangle
-    from material import Concrete, Steel
-    from time import clock
-
-    start = clock()
-    concrete = Concrete(f_cm=30)
-    concrete_rectangle = Rectangle(top_edge=0, bottom_edge=20, width=10)
-
-    steel = Steel(f_y=355, epsilon_u=0.2)
-    steel_rectangle = Rectangle(top_edge=20, bottom_edge=30, width=10)
-
-    concrete_section = Section(geometry=concrete_rectangle, material=concrete)
-    steel_section = Section(geometry=steel_rectangle, material=steel)
-
-    cs = concrete_section + steel_section
-    print(cs)
-    cs += steel_section
-
-    for section in cs:
-        print(section)
-
-    curvature = 0.0001
-    neutral_axis = 20
-
-    curvature_section = ComputationSectionCurvature(
-        steel_section, curvature=curvature, neutral_axis=neutral_axis
-    )
-    # print(curvature_section.__dict__)
-    # print(curvature_section)
-    curvature_section = ComputationSectionCurvature(
-        concrete_section, curvature=curvature, neutral_axis=neutral_axis
-    )
-    # print(curvature_section)
-    strain_section = ComputationSectionStrain(steel_section, strain=0.002)
-    # print(strain_section)
-    strain_section = ComputationSectionStrain(concrete_section, strain=-0.002)
-    # print(strain_section)
-    """
-    # cs = CrosssectionBoundaries(sections=[concrete_section, steel_section])
-    # print(cs.maximum_positive_curvature)
-    cs = Crosssection(sections=[concrete_section, steel_section])
-    # cs.add_section(concrete_section)
-    # cs.add_section(steel_section)
-    # print(cs)
-    # print(cs.get_boundary_conditions())
-
-    ccc = ComputationCrosssectionCurvature(
-        sections=cs.sections, curvature=curvature, neutral_axis=neutral_axis
-    )
-    # print(ccc)
-    # print(ccs.get_material_points_inside_curvature())
-    # print(ComputationCrosssection(sections=cs.sections, curvature=curvature, neutral_axis=neutral_axis).total_axial_force())
-
-    ccs = ComputationCrosssectionStrain(sections=cs.sections, strain=-0.002)
-    # print(ccs)
-
-    end = time.clock()
-    print(end - start)
-    """
