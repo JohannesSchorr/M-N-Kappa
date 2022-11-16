@@ -13,9 +13,16 @@ from .general import (
 )
 
 
+def make_float(value):
+    if value is None:
+        return None
+    else:
+        return float(value)
+
+
 class Material:
 
-    """Defines a custom material-type"""
+    """Defines a custom material-section_type"""
 
     def __init__(self, section_type: str, stress_strain: list = None):
         """
@@ -24,9 +31,9 @@ class Material:
         Parameters
         ----------
         stress_strain : list
-            list with stress-strain-relationship
+            list with stress-strain_value-relationship
         section_type : str
-            type of section this material is ordered to
+            section_type of section this material is ordered to
 
             possible values are:
             - slab
@@ -50,7 +57,7 @@ class Material:
     def _print_title(self) -> str:
         class_name = self.__class__.__name__
         return print_sections(
-            [class_name, len(class_name) * "=", "section-type: " + self.section_type]
+            [class_name, len(class_name) * "=", "section-section_type: " + self.section_type]
         )
 
     def _print_initialization(self) -> str:
@@ -58,10 +65,10 @@ class Material:
 
     def _print_stress_strains(self) -> str:
         text = [
-            "Stress-strain-relationship",
+            "Stress-strain_value-relationship",
             "--------------------------",
-            # f"type: {self.stress_strain_type.lower()}",
-            "   stress  |   strain  ",
+            # f"section_type: {self.stress_strain_type.lower()}",
+            "   stress  |   strain_value  ",
             "-----------------------",
             self._print_stress_strain_points(),
             "-----------------------",
@@ -84,38 +91,38 @@ class Material:
 
     @property
     def maximum_strain(self) -> float:
-        """maximum strain in the stress-strain-relationship"""
+        """maximum strain_value in the stress-strain_value-relationship"""
         self.sort_strains_descending()
         return self.stress_strain[0][1]
 
     @property
     def minimum_strain(self) -> float:
-        """minimum strain in the stress-strain-relationship"""
+        """minimum strain_value in the stress-strain_value-relationship"""
         self.sort_strains_ascending()
         return self.stress_strain[0][1]
 
     @property
     def stress_strain(self) -> list:
-        """list of stress-strain points"""
+        """list of stress-strain_value points"""
         return self._stress_strain
 
     @property
     def section_type(self) -> str:
-        """section type"""
+        """section section_type"""
         return self._section_type
 
     @property
     def strains(self) -> list:
-        """strains from the stress-strain-relationship"""
+        """strains from the stress-strain_value-relationship"""
         return [stress_strain[1] for stress_strain in self.stress_strain]
 
     @property
     def stresses(self) -> list:
-        """stresses from the stress-strain-relationship"""
+        """stresses from the stress-strain_value-relationship"""
         return [stress_strain[0] for stress_strain in self.stress_strain]
 
     def get_intermediate_strains(self, strain_1: float, strain_2: float = 0.0) -> list:
-        """determine material points with strains between zero and given strain"""
+        """determine material points with strains between zero and given strain_value"""
         material_index_1 = self._get_material_index(strain_1)
         material_index_2 = self._get_material_index(strain_2)
         min_index, max_index = self._order_material_indexes(
@@ -125,23 +132,23 @@ class Material:
 
     def get_material_stress(self, strain: float) -> float:
         """
-        gives stress from the stress-strain-relationship corresponding with the given strain
+        gives stress from the stress-strain_value-relationship corresponding with the given strain_value
 
         Parameters
         ----------
         strain : float
-                strain a corresponding stress value should be given
+                strain_value a corresponding stress value should be given
 
         Returns
         -------
         float
-                stress corresponding to the given strain
+                stress corresponding to the given strain_value
         """
         material_index = self._get_material_index(strain)
         return self._interpolate_stress(strain, material_index)
 
     def sort_strains(self, reverse: bool = False) -> None:
-        """sorts stress-strain-relationship depending on strains
+        """sorts stress-strain_value-relationship depending on strains
 
         Parameters
         ----------
@@ -152,27 +159,27 @@ class Material:
         self._stress_strain.sort(key=lambda x: x[1], reverse=reverse)
 
     def sort_strains_ascending(self) -> None:
-        """sorts stress-strain-relationship so strains are ascending"""
+        """sorts stress-strain_value-relationship so strains are ascending"""
         self.sort_strains(reverse=False)
 
     def sort_strains_descending(self) -> None:
-        """sorts stress-strain-relationship so strains are descending"""
+        """sorts stress-strain_value-relationship so strains are descending"""
         self.sort_strains(reverse=True)
 
-    def _get_material_index(self, strain: float):
+    def _get_material_index(self, strain_value: float):
         self.sort_strains_ascending()
-        strain = self.__round_strain(strain)
-        if strain == self.stress_strain[-1][1]:
+        strain_value = self.__round_strain(strain_value)
+        if strain_value == self.stress_strain[-1][1]:
             return len(self.stress_strain) - 2
         for material_index in range(len(self.stress_strain) - 1):
             if (
                 self.stress_strain[material_index][1]
-                <= strain
+                <= strain_value
                 < self.stress_strain[material_index + 1][1]
             ):
                 return material_index
-        print(f"No stress-strain-pair found in {self.__class__.__name__}")
-        print(f"strain: {strain}")
+        print(f"No stress-strain_value-pair found in {self.__class__.__name__}")
+        print(f"strain_value: {strain_value}")
         print(f"stress-strains: {self.stress_strain}")
 
     def _get_material_stress_by_index(self, index: int) -> float:
@@ -199,9 +206,9 @@ class Material:
             return False
 
     @staticmethod
-    def __round_strain(strain: float):
-        """prevent rounding errors by rounding strain"""
-        return round(strain, 7)
+    def __round_strain(strain_value: float):
+        """prevent rounding errors by rounding strain_value"""
+        return round(strain_value, 7)
 
     def _interpolate_stress(self, strain: float, material_index: int) -> float:
         return interpolation(
@@ -213,9 +220,9 @@ class Material:
 
 class ConcreteCompression(ABC):
     def __init__(self, f_cm: float, yield_strain: float, E_cm: float):
-        self._f_cm = f_cm
-        self._yield_strain = yield_strain
-        self._E_cm = E_cm
+        self._f_cm = float(f_cm)
+        self._yield_strain = float(yield_strain)
+        self._E_cm = float(E_cm)
 
     @property
     def E_cm(self) -> float:
@@ -236,13 +243,13 @@ class ConcreteCompression(ABC):
     @property
     @abstractmethod
     def c(self) -> float:
-        """strain at maximum stress"""
+        """strain_value at maximum stress"""
         ...
 
     @property
     @abstractmethod
     def cu(self) -> float:
-        """strain at failure"""
+        """strain_value at failure"""
         ...
 
     @property
@@ -428,19 +435,19 @@ class Concrete(Material):
             if True: considers tension (Default)
             if False: does not consider tension
         compression_stress_strain_type : str
-            sets type of stress-strain curve under compression.
+            sets section_type of stress-strain_value curve under compression.
             Possible values are:
             - 'Nonlinear'
             - 'Parabola'
             - 'Bilinear'
         tension_stress_strain_type : str
-            sets type of strain-stain curve under tension
+            sets section_type of strain_value-stain curve under tension
             Possible values are:
             - 'Default'
         """
         super().__init__(section_type="slab")
-        self._f_cm = f_cm
-        self._f_ctm = f_ctm
+        self._f_cm = float(f_cm)
+        self._f_ctm = make_float(f_ctm)
         self._use_tension = use_tension
         self._compression_stress_strain_type = compression_stress_strain_type
         self._tension_stress_strain_type = tension_stress_strain_type
@@ -513,11 +520,11 @@ class Concrete(Material):
         self.__set_compression()
 
     @property
-    def E_cm(self):
-        return 22000 * (self.f_cm / 10) ** 0.3
+    def E_cm(self) -> float:
+        return 22000. * (self.f_cm / 10) ** 0.3
 
     @property
-    def epsilon_y(self):
+    def epsilon_y(self) -> float:
         return 0.4 * self.f_cm / self.E_cm
 
     @property
@@ -529,15 +536,15 @@ class Concrete(Material):
         return self.f_cm - 8.0
 
     @property
-    def section_type(self):
+    def section_type(self) -> str:
         return "slab"
 
     @property
-    def tension(self):
+    def tension(self) -> ConcreteTension:
         return self._tension
 
     @property
-    def tension_stress_strain_type(self):
+    def tension_stress_strain_type(self) -> str:
         return self._tension_stress_strain_type
 
     @tension_stress_strain_type.setter
@@ -596,10 +603,10 @@ class Steel(Material):
         E_a: float = 210000.0,
     ):
         super().__init__(section_type="girder")
-        self._f_y = f_y
-        self._f_u = f_u
-        self._epsilon_u = epsilon_u
-        self._E_a = E_a
+        self._f_y = float(f_y)
+        self._f_u = make_float(f_u)
+        self._epsilon_u = make_float(epsilon_u)
+        self._E_a = make_float(E_a)
         self._stress_strain = self.__build_stress_strain()
 
     def __repr__(self):
@@ -615,7 +622,7 @@ class Steel(Material):
         text = [
             self.__class__.__name__,
             len(self.__class__.__name__) * "=",
-            "section-type: " + self.section_type,
+            "section-section_type: " + self.section_type,
             "",
             "Initialization",
             "--------------",
@@ -644,8 +651,8 @@ class Steel(Material):
             "",
             "Stress-Strain-Relationship",
             "--------------------------",
-            "type: " + self.stress_strain_type,
-            "   stress  |   strain  ",
+            "section_type: " + self.stress_strain_type,
+            "   stress  |   strain_value  ",
             "------------------------",
         ]
         for point in self.stress_strain:
