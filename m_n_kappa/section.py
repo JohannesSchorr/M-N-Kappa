@@ -510,7 +510,9 @@ class ComputationSectionCurvature(ComputationSection):
 
     def __get_strain_by_position(self, position_value: float):
         return strain(
-            neutral_axis_value=self.neutral_axis, curvature=self.curvature, position=position_value
+            neutral_axis_value=self.neutral_axis,
+            curvature_value=self.curvature,
+            position_value=position_value
         )
 
     def __get_sub_geometries(self):
@@ -535,7 +537,7 @@ class ComputationSectionCurvature(ComputationSection):
 
     def __compute_position(self, strain_value: float):
         return position(
-            curvature=self.curvature,
-            neutral_axis=self.neutral_axis,
+            curvature_value=self.curvature,
+            neutral_axis_value=self.neutral_axis,
             strain_at_position=strain_value,
         )
