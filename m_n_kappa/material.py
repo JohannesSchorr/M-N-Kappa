@@ -1,4 +1,4 @@
-from abc import ABC, abstractmethod, abstractproperty
+from abc import ABC, abstractmethod
 from math import log
 
 from .general import (
@@ -9,6 +9,7 @@ from .general import (
     positive_sign,
     str_start_end,
     remove_duplicates,
+    remove_zeros,
 )
 
 
@@ -34,7 +35,8 @@ class Material:
         self._section_type = section_type
 
     def __repr__(self) -> str:
-        return f"Material(stress_strain={self.stress_strain}, section_type={self.section_type})"
+        return f"""Material(stress_strain={self.stress_strain}, 
+        section_type={self.section_type})"""
 
     def __str__(self) -> str:
         text = [
@@ -57,7 +59,7 @@ class Material:
         text = [
             "Stress-strain-relationship",
             "--------------------------",
-            "type: {}".format(self.stress_strain_type.lower()),
+            # f"type: {self.stress_strain_type.lower()}",
             "   stress  |   strain  ",
             "-----------------------",
             self._print_stress_strain_points(),
@@ -81,13 +83,13 @@ class Material:
 
     @property
     def maximum_strain(self) -> float:
-        """maximum strain in the stress-strain-relationsship"""
+        """maximum strain in the stress-strain-relationship"""
         self.sort_strains_descending()
         return self.stress_strain[0][1]
 
     @property
     def minimum_strain(self) -> float:
-        """minimum strain in the stress-strain-relationsship"""
+        """minimum strain in the stress-strain-relationship"""
         self.sort_strains_ascending()
         return self.stress_strain[0][1]
 
@@ -103,19 +105,19 @@ class Material:
 
     @property
     def strains(self) -> list:
-        """strains from the stress-strain-relationsship"""
+        """strains from the stress-strain-relationship"""
         return [stress_strain[1] for stress_strain in self.stress_strain]
 
     @property
     def stresses(self) -> list:
-        """stresses from the stress-strain-relationsship"""
+        """stresses from the stress-strain-relationship"""
         return [stress_strain[0] for stress_strain in self.stress_strain]
 
     def get_intermediate_strains(self, strain_1: float, strain_2: float = 0.0) -> list:
         """determine material points with strains between zero and given strain"""
         material_index_1 = self._get_material_index(strain_1)
         material_index_2 = self._get_material_index(strain_2)
-        min_index, max_index = self._order_material_indizes(
+        min_index, max_index = self._order_material_indexes(
             material_index_2, material_index_1
         )
         return self._remove_zero_strain(self.strains[min_index:max_index])
@@ -149,11 +151,11 @@ class Material:
         self._stress_strain.sort(key=lambda x: x[1], reverse=reverse)
 
     def sort_strains_ascending(self) -> None:
-        """sorts stress-strain-relationsship so strains are ascending"""
+        """sorts stress-strain-relationship so strains are ascending"""
         self.sort_strains(reverse=False)
 
     def sort_strains_descending(self) -> None:
-        """sorts stress-strain-relationsship so strains are descending"""
+        """sorts stress-strain-relationship so strains are descending"""
         self.sort_strains(reverse=True)
 
     def _get_material_index(self, strain: float):
@@ -175,17 +177,19 @@ class Material:
     def _get_material_stress_by_index(self, index: int) -> float:
         return self.stress_strain[index][0]
 
-    def _order_material_indizes(self, zero_index: int, strain_index: int) -> tuple:
+    @staticmethod
+    def _order_material_indexes(zero_index: int, strain_index: int) -> tuple:
         if strain_index < zero_index:
             if strain_index == 0:
-                return (strain_index + 1, zero_index + 1)
+                return strain_index + 1, zero_index + 1
             else:
-                return (strain_index, zero_index + 1)
+                return strain_index, zero_index + 1
         else:
-            return (zero_index, strain_index + 1)
+            return zero_index, strain_index + 1
 
-    def _remove_zero_strain(self, strains):
-        return list(filter(lambda x: x != 0.0, strains))
+    @staticmethod
+    def _remove_zero_strain(strains: list) -> list:
+        return remove_zeros(strains)
 
     def __is_max_index(self, index: int) -> bool:
         if index == len(self.stress_strain) - 1:
@@ -193,7 +197,8 @@ class Material:
         else:
             return False
 
-    def __round_strain(self, strain: float):
+    @staticmethod
+    def __round_strain(strain: float):
         """prevent rounding errors by rounding strain"""
         return round(strain, 7)
 
@@ -227,17 +232,20 @@ class ConcreteCompression(ABC):
     def f_ck(self) -> float:
         return self.f_cm - 8.0
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def c(self) -> float:
         """strain at maximum stress"""
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def cu(self) -> float:
         """strain at failure"""
         ...
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def strains(self) -> list:
         ...
 
@@ -258,12 +266,12 @@ class ConcreteCompressionNonlinear(ConcreteCompression):
 
     @property
     def c(self) -> float:
-        return min(0.7 * (self.f_cm) ** (0.31), 2.8) * 0.001
+        return min(0.7 * self.f_cm ** 0.31, 2.8) * 0.001
 
     @property
     def cu(self) -> float:
         return 0.001 * min(
-            (2.8 + 27.0 * ((98.0 - float(self.f_cm)) / 100.0) ** (4.0)), 3.5
+            (2.8 + 27.0 * ((98.0 - float(self.f_cm)) / 100.0) ** 4.0), 3.5
         )
 
     @property
@@ -287,7 +295,7 @@ class ConcreteCompressionNonlinear(ConcreteCompression):
         if self.yield_strain <= strain <= self.cu:
             eta = self.eta(strain)
             k = self.k()
-            return self.f_cm * ((k * eta - eta ** (2.0)) / (1.0 + (k - 2) * eta))
+            return self.f_cm * ((k * eta - eta ** 2.0) / (1.0 + (k - 2) * eta))
         else:
             return 0.0
 
@@ -301,17 +309,17 @@ class ConcreteCompressionParabolaRectangle(ConcreteCompression):
         if self.f_ck <= 50:
             return 0.001 * 2.0
         else:
-            return 0.001 * (2.0 + (0.085 * (float(self.f_ck) - 50.0) ** (0.53)))
+            return 0.001 * (2.0 + (0.085 * (float(self.f_ck) - 50.0) ** 0.53))
 
     @property
     def cu(self) -> float:
         return 0.001 * min(
-            (2.6 + 35.0 * ((90.0 - float(self.f_ck)) / 100.0) ** (4.0)), 3.5
+            (2.6 + 35.0 * ((90.0 - float(self.f_ck)) / 100.0) ** 4.0), 3.5
         )
 
     @property
     def n(self) -> float:
-        return min(1.4 + 23.4 * ((90.0 - self.f_ck) / 100.0) ** (4.0), 2.0)
+        return min(1.4 + 23.4 * ((90.0 - self.f_ck) / 100.0) ** 4.0, 2.0)
 
     @property
     def strains(self) -> list:
@@ -319,21 +327,21 @@ class ConcreteCompressionParabolaRectangle(ConcreteCompression):
 
     def stress(self, strain) -> float:
         if 0.0 <= strain <= self.c:
-            return self.f_ck * (1 - (1 - strain / self.c) ** (self.n))
+            return self.f_ck * (1 - (1 - strain / self.c) ** self.n)
         elif self.c < strain < self.cu:
             return self.f_ck
         else:
             return 0.0
 
 
-class ConcreteCompressionBilinear(ConcreteCompression):
+class ConcreteCompressionBiLinear(ConcreteCompression):
     @property
     def c(self) -> float:
         return 0.001 * max((1.75 + 0.55 * ((self.f_ck - 50.0) / 40.0)), 1.75)
 
     @property
     def cu(self) -> float:
-        return 0.001 * min((2.6 + 35.0 * ((90.0 - self.f_ck) / 100) ** (4.0)), 3.5)
+        return 0.001 * min((2.6 + 35.0 * ((90.0 - self.f_ck) / 100) ** 4.0), 3.5)
 
     @property
     def strains(self) -> list:
@@ -408,6 +416,28 @@ class Concrete(Material):
         compression_stress_strain_type: str = "Nonlinear",
         tension_stress_strain_type="Default",
     ):
+        """
+        Parameters
+        ----------
+        f_cm : float
+            mean concrete cylinder compression strength
+        f_ctm : float
+            mean tensile strength
+        use_tension : float
+            if True: considers tension (Default)
+            if False: does not consider tension
+        compression_stress_strain_type : str
+            sets type of stress-strain curve under compression.
+            Possible values are:
+            - 'Nonlinear'
+            - 'Parabola'
+            - 'Bilinear'
+        tension_stress_strain_type : str
+            sets type of strain-stain curve under tension
+            Possible values are:
+            - 'Default'
+        """
+        super().__init__(section_type="slab")
         self._f_cm = f_cm
         self._f_ctm = f_ctm
         self._use_tension = use_tension
@@ -418,7 +448,13 @@ class Concrete(Material):
         self._stress_strain = self.__build_stress_strain()
 
     def __repr__(self):
-        return f"Concrete(f_cm={self.f_cm}, f_ctm={self._f_ctm}, use_tension={self.use_tension}, stress_strain_type={self.stress_strain_type})"
+        return (
+            f"Concrete(f_cm={self.f_cm}, "
+            f"f_ctm={self._f_ctm}, "
+            f"use_tension={self.use_tension}, "
+            f"compression_stress_strain_type={self.compression_stress_strain_type})"
+            f"tension_stress_strain_type={self.tension_stress_strain_type})"
+        )
 
     @str_start_end
     def __str__(self):
@@ -449,7 +485,7 @@ class Concrete(Material):
             "--------------------",
             "f_ck = {:.1f} N/mm^2 | f_cm = {:.1f} N/mm^2".format(self.f_ck, self.f_cm),
             "epsilon_c = {:.4f} | epsilon_cu = {:.4f}".format(
-                self.epsilon_c, self.epsilon_cu
+                self.compression.c, self.compression.cu
             ),
         ]
         return print_sections(text)
@@ -458,7 +494,7 @@ class Concrete(Material):
         text = [
             "Tensile strength",
             "----------------",
-            "f_ctm = {:.1f} N/mm^2".format(self.f_ctm),
+            "f_ctm = {:.1f} N/mm^2".format(self.tension.f_ctm),
         ]
         return print_sections(text)
 
@@ -471,13 +507,13 @@ class Concrete(Material):
         return self._compression_stress_strain_type
 
     @compression_stress_strain_type.setter
-    def compression_stress_strain_type(self, type: str):
-        self._compression_stress_strain_type = type
+    def compression_stress_strain_type(self, stress_strain_type: str):
+        self._compression_stress_strain_type = stress_strain_type
         self.__set_compression()
 
     @property
     def E_cm(self):
-        return 22000 * (self.f_cm / 10) ** (0.3)
+        return 22000 * (self.f_cm / 10) ** 0.3
 
     @property
     def epsilon_y(self):
@@ -486,6 +522,10 @@ class Concrete(Material):
     @property
     def f_cm(self) -> float:
         return self._f_cm
+
+    @property
+    def f_ck(self) -> float:
+        return self.f_cm - 8.0
 
     @property
     def section_type(self):
@@ -500,37 +540,40 @@ class Concrete(Material):
         return self._tension_stress_strain_type
 
     @tension_stress_strain_type.setter
-    def tension_stress_strain_type(self, type: str):
-        self._tension_stress_strain_type = type
+    def tension_stress_strain_type(self, stress_strain_type: str):
+        self._tension_stress_strain_type = stress_strain_type
         self.__set_tension()
 
     @property
     def use_tension(self) -> bool:
         return self._use_tension
 
-    def __set_compression(self):
-        type = self.compression_stress_strain_type.replace("-", "").replace(" ", "")
-        if type.upper() == "NONLINEAR":
+    def __set_compression(self) -> ConcreteCompression:
+        typ = self.compression_stress_strain_type.replace("-", "").replace(" ", "")
+        if typ.upper() == "NONLINEAR":
             return ConcreteCompressionNonlinear(self.f_cm, self.epsilon_y, self.E_cm)
-        elif type.upper() == "PARABOLA":
+        elif typ.upper() == "PARABOLA":
             return ConcreteCompressionParabolaRectangle(
                 self.f_cm, self.epsilon_y, self.E_cm
             )
-        elif type.upper() == "BILINEAR":
-            return ConcreteCompressionBilinear(self.f_cm, self.epsilon_y, self.Ecm)
+        elif typ.upper() == "BILINEAR":
+            return ConcreteCompressionBiLinear(self.f_cm, self.epsilon_y, self.E_cm)
         else:
             raise ValueError(
-                str(type)
+                str(typ)
                 + ' not a valid value. Valid values are "Nonlinear", "Parabola" or "Bilinear"'
             )
 
     def __set_tension(self) -> ConcreteTension:
-        type = self.tension_stress_strain_type.replace("-", "").replace(" ", "")
-        if type.upper() == "DEFAULT":
+        stress_strain_type = self.tension_stress_strain_type.replace("-", "").replace(
+            " ", ""
+        )
+        if stress_strain_type.upper() == "DEFAULT":
             return ConcreteTension(self.f_cm, self.E_cm, self._f_ctm, self.use_tension)
         else:
             raise ValueError(
-                str(type) + ' is not a valid value. Valid value is "Default"'
+                str(stress_strain_type)
+                + ' is not a valid value. Valid value is "Default"'
             )
 
     def __build_stress_strain(self):
@@ -541,13 +584,17 @@ class Concrete(Material):
 
 
 class Steel(Material):
+
+    """Steel material"""
+
     def __init__(
         self,
         f_y: float,
         f_u: float = None,
         epsilon_u: float = None,
-        E_a: float = 210000,
+        E_a: float = 210000.0,
     ):
+        super().__init__(section_type="girder")
         self._f_y = f_y
         self._f_u = f_u
         self._epsilon_u = epsilon_u
@@ -555,17 +602,18 @@ class Steel(Material):
         self._stress_strain = self.__build_stress_strain()
 
     def __repr__(self):
-        return f"Steel(f_y={self.f_y}, f_u={self.f_u}, epsilon_u={self.epsilon_u}, E_a={self.E_a})"
-
-    @property
-    def class_name(self):
-        return "Steel"
+        return (
+            f"Steel(f_y={self.f_y}, "
+            f"f_u={self.f_u}, "
+            f"epsilon_u={self.epsilon_u}, "
+            f"E_a={self.E_a})"
+        )
 
     @str_start_end
     def __str__(self):
         text = [
-            self.class_name,
-            len(self.class_name) * "=",
+            self.__class__.__name__,
+            len(self.__class__.__name__) * "=",
             "section-type: " + self.section_type,
             "",
             "Initialization",
@@ -647,9 +695,7 @@ class Steel(Material):
 
     @property
     def f_u(self) -> float:
-        if self._f_u is None or self._epsilon_u is None:
-            return None
-        else:
+        if self._f_u is not None and self._epsilon_u is not None:
             return self._f_u
 
     @property
@@ -664,8 +710,6 @@ class Steel(Material):
     def epsilon_y(self) -> float:
         if self.f_y is not None:
             return self.f_y / self.E_a
-        else:
-            return None
 
     def stress_strain_standard(self) -> list:
         stress_strain = [
@@ -696,10 +740,9 @@ class Steel(Material):
 
 
 class Reinforcement(Steel):
+
+    """Reinforcement material"""
+
     @property
     def section_type(self):
         return "slab"
-
-    @property
-    def class_name(self):
-        return "Reinforcement"
