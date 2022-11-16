@@ -31,17 +31,8 @@ class MKappa:
         """
         Parameters
         ----------
-        cross_section : crosssection.Crossection
+        cross_section : cross_section.Crossection
             cross-section to compute
-        maximum_curvature : float
-           maximum positive or negative allowed curvature
-        minimum_curvature : float
-            minnimum positive or negative allowed curvature
-            (needs same sign as maximum_curvature)
-        strain_position : float
-                position of the given strain (Default: None)
-        strain_at_postion : float
-                strain at the given position (Default: None)
         applied_axial_force : float
                 applied axial force (Default: 0.0)
         maximum_iterations : int
@@ -60,7 +51,7 @@ class MKappa:
         self._maximum_iterations = maximum_iterations
         self._computations = (
             []
-        )  # [iteration, computed_cross_section, curvature, neutral_axis, horizontal_forces]
+        )  # [iteration, computed_cross_section, curvature, neutral_axis_value, horizontal_forces]
         self._solver = solver
         self._successful = False
 
@@ -78,7 +69,8 @@ class MKappa:
         return print_chapter(text)
 
     def _print_title(self) -> str:
-        return print_sections(["MKappa", len("MKappa") * "="])
+        class_name = self.__class__.__name__
+        return print_sections([class_name, len(class_name) * "="])
 
     def _print_initialization(self):
         return print_sections(["Initialization", "--------------", self.__repr__()])
@@ -99,7 +91,7 @@ class MKappa:
                 "{:4} | {:9.6f} | {:12.2f} | {:10.2f}".format(
                     iteration["iteration"],
                     iteration["curvature"],
-                    iteration["neutral_axis"],
+                    iteration["neutral_axis_value"],
                     iteration["axial_force"],
                 )
             )
@@ -139,16 +131,16 @@ class MKappa:
         """
         list of computations with dictionaries including the following values
                 'iteration' : number of the iteration
-                'computed_cross_section' : computed crosssection
+                'computed_cross_section' : computed cross_section
                 'curvature' : computed curvature
-                'neutral_axis' : computed neutral axis
+                'neutral_axis_value' : computed neutral axis
                 'axial_force' : computed axial force within this iteration
         """
         return self._computations
 
     @property
     def computed_cross_section(self):
-        """computed crosssection of the current iteration"""
+        """computed cross_section of the current iteration"""
         return self._computed_cross_section
 
     @property
@@ -173,12 +165,12 @@ class MKappa:
 
     @property
     def moment(self) -> float:
-        """computed moment of the crosssection"""
+        """computed moment of the cross_section"""
         return self._computed_cross_section.total_moment()
 
     @property
     def neutral_axis(self) -> float:
-        """point where strain is zero"""
+        """point where strain_value is zero"""
         return self._neutral_axis
 
     @property
@@ -196,7 +188,7 @@ class MKappa:
 
     def compute(self):
         """
-        compute the crosssection with given inital values (curvature and neutral axis)
+        compute the cross-section with given initial values (curvature and neutral axis)
         and save it
         """
         self._computed_cross_section = self._get_compute_cross_section()
@@ -252,7 +244,7 @@ class MKappa:
     def _guess_neutral_axis(self):
         self.__sort_computations_by_axial_forces()
         return self.solver(
-            data=self._computations, target="axial_force", variable="neutral_axis"
+            data=self._computations, target="axial_force", variable="neutral_axis_value"
         ).compute()
 
     def __is_axial_force_within_tolerance(self):
@@ -267,7 +259,7 @@ class MKappa:
                 "iteration": self.iteration,
                 "computed_cross_section": self.computed_cross_section,
                 "curvature": self.curvature,
-                "neutral_axis": self.neutral_axis,
+                "neutral_axis_value": self.neutral_axis,
                 "axial_force": self.axial_force,
             }
         )
@@ -288,7 +280,7 @@ class MKappa:
         self.__sort_computations_by("curvature")
 
     def __sort_computations_by_neutral_axis(self):
-        self.__sort_computations_by("neutral_axis")
+        self.__sort_computations_by("neutral_axis_value")
 
     def __sort_computations_by_axial_forces(self):
         self.__sort_computations_by("axial_force")
@@ -299,7 +291,7 @@ class MKappa:
 
 class MKappaByStrainPosition(MKappa):
 
-    """computation of one Moment-Curvature-Point by fixed stress-strain-point and varying the neutral axis"""
+    """computation of one Moment-Curvature-Point by fixed stress-strain_value-point and varying the neutral axis"""
 
     __slots__ = (
         "_cross_section",
@@ -334,7 +326,7 @@ class MKappaByStrainPosition(MKappa):
 
         Parameters
         ----------
-        cross_section : crosssection.Crossection
+        cross_section : cross_section.Crossection
                 cross-section to compute
         maximum_curvature : float
                 maximum positive or negative allowed curvature
@@ -342,9 +334,9 @@ class MKappaByStrainPosition(MKappa):
                 minimum positive or negative allowed curvature
                 (needs same sign as maximum_curvature)
         strain_position : float
-                position of the given strain (Default: None)
-        strain_at_postion : float
-                strain at the given position (Default: None)
+                position_value of the given strain_value (Default: None)
+        strain_at_position : float
+                strain_value at the given position_value (Default: None)
         applied_axial_force : float
                 applied axial force (Default: 0.0)
         maximum_iterations : int
@@ -371,7 +363,14 @@ class MKappaByStrainPosition(MKappa):
         self.initialize()
 
     def __repr__(self):
-        return f"MKappaByStrainPosition(cross_section=CrossSection, strain_position={self.strain_position}, strain_at_position={self.strain_at_position}, applied_axial_force={self.applied_axial_force}, maximum_iterations={self.maximum_iterations}, axial_force_tolerance={self.axial_force_tolerance}, solver={self.solver})"
+        return f"MKappaByStrainPosition(" \
+               f"cross_section=CrossSection, " \
+               f"strain_position={self.strain_position}, " \
+               f"strain_at_position={self.strain_at_position}, " \
+               f"applied_axial_force={self.applied_axial_force}, " \
+               f"maximum_iterations={self.maximum_iterations}, " \
+               f"axial_force_tolerance={self.axial_force_tolerance}, " \
+               f"solver={self.solver})"
 
     @property
     def maximum_curvature(self) -> float:
@@ -385,12 +384,12 @@ class MKappaByStrainPosition(MKappa):
 
     @property
     def strain_position(self) -> float:
-        """position of the given strain"""
+        """position_value of the given strain_value"""
         return self._strain_position
 
     @property
     def strain_at_position(self) -> float:
-        """strain at the given position"""
+        """strain_value at the given position_value"""
         return self._strain_at_position
 
     def initialize_boundary_curvatures(self):
@@ -404,22 +403,22 @@ class MKappaByStrainPosition(MKappa):
 
     def _compute_new_curvature(self):
         return curvature(
-            neutral_axis=self.neutral_axis,
-            position=self.strain_position,
+            neutral_axis_value=self.neutral_axis,
+            position_value=self.strain_position,
             strain_at_position=self.strain_at_position,
         )
 
     def _compute_neutral_axis(self):
         return neutral_axis(
             strain_at_position=self.strain_at_position,
-            curvature=self.curvature,
-            position=self.strain_position,
+            curvature_value=self.curvature,
+            position_value=self.strain_position,
         )
 
 
 class MKappaByConstantCurvature(MKappa):
 
-    """computation of one Momente-Curvature-Point by fixed curvature and varying the neutral axis"""
+    """computation of one Moment-Curvature-Point by fixed curvature and varying the neutral axis"""
 
     __slots__ = (
         "_cross_section",
@@ -452,7 +451,7 @@ class MKappaByConstantCurvature(MKappa):
 
         Parameters
         ----------
-        cross_section : crosssection.Crossection
+        cross_section : cross_section.Crossection
                 cross-section to compute
         maximum_neutral_axis : float
                 maximum allowed neutral-axis
@@ -511,51 +510,3 @@ class MKappaByConstantCurvature(MKappa):
 
     def _compute_new_curvature(self):
         return self.applied_curvature
-
-
-"""
-import material 
-import geometry
-import section		
-import time
-if __name__ == '__main__': 
-	
-	concrete = material.Concrete(f_cm=30)
-	concrete_rectangle = geometry.Rectangle(top_edge=0.0, bottom_edge=20, width=10)
-	#print(concrete)
-	steel = material.Steel(f_y=355, epsilon_u=0.2)
-	steel_rectangle = geometry.Rectangle(top_edge=20, bottom_edge=30, width=10)
-	
-	#print(steel)
-	
-	concrete_section = section.Section(geometry=concrete_rectangle, material=concrete)
-	steel_section = section.Section(geometry=steel_rectangle, material=steel)
-	
-	cs = section.Crosssection(sections=[concrete_section, steel_section])
-	cs_bound = section.CrosssectionBoundaries(sections=cs.sections)
-	#print(cs_bound)
-	
-	m_kappa = MKappaByStrainPosition(
-		cross_section=cs, 
-		strain_position=20.0, 
-		strain_at_position=-0.00169, 
-		maximum_curvature=0.000135)
-	print(m_kappa)
-	
-	start = time.clock()
-	m_kappa_curve = MKappaCurve(
-		cross_section=cs, 
-		include_positive_curvature = True,
-		include_negative_curvature = True, 
-		)
-	print(m_kappa_curve)
-	
-	mncurvaturecurve = MNZeroCurvatureCurve(cross_section=cs)
-	print(mncurvaturecurve)
-	#mncurve = MNZeroCurvature(cross_section=cs, input_section_type='slab', input_strain=-0.002)
-	#print(mncurve)
-	
-	end = time.clock()
-	#print(m_kappa_curve)
-	#print('duration:', str(end - start))
-	#"""
