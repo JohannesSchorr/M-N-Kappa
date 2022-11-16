@@ -453,7 +453,7 @@ class Concrete(Material):
             f"Concrete(f_cm={self.f_cm}, "
             f"f_ctm={self._f_ctm}, "
             f"use_tension={self.use_tension}, "
-            f"compression_stress_strain_type={self.compression_stress_strain_type})"
+            f"compression_stress_strain_type={self.compression_stress_strain_type}), "
             f"tension_stress_strain_type={self.tension_stress_strain_type})"
         )
 
