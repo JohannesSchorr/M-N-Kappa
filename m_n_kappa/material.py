@@ -212,7 +212,7 @@ class Material:
 
     def _interpolate_stress(self, strain: float, material_index: int) -> float:
         return interpolation(
-            position=strain,
+            position_value=strain,
             first_pair=self.stress_strain[material_index],
             second_pair=self.stress_strain[material_index + 1],
         )
