@@ -14,7 +14,7 @@ Currently available
 -------------------
   - Rectangle
   - Circle 
-  - Trapazoidal
+  - Trapezoid
 """
 
 
@@ -184,7 +184,7 @@ class Circle(Geometry):
 
     @property
     def area(self):
-        return 3.145 * (0.5 * self.diameter) ** (2.0)
+        return 3.145 * (0.5 * self.diameter) ** 2.0
 
     def split(self, at_points: list) -> list:
         return [self]  # [Circle(self.diameter, self.centroid)]
@@ -198,9 +198,9 @@ class Circle(Geometry):
         return 0.0
 
 
-class Trapazoid(Geometry):
+class Trapezoid(Geometry):
     """
-    Represents a trapazoidal
+    Represents a trapezoidal
     """
 
     def __init__(
@@ -212,12 +212,17 @@ class Trapazoid(Geometry):
         self._bottom_width = bottom_width
 
     def __repr__(self):
-        return f"Trapazoid(top_edge={self.top_edge}, bottom_edge={self.bottom_edge}, top_width={self.top_width}, bottom_width={self.bottom_width})"
+        return (
+            f"Trapezoid(top_edge={self.top_edge}, "
+            f"bottom_edge={self.bottom_edge}, "
+            f"top_width={self.top_width}, "
+            f"bottom_width={self.bottom_width})"
+        )
 
     @str_start_end
     def __str__(self):
         text = [
-            "Trapazoid",
+            "Trapezoid",
             "=========",
             "",
             "Initialization",
@@ -298,11 +303,11 @@ class Trapazoid(Geometry):
         for point in at_points:
             if self.top_edge < point < self.bottom_edge:
                 trapazoids.append(
-                    Trapazoid(top_edge, point, self.width(top_edge), self.width(point))
+                    Trapezoid(top_edge, point, self.width(top_edge), self.width(point))
                 )
                 top_edge = point
         trapazoids.append(
-            Trapazoid(
+            Trapezoid(
                 top_edge, self.bottom_edge, self.width(top_edge), self.bottom_width
             )
         )
