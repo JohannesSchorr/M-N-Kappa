@@ -24,12 +24,13 @@ class Material:
         Parameters
         ----------
         stress_strain : list
-                list with stress-strain-relationship
+            list with stress-strain-relationship
         section_type : str
-                type of section this material is ordered to
-                possible values are:
-                        - slab
-                        - girder
+            type of section this material is ordered to
+
+            possible values are:
+            - slab
+            - girder
         """
         self._stress_strain = stress_strain
         self._section_type = section_type
