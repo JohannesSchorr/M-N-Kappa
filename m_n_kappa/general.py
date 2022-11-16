@@ -1,13 +1,13 @@
 from itertools import groupby
 
 
-def curvature(neutral_axis: float, position: float, strain_at_position: float):
-    if neutral_axis == position:
+def curvature(neutral_axis_value: float, position_value: float, strain_at_position: float):
+    if neutral_axis_value == position_value:
         raise ZeroDivisionError(
-            'Arguments "neutral_axis" and "position" must have different values'
+            'Arguments "neutral_axis_value" and "position_value" must have different values'
         )
     else:
-        return strain_at_position / (position - neutral_axis)
+        return strain_at_position / (position_value - neutral_axis_value)
 
 
 def curvature_by_points(
@@ -16,21 +16,21 @@ def curvature_by_points(
     return (top_strain - bottom_strain) / (top_edge - bottom_edge)
 
 
-def strain(neutral_axis: float, curvature: float, position: float):
-    if neutral_axis == position:
+def strain(neutral_axis_value: float, curvature_value: float, position_value: float):
+    if neutral_axis_value == position:
         return 0.0
-    elif curvature == 0.0:
+    elif curvature_value == 0.0:
         raise ValueError("Curvature must be unequal zero")
     else:
-        return curvature * (position - neutral_axis)
+        return curvature_value * (position_value - neutral_axis_value)
 
 
-def position(strain_at_position: float, neutral_axis: float, curvature: float):
-    return neutral_axis + (strain_at_position / curvature)
+def position(strain_at_position: float, neutral_axis_value: float, curvature_value: float):
+    return neutral_axis_value + (strain_at_position / curvature_value)
 
 
-def neutral_axis(strain_at_position: float, curvature: float, position: float):
-    return position - (strain_at_position / curvature)
+def neutral_axis(strain_at_position: float, curvature_value: float, position_value: float):
+    return position_value - (strain_at_position / curvature_value)
 
 
 def remove_duplicates(list_of_lists: list) -> list:
@@ -49,7 +49,7 @@ def negative_sign(list_of_lists: list) -> list:
 
 
 def str_start_end(func):
-    def wrapper(*args, **kwargs):
+    def wrapper(*args):
         text = [
             "***************************************************",
             "",
@@ -62,8 +62,8 @@ def str_start_end(func):
     return wrapper
 
 
-def interpolation(position: float, first_pair: list, second_pair: list):
-    return first_pair[0] + (position - first_pair[1]) * (
+def interpolation(position_value: float, first_pair: list, second_pair: list):
+    return first_pair[0] + (position_value - first_pair[1]) * (
         second_pair[0] - first_pair[0]
     ) / (second_pair[1] - first_pair[1])
 
