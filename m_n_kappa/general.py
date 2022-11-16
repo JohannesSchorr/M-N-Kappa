@@ -78,3 +78,7 @@ def print_chapter(sections: list, separator="\n\n"):
 
 def print_sections(sub_sections: list, separator="\n"):
     return separator.join(sub_sections)
+
+
+def remove_zeros(values: list) -> list:
+    return list(filter(lambda x: x != 0.0, values))
