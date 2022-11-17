@@ -52,10 +52,10 @@ class MNZeroCurvature:
         cross_section : Crosssection
                 given cross-section
         input_section_type : str
-                section where strain is applied to
+                section where strain_value is applied to
                 possible values are (steel-)'girder' or (concrete-)'slab'
         input_strain : str
-                strain where axial force and moment were calculated
+                strain_value where axial force and moment were calculated
         axial_force_tolerance : float
                 tolerance of axial force to be met
         maximum_iterations : int
@@ -107,8 +107,8 @@ class MNZeroCurvature:
         text = [
             "Input Section",
             "-------------",
-            f"section-type: {self.input_section_type}",
-            f"strain: {self.input_strain}",
+            f"section-section_type: {self.input_section_type}",
+            f"strain_value: {self.input_strain}",
             f"axial-force: {self.axial_force}",
             f"moment: {self.input_sections_moment()}",
         ]
@@ -118,7 +118,7 @@ class MNZeroCurvature:
         text = [
             "Other Section",
             "-------------",
-            f"strain: {self.other_strain}",
+            f"strain_value: {self.other_strain}",
             f"axial-force: {self.other_axial_force}",
             f"moment: {self.other_sections_moment()}",
         ]
@@ -130,14 +130,14 @@ class MNZeroCurvature:
             "----------",
             "",
             "----------------------------",
-            "iter |  strain  | ax. force ",
+            "iter |  strain_value  | ax. force ",
             "----------------------------",
         ]
         for computation in self.computations:
             text.append(
                 "{:4} | {:8.5f} | {:9.2f}".format(
                     computation["iteration"],
-                    computation["strain"],
+                    computation["strain_value"],
                     computation["axial-force"],
                 )
             )
@@ -276,14 +276,14 @@ class MNZeroCurvature:
 
     def _guess_new_strain(self) -> float:
         return self.solver(
-            data=self.computations, variable="strain", target="axial-force"
+            data=self.computations, variable="strain_value", target="axial-force"
         ).compute()
 
     def _save(self) -> None:
         self._computations.append(
             {
                 "iteration": self.iteration,
-                "strain": self.other_strain,
+                "strain_value": self.other_strain,
                 "axial-force": self._axial_force_equilibrium(),
                 "cross-section": self.other_cross_section,
             }
@@ -300,8 +300,8 @@ class MNZeroCurvatureCurve:
 
     procedure:
             1. determine strains in the sub-cross-sections (girder and slab)
-            2. compute strain at the corresponding counter-sections
-            3. determine moment, axial-force, strain-difference, etc.r
+            2. compute strain_value at the corresponding counter-sections
+            3. determine moment, axial-force, strain_value-difference, etc.r
     """
 
     __slots__ = (
@@ -318,7 +318,7 @@ class MNZeroCurvatureCurve:
         Parameters
         ----------
         cross_section : Crosssection
-                crosssection to compute
+                cross_section to compute
         """
         self._cross_section = cross_section
         self._section_results = []
@@ -358,7 +358,7 @@ class MNZeroCurvatureCurve:
             len(title) * "-",
             "",
             "-------------------------------------",
-            "   strain   |  ax.-force | sec.-type ",
+            "   strain_value   |  ax.-force | sec.-section_type ",
             "-------------------------------------",
             results,
             "-------------------------------------",
@@ -380,9 +380,9 @@ class MNZeroCurvatureCurve:
 
     def _print_section_result(self, section_result: dict) -> str:
         line = []
-        line.append(" {:10.6f}".format(section_result["strain"]))
+        line.append(" {:10.6f}".format(section_result["strain_value"]))
         line.append("{:10.2f}".format(section_result["axial-force"]))
-        line.append("{:}".format(section_result["section-type"]))
+        line.append("{:}".format(section_result["section-section_type"]))
         return " | ".join(line)
 
     def _print_axial_force_starting_points(self) -> str:
@@ -404,7 +404,7 @@ class MNZeroCurvatureCurve:
             "----------------",
             "",
             "-------------------------------------------------------",
-            "    Moment    | Axi.-force |  Curvature | strain-diff. ",
+            "    Moment    | Axi.-force |  Curvature | strain_value-diff. ",
             "-------------------------------------------------------",
             self._print_m_n_points_table_content(),
             "-------------------------------------------------------",
@@ -421,7 +421,7 @@ class MNZeroCurvatureCurve:
             " {:12.2f}".format(m_n_point["moment"]),
             "{:10.2f}".format(m_n_point["axial-force"]),
             "{:10.6f}".format(m_n_point["curvature"]),
-            "{:10.6f}".format(m_n_point["strain-difference"]),
+            "{:10.6f}".format(m_n_point["strain_value-difference"]),
         ]
         return " | ".join(row)
 
@@ -435,11 +435,11 @@ class MNZeroCurvatureCurve:
         m-n-points with zero curvature
 
         each m-n-point has following keys:
-                - moment: computed moment of the crosssection
+                - moment: computed moment of the cross_section
                 - axial-force: axial force between the slab- and the girder-sections
-                - curvature: curvature of the crosssection (defaults to 0.0)
-                - strain-difference: strain-difference between the slab- and the girder-sections
-                - cross-section: computed crosssection
+                - curvature: curvature of the cross_section (defaults to 0.0)
+                - strain_value-difference: strain_value-difference between the slab- and the girder-sections
+                - cross-section: computed cross_section
         """
         return self._m_n_points
 
@@ -460,8 +460,8 @@ class MNZeroCurvatureCurve:
     def compute_section_axial_forces(self):
         for section_strain in self._get_section_strains():
             self.compute_section_axial_force(
-                strain=section_strain["strain"],
-                section_type=section_strain["section-type"],
+                strain=section_strain["strain_value"],
+                section_type=section_strain["section-section_type"],
             )
 
     def compute_section_axial_force(self, strain: float, section_type: str) -> None:
@@ -473,9 +473,9 @@ class MNZeroCurvatureCurve:
         self._section_results.append(
             {
                 "cross-section": crosssection,
-                "strain": crosssection.strain,
+                "strain_value": crosssection.strain,
                 "axial-force": crosssection.total_axial_force(),
-                "section-type": crosssection.section_type,
+                "section-section_type": crosssection.section_type,
             }
         )
 
@@ -483,7 +483,7 @@ class MNZeroCurvatureCurve:
         return [
             section_result
             for section_result in self.section_results
-            if section_result["section-type"] == section_type
+            if section_result["section-section_type"] == section_type
         ]
 
     def _maximum_axial_force(self, section_type: str):
@@ -510,8 +510,8 @@ class MNZeroCurvatureCurve:
                 <= counter_sections[index + 1]["axial-force"]
             ):
                 return (
-                    counter_sections[index]["strain"],
-                    counter_sections[index + 1]["strain"],
+                    counter_sections[index]["strain_value"],
+                    counter_sections[index + 1]["strain_value"],
                 )
 
     def counter_section_type(self, section_type: str):
@@ -521,7 +521,7 @@ class MNZeroCurvatureCurve:
     def collect_axial_force_starting_points(self):
         for index, section_result in enumerate(self.section_results):
             counter_section_type = self.counter_section_type(
-                section_result["section-type"]
+                section_result["section-section_type"]
             )
             if self._is_axial_starting_point(
                 counter_section_type, section_result["axial-force"]
@@ -549,14 +549,14 @@ class MNZeroCurvatureCurve:
         for starting_point in self.axial_force_starting_points:
             axial_force = starting_point["axial-force"]
             counter_section_type = self.counter_section_type(
-                starting_point["section-type"]
+                starting_point["section-section_type"]
             )
             lower_strain, upper_strain = self.find_border_strains(
                 axial_force * (-1.0), counter_section_type
             )
             m_n_zero_curvature = self._create_mnzerocurvature(
-                section_type=starting_point["section-type"],
-                strain=starting_point["strain"],
+                section_type=starting_point["section-section_type"],
+                strain=starting_point["strain_value"],
                 counter_lower_strain=lower_strain,
                 counter_upper_strain=upper_strain,
             )
@@ -583,7 +583,7 @@ class MNZeroCurvatureCurve:
                 "moment": mnzerocurvature.total_moment(),
                 "axial-force": mnzerocurvature.axial_force,
                 "curvature": 0.0,
-                "strain-difference": mnzerocurvature.strain_difference,
+                "strain_value-difference": mnzerocurvature.strain_difference,
                 "cross-section": mnzerocurvature,
             }
         )
