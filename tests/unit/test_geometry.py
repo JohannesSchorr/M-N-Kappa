@@ -1,6 +1,6 @@
 from unittest import TestCase, main
 
-from m_n_kappa.geometry import Rectangle, Circle, Trapazoid
+from m_n_kappa.geometry import Rectangle, Circle, Trapezoid
 
 
 class TestRectangle(TestCase):
@@ -75,7 +75,7 @@ class TestTrapazoidRectangle(TestCase):
         self.top_width = 10.0
         self.bottom_width = 10.0
 
-        self.trapazoid = Trapazoid(
+        self.trapazoid = Trapezoid(
             top_edge=self.top_edge,
             bottom_edge=self.bottom_edge,
             top_width=self.top_width,
@@ -109,7 +109,7 @@ class TestTrapazoidTriangle(TestCase):
         self.bottom_width = 0.0
         self.height = self.bottom_edge - self.top_edge
 
-        self.trapazoid = Trapazoid(
+        self.trapazoid = Trapezoid(
             top_edge=self.top_edge,
             bottom_edge=self.bottom_edge,
             top_width=self.top_width,
@@ -140,8 +140,8 @@ class TestTrapazoidTriangle(TestCase):
         point = 5.0
         width_at_point = 0.5 * (self.top_width + self.bottom_width)
         trapazoids = [
-            Trapazoid(self.top_edge, point, self.top_width, width_at_point),
-            Trapazoid(point, self.bottom_edge, width_at_point, self.bottom_width),
+            Trapezoid(self.top_edge, point, self.top_width, width_at_point),
+            Trapezoid(point, self.bottom_edge, width_at_point, self.bottom_width),
         ]
         self.assertListEqual(self.trapazoid.split([point]), trapazoids)
 
