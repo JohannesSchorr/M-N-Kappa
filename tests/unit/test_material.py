@@ -5,80 +5,88 @@ from unittest import TestCase, main
 
 class TestMaterial(TestCase):
 
-    stress_strain_list = [
-        [-100.0, -1.0],
-        [-50.0, -0.6],
-        [0.0, 0.0],
-        [50, 0.5],
-        [150.0, 2.0],
-    ]
-    section_type = "slab"
-    my_material = Material(section_type=section_type, stress_strain=stress_strain_list)
+    def setUp(self):
+        self.stress_strain_list = [
+            [-100.0, -1.0],
+            [-50.0, -0.6],
+            [0.0, 0.0],
+            [50, 0.5],
+            [150.0, 2.0],
+        ]
+        self.section_type = "slab"
+        self.material = Material(
+            section_type=self.section_type,
+            stress_strain=self.stress_strain_list)
 
     def test_stress_strain(self):
-        self.assertListEqual(self.my_material.stress_strain, self.stress_strain_list)
+        self.assertListEqual(self.material.stress_strain, self.stress_strain_list)
 
     def test_section_type(self):
-        self.assertEqual(self.my_material.section_type, self.section_type)
+        self.assertEqual(self.material.section_type, self.section_type)
 
     def test_maximum_strain(self):
-        self.assertEqual(self.my_material.maximum_strain, 2.0)
+        self.assertEqual(self.material.maximum_strain, 2.0)
 
     def test_minimum_strain(self):
-        self.assertEqual(self.my_material.minimum_strain, -1.0)
+        self.assertEqual(self.material.minimum_strain, -1.0)
 
     def test_strains(self):
-        self.assertEqual(self.my_material.strains, [-1.0, -0.6, 0.0, 0.5, 2.0])
+        self.assertEqual(self.material.strains, [-1.0, -0.6, 0.0, 0.5, 2.0])
 
     def test_stresses(self):
-        self.assertEqual(self.my_material.stresses, [-100.0, -50.0, 0.0, 50.0, 150.0])
+        self.assertEqual(self.material.stresses, [-100.0, -50.0, 0.0, 50.0, 150.0])
 
     def test_get_material_index_positive_strain(self):
-        self.assertEqual(self.my_material._get_material_index(strain=1.0), 3)
+        self.assertEqual(self.material._get_material_index(strain=1.0), 3)
 
     def test_get_material_index_zero(self):
-        self.assertEqual(self.my_material._get_material_index(strain=0.0), 2)
+        self.assertEqual(self.material._get_material_index(strain=0.0), 2)
 
     def test_get_material_index_negative_strain(self):
-        self.assertEqual(self.my_material._get_material_index(strain=-0.5), 1)
+        self.assertEqual(self.material._get_material_index(strain=-0.5), 1)
 
     def test_get_intermediate_strains_positive(self):
         self.assertEqual(
-            self.my_material.get_intermediate_strains(strain_1=1.0, strain_2=0.0), [0.5]
+            self.material.get_intermediate_strains(strain_1=1.0, strain_2=0.0), [0.5]
+        )
+
+    def test_get_intermediate_strain_positive_small(self):
+        self.assertEqual(
+            self.material.get_intermediate_strains(strain_1=0.1, strain_2=0.0), []
         )
 
     def test_get_intermediate_strain_negative(self):
         self.assertEqual(
-            self.my_material.get_intermediate_strains(strain_1=-1.0, strain_2=0.0),
+            self.material.get_intermediate_strains(strain_1=-1.0, strain_2=0.0),
             [-0.6],
         )
 
     def test_get_intermediate_strain_with_two_strains(self):
         self.assertEqual(
-            self.my_material.get_intermediate_strains(strain_1=-1.0, strain_2=1.0),
+            self.material.get_intermediate_strains(strain_1=-1.0, strain_2=1.0),
             [-0.6, 0.5],
         )
 
     def test_get_material_stress_1(self):
-        self.assertEqual(self.my_material.get_material_stress(-1.0), -100.0)
+        self.assertEqual(self.material.get_material_stress(-1.0), -100.0)
 
     def test_get_material_stress_2(self):
-        self.assertEqual(self.my_material.get_material_stress(0.25), 25)
+        self.assertEqual(self.material.get_material_stress(0.25), 25)
 
     def test_get_material_stress_3(self):
-        self.assertEqual(self.my_material.get_material_stress(2.0), 150.0)
+        self.assertEqual(self.material.get_material_stress(2.0), 150.0)
 
     def test_sort_strains_ascending(self):
-        self.my_material.sort_strains_ascending()
-        self.assertListEqual(self.my_material.stress_strain, self.stress_strain_list)
+        self.material.sort_strains_ascending()
+        self.assertListEqual(self.material.stress_strain, self.stress_strain_list)
 
     def test_sort_strains_descending(self):
-        self.my_material.sort_strains_descending()
+        self.material.sort_strains_descending()
         self.assertListEqual(
-            self.my_material.stress_strain,
+            self.material.stress_strain,
             [[150.0, 2.0], [50, 0.5], [0.0, 0.0], [-50.0, -0.6], [-100.0, -1.0]],
         )
-        self.my_material.sort_strains_ascending()
+        self.material.sort_strains_ascending()
 
 
 class TestConcrete(TestCase):
@@ -91,13 +99,13 @@ class TestConcrete(TestCase):
     def test_f_cm(self):
         self.assertEqual(self.concrete.f_cm, self.f_cm)
 
-    def test_compression_stress_strain_type(self) -> str:
+    def test_compression_stress_strain_type(self):
         self.assertEqual(self.concrete.compression_stress_strain_type, "Nonlinear")
 
 
 class TestConcreteCompressionNonlinear(TestCase):
 
-    """Test Concrete-class of material-module with non-linear stress-strain relationship"""
+    """Test Concrete-class of material-module with non-linear stress-strain_value relationship"""
 
     def setUp(self):
         self.f_cm = 35.0
