@@ -50,7 +50,7 @@ class MKappa:
         applied_axial_force : float
                 applied axial force (Default: 0.0)
         maximum_iterations : int
-                maximum allowed iterations (Default: 10)
+                maximum allowed iterations (Default: 10).
                 In case the given number of iterations before axial force within desired tolerance,
                 the computation is classified as unsuccessful and will be stopped
         axial_force_tolerance : float
@@ -216,7 +216,8 @@ class MKappa:
         elif self.initial_axial_forces_have_different_sign():
             self.iterate()
         else:
-            print("has different sign --> break")
+            print("Axial-forces computed with minimum and maximum curvature have same sign.\n"
+                  "Therefore, no equilibrium of Axial-forces possible. --> break")
             self.__set_values_none()
 
     def initial_axial_forces_have_different_sign(self):
@@ -337,8 +338,6 @@ class MKappaByStrainPosition(MKappa):
         solver: Solver = Newton,
     ):
         """
-        Initialization
-
         Parameters
         ----------
         cross_section : cross_section.Crossection
