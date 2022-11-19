@@ -29,6 +29,9 @@ class StressStrain:
     stress: float
     strain: float
 
+    def pair(self) -> list[float]:
+        return [self.stress, self.strain]
+
 
 class Material:
 
@@ -170,7 +173,7 @@ class Material:
                 True: sorts strains descending
                 False: sorts strains ascending (Default)
         """
-        self._stress_strain.sort(key=lambda x: x[1], reverse=reverse)
+        self._stress_strain.sort(key=lambda x: x.strain, reverse=reverse)
 
     def sort_strains_ascending(self) -> None:
         """sorts stress-strain_value-relationship so strains are ascending"""
@@ -227,14 +230,8 @@ class Material:
     def _interpolate_stress(self, strain: float, material_index: int) -> float:
         return interpolation(
             position_value=strain,
-            first_pair=[
-                self.stress_strain[material_index].stress,
-                self.stress_strain[material_index].strain,
-            ],
-            second_pair=[
-                self.stress_strain[material_index + 1].stress,
-                self.stress_strain[material_index + 1].strain,
-            ],
+            first_pair=self.stress_strain[material_index].pair(),
+            second_pair=self.stress_strain[material_index + 1].pair(),
         )
 
 
@@ -608,6 +605,10 @@ class Concrete(Material):
         stress_strains = self.compression.stress_strain() + self.tension.stress_strain()
         stress_strains = remove_duplicates(stress_strains)
         stress_strains.sort(key=lambda x: x[1], reverse=False)
+        stress_strains = [
+            StressStrain(stress_strain[0], stress_strain[1])
+            for stress_strain in stress_strains
+        ]
         return stress_strains
 
 
@@ -764,7 +765,11 @@ class Steel(Material):
     def __build_stress_strain(self):
         stress_strains = self.compression_stress_strain + self.tension_stress_strain
         stress_strains.sort()
-        return remove_duplicates(stress_strains)
+        stress_strains = remove_duplicates(stress_strains)
+        return [
+            StressStrain(stress_strain[0], stress_strain[1])
+            for stress_strain in stress_strains
+        ]
 
 
 class Reinforcement(Steel):
