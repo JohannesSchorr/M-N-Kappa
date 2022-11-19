@@ -1,3 +1,4 @@
+from dataclasses import dataclass
 from itertools import groupby
 
 
@@ -34,7 +35,6 @@ def neutral_axis(strain_at_position: float, curvature_value: float, position_val
 
 
 def remove_duplicates(list_of_lists: list) -> list:
-    # list_of_lists.sort()
     return [sublist for sublist, _ in groupby(list_of_lists)]
 
 
@@ -82,3 +82,21 @@ def print_sections(sub_sections: list, separator="\n"):
 
 def remove_zeros(values: list) -> list:
     return list(filter(lambda x: x != 0.0, values))
+
+
+@dataclass
+class StrainPosition:
+
+    """Container for strains at a position_value within a given material"""
+
+    strain: float
+    position: float
+    material: str
+
+    def __eq__(self, other) -> bool:
+        if not isinstance(other, StrainPosition):
+            return False
+        elif self.strain == other.strain and self.position == self.position:
+            return True
+        else:
+            return False
