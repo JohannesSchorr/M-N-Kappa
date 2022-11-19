@@ -1,7 +1,7 @@
 from m_n_kappa.material import Concrete, Steel
 from m_n_kappa.geometry import Rectangle
-from m_n_kappa.deformation import MKappaCurvesAlongBeam, BeamCurvatures
-from m_n_kappa.curves import MKappaCurvePoints
+from m_n_kappa.deformation import Beam
+from m_n_kappa.internalforces import SingleSpanUniformLoad
 
 from unittest import TestCase, main
 
@@ -15,80 +15,22 @@ steel = Steel(f_y=355, epsilon_u=0.2)
 steel_rectangle = Rectangle(top_edge=20, bottom_edge=30, width=10)
 steel_section = steel + steel_rectangle
 
-# Crosssection
+# cross-section
 cs = concrete_section + steel_section
 
-beam_length = 10000
+beam_length = 100
 element_number = 10
-load = 15
+load = 0.0001
 
-# compute M-Kappa curves along the beam
-m_kappa_curves = MKappaCurvesAlongBeam(crosssection=cs, beam_length=beam_length)
-
-# compute Beam-Curvatures
-beam_curvatures = BeamCurvatures(m_kappa_curves.m_kappa_curves, beam_length)
+loading = SingleSpanUniformLoad(beam_length, load)
 
 
-class TestMKappaCurvesAlongBeam(TestCase):
-    def test_crosssection(self):
-        self.assertEqual(m_kappa_curves.crosssection, cs)
+class TestBeam(TestCase):
+    def setUp(self):
+        self.beam = Beam(cs, beam_length, element_number, loading)
 
-    def test_beam_length(self):
-        self.assertEqual(m_kappa_curves.beam_length, beam_length)
-
-    def test_loading_type(self):
-        self.assertEqual(m_kappa_curves.loading_type, "uniform")
-
-    def test_m_kappa_curves(self):
-        self.assertEqual(type(m_kappa_curves.m_kappa_curves), list)
-
-    def test_m_kappa_curves_2(self):
-        for index in range(len(m_kappa_curves.m_kappa_curves)):
-            self.assertEqual(
-                type(m_kappa_curves.m_kappa_curves[index]["position"]), float
-            )
-
-    def test_m_kappa_curves_3(self):
-        for index in range(len(m_kappa_curves.m_kappa_curves)):
-            self.assertEqual(
-                type(m_kappa_curves.m_kappa_curves[index]["curve"]),
-                MKappaCurvePoints,
-            )
-
-    def test_elements(self):
-        self.assertEqual(m_kappa_curves.elements, element_number)
-
-    def test_element_length(self):
-        self.assertEqual(m_kappa_curves.element_length, beam_length / element_number)
-
-    def test_positions(self):
-        self.assertEqual(
-            m_kappa_curves.positions(),
-            [
-                number * beam_length / element_number
-                for number in range(1, element_number)
-            ],
-        )
-
-
-class TestBeamCurvatures(TestCase):
-    def test_beam_length(self):
-        self.assertEqual(beam_curvatures.beam_length, beam_length)
-
-    def test_moment(self):
-        self.assertEqual(
-            beam_curvatures._moment(0.5 * beam_length, load),
-            load * beam_length ** (2.0) * 0.125,
-        )
-
-    def test_m_kappa_curve(self):
-        self.assertEqual(
-            type(beam_curvatures._m_kappa_curve(0.5 * beam_length)),
-            MKappaCurvePoints,
-        )
-
-    def test_compute(self):
-        self.assertEqual(list(beam_curvatures.compute(10)), list)
+    def test_deformation(self):
+        print(self.beam.deformation(0.5 * beam_length, loading))
 
 
 if __name__ == "__main__":
