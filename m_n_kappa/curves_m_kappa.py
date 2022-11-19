@@ -1,17 +1,18 @@
 from dataclasses import dataclass
 
 from .crosssection import Crosssection
-from .curvature_boundaries import BoundaryValues,Boundaries
+from .curvature_boundaries import BoundaryValues, Boundaries
 
 from .general import (
     interpolation,
     print_sections,
     print_chapter,
     str_start_end,
-    StrainPosition
+    StrainPosition,
 )
 from .points import MKappaByStrainPosition
 from .solver import Newton, Bisection
+
 
 @dataclass
 class MKappaCurvePoint:
@@ -27,9 +28,9 @@ class MKappaCurvePoint:
         if not isinstance(other, MKappaCurvePoint):
             return False
         elif (
-                self.moment == other.moment and
-                self.curvature == other.curvature and
-                self.neutral_axis == other.neutral_axis
+            self.moment == other.moment
+            and self.curvature == other.curvature
+            and self.neutral_axis == other.neutral_axis
         ):
             return True
         else:
@@ -83,12 +84,12 @@ class MKappaCurvePoints:
             strain and its position
         """
         point = MKappaCurvePoint(
-                moment,
-                curvature,
-                neutral_axis,
-                cross_section,
-                strain_position,
-            )
+            moment,
+            curvature,
+            neutral_axis,
+            cross_section,
+            strain_position,
+        )
         if point not in self.points:
             self._points.append(point)
             self._sort_points_by_curvature()
@@ -96,10 +97,13 @@ class MKappaCurvePoints:
     def curvature(self, by_moment: float) -> float:
         """get curvature at given moment"""
         if self.maximum_moment() < by_moment:
-            raise ValueError(
-                f"{by_moment=} > maximum moment in the curve {self.maximum_moment()}"
-                f"Therefore, no matching moment value could be found."
-            )
+            if self.maximum_moment() < by_moment * 0.999:
+                raise ValueError(
+                    f"{by_moment=:.2f} > maximum moment in the curve {self.maximum_moment():.2f}.\n"
+                    f"Therefore, no matching moment value could be found."
+                )
+            else:
+                by_moment = self.maximum_moment()
         point_index = self._determine_index(by_moment)
         return interpolation(
             by_moment,
@@ -134,7 +138,7 @@ class MKappaCurveCurvature:
         "_maximum_curvature",
         "_minimum_curvature",
         "_m_kappa_failure",
-        "_start_strain_position"
+        "_start_strain_position",
     )
 
     def __init__(
@@ -416,9 +420,7 @@ class MKappaCurve:
             self._compute_positive_curvature_failure()
             self._compute_positive_curvature_intermediate()
 
-    def _compute_values(
-        self, m_kappa: MKappaByStrainPosition
-    ) -> None:
+    def _compute_values(self, m_kappa: MKappaByStrainPosition) -> None:
         if m_kappa.successful:
             self._save_values(
                 m_kappa.moment,
@@ -428,11 +430,13 @@ class MKappaCurve:
                 m_kappa.strain_position,
             )
         else:
-            print(f'============\n'
-                  f'not successful:\n'
-                  f'position_value={m_kappa.strain_position}')
-            print(m_kappa._print_initialization())
-            print(m_kappa._print_iterations())
+            print(
+                f"============\n"
+                f"not successful:\n"
+                f"position_value={m_kappa.strain_position}"
+            )
+            #print(m_kappa._print_initialization())
+            #print(m_kappa._print_iterations())
 
     def _insert_zero(self) -> None:
         self._save_values(0.0, 0.0, 0.0, None, None)
@@ -459,11 +463,7 @@ class MKappaCurve:
         strain_position: StrainPosition = None,
     ) -> None:
         self._m_kappa_points.add(
-            moment,
-            curvature,
-            neutral_axis,
-            computed_cross_section,
-            strain_position
+            moment, curvature, neutral_axis, computed_cross_section, strain_position
         )
 
     def __sort_m_kappa_by_curvature(self) -> None:
