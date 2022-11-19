@@ -18,18 +18,16 @@ class Solver:
 
     def __init__(self, data: list, target, variable, target_value: float = 0.0):
         """
-        Initilization
-
         Parameters
         ----------
         data : list
-                data containing target and variable keys
+            data containing target and variable keys
         target : str or int
-                key of the target (eg. str for dictionaries or int for lists)
+            key of the target (e.g. str for dictionaries or int for lists)
         variable : str or int
-                variable of the target (eg. str for dictionaries or int for lists)
+            variable of the target (e.g. str for dictionaries or int for lists)
         target_value : float
-                value to meet by the target
+            value to meet by the target
         """
         self._data = data
         self._target = target
@@ -40,7 +38,11 @@ class Solver:
         self._prepare()
 
     def __repr__(self):
-        return f"{self.__class__.__name__}(data=data, target={self.target}, variable={self.variable}, target_value={self.target_value})"
+        return f"{self.__class__.__name__}(" \
+               f"data=data, " \
+               f"target={self.target}, " \
+               f"variable={self.variable}, " \
+               f"target_value={self.target_value})"
 
     @str_start_end
     def __str__(self):
@@ -135,15 +137,14 @@ class Bisection(Solver):
     )
 
     def compute(self) -> float:
-        print(
-            "min over zero:",
-            self._min_over_zero_variable(),
-            "| min under zero:",
-            self._min_under_zero_variable(),
-            "| mean:",
-            0.5 * (self._min_under_zero_variable() + self._min_over_zero_variable()),
-        )
         return 0.5 * (self._min_under_zero_variable() + self._min_over_zero_variable())
+
+    def print_values(self):
+        print(
+            f"min over zero: {self._min_over_zero_variable()} | "
+            f"min under zero: {self._min_under_zero_variable()} | "
+            f"mean: {self.compute()}"
+        )
 
     def _min_over_zero_variable(self) -> float:
         return min(self._data_with_target_over_zero(), key=lambda x: x[self.target])[
@@ -163,8 +164,18 @@ class Bisection(Solver):
 
 
 class Newton(Solver):
-
     """Solver using the newton method"""
+
+    __slots__ = (
+        "_data",
+        "_target",
+        "_variable",
+        "_target_value",
+        "_maximum_variable",
+        "_minimum_variable",
+        "_function",
+        "_x_n_plus_1",
+    )
 
     @property
     def function(self):
@@ -176,15 +187,27 @@ class Newton(Solver):
 
     def compute(self) -> float:
         self._x_n_plus_1 = self.solve()
-        if self.minimum_variable <= self.x_n_plus_1 <= self.maximum_variable:
+        if self.is_value_in_range(): #  and self.value_has_changed():
             return self.x_n_plus_1
         else:
             return self.fallback()
 
+    def is_value_in_range(self) -> bool:
+        if self.minimum_variable <= self.x_n_plus_1 <= self.maximum_variable:
+            return True
+        else:
+            return False
+
+    def value_has_changed(self) -> bool:
+        if abs(self.x_n_plus_1 - self.x_n) / self.x_n < 0.0001:
+            return False
+        else:
+            return True
+
     def fallback(self) -> float:
         print("Fallback: Bisection")
-        bisec = Bisection(self.data, self.target, self.variable)
-        return bisec.compute()
+        bisection = Bisection(self.data, self.target, self.variable)
+        return bisection.compute()
 
     def solve(self) -> float:
         return self.x_n - (self.solved_function() / self.solved_derivate())
