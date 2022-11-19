@@ -2,6 +2,7 @@ from m_n_kappa.section import (
     Section,
     ComputationSectionStrain,
     ComputationSectionCurvature,
+    StrainPosition,
 )
 from m_n_kappa.geometry import Rectangle
 from m_n_kappa.material import Steel
@@ -132,6 +133,20 @@ class TestComputationSectionCurvature(TestCase):
     def test_moment(self):
         self.assertAlmostEqual(
             self.computation_section.moment(), self.axial_force * self.lever_arm
+        )
+
+
+class TestMaterialPointsInsideCurvature(TestCase):
+
+    def setUp(self):
+        self.geometry = Rectangle(0, 10, 10)
+        self.material = Steel(355, 400, 0.15)
+        self.section = self.geometry + self.material
+        self.computed_section = ComputationSectionCurvature(self.section, 0.001, 10)
+    def test_material_points_inside_curvature(self):
+        self.assertListEqual(
+            self.computed_section.material_points_inside_curvature(),
+            [StrainPosition(strain=-0.0016904761904761904, position=0, material='Steel')]
         )
 
 
