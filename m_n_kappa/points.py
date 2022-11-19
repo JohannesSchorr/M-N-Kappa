@@ -1,9 +1,12 @@
+from dataclasses import dataclass
+
 from .general import (
     print_sections,
     print_chapter,
     str_start_end,
     curvature,
     neutral_axis,
+    StrainPosition,
 )
 from .crosssection import Crosssection, ComputationCrosssectionCurvature
 from .solver import Solver, Newton
@@ -14,6 +17,17 @@ Todo
 ----
   - Implement effective width
 """
+
+
+@dataclass
+class Computation:
+    """stores the results of an iteration-step during a computation """
+
+    iteration: int
+    computed_cross_section: Crosssection
+    curvature: float
+    neutral_axis_value: float
+    axial_force: float
 
 
 class MKappa:
@@ -49,14 +63,21 @@ class MKappa:
         self._applied_axial_force = applied_axial_force
         self._axial_force_tolerance = axial_force_tolerance
         self._maximum_iterations = maximum_iterations
-        self._computations = (
-            []
-        )  # [iteration, computed_cross_section, curvature, neutral_axis_value, horizontal_forces]
+        self._computations: list[Computation] = []
         self._solver = solver
         self._successful = False
+        self._iteration = 0
+        self._curvature = None
+        self._neutral_axis = None
+        self._computed_cross_section = None
+        self._axial_force = None
 
     def __repr__(self):
-        return f"MKappa(cross_section=CrossSection, applied_axial_force={self.applied_axial_force}, maximum_iterations={self.maximum_iterations})"
+        return (
+            f"MKappa(cross_section=CrossSection, "
+            f"applied_axial_force={self.applied_axial_force}, "
+            f"maximum_iterations={self.maximum_iterations})"
+        )
 
     @str_start_end
     def __str__(self):
@@ -86,13 +107,13 @@ class MKappa:
             "---------------------------------------------",
         ]
         self.__sort_computations_by_iteration()
-        for iteration in self.computations:
+        for computation in self.computations:
             text.append(
                 "{:4} | {:9.6f} | {:12.2f} | {:10.2f}".format(
-                    iteration["iteration"],
-                    iteration["curvature"],
-                    iteration["neutral_axis_value"],
-                    iteration["axial_force"],
+                    computation.iteration,
+                    computation.curvature,
+                    computation.neutral_axis_value,
+                    computation.axial_force,
                 )
             )
         text.append("---------------------------------------------")
@@ -127,15 +148,7 @@ class MKappa:
         return self._axial_force_tolerance
 
     @property
-    def computations(self) -> list:
-        """
-        list of computations with dictionaries including the following values
-                'iteration' : number of the iteration
-                'computed_cross_section' : computed cross_section
-                'curvature' : computed curvature
-                'neutral_axis_value' : computed neutral axis
-                'axial_force' : computed axial force within this iteration
-        """
+    def computations(self) -> list[Computation]:
         return self._computations
 
     @property
@@ -203,14 +216,11 @@ class MKappa:
         elif self.initial_axial_forces_have_different_sign():
             self.iterate()
         else:
-            # print('has different sign --> break')
+            print("has different sign --> break")
             self.__set_values_none()
 
     def initial_axial_forces_have_different_sign(self):
-        if (
-            self.computations[0]["axial_force"] * self.computations[1]["axial_force"]
-            < 0.0
-        ):
+        if self.computations[0].axial_force * self.computations[1].axial_force < 0.0:
             return True
         else:
             return False
@@ -238,13 +248,20 @@ class MKappa:
         return ComputationCrosssectionCurvature(
             sections=self.cross_section.sections,
             curvature=self.curvature,
-            neutral_axis=self.neutral_axis,
+            neutral_axis_value=self.neutral_axis,
         )
 
     def _guess_neutral_axis(self):
         self.__sort_computations_by_axial_forces()
+        temp_computations = [
+            {
+                "axial_force": computation.axial_force,
+                "neutral_axis_value": computation.neutral_axis_value,
+            }
+            for computation in self._computations
+        ]
         return self.solver(
-            data=self._computations, target="axial_force", variable="neutral_axis_value"
+            data=temp_computations, target="axial_force", variable="neutral_axis_value"
         ).compute()
 
     def __is_axial_force_within_tolerance(self):
@@ -255,13 +272,13 @@ class MKappa:
 
     def __save(self):
         self._computations.append(
-            {
-                "iteration": self.iteration,
-                "computed_cross_section": self.computed_cross_section,
-                "curvature": self.curvature,
-                "neutral_axis_value": self.neutral_axis,
-                "axial_force": self.axial_force,
-            }
+            Computation(
+                iteration=self.iteration,
+                computed_cross_section=self.computed_cross_section,
+                curvature=self.curvature,
+                neutral_axis_value=self.neutral_axis,
+                axial_force=self.axial_force,
+            )
         )
         # print(self._computations[-1])
         # print(self.print_iterations())
@@ -277,16 +294,16 @@ class MKappa:
         self._computations.sort(key=lambda x: x[key])
 
     def __sort_computations_by_curvature(self):
-        self.__sort_computations_by("curvature")
+        self._computations.sort(key=lambda x: x.curvature)
 
     def __sort_computations_by_neutral_axis(self):
-        self.__sort_computations_by("neutral_axis_value")
+        self._computations.sort(key=lambda x: x.neutral_axis_value)
 
     def __sort_computations_by_axial_forces(self):
-        self.__sort_computations_by("axial_force")
+        self._computations.sort(key=lambda x: x.axial_force)
 
     def __sort_computations_by_iteration(self):
-        self.__sort_computations_by("iteration")
+        self._computations.sort(key=lambda x: x.iteration)
 
 
 class MKappaByStrainPosition(MKappa):
@@ -296,7 +313,6 @@ class MKappaByStrainPosition(MKappa):
     __slots__ = (
         "_cross_section",
         "_strain_position",
-        "_strain_at_position",
         "_applied_axial_force",
         "_axial_force_tolerance",
         "_maximum_iterations",
@@ -314,8 +330,7 @@ class MKappaByStrainPosition(MKappa):
         cross_section: Crosssection,
         maximum_curvature: float,
         minimum_curvature: float,
-        strain_position: float,
-        strain_at_position: float,
+        strain_position: StrainPosition,
         applied_axial_force: float = 0.0,
         maximum_iterations: int = 10,
         axial_force_tolerance: float = 5.0,
@@ -332,11 +347,9 @@ class MKappaByStrainPosition(MKappa):
                 maximum positive or negative allowed curvature
         minimum_curvature : float
                 minimum positive or negative allowed curvature
-                (needs same sign as maximum_curvature)
-        strain_position : float
+                (needs same sign as edge_strains)
+        strain_position : StrainPosition
                 position_value of the given strain_value (Default: None)
-        strain_at_position : float
-                strain_value at the given position_value (Default: None)
         applied_axial_force : float
                 applied axial force (Default: 0.0)
         maximum_iterations : int
@@ -357,20 +370,20 @@ class MKappaByStrainPosition(MKappa):
             solver,
         )
         self._strain_position = strain_position
-        self._strain_at_position = strain_at_position
         self._maximum_curvature = maximum_curvature
         self._minimum_curvature = minimum_curvature
         self.initialize()
 
     def __repr__(self):
-        return f"MKappaByStrainPosition(" \
-               f"cross_section=CrossSection, " \
-               f"strain_position={self.strain_position}, " \
-               f"strain_at_position={self.strain_at_position}, " \
-               f"applied_axial_force={self.applied_axial_force}, " \
-               f"maximum_iterations={self.maximum_iterations}, " \
-               f"axial_force_tolerance={self.axial_force_tolerance}, " \
-               f"solver={self.solver})"
+        return (
+            f"MKappaByStrainPosition("
+            f"cross_section=CrossSection, "
+            f"strain_position={self.strain_position}, "
+            f"applied_axial_force={self.applied_axial_force}, "
+            f"maximum_iterations={self.maximum_iterations}, "
+            f"axial_force_tolerance={self.axial_force_tolerance}, "
+            f"solver={self.solver})"
+        )
 
     @property
     def maximum_curvature(self) -> float:
@@ -383,36 +396,31 @@ class MKappaByStrainPosition(MKappa):
         return self._minimum_curvature
 
     @property
-    def strain_position(self) -> float:
+    def strain_position(self) -> StrainPosition:
         """position_value of the given strain_value"""
         return self._strain_position
 
-    @property
-    def strain_at_position(self) -> float:
-        """strain_value at the given position_value"""
-        return self._strain_at_position
-
     def initialize_boundary_curvatures(self):
-        for index, curvature in enumerate(
+        for index, curvature_value in enumerate(
             [self.minimum_curvature, self.maximum_curvature]
         ):
             self._iteration = index
-            self._curvature = curvature
+            self._curvature = curvature_value
             self._neutral_axis = self._compute_neutral_axis()
             self.compute()
 
     def _compute_new_curvature(self):
         return curvature(
             neutral_axis_value=self.neutral_axis,
-            position_value=self.strain_position,
-            strain_at_position=self.strain_at_position,
+            position_value=self.strain_position.position,
+            strain_at_position=self.strain_position.strain,
         )
 
     def _compute_neutral_axis(self):
         return neutral_axis(
-            strain_at_position=self.strain_at_position,
+            strain_at_position=self.strain_position.strain,
             curvature_value=self.curvature,
-            position_value=self.strain_position,
+            position_value=self.strain_position.position,
         )
 
 
@@ -482,7 +490,17 @@ class MKappaByConstantCurvature(MKappa):
         self.initialize()
 
     def __repr__(self):
-        return f"MKappaByConstantCurvature(cross_section=cross_section, applied_curvature={self.applied_curvature}, maximum_neutral_axis={self.maximum_neutral_axis}, minimum_neutral_axis={self.minimum_neutral_axis}, applied_axial_force={self.applied_axial_force}, maximum_iterations={self.maximum_iterations}, axial_force_tolerance={self.axial_force_tolerance}, solver={self.solver})"
+        return (
+            f"MKappaByConstantCurvature("
+            f"cross_section=cross_section, "
+            f"applied_curvature={self.applied_curvature}, "
+            f"maximum_neutral_axis={self.maximum_neutral_axis}, "
+            f"minimum_neutral_axis={self.minimum_neutral_axis}, "
+            f"applied_axial_force={self.applied_axial_force}, "
+            f"maximum_iterations={self.maximum_iterations}, "
+            f"axial_force_tolerance={self.axial_force_tolerance}, "
+            f"solver={self.solver})"
+        )
 
     @property
     def applied_curvature(self) -> float:
@@ -500,12 +518,12 @@ class MKappaByConstantCurvature(MKappa):
         return self._minimum_neutral_axis
 
     def initialize_boundary_curvatures(self):
-        for index, neutral_axis in enumerate(
+        for index, neutral_axis_value in enumerate(
             [self.minimum_neutral_axis, self.maximum_neutral_axis]
         ):
             self._iteration = index
             self._curvature = self.applied_curvature
-            self._neutral_axis = neutral_axis
+            self._neutral_axis = neutral_axis_value
             self.compute()
 
     def _compute_new_curvature(self):
