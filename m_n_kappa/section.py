@@ -27,9 +27,11 @@ class Section:
         self._material = material
 
     def __repr__(self):
-        return f"Section(" \
-               f"geometry={self.geometry.__repr__()}, " \
-               f"material={self.material.__repr__()})"
+        return (
+            f"Section("
+            f"geometry={self.geometry.__repr__()}, "
+            f"material={self.material.__repr__()})"
+        )
 
     def __add__(self, other):
         return self._build_crosssection(other)
@@ -141,7 +143,6 @@ class Section:
 
 
 class ComputationSection(Section):
-
     def __init_(self):
         self._section = None
         self._edges_strain = None
@@ -209,47 +210,50 @@ class ComputationSection(Section):
     def _compute_axial_force(self) -> float:
         if len(self.geometry.edges) > 1:
             return self._axial_force_integrated()
-        else:
+        else:  # Circle
             return self.geometry.area * self.edges_stress[0]
 
     def _get_edges_strain(self) -> list:
         pass
 
     def _get_edges_stress(self) -> list:
-        #print(self.edges_strain, self.geometry.edges)
-        return [self._material_stress(strain_value) for strain_value in self.edges_strain]
+        return [
+            self._material_stress(strain_value) for strain_value in self.edges_strain
+        ]
 
     def _axial_force_integrated_at_position(self, position_value) -> float:
         return (
-                (1.0 / 3.0)
-                * self.geometry.width_slope
-                * self.stress_slope
-                * position_value ** 3.0
-                + (1.0 / 2.0)
-                * (
-                    self.stress_interception * self.geometry.width_slope
-                    + self.geometry.width_interception * self.stress_slope
-                )
-                * position_value ** 2.0
-                + self.geometry.width_interception * self.stress_interception * position_value
+            (1.0 / 3.0)
+            * self.geometry.width_slope
+            * self.stress_slope
+            * position_value**3.0
+            + (1.0 / 2.0)
+            * (
+                self.stress_interception * self.geometry.width_slope
+                + self.geometry.width_interception * self.stress_slope
+            )
+            * position_value**2.0
+            + self.geometry.width_interception
+            * self.stress_interception
+            * position_value
         )
 
     def _lever_arm_integrated_at_position(self, position_value: float):
         return (
-                (1.0 / 4.0)
-                * self.geometry.width_slope
-                * self.stress_slope
-                * position_value ** 4.0
-                + (1.0 / 3.0)
-                * (
-                    self.stress_interception * self.geometry.width_slope
-                    + self.geometry.width_interception * self.stress_slope
-                )
-                * position_value ** 3.0
-                + (1.0 / 2.0)
-                * self.geometry.width_interception
-                * self.stress_interception
-                * position_value ** 2.0
+            (1.0 / 4.0)
+            * self.geometry.width_slope
+            * self.stress_slope
+            * position_value**4.0
+            + (1.0 / 3.0)
+            * (
+                self.stress_interception * self.geometry.width_slope
+                + self.geometry.width_interception * self.stress_slope
+            )
+            * position_value**3.0
+            + (1.0 / 2.0)
+            * self.geometry.width_interception
+            * self.stress_interception
+            * position_value**2.0
         )
 
     def _lever_arm_numerator(self):
@@ -315,9 +319,11 @@ class ComputationSectionStrain(ComputationSection):
         self._axial_force = self._compute_axial_force()
 
     def __repr__(self):
-        return f"ComputationSectionStrain(" \
-               f"section={self.section.__repr__()}, " \
-               f"strain_value={self.strain})"
+        return (
+            f"ComputationSectionStrain("
+            f"section={self.section.__repr__()}, "
+            f"strain_value={self.strain})"
+        )
 
     @str_start_end
     def __str__(self):
@@ -387,10 +393,12 @@ class ComputationSectionCurvature(ComputationSection):
         self._axial_force = self._compute_axial_force()
 
     def __repr__(self):
-        return f"ComputationSectionCurvature(" \
-               f"section={self.section.__class__.__name__}, " \
-               f"curvature={self.curvature}, " \
-               f"neutral_axis_value={self.neutral_axis})"
+        return (
+            f"ComputationSectionCurvature("
+            f"section={self.section.__class__.__name__}, "
+            f"curvature={self.curvature}, "
+            f"neutral_axis_value={self.neutral_axis})"
+        )
 
     @str_start_end
     def __str__(self):
@@ -404,7 +412,11 @@ class ComputationSectionCurvature(ComputationSection):
         return print_chapter(text)
 
     def _print_geometry(self) -> str:
-        text = ["Geometry", "--------", "section_type: " + self.geometry.__class__.__name__]
+        text = [
+            "Geometry",
+            "--------",
+            "section_type: " + self.geometry.__class__.__name__,
+        ]
         if len(self.geometry.edges) > 1:
             text += [
                 "top_edge: {:.1f} | bottom_edge: {:.1f}".format(
@@ -483,7 +495,7 @@ class ComputationSectionCurvature(ComputationSection):
                         StrainPosition(
                             intermediate_strain,
                             self.geometry.edges[strain_index],
-                            self.material.__class__.__name__
+                            self.material.__class__.__name__,
                         )
                     )
         return strain_position
@@ -491,14 +503,14 @@ class ComputationSectionCurvature(ComputationSection):
     def __get_allowed_position_index(self, strain_value: float) -> int:
         if self.curvature > 0.0:
             if strain_value > 0.0:
-                return 1  # bottom_edge
+                return 1  # index bottom_edge
             else:
-                return 0  # top_edge
+                return 0  # index  top_edge
         else:
             if strain_value > 0.0:
-                return 0  # top_edge
+                return 0  # index top_edge
             else:
-                return 1  # bottom_edge
+                return 1  # index bottom_edge
 
     def __computation_section(self, geometry):
         return ComputationSectionCurvature(
@@ -525,7 +537,7 @@ class ComputationSectionCurvature(ComputationSection):
         return strain(
             neutral_axis_value=self.neutral_axis,
             curvature_value=self.curvature,
-            position_value=position_value
+            position_value=position_value,
         )
 
     def __get_sub_geometries(self):
@@ -538,7 +550,7 @@ class ComputationSectionCurvature(ComputationSection):
         else:
             self.material.sort_strains_descending()
 
-    def __sub_section(self, geometry):
+    def __sub_section(self, geometry) -> Section:
         return Section(geometry, self.material)
 
     def __material_points_position(self) -> list:
@@ -548,7 +560,7 @@ class ComputationSectionCurvature(ComputationSection):
             positions.append(position_value)
         return positions
 
-    def __compute_position(self, strain_value: float):
+    def __compute_position(self, strain_value: float) -> float:
         """compute position_value where strain-value is given"""
         return position(
             curvature_value=self.curvature,
