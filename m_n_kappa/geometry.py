@@ -28,7 +28,7 @@ class Geometry(ABC):
     def __radd__(self, other: Material):
         return self._build_section(other)
 
-    def _build_section(self, other: Material):
+    def _build_section(self, other: Material) -> Section:
         if isinstance(other, Material):
             return Section(geometry=self, material=other)
         else:
@@ -37,11 +37,11 @@ class Geometry(ABC):
             )
 
     @abstractmethod
-    def area(self):
+    def area(self) -> float:
         ...
 
     @abstractmethod
-    def centroid(self):
+    def centroid(self) -> float:
         ...
 
     # @abstractmethod
@@ -53,7 +53,7 @@ class Geometry(ABC):
         ...
 
     @abstractmethod
-    def edges(self):
+    def edges(self) -> list[float]:
         ...
 
 
@@ -130,7 +130,7 @@ class Rectangle(Geometry):
     def width_interception(self) -> float:
         return self.width
 
-    def split(self, at_points: list) -> list:
+    def split(self, at_points: list) -> list[Geometry]:
         top_edge = self.top_edge
         rectangles = []
         at_points.sort()
@@ -296,7 +296,7 @@ class Trapezoid(Geometry):
         else:
             return 0.0
 
-    def split(self, at_points: list) -> list:
+    def split(self, at_points: list) -> list[Geometry]:
         top_edge = self.top_edge
         trapazoids = []
         at_points.sort()
