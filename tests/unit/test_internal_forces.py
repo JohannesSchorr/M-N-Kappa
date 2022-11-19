@@ -1,6 +1,6 @@
 from unittest import TestCase, main
 
-from m_n_kappa.internalforces import SingleSpan
+from m_n_kappa.internalforces import SingleSpan, SingleLoad
 
 
 class TestSingleSpanUniformLoad(TestCase):
@@ -12,12 +12,12 @@ class TestSingleSpanUniformLoad(TestCase):
     def test_moment(self):
         self.assertEqual(
             self.forces.moment(0.5 * self.beam_length),
-            self.load * self.beam_length ** (2.0) / 8.0,
+            self.load * self.beam_length ** 2.0 / 8.0,
         )
 
     def test_maximum_moment(self):
         self.assertEqual(
-            self.forces.maximum_moment, self.load * self.beam_length ** (2.0) / 8.0
+            self.forces.maximum_moment, self.load * self.beam_length ** 2.0 / 8.0
         )
 
     def test_transversal_shear_1(self):
@@ -57,9 +57,9 @@ class TestSingleSpanSingleLoad(TestCase):
     def setUp(self):
         self.beam_length = 10.0
         self.load = 10.0
-        self.forces = SingleSpan(
-            length=self.beam_length, loads=[[0.5 * self.beam_length, self.load]]
-        )
+        self.load_position = 0.5 * self.beam_length
+        self.single_load = SingleLoad(self.load_position, self.load)
+        self.forces = SingleSpan(length=self.beam_length, loads=[self.single_load])
 
     def test_transversal_shear_support_left(self):
         self.assertEqual(self.forces.transversal_shear_support_left, 0.5 * self.load)
@@ -75,7 +75,7 @@ class TestSingleSpanSingleLoad(TestCase):
 
     def test_maximum_moment(self):
         self.assertEqual(
-            self.forces.maximum_moment, 0.5 * self.load * 0.5 * self.beam_length
+            self.forces.maximum_moment, 0.5 * self.load * self.load_position
         )
 
     def test_moment(self):
@@ -83,6 +83,9 @@ class TestSingleSpanSingleLoad(TestCase):
             self.forces.moment(0.5 * self.beam_length),
             0.5 * self.load * 0.5 * self.beam_length,
         )
+
+    def test_position_of_maximum_moment(self):
+        self.assertEqual(self.forces.position_of_maximum_moment(), self.load_position)
 
 
 if __name__ == "__main__":
