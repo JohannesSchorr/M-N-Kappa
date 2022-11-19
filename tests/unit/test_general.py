@@ -17,49 +17,49 @@ from m_n_kappa.general import (
 class TestCurvature(TestCase):
     def test_greater_1(self):
         self.assertGreater(
-            curvature(neutral_axis=10, position=5, strain_at_position=-0.001),
+            curvature(neutral_axis_value=10, position=5, strain_at_position=-0.001),
             0.0,
         )
 
     def test_greater_2(self):
         self.assertGreater(
-            curvature(neutral_axis=10, position=15, strain_at_position=0.001),
+            curvature(neutral_axis_value=10, position=15, strain_at_position=0.001),
             0.0,
         )
 
     def test_less_1(self):
         self.assertLess(
-            curvature(neutral_axis=10, position=5, strain_at_position=0.001),
+            curvature(neutral_axis_value=10, position=5, strain_at_position=0.001),
             0.0,
         )
 
     def test_less_2(self):
         self.assertLess(
-            curvature(neutral_axis=10, position=15, strain_at_position=-0.001),
+            curvature(neutral_axis_value=10, position=15, strain_at_position=-0.001),
             0.0,
         )
 
     def test_equals_1(self):
         self.assertEqual(
-            curvature(neutral_axis=10, position=5, strain_at_position=-0.001),
+            curvature(neutral_axis_value=10, position=5, strain_at_position=-0.001),
             0.0002,
         )
 
     def test_equals_2(self):
         self.assertEqual(
-            curvature(neutral_axis=10, position=15, strain_at_position=0.001),
+            curvature(neutral_axis_value=10, position=15, strain_at_position=0.001),
             0.0002,
         )
 
     def test_equals_3(self):
         self.assertEqual(
-            curvature(neutral_axis=10, position=5, strain_at_position=0.001),
+            curvature(neutral_axis_value=10, position=5, strain_at_position=0.001),
             -0.0002,
         )
 
     def test_equals_4(self):
         self.assertEqual(
-            curvature(neutral_axis=10, position=15, strain_at_position=-0.001),
+            curvature(neutral_axis_value=10, position=15, strain_at_position=-0.001),
             -0.0002,
         )
 
@@ -108,16 +108,16 @@ class TestCurvatureByPoints(TestCase):
 
 class TestStrain(TestCase):
     def test_less_1(self):
-        self.assertLess(strain(neutral_axis=10, curvature=0.0001, position=5), 0.0)
+        self.assertLess(strain(neutral_axis_value=10, curvature=0.0001, position=5), 0.0)
 
     def test_greater_2(self):
-        self.assertGreater(strain(neutral_axis=10, curvature=0.0001, position=15), 0.0)
+        self.assertGreater(strain(neutral_axis_value=10, curvature=0.0001, position=15), 0.0)
 
     def test_equals_1(self):
-        self.assertEqual(strain(neutral_axis=10, curvature=0.0001, position=5), -0.0005)
+        self.assertEqual(strain(neutral_axis_value=10, curvature=0.0001, position=5), -0.0005)
 
     def test_equals_2(self):
-        self.assertEqual(strain(neutral_axis=10, curvature=0.0001, position=15), 0.0005)
+        self.assertEqual(strain(neutral_axis_value=10, curvature=0.0001, position=15), 0.0005)
 
 
 class TestPosition(TestCase):
