@@ -16,7 +16,12 @@ from .section import (
     ComputationSectionCurvature,
 )
 
-from .curvature_boundaries import MaximumCurvature, MinimumCurvature, Boundaries, BoundaryValues
+from .curvature_boundaries import (
+    MaximumCurvature,
+    MinimumCurvature,
+    Boundaries,
+    BoundaryValues,
+)
 
 
 def axial_force(sections: list[ComputationSection]):
@@ -49,6 +54,24 @@ class Crosssection:
 
     def __next__(self):
         return self._section_iterator.__next__()
+
+    def __add__(self, other):
+        return self._build_cross_section(other)
+
+    def __radd__(self, other):
+        return self._build_cross_section(other)
+
+    def _build_cross_section(self, other):
+        if isinstance(other, Crosssection):
+            sections = self.sections + other.sections
+            return Crosssection(sections)
+        elif isinstance(other, Section):
+            self.add_section(other)
+            return self
+        else:
+            raise TypeError(
+                f'unsupported operand section_type(s) for +: "{type(self)}" and "{type(other)}"'
+            )
 
     @str_start_end
     def __str__(self):
@@ -381,7 +404,8 @@ class ComputationCrossSectionStrainAdd(ComputationCrosssectionStrain):
     @property
     def top_edge(self) -> float:
         return min(
-            self.computed_cross_section_1.top_edge, self.computed_cross_section_2.top_edge
+            self.computed_cross_section_1.top_edge,
+            self.computed_cross_section_2.top_edge,
         )
 
     @property
@@ -596,8 +620,12 @@ class CrossSectionBoundaries(Crosssection):
         self._sections_minimum_strains = self._get_sections_minimum_strain()
         self._maximum_positive_curvature = self._get_maximum_positive_curvature()
         self._maximum_negative_curvature = self._get_maximum_negative_curvature()
-        self._positive_start_bound = self.__get_curvature_start_values(self._maximum_positive_curvature)
-        self._negative_start_bound = self.__get_curvature_start_values(self._maximum_negative_curvature)
+        self._positive_start_bound = self.__get_curvature_start_values(
+            self._maximum_positive_curvature
+        )
+        self._negative_start_bound = self.__get_curvature_start_values(
+            self._maximum_negative_curvature
+        )
 
     def __repr__(self):
         return "CrossSectionBoundaries(sections=sections)"
@@ -718,7 +746,10 @@ class CrossSectionBoundaries(Crosssection):
         return position_strain
 
     def _create_computation_cross_section(
-        self, maximum_curvature: EdgeStrains, compute_with_strain_at_top: bool, factor_curvature: float
+        self,
+        maximum_curvature: EdgeStrains,
+        compute_with_strain_at_top: bool,
+        factor_curvature: float,
     ) -> ComputationCrosssectionCurvature:
         """
         create a Computations-cross-section
@@ -733,7 +764,9 @@ class CrossSectionBoundaries(Crosssection):
             neutral_axis_value=neutral_axis_value,
         )
 
-    def __get_curvature_start_values(self, maximum_curvature: EdgeStrains) -> StrainPosition:
+    def __get_curvature_start_values(
+        self, maximum_curvature: EdgeStrains
+    ) -> StrainPosition:
         """
 
         computes two scenarios:
@@ -751,19 +784,27 @@ class CrossSectionBoundaries(Crosssection):
         curvature_change_factor = 0.5
         # --- axial force with strain on top
         cross_section_start_with_strain_on_top = self._create_computation_cross_section(
-            maximum_curvature, compute_with_strain_at_top=True, factor_curvature=curvature_change_factor
+            maximum_curvature,
+            compute_with_strain_at_top=True,
+            factor_curvature=curvature_change_factor,
         )
-        strain_on_top_axial_force = cross_section_start_with_strain_on_top.total_axial_force()
+        strain_on_top_axial_force = (
+            cross_section_start_with_strain_on_top.total_axial_force()
+        )
         # --- axial force with strain on bottom
         cross_section_start_with_strain_on_bottom = (
             self._create_computation_cross_section(
-                maximum_curvature, compute_with_strain_at_top=False, factor_curvature=curvature_change_factor
+                maximum_curvature,
+                compute_with_strain_at_top=False,
+                factor_curvature=curvature_change_factor,
             )
         )
-        strain_on_bottom_axial_force = cross_section_start_with_strain_on_bottom.total_axial_force()
+        strain_on_bottom_axial_force = (
+            cross_section_start_with_strain_on_bottom.total_axial_force()
+        )
         # --- comparing the maximum change in axial-forces with similar change of curvature
-        if abs(strain_on_top_axial_force-initial_axial_force) < abs(
-                strain_on_bottom_axial_force-initial_axial_force
+        if abs(strain_on_top_axial_force - initial_axial_force) < abs(
+            strain_on_bottom_axial_force - initial_axial_force
         ):
             return maximum_curvature.bottom_edge_strain
         else:
