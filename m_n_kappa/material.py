@@ -279,7 +279,7 @@ class ConcreteCompression(ABC):
         ...
 
     def stress_strain(self) -> list:
-        stress_strain = [[0.0, 0.0]]
+        stress_strain = []  # [[0.0, 0.0]]
         for epsilon in self.strains:
             stress_strain.append([self.stress(epsilon), epsilon])
         return negative_sign(stress_strain)
@@ -417,7 +417,7 @@ class ConcreteTension:
             return self._f_ctm
 
     def stress_strain(self) -> list:
-        stress_strain = [[0.0, 0.0]]
+        stress_strain = []  # [[0.0, 0.0]]
         if self.use_tension:
             stress_strain.append([self.f_ctm, self.yield_strain])
             stress_strain.append([0.0, self.yield_strain + 0.000001])
@@ -472,7 +472,7 @@ class Concrete(Material):
         self._tension = self.__set_tension()
         self._stress_strain = self.__build_stress_strain()
 
-    def __repr__(self):
+    def __repr__(self) -> str:
         return (
             f"Concrete(f_cm={self.f_cm}, "
             f"f_ctm={self._f_ctm}, "
@@ -482,7 +482,7 @@ class Concrete(Material):
         )
 
     @str_start_end
-    def __str__(self):
+    def __str__(self) -> str:
         text = [
             self._print_title(),
             self._print_initialization(),
@@ -498,9 +498,7 @@ class Concrete(Material):
             [
                 "Elastic",
                 "-------",
-                "E_cm = {:.1f} N/mm^2, | epsilon_y={:.4f}".format(
-                    self.E_cm, self.epsilon_y
-                ),
+                f"E_cm = {self.E_cm:.1f} N/mm^2, | epsilon_y={self.epsilon_y:.4f}",
             ]
         )
 
@@ -508,10 +506,8 @@ class Concrete(Material):
         text = [
             "Compressive strength",
             "--------------------",
-            "f_ck = {:.1f} N/mm^2 | f_cm = {:.1f} N/mm^2".format(self.f_ck, self.f_cm),
-            "epsilon_c = {:.4f} | epsilon_cu = {:.4f}".format(
-                self.compression.c, self.compression.cu
-            ),
+            f"f_ck = {self.f_ck:.1f} N/mm^2 | f_cm = {self.f_cm:.1f} N/mm^2",
+            f"epsilon_c = {self.compression.c:.4f} | epsilon_cu = {self.compression.cu:.4f}",
         ]
         return print_sections(text)
 
@@ -519,20 +515,20 @@ class Concrete(Material):
         text = [
             "Tensile strength",
             "----------------",
-            "f_ctm = {:.1f} N/mm^2".format(self.tension.f_ctm),
+            f"f_ctm = {self.tension.f_ctm:.1f} N/mm^2",
         ]
         return print_sections(text)
 
     @property
-    def compression(self):
+    def compression(self) -> ConcreteCompression:
         return self._compression
 
     @property
-    def compression_stress_strain_type(self):
+    def compression_stress_strain_type(self) -> str:
         return self._compression_stress_strain_type
 
     @compression_stress_strain_type.setter
-    def compression_stress_strain_type(self, stress_strain_type: str):
+    def compression_stress_strain_type(self, stress_strain_type: str) -> None:
         self._compression_stress_strain_type = stress_strain_type
         self.__set_compression()
 
@@ -565,7 +561,7 @@ class Concrete(Material):
         return self._tension_stress_strain_type
 
     @tension_stress_strain_type.setter
-    def tension_stress_strain_type(self, stress_strain_type: str):
+    def tension_stress_strain_type(self, stress_strain_type: str) -> None:
         self._tension_stress_strain_type = stress_strain_type
         self.__set_tension()
 
@@ -601,8 +597,9 @@ class Concrete(Material):
                 + ' is not a valid value. Valid value is "Default"'
             )
 
-    def __build_stress_strain(self):
+    def __build_stress_strain(self) -> list[StressStrain]:
         stress_strains = self.compression.stress_strain() + self.tension.stress_strain()
+        stress_strains.append([0.0, 0.0])
         stress_strains = remove_duplicates(stress_strains)
         stress_strains.sort(key=lambda x: x[1], reverse=False)
         stress_strains = [
