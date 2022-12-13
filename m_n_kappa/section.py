@@ -5,6 +5,7 @@ from .general import (
     position,
     strain,
     StrainPosition,
+    EffectiveWidths,
 )
 
 
@@ -221,7 +222,18 @@ class ComputationSection(Section):
             self._material_stress(strain_value) for strain_value in self.edges_strain
         ]
 
-    def _axial_force_integrated_at_position(self, position_value) -> float:
+    def _axial_force_integrated_at_position(self, position_value: float) -> float:
+        """
+        Parameters
+        ----------
+        position_value : float
+            vertical position where the axial force is integrated
+
+        Returns
+        -------
+        float
+            integrated axial force
+        """
         return (
             (1.0 / 3.0)
             * self.geometry.width_slope
@@ -278,9 +290,9 @@ class ComputationSection(Section):
         text = [
             "Results",
             "-------",
-            "axial force: " + "N = {:10.1f} N".format(self.axial_force),
-            "lever arm:   " + "z = {:10.1f} mm".format(self.lever_arm()),
-            "moment:      " + "M = {:10.1f} Nmm".format(self.moment()),
+            f"axial force: N = {self.axial_force:10.1f} N",
+            f"lever arm:   z = {self.lever_arm():10.1f} mm",
+            f"moment:      M = {self.moment():10.1f} Nmm",
         ]
         return print_sections(text)
 
@@ -369,18 +381,24 @@ class ComputationSectionCurvature(ComputationSection):
         "_axial_force",
     )
 
-    def __init__(self, section: Section, curvature: float, neutral_axis: float):
+    def __init__(
+        self,
+        section: Section,
+        curvature: float,
+        neutral_axis: float,
+        effective_width: float = None,
+    ):
         """
-        Initialize
-
         Parameters
         ----------
         section : Section
-                section to compute
+            section to compute
         curvature : float
-                curvature to apply to the section
+            curvature to apply to the section
         neutral axis : float
-                point where the strain_value is zero
+            point where the strain_value is zero
+        effective_width : float
+            effective width (Default: None)
         """
         self._section = section
         self._curvature = curvature
@@ -392,7 +410,7 @@ class ComputationSectionCurvature(ComputationSection):
         self._stress_interception = self._compute_stress_interception()
         self._axial_force = self._compute_axial_force()
 
-    def __repr__(self):
+    def __repr__(self) -> str:
         return (
             f"ComputationSectionCurvature("
             f"section={self.section.__class__.__name__}, "
@@ -401,7 +419,7 @@ class ComputationSectionCurvature(ComputationSection):
         )
 
     @str_start_end
-    def __str__(self):
+    def __str__(self) -> str:
         text = [
             self._print_title(),
             self._print_initialization(),
@@ -452,6 +470,19 @@ class ComputationSectionCurvature(ComputationSection):
             text += ["stress {:.1f} N/mm^2".format(self.edges_stress[0])]
         return print_sections(text)
 
+    def _print_result(self) -> str:
+        return (
+            f"{self.geometry.top_edge:10.2f} | "
+            f"{self.edges_strain[0]:10.6f} | "
+            f"{self.edges_stress[0]:10.2f} | "
+            f"{self.geometry.bottom_edge:8.2f} | "
+            f"{self.edges_strain[1]:10.6f} | "
+            f"{self.edges_stress[1]:10.2f} | "
+            f"{self.axial_force:10.2f} | "
+            f"{self.section_type:7} | "
+            f"{self.material.__class__.__name__}"
+        )
+
     @property
     def curvature(self) -> float:
         return self._curvature
@@ -461,27 +492,15 @@ class ComputationSectionCurvature(ComputationSection):
         return self._neutral_axis
 
     @property
-    def edges_stress_difference(self):
+    def edges_stress_difference(self) -> float:
         return self.edges_stress[1] - self.edges_stress[0]
 
-    def _print_result(self):
-        return "{:10.2f} | {:10.6f} | {:10.2f} | {:8.2f} | {:10.6f} | {:10.2f} | {:10.2f} | {:7} | {}".format(
-            self.geometry.top_edge,
-            self.edges_strain[0],
-            self.edges_stress[0],
-            self.geometry.bottom_edge,
-            self.edges_strain[1],
-            self.edges_stress[1],
-            self.axial_force,
-            self.section_type,
-            self.material.__class__.__name__,
-        )
-
-    def split_section(self) -> list[ComputationSection]:
-        sub_geometries = self.__get_sub_geometries()
-        split_sections = []
-        for sub_geometry in sub_geometries:
-            split_sections.append(self.__computation_section(sub_geometry))
+    def split_section(self, effective_widths: EffectiveWidths = None) -> list[ComputationSection]:
+        """split sections considering the material points and the maximum effective widths"""
+        if effective_widths is not None and effective_widths.for_section_type != self.section_type:
+            effective_widths = None
+        sub_geometries = self.__get_sub_geometries(effective_widths)
+        split_sections = [self.__computation_section(sub_geometry) for sub_geometry in sub_geometries]
         return split_sections
 
     def material_points_inside_curvature(self) -> list[StrainPosition]:
@@ -540,9 +559,13 @@ class ComputationSectionCurvature(ComputationSection):
             position_value=position_value,
         )
 
-    def __get_sub_geometries(self):
+    def __get_sub_geometries(self, effective_widths: EffectiveWidths = None) -> list:
+        """
+        splits geometry corresponding with the stress-strain-relationship
+        under given curvature and neutral-axis
+        """
         material_points = self.__material_points_position()
-        return self.geometry.split(material_points)
+        return self.geometry.split(at_points=material_points, max_widths=effective_widths)
 
     def __sort_material_strains_by_curvature(self) -> None:
         if self.curvature > 0:
@@ -553,11 +576,16 @@ class ComputationSectionCurvature(ComputationSection):
     def __sub_section(self, geometry) -> Section:
         return Section(geometry, self.material)
 
-    def __material_points_position(self) -> list:
+    def __material_points_position(self) -> list[StrainPosition]:
         positions = []
         for stress_strain in self.material.stress_strain:
-            position_value = self.__compute_position(strain_value=stress_strain.strain)
-            positions.append(position_value)
+            positions.append(
+                StrainPosition(
+                    strain=stress_strain.strain,
+                    position=self.__compute_position(strain_value=stress_strain.strain),
+                    material=self.material.__class__.__name__,
+                )
+            )
         return positions
 
     def __compute_position(self, strain_value: float) -> float:
