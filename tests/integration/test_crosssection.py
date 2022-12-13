@@ -5,17 +5,31 @@ from m_n_kappa.crosssection import (
 )
 from m_n_kappa.material import Concrete, Steel
 from m_n_kappa.geometry import Rectangle
+from m_n_kappa.general import EffectiveWidths
 
 from unittest import TestCase, main
 
 # Concrete section
-concrete = Concrete(f_cm=30)
-concrete_rectangle = Rectangle(top_edge=0.0, bottom_edge=20, width=10)
+f_cm = 30
+concrete_top_edge = 0.0
+concrete_bottom_edge = 20.0
+concrete_width = 10.0
+concrete = Concrete(f_cm=f_cm)
+concrete_rectangle = Rectangle(
+    top_edge=concrete_top_edge, bottom_edge=concrete_bottom_edge, width=concrete_width
+)
 concrete_section = concrete + concrete_rectangle
 
 # Steel section
-steel = Steel(f_y=355, epsilon_u=0.2)
-steel_rectangle = Rectangle(top_edge=20, bottom_edge=30, width=10)
+f_y = 355
+epsilon_u = 0.2
+steel_top_edge = 20.0
+steel_bottom_edge = 30.0
+steel_width = 10.0
+steel = Steel(f_y=f_y, epsilon_u=epsilon_u)
+steel_rectangle = Rectangle(
+    top_edge=steel_top_edge, bottom_edge=steel_bottom_edge, width=steel_width
+)
 steel_section = steel + steel_rectangle
 
 sections = [concrete_section, steel_section]
@@ -23,16 +37,16 @@ sections = [concrete_section, steel_section]
 
 class TestCrosssection(TestCase):
     def setUp(self):
-        self.cs = Crosssection([concrete_section, steel_section])
+        self.cs = Crosssection(sections)
 
     def test_sections(self):
-        self.assertListEqual(self.cs.sections, [concrete_section, steel_section])
+        self.assertListEqual(self.cs.sections, sections)
 
     def test_top_edge(self):
-        self.assertEqual(self.cs.top_edge, 0.0)
+        self.assertEqual(self.cs.top_edge, concrete_top_edge)
 
     def test_bottom_edge(self):
-        self.assertEqual(self.cs.bottom_edge, 30)
+        self.assertEqual(self.cs.bottom_edge, steel_bottom_edge)
 
     def test_girder_sections(self):
         self.assertListEqual(self.cs.girder_sections, [steel_section])
@@ -41,7 +55,7 @@ class TestCrosssection(TestCase):
         self.assertListEqual(self.cs.slab_sections, [concrete_section])
 
     def test_height(self):
-        self.assertEqual(self.cs.height, 30)
+        self.assertEqual(self.cs.height, steel_bottom_edge - concrete_top_edge)
 
     def test_half_points(self):
         self.assertEqual(self.cs.half_point, 0.5 * 30)
@@ -63,59 +77,121 @@ class TestCrosssection(TestCase):
     def test_maximum_negative_strain(self):
         self.assertEqual(self.cs.maximum_negative_strain(), steel.minimum_strain)
 
+    def test_left_edge(self):
+        self.assertEqual(self.cs.left_edge(), -0.5 * concrete_width)
 
-class TestComputationCrosssectionStrain1(TestCase):
+    def test_right_edge(self):
+        self.assertEqual(self.cs.right_edge(), 0.5 * concrete_width)
+
+    def test_concrete_slab_width(self):
+        self.assertEqual(self.cs.concrete_slab_width(), concrete_width)
+
+
+class TestComputationCrosssectionStrainPositive(TestCase):
     def setUp(self):
         self.strain = 0.1
+        self.concrete_stress = concrete.get_material_stress(self.strain)
+        self.concrete_force = concrete_rectangle.area * self.concrete_stress
+        self.concrete_lever_arm = concrete_rectangle.centroid
+        self.concrete_moment = self.concrete_force * self.concrete_lever_arm
+
+        self.steel_stress = steel.get_material_stress(self.strain)
+        self.steel_force = steel_rectangle.area * self.steel_stress
+        self.steel_lever_arm = steel_rectangle.centroid
+        self.steel_moment = self.steel_force * self.steel_lever_arm
+
         self.cs = ComputationCrosssectionStrain(sections, self.strain)
 
     def test_strain(self):
         self.assertEqual(self.cs.strain, self.strain)
 
     def test_total_axial_force(self):
-        self.assertGreater(self.cs.total_axial_force(), 0.0)
+        self.assertEqual(self.cs.total_axial_force(), self.concrete_force + self.steel_force)
 
     def test_slab_axial_force(self):
-        self.assertGreater(self.cs.girder_sections_axial_force(), 0.0)
-        self.assertGreaterEqual(self.cs.slab_sections_axial_force(), 0.0)
+        self.assertEqual(self.cs.slab_sections_axial_force(), self.concrete_force)
+
+    def test_girder_axial_force(self):
+        self.assertEqual(self.cs.girder_sections_axial_force(), self.steel_force)
 
     def test_total_moment(self):
-        self.assertGreater(self.cs.total_moment(), 0.0)
+        self.assertEqual(self.cs.total_moment(), self.steel_moment + self.concrete_moment)
+
+    def test_girder_moment(self):
+        self.assertEqual(self.cs.girder_sections_moment(), self.steel_moment)
 
     def test_slab_moment(self):
-        self.assertGreater(self.cs.girder_sections_moment(), 0.0)
-        self.assertGreaterEqual(self.cs.slab_sections_moment(), 0.0)
+        self.assertEqual(self.cs.slab_sections_moment(), self.concrete_moment)
+
+    def test_slab_section(self):
+        self.assertEqual(self.cs.slab_sections, [concrete_section])
+
+    def test_girder_section(self):
+        self.assertEqual(self.cs.girder_sections, [steel_section])
 
 
-class TestComputationCrosssectionStrain2(TestCase):
+class TestComputationCrosssectionStrainNegative(TestCase):
     def setUp(self):
         self.strain = -0.001
+        self.concrete_stress = concrete.get_material_stress(self.strain)
+        self.concrete_force = concrete_rectangle.area * self.concrete_stress
+        self.concrete_lever_arm = concrete_rectangle.centroid
+        self.concrete_moment = self.concrete_force * self.concrete_lever_arm
+
+        self.steel_stress = steel.get_material_stress(self.strain)
+        self.steel_force = steel_rectangle.area * self.steel_stress
+        self.steel_lever_arm = steel_rectangle.centroid
+        self.steel_moment = self.steel_force * self.steel_lever_arm
+
         self.cs = ComputationCrosssectionStrain(sections, self.strain)
 
     def test_strain(self):
         self.assertEqual(self.cs.strain, self.strain)
 
     def test_total_axial_force(self):
-        self.assertLess(self.cs.total_axial_force(), 0.0)
+        self.assertAlmostEqual(self.cs.total_axial_force(), self.concrete_force + self.steel_force)
 
     def test_slab_axial_force(self):
-        self.assertLess(self.cs.girder_sections_axial_force(), 0.0)
-        self.assertLessEqual(self.cs.slab_sections_axial_force(), 0.0)
+        self.assertAlmostEqual(self.cs.slab_sections_axial_force(), self.concrete_force)
+
+    def test_girder_axial_force(self):
+        self.assertAlmostEqual(self.cs.girder_sections_axial_force(), self.steel_force)
 
     def test_total_moment(self):
-        self.assertLess(self.cs.total_moment(), 0.0)
+        self.assertEqual(self.cs.total_moment(), self.steel_moment + self.concrete_moment)
+
+    def test_girder_moment(self):
+        self.assertEqual(self.cs.girder_sections_moment(), self.steel_moment)
 
     def test_slab_moment(self):
-        self.assertLess(self.cs.girder_sections_moment(), 0.0)
-        self.assertLessEqual(self.cs.slab_sections_moment(), 0.0)
+        self.assertAlmostEqual(self.cs.slab_sections_moment(), self.concrete_moment)
 
 
 class TestComputationCrosssectionCurvature(TestCase):
     def setUp(self):
-        self.curvature = 0.0001
-        self.neutral_axis = 20.0
+        self.curvature = 0.00001
+        self.neutral_axis = concrete_bottom_edge
+
+        self.concrete_top_strain = -self.curvature * self.neutral_axis
+        self.concrete_top_stress = concrete.get_material_stress(self.concrete_top_strain)
+        self.concrete_bottom_strain = 0.0
+        self.concrete_bottom_stress = concrete.get_material_stress(self.concrete_bottom_strain)
+        self.concrete_stress = 0.5 * (self.concrete_top_stress + self.concrete_bottom_stress)
+        self.concrete_force = self.concrete_stress * concrete_rectangle.area
+        self.concrete_lever_arm = 1./3. * (concrete_rectangle.bottom_edge - concrete_rectangle.top_edge)
+        self.concrete_moment = self.concrete_lever_arm * self.concrete_force
+
+        self.steel_top_strain = 0.0
+        self.steel_top_stress = steel.get_material_stress(self.steel_top_strain)
+        self.steel_bottom_strain = self.curvature * (steel_rectangle.bottom_edge - steel_rectangle.top_edge)
+        self.steel_bottom_stress = steel.get_material_stress(self.steel_bottom_strain)
+        self.steel_stress = 0.5 * (self.steel_top_stress + self.steel_bottom_stress)
+        self.steel_force = self.steel_stress * steel_rectangle.area
+        self.steel_lever_arm = steel_rectangle.top_edge + 2./3. * (steel_rectangle.bottom_edge - steel_rectangle.top_edge)
+        self.steel_moment = self.steel_lever_arm * self.steel_force
+
         self.cs = ComputationCrosssectionCurvature(
-            sections, self.curvature, self.neutral_axis
+            Crosssection(sections), self.curvature, self.neutral_axis
         )
 
     def test_curvature(self):
@@ -126,6 +202,152 @@ class TestComputationCrosssectionCurvature(TestCase):
 
     def test_compute_split_sections(self):
         self.assertEqual(type(self.cs.compute_sections), list)
+
+    def test_slab_axial_forces(self):
+        self.assertAlmostEqual(self.cs.slab_sections_axial_force(), self.concrete_force)
+
+    def test_girder_axial_forces(self):
+        self.assertAlmostEqual(self.cs.girder_sections_axial_force(), self.steel_force)
+
+    def test_total_axial_forces(self):
+        self.assertAlmostEqual(self.cs.total_axial_force(), self.steel_force + self.concrete_force)
+
+    def test_slab_moment(self):
+        self.assertAlmostEqual(self.cs.slab_sections_moment(), self.concrete_moment)
+
+    def test_girder_moment(self):
+        self.assertAlmostEqual(self.cs.girder_sections_moment(), self.steel_moment)
+
+    def test_total_moment(self):
+        self.assertAlmostEqual(self.cs.total_moment(), self.steel_moment + self.concrete_moment)
+
+
+class TestComputationCrosssectionCurvaturePositiveWithEffectiveWidth(TestCase):
+    def setUp(self):
+        membran = 2.
+        bending = 4.
+        self.effective_width = EffectiveWidths(membran, bending)
+        self.curvature = 0.00001
+        self.neutral_axis = concrete_bottom_edge
+
+        self.concrete_rectangle = Rectangle(concrete_top_edge, concrete_bottom_edge, 2.*membran)
+
+        self.concrete_top_strain = -self.curvature * self.neutral_axis
+        self.concrete_top_stress = concrete.get_material_stress(self.concrete_top_strain)
+        self.concrete_bottom_strain = 0.0
+        self.concrete_bottom_stress = concrete.get_material_stress(self.concrete_bottom_strain)
+        self.concrete_stress = 0.5 * (self.concrete_top_stress + self.concrete_bottom_stress)
+        self.concrete_force = self.concrete_stress * self.concrete_rectangle.area
+        self.concrete_lever_arm = 1./3. * (self.concrete_rectangle.bottom_edge - self.concrete_rectangle.top_edge)
+        self.concrete_moment = self.concrete_lever_arm * self.concrete_force
+
+        self.steel_top_strain = 0.0
+        self.steel_top_stress = steel.get_material_stress(self.steel_top_strain)
+        self.steel_bottom_strain = self.curvature * (steel_rectangle.bottom_edge - steel_rectangle.top_edge)
+        self.steel_bottom_stress = steel.get_material_stress(self.steel_bottom_strain)
+        self.steel_stress = 0.5 * (self.steel_top_stress + self.steel_bottom_stress)
+        self.steel_force = self.steel_stress * steel_rectangle.area
+        self.steel_lever_arm = steel_rectangle.top_edge + 2./3. * (steel_rectangle.bottom_edge - steel_rectangle.top_edge)
+        self.steel_moment = self.steel_lever_arm * self.steel_force
+
+        self.cross_section = Crosssection(sections, slab_effective_widths=self.effective_width)
+
+        self.cs = ComputationCrosssectionCurvature(
+            self.cross_section,
+            self.curvature,
+            self.neutral_axis
+        )
+
+    def test_curvature(self):
+        self.assertEqual(self.cs.curvature, self.curvature)
+
+    def test_neutral_axis(self):
+        self.assertEqual(self.cs.neutral_axis, self.neutral_axis)
+
+    def test_compute_split_sections(self):
+        self.assertEqual(type(self.cs.compute_sections), list)
+
+    def test_slab_axial_forces(self):
+        self.assertAlmostEqual(self.cs.slab_sections_axial_force(), self.concrete_force)
+
+    def test_girder_axial_forces(self):
+        self.assertAlmostEqual(self.cs.girder_sections_axial_force(), self.steel_force)
+
+    def test_total_axial_forces(self):
+        self.assertAlmostEqual(self.cs.total_axial_force(), self.steel_force + self.concrete_force)
+
+    def test_slab_moment(self):
+        self.assertAlmostEqual(self.cs.slab_sections_moment(), self.concrete_moment)
+
+    def test_girder_moment(self):
+        self.assertAlmostEqual(self.cs.girder_sections_moment(), self.steel_moment)
+
+    def test_total_moment(self):
+        self.assertAlmostEqual(self.cs.total_moment(), self.steel_moment + self.concrete_moment)
+
+
+class TestComputationCrosssectionCurvatureNegativeWithEffectiveWidth(TestCase):
+    def setUp(self):
+        membran = 2.
+        bending = 4.
+        self.effective_width = EffectiveWidths(membran, bending)
+        self.curvature = -0.00001
+        self.neutral_axis = concrete_bottom_edge
+
+        self.concrete_rectangle = Rectangle(concrete_top_edge, concrete_bottom_edge, 2.*bending)
+
+        self.concrete_top_strain = -self.curvature * self.neutral_axis
+        self.concrete_top_stress = concrete.get_material_stress(self.concrete_top_strain)
+        self.concrete_bottom_strain = 0.0
+        self.concrete_bottom_stress = concrete.get_material_stress(self.concrete_bottom_strain)
+        self.concrete_stress = 0.5 * (self.concrete_top_stress + self.concrete_bottom_stress)
+        self.concrete_force = self.concrete_stress * self.concrete_rectangle.area
+        self.concrete_lever_arm = 1./3. * (self.concrete_rectangle.bottom_edge - self.concrete_rectangle.top_edge)
+        self.concrete_moment = self.concrete_lever_arm * self.concrete_force
+
+        self.steel_top_strain = 0.0
+        self.steel_top_stress = steel.get_material_stress(self.steel_top_strain)
+        self.steel_bottom_strain = self.curvature * (steel_rectangle.bottom_edge - steel_rectangle.top_edge)
+        self.steel_bottom_stress = steel.get_material_stress(self.steel_bottom_strain)
+        self.steel_stress = 0.5 * (self.steel_top_stress + self.steel_bottom_stress)
+        self.steel_force = self.steel_stress * steel_rectangle.area
+        self.steel_lever_arm = steel_rectangle.top_edge + 2./3. * (steel_rectangle.bottom_edge - steel_rectangle.top_edge)
+        self.steel_moment = self.steel_lever_arm * self.steel_force
+
+        self.cross_section = Crosssection(sections, slab_effective_widths=self.effective_width)
+
+        self.cs = ComputationCrosssectionCurvature(
+            self.cross_section,
+            self.curvature,
+            self.neutral_axis
+        )
+
+    def test_curvature(self):
+        self.assertEqual(self.cs.curvature, self.curvature)
+
+    def test_neutral_axis(self):
+        self.assertEqual(self.cs.neutral_axis, self.neutral_axis)
+
+    def test_compute_split_sections(self):
+        self.assertEqual(type(self.cs.compute_sections), list)
+
+    def test_slab_axial_forces(self):
+        self.assertAlmostEqual(self.cs.slab_sections_axial_force(), self.concrete_force)
+
+    def test_girder_axial_forces(self):
+        self.assertAlmostEqual(self.cs.girder_sections_axial_force(), self.steel_force)
+
+    def test_total_axial_forces(self):
+        self.assertAlmostEqual(self.cs.total_axial_force(), self.steel_force + self.concrete_force)
+
+    def test_slab_moment(self):
+        self.assertAlmostEqual(self.cs.slab_sections_moment(), self.concrete_moment)
+
+    def test_girder_moment(self):
+        self.assertAlmostEqual(self.cs.girder_sections_moment(), self.steel_moment)
+
+    def test_total_moment(self):
+        self.assertAlmostEqual(self.cs.total_moment(), self.steel_moment + self.concrete_moment)
 
 
 if __name__ == "__main__":
