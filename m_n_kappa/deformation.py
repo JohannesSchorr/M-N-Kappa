@@ -1,6 +1,6 @@
 from dataclasses import dataclass
 
-from .general import interpolation, StrainPosition
+from .general import interpolation, EffectiveWidths
 from .crosssection import Crosssection
 from .curves_m_kappa import MKappaCurve, MKappaCurvePoints, MKappaCurvePoint
 from .internalforces import (
@@ -9,6 +9,7 @@ from .internalforces import (
     SingleLoad,
     SingleSpanUniformLoad,
 )
+from .width import OneWeb
 
 
 class Node:
@@ -54,7 +55,21 @@ class Node:
     def incremental_deformation(
         self, load: ABCSingleSpan, single_load: SingleSpanSingleLoads
     ) -> float:
-        """determine curvature and single-load-moment at the node under given loading"""
+        """
+        determine curvature and single-load-moment at the node under given loading
+
+        Parameters
+        ----------
+        load : ABCSingleSpan
+           load applied to the beam
+        single_load : SingleSpanSingleLoads
+            single-load applied at the point, where deformation is computed
+
+        Returns
+        -------
+        float
+            product from curvature and moment of the single-load at this node
+        """
         moment = load.moment(self.position)
         curvature = self.curvature_by(moment)
         single_load_moment = single_load.moment(self.position)
@@ -87,17 +102,31 @@ class Loading:
     def maximum_resistance_moments(self) -> list[float]:
         return [node.m_kappa_curve.maximum_moment() for node in self.nodes]
 
-    def _position_maximum_moment(self) -> float:
-        return self.load.position_of_maximum_moment()
+    def decisive_position(self):
+        decisive_loading = self.load.load_by(self.nodes[1].m_kappa_curve.maximum_moment(), self.nodes[1].position).loading
+        decisive_node = None
+        for node in self.nodes:
+            if 0.0 < node.position < self.beam_length:
+                load = self.load.load_by(node.m_kappa_curve.maximum_moment(), node.position)
+                if decisive_loading > load.loading:
+                    decisive_loading = load.loading
+                    decisive_node = node
+        return decisive_node.position
+
+    def _position_maximum_moment(self) -> list[float]:
+        return self.load.positions_of_maximum_moment()
+
+    def _position_maximum_deformation(self) -> float:
+        return self.load.position_of_maximum_deformation()
 
     def decisive_m_kappa_curve(self) -> MKappaCurvePoints:
-        position = self._position_maximum_moment()
+        position = self.decisive_position()
         return self.m_kappa_curve_at(position)
 
     def load_steps(self) -> list[LoadStep]:
         return [
             LoadStep(
-                self.load.load_by(point.moment, self._position_maximum_moment()), point
+                self.load.load_by(point.moment, self._position_maximum_deformation()), point
             )
             for point in self.decisive_m_kappa_curve().points
         ]
@@ -110,12 +139,25 @@ class Loading:
 
 @dataclass
 class Deformation:
-    """container for deformations"""
+    """
+    computed deformations
+
+    Parameters
+    ----------
+    position : float
+        position the deformation is computed
+    load : float
+        load leading to the computed deformation at the given position
+    deformation : float
+        computed deformation
+    m_kappa_point : MKappaCurvePoint
+        point in the M-Kappa-curve
+    """
 
     position: float
     load: float
     deformation: float
-    m_kappa_point: MKappaCurvePoint
+    m_kappa_point: MKappaCurvePoint = None
 
 
 class Beam:
@@ -131,6 +173,7 @@ class Beam:
         "_positions",
         "_nodes",
         "_load_steps",
+        "_consider_widths",
     )
 
     def __init__(
@@ -139,6 +182,7 @@ class Beam:
         length: float,
         element_number: int,
         load: ABCSingleSpan,
+        consider_widths: bool = True,
     ):
         """
         Parameters
@@ -151,15 +195,22 @@ class Beam:
             number of elements the beam consists of
         load : ABCSingleSpan
             load-section_type applied to the beam
+        consider_widths : bool
+            consider effective widths (Default: True)
         """
         self._cross_section = cross_section
         self._length = length
         self._element_number = element_number
         self._load = load
+        self._consider_widths = consider_widths
         self._element_standard_length = self.length / self.element_number
         self._positions = self._create_positions()
         self._nodes = self._create_nodes()
         self._load_steps = Loading(self.length, self.nodes, self.load).load_steps()
+
+    @property
+    def consider_widths(self) -> bool:
+        return self._consider_widths
 
     @property
     def cross_section(self) -> Crosssection:
@@ -192,6 +243,42 @@ class Beam:
     @property
     def nodes(self) -> list[Node]:
         return self._nodes
+
+    def nodes_at(self, beam_positions: list[float]) -> list[Node]:
+        """
+        nodes at the given positions along the beam
+
+        considers only nodes where the position meets the given arguments
+
+        Parameters
+        ----------
+        beam_positions : list[float]
+            positions along the beam
+
+        Returns
+        -------
+        list[Node]
+            nodes at the given positions along the beam
+        """
+        if isinstance(beam_positions, float):
+            beam_positions = [beam_positions]
+        return [node for node in self.nodes if node.position in beam_positions]
+
+    def nodes_at_decisive_position(self) -> list[Node]:
+        """
+        nodes at decisive positions
+
+        decisive positions are:
+          - position of maximum moment
+          - position of maximum deformation
+        In few cases these two positions differ from each other
+
+        Returns
+        -------
+        list[Node]
+            nodes at decisive positions
+        """
+        return self.nodes_at(self._decisive_positions())
 
     def deformation(self, at_position: float, load: ABCSingleSpan) -> float:
         """compute deformation at given position_value under given load
@@ -233,12 +320,47 @@ class Beam:
 
     def deformations_at_maximum_moment_position(self) -> list[Deformation]:
         """computes deformations at the decisive position_value for relevant load-steps"""
-        position_of_maximum_moment = self.load.position_of_maximum_moment()
-        deformations = self.deformations(position_of_maximum_moment)
+        position_of_maximum_moment = self.load.positions_of_maximum_moment()
+        deformations = self.deformations(position_of_maximum_moment[0])
         return sorted(deformations, key=lambda x: x.load)
+
+    def deformations_at_maximum_deformation_position(self) -> list[Deformation]:
+        """computes deformations at the decisive beam-position for relevant load-steps"""
+        position_of_maximum_deformation = self.load.position_of_maximum_deformation()
+        deformations = self.deformations(position_of_maximum_deformation)
+        return sorted(deformations, key=lambda x: x.load)
+
+    def deformation_over_beam_length(self, load_step: ABCSingleSpan) -> list[Deformation]:
+        """
+        deformation over the length of the beam
+
+        Parameters
+        ----------
+        load_step : ABCSingleSpan
+            load-step the deformation is computed at
+
+        Returns
+        -------
+        list[Deformation]
+            deformations over the length of the beam at the given load-step
+        """
+        return [Deformation(
+            position=position,
+            deformation=self.deformation(at_position=position, load=load_step),
+            load=load_step.loading,
+        )
+                for position in self.positions]
 
     def _deformation_at_node(self, at_position: float, load: ABCSingleSpan) -> float:
         return sum(self._incremental_deformations(at_position, load))
+
+    def _decisive_positions(self) -> list[float]:
+        positions = self.load.positions_of_maximum_moment()
+        positions.append(self.load.position_of_maximum_deformation())
+        positions += self.load.positions
+        positions += [0.0, self.length]
+        positions = list(set(positions))
+        return positions
 
     def _deformation_between_nodes(
         self, at_position: float, load: ABCSingleSpan
@@ -281,9 +403,9 @@ class Beam:
     def _create_positions(self) -> list[float]:
         positions = [
             number * self.element_standard_length
-            for number in range(1, self.element_number)
+            for number in range(0, self.element_number + 1)
         ]
-        positions.append(self.load.position_of_maximum_moment())
+        positions += self._decisive_positions()
         positions = list(set(positions))
         positions = sorted(positions)
         return positions
@@ -295,7 +417,33 @@ class Beam:
             raise ValueError(f"{position=} is outside the beam")
 
     def _create_nodes(self) -> list[Node]:
-        return [Node(self.cross_section, position) for position in self.positions]
+        nodes = []
+        for position in self.positions:
+            if self.consider_widths:
+                cross_section = self._cross_section_with_effective_width(position)
+            else:
+                cross_section = self._cross_section
+            nodes.append(Node(cross_section, position))
+        return nodes
+
+    def _cross_section_with_effective_width(self, position: float) -> Crosssection:
+        slab_width = 0.5 * self.cross_section.concrete_slab_width()
+        width_position = abs(0.5 * self.length - position)
+        widths = OneWeb(slab_width, self.length)
+        if self.load.load_distribution_factor() <= 0.6:
+            width_load = widths.single
+        else:
+            width_load = widths.line
+        membran = width_load.membran.ratio_beff_to_b(width_position) * slab_width
+        bending = width_load.bending.ratio_beff_to_b(width_position) * slab_width
+        print(f"load-distribution-factor={self.load.load_distribution_factor()}, "
+              f"{position=:5.1f}, {width_position=:5.1f}, "
+              f"{membran=:.1f} ({membran / slab_width:.2f}), "
+              f"{bending=:.1f} ({bending / slab_width:.2f})")
+        effective_widths = EffectiveWidths(bending=bending, membran=membran)
+        return Crosssection(
+            sections=self.cross_section.sections, slab_effective_widths=effective_widths
+        )
 
     def _element_length(self, node_index) -> float:
         return self.nodes[node_index + 1].position - self.nodes[node_index].position
