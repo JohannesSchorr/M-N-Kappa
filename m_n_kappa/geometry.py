@@ -1,7 +1,13 @@
 from abc import ABC, abstractmethod
 from dataclasses import dataclass
 
-from .general import print_sections, str_start_end
+from .general import (
+    print_sections,
+    str_start_end,
+    StrainPosition,
+    EffectiveWidths,
+    interpolation,
+)
 from .material import Material
 from .section import Section
 from .crosssection import Crosssection
@@ -12,11 +18,17 @@ Geometries
 
 Basic geometries providing parameters like area, centroid, etc.
 
-Currently available
--------------------
+Currently available basic geometries
+------------------------------------
   - Rectangle
   - Circle 
   - Trapezoid
+  
+Currently available composed geometries
+---------------------------------------
+  - IProfile
+  - RebarLayer
+  - UPEProfile
 """
 
 
@@ -54,12 +66,50 @@ class Geometry(ABC):
     # 	...
 
     @abstractmethod
-    def split(self, at_points):
+    def split(
+        self, at_points: list[StrainPosition], max_widths: EffectiveWidths = None
+    ):
         ...
 
+    @property
     @abstractmethod
     def edges(self) -> list[float]:
+        """vertical edges"""
         ...
+
+    @property
+    @abstractmethod
+    def sides(self) -> list[float]:
+        """horizontal edges"""
+        ...
+
+
+def check_width(
+    width: float = None, left_edge: float = None, right_edge: float = None
+) -> tuple:
+    """
+    make sure all properties corresponding with the width are filled:
+      - width
+      - left_edge
+      - right_edge
+    """
+    if left_edge is not None and right_edge is not None:
+        if left_edge > right_edge:
+            left_edge, right_edge = right_edge, left_edge
+    if width is not None and left_edge is None and right_edge is None:
+        left_edge = -0.5 * width
+        right_edge = 0.5 * width
+    elif width is None and left_edge is not None and right_edge is not None:
+        width = abs(left_edge - right_edge)
+    elif width is not None and left_edge is None and right_edge is not None:
+        left_edge = right_edge - width
+    elif width is not None and left_edge is not None and right_edge is None:
+        right_edge = left_edge + width
+    else:
+        raise ValueError(
+            "Neither two of arguments 'width', 'right_edge' and 'left_edge' must be given."
+        )
+    return width, left_edge, right_edge
 
 
 class Rectangle(Geometry):
@@ -67,23 +117,73 @@ class Rectangle(Geometry):
     Represents a rectangle
     """
 
-    def __init__(self, top_edge: float, bottom_edge: float, width: float):
+    def __init__(
+        self,
+        top_edge: float,
+        bottom_edge: float,
+        width: float = None,
+        left_edge: float = None,
+        right_edge: float = None,
+    ):
+        """
+        Neither two of the following arguments 'width', 'right_edge' and 'left_edge' must be given.
+        But if only argument 'width' is given left and right edge apply to 0.5*width
+
+        Parameters
+        ----------
+        top_edge : float
+            top-edge of the rectangle
+        bottom_edge : float
+            bottom-edge of the rectangle
+        width : float
+            width of the rectangle (Default: None).
+        left_edge : float
+            left-edge of the rectangle (Default: None).
+        right_edge : float
+            right-edge of the rectangle (Default: None)
+        """
         self._top_edge = top_edge
         self._bottom_edge = bottom_edge
         self._width = width
+        self._left_edge = left_edge
+        self._right_edge = right_edge
+        self._check_input_values()
+        self._width, self._left_edge, self._right_edge = check_width(
+            self.width, self.left_edge, self.right_edge
+        )
+
+    def _check_input_values(self) -> None:
+        """rearrange input-values to match the needed arrangement"""
+        if self.bottom_edge < self.top_edge:
+            self._top_edge, self._bottom_edge = self.bottom_edge, self.top_edge
+        if (
+            self.left_edge is not None
+            and self.right_edge is not None
+            and self.right_edge < self.left_edge
+        ):
+            self._left_edge, self._right_edge = self.right_edge, self.left_edge
 
     def __eq__(self, other):
         return (
             self.top_edge == other.top_edge
             and self.bottom_edge == other.bottom_edge
             and self.width == other.width
+            and self.left_edge == other.left_edge
+            and self.right_edge == other.right_edge
         )
 
-    def __repr__(self):
-        return f"Rectangle(top_edge={self.top_edge}, bottom_edge={self.bottom_edge}, width={self.width})"
+    def __repr__(self) -> str:
+        return (
+            f"Rectangle("
+            f"top_edge={self.top_edge:.2f}, "
+            f"bottom_edge={self.bottom_edge:.2f}, "
+            f"width={self.width:.2f}, "
+            f"left_edge={self.left_edge:.2f}, "
+            f"right_edge={self.right_edge:.2f})"
+        )
 
     @str_start_end
-    def __str__(self):
+    def __str__(self) -> str:
         text = [
             "Rectangle",
             "=========",
@@ -94,10 +194,10 @@ class Rectangle(Geometry):
             "",
             "Properties",
             "----------",
-            "Area: {:.2f}".format(self.area),
-            "Centroid: {:.2f}".format(self.centroid),
+            f"Area: {self.area:.2f}",
+            f"Centroid: {self.centroid:.2f}",
         ]
-        return "\n".join(text)
+        return print_sections(text)
 
     @property
     def top_edge(self):
@@ -108,8 +208,20 @@ class Rectangle(Geometry):
         return self._bottom_edge
 
     @property
+    def right_edge(self) -> float:
+        return self._right_edge
+
+    @property
+    def left_edge(self) -> float:
+        return self._left_edge
+
+    @property
     def edges(self):
         return [self.top_edge, self.bottom_edge]
+
+    @property
+    def sides(self) -> list[float]:
+        return [self.left_edge, self.right_edge]
 
     @property
     def height(self):
@@ -135,35 +247,122 @@ class Rectangle(Geometry):
     def width_interception(self) -> float:
         return self.width
 
-    def split(self, at_points: list) -> list[Geometry]:
-        top_edge = self.top_edge
+    def split(
+        self, at_points: list[StrainPosition], max_widths: EffectiveWidths = None
+    ) -> list[Geometry]:
+        """
+        splitting the rectangle horizontally in smaller rectangles
+
+        Parameters
+        ----------
+        at_points : list[StrainPosition]
+            points where the rectangle is split into smaller rectangles
+        max_widths: EffectiveWidths
+            widths under consideration of bending or membran loading
+
+        Returns
+        list[Rectangle]
+            rectangles assembling to the original rectangle
+        """
         rectangles = []
-        at_points.sort()
-        for point in at_points:
-            if self.top_edge < point < self.bottom_edge:
-                rectangles.append(Rectangle(top_edge, point, self.width))
-                top_edge = point
-        rectangles.append(Rectangle(top_edge, self.bottom_edge, self.width))
+        at_points.sort(key=lambda x: x.position)
+        top_edge = StrainPosition(at_points[0].strain, self.top_edge, at_points[0].material)
+        for bottom_edge in at_points:
+            if self.top_edge < bottom_edge.position < self.bottom_edge:
+                if bottom_edge.strain == 0.0:
+                    edge = top_edge
+                else:
+                    edge = bottom_edge
+                left_edge, right_edge = self.get_horizontal_edges(edge, max_widths)
+                rectangles.append(
+                    Rectangle(
+                        top_edge.position,
+                        bottom_edge.position,
+                        left_edge=left_edge,
+                        right_edge=right_edge,
+                    ))
+                top_edge = bottom_edge
+        if top_edge.strain == 0.0:
+            edge = StrainPosition(at_points[-1].strain, self.bottom_edge, at_points[-1].material)
+        else:
+            edge = top_edge
+        left_edge, right_edge = self.get_horizontal_edges(edge, max_widths)
+        rectangles.append(Rectangle(top_edge.position, self.bottom_edge, left_edge=left_edge, right_edge=right_edge))
+        #print(rectangles)
         return rectangles
+
+    def get_horizontal_edges(
+        self, point: StrainPosition, max_widths: EffectiveWidths
+    ) -> tuple:
+        """
+        Get the horizontal edges of the rectangles considering the effective widths
+        as well as real dimensions of the rectangle
+
+        Parameters
+        ----------
+        point : StrainPosition
+            position and strain at this position as well as the corresponding material.
+            Needed to differentiate between rectangle under tension and under compression.
+        max_widths : EffectiveWidths
+            effective widths to consider
+
+        Returns
+        -------
+        tuple[float, float]
+            left and right edge considering the effective widths as well as real dimensions of the rectangle
+        """
+        if max_widths is not None:
+            effective_width = max_widths.width(point.material, point.strain)
+            right_edge = min(effective_width, self.right_edge)
+            left_edge = max(-effective_width, self.left_edge)
+            # if right_edge != self.right_edge or left_edge != self.left_edge:
+                # print(f"{point.strain}, {point.material}, "
+                #      f"{left_edge=:.2f} != {self.left_edge} or "
+                #      f"{right_edge=:.2f} != {self.right_edge}")
+        else:
+            right_edge, left_edge = self.right_edge, self.left_edge
+        return left_edge, right_edge
 
 
 class Circle(Geometry):
     """
-    Represents a circle
+    Circle
+
+    Parameters
+    ----------
+    diameter: float
+        diameter of the circle
+    centroid_y: float
+        position of centroid of the circle in vertical direction
+    centroid_z: float
+        position of centroid of the circle in horizontal direction
     """
 
-    def __init__(self, diameter: float, centroid: float):
+    def __init__(self, diameter: float, centroid_y: float, centroid_z: float):
         self._diameter = diameter
-        self._centroid = centroid
+        self._centroid_y = centroid_y
+        self._centroid_z = centroid_z
 
     def __eq__(self, other) -> bool:
-        return self.diameter == other.diameter and self.centroid == other.centroid
+        if isinstance(other, Circle):
+            return (
+                self.diameter == other.diameter
+                and self.centroid_y == other.centroid_y
+                and self.centroid_z == other.centroid_z
+            )
+        else:
+            return False
 
-    def __repr__(self):
-        return f"Circle(diameter={self.diameter}, centroid={self.centroid})"
+    def __repr__(self) -> str:
+        return (
+            f"Circle("
+            f"diameter={self.diameter}, "
+            f"centroid_y={self._centroid_y}, "
+            f"centroid_z={self._centroid_z})"
+        )
 
     @str_start_end
-    def __str__(self):
+    def __str__(self) -> str:
         text = [
             "Circle",
             "======",
@@ -174,8 +373,8 @@ class Circle(Geometry):
             "",
             "Properties",
             "----------",
-            "Area: {:.2f}".format(self.area),
-            "Centroid {:.2f}".format(self.centroid),
+            f"Area: {self.area:.2f}",
+            f"Centroid: ({self.centroid_y:.2f}, {self.centroid_y:.2f})",
         ]
         return "\n".join(text)
 
@@ -183,32 +382,66 @@ class Circle(Geometry):
     def diameter(self):
         return self._diameter
 
-    @property
     def centroid(self):
-        return self._centroid
+        return self._centroid_y
+
+    @property
+    def centroid_y(self):
+        return self._centroid_y
+
+    @property
+    def centroid_z(self):
+        return self._centroid_z
 
     @property
     def area(self):
         return 3.145 * (0.5 * self.diameter) ** 2.0
 
-    def split(self, at_points: list) -> list:
-        return [self]  # [Circle(self.diameter, self.centroid)]
+    @property
+    def edges(self) -> list[float]:
+        return [self.centroid_y]
 
     @property
-    def edges(self) -> list:
-        return [self.centroid]
+    def sides(self) -> list[float]:
+        return [self.centroid_z]
 
     @property
     def top_edge(self):
-        return self.centroid - 0.5 * self.diameter
+        return self.centroid_y - 0.5 * self.diameter
 
     @property
     def bottom_edge(self):
-        return self.centroid + 0.5 * self.diameter
+        return self.centroid_y + 0.5 * self.diameter
 
     @property
     def height(self) -> float:
         return 0.0
+
+    def split(
+        self, at_points: list[StrainPosition], max_widths: EffectiveWidths = None
+    ) -> list:
+        if self._is_in_effective_width(at_points, max_widths):
+            return [self]  # [Circle(self.diameter, self.centroid)]
+        else:
+            return []
+
+    def _is_in_effective_width(
+        self, points: list[StrainPosition], max_widths: EffectiveWidths
+    ) -> bool:
+        """checks if centroid of circle is within the effective width"""
+        for point_index in range(len(points)):
+            two_points = [
+                points[point_index].position,
+                points[point_index + 1].position,
+            ]
+            if min(two_points) <= self.centroid_y <= max(two_points):
+                width = max_widths.width(
+                    points[0].material,
+                    sum([points[point_index].strain, points[point_index + 1].strain]),
+                )
+                return -width <= self.centroid_z <= width
+            else:
+                return False
 
 
 class Trapezoid(Geometry):
@@ -217,14 +450,96 @@ class Trapezoid(Geometry):
     """
 
     def __init__(
-        self, top_edge: float, bottom_edge: float, top_width: float, bottom_width: float
+        self,
+        top_edge: float,
+        bottom_edge: float,
+        top_width: float,
+        top_left_edge: float = None,
+        top_right_edge: float = None,
+        bottom_width: float = None,
+        bottom_left_edge: float = None,
+        bottom_right_edge: float = None,
     ):
+        """
+        Parameters
+        ----------
+        top_edge : float
+            top-edge of the rectangle
+        bottom_edge : float
+            bottom-edge of the rectangle
+        top_width : float
+            width of the trapezoid at the top-edge (Default: None).
+        top_left_edge : float
+            left-edge position of the trapezoid at the top-edge (Default: None).
+        top_right_edge : float
+            right-edge position of the trapezoid at the top-edge (Default: None).
+        bottom_width : float
+            width of the trapezoid at the bottom-edge (Default: None).
+        bottom_left_edge : float
+            left-edge position of the trapezoid at the bottom-edge (Default: None).
+        bottom_right_edge : float
+            right-edge position of the trapezoid at the bottom-edge (Default: None).
+        """
         self._top_edge = top_edge
         self._bottom_edge = bottom_edge
         self._top_width = top_width
+        self._top_left_edge = top_left_edge
+        self._top_right_edge = top_right_edge
         self._bottom_width = bottom_width
+        self._bottom_left_edge = bottom_left_edge
+        self._bottom_right_edge = bottom_right_edge
+        self._check_input_values()
+        self._top_width, self._top_left_edge, self._top_right_edge = check_width(
+            self.top_width, self.top_left_edge, self.top_right_edge
+        )
+        (
+            self._bottom_width,
+            self._bottom_left_edge,
+            self._bottom_right_edge,
+        ) = check_width(
+            self.bottom_width, self.bottom_left_edge, self.bottom_right_edge
+        )
 
-    def __repr__(self):
+    def _check_input_values(self) -> None:
+        """check input-value to match the needed arrangement"""
+        if self.bottom_edge < self.top_edge:
+            self._top_edge, self._bottom_edge = self.bottom_edge, self.top_edge
+        if (
+            self.top_left_edge is not None
+            and self.top_right_edge is not None
+            and self.top_right_edge < self.top_left_edge
+        ):
+            self._top_left_edge, self._top_right_edge = (
+                self.top_right_edge,
+                self.top_left_edge,
+            )
+        if (
+            self.bottom_left_edge is not None
+            and self.bottom_right_edge is not None
+            and self.bottom_right_edge < self.bottom_left_edge
+        ):
+            self._bottom_left_edge, self._bottom_right_edge = (
+                self.bottom_right_edge,
+                self.bottom_left_edge,
+            )
+
+    @property
+    def top_left_edge(self) -> float:
+        return self._top_left_edge
+
+    @property
+    def bottom_left_edge(self) -> float:
+        return self._bottom_left_edge
+
+    @property
+    def top_right_edge(self) -> float:
+        return self._top_right_edge
+
+    @property
+    def bottom_right_edge(self) -> float:
+        return self._bottom_right_edge
+
+    def __repr__(self) -> str:
         return (
             f"Trapezoid(top_edge={self.top_edge}, "
             f"bottom_edge={self.bottom_edge}, "
@@ -233,7 +548,7 @@ class Trapezoid(Geometry):
         )
 
     @str_start_end
-    def __str__(self):
+    def __str__(self) -> str:
         text = [
             "Trapezoid",
             "=========",
@@ -249,7 +564,7 @@ class Trapezoid(Geometry):
         ]
         return print_sections(text)
 
-    def __eq__(self, other):
+    def __eq__(self, other) -> bool:
         return (
             self.top_edge == other.top_edge
             and self.bottom_edge == other.bottom_edge
@@ -258,11 +573,11 @@ class Trapezoid(Geometry):
         )
 
     @property
-    def top_edge(self):
+    def top_edge(self) -> float:
         return self._top_edge
 
     @property
-    def bottom_edge(self):
+    def bottom_edge(self) -> float:
         return self._bottom_edge
 
     @property
@@ -270,23 +585,32 @@ class Trapezoid(Geometry):
         return [self.top_edge, self.bottom_edge]
 
     @property
-    def top_width(self):
+    def sides(self) -> list[float]:
+        return [
+            self.top_left_edge,
+            self.top_right_edge,
+            self.bottom_left_edge,
+            self.bottom_right_edge,
+        ]
+
+    @property
+    def top_width(self) -> float:
         return self._top_width
 
     @property
-    def bottom_width(self):
+    def bottom_width(self) -> float:
         return self._bottom_width
 
     @property
-    def height(self):
+    def height(self) -> float:
         return abs(self.top_edge - self.bottom_edge)
 
     @property
-    def area(self):
+    def area(self) -> float:
         return 0.5 * self.height * (self.top_width + self.bottom_width)
 
     @property
-    def centroid(self):
+    def centroid(self) -> float:
         return (
             self.top_edge
             + self.height
@@ -301,27 +625,76 @@ class Trapezoid(Geometry):
             )
         )
 
-    def width(self, vertical_position: float):
+    def width(self, vertical_position: float) -> float:
         if self.top_edge <= vertical_position <= self.bottom_edge:
-            return self.top_width + (vertical_position - self.top_edge) * (
-                self.bottom_width - self.top_width
-            ) / (self.bottom_edge - self.top_edge)
+            return interpolation(
+                position_value=vertical_position,
+                first_pair=[self.top_edge, self.top_width],
+                second_pair=[self.bottom_edge, self.bottom_width],
+            )
         else:
             return 0.0
 
-    def split(self, at_points: list) -> list[Geometry]:
+    def left_edge(self, vertical_position: float) -> float:
+        if self.top_edge <= vertical_position <= self.bottom_edge:
+            return interpolation(
+                position_value=vertical_position,
+                first_pair=[self.top_edge, self.top_left_edge],
+                second_pair=[self.bottom_edge, self.bottom_left_edge],
+            )
+        else:
+            return 0.0
+
+    def right_edge(self, vertical_position: float) -> float:
+        if self.top_edge <= vertical_position <= self.bottom_edge:
+            return interpolation(
+                position_value=vertical_position,
+                first_pair=[self.top_edge, self.top_right_edge],
+                second_pair=[self.bottom_edge, self.bottom_right_edge],
+            )
+        else:
+            return 0.0
+
+    def split(
+        self, at_points: list[StrainPosition], max_widths: EffectiveWidths = None
+    ) -> list[Geometry]:
+        """
+        split trapezoid at the given points and if needed to
+
+        Parameters
+        ----------
+        at_points
+        max_widths
+
+        Returns
+        -------
+        list[Trapezoid]
+            trapezoid split at the material-points into sub-trapezoids
+        """
         top_edge = self.top_edge
         trapazoids = []
-        at_points.sort()
+        at_points.sort(key=lambda x: x.position)
         for point in at_points:
-            if self.top_edge < point < self.bottom_edge:
+            if self.top_edge < point.position < self.bottom_edge:
                 trapazoids.append(
-                    Trapezoid(top_edge, point, self.width(top_edge), self.width(point))
+                    Trapezoid(
+                        top_edge=top_edge,
+                        bottom_edge=point.position,
+                        top_width=self.width(top_edge),
+                        top_left_edge=self.left_edge(top_edge),
+                        bottom_width=self.width(point.position),
+                        bottom_left_edge=self.left_edge(point.position),
+                    )
                 )
-                top_edge = point
+                top_edge = point.position
         trapazoids.append(
             Trapezoid(
-                top_edge, self.bottom_edge, self.width(top_edge), self.bottom_width
+                top_edge=top_edge,
+                bottom_edge=self.bottom_edge,
+                top_width=self.width(top_edge),
+                top_left_edge=self.left_edge(top_edge),
+                bottom_width=self.bottom_width,
+                bottom_left_edge=self.bottom_left_edge,
             )
         )
         return trapazoids
@@ -400,6 +773,8 @@ class IProfile(ComposedGeometry):
     has_bottom_flange: bool = True
         decide if I-profile has a bottom-flange (Default: True)
         if False: no top-flange is considered
+    centroid_z: float
+        horizontal position of the centroid of the I-profile (Default: 0)
 
     Example(s):
     -----------
@@ -415,6 +790,7 @@ class IProfile(ComposedGeometry):
     b_fu: float = None
     has_top_flange: bool = True
     has_bottom_flange: bool = True
+    centroid_z: float = 0.0
     geometries: list = None
 
     def __post_init__(self):
@@ -423,23 +799,42 @@ class IProfile(ComposedGeometry):
             self.t_fu = self.t_fo
         if self.has_bottom_flange and self.b_fu is None and self.b_fo is not None:
             self.b_fu = self.b_fo
+        self._add_top_flange()
+        self._add_web()
+        self._add_bottom_flange()
+
+    def _add_top_flange(self):
+        """add top-flange to geometry if wanted and geometric values are given"""
         if self.has_top_flange and self.t_fo is not None and self.b_fo is not None:
             self.geometries.append(
-                Rectangle(self.top_edge, self.top_edge + self.t_fo, self.b_fo)
+                Rectangle(
+                    top_edge=self.top_edge,
+                    bottom_edge=self.top_edge + self.t_fo,
+                    width=self.b_fo,
+                    left_edge=self.centroid_z - 0.5 * self.b_fo,
+                )
             )
+
+    def _add_web(self) -> None:
+        """add web to the geometry of the profile"""
         self.geometries.append(
             Rectangle(
-                self.top_edge + self.t_fo,
-                self.top_edge + self.t_fo + self.h_w,
-                self.t_w,
+                top_edge=self.top_edge + self.t_fo,
+                bottom_edge=self.top_edge + self.t_fo + self.h_w,
+                width=self.t_w,
+                left_edge=self.centroid_z - 0.5 * self.t_w,
             )
         )
+
+    def _add_bottom_flange(self) -> None:
+        """add bottom-flange to geometry if wanted and geometric values are given"""
         if self.has_bottom_flange and self.t_fu is not None and self.b_fu is not None:
             self.geometries.append(
                 Rectangle(
-                    self.top_edge + self.t_fo + self.h_w,
-                    self.top_edge + self.t_fo + self.h_w + self.t_fu,
-                    self.b_fu,
+                    top_edge=self.top_edge + self.t_fo + self.h_w,
+                    bottom_edge=self.top_edge + self.t_fo + self.h_w + self.t_fu,
+                    width=self.b_fu,
+                    left_edge=self.centroid_z - 0.5 * self.b_fu,
                 )
             )
 
@@ -475,6 +870,8 @@ class RebarLayer(ComposedGeometry):
     centroid: float
     rebar_number: int = None
     width: float = None
+    left_edge: float = None
+    right_edge: float = None
     rebar_horizontal_distance: float = None
     geometries: list = None
 
@@ -488,9 +885,21 @@ class RebarLayer(ComposedGeometry):
             )
         if self.rebar_number is None:
             self.rebar_number = int(self.width / self.rebar_horizontal_distance)
+        if self.width is None:
+            self.width = float(self.rebar_number - 1) * self.rebar_horizontal_distance
+        if self.rebar_horizontal_distance is None:
+            self.rebar_horizontal_distance = float(self.width / self.rebar_number)
+        self.width, self.left_edge, self.right_edge = check_width(self.width, self.left_edge, self.right_edge)
+
         self.geometries = []
-        for _ in range(self.rebar_number):
-            self.geometries.append(Circle(self.rebar_diameter, self.centroid))
+        for index in range(self.rebar_number):
+            centroid_z = index * self.rebar_horizontal_distance + self.left_edge
+            self.geometries.append(
+                Circle(
+                    diameter=self.rebar_diameter,
+                    centroid_y=self.centroid,
+                    centroid_z=centroid_z,
+                ))
 
 
 @dataclass
@@ -501,7 +910,20 @@ class UPEProfile(ComposedGeometry):
 
     Parameters
     ----------
-    top_edge :
+    top_edge : float
+        top-edge of the rectangle
+    t_f: float
+        flange-thickness
+    b_f: float
+        flange-width
+    t_w: float
+        web-thickness
+    h_w: float = None
+        web-height (Default: None). Alternative argument 'h' must be given, otherwise an exception will be risen.
+    h: float = None
+        overall height of the steel-profile (Default: None). Alternative arguments 'h_w' and 't_f' must be given.
+    centroid_z: float
+        horizontal position of the centroid of the I-profile (Default: 0.0)
 
     Example
     -------
@@ -514,6 +936,7 @@ class UPEProfile(ComposedGeometry):
     t_w: float
     h_w: float = None
     h: float = None
+    centroid_z: float = 0.0
     geometries: list = None
 
     def __post_init__(self):
@@ -524,7 +947,31 @@ class UPEProfile(ComposedGeometry):
         if self.h_w is None:
             self.h_w = self.h - 2.0 * self.t_f
         self.geometries = [
-            Rectangle(self.top_edge, self.top_edge + self.b_f, self.t_f),
-            Rectangle(self.top_edge, self.top_edge + self.t_w, self.h_w),
-            Rectangle(self.top_edge, self.top_edge + self.b_f, self.t_f),
+            self._left_flange(),
+            self._web(),
+            self._right_flange(),
         ]
+
+    def _left_flange(self) -> Rectangle:
+        return Rectangle(
+            top_edge=self.top_edge,
+            bottom_edge=self.top_edge + self.b_f,
+            width=self.t_f,
+            left_edge=self.centroid_z - 0.5 * self.h_w - self.t_f,
+        )
+
+    def _web(self) -> Rectangle:
+        return Rectangle(
+            top_edge=self.top_edge,
+            bottom_edge=self.top_edge + self.t_w,
+            width=self.h_w,
+            left_edge=self.centroid_z - 0.5 * self.h_w,
+        )
+
+    def _right_flange(self) -> Rectangle:
+        return Rectangle(
+            top_edge=self.top_edge,
+            bottom_edge=self.top_edge + self.b_f,
+            width=self.t_f,
+            left_edge=self.centroid_z + 0.5 * self.h_w,
+        )
