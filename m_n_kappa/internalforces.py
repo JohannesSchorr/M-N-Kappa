@@ -15,11 +15,9 @@ Systems available
     
     - Single load
     - line load / Uniform load 
-   
-To Do
------
-  - Multi-span beams
 """
+
+# TODO: Multi-span systems
 
 
 class ABCSingleSpan(ABC):
@@ -55,6 +53,12 @@ class ABCSingleSpan(ABC):
         """transversal shear value at the right support"""
         ...
 
+    @property
+    @abstractmethod
+    def positions(self) -> list[float]:
+        """positions of load-introduction"""
+        ...
+
     @abstractmethod
     def moment(self, at_position: float) -> float:
         """moment at the given position_value
@@ -88,12 +92,28 @@ class ABCSingleSpan(ABC):
         ...
 
     @abstractmethod
-    def position_of_maximum_moment(self) -> float:
+    def positions_of_maximum_moment(self) -> list[float]:
         """position_value of the maximum moment"""
         ...
 
+    def position_of_maximum_deformation(self) -> float:
+        """positions-value of the maximum-deformation"""
+        return sum(self.positions_of_maximum_moment()) / len(self.positions_of_maximum_moment())
+
     @abstractmethod
     def load_by(self, moment: float, at_position: float):
+        ...
+
+    @abstractmethod
+    def load_distribution_factor(self) -> float:
+        """
+        effect of the load on the distribution on bending moment
+
+        References
+        ----------
+        Eggert, F. (2019) Einfluss der Verdübelung auf das Trag- und Verformungsverhalten von Verbundträgern mit und
+        ohne Profilblech, dissertation, University of Stuttgart, Institute of Structural Design, No. 2019-1, p. 182
+        """
         ...
 
 
@@ -116,12 +136,14 @@ class SingleSpan(ABCSingleSpan):
 
     def __init__(self, length: float, loads: list = None, uniform_load: float = None):
         """
-
         Parameters
         ----------
-        length
-        loads
-        uniform_load
+        length : float
+            length of the beam
+        loads : list[SingleLoad]
+            list of single-loads applied onto the beam
+        uniform_load : float
+            line load that is applied on the beam over the hole length
         """
         self._length = length
         self._uniform_load = uniform_load
@@ -155,14 +177,18 @@ class SingleSpan(ABCSingleSpan):
     def transversal_shear_support_right(self) -> float:
         return self.beam.transversal_shear_support_right
 
+    @property
+    def positions(self) -> list[float]:
+        return self.beam.positions
+
     def moment(self, at_position) -> float:
         return self.beam.moment(at_position)
 
     def transversal_shear(self, at_position) -> float:
         return self.beam.transversal_shear(at_position)
 
-    def position_of_maximum_moment(self) -> float:
-        return self.beam.position_of_maximum_moment()
+    def positions_of_maximum_moment(self) -> list[float]:
+        return self.beam.positions_of_maximum_moment()
 
     def load_by(self, moment: float, at_position: float) -> float:
         """load that leads to given moment at the given position_value"""
@@ -187,6 +213,9 @@ class SingleSpan(ABCSingleSpan):
             return SingleSpanSingleLoads(self.length, self._loads)
         else:
             raise ValueError()
+
+    def load_distribution_factor(self) -> float:
+        return self.beam.load_distribution_factor()
 
 
 @dataclass
@@ -257,11 +286,15 @@ class SingleSpanSingleLoads(ABCSingleSpan):
     def loading(self) -> float:
         return self._loading()
 
+    @property
+    def positions(self) -> list[float]:
+        return [load.position_in_beam for load in self.loads]
+
     def moment(self, at_position: float) -> float:
         return self._moment(at_position)
 
-    def position_of_maximum_moment(self) -> float:
-        return self._maximum_moment().position_in_beam
+    def positions_of_maximum_moment(self) -> list[float]:
+        return self._maximum_moment_positions()
 
     def transversal_shear(self, at_position) -> float:
         return self._transversal_shear(at_position)
@@ -319,13 +352,19 @@ class SingleSpanSingleLoads(ABCSingleSpan):
             for load in self.loads
         ]
 
-    def _maximum_moment(self) -> Moment:
+    def _maximum_moment(self) -> list[Moment]:
         moments = self._moments()
         moments.sort(key=lambda x: x.value, reverse=True)
-        return moments[0]
+        maximum_moments = list(filter(lambda x: round(x.value, 5) == round(moments[0].value, 5), moments))
+        return maximum_moments
 
     def _maximum_moment_value(self) -> float:
-        return self._maximum_moment().value
+        return self._maximum_moment()[0].value
+
+    def _maximum_moment_positions(self) -> list[float]:
+        maximum_moment_positions = [moment.position_in_beam for moment in self._maximum_moment()]
+        maximum_moment_positions.sort()
+        return maximum_moment_positions
 
     def _single_loads(self) -> list[float]:
         return [load.value for load in self.loads]
@@ -336,6 +375,14 @@ class SingleSpanSingleLoads(ABCSingleSpan):
             if load.position_in_beam < at_position:
                 shear -= load.value
         return shear
+
+    def load_distribution_factor(self) -> float:
+        if len(self.loads) == 1 and self.loads[0].position_in_beam == 0.5 * self.length:
+            return 0.5
+        elif len(self.loads) > 1 and self.length-self.loads[-1].position_in_beam == self.loads[0].position_in_beam:
+            load_distance = abs(self.loads[0].position_in_beam - self.loads[-1].position_in_beam)
+            a = - 0.5 * (load_distance - self.length)
+            return 1. - (a / self.length)
 
 
 class SingleSpanUniformLoad(ABCSingleSpan):
@@ -399,6 +446,10 @@ class SingleSpanUniformLoad(ABCSingleSpan):
     def transversal_shear_support_right(self):
         return (-1) * self._support_transversal_shear()
 
+    @property
+    def positions(self) -> list[float]:
+        return []
+
     def moment(self, at_position: float):
         return self._moment(at_position)
 
@@ -413,9 +464,9 @@ class SingleSpanUniformLoad(ABCSingleSpan):
         load = moment / (0.5 * (self.length * at_position - at_position ** 2.0))
         return SingleSpanUniformLoad(self.length, load)
 
-    def position_of_maximum_moment(self) -> float:
+    def positions_of_maximum_moment(self) -> list[float]:
         """position_value where the moment is the maximum"""
-        return 0.5 * self.length
+        return [0.5 * self.length]
 
     def _support_transversal_shear(self):
         return 0.5 * self.loading
@@ -434,3 +485,6 @@ class SingleSpanUniformLoad(ABCSingleSpan):
 
     def _transversal_shear(self, at_position):
         return self._support_transversal_shear() - self.load * at_position
+
+    def load_distribution_factor(self) -> float:
+        return 2. / 3.
