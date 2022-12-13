@@ -96,10 +96,12 @@ class MKappaCurvePoints:
 
     def curvature(self, by_moment: float) -> float:
         """get curvature at given moment"""
+        if -.00001 <= by_moment <= 0.00001:
+            return 0.0
         if self.maximum_moment() < by_moment:
             if self.maximum_moment() < by_moment * 0.999:
                 raise ValueError(
-                    f"{by_moment=:.2f} > maximum moment in the curve {self.maximum_moment():.2f}.\n"
+                    f"{by_moment=:.2f} > {self.maximum_moment():.2f} = maximum moment in the curve .\n"
                     f"Therefore, no matching moment value could be found."
                 )
             else:
@@ -121,6 +123,7 @@ class MKappaCurvePoints:
         for index in range(len(self.points) - 1):
             if self.points[index].moment <= moment <= self.points[index + 1].moment:
                 return index
+        raise ValueError(f"No index found for {moment=}")
 
     def _sort_points_by_curvature(self):
         self.points.sort(key=lambda x: x.curvature)
@@ -385,6 +388,7 @@ class MKappaCurve:
                 minimum_curvature=self._minimum_positive_curvature(strain_position),
             )
             if not m_kappa.successful:
+                # print(m_kappa._print_iterations()) # TODO: Logging?
                 m_kappa = MKappaByStrainPosition(
                     self.cross_section,
                     strain_position=strain_position,
@@ -433,7 +437,9 @@ class MKappaCurve:
             print(
                 f"============\n"
                 f"not successful:\n"
-                f"position_value={m_kappa.strain_position}"
+                f"position_value={m_kappa.strain_position},\n"
+                f"iterations={m_kappa.iteration} ({m_kappa.maximum_iterations})\n"
+                f"{m_kappa._print_iterations()}",
             )
             #print(m_kappa._print_initialization())
             #print(m_kappa._print_iterations())
