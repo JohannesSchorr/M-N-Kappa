@@ -1,4 +1,4 @@
-import unittest
+from unittest import TestCase, main
 
 from m_n_kappa.width import (
     StateMeta,
@@ -16,7 +16,7 @@ Kuhlmann, U.; Rieg, A. Mittragende Betongurtbreite niedriger Verbundträger, AiF
 """
 
 
-class TestStateMeta(unittest.TestCase):
+class TestStateMeta(TestCase):
     def setUp(self):
         self.test_state = StateMeta(
             slab_width=2.0, beam_length=1.0, mu=0.0, sequences=55
@@ -29,7 +29,7 @@ class TestStateMeta(unittest.TestCase):
         self.assertEqual(self.test_state.cosh(0), 1.0)
 
 
-class TestMembranStateHarmonicLoading(unittest.TestCase):
+class TestMembranStateHarmonicLoading(TestCase):
     def setUp(self):
         self.test_state_1 = MembranStateHarmonicLoading(
             slab_width=2.0, beam_length=1.0, mu=0.0
@@ -84,7 +84,7 @@ class TestMembranStateHarmonicLoading(unittest.TestCase):
         )
 
 
-class TestMembrandStateLineLoading(unittest.TestCase):
+class TestMembranStateLineLoading(TestCase):
     def setUp(self):
         self.test_state = MembranStateLineLoading(
             slab_width=2.0, beam_length=1.0, mu=0.0, sequences=55
@@ -136,7 +136,11 @@ class TestMembrandStateLineLoading(unittest.TestCase):
         )
 
 
-class TestBendingStateHarmonicLoading(unittest.TestCase):
+class TestMembranStateSingleLoading(TestCase): 
+    # TODO: TestMembranStateSingleLoading
+    pass 
+
+class TestBendingStateHarmonicLoading(TestCase):
 
     test_state = BendingStateHarmonicLoading(slab_width=2.0, beam_length=1.0, mu=0.0)
 
@@ -167,7 +171,7 @@ class TestBendingStateHarmonicLoading(unittest.TestCase):
         )
 
 
-class TestBendingStateLineLoading(unittest.TestCase):
+class TestBendingStateLineLoading(TestCase):
     def setUp(self):
         self.test_state = BendingStateLineLoading(
             slab_width=2.0, beam_length=1.0, mu=0.0, sequences=30
@@ -201,5 +205,10 @@ class TestBendingStateLineLoading(unittest.TestCase):
         )
 
 
+class TestBendingStateSingleLoading(TestCase):
+    # TODO: TestBendingStateSingleLoading
+    pass
+
+
 if __name__ == "__main__":
-    unittest.main()
+    main()
