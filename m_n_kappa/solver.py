@@ -14,6 +14,7 @@ class Solver:
         "_maximum_variable",
         "_minimum_variable",
         "_function",
+        "_sorted_data",
     )
 
     def __init__(self, data: list, target, variable, target_value: float = 0.0):
@@ -34,10 +35,10 @@ class Solver:
         self._variable = variable
         self._target_value = target_value
         self._set_variable_boundaries()
-        self._sort_data()
+        self._sorted_data = self._sort_data()
         self._prepare()
 
-    def __repr__(self):
+    def __repr__(self) -> str:
         return f"{self.__class__.__name__}(" \
                f"data=data, " \
                f"target={self.target}, " \
@@ -45,7 +46,7 @@ class Solver:
                f"target_value={self.target_value})"
 
     @str_start_end
-    def __str__(self):
+    def __str__(self) -> str:
         text = [
             self._print_title(),
             self._print_initialization(),
@@ -95,32 +96,39 @@ class Solver:
         return self._variable
 
     @property
-    def x_n(self):
-        return self.data[0][self.variable]
+    def x_n(self) -> float:
+        return self._sorted_data[0][self.variable]
 
-    def compute(self) -> float:
+    def compute(self, use_fallback: bool = False) -> float:
         pass
 
     def _prepare(self):
         pass
 
-    def _sort_data(self) -> None:
-        self._data.sort(key=lambda x: abs(x[self.target]))
+    def _sort_data(self) -> list:
+        #  self._data.sort(key=lambda x: abs(x[self.target]))
+        gt_zero = list(filter(lambda x: x[self.target] > 0.0, self.data))
+        lt_zero = list(filter(lambda x: x[self.target] < 0.0, self.data))
+        if len(gt_zero) > 2:
+            gt_zero.sort(key=lambda x: abs(x[self.target]))
+            gt_zero = gt_zero[:2]
+        if len(lt_zero) > 2:
+            lt_zero.sort(key=lambda x: abs(x[self.target]))
+            lt_zero = lt_zero[:2]
+        new_data = gt_zero + lt_zero
+        new_data.sort(key=lambda x: abs(x[self.target]))
+        return new_data
 
-    def _set_variable_boundaries(self):
+    def _set_variable_boundaries(self) -> None:
         if len(self._data) > 1:
-            self._set_maximum_variable()
-            self._set_minimum_variable()
+            self._maximum_variable = self._compute_maximum_variable()
+            self._minimum_variable = self._compute_minimum_variable()
 
-    def _set_maximum_variable(self) -> None:
-        self._maximum_variable = max(self._data, key=lambda x: x[self.variable])[
-            self.variable
-        ]
+    def _compute_maximum_variable(self) -> float:
+        return max(self._data, key=lambda x: x[self.variable])[self.variable]
 
-    def _set_minimum_variable(self) -> None:
-        self._minimum_variable = min(self._data, key=lambda x: x[self.variable])[
-            self.variable
-        ]
+    def _compute_minimum_variable(self) -> float:
+        return min(self._data, key=lambda x: x[self.variable])[self.variable]
 
 
 class Bisection(Solver):
@@ -136,11 +144,20 @@ class Bisection(Solver):
         "_minimum_variable",
     )
 
-    def compute(self) -> float:
-        return 0.5 * (self._min_under_zero_variable() + self._min_over_zero_variable())
+    def compute(self, use_fallback: bool = False) -> float:
+        variables = [data_point[self.variable] for data_point in self.data]
+        # print(f'{variables=}') # TODO: Logging?
+        for factor in [0.5, 0.25, 0.75, 0.1, 0.2, 0.3, 0.4, 0.6, 0.7, 0.8, 0.9]:
+            new_variable = self._compute_with(factor)
+            if new_variable not in variables:
+                # print(new_variable) # TODO: Logging?
+                return new_variable
 
-    def print_values(self):
-        print(
+    def _compute_with(self, factor: float = 0.5):
+        return factor * (self._min_under_zero_variable() + self._min_over_zero_variable())
+
+    def print_values(self) -> str:
+        return (
             f"min over zero: {self._min_over_zero_variable()} | "
             f"min under zero: {self._min_under_zero_variable()} | "
             f"mean: {self.compute()}"
@@ -185,27 +202,38 @@ class Newton(Solver):
     def x_n_plus_1(self) -> float:
         return self._x_n_plus_1
 
-    def compute(self) -> float:
+    def compute(self, use_fallback: bool = False) -> float:
         self._x_n_plus_1 = self.solve()
-        if self.is_value_in_range(): #  and self.value_has_changed():
+        if self.is_value_in_range() and self.value_has_changed() and not use_fallback:
             return self.x_n_plus_1
         else:
             return self.fallback()
 
     def is_value_in_range(self) -> bool:
+        """check if computed value is between maximum and minimum variable value"""
         if self.minimum_variable <= self.x_n_plus_1 <= self.maximum_variable:
             return True
         else:
+            #print(f'Value {self.x_n_plus_1=} is not in range. '
+            #      f'x_n: {self.x_n}, '
+            #      f'Minimum: {self.minimum_variable=}, '
+            #      f'Maximum: {self.maximum_variable=},\n'
+            #      f'Data: {self.data}') # TODO: Logging
             return False
 
     def value_has_changed(self) -> bool:
-        if abs(self.x_n_plus_1 - self.x_n) / self.x_n < 0.0001:
+        if self.x_n != 0.0:
+            denominator = self.x_n
+        else:
+            denominator = self.x_n_plus_1
+        if abs(self.x_n_plus_1 - self.x_n / denominator) < 0.0001:
+            # print(f'value has not changed {self.x_n_plus_1=}, {self.x_n=}') # TODO: Logging
             return False
         else:
             return True
 
     def fallback(self) -> float:
-        print("Fallback: Bisection")
+        # print("Fallback: Bisection") # TODO: Logging
         bisection = Bisection(self.data, self.target, self.variable)
         return bisection.compute()
 
@@ -222,11 +250,11 @@ class Newton(Solver):
         self._set_function()
 
     def _set_function(self):
-        if len(self.data) > 2:
+        if len(self._sorted_data) > 2:
             self._function = Polynominal(
-                data=self.data, variable=self.variable, target=self.target
+                data=self._sorted_data, variable=self.variable, target=self.target
             )
         else:
             self._function = Linear(
-                data=self.data, variable=self.variable, target=self.target
+                data=self._sorted_data, variable=self.variable, target=self.target
             )
