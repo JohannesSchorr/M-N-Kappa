@@ -8,6 +8,7 @@ from .general import (
     neutral_axis,
     remove_duplicates,
     StrainPosition,
+    EffectiveWidths,
 )
 from .section import (
     Section,
@@ -40,12 +41,31 @@ class Crosssection:
 
     """Combines a number of sections"""
 
-    def __init__(self, sections: list[Section] = None):
+    def __init__(
+        self,
+        sections: list[Section] = None,
+        slab_effective_widths: EffectiveWidths = None,
+    ):
+        """
+        Parameters
+        ----------
+        sections : list[Section]
+            sections the cross-section consists of
+        slab_effective_widths : EffectiveWidths
+            effective widths' for the slab (concrete and reinforcement)
+        """
         self._sections = sections
+        self._slab_effective_widths = slab_effective_widths
         self._top_edge = self.__compute_top_edge()
         self._bottom_edge = self.__compute_bottom_edge()
 
-    def __repr__(self):
+    # TODO: check if rebars are within the concrete slab
+
+    @property
+    def slab_effective_width(self):
+        return self._slab_effective_widths
+
+    def __repr__(self) -> str:
         return "Crosssection(sections=sections)"
 
     def __iter__(self):
@@ -74,7 +94,7 @@ class Crosssection:
             )
 
     @str_start_end
-    def __str__(self):
+    def __str__(self) -> str:
         text = [
             self._print_title(),
             self._print_initialization(),
@@ -92,6 +112,25 @@ class Crosssection:
         return print_sections(
             ["Initialization", len("Initialization") * "-", self.__repr__()]
         )
+
+    def _print_geometry(self) -> str:
+        text = [
+            "Geometry",
+            "--------",
+            "top_edge: {:.1f} | bottom_edge: {:.1f}".format(
+                self.top_edge, self.bottom_edge
+            ),
+        ]
+        return print_sections(text)
+
+    def _print_sections(self) -> str:
+        text = [
+            "Sections",
+            "--------",
+        ]
+        for section in self.sections:
+            text.append(section.__repr__())
+        return print_sections(text)
 
     @property
     def bottom_edge(self) -> float:
@@ -134,26 +173,14 @@ class Crosssection:
         else:
             self._sections.append(section)
 
-    def _print_geometry(self):
-        text = [
-            "Geometry",
-            "--------",
-            "top_edge: {:.1f} | bottom_edge: {:.1f}".format(
-                self.top_edge, self.bottom_edge
-            ),
-        ]
-        return print_sections(text)
-
-    def _print_sections(self):
-        text = [
-            "Sections",
-            "--------",
-        ]
-        for section in self.sections:
-            text.append(section.__repr__())
-        return print_sections(text)
-
     def sections_of_type(self, section_type: str) -> list[Section]:
+        """
+        get a list of sections that are of the specified typ
+
+        Possible section-types are:
+          - 'slab'   -> concrete slab + reinforcement
+          - 'girder' -> Steel girder
+        """
         return [
             section for section in self.sections if section.section_type == section_type
         ]
@@ -163,8 +190,8 @@ class Crosssection:
         get a list of sections that are not of the specified typ
 
         Possible section-types are:
-        - 'slab'   -> concrete slab + reinforcement
-        - 'girder' -> Steel girder
+          - 'slab'   -> concrete slab + reinforcement
+          - 'girder' -> Steel girder
         """
         return [
             section for section in self.sections if section.section_type != section_type
@@ -192,18 +219,62 @@ class Crosssection:
 
     def __compute_top_edge(self) -> float:
         """compute top-edge of cross-section"""
+        if len(self.sections) == 0:
+            return 0.0
         top_edges = [min(section.geometry.edges) for section in self.sections]
         return min(top_edges)
 
     def __compute_bottom_edge(self) -> float:
         """compute bottom-edge of cross-section"""
+        if len(self.sections) == 0:
+            return 0.0
         bottom_edges = [max(section.geometry.edges) for section in self.sections]
         return max(bottom_edges)
 
+    def _concrete_sections(self) -> list[Section]:
+        return [
+            section
+            for section in self.sections
+            if section.material.__class__.__name__ == "Concrete"
+        ]
+
+    def left_edge(self) -> float:
+        """
+        outer left-edge of the concrete-slab
+
+        CAUTION: will fail in case concrete is a trapezoid or a circle
+        """
+        concrete_sections = self._concrete_sections()
+        return min(concrete_sections, key=lambda x: x.geometry.left_edge).geometry.left_edge
+
+    def right_edge(self) -> float:
+        """
+        outer right-edge of the concrete-slab
+
+        CAUTION: will fail in case concrete is a trapezoid or a circle
+        """
+        concrete_sections = self._concrete_sections()
+        return max(concrete_sections, key=lambda x: x.geometry.right_edge).geometry.right_edge
+
+    def concrete_slab_width(self) -> float:
+        """full width of the concrete slab"""
+        return self.right_edge() - self.left_edge()
+
 
 class ComputationCrosssection(Crosssection):
+
+    """
+    Base for computed cross-sections:
+      - :class:`ComputationCrosssectionStrain` cross-section that is loaded only by axial-forces
+      - :class:`ComputationCrosssectionCurvature` cross-section computing curvatures
+
+    Both classes share the functions defined within this class.
+
+    This class has no initializer.
+    """
+
     @str_start_end
-    def __str__(self):
+    def __str__(self) -> str:
         text = [
             self._print_title(),
             self._print_initialization(),
@@ -229,38 +300,38 @@ class ComputationCrosssection(Crosssection):
     @property
     def computed_slab_sections(self) -> list:
         """sections of the slab (computed)"""
-        return self._compute_sections_of_type(section_type="slab")
+        return self._computed_sections_of_type(section_type="slab")
 
     @property
     def computed_girder_sections(self) -> list:
         """sections of the girder (computed)"""
-        return self._compute_sections_of_type(section_type="girder")
+        return self._computed_sections_of_type(section_type="girder")
 
     def girder_sections_axial_force(self) -> float:
         """summarized axial force of the girder sections"""
         return axial_force(self.computed_girder_sections)
 
-    def girder_sections_moment(self):
+    def girder_sections_moment(self) -> float:
         """summarized moment of the girder sections"""
         return moment(self.computed_girder_sections)
 
-    def slab_sections_axial_force(self):
+    def slab_sections_axial_force(self) -> float:
         """summarized axial forces of the slab sections"""
         return axial_force(self.computed_slab_sections)
 
-    def slab_sections_moment(self):
+    def slab_sections_moment(self) -> float:
         """summarized moments of the slab sections"""
         return moment(self.computed_slab_sections)
 
-    def total_axial_force(self):
+    def total_axial_force(self) -> float:
         """summarized axial forces of the cross_section"""
         return axial_force(self.compute_split_sections)
 
-    def total_moment(self):
+    def total_moment(self) -> float:
         """summarized moments of the cross_section"""
         return moment(self.compute_split_sections)
 
-    def _compute_sections_of_type(self, section_type: str):
+    def _computed_sections_of_type(self, section_type: str) -> list:
         return [
             section
             for section in self.compute_split_sections
@@ -279,7 +350,7 @@ class ComputationCrosssection(Crosssection):
             section_index += 1
         return print_sections(text)
 
-    def _print_all_sections_results(self):
+    def _print_all_sections_results(self) -> str:
         text = [
             f"All sections (n = {len(self.sections)}/{len(self.compute_sections)}):",
             "\t" + "N = {:.1f} N".format(self.total_axial_force()),
@@ -287,7 +358,7 @@ class ComputationCrosssection(Crosssection):
         ]
         return print_sections(text)
 
-    def _print_girder_sections_results(self):
+    def _print_girder_sections_results(self) -> str:
         text = [
             f"Girder sections (n = {len(self.girder_sections)}/{len(self.computed_girder_sections)}):",
             "\t" + "N_a = {:.1f} N".format(self.girder_sections_axial_force()),
@@ -295,7 +366,7 @@ class ComputationCrosssection(Crosssection):
         ]
         return print_sections(text)
 
-    def _print_slab_sections_results(self):
+    def _print_slab_sections_results(self) -> str:
         text = [
             f"Slab sections (n = {len(self.slab_sections)}/{len(self.computed_slab_sections)}):",
             "\t" + "N_c = {:.1f} N".format(self.slab_sections_axial_force()),
@@ -303,7 +374,7 @@ class ComputationCrosssection(Crosssection):
         ]
         return print_sections(text)
 
-    def _print_sections_results(self):
+    def _print_sections_results(self) -> str:
         text = ["Axial Forces, Moment", "--------------------"]
         if len(self.girder_sections) > 0:
             text += [self._print_girder_sections_results(), ""]
@@ -324,27 +395,25 @@ class ComputationCrosssectionStrain(ComputationCrosssection):
 
     def __init__(self, sections: list, strain: float):
         """
-        Initialize
-
         Parameters
         ----------
         sections : list[Section]
-                sections the cross_section consists of
+            sections the cross_section consists of
         strain : float
-                applied constant strain_value
+            applied constant strain_value
         """
         super().__init__(sections)
         self._strain = strain
         self._compute_sections = self._create_computation_sections()
 
-    def __repr__(self):
+    def __repr__(self) -> str:
         return f"ComputationCrosssectionStrain(sections=sections, strain_value={self.strain})"
 
     def __add__(self, other):
         return ComputationCrossSectionStrainAdd(self, other)
 
     @property
-    def strain(self):
+    def strain(self) -> float:
         """applied strain_value to the cross_section"""
         return self._strain
 
@@ -358,7 +427,7 @@ class ComputationCrosssectionStrain(ComputationCrosssection):
     def _create_section(self, basic_section) -> ComputationSectionStrain:
         return ComputationSectionStrain(basic_section, self.strain)
 
-    def _print_results(self):
+    def _print_results(self) -> str:
         text = [
             "Stress distribution",
             "--------------------------",
@@ -444,26 +513,43 @@ class ComputationCrosssectionCurvature(ComputationCrosssection):
 
     """computes a cross_section under a curvature and a neutral axis"""
 
-    __slots__ = "_sections", "_curvature", "_neutral_axis", "_bottom_edge", "_top_edge"
+    __slots__ = (
+        "_sections",
+        "_curvature",
+        "_neutral_axis",
+        "_bottom_edge",
+        "_top_edge",
+        "_slab_effective_widths",
+        "_girder_effective_widths",
+    )
 
-    def __init__(self, sections: list, curvature: float, neutral_axis_value: float):
+    def __init__(
+        self,
+        cross_section: Crosssection,
+        curvature: float,
+        neutral_axis_value: float,
+    ):
         """
         Parameters
         ----------
         sections : list[Section]
-                sections the cross_section consists of
+            sections the cross_section consists of
         curvature : float
-                curvature to compute values
+            curvature to compute values
         neutral_axis_value : float
-                position_value where strain_value is zero
+            position_value where strain_value is zero
+        slab_effective_widths : EffectiveWidths
+            effective widths' for the slab (concrete and reinforcement)
         """
-        super().__init__(sections)
+        super().__init__(cross_section.sections, cross_section.slab_effective_width)
         self._curvature = curvature
         self._neutral_axis = neutral_axis_value
-        self._compute_sections = self._create_computation_sections()
+        self._compute_sections: list[
+            ComputationSectionCurvature
+        ] = self._create_computation_sections()
         self._compute_split_sections = self._create_computation_split_sections()
 
-    def __repr__(self):
+    def __repr__(self) -> str:
         return (
             f"ComputationCrosssection("
             f"sections=sections, "
@@ -472,7 +558,7 @@ class ComputationCrosssectionCurvature(ComputationCrosssection):
         )
 
     @property
-    def compute_split_sections(self) -> list:
+    def compute_split_sections(self) -> list[ComputationSectionCurvature]:
         """sections split at material points"""
         return self._compute_split_sections
 
@@ -489,26 +575,26 @@ class ComputationCrosssectionCurvature(ComputationCrosssection):
     def get_material_points_inside_curvature(self) -> list[StrainPosition]:
         """gives the points included between the curvature and zero strain_value"""
         strain_positions = []
-        for basic_section in self.compute_sections:
-            strain_positions += basic_section.material_points_inside_curvature()
+        for compute_section in self.compute_sections:
+            strain_positions += compute_section.material_points_inside_curvature()
         strain_positions = remove_duplicates(strain_positions)
         return strain_positions
 
     def _create_computation_sections(self) -> list[ComputationSectionCurvature]:
         return [self._create_section(section) for section in self.sections]
 
-    def _create_section(self, basic_section) -> ComputationSectionCurvature:
+    def _create_section(self, basic_section: Section) -> ComputationSectionCurvature:
         return ComputationSectionCurvature(
             basic_section, self.curvature, self.neutral_axis
         )
 
-    def _create_computation_split_sections(self):
+    def _create_computation_split_sections(self) -> list[ComputationSectionCurvature]:
         split_sections = []
         for compute_section in self.compute_sections:
-            split_sections += compute_section.split_section()
+            split_sections += compute_section.split_section(self.slab_effective_width)
         return split_sections
 
-    def _print_results(self):
+    def _print_results(self) -> str:
         text = [
             "Stress-strain_value distribution",
             "--------------------------",
@@ -528,6 +614,11 @@ class ComputationCrosssectionCurvature(ComputationCrosssection):
 class EdgeStrains:
     """
     store strains at edges and compute curvature from these points
+
+    bottom_edge_strain : StrainPosition
+        strain and position at the bottom-edge
+    top_edge_strain : StrainPosition
+        strain and position at the top-edge
     """
 
     bottom_edge_strain: StrainPosition
@@ -548,6 +639,24 @@ def determine_curvatures(
     bottom_edge_strains: list[StrainPosition],
     top_edge_strains: list[StrainPosition],
 ) -> list[EdgeStrains]:
+    """
+    determine curvatures by combining the bottom- and
+    top-edge-strains
+
+    EdgeStrains allow to compute the corresponding curvature
+
+    Parameters
+    ----------
+    bottom_edge_strains: list[StrainPosition]
+        strains and position at the bottom-edges of all sections
+    top_edge_strains: list[StrainPosition]
+        strains and corresponding positions at the top-edges of all sections
+
+    Returns
+    -------
+    list[EdgeStrains]
+        list of strains at top and bottom edge
+    """
     curvatures = []
     for bottom_edge_strain in bottom_edge_strains:
         for top_edge_strain in top_edge_strains:
@@ -759,7 +868,7 @@ class CrossSectionBoundaries(Crosssection):
             maximum_curvature, starts_top=compute_with_strain_at_top
         )
         return ComputationCrosssectionCurvature(
-            sections=self.sections,
+            cross_section=Crosssection(self.sections, self.slab_effective_width),
             curvature=factor_curvature * maximum_curvature.curvature,
             neutral_axis_value=neutral_axis_value,
         )
