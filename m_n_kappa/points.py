@@ -11,13 +11,6 @@ from .general import (
 from .crosssection import Crosssection, ComputationCrosssectionCurvature
 from .solver import Solver, Newton
 
-"""
-
-Todo
-----
-  - Implement effective width
-"""
-
 
 @dataclass
 class Computation:
@@ -230,7 +223,7 @@ class MKappa:
         pass
 
     def iterate(self):
-        for iter_index in range(self.iteration + 1, self.maximum_iterations, 1):
+        for iter_index in range(self.iteration + 1, self.maximum_iterations+1, 1):
             self._iteration = iter_index
             self._neutral_axis = self._guess_neutral_axis()
             self._curvature = self._compute_new_curvature()
@@ -247,12 +240,23 @@ class MKappa:
 
     def _get_compute_cross_section(self):
         return ComputationCrosssectionCurvature(
-            sections=self.cross_section.sections,
+            cross_section=self.cross_section,
             curvature=self.curvature,
             neutral_axis_value=self.neutral_axis,
         )
 
-    def _guess_neutral_axis(self):
+    def _guess_neutral_axis(self) -> float:
+        """
+        Guess a new value for the neutral axis
+
+        Uses the defined Solver and checks if the preceding computations
+        lead to an improvement of the target value (here: axial-forces)
+
+        Returns
+        -------
+        float
+            new value of the neutral axis
+        """
         self.__sort_computations_by_axial_forces()
         temp_computations = [
             {
@@ -261,9 +265,15 @@ class MKappa:
             }
             for computation in self._computations
         ]
-        return self.solver(
+        solver = self.solver(
             data=temp_computations, target="axial_force", variable="neutral_axis_value"
-        ).compute()
+        )
+        if self._target_value_is_improved():
+            use_fallback = False
+        else:
+            use_fallback = True
+            # print('Axial force not improved: use fallback') # TODO: Logging
+        return solver.compute(use_fallback)
 
     def __is_axial_force_within_tolerance(self):
         if abs(self._axial_force_equilibrium()) < self.axial_force_tolerance:
@@ -284,6 +294,13 @@ class MKappa:
         # print(self._computations[-1])
         # print(self.print_iterations())
         # print(self.computed_cross_section._print_results())
+
+    def _target_value_is_improved(self) -> bool:
+        self.__sort_computations_by_iteration()
+        if len(self._computations) > 1:
+            if abs(self._computations[-1].axial_force - self._computations[-2].axial_force) < 1.0:
+                return False
+        return True
 
     def __set_values_none(self):
         self._axial_force = None
@@ -309,7 +326,10 @@ class MKappa:
 
 class MKappaByStrainPosition(MKappa):
 
-    """computation of one Moment-Curvature-Point by fixed stress-strain_value-point and varying the neutral axis"""
+    """
+    computation of one Moment-Curvature-Point by fixed stress-strain_value-point and
+    varying the neutral axis
+    """
 
     __slots__ = (
         "_cross_section",
@@ -341,25 +361,25 @@ class MKappaByStrainPosition(MKappa):
         Parameters
         ----------
         cross_section : cross_section.Crossection
-                cross-section to compute
+            cross-section to compute
         maximum_curvature : float
-                maximum positive or negative allowed curvature
+            maximum positive or negative allowed curvature
         minimum_curvature : float
-                minimum positive or negative allowed curvature
-                (needs same sign as edge_strains)
+            minimum positive or negative allowed curvature
+            (needs same sign as edge_strains)
         strain_position : StrainPosition
-                position_value of the given strain_value (Default: None)
+            position_value of the given strain_value (Default: None)
         applied_axial_force : float
-                applied axial force (Default: 0.0)
+            applied axial force (Default: 0.0)
         maximum_iterations : int
-                maximum allowed iterations (Default: 10)
-                In case the given number of iterations before axial force within desired tolerance,
-                the computation is classified as unsuccessful and will be stopped
+            maximum allowed iterations (Default: 10)
+            In case the given number of iterations before axial force within desired tolerance,
+            the computation is classified as unsuccessful and will be stopped
         axial_force_tolerance : float
-                if axial force within this tolerance the computation is terminated and
-                classified as successful (Default: 5.0)
+            if axial force within this tolerance the computation is terminated and
+            classified as successful (Default: 5.0)
         solver : solver.Solver
-                used solver (Default: solver.Newton)
+            used solver (Default: solver.Newton)
         """
         super().__init__(
             cross_section,
@@ -425,7 +445,10 @@ class MKappaByStrainPosition(MKappa):
 
 class MKappaByConstantCurvature(MKappa):
 
-    """computation of one Moment-Curvature-Point by fixed curvature and varying the neutral axis"""
+    """
+    computation of one Moment-Curvature-Point by fixed curvature and
+    varying the neutral axis
+    """
 
     __slots__ = (
         "_cross_section",
@@ -454,8 +477,6 @@ class MKappaByConstantCurvature(MKappa):
         solver=Newton,
     ):
         """
-        Initialization
-
         Parameters
         ----------
         cross_section : cross_section.Crossection
