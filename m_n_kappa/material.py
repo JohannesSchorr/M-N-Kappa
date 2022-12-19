@@ -35,22 +35,23 @@ class StressStrain:
 
 class Material:
 
-    """Defines a custom material-section_type"""
+    """
+    Provides basic functionality for materials
+
+    In case custom-type materials are created these must inherit from :py:class:`Material`.
+    """
 
     def __init__(self, section_type: str, stress_strain: list[StressStrain] = None):
         """
-        Initialization
-
         Parameters
         ----------
         stress_strain : list
             list with stress-strain_value-relationship
         section_type : str
-            section_type of section this material is ordered to
-
-            possible values are:
-            - slab
-            - girder
+            section_type of section this material is ordered to.
+            Possible values are:
+             - slab
+             - girder
         """
         self._stress_strain = stress_strain
         self._section_type = section_type
@@ -348,12 +349,12 @@ class ConcreteCompressionParabolaRectangle(ConcreteCompression):
 
     @property
     def strains(self) -> list:
-        return [0.33 * self.c, 0.66 * self.c, self.c, self.cu]
+        return [0.25 * self.c, 0.5 * self.c, 0.75*self.c, self.c, self.cu]
 
     def stress(self, strain) -> float:
         if 0.0 <= strain <= self.c:
             return self.f_ck * (1 - (1 - strain / self.c) ** self.n)
-        elif self.c < strain < self.cu:
+        elif self.c < strain <= self.cu:
             return self.f_ck
         else:
             return 0.0
@@ -383,12 +384,37 @@ class ConcreteCompressionBiLinear(ConcreteCompression):
 
 class ConcreteTension:
     def __init__(
-        self, f_cm: float, E_cm: float, f_ctm: float = None, use_tension: bool = True
+        self,
+        f_cm: float,
+        E_cm: float,
+        f_ctm: float = None,
+        g_f: float = None,
+        use_tension: bool = True,
+        consider_opening_behaviour: bool = True,
     ):
+        """
+        Parameters
+        ----------
+        f_cm : float
+            cylinder concrete compressive strength :math:`f_\\mathrm{cm}`
+        E_cm : float
+            mean modulus of elasticity of concrete :math:`E_\\mathrm{cm}`
+        f_ctm : float
+            mean tensile concrete tensile strength :math:`f_\\mathrm{ctm}` (Default: None)
+        g_f : float
+            fracture energy of concrete :math:`G_\\mathrm{f}` (Default: None)
+        use_tension: bool
+            - ``True``: compute tensile behaviour (Default)
+            - ``False``: no tensile behaviour computed
+        consider_opening_behaviour: bool
+
+        """
         self._f_cm = f_cm
         self._E_cm = E_cm
         self._f_ctm = f_ctm
+        self._g_f = g_f
         self._use_tension = use_tension
+        self._consider_opening_behaviour = consider_opening_behaviour
 
     @property
     def f_cm(self):
@@ -407,6 +433,23 @@ class ConcreteTension:
         return self.f_ctm / self.E_cm
 
     @property
+    def fracture_energy(self) -> float:
+        """
+        Fracture energy of concrete :math:`G_\\mathrm{F}` in N/mm (Newton per millimeter)
+
+        .. note::
+
+            The formula assumes that the mean concrete compressive strength :math:`f_\\mathrm{cm}` is given in
+            N/mm².
+
+        .. seealso::
+
+            fib Model Code for Concrete Structures, International Federation for Structural Concrete,
+            Ernst & Sohn GmbH & Co. KG, 2013, p. 78, Eq. 5.1-9
+        """
+        return 0.001 * 73.0 * self.f_cm * 0.18
+
+    @property
     def f_ctm(self) -> float:
         if self._f_ctm is None:
             if self.f_ck <= 50.0:
@@ -420,6 +463,10 @@ class ConcreteTension:
         stress_strain = []  # [[0.0, 0.0]]
         if self.use_tension:
             stress_strain.append([self.f_ctm, self.yield_strain])
+        if self.consider_opening_behaviour:
+            stress_strain.append([0.2*self.f_ctm, self.fracture_energy / self.f_ctm])
+            stress_strain.append([0.0, 5.0 * self.fracture_energy / self.f_ctm])
+        else:
             stress_strain.append([0.0, self.yield_strain + 0.000001])
         stress_strain.append([0.0, 10.0])
         return positive_sign(stress_strain)
@@ -427,6 +474,10 @@ class ConcreteTension:
     @property
     def use_tension(self) -> bool:
         return self._use_tension
+
+    @property
+    def consider_opening_behaviour(self) -> bool:
+        return self._consider_opening_behaviour
 
 
 class Concrete(Material):
@@ -445,22 +496,23 @@ class Concrete(Material):
         Parameters
         ----------
         f_cm : float
-            mean concrete cylinder compression strength
+            mean concrete cylinder compression strength :math:`f_\\mathrm{cm}`
         f_ctm : float
-            mean tensile strength
-        use_tension : float
-            if True: considers tension (Default)
-            if False: does not consider tension
+            mean tensile strength :math:`f_\\mathrm{ctm}` (Default: None)
+        use_tension : bool
+            - ``True``: considers tension (Default)
+            - ``False``: does not consider tension
         compression_stress_strain_type : str
             sets section_type of stress-strain_value curve under compression.
             Possible values are:
-            - 'Nonlinear'
-            - 'Parabola'
-            - 'Bilinear'
+               - ``'Nonlinear'`` (Default)
+               - ``'Parabola'``
+               - ``'Bilinear'``
         tension_stress_strain_type : str
             sets section_type of strain_value-stain curve under tension
             Possible values are:
-            - 'Default'
+               - ``'Default'``
+               - ``'consider opening behaviour'``
         """
         super().__init__(section_type="slab")
         self._f_cm = float(f_cm)
@@ -590,7 +642,21 @@ class Concrete(Material):
             " ", ""
         )
         if stress_strain_type.upper() == "DEFAULT":
-            return ConcreteTension(self.f_cm, self.E_cm, self._f_ctm, self.use_tension)
+            return ConcreteTension(
+                self.f_cm,
+                self.E_cm,
+                self._f_ctm,
+                self.use_tension,
+                consider_opening_behaviour=False
+            )
+        elif stress_strain_type.upper() == "CONSIDEROPENINGBEHAVIOUR":
+            return ConcreteTension(
+                self.f_cm,
+                self.E_cm,
+                self._f_ctm,
+                self.use_tension,
+                consider_opening_behaviour=True
+            )
         else:
             raise ValueError(
                 str(stress_strain_type)
@@ -611,7 +677,27 @@ class Concrete(Material):
 
 class Steel(Material):
 
-    """Steel material"""
+    """
+    Steel material
+
+    Provides a stress-strain material behaviour of structural steel material.
+    Three forms of the stress-strain relationship are possible
+       1. ``f_u = None`` and ``epsilon_u = None``:
+          Linear-elastic behaviour.
+
+       2. ``f_u = None``:
+          Bi-linear behaviour where ``f_u = f_y``
+       3. All values are not none:
+          Bi-linear behaviour with following stress-strain points
+          (:math:`f_\\mathrm{y}` | :math:`\\varepsilon_\\mathrm{y}`),
+          (:math:`f_\\mathrm{u}` | :math:`\\varepsilon_\\mathrm{u}`).
+          Where the strain at yield is computed like :math:`\\varepsilon_\\mathrm{y} = f_\\mathrm{y} / E_\\mathrm{a}`
+
+    .. note::
+
+       Assumes Newton (N) and Millimeter (mm) as basic units.
+       In case other units are used appropriate value for modulus of elasticity `E_a` must be provided.
+    """
 
     def __init__(
         self,
@@ -620,6 +706,18 @@ class Steel(Material):
         epsilon_u: float = None,
         E_a: float = 210000.0,
     ):
+        """
+        Parameters
+        ----------
+        f_y : float
+            yield strength :math:`f_\\mathrm{y}`
+        f_u : float
+            tensile strength :math:`f_\\mathrm{u}` (Default: None)
+        epsilon_u : float
+            tensile strain :math:`\\varepsilon_\\mathrm{u}` (Default: None)
+        E_a : float
+            modulus of elasticity :math:`E_\\mathrm{a}` (Default: 210000 N/mm²)
+        """
         super().__init__(section_type="girder")
         self._f_y = float(f_y)
         self._f_u = make_float(f_u)
@@ -771,8 +869,43 @@ class Steel(Material):
 
 class Reinforcement(Steel):
 
-    """Reinforcement material"""
+    """
+    Reinforcement material
+
+    Inherits from :py:class:`Steel`.
+    """
+
+    def __init__(self, f_s: float, f_su: float = None, epsilon_su: float = None, E_s: float = 200000.0):
+        """
+        Parameters
+        ----------
+        f_s : float
+            Yield strength of the reinforcement :math:`f_\\mathrm{s}`
+        f_su : float
+            Tensile strength of the reinforcement :math:`f_\\mathrm{su}` (Default: None)
+        epsilon_su : float
+            Tensile strain of the reinforcement :math:`\\varepsilon_\\mathrm{su}` (Default: None)
+        E_s  : float
+            Modulus of elasticity of the reinforcement :math:`E_\\mathrm{s}` (Default: 200000 N/mm²)
+        """
+        super().__init__(f_s, f_su, epsilon_su, E_s)
 
     @property
     def section_type(self):
         return "slab"
+
+    @property
+    def f_s(self) -> float:
+        return self.f_y
+
+    @property
+    def f_su(self) -> float:
+        return self.f_u
+
+    @property
+    def epsilon_su(self) -> float:
+        return self.epsilon_su
+
+    @property
+    def E_s(self) -> float:
+        return self.E_a

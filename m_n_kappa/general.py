@@ -140,26 +140,26 @@ class EffectiveWidths:
     membran : float
         value of the effective width under axial loading
     bending : float
-        value of the effective width under bending (Default: None).
+        value of the effective width under bending (Default: ``None``).
         If None, then membran value is applied.
-    for_section_type: str = 'slab'
-        section_type the effective widths are defined for (Default: 'slab')
+    for_section_type: str
+        section_type the effective widths are defined for (Default: ``slab``)
     reinforcement_under_tension_use_membran_width: bool
         width for reinforcement under tensile loading
-          - True: membran-width
-          - False: bending-width (Default)
+          - ``True``: membran-width
+          - ``False``: bending-width (Default)
     reinforcement_under_compression_use_membran_width: bool
         width for reinforcement under compressive loading
-          - True: membran-width (Default)
-          - False: bending-width
+          - ``True``: membran-width (Default)
+          - ``False``: bending-width
     concrete_under_tension_use_membran_width: bool
         width for concrete under tensile loading
-          - True: membran-width
-          - False: bending-width  (Default)
+          - ``True``: membran-width
+          - ``False``: bending-width  (Default)
     concrete_under_compression_use_membran_width: bool
         width for reinforcement under compressive loading
-          - True: membran-width (Default)
-          - False: bending-width
+          - ``True``: membran-width (Default)
+          - ``False``: bending-width
     """
 
     membran: float

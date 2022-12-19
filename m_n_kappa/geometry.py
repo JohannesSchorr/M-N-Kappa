@@ -261,6 +261,7 @@ class Rectangle(Geometry):
             widths under consideration of bending or membran loading
 
         Returns
+        -------
         list[Rectangle]
             rectangles assembling to the original rectangle
         """
@@ -382,6 +383,7 @@ class Circle(Geometry):
     def diameter(self):
         return self._diameter
 
+    @property
     def centroid(self):
         return self._centroid_y
 
@@ -420,7 +422,9 @@ class Circle(Geometry):
     def split(
         self, at_points: list[StrainPosition], max_widths: EffectiveWidths = None
     ) -> list:
-        if self._is_in_effective_width(at_points, max_widths):
+        if max_widths is None:
+            return [self]
+        elif self._is_in_effective_width(at_points, max_widths):
             return [self]  # [Circle(self.diameter, self.centroid)]
         else:
             return []
@@ -843,7 +847,7 @@ class IProfile(ComposedGeometry):
 class RebarLayer(ComposedGeometry):
 
     """
-    rebar-layer composed of several reinforcement-bars of class Circle
+    rebar-layer composed of several reinforcement-bars of :py:class:`Circle`
 
     Parameters
     ----------

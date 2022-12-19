@@ -24,6 +24,14 @@ class Node:
     node_number: int = 0
 
     def __init__(self, cross_section: Crosssection, position: float):
+        """
+        Parameters
+        ----------
+        cross_section : :py:class:`~m_n_kappa.crosssection.Crosssection`
+            Cross-section at this node
+        position : float
+            position of the node along the beam
+        """
         self._cross_section = cross_section
         self._position = position
         self._m_kappa_curve = MKappaCurve(

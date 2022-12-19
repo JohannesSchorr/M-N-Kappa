@@ -140,7 +140,7 @@ class SingleSpan(ABCSingleSpan):
         ----------
         length : float
             length of the beam
-        loads : list[SingleLoad]
+        loads : list[:py:class:`SingleLoad`]
             list of single-loads applied onto the beam
         uniform_load : float
             line load that is applied on the beam over the hole length
@@ -237,7 +237,7 @@ class SingleSpanSingleLoads(ABCSingleSpan):
         ----------
         length : float
             length of the beam-span
-        loads : list[SingleLoad]
+        loads : list[:py:class:`SingleLoad`]
             loads applied to the beam
         """
         self._length = length

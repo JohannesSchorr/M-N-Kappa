@@ -19,10 +19,12 @@ class Section:
         """
         Parameters
         ----------
-        geometry : Geometry
-            geometry of the section
-        material: Material
-            material of the section
+        geometry : :py:class:`~m_n_kappa.geometry.Geometry`
+            geometry of the section, e.g. :py:class:`~m_n_kappa.Rectangle`, :py:class:`~m_n_kappa.Circle`
+            or :py:class:`~m_n_kappa.Trapezoid`
+        material: :py:class:`~m_n_kappa.material.Material`
+            material of the section, e.g. :py:class:`~m_n_kappa.Steel`, :py:class:`~m_n_kappa.Reinforcement`
+            or :py:class:`~m_n_kappa.Concrete`
         """
         self._geometry = geometry
         self._material = material
