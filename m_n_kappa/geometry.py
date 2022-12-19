@@ -32,21 +32,77 @@ Currently available composed geometries
 """
 
 
+class ComposedGeometry:
+
+    """
+    Geometry consisting of several basic geometries
+
+    such as:
+    - RebarLayer: consists of several circular geometries
+    - profile: T-profile consists of two flanges and one web
+    """
+    def __init__(self):
+        self._geometries = []
+
+    def __add__(self, other):
+        return self._build(other)
+
+    def __radd__(self, other):
+        return self._build(other)
+
+    def __mul__(self, other):
+        return self._build(other)
+
+    def _build(self, other):
+        if isinstance(other, Material):
+            sections = [
+                Section(geometry=geometry, material=other)
+                for geometry in self.geometries
+            ]
+            return Crosssection(sections)
+        elif isinstance(other, Geometry):
+            new_geometry = ComposedGeometry()
+            new_geometry._geometries = self.geometries
+            new_geometry._geometries.append(other)
+            return new_geometry
+        elif isinstance(other, ComposedGeometry):
+            new_geometry = ComposedGeometry()
+            new_geometry._geometries = self.geometries + other.geometries
+            return new_geometry
+        else:
+            raise TypeError(
+                f'unsupported operand type(s) for +: "{type(self)}" and "{type(other)}"'
+            )
+
+    @property
+    def geometries(self) -> list:
+        return self._geometries
+
+
 class Geometry(ABC):
 
     """basic geometry class"""
 
-    def __add__(self, other: Material) -> Section:
-        return self._build_section(other)
+    def __add__(self, other):
+        return self._build(other)
 
-    def __radd__(self, other: Material) -> Section:
-        return self._build_section(other)
+    def __radd__(self, other):
+        return self._build(other)
 
-    def __mul__(self, other: Material) -> Section:
-        return self._build_section(other)
+    def __mul__(self, other):
+        return self._build(other)
 
-    def _build_section(self, other: Material) -> Section:
-        if isinstance(other, Material):
+    def _build(self, other):
+        """builds depending on the input-type a :py:class:`ComposedGeometry` or a :py:class:`Section`"""
+        if isinstance(other, Geometry):
+            new_geometry = ComposedGeometry()
+            new_geometry._geometries = [self, other]
+            return new_geometry
+        elif isinstance(other, ComposedGeometry):
+            new_geometry = other
+            new_geometry._geometries.append(self)
+            return new_geometry
+        elif isinstance(other, Material):
             return Section(geometry=self, material=other)
         else:
             raise TypeError(
@@ -105,9 +161,15 @@ def check_width(
         left_edge = right_edge - width
     elif width is not None and left_edge is not None and right_edge is None:
         right_edge = left_edge + width
+    elif width is not None and left_edge is not None and right_edge is not None:
+        if abs(left_edge - right_edge) != width:
+            raise ValueError(
+                f"abs(left_edge - right_edge) = abs({left_edge} - {right_edge}) != width = {width}. "
+                f"Please check/adapt input-values."
+            )
     else:
         raise ValueError(
-            "Neither two of arguments 'width', 'right_edge' and 'left_edge' must be given."
+            "At least two of arguments 'width', 'right_edge' and 'left_edge' must be given."
         )
     return width, left_edge, right_edge
 
@@ -345,14 +407,11 @@ class Circle(Geometry):
         self._centroid_z = centroid_z
 
     def __eq__(self, other) -> bool:
-        if isinstance(other, Circle):
-            return (
-                self.diameter == other.diameter
-                and self.centroid_y == other.centroid_y
-                and self.centroid_z == other.centroid_z
-            )
-        else:
-            return False
+        return (
+            self.diameter == other.diameter
+            and self.centroid_y == other.centroid_y
+            and self.centroid_z == other.centroid_z
+        )
 
     def __repr__(self) -> str:
         return (
@@ -710,43 +769,6 @@ class Trapezoid(Geometry):
     @property
     def width_interception(self) -> float:
         return self.top_width - self.top_edge * self.width_slope
-
-
-class ComposedGeometry(ABC):
-
-    """
-    Geometry consisting of several basic geometries
-
-    such as:
-    - RebarLayer: consists of several circular geometries
-    - profile: T-profile consists of two flanges and one web
-    """
-
-    def __add__(self, other: Material) -> Crosssection:
-        return self._build_section(other)
-
-    def __radd__(self, other: Material) -> Crosssection:
-        return self._build_section(other)
-
-    def __mul__(self, other) -> Crosssection:
-        return self._build_section(other)
-
-    def _build_section(self, other: Material) -> Crosssection:
-        if isinstance(other, Material):
-            sections = [
-                Section(geometry=geometry, material=other)
-                for geometry in self.geometries
-            ]
-            return Crosssection(sections)
-        else:
-            raise TypeError(
-                f'unsupported operand type(s) for +: "{type(self)}" and "{type(other)}"'
-            )
-
-    @property
-    @abstractmethod
-    def geometries(self) -> list[Geometry]:
-        ...
 
 
 @dataclass

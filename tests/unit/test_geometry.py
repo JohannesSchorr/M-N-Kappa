@@ -10,6 +10,7 @@ from m_n_kappa.geometry import (
     IProfile,
     UPEProfile,
     RebarLayer,
+    ComposedGeometry
 )
 
 
@@ -344,6 +345,27 @@ class TestRebarLayer(TestCase):
         for rebar_number in range(self.rebar_number):
             circles.append(Circle(self.rebar_diameter, self.centroid_y, -0.5*self.width + rebar_number * rebar_horizontal_distance))
         self.assertListEqual(self.layer.geometries, circles)
+
+
+class TestComposition(TestCase):
+    def setUp(self) -> None:
+        self.section_1 = Rectangle(0.0, 10.0, 10.0)
+        self.section_2 = Rectangle(10.0, 20.0, 10.0)
+        self.section_3 = Rectangle(20.0, 30.0, 10.0)
+
+    def test_composition(self):
+        new_geometry = self.section_1 + self.section_2
+        self.assertEqual(type(new_geometry), ComposedGeometry)
+
+    def test_add_geometry_1(self):
+        composed_geometry = self.section_1 + self.section_2
+        new_geometry = composed_geometry + self.section_3
+        self.assertEqual(type(new_geometry), ComposedGeometry)
+
+    def test_add_geometry_2(self):
+        composed_geometry = self.section_1 + self.section_2
+        new_geometry = self.section_3 + composed_geometry
+        self.assertEqual(type(new_geometry), ComposedGeometry)
 
 
 if __name__ == "__main__":
