@@ -1,10 +1,51 @@
 from dataclasses import dataclass
 from itertools import groupby
+from decimal import Decimal
 
 
 def curvature(
     neutral_axis_value: float, position_value: float, strain_at_position: float
-):
+) -> float:
+    """
+    curvature from strain at a position and neutral-axis
+
+    Parameters
+    ----------
+    neutral_axis_value : float
+        vertical position of the neutral axis :math:`z_\\mathrm{n}`
+    position_value : float
+        vertical position of the ``strain_at_position`` :math:`z`
+    strain_at_position : float
+        strain :math:`\\varepsilon` at the ``position_value``
+
+    Returns
+    -------
+    float
+        computed curvature :math:`\\kappa`
+
+    Notes
+    -----
+    In mathematical notation this method works as follows.
+
+    .. math::
+
+       \\kappa = \\frac{\\varepsilon}{z - z_\\mathrm{n}}
+
+    Where
+
+    - :math:`\\varepsilon` = ``strain_at_position``
+    - :math:`z` = ``position_value``
+    - :math:`z_\\mathrm{n}` = ``neutral_axis_value``
+
+    See Also
+    --------
+    curvature_by_points : method to compute curvature by two points
+
+    Raises
+    ------
+    ZeroDivisionError
+        In case ``neutral_axis_value == position_value``
+    """
     if neutral_axis_value == position_value:
         raise ZeroDivisionError(
             'Arguments "neutral_axis_value" and "position_value" must have different values'
@@ -15,17 +56,32 @@ def curvature(
 
 def curvature_by_points(
     top_edge: float, bottom_edge: float, top_strain: float, bottom_strain: float
-):
-    return (top_strain - bottom_strain) / (top_edge - bottom_edge)
+) -> float:
+    """
+    compute curvature by two given points
+
+    Point 1: (``top_edge``
+    Parameters
+    ----------
+    top_edge
+    bottom_edge
+    top_strain
+    bottom_strain
+
+    Returns
+    -------
+
+    """
+    return float((Decimal(top_strain) - Decimal(bottom_strain)) / (Decimal(top_edge) - Decimal(bottom_edge)))
 
 
-def strain(neutral_axis_value: float, curvature_value: float, position_value: float):
+def strain(neutral_axis_value: float, curvature_value: float, position_value: float) -> float:
     if neutral_axis_value == position:
         return 0.0
     elif curvature_value == 0.0:
         raise ValueError("Curvature must be unequal zero")
     else:
-        return curvature_value * (position_value - neutral_axis_value)
+        return float(Decimal(curvature_value) * (Decimal(position_value) - Decimal(neutral_axis_value)))
 
 
 def position(
@@ -115,7 +171,18 @@ def remove_zeros(values: list) -> list:
 @dataclass
 class StrainPosition:
 
-    """Container for strains at a position_value within a given material"""
+    """
+    Container for strains at a position_value within a given material
+
+    Parameters
+    ----------
+    strain: float
+        strain at the given ``position``
+    position: float
+        position of the given float
+    material: str
+        material the strain is obtained from
+    """
 
     strain: float
     position: float
