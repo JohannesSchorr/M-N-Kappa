@@ -8,12 +8,18 @@ Contents
    :caption: Contents:
    :titlesonly:
 
-   examples/intro
-   theory/intro
+   getting_started
+   examples/index
+   users_guide/index
+   theory/index
+   verification/index
 
    api/
 
+To Do's
+-------
 
+.. todolist::
 
 Indices and tables
 ==================
