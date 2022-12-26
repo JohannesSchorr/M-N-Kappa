@@ -1,5 +1,5 @@
-Slim-Floor Beam with :math:`M`-:math:`\kappa`-Curve
-***************************************************
+Single span slim-floor beam with :math:`M`-:math:`\kappa`-Curve
+***************************************************************
 
 Introduction
 ============
@@ -68,7 +68,7 @@ The ``top_edge`` must be computed accordingly:
    from m_n_kappa import UPEProfile
    upe200_geometry = UPEProfile(top_edge=144, t_f=5.2, b_f=76, t_w=9.0, h=200)
 
-:py:class:`~m_n_kappa.UPEProfile` is derived from the :py:class:`~m_n_kappa.ComposedGeometry`.
+:py:class:`~m_n_kappa.UPEProfile` is derived from the :py:class:`~m_n_kappa.geometry.ComposedGeometry`.
 Therefore, it consists of a set of basic geometry-instances (e.g. several :py:class:`~m_n_kappa.Rectangle`):
 
 > upe200_geometry.geometries
@@ -82,7 +82,7 @@ The material of the UPE-profile is also created using :py:class:`~m_n_kappa.Stee
    from m_n_kappa import Steel
    upe200_material = Steel(f_y=293, f_u=443, epsilon_u=0.15)
 
-Geometry and material are merged easily to a :py:class:`~m_n_kappa.Section` by adding one to the other:
+Geometry and material are merged easily to a :py:class:`~m_n_kappa.Crosssection` by addition:
 
 .. plot::
    :nofigs:
@@ -162,7 +162,7 @@ The material-behaviour of the reinforcement :py:class:`~m_n_kappa.Reinforcement`
    rebar12_material = Reinforcement(f_s=558, f_su=643, epsilon_su=0.25, E_s=200000)
 
 For combination of ``Geometry`` and ``Material`` both instance only need to be added to each other.
-By adding the resulting :py:class:`~m_n_kappa.Section`s to each other a rebar-:py:class:`~m_n_kappa.Crosssection` is created:
+By adding the resulting :py:class:`~m_n_kappa.Section` instance to each other a :py:class:`~m_n_kappa.Crosssection` of rebars is created:
 
 .. plot::
    :nofigs:
@@ -185,14 +185,14 @@ The overall :py:class:`~m_n_kappa.Crosssection` is created by adding all parts t
 
    cross_section = bottom_flange + upe200 + concrete_slab + rebar_layer
 
-.. _m_kappa_loading:
+.. _m_kappa_example_loading:
 
 Loading
 =======
 The loading of the beam is considered by :py:class:`~m_n_kappa.SingleSpan`-class.
 The :py:class:`~m_n_kappa.SingleSpan`-class accepts either a uniform load or a list of :py:class:`~m_n_kappa.SingleLoad`.
 The ``uniform_load``-argument accepts a float that describes a line-load that is applied uniformly over the length of the girder.
-``SingleLoad``-class represents a single load applied at a specific position along the beam:
+The :py:class:`~m_n_kappa.SingleLoad`-class represents a single load applied at a specific position along the beam:
 
 .. plot::
    :nofigs:
@@ -203,24 +203,15 @@ The ``uniform_load``-argument accepts a float that describes a line-load that is
    single_load_right = SingleLoad(position_in_beam=1375. + 1250., value=1.0)
    loading = SingleSpan(length=4000.0, uniform_load=None, loads=[single_load_left, single_load_right])
 
-.. _m_kappa_computation:
+.. _m_kappa_example_computation:
 
 Computation
 ===========
+
+Introduction
+------------
+
 For computation of its reaction behaviour in form of moment-curvature-curves (:math:`M`-:math:`\kappa`) along the beam the :py:class:`~m_n_kappa.Beam`-class is provided.
-
-.. plot::
-   :nofigs:
-   :context:
-
-   from m_n_kappa import Beam
-   beam = Beam(
-      cross_section=cross_section,
-      length=4000.,
-      element_number=20,
-      load=loading,
-      consider_widths=False
-   )
 
 At initialization the :py:class:`~m_n_kappa.Beam`-class does following things:
 
@@ -228,47 +219,111 @@ At initialization the :py:class:`~m_n_kappa.Beam`-class does following things:
 2. create a :py:class:`~m_n_kappa.deformation.Node` between these elements
 3. compute load-steps by determination of the decisive :py:class:`~m_n_kappa.deformation.Node` and its :math:`M`-:math:`\kappa`-curve
 
-.. _m_kappa_analysis:
+In :ref:`m_kappa_example_without_effective_widths` the :math:`M`-:math:`\kappa`-curves are computed neglecting the effective widths of the computation.
+Whereas in :ref:`m_kappa_example_with_effective_widths` effective widths are considered considering the bending and membran effective widths.
 
-Analysis
-========
-Introduction
-------------
-Using ``beam`` several analyses of the resistance behaviour of the composite beam are possible.
+.. _m_kappa_example_geometrical_widths:
 
-Load-deformation-curve at point of maximum deformation
-------------------------------------------------------
-The load-bearing behaviour of beams is often characterised by the load-deformation-curve at the point of maximum deformation under the given loading.
-``beam.deformations_at_maximum_deformation_position()`` returns the deformations for the decisive load-steps at this point:
+Considering geometrical widths
+------------------------------
+
+Considering geometrical widths and neglecting effective widths are accomplished by setting ``consider_widths=False``.
+Geometrical widths are in any case greater than the effective widths.
 
 .. plot::
    :nofigs:
    :context:
 
-   beam_deformations = beam.deformations_at_maximum_deformation_position()
+   from m_n_kappa import Beam
+   beam_geometrical_widths = Beam(
+      cross_section=cross_section,
+      length=4000.,
+      element_number=10,
+      load=loading,
+      consider_widths=False
+   )
+
+
+.. _m_kappa_example_effective_widths:
+
+Considering effective widths
+----------------------------
+
+The effective widths of the concrete slab are taken into account during computation by passing ``consider_widths=True``.
+
+.. plot::
+   :nofigs:
+   :context:
+
+   beam_effective_widths = Beam(
+      cross_section=cross_section,
+      length=4000.,
+      element_number=10,
+      load=loading,
+      consider_widths=True
+   )
+
+The following graph shows how the effective widths are considered.
+
+.. plot::
+   :context:
+
+   import matplotlib.pyplot as plt
+
+   fig,ax = plt.subplots(figsize=(8., 3.))
+   ax.plot(
+      beam_effective_widths.positions,
+      beam_effective_widths.bending_widths(),
+      marker='.', label="Bending")
+   ax.plot(
+      beam_effective_widths.positions,
+      beam_effective_widths.membran_widths(),
+      marker='.', label="Membran")
+   ax.set_ticks(position)
+   ax.set_xlabel("Position along the beam")
+   ax.set_ylabel("Effective width")
+   ax.set_ylim(0., 0.5*concrete_slab_width)
+   ax.set_xlim(0., beam_effective_widths.length)
+
+
+.. _m_kappa_example_analysis:
+
+Analysis
+========
+Introduction
+------------
+An instance of the :py:class:`~m_n_kappa.Beam`-class allows several analyses of the resistance behaviour of the computed composite beam.
+
+.. _m_kappa_example_analysis_load_deformation:
+
+Load-deformation-curve at point of maximum deformation
+------------------------------------------------------
+The load-bearing behaviour of beams is often characterised by the load-deformation-curve at the point of maximum deformation under the given loading.
+:py:method:`m_n_kappa.Beam.deformations_at_maximum_deformation_position` returns the deformations for the decisive load-steps at this point:
+
+.. plot::
+   :nofigs:
+   :context:
+
+   beam_deformations_geometrical_widths = beam_geometrical_widths.deformations_at_maximum_deformation_position()
+   beam_deformations_effective_widths = beam_effective_widths.deformations_at_maximum_deformation_position()
 
 The resulting deformations may be visualized by choosing an appropriate visualization-library, e.g. `Matplotlib <https://matplotlib.org/>`_, `Altair <https://altair-viz.github.io/>`_ or other.
 The following example uses Matplotlib:
 
 .. plot::
    :context:
-
-   import matplotlib.pyplot as plt
-   deformations = [deformation.deformation for deformation in beam_deformations]
-   loads = [deformation.load*0.001 for deformation in beam_deformations]
+   :caption: Load-deformation-curves considering geometrical and effective widths
 
    fig,ax = plt.subplots()
-   ax.plot(deformations, loads, marker='.')
-   for deformation in beam_deformations:
-       if deformation.m_kappa_point.strain_position is not None:
-           plt.text(
-               deformation.deformation,
-               10.,
-               f'{deformation.m_kappa_point.strain_position.material}'
-               f'(pos.={deformation.m_kappa_point.strain_position.position})',
-               va='bottom',
-               rotation=90
-           )
+   ax.plot(
+      beam_geometrical_widths.values(),
+      beam_geometrical_widths.loadings(),
+      marker='.', label='geometrical widths')
+   ax.plot(
+      beam_effective_widths.values(),
+      beam_effective_widths.loadings(),
+      marker='.', label='effective widths')
    ax.set_xlim(0,)
    ax.set_ylim(0, )
    ax.set_xlabel('Deformation')
