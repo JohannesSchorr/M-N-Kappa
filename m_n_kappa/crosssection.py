@@ -49,9 +49,9 @@ class Crosssection:
         """
         Parameters
         ----------
-        sections : list[Section]
+        sections : list[:py:class:`~m_n_kappa.section.Section`]
             sections the cross-section consists of
-        slab_effective_widths : EffectiveWidths
+        slab_effective_widths : :py:class:`~m_n_kappa.crosssection.EffectiveWidths`
             effective widths' for the slab (concrete and reinforcement)
         """
         self._sections = sections
@@ -62,7 +62,8 @@ class Crosssection:
     # TODO: check if rebars are within the concrete slab
 
     @property
-    def slab_effective_width(self):
+    def slab_effective_width(self) -> EffectiveWidths:
+        """effective widths of the (concrete) slab"""
         return self._slab_effective_widths
 
     def __repr__(self) -> str:
@@ -134,30 +135,40 @@ class Crosssection:
 
     @property
     def bottom_edge(self) -> float:
+        """overall vertical position of the bottom edge of the cross-section :math:`z_\\mathrm{bottom}`"""
         return self._bottom_edge
 
     @property
     def girder_sections(self) -> list:
+        """:py:class:`~m_n_kappa.section.Section belonging to te girder"""
         return self.sections_of_type(section_type="girder")
 
     @property
     def height(self) -> float:
+        """height of the cross-section"""
         return self.bottom_edge - self.top_edge
 
     @property
     def half_point(self) -> float:
+        """vertical middle between and bottom"""
         return 0.5 * (self.bottom_edge + self.top_edge)
 
     @property
     def sections(self) -> list[Section]:
+        """all sections associated with this cross-section"""
         return self._sections
 
     @property
     def slab_sections(self) -> list[Section]:
+        """all slab-sections of this cross-section"""
         return self.sections_of_type(section_type="slab")
 
     @property
     def section_type(self) -> str:
+        """
+        section-type this cross-section is associated with,
+        if it is only one
+        """
         if len(self.girder_sections) > 0 and len(self.slab_sections) == 0:
             return "girder"
         elif len(self.girder_sections) == 0 and len(self.slab_sections) > 0:
@@ -165,9 +176,30 @@ class Crosssection:
 
     @property
     def top_edge(self) -> float:
+        """top-edge of the cross-section :math:`z_\\mathrm{top}`"""
         return self._top_edge
 
-    def add_section(self, section: Section):
+    def add_section(self, section: Section) -> None:
+        """
+        add a :py:class:`~m_n_kappa.sections.Section` to this cross-section
+
+        Parameters
+        ----------
+        section : :py:class:`~m_n_kappa.sections.Section`
+            section to add to this cross-section
+
+        Returns
+        -------
+        None
+
+        Raises
+        ------
+        ValueError
+            if ``section`` is not of type :py:class:`~m_n_kappa.section.Section`
+        """
+        if not isinstance(section, Section):
+            raise ValueError(f"section is type '{type(Section)}', "
+                             f"must be of type 'Section'")
         if self.sections is None:
             self._sections = [section]
         else:
@@ -175,11 +207,23 @@ class Crosssection:
 
     def sections_of_type(self, section_type: str) -> list[Section]:
         """
-        get a list of sections that are of the specified typ
+        get a list of sections that are of the specified type associated with this cross-section
 
-        Possible section-types are:
-          - 'slab'   -> concrete slab + reinforcement
-          - 'girder' -> Steel girder
+        Associated sections are listed in property `sections`.
+        Therefore, these sections must have been added before to this cross-section.
+
+        Parameters
+        ----------
+        section_type : str
+            type of section to search for.
+            Possible section-types are:
+              - 'slab'   -> concrete slab + reinforcement
+              - 'girder' -> Steel girder
+
+        Returns
+        -------
+        list[Section]
+            sections of the specified type associated with this cross-section
         """
         return [
             section for section in self.sections if section.section_type == section_type
@@ -201,20 +245,28 @@ class Crosssection:
         """
         curvature boundary values under positive and negative curvature
 
-        see :meth:`CrossSectionBoundaries.get_boundaries`
+        see :py:meth:`~m_n_kappa.crosssection.CrossSectionBoundaries.get_boundaries`
 
         Returns
         -------
-        Boundaries
+        :py:class:`~m_n_kappa.curvature_boundaries.Boundaries`
             curvature boundary values under positive and negative curvature
         """
         cross_section_boundaries = CrossSectionBoundaries(self.sections)
         return cross_section_boundaries.get_boundaries()
 
     def maximum_positive_strain(self) -> float:
+        """
+        determine maximum positive strain of all sections
+        associated with this cross-section
+        """
         return max([section.maximum_positive_strain() for section in self.sections])
 
     def maximum_negative_strain(self) -> float:
+        """
+        determine maximum positive strain of all sections
+        associated with this cross-section
+        """
         return min([section.maximum_negative_strain() for section in self.sections])
 
     def __compute_top_edge(self) -> float:
@@ -232,6 +284,7 @@ class Crosssection:
         return max(bottom_edges)
 
     def _concrete_sections(self) -> list[Section]:
+        """get all sections with material :py:class:~m_n_kappa.material.Concrete`"""
         return [
             section
             for section in self.sections
@@ -242,7 +295,9 @@ class Crosssection:
         """
         outer left-edge of the concrete-slab
 
-        CAUTION: will fail in case concrete is a trapezoid or a circle
+        .. warning::
+
+            will fail in case concrete is a trapezoid or a circle
         """
         concrete_sections = self._concrete_sections()
         return min(concrete_sections, key=lambda x: x.geometry.left_edge).geometry.left_edge
@@ -251,7 +306,9 @@ class Crosssection:
         """
         outer right-edge of the concrete-slab
 
-        CAUTION: will fail in case concrete is a trapezoid or a circle
+        .. warning::
+
+            will fail in case concrete is a trapezoid or a circle
         """
         concrete_sections = self._concrete_sections()
         return max(concrete_sections, key=lambda x: x.geometry.right_edge).geometry.right_edge
@@ -265,8 +322,8 @@ class ComputationCrosssection(Crosssection):
 
     """
     Base for computed cross-sections:
-      - :class:`ComputationCrosssectionStrain` cross-section that is loaded only by axial-forces
-      - :class:`ComputationCrosssectionCurvature` cross-section computing curvatures
+      - :py:class:`ComputationCrosssectionStrain` cross-section that is loaded only by axial-forces
+      - :py:class:`ComputationCrosssectionCurvature` cross-section computing curvatures
 
     Both classes share the functions defined within this class.
 
@@ -286,15 +343,18 @@ class ComputationCrosssection(Crosssection):
         return print_chapter(text)
 
     @property
-    def compute_sections(self):
+    def compute_sections(self) -> list[ComputationSection]:
+        """:py:class:`~m_n_kappa.sections.Section` in ``sections``
+        transformed into :py:class:`~m_n_kappa.section.ComputationSection`"""
         return self._compute_sections
 
     @compute_sections.setter
-    def compute_sections(self, compute_sections):
+    def compute_sections(self, compute_sections: list[ComputationSection]):
         self._compute_sections = compute_sections
 
     @property
     def compute_split_sections(self):
+
         return self.compute_sections
 
     @property
@@ -422,9 +482,13 @@ class ComputationCrosssectionStrain(ComputationCrosssection):
         return self.compute_sections
 
     def _create_computation_sections(self) -> list[ComputationSectionStrain]:
+        """transforms each :py:class:`~m_n_kappa.section.Section`
+        into :py:class:`~m_n_kappa.section.ComputationSectionStrain`"""
         return [self._create_section(section) for section in self.sections]
 
-    def _create_section(self, basic_section) -> ComputationSectionStrain:
+    def _create_section(self, basic_section: Section) -> ComputationSectionStrain:
+        """transform :py:class:`~m_n_kappa.section.Section` into
+        :py:class:`~m_n_kappa.section.ComputationSection` under given ``strain``"""
         return ComputationSectionStrain(basic_section, self.strain)
 
     def _print_results(self) -> str:
@@ -444,6 +508,7 @@ class ComputationCrosssectionStrain(ComputationCrosssection):
 
 
 class ComputationCrossSectionStrainAdd(ComputationCrosssectionStrain):
+
     def __init__(self, computed_cross_section_1, computed_cross_section_2):
         self._computed_cross_section_1 = computed_cross_section_1
         self._computed_cross_section_2 = computed_cross_section_2
@@ -511,7 +576,7 @@ class ComputationCrossSectionStrainAdd(ComputationCrosssectionStrain):
 
 class ComputationCrosssectionCurvature(ComputationCrosssection):
 
-    """computes a cross_section under a curvature and a neutral axis"""
+    """computes a cross-section given a curvature and a neutral axis"""
 
     __slots__ = (
         "_sections",
@@ -626,7 +691,13 @@ class EdgeStrains:
 
     @property
     def curvature(self) -> float:
-        """curvature by comparison of the strains at the edges"""
+        """
+        curvature by comparison of the strains at the edges
+
+        See Also
+        --------
+        curvature_by_points : method to compute curvature from two stress-position points
+        """
         return curvature_by_points(
             top_edge=self.top_edge_strain.position,
             bottom_edge=self.bottom_edge_strain.position,
@@ -643,7 +714,7 @@ def determine_curvatures(
     determine curvatures by combining the bottom- and
     top-edge-strains
 
-    EdgeStrains allow to compute the corresponding curvature
+    :py:class:`~m_n_kappa.crosssection.EdgeStrains` allow to compute the corresponding curvature
 
     Parameters
     ----------
@@ -704,7 +775,7 @@ class CrossSectionBoundaries(Crosssection):
     """
     Compute the Boundary-Values for the cross_section
 
-    :meth:`CrossSectionBoundaries:get_boundaries` gives the curvature boundary values
+    :py:meth:`CrossSectionBoundaries:get_boundaries` gives the curvature boundary values
     under positive and negative curvature
     """
 
@@ -722,7 +793,7 @@ class CrossSectionBoundaries(Crosssection):
         Parameters
         ----------
         sections : list[Section]
-                sections of the given cross_section
+            sections of the given cross_section
         """
         super().__init__(sections)
         self._sections_maximum_strains = self._get_sections_maximum_strain()
@@ -799,10 +870,18 @@ class CrossSectionBoundaries(Crosssection):
 
     @property
     def maximum_positive_curvature(self) -> EdgeStrains:
+        """
+        :py:class:`~m_n_kappa.crosssection.EdgeStrains` reaching the maximum possible
+        positive curvature
+        """
         return self._maximum_positive_curvature
 
     @property
     def maximum_negative_curvature(self) -> EdgeStrains:
+        """
+        :py:class:`~m_n_kappa.crosssection.EdgeStrains` reaching the maximum
+        possible negative curvature
+        """
         return self._maximum_negative_curvature
 
     def get_boundaries(self) -> Boundaries:
@@ -815,7 +894,7 @@ class CrossSectionBoundaries(Crosssection):
 
         Returns
         -------
-        Boundaries
+        :py:class:`~m_n_kappa.curvature_boundaries.Boundaries`
             curvature boundary values under positive and negative curvature
             derived from the given material curves
         """
@@ -825,6 +904,12 @@ class CrossSectionBoundaries(Crosssection):
         )
 
     def _get_maximum_positive_curvature(self) -> EdgeStrains:
+        """
+        Returns
+        -------
+        :py:class:`~m_n_kappa.crosssection.EdgeStrains`
+           maximum possible positive curvature for the given cross-section
+        """
         curvatures = determine_curvatures(
             self._sections_maximum_strains, self._sections_minimum_strains
         )
@@ -832,6 +917,12 @@ class CrossSectionBoundaries(Crosssection):
         return edge_strain
 
     def _get_maximum_negative_curvature(self) -> EdgeStrains:
+        """
+        Returns
+        -------
+        :py:class:`~m_n_kappa.crosssection.EdgeStrains`
+           maximum possible negative curvature for the given cross-section
+        """
         curvatures = determine_curvatures(
             self._sections_minimum_strains, self._sections_maximum_strains
         )
@@ -839,6 +930,13 @@ class CrossSectionBoundaries(Crosssection):
         return edge_strains
 
     def _get_sections_maximum_strain(self) -> list[StrainPosition]:
+        """
+        Returns
+        -------
+        list[:py:class:`~m_n_kappa.general.StrainPosition`]
+            maximum strains and their position from each section of the
+            given cross-section
+        """
         position_strain = []
         for section in self.sections:
             position_strain.append(section.top_edge_maximum_strain)
@@ -847,6 +945,13 @@ class CrossSectionBoundaries(Crosssection):
         return position_strain
 
     def _get_sections_minimum_strain(self) -> list[StrainPosition]:
+        """
+        Returns
+        -------
+        list[:py:class:`~m_n_kappa.general.StrainPosition`]
+            minium strains (or maximum negative strains) and their position from each section of the
+            given cross-section
+        """
         position_strain = []
         for section in self.sections:
             position_strain.append(section.top_edge_minimum_strain)
