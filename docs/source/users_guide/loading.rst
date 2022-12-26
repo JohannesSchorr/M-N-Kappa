@@ -1,6 +1,10 @@
 Loading
 *******
 
+.. todo::
+
+   Users' guide - loading: Draw figure(s)
+
 Introduction
 ============
 
