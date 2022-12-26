@@ -22,16 +22,40 @@ sys.path.insert(0, pathlib.Path(__file__).parents[2].resolve().as_posix())
 extensions = [
     'sphinx.ext.duration',
     'sphinx.ext.doctest',
-    'sphinx.ext.autodoc',
-    'sphinx.ext.autosummary',
+    'sphinx.ext.napoleon',
     'nbsphinx',
-    'matplotlib.sphinxext.plot_directive'
 ]
 
-autoclass_content = 'both'
+
 templates_path = ['_templates']
-exclude_patterns = []
+exclude_patterns = ['**.ipynb_checkpoints']
+
+# autodoc
+extensions.append('sphinx.ext.autodoc')
+autoclass_content = 'both'
+autodoc_typehints = 'description'
+autodoc_default_options = {
+    'members': True,
+    'member-order': 'groupwise'
+}
+
+# autosummary - sphinx.ext.autosummary
+extensions.append('sphinx.ext.autosummary')
+autosummary_generate = True
+
+# Matplotlib - matplotlib.sphinxext.plot_directive
+extensions.append('matplotlib.sphinxext.plot_directive')
+plot_html_show_source_link = False
 plot_include_source = True
+
+# sphinx.ext.todo
+extensions.append('sphinx.ext.todo')
+todo_include_todos = True
+
+# Bibliography
+extensions.append('sphinxcontrib.bibtex')
+bibtex_bibfiles = ['literature.bib']
+bibtex_default_style = 'plain'
 
 
 # -- Options for HTML output -------------------------------------------------
