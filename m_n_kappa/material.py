@@ -24,12 +24,24 @@ def make_float(value):
 @dataclass
 class StressStrain:
 
-    """container for a stress-strain-point"""
+    """
+    container for a stress-strain-point
 
+    Parameters
+    ----------
+    stress : float
+        stress of the point
+    strain : float
+        strain of the point
+    """
+
+    # stress at the given strain
     stress: float
+    # strain at the given stress
     strain: float
 
     def pair(self) -> list[float]:
+        """stress-strain-point as list"""
         return [self.stress, self.strain]
 
 
@@ -38,20 +50,20 @@ class Material:
     """
     Provides basic functionality for materials
 
-    In case custom-type materials are created these must inherit from :py:class:`Material`.
+    In case custom-type materials are created these must inherit from this class.
     """
 
     def __init__(self, section_type: str, stress_strain: list[StressStrain] = None):
         """
         Parameters
         ----------
-        stress_strain : list
+        stress_strain : list[:py:class:`~m_n_kappa.material.StressStrain´]
             list with stress-strain_value-relationship
         section_type : str
             section_type of section this material is ordered to.
             Possible values are:
-             - slab
-             - girder
+            - slab
+            - girder
         """
         self._stress_strain = stress_strain
         self._section_type = section_type
@@ -155,14 +167,24 @@ class Material:
         Parameters
         ----------
         strain : float
-                strain_value a corresponding stress value should be given
+            strain_value a corresponding stress value should be given
 
         Returns
         -------
         float
-                stress corresponding to the given strain_value
+            stress corresponding to the given strain_value
+
+        Raises
+        ------
+        ValueError
+            when strain is outside the boundary values of the material-model
         """
         material_index = self._get_material_index(strain)
+        if material_index is None:
+            raise ValueError(
+                f"{strain=} -> None,\n"
+                f"{self.__str__()}"
+            )
         return self._interpolate_stress(strain, material_index)
 
     def sort_strains(self, reverse: bool = False) -> None:
@@ -171,8 +193,8 @@ class Material:
         Parameters
         ----------
         reverse : bool
-                True: sorts strains descending
-                False: sorts strains ascending (Default)
+            - ``True``: sorts strains descending
+            - ``False``: sorts strains ascending (Default)
         """
         self._stress_strain.sort(key=lambda x: x.strain, reverse=reverse)
 
@@ -229,6 +251,9 @@ class Material:
         return round(strain_value, 7)
 
     def _interpolate_stress(self, strain: float, material_index: int) -> float:
+        if material_index is None:
+            raise TypeError(f"List indices must be integers or slices, not NoneType.\n"
+                            f"Material: {self.__str__()}")
         return interpolation(
             position_value=strain,
             first_pair=self.stress_strain[material_index].pair(),
@@ -505,14 +530,17 @@ class Concrete(Material):
         compression_stress_strain_type : str
             sets section_type of stress-strain_value curve under compression.
             Possible values are:
-               - ``'Nonlinear'`` (Default)
-               - ``'Parabola'``
-               - ``'Bilinear'``
+
+            - ``'Nonlinear'`` (Default)
+            - ``'Parabola'``
+            - ``'Bilinear'``
+
         tension_stress_strain_type : str
             sets section_type of strain_value-stain curve under tension
             Possible values are:
-               - ``'Default'``
-               - ``'consider opening behaviour'``
+
+            - ``'Default'``
+            - ``'consider opening behaviour'``
         """
         super().__init__(section_type="slab")
         self._f_cm = float(f_cm)
@@ -681,7 +709,8 @@ class Steel(Material):
     Steel material
 
     Provides a stress-strain material behaviour of structural steel material.
-    Three forms of the stress-strain relationship are possible
+    Three forms of the stress-strain relationship are possible:
+
        1. ``f_u = None`` and ``epsilon_u = None``:
           Linear-elastic behaviour.
 
@@ -778,10 +807,6 @@ class Steel(Material):
     @property
     def section_type(self) -> str:
         return "girder"
-
-    @property
-    def stress_strain(self) -> list:
-        return self._stress_strain
 
     @property
     def __is_elastic(self):
