@@ -35,11 +35,55 @@ Currently available composed geometries
 class ComposedGeometry:
 
     """
-    Geometry consisting of several basic geometries
+    Geometry consisting of basic geometries
 
-    such as:
-    - RebarLayer: consists of several circular geometries
-    - profile: T-profile consists of two flanges and one web
+    Supported basic geometries must inherit :py:class:`Geometry`:
+
+    - :py:class:`~m_n_kappa.Rectangle`
+    - :py:class:`~m_n_kappa.Circle`
+    - :py:class:`~m_n_kappa.Trapezoid`
+
+    See Also
+    --------
+    IProfile : composed geometry consisting of several :py:class:`Rectangle` forming an ``I``
+
+    UPEProfile : composed geometry consisting of several :py:class:`Rectangle` forming an ``U``
+
+    RebarLayer : composed geometry consisting of several :py:class:`Circle`
+
+    Examples
+    --------
+    Building a :py:class:`~m_n_kappa.geometry.ComposedGeometry` is as easy as adding two basic geometries together:
+
+    >>> from m_n_kappa import Rectangle
+    >>> rectangle_1 = Rectangle(top_edge=0.0, bottom_edge = 10.0, width=10.0)
+    >>> rectangle_2 = Rectangle(top_edge=10.0, bottom_edge = 20.0, width=10.0)
+    >>> composed_geometry = rectangle_1 + rectangle_2
+    >>> composed_geometry
+    ComposedGeometry(geometries=[Rectangle(top_edge=0.00, bottom_edge=10.00, width=10.00, left_edge=-5.00, right_edge=5.00), Rectangle(top_edge=10.00, bottom_edge=20.00, width=10.00, left_edge=-5.00, right_edge=5.00)])
+
+
+    Adding another basic geometry is also easily done.
+    This applies also for adding one composed geometry to another.
+
+
+    >>> rectangle_3 = Rectangle(top_edge=20.0, bottom_edge = 30.0, width=10.0)
+    >>> composed_geometry += rectangle_3
+    >>> composed_geometry
+    ComposedGeometry(geometries=[Rectangle(top_edge=0.00, bottom_edge=10.00, width=10.00, left_edge=-5.00, right_edge=5.00), Rectangle(top_edge=10.00, bottom_edge=20.00, width=10.00, left_edge=-5.00, right_edge=5.00), Rectangle(top_edge=20.00, bottom_edge=30.00, width=10.00, left_edge=-5.00, right_edge=5.00)])
+
+
+    The composed geometry is also easily combined by adding a :py:class:`~m_n_kappa.Material`
+    like :py:class:`~m_n_kappa.Steel` merging to a :py:class:`~m_n_kappa.Crosssection`
+
+
+    >>> from m_n_kappa import Steel
+    >>> steel = Steel(f_y = 300.0, f_u = 350.0, epsilon_u=0.25)
+    >>> cross_section = composed_geometry + steel
+    >>> cross_section
+    Crosssection(sections=sections)
+
+
     """
     def __init__(self):
         self._geometries = []
@@ -52,6 +96,9 @@ class ComposedGeometry:
 
     def __mul__(self, other):
         return self._build(other)
+
+    def __repr__(self):
+        return f"ComposedGeometry(geometries={self.geometries})"
 
     def _build(self, other):
         if isinstance(other, Material):
@@ -76,12 +123,17 @@ class ComposedGeometry:
 
     @property
     def geometries(self) -> list:
+        """number of :py:class:`Geometry` instances"""
         return self._geometries
 
 
 class Geometry(ABC):
 
-    """basic geometry class"""
+    """
+    basic geometry class
+
+    the basic geometries must inherit from this class
+    """
 
     def __add__(self, other):
         return self._build(other)
@@ -144,10 +196,40 @@ def check_width(
     width: float = None, left_edge: float = None, right_edge: float = None
 ) -> tuple:
     """
-    make sure all properties corresponding with the width are filled:
-      - width
-      - left_edge
-      - right_edge
+    make sure all properties corresponding with the width of a :py:class:`~m_n_kappa.Rectangle` or
+    :py:class:`~m_n_kappa.Trapezoid` are fulfilled.
+
+    The corresponding properties are: width, left_edge, right_edge
+
+    Parameters
+    ----------
+    width: float
+        width of the :py:class:`~m_n_kappa.Rectangle` or  :py:class:`~m_n_kappa.Trapezoid` (Default: None)
+    left_edge: float
+        horizontal position (Y-Axis) of left edge of the :py:class:`~m_n_kappa.Rectangle` or
+        :py:class:`~m_n_kappa.Trapezoid` (Default: None)
+    right_edge: float = None
+        horizontal position (Y-Axis) of the right edge of the :py:class:`~m_n_kappa.Rectangle` or
+        :py:class:`~m_n_kappa.Trapezoid` (Default: None)
+
+    Returns
+    -------
+    width : float
+       width of  the :py:class:`~m_n_kappa.Rectangle` or  :py:class:`~m_n_kappa.Trapezoid` obtained from the given
+       information
+    left_edge : float
+        horizontal position (Y-Axis) of left edge of the :py:class:`~m_n_kappa.Rectangle` or
+        :py:class:`~m_n_kappa.Trapezoid` obtained from the given information
+    right_edge : float
+        horizontal position (Y-Axis) of right edge of the :py:class:`~m_n_kappa.Rectangle` or
+        :py:class:`~m_n_kappa.Trapezoid` obtained from the given information
+
+    Raises
+    ------
+    ValueError
+        if all input-values are ``None``
+    ValueError
+        if all input-values are given, but do not meet each other: ``right_edge - left_edge != width``
     """
     if left_edge is not None and right_edge is not None:
         if left_edge > right_edge:
@@ -188,21 +270,25 @@ class Rectangle(Geometry):
         right_edge: float = None,
     ):
         """
-        Neither two of the following arguments 'width', 'right_edge' and 'left_edge' must be given.
-        But if only argument 'width' is given left and right edge apply to 0.5*width
+        Neither two of the following arguments ``width``, ``right_edge`` and ``left_edge`` must be given.
+        If only argument ``width`` is given ``left_edge = 0.5*width``  and ``right_edge = 0.5*width``
+
+        .. figure:: ../images/rectangle.png
+
+           Rectangle - dimensions
 
         Parameters
         ----------
         top_edge : float
-            top-edge of the rectangle
+            vertical position of top-edge of the rectangle :math:`z_\\mathrm{top}`
         bottom_edge : float
-            bottom-edge of the rectangle
+            vertical position of bottom-edge of the rectangle :math:`z_\\mathrm{bottom}`
         width : float
-            width of the rectangle (Default: None).
+            width of the rectangle :math:`b` (Default: None)
         left_edge : float
-            left-edge of the rectangle (Default: None).
+            horizontal position of left-edge of the rectangle :math:`y_\\mathrm{left}` (Default: None).
         right_edge : float
-            right-edge of the rectangle (Default: None)
+            horizontal position of right-edge of the rectangle :math:`y_\\mathrm{right}` (Default: None)
         """
         self._top_edge = top_edge
         self._bottom_edge = bottom_edge
@@ -263,50 +349,62 @@ class Rectangle(Geometry):
 
     @property
     def top_edge(self):
+        """vertical position (Z-Axis) of the top-edge of the rectangle :math:`z_\\mathrm{top}`"""
         return self._top_edge
 
     @property
     def bottom_edge(self):
+        """vertical position (Z-Axis) of the bottom-edge of the rectangle :math:`z_\\mathrm{bottom}`"""
         return self._bottom_edge
 
     @property
     def right_edge(self) -> float:
+        """horizontal position (Y-Axis) of the right-edge of the rectangle :math:`y_\\mathrm{right}`"""
         return self._right_edge
 
     @property
     def left_edge(self) -> float:
+        """horizontal position (Y-Axis) of the left-edge of the rectangle :math:`y_\\mathrm{left}`"""
         return self._left_edge
 
     @property
-    def edges(self):
+    def edges(self) -> list[float]:
+        """vertical positions (Z-Axis) top- and bottom-edge"""
         return [self.top_edge, self.bottom_edge]
 
     @property
     def sides(self) -> list[float]:
+        """horizontal positions (Y-Axis) of left- and right-edge"""
         return [self.left_edge, self.right_edge]
 
     @property
-    def height(self):
+    def height(self) -> float:
+        """height of the rectangle"""
         return abs(self.top_edge - self.bottom_edge)
 
     @property
-    def width(self):
+    def width(self) -> float:
+        """width of the rectangle"""
         return self._width
 
     @property
-    def area(self):
+    def area(self) -> float:
+        """cross-sectional area of rectangle"""
         return self.width * self.height
 
     @property
-    def centroid(self):
+    def centroid(self) -> float:
+        """centroid of the rectangle in vertical direction (Z-Axis)"""
         return self.top_edge + 0.5 * self.height
 
     @property
     def width_slope(self) -> float:
+        """slope of the width depending of vertical position :math:`z`"""
         return 0.0
 
     @property
     def width_interception(self) -> float:
+        """interception of the width"""
         return self.width
 
     def split(
@@ -388,20 +486,26 @@ class Rectangle(Geometry):
 
 
 class Circle(Geometry):
-    """
-    Circle
-
-    Parameters
-    ----------
-    diameter: float
-        diameter of the circle
-    centroid_y: float
-        position of centroid of the circle in vertical direction
-    centroid_z: float
-        position of centroid of the circle in horizontal direction
-    """
 
     def __init__(self, diameter: float, centroid_y: float, centroid_z: float):
+        """
+        Circle
+
+        applies only for circles that are small compared to the other dimensions of the cross-section
+
+        .. figure:: ../images/circle.png
+
+           Circle - dimensions
+
+        Parameters
+        ----------
+        diameter: float
+            diameter of the circle :math:`d`
+        centroid_y: float
+            position of centroid of the circle in horizontal direction :math:`y_\\mathrm{centroid}`
+        centroid_z: float
+            position of centroid of the circle in vertical direction :math:`z_\\mathrm{centroid}`
+        """
         self._diameter = diameter
         self._centroid_y = centroid_y
         self._centroid_z = centroid_z
@@ -439,39 +543,45 @@ class Circle(Geometry):
         return "\n".join(text)
 
     @property
-    def diameter(self):
+    def diameter(self) -> float:
+        """diameter of the circle :math:`d`"""
         return self._diameter
 
     @property
-    def centroid(self):
-        return self._centroid_y
+    def centroid(self) -> float:
+        return self._centroid_z
 
     @property
     def centroid_y(self):
+        """position of centroid of the circle in horizontal direction :math:`y_\\mathrm{centroid}`"""
         return self._centroid_y
 
     @property
     def centroid_z(self):
+        """position of centroid of the circle in vertical direction :math:`z_\\mathrm{centroid}`"""
         return self._centroid_z
 
     @property
     def area(self):
+        """area of the circle"""
         return 3.145 * (0.5 * self.diameter) ** 2.0
 
     @property
     def edges(self) -> list[float]:
-        return [self.centroid_y]
-
-    @property
-    def sides(self) -> list[float]:
         return [self.centroid_z]
 
     @property
+    def sides(self) -> list[float]:
+        return [self.centroid_y]
+
+    @property
     def top_edge(self):
+        """vertical position (Z-Axis) of the top-edge of the circle"""
         return self.centroid_y - 0.5 * self.diameter
 
     @property
     def bottom_edge(self):
+        """vertical position (Z-Axis) of the bottom-edge of the circle"""
         return self.centroid_y + 0.5 * self.diameter
 
     @property
@@ -481,6 +591,31 @@ class Circle(Geometry):
     def split(
         self, at_points: list[StrainPosition], max_widths: EffectiveWidths = None
     ) -> list:
+        """check if circle is within effective width
+
+        In case ``max_widths=None`` this circle is returned.
+        Otherwise, this circle is only returned if position of the circle is smaller ``max_widths``
+
+        See Also
+        --------
+        Rectangle.split : method that splits :py:class:`Rectangle` considering strain-points and effective widths in
+           a number of smaller rectangle
+
+        Trapezoid.split : method that splits :py:class:`Trapezoid` considering strain-points and effective widths in
+           a number of smaller trapezoids
+
+        Parameters
+        ----------
+        at_points : :py:class:`~m_n_kappa.general.StrainPosition`
+            has no effect on splitting process
+        max_widths : :py:class:`~m_n_kappa.general.EffectiveWidths`
+            criteria to return the circle for further computations (Default: None)
+
+        Returns
+        -------
+        list[Circle]
+            this circles
+        """
         if max_widths is None:
             return [self]
         elif self._is_in_effective_width(at_points, max_widths):
@@ -524,24 +659,29 @@ class Trapezoid(Geometry):
         bottom_right_edge: float = None,
     ):
         """
+
+        .. figure:: ../images/trapezoid.png
+
+           Trapezoid - dimensions
+
         Parameters
         ----------
         top_edge : float
-            top-edge of the rectangle
+            top-edge of the trapezoid :math:`z_\\mathrm{top}`
         bottom_edge : float
-            bottom-edge of the rectangle
+            bottom-edge of the trapezoid :math:`z_\\mathrm{bottom}`
         top_width : float
-            width of the trapezoid at the top-edge (Default: None).
+            width of the trapezoid at the top-edge :math:`b_\\mathrm{top}` (Default: None).
         top_left_edge : float
-            left-edge position of the trapezoid at the top-edge (Default: None).
+            left-edge position of the trapezoid at the top-edge :math:`y_\\mathrm{top_left}` (Default: None).
         top_right_edge : float
-            right-edge position of the trapezoid at the top-edge (Default: None).
+            right-edge position of the trapezoid at the top-edge :math:`y_\\mathrm{top_right}`(Default: None).
         bottom_width : float
-            width of the trapezoid at the bottom-edge (Default: None).
+            width of the trapezoid at the bottom-edge :math:`b_\\mathrm{bottom}` (Default: None).
         bottom_left_edge : float
-            left-edge position of the trapezoid at the bottom-edge (Default: None).
+            left-edge position of the trapezoid at the bottom-edge :math:`y_\\mathrm{bottom_left}` (Default: None).
         bottom_right_edge : float
-            right-edge position of the trapezoid at the bottom-edge (Default: None).
+            right-edge position of the trapezoid at the bottom-edge :math:`y_\\mathrm{bottom_right}` (Default: None).
         """
         self._top_edge = top_edge
         self._bottom_edge = bottom_edge
@@ -588,18 +728,22 @@ class Trapezoid(Geometry):
 
     @property
     def top_left_edge(self) -> float:
+        """left-edge position of the trapezoid at the top-edge :math:`y_\\mathrm{top-left}`"""
         return self._top_left_edge
 
     @property
     def bottom_left_edge(self) -> float:
+        """left-edge position of the trapezoid at the bottom-edge :math:`y_\\mathrm{bottom-left}`"""
         return self._bottom_left_edge
 
     @property
     def top_right_edge(self) -> float:
+        """right-edge position of the trapezoid at the top-edge :math:`y_\\mathrm{top-right}`"""
         return self._top_right_edge
 
     @property
     def bottom_right_edge(self) -> float:
+        """right-edge position of the trapezoid at the bottom-edge :math:`y_\\mathrm{bottom-right}`"""
         return self._bottom_right_edge
 
     def __repr__(self) -> str:
@@ -637,14 +781,17 @@ class Trapezoid(Geometry):
 
     @property
     def top_edge(self) -> float:
+        """vertical position of top-edge of the trapezoid :math:`z_\\mathrm{top}`"""
         return self._top_edge
 
     @property
     def bottom_edge(self) -> float:
+        """vertical position of bottom-edge of the trapezoid :math:`z_\\mathrm{bottom}`"""
         return self._bottom_edge
 
     @property
     def edges(self) -> list:
+        """edges of trapezoid in vertical direction"""
         return [self.top_edge, self.bottom_edge]
 
     @property
@@ -658,22 +805,27 @@ class Trapezoid(Geometry):
 
     @property
     def top_width(self) -> float:
+        """width of trapezoid on top-edge :math:`b_\\mathrm{top}`"""
         return self._top_width
 
     @property
     def bottom_width(self) -> float:
+        """width of trapezoid on bottom-edge :math:`b_\\mathrm{top}`"""
         return self._bottom_width
 
     @property
     def height(self) -> float:
+        """height of the trapezoid :math:`h`"""
         return abs(self.top_edge - self.bottom_edge)
 
     @property
     def area(self) -> float:
+        """cross-sectional area of the trapezoid"""
         return 0.5 * self.height * (self.top_width + self.bottom_width)
 
     @property
     def centroid(self) -> float:
+        """vertical position of the centroid of the trapezoid"""
         return (
             self.top_edge
             + self.height
@@ -689,6 +841,20 @@ class Trapezoid(Geometry):
         )
 
     def width(self, vertical_position: float) -> float:
+        """ width of trapezoid at given vertical position
+
+        in case ``vertical_position`` is outside of the trapezoid zero is returned
+
+        Parameters
+        ----------
+        vertical_position : float
+            vertical position the width of the trapezoid shall be given
+
+        Returns
+        -------
+        float
+            width of trapezoid at given vertical position
+        """
         if self.top_edge <= vertical_position <= self.bottom_edge:
             return interpolation(
                 position_value=vertical_position,
@@ -699,6 +865,20 @@ class Trapezoid(Geometry):
             return 0.0
 
     def left_edge(self, vertical_position: float) -> float:
+        """left edge at the given vertical position
+
+        in case ``vertical_position`` is outside of the trapezoid zero is returned
+
+        Parameters
+        ----------
+        vertical_position : float
+            vertical position the width of the trapezoid shall be given
+
+        Returns
+        -------
+        float
+            horizontal position of the left-edge of trapezoid at given vertical position
+        """
         if self.top_edge <= vertical_position <= self.bottom_edge:
             return interpolation(
                 position_value=vertical_position,
@@ -709,6 +889,20 @@ class Trapezoid(Geometry):
             return 0.0
 
     def right_edge(self, vertical_position: float) -> float:
+        """right edge at the given vertical position
+
+        in case ``vertical_position`` is outside of the trapezoid zero is returned
+
+        Parameters
+        ----------
+        vertical_position : float
+            vertical position the width of the trapezoid shall be given
+
+        Returns
+        -------
+        float
+            horizontal position of the right-edge of trapezoid at given vertical position
+        """
         if self.top_edge <= vertical_position <= self.bottom_edge:
             return interpolation(
                 position_value=vertical_position,
@@ -764,10 +958,12 @@ class Trapezoid(Geometry):
 
     @property
     def width_slope(self) -> float:
+        """change of the width of the trapezoid depending on vertical position"""
         return (self.bottom_width - self.top_width) / self.height
 
     @property
     def width_interception(self) -> float:
+        """theoretical width of the trapezoid at coordinate-origin"""
         return self.top_width - self.top_edge * self.width_slope
 
 
@@ -775,7 +971,18 @@ class Trapezoid(Geometry):
 class IProfile(ComposedGeometry):
 
     """
-    I-Profile composed of class Rectangles
+    I-Profile composed of :py:class:`~m_n_kappa.Rectangle` instances
+
+    Inherits from :py:class:`~m_n_kappa.geometry.ComposedGeometry` and makes a variety of geometries
+    possible as the following figure shows.
+    In case the desired profile has no bottom-flange choose ``has_bottom_flange=False``.
+    Similar if no top-flange is needed then use ``has_top_flange=False``.
+    In case top- and bottom flange are similar only passing values to ``t_fo`´ and ``t_fo`` is needed.
+
+    .. figure:: ../images/i-profile.png
+
+        I-Profile - dimensions - a) asymmetric I-profile, b) without bottom-flange, c) without top-flange,
+        d) without top- and bottom-flange
 
     Parameters
     ----------
@@ -795,16 +1002,39 @@ class IProfile(ComposedGeometry):
         width of the bottom-flange
     has_top_flange: bool = True
         decide if I-profile has a top-flange (Default: True).
-        If False: no top-flange is considered
+        If False: no top-flange is created
     has_bottom_flange: bool = True
         decide if I-profile has a bottom-flange (Default: True)
-        if False: no top-flange is considered
-    centroid_z: float
+        if False: no top-flange is created
+    centroid_y: float
         horizontal position of the centroid of the I-profile (Default: 0)
 
-    Example(s):
-    -----------
-    - HEB 200 -> IProfile(top_edge=0., t_fo=15.5, b_fo=200.0, t_w=9.5, h_w=169.0)
+    See Also
+    --------
+    UPEProfile : composed geometry consisting of several :py:class:`Rectangle` forming an ``U``
+
+    RebarLayer : composed geometry consisting of several :py:class:`Circle`
+
+    Example
+    -------
+    An HEB 200-profile may be composed as follows
+
+    >>> from m_n_kappa import IProfile
+    >>> heb200_geometry = IProfile(top_edge=0., t_fo=15.5, b_fo=200.0, t_w=9.5, h_w=169.0)
+    >>> heb200_geometry
+    IProfile(top_edge=0.0, t_w=9.5, h_w=169.0, t_fo=15.5, b_fo=200.0, t_fu=15.5, b_fu=200.0, has_top_flange=True, has_bottom_flange=True, centroid_z=0.0, geometries=[Rectangle(top_edge=0.00, bottom_edge=15.50, width=200.00, left_edge=-100.00, right_edge=100.00), Rectangle(top_edge=15.50, bottom_edge=184.50, width=9.50, left_edge=-4.75, right_edge=4.75), Rectangle(top_edge=184.50, bottom_edge=200.00, width=200.00, left_edge=-100.00, right_edge=100.00)])
+
+
+    As :py:class:`~m_n_kappa.geometry.IProfile` inherits from :py:class:`~m_n_kappa.geometry.ComposedGeometry` it also inherits its
+    functionality tranforming to a :py:class:`m_n_kappa.Crosssection` by adding :py:class:`m_n_kappa.Material`.
+
+    >>> from m_n_kappa import Steel
+    >>> steel = Steel(f_y = 300.0, f_u = 350.0, epsilon_u=0.25)
+    >>> cross_section = heb200_geometry + steel
+    >>> cross_section
+    Crosssection(sections=sections)
+
+
     """
 
     top_edge: float
@@ -816,7 +1046,7 @@ class IProfile(ComposedGeometry):
     b_fu: float = None
     has_top_flange: bool = True
     has_bottom_flange: bool = True
-    centroid_z: float = 0.0
+    centroid_y: float = 0.0
     geometries: list = None
 
     def __post_init__(self):
@@ -837,7 +1067,7 @@ class IProfile(ComposedGeometry):
                     top_edge=self.top_edge,
                     bottom_edge=self.top_edge + self.t_fo,
                     width=self.b_fo,
-                    left_edge=self.centroid_z - 0.5 * self.b_fo,
+                    left_edge=self.centroid_y - 0.5 * self.b_fo,
                 )
             )
 
@@ -848,7 +1078,7 @@ class IProfile(ComposedGeometry):
                 top_edge=self.top_edge + self.t_fo,
                 bottom_edge=self.top_edge + self.t_fo + self.h_w,
                 width=self.t_w,
-                left_edge=self.centroid_z - 0.5 * self.t_w,
+                left_edge=self.centroid_y - 0.5 * self.t_w,
             )
         )
 
@@ -860,7 +1090,7 @@ class IProfile(ComposedGeometry):
                     top_edge=self.top_edge + self.t_fo + self.h_w,
                     bottom_edge=self.top_edge + self.t_fo + self.h_w + self.t_fu,
                     width=self.b_fu,
-                    left_edge=self.centroid_z - 0.5 * self.b_fu,
+                    left_edge=self.centroid_y - 0.5 * self.b_fu,
                 )
             )
 
@@ -871,6 +1101,10 @@ class RebarLayer(ComposedGeometry):
     """
     rebar-layer composed of several reinforcement-bars of :py:class:`Circle`
 
+    .. figure:: ../images/rebar-layer.png
+
+        Rebar-layer - dimensions
+
     Parameters
     ----------
     rebar_diameter: float
@@ -880,16 +1114,26 @@ class RebarLayer(ComposedGeometry):
     rebar_number: int = None
         number of rebars within the layer (Alternative to argument 'width')
     width: float = None
-        width of the rebar-layer (together with 'rebar_horizontal_distance' alternative to argument 'rebar_number').
-        In case 'rebar_number' is defined, the argument 'width' as well as 'rebar_horizontal_distance' value is ignored.
+        width of the rebar-layer :math:`b`(together with ``rebar_horizontal_distance`` alternative to argument ``rebar_number``).
+        In case ``rebar_number`` is defined, the argument ``width`` as well as ``rebar_horizontal_distance`` value is ignored.
     rebar_horizontal_distance : float
-        distance between the rebars in horizontal direction (Default: None).
-        See description in argument 'width'.
+        distance between the rebars in horizontal direction :math:`s_\\mathrm{y}` (Default: None).
+        See description in argument ``width``.
+
+    See Also
+    --------
+    IProfile : composed geometry consisting of several :py:class:`Rectangle` forming an ``I``
+
+    UPEProfile : composed geometry consisting of several :py:class:`Rectangle` forming an ``U``
 
     Example
     -------
-    - RebarLayer(rebar_diameter: 12.0, centroid=10.0, rebar_number=10)
-      Creates 10 circles with diameter 12 and a vertical position of 10
+    The following example creates 10 circles with diameter 12 and a vertical position of 10
+
+
+    >>> from m_n_kappa import RebarLayer
+    >>> layer = RebarLayer(rebar_diameter=12.0, centroid=10.0, rebar_number=10)
+
     """
 
     rebar_diameter: float
@@ -932,28 +1176,58 @@ class RebarLayer(ComposedGeometry):
 class UPEProfile(ComposedGeometry):
 
     """
-    UPE-Profile composed of class Rectangles
+    UPE-Profile composed of class Rectangles forming a reversed ``U``
+
+    .. figure:: ../images/upe.png
+
+        UPE-Profile - dimensions
 
     Parameters
     ----------
     top_edge : float
-        top-edge of the rectangle
+        top-edge of the rectangle :math:`z_\\mathrm{top}`
     t_f: float
-        flange-thickness
+        flange-thickness :math:`t_\\mathrm{f}`
     b_f: float
-        flange-width
+        flange-width :math:`b_\\mathrm{f}`
     t_w: float
-        web-thickness
+        web-thickness :math:`t_\\mathrm{w}`
     h_w: float = None
-        web-height (Default: None). Alternative argument 'h' must be given, otherwise an exception will be risen.
+        web-height :math:`h_\\mathrm{w}` (Default: None).
+        Alternative argument ``h`` must be given, otherwise an exception will be risen.
     h: float = None
-        overall height of the steel-profile (Default: None). Alternative arguments 'h_w' and 't_f' must be given.
-    centroid_z: float
-        horizontal position of the centroid of the I-profile (Default: 0.0)
+        overall height of the steel-profile :math:`h` (Default: None).
+        Alternative arguments ``h_w`` and ``t_f`` must be given.
+    centroid_y: floats
+        horizontal position of the centroid of the UPE-profile :math:`y_\\mathrm{centroid}` (Default: 0.0)
+
+    See Also
+    --------
+
+    IProfile : composed geometry consisting of several :py:class:`Rectangle` forming an ``I``
+
+    RebarLayer : composed geometry consisting of several :py:class:`Circle`
 
     Example
     -------
-    - UPE 200:
+    The following example creates :py:class:`~m_n_kappa.geometry.Rectangle` instances forming an UPE 200 profile
+
+    >>> from m_n_kappa import UPEProfile
+    >>> upe200_geometry = UPEProfile(top_edge=10, t_f=5.2, b_f=76, t_w=9.0, h=200)
+    >>> upe200_geometry
+    UPEProfile(top_edge=10, t_f=5.2, b_f=76, t_w=9.0, h_w=189.6, h=200, centroid_y=0.0, geometries=[Rectangle(top_edge=10.00, bottom_edge=86.00, width=5.20, left_edge=-100.00, right_edge=-94.80), Rectangle(top_edge=10.00, bottom_edge=19.00, width=189.60, left_edge=-94.80, right_edge=94.80), Rectangle(top_edge=10.00, bottom_edge=86.00, width=5.20, left_edge=94.80, right_edge=100.00)])
+
+
+    As :py:class:`~m_n_kappa.geometry.UPEProfile` inherits from :py:class:`~m_n_kappa.geometry.ComposedGeometry`
+    it also inherits its functionality tranforming to a :py:class:`m_n_kappa.Crosssection`
+    by adding :py:class:`m_n_kappa.Material`.
+
+    >>> from m_n_kappa import Steel
+    >>> steel = Steel(f_y = 300.0, f_u = 350.0, epsilon_u=0.25)
+    >>> cross_section = upe200_geometry + steel
+    >>> cross_section
+    Crosssection(sections=sections)
+
     """
 
     top_edge: float
@@ -962,7 +1236,7 @@ class UPEProfile(ComposedGeometry):
     t_w: float
     h_w: float = None
     h: float = None
-    centroid_z: float = 0.0
+    centroid_y: float = 0.0
     geometries: list = None
 
     def __post_init__(self):
@@ -983,7 +1257,7 @@ class UPEProfile(ComposedGeometry):
             top_edge=self.top_edge,
             bottom_edge=self.top_edge + self.b_f,
             width=self.t_f,
-            left_edge=self.centroid_z - 0.5 * self.h_w - self.t_f,
+            left_edge=self.centroid_y - 0.5 * self.h_w - self.t_f,
         )
 
     def _web(self) -> Rectangle:
@@ -991,7 +1265,7 @@ class UPEProfile(ComposedGeometry):
             top_edge=self.top_edge,
             bottom_edge=self.top_edge + self.t_w,
             width=self.h_w,
-            left_edge=self.centroid_z - 0.5 * self.h_w,
+            left_edge=self.centroid_y - 0.5 * self.h_w,
         )
 
     def _right_flange(self) -> Rectangle:
@@ -999,5 +1273,5 @@ class UPEProfile(ComposedGeometry):
             top_edge=self.top_edge,
             bottom_edge=self.top_edge + self.b_f,
             width=self.t_f,
-            left_edge=self.centroid_z + 0.5 * self.h_w,
+            left_edge=self.centroid_y + 0.5 * self.h_w,
         )
