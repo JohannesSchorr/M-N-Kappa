@@ -6,8 +6,26 @@ from .general import StrainPosition, curvature_by_points
 def compute_curvatures(
     strain_position: StrainPosition, position_strains: list[StrainPosition]
 ) -> list[float]:
-    """compute curvatures from a position with associated strains
-    and a list of strains with its associated positions"""
+    """
+    compute curvatures from a position with associated strains
+    and a list of strains with its associated positions
+
+    Parameters
+    ----------
+    strain_position : :py:class:`~m_n_kappa.general.StrainPosition`
+        strain-position value that serves as basis
+    position_strains : list[:py:class:`~m_n_kappa.general.StrainPosition`]
+        Strain-position values the method iterates over
+
+    Returns
+    -------
+    list[float]
+        curvatures
+
+    See Also
+    --------
+    curvature_by_points : computes curvatures by two given (Strain | Positions) - values
+    """
     curvatures = []
     if len(position_strains) > 0:
         for position_strain in position_strains:
@@ -24,10 +42,40 @@ def compute_curvatures(
 
 
 def remove_higher_strains(strain: float, position_strains: list[StrainPosition]):
+    """
+    Return strain-position values where ``strain``-attribute is smaller ``strain``
+
+    Parameters
+    ----------
+    strain : float
+        strain-value that serves as "split"-line
+    position_strains : list[:py:class:`~m_n_kappa.general.StrainPosition`]
+        :py:class:`~m_n_kappa.general.StrainPosition` to check for strain
+
+    Returns
+    -------
+    list[:py:class:`~m_n_kappa.general.StrainPosition`]
+        strain-position values with strain smaller than ``strain``
+    """
     return list(filter(lambda x: 0.0 < x.strain < strain, position_strains))
 
 
 def remove_smaller_strains(strain: float, position_strains: list[StrainPosition]):
+    """
+    Return strain-position values where ``strain``-attribute is greater ``strain``
+
+    Parameters
+    ----------
+    strain : float
+        strain-value that serves as "split"-line
+    position_strains : list[:py:class:`~m_n_kappa.general.StrainPosition`]
+        :py:class:`~m_n_kappa.general.StrainPosition` to check for strain
+
+    Returns
+    -------
+    list[:py:class:`~m_n_kappa.general.StrainPosition`]
+        strain-position values with strain smaller than ``strain``
+    """""
     return list(filter(lambda x: strain < x.strain < 0.0, position_strains))
 
 
@@ -60,7 +108,7 @@ class MaximumCurvature:
     ----------
     curvature : float
         maximum curvature
-    start : Bound
+    start : dBound
         start strain_value and position_value for the given maximum curvature
     other : Bound
         other strain_value and position_value for the given maximum curvature
