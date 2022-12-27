@@ -91,14 +91,17 @@ class Section:
 
     @property
     def material(self):
+        """:py:class:`~m_n_kappa.material.Material` of the section"""
         return self._material
 
     @property
     def geometry(self):
+        """:py:class:`~m_n_kappa.geometry.Geometry` of the section """
         return self._geometry
 
     @property
     def top_edge_maximum_strain(self) -> StrainPosition:
+        """:py:class:`~m_n_kappa.general.StrainPosition` with maximum strain on top edge of section"""
         return StrainPosition(
             strain=self.material.maximum_strain,
             position=self.geometry.top_edge,
@@ -107,6 +110,7 @@ class Section:
 
     @property
     def top_edge_minimum_strain(self) -> StrainPosition:
+        """:py:class:`~m_n_kappa.general.StrainPosition` with minimum strain on top edge of section"""
         return StrainPosition(
             strain=self.material.minimum_strain,
             position=self.geometry.top_edge,
@@ -115,6 +119,7 @@ class Section:
 
     @property
     def bottom_edge_maximum_strain(self) -> StrainPosition:
+        """:py:class:`~m_n_kappa.general.StrainPosition` with maximum strain on bottom edge of section"""
         return StrainPosition(
             strain=self.material.maximum_strain,
             position=self.geometry.bottom_edge,
@@ -123,6 +128,7 @@ class Section:
 
     @property
     def bottom_edge_minimum_strain(self) -> StrainPosition:
+        """:py:class:`~m_n_kappa.general.StrainPosition` with minimum strain on bottom edge of section"""
         return StrainPosition(
             position=self.geometry.bottom_edge,
             strain=self.material.minimum_strain,
@@ -130,15 +136,20 @@ class Section:
         )
 
     def maximum_positive_strain(self) -> float:
+        """maximum positive strain from associated material-model"""
         return self.material.maximum_strain
 
     def maximum_negative_strain(self) -> float:
+        """maximum negative strain from associated material-model"""
         return self.material.minimum_strain
 
-    def material_strains(self) -> list:
+    def material_strains(self) -> list[float]:
+        """strains of the associated material-model"""
         return self.material.strains
 
-    def section_strains(self) -> list:
+    def section_strains(self) -> list[dict]:
+        """strains of the associated material-model"""
+        print("Section.section_strains is needed")
         return [
             {"section-section_type": self.section_type, "strain_value": strain_value}
             for strain_value in self.material_strains()
@@ -146,6 +157,11 @@ class Section:
 
 
 class ComputationSection(Section):
+
+    """
+    base class for specified ComputationsSection-classes
+    :py:class:`~m_n_kappa.section.ComputationSectionCurvature` and :py:class:`~m_n_kappa.section.ComputationSectionStrain`
+    """
     def __init_(self):
         self._section = None
         self._edges_strain = None
@@ -388,7 +404,6 @@ class ComputationSectionCurvature(ComputationSection):
         section: Section,
         curvature: float,
         neutral_axis: float,
-        effective_width: float = None,
     ):
         """
         Parameters
@@ -397,10 +412,8 @@ class ComputationSectionCurvature(ComputationSection):
             section to compute
         curvature : float
             curvature to apply to the section
-        neutral axis : float
+        neutral_axis : float
             point where the strain_value is zero
-        effective_width : float
-            effective width (Default: None)
         """
         self._section = section
         self._curvature = curvature
