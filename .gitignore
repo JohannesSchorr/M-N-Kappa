@@ -3,4 +3,5 @@
 __pycache__/
 venv/
 docs/build/
-source/api/
+
+docs/source/api/
