@@ -53,6 +53,15 @@ Sections and Crosssection
    Section
    Crosssection
 
+Strain-based-design
+===================
+
+.. autosummary::
+   :toctree: api/
+
+   MKappaByStrainPosition
+   MKappaByConstantCurvature
+
 Loading
 =======
 
