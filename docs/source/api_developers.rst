@@ -118,6 +118,29 @@ Cross-section boundaries
    get_lower_positions
    get_higher_positionsh
 
+Strain-based design
+===================
+
+.. currentmodule:: m_n_kappa.points
+
+.. autosummary::
+   :toctree: api/
+
+   Computation
+   MKappa
+
+Solver
+======
+
+.. currentmodule:: m_n_kappa.solver
+
+.. autosummary::
+   :toctree: api/
+
+   Solver
+   Bisection
+   Newton
+
 Loading
 =======
 
