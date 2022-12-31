@@ -14,8 +14,22 @@ from .solver import Solver, Newton
 
 @dataclass
 class Computation:
-    """stores the results of an iteration-step during a computation """
+    """
+    stores the results of an iteration-step during a computation
 
+    Parameters
+    ----------
+    iteration: int
+        iteration-number
+    computed_cross_section: :py:class:`~m_n_kappa.crosssection.Crosssection`
+        computed cross-section that inherits from `~m_n_kappa.crosssection.Crosssection`
+    curvature: float
+        computed curvature
+    neutral_axis_value: float
+        computed neutral axis
+    axial_force: float
+        computed axial-force
+    """
     iteration: int
     computed_cross_section: Crosssection
     curvature: float
@@ -25,7 +39,13 @@ class Computation:
 
 class MKappa:
 
-    """computation of one Moment-Curvature-Point by fixation of one point and varying the neutral axis"""
+    """
+    computation of one Moment-Curvature-Point by fixation of
+    one point and varying the neutral axis
+
+    works as base-class for :py:class:`MKappaByStrainPosition` and
+    :py:class:`MKappaByConstantCurvature`
+    """
 
     def __init__(
         self,
@@ -142,6 +162,7 @@ class MKappa:
 
     @property
     def computations(self) -> list[Computation]:
+        """saved computations"""
         return self._computations
 
     @property
@@ -206,14 +227,14 @@ class MKappa:
         self.initialize_boundary_curvatures()
         if self.__is_axial_force_within_tolerance():
             self._successful = True
-        elif self.initial_axial_forces_have_different_sign():
+        elif self._initial_axial_forces_have_different_sign():
             self.iterate()
         else:
             print("Axial-forces computed with minimum and maximum curvature have same sign.\n"
                   "Therefore, no equilibrium of Axial-forces possible. --> break")
             self.__set_values_none()
 
-    def initial_axial_forces_have_different_sign(self):
+    def _initial_axial_forces_have_different_sign(self):
         if self.computations[0].axial_force * self.computations[1].axial_force < 0.0:
             return True
         else:
@@ -223,6 +244,11 @@ class MKappa:
         pass
 
     def iterate(self):
+        """
+        iterate as long as one of the following criteria are reached:
+        - number of maximum iterations
+        - absolute axial force smaller than desired one
+        """
         for iter_index in range(self.iteration + 1, self.maximum_iterations+1, 1):
             self._iteration = iter_index
             self._neutral_axis = self._guess_neutral_axis()
@@ -479,7 +505,7 @@ class MKappaByConstantCurvature(MKappa):
         """
         Parameters
         ----------
-        cross_section : cross_section.Crossection
+        cross_section : :py:class:`~m_n_kappa.crosssection.Crossection`
                 cross-section to compute
         maximum_neutral_axis : float
                 maximum allowed neutral-axis
