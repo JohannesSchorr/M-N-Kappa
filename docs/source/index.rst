@@ -10,7 +10,6 @@ Contents
 
    getting_started
    examples/index
-   users_guide/index
    theory/index
    verification/index
 
