@@ -1,5 +1,9 @@
+.. _verification:
+
 Verification
 *************
+
+.. _verification.slim_floor_beams:
 
 Slim-Floor Beams
 ================
@@ -12,6 +16,7 @@ Slim-Floor Beams
    2001-fries
    2018-slimapp
 
+.. _verification.reduced_composite_beams:
 
 Composite beams of reduced size
 ===============================
@@ -20,6 +25,8 @@ Composite beams of reduced size
 
 ..
    2006-rieg
+
+.. _verification.normal_composite_beams:
 
 Composite beams of normal height
 ================================
