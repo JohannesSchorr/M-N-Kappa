@@ -37,6 +37,8 @@ class ComposedGeometry:
     """
     Geometry consisting of basic geometries
 
+    .. versionadded:: 0.1.0
+
     Supported basic geometries must inherit :py:class:`Geometry`:
 
     - :py:class:`~m_n_kappa.Rectangle`
@@ -46,9 +48,7 @@ class ComposedGeometry:
     See Also
     --------
     IProfile : composed geometry consisting of several :py:class:`Rectangle` forming an ``I``
-
     UPEProfile : composed geometry consisting of several :py:class:`Rectangle` forming an ``U``
-
     RebarLayer : composed geometry consisting of several :py:class:`Circle`
 
     Examples
@@ -62,27 +62,22 @@ class ComposedGeometry:
     >>> composed_geometry
     ComposedGeometry(geometries=[Rectangle(top_edge=0.00, bottom_edge=10.00, width=10.00, left_edge=-5.00, right_edge=5.00), Rectangle(top_edge=10.00, bottom_edge=20.00, width=10.00, left_edge=-5.00, right_edge=5.00)])
 
-
     Adding another basic geometry is also easily done.
     This applies also for adding one composed geometry to another.
-
 
     >>> rectangle_3 = Rectangle(top_edge=20.0, bottom_edge = 30.0, width=10.0)
     >>> composed_geometry += rectangle_3
     >>> composed_geometry
     ComposedGeometry(geometries=[Rectangle(top_edge=0.00, bottom_edge=10.00, width=10.00, left_edge=-5.00, right_edge=5.00), Rectangle(top_edge=10.00, bottom_edge=20.00, width=10.00, left_edge=-5.00, right_edge=5.00), Rectangle(top_edge=20.00, bottom_edge=30.00, width=10.00, left_edge=-5.00, right_edge=5.00)])
 
-
     The composed geometry is also easily combined by adding a :py:class:`~m_n_kappa.Material`
     like :py:class:`~m_n_kappa.Steel` merging to a :py:class:`~m_n_kappa.Crosssection`
-
 
     >>> from m_n_kappa import Steel
     >>> steel = Steel(f_y = 300.0, f_u = 350.0, epsilon_u=0.25)
     >>> cross_section = composed_geometry + steel
     >>> cross_section
     Crosssection(sections=sections)
-
 
     """
     def __init__(self):
