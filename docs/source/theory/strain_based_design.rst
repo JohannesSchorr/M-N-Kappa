@@ -1,12 +1,9 @@
-.. _theory_strain_based_design:
+.. _theory.strain_based_design:
 
 Strain based design
 *******************
 
-.. todo::
-
-   theory - strain based design
-   - draw figure(s)
+.. _theory.strain_based_design.intro: 
 
 Introduction
 ============
@@ -15,7 +12,7 @@ Introduction
 :ref:`theory.sections.cross_section` under a given strain-distribution.
 
 
-.. _theory_strain_based_design_aim:
+.. _theory.strain_based_design.aim:
 
 Aim
 ===
@@ -25,14 +22,14 @@ The aim is to find a distribution of strains over a beam cross-section leading t
 In consequence the summarized axial forces of all sub-sections :math:`N_i` must become zero.
 
 .. math::
-   :label: eq:theory_strain_based_design_equilibrium
+   :label: eq:theory.strain_based_design.equilibrium
 
    H = \sum N_i = 0
 
 The strain-distribution leading to equilibrium of the axial-forces is found by iteration.
 
 
-.. _theory_strain_based_design_boundary_values:
+.. _theory.strain_based_design.boundary_values:
 
 Boundary values
 ===============
@@ -60,7 +57,7 @@ that is above the maximum or below the minium strain then the
 minimum curvature is adapted appropriately.
 
 
-.. _theory_strain_based_design_equilibrium:
+.. _theory.strain_based_design.equilibrium:
 
 Finding equilibrium of axial forces
 ===================================
@@ -70,7 +67,7 @@ as given in formula :math:numref:`eq:theory.strain_based_design_newton`.
 As variable the neutral axis :math:`z_\mathrm{n}` was used.
 
 .. math::
-   :label: eq:theory_strain_based_design_newton
+   :label: eq:theory.strain_based_design_newton
 
    x_\mathrm{n+1} = x_\mathrm{n} - \frac{f(x_\mathrm{n})}{f'(x_\mathrm{n})}
 
@@ -82,7 +79,7 @@ In case the Newton-Algorithm does not find a solution a Bisection-algorithm
 is implemented as fallback.
 
 .. math::
-   :label: eq:theory_strain_based_design_bisection
+   :label: eq:theory.strain_based_design_bisection
 
    x_\mathrm{n+1} = \frac{x_{f(x)>0} + x_{f(x)<0}}{2}
 
