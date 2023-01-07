@@ -198,6 +198,8 @@ def check_width(
 
     The corresponding properties are: width, left_edge, right_edge
 
+    .. versionadded: 0.1.0
+
     Parameters
     ----------
     width: float
