@@ -87,3 +87,7 @@ extensions.append('sphinx_design')
 html_theme = "furo"
 
 html_static_path = ['_static']
+html_logo = '_static/logo/m_kappa_logo.png'
+html_css_files = [
+    'css/custom.css',
+]
