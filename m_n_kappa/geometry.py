@@ -707,6 +707,11 @@ class Circle(Geometry):
 class Trapezoid(Geometry):
     """
     Represents a trapezoidal
+
+    .. versionadded:: 0.1.0
+
+    The trapezoid has vertical edges parallel to each other and
+    two horizontal edges that are *not parallel* to each other.
     """
 
     def __init__(
@@ -721,11 +726,6 @@ class Trapezoid(Geometry):
         bottom_right_edge: float = None,
     ):
         """
-
-        .. figure:: ../images/trapezoid.png
-
-           Trapezoid - dimensions
-
         Parameters
         ----------
         top_edge : float
@@ -735,15 +735,49 @@ class Trapezoid(Geometry):
         top_width : float
             width of the trapezoid at the top-edge :math:`b_\\mathrm{top}` (Default: None).
         top_left_edge : float
-            left-edge position of the trapezoid at the top-edge :math:`y_\\mathrm{top_left}` (Default: None).
+            left-edge position of the trapezoid at the top-edge :math:`y_\\mathrm{top-left}` (Default: None).
         top_right_edge : float
-            right-edge position of the trapezoid at the top-edge :math:`y_\\mathrm{top_right}`(Default: None).
+            right-edge position of the trapezoid at the top-edge :math:`y_\\mathrm{top-right}` (Default: None).
         bottom_width : float
             width of the trapezoid at the bottom-edge :math:`b_\\mathrm{bottom}` (Default: None).
         bottom_left_edge : float
-            left-edge position of the trapezoid at the bottom-edge :math:`y_\\mathrm{bottom_left}` (Default: None).
+            left-edge position of the trapezoid at the bottom-edge :math:`y_\\mathrm{bottom-left}` (Default: None).
         bottom_right_edge : float
-            right-edge position of the trapezoid at the bottom-edge :math:`y_\\mathrm{bottom_right}` (Default: None).
+            right-edge position of the trapezoid at the bottom-edge :math:`y_\\mathrm{bottom-right}` (Default: None).
+
+
+        .. figure:: ../images/geometry_trapezoid-light.svg
+           :class: only-light
+        .. figure:: ../images/geometry_trapezoid-dark.svg
+           :class: only-dark
+
+           Trapezoid - dimensions
+
+        See Also
+        --------
+        Rectangle : creates a rectangular geometry object
+        Circle : creates a circular geometry object
+
+        Examples
+        --------
+        A trapezoid object is easily instantiated as follows.
+
+        >>> from m_n_kappa import Trapezoid
+        >>> trapezoid = Trapezoid(top_edge=10, bottom_edge=10, top_width=10, bottom_width=20)
+
+        In case only ``top_width`` or ``bottom_width`` is passed as argument the centerline of the specific
+        width of the trapezoid is assumed to be a :math:`y = 0`.
+        In consequence ``top_left_edge = -0.5 * top_width`` and ``top_right_edge = 0.5 * top_width``.
+        Similar for the bottom-edge.
+
+        For building a :py:class:`~m_n_kappa.Section` the ``trapezoid`` must only be added to a material.
+
+        >>> from m_n_kappa import Steel
+        >>> steel = Steel(f_y=355)
+        >>> section = trapezoid + steel
+        >>> type(section)
+        Section
+
         """
         self._top_edge = top_edge
         self._bottom_edge = bottom_edge
