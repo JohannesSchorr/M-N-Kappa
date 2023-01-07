@@ -18,17 +18,30 @@ release = '0.1.0'
 import pathlib
 import sys
 sys.path.insert(0, pathlib.Path(__file__).parents[2].resolve().as_posix())
+extensions = []
+exclude_patterns = []
 
-extensions = [
-    'sphinx.ext.duration',
-    'sphinx.ext.doctest',
-    'sphinx.ext.napoleon',
-    'nbsphinx',
-]
+# Duration
+# measures durations of Sphinx processing
+# https://www.sphinx-doc.org/en/master/usage/extensions/duration.html
+extensions.append('sphinx.ext.duration')
 
+# Doctest
+# https://www.sphinx-doc.org/en/master/usage/extensions/doctest.html
+extensions.append('sphinx.ext.doctest')
+
+# Napoleon
+# https://www.sphinx-doc.org/en/master/usage/extensions/napoleon.html
+extensions.append('sphinx.ext.napoleon')
+
+# nbsphinx
+# https://nbsphinx.readthedocs.io/en/0.8.11/
+# provides a source parser for *.ipynb files
+extensions.append('nbsphinx')
+exclude_patterns.append('_build')
+exclude_patterns.append('**.ipynb_checkpoints')
 
 templates_path = ['_templates']
-exclude_patterns = ['**.ipynb_checkpoints']
 
 # autodoc
 # https://www.sphinx-doc.org/en/master/usage/extensions/autodoc.html
