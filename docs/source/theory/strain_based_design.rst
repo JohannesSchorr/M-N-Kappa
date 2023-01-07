@@ -11,8 +11,8 @@ Strain based design
 Introduction
 ============
 
-:ref:`theory_sections` indicates how axial force and moment are computed for a :ref:`theory_sections_sections` and
-:ref:`theory_sections_cross_sections` under a given strain-distribution.
+:ref:`theory.sections` indicates how axial force and moment are computed for a :ref:`theory.sections.sections` and
+:ref:`theory.sections.cross_section` under a given strain-distribution.
 
 
 .. _theory_strain_based_design_aim:
@@ -21,7 +21,7 @@ Aim
 ===
 
 The aim is to find a distribution of strains over a beam cross-section leading to an equilibrium of the horizontal forces
-:math:`H` (see Formula :math:numref:`eq:theory_strain_based_design_equilibrium`).
+:math:`H` (see Formula :math:numref:`eq:theory.strain_based_design.equilibrium`).
 In consequence the summarized axial forces of all sub-sections :math:`N_i` must become zero.
 
 .. math::
@@ -66,7 +66,7 @@ Finding equilibrium of axial forces
 ===================================
 
 To find the equilibrium of axial forces a Newton-algorithm is used
-as given in formula :math:numref:`eq:theory_strain_based_design_newton`.
+as given in formula :math:numref:`eq:theory.strain_based_design_newton`.
 As variable the neutral axis :math:`z_\mathrm{n}` was used.
 
 .. math::
@@ -96,7 +96,7 @@ neutral axis :math:`N(z_\mathrm{n})`.
 The fallback-mechanism also strikes in case the Newton-Algorithm
 computes the same value twice.
 
-The :ref:`theory_strain_based_design_boundary_values` are used on the
+The :ref:`theory.strain_based_design.boundary_values` are used on the
 one hand as starting values and on the other hand to make sure that
 strains stay within the minimal and maximal strains of the
 material models.
