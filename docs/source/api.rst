@@ -102,5 +102,5 @@ Beam
 API for developers
 ==================
 
-For a more in-depth study of the internals of the program, beside the :ref:`theory_guide`,
+For a more in-depth study of the internals of the program, beside the :ref:`theory`,
 the :ref:`api_developers` guide gives further information.
