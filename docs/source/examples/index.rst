@@ -3,11 +3,8 @@
 Examples
 ========
 
-Contents
---------
 .. toctree::
    :maxdepth: 2
-   :caption: Contents:
    :titlesonly:
 
    Single span slim-floor beam with :math:`M`-:math:`\kappa`-curve <m_kappa_UPE>
