@@ -127,6 +127,8 @@ class Geometry(ABC):
     """
     basic geometry class
 
+    .. versionadded:: 0.1.0
+
     the basic geometries must inherit from this class
     """
 
