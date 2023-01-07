@@ -1133,9 +1133,7 @@ class RebarLayer(ComposedGeometry):
     """
     rebar-layer composed of several reinforcement-bars of :py:class:`Circle`
 
-    .. figure:: ../images/rebar-layer.png
-
-        Rebar-layer - dimensions
+    .. versionadded:: 0.1.0
 
     Parameters
     ----------
@@ -1144,27 +1142,49 @@ class RebarLayer(ComposedGeometry):
     centroid: float
         position of the centroid in vertical direction
     rebar_number: int = None
-        number of rebars within the layer (Alternative to argument 'width')
+        number of rebars within the layer (Alternative to argument ``width``)
     width: float = None
-        width of the rebar-layer :math:`b`(together with ``rebar_horizontal_distance`` alternative to argument ``rebar_number``).
+        width of the rebar-layer :math:`b` (together with ``rebar_horizontal_distance`` alternative to argument ``rebar_number``).
         In case ``rebar_number`` is defined, the argument ``width`` as well as ``rebar_horizontal_distance`` value is ignored.
     rebar_horizontal_distance : float
         distance between the rebars in horizontal direction :math:`s_\\mathrm{y}` (Default: None).
         See description in argument ``width``.
+    left_edge : float
+        horizontal position of the centroid of the left-most circle :math:`y_\\mathrm{left}` (Default: None).
+    right_edge : float
+        horizontal position of the centroid of the right-most circle :math:`y_\\mathrm{right}` (Default: None)
+    rebar_horizontal_distance : float
+        horizontal-distance between the rebar-centroids :math:`s_\\mathrm{y}` (Default: None)
+
+
+    .. figure:: ../images/geometry_rebar-layer-light.svg
+       :class: only-light
+    .. figure:: ../images/geometry_rebar-layer-dark.svg
+       :class: only-dark
+
+       Rebar-layer - dimensions
+
 
     See Also
     --------
+    Circle : basic geometric class
     IProfile : composed geometry consisting of several :py:class:`Rectangle` forming an ``I``
-
     UPEProfile : composed geometry consisting of several :py:class:`Rectangle` forming an ``U``
 
     Example
     -------
     The following example creates 10 circles with diameter 12 and a vertical position of 10
 
-
     >>> from m_n_kappa import RebarLayer
-    >>> layer = RebarLayer(rebar_diameter=12.0, centroid=10.0, rebar_number=10)
+    >>> rebar_layer = RebarLayer(rebar_diameter=12.0, centroid=10.0, rebar_number=10)
+
+    Adding a material to ``rebar_layer`` creates a cross-section.
+
+    >>> from m_n_kappa import Reinforcement
+    >>> rebar_steel = Reinforcement(f_s=500, f_su=550, epsilon_su=0.25)
+    >>> rebars = rebar_layer + rebar_steel
+    >>> rebars
+    Crosssection(sections=sections)
 
     """
 
