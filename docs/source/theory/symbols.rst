@@ -1,5 +1,7 @@
 .. summarizing overview over all given variables
 
+.. _theory.symbols:
+
 Symbols
 *******
 
