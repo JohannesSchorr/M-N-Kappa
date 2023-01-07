@@ -7,10 +7,12 @@ Single span slim-floor beam with :math:`M`-:math:`\kappa`-Curve
 
 Introduction
 ============
-The slim-floor beam in this example consists of a :ref:`m_kappa_example_input_upe200` steel-profile welded onto a :ref:`m_kappa_example_input_bottom_flange`.
-The created steel-beam is integrated into a :ref:`m_kappa_example_input_concrete_slab`.
-Within in the :ref:`m_kappa_example_input_concrete_slab` also some :ref:`m_kappa_example_input_reinforcement`-Layers are integrated.
-Geometry- and material-values are defined hereafter and build later on to a :ref:`cross-section <m_kappa_example_input_reinforcement>`.
+The slim-floor beam in this example consists of a :ref:`examples.m_kappa_UPE.input.upe200` steel-profile welded onto a :ref:`examples.m_kappa_UPE.input.bottom_flange`.
+The created steel-beam is integrated into a :ref:`examples.m_kappa_UPE.input.concrete_slab`.
+Within in the :ref:`examples.m_kappa_UPE.input.concrete_slab` also some :ref:`examples.m_kappa_UPE.input.reinforcement`-Layers are integrated.
+Geometry- and material-values are defined hereafter and build later on to a :ref:`cross-section <examples.m_kappa_UPE.input.reinforcement>`.
+
+.. _examples.m_kappa_UPE.input:
 
 Cross-section
 =============
@@ -77,7 +79,7 @@ Therefore, it consists of a set of basic geometry-instances (e.g. several :py:cl
 
 > upe200_geometry.geometries
 
-The material of the UPE-profile is also created using :py:class:`~m_n_kappa.Steel` analogous to the creation of the material for the :ref:`m_kappa_example_input_bottom_flange`:
+The material of the UPE-profile is also created using :py:class:`~m_n_kappa.Steel` analogous to the creation of the material for the :ref:`examples.m_kappa_UPE.input.bottom_flange`:
 
 .. plot::
    :nofigs:
@@ -223,8 +225,8 @@ At initialization the :py:class:`~m_n_kappa.Beam`-class does following things:
 2. create a :py:class:`~m_n_kappa.deformation.Node` between these elements
 3. compute load-steps by determination of the decisive :py:class:`~m_n_kappa.deformation.Node` and its :math:`M`-:math:`\kappa`-curve
 
-In :ref:`m_kappa_example_without_effective_widths` the :math:`M`-:math:`\kappa`-curves are computed neglecting the effective widths of the computation.
-Whereas in :ref:`m_kappa_example_with_effective_widths` effective widths are considered considering the bending and membran effective widths.
+In :ref:`examples.m_kappa_UPE.geometrical_widths` the :math:`M`-:math:`\kappa`-curves are computed neglecting the effective widths of the computation.
+Whereas in :ref:`examples.m_kappa_UPE.effective_widths` effective widths are considered considering the bending and membran effective widths.
 
 .. _examples.m_kappa_UPE.geometrical_widths:
 
