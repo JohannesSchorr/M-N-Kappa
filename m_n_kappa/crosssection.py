@@ -470,7 +470,7 @@ class ComputationCrosssectionStrain(ComputationCrosssection):
         return f"ComputationCrosssectionStrain(sections=sections, strain_value={self.strain})"
 
     def __add__(self, other):
-        return ComputationCrossSectionStrainAdd(self, other)
+        return ComputationCrosssectionStrainAdd(self, other)
 
     @property
     def strain(self) -> float:
@@ -507,7 +507,7 @@ class ComputationCrosssectionStrain(ComputationCrosssection):
         return print_sections(text)
 
 
-class ComputationCrossSectionStrainAdd(ComputationCrosssectionStrain):
+class ComputationCrosssectionStrainAdd(ComputationCrosssectionStrain):
 
     def __init__(self, computed_cross_section_1, computed_cross_section_2):
         self._computed_cross_section_1 = computed_cross_section_1
