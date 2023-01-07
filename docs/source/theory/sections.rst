@@ -1,23 +1,21 @@
-.. _theory_sections:
+.. _theory.sections:
 
 Sections and cross-sections
 ***************************
 
-.. todo::
-
-   theory - sections
-   - documentation
-   - draw figure(s)
+.. _theory.sections.intro:
 
 Introduction
 ============
 Concept and process of computing the axial-force and moment of the cross-section under a given distribution of strain
 is described.
 
-.. _theory_sections_sections:
+.. _theory.sections.sections:
 
 Sections
 ========
+
+.. _theory.sections.sections.general:
 
 General
 -------
@@ -27,11 +25,7 @@ Sections consist of:
 
 Regarding the creation and application of sections please refer to the :ref:`Users' guide <users_sections>`.
 
-The characteristics of geometry and material are combined to computed the :ref:`axial force <theory_sections_sections_axial_force>`,
-the :ref:`lever arm <theory_sections_sections_lever_arm>` and the :ref:`moment <theory_sections_sections_moment>`
-corresponding with an applied :ref:`theory_general_curvature` or constant strain.
-
-.. _theory_sections_sections_procedure:
+.. _theory.sections.sections.procedure:
 
 Procedure
 ---------
@@ -46,7 +40,7 @@ As the procedure above ensures that no material points - and therefore no change
 within each sub-section a linear relationship between vertical position :math:`z` and stress :math:`\sigma` is present.
 This allows to determine a :ref:`theory_sections_sections_stress_distribution` of each sub-section.
 
-.. _theory_sections_sections_stress_distribution:
+.. _theory.sections.sections.stress_distribution:
 
 Linear stress-distribution over height
 --------------------------------------
@@ -75,7 +69,7 @@ and (:math:`\sigma_\mathrm{bottom}` | :math:`z_\mathrm{bottom}` ).
 Linear distributions allow easy integration, giving the opportunity to determine :ref:`theory_sections_sections_axial_force`,
 :ref:`theory_sections_sections_lever_arm` and :ref:`theory_sections_sections_moment` in conclusion.
 
-.. _theory_sections_sections_axial_force:
+.. _theory.sections.sections.axial_force:
 
 Axial force
 -----------
@@ -108,7 +102,7 @@ where :math:`A_\mathrm{circle}` is the cross-sectional area of the circle (see f
 
 Similar procedure is conducted for the :ref:`theory_sections_sections_lever_arm` and the :ref:`theory_sections_sections_moment`.
 
-.. _theory_sections_sections_lever_arm:
+.. _theory.sections.sections.lever_arm:
 
 Lever arm
 ---------
@@ -135,7 +129,7 @@ For circles the lever arm applies to the geometrical centroid in vertical direct
 The lever arm is used to compute the moment the sub-section contributes to the overall moment of the cross-section under
 a given stress-distribution.
 
-.. _theory_sections_sections_moment:
+.. _theory.sections.sections.moment:
 
 Moment
 ------
@@ -154,7 +148,7 @@ Implementation
 These functionalities are part of :py:class:`~m_n_kappa.section.ComputationSection`,
 :py:class:`~m_n_kappa.section.ComputationSectionCurvature` and :py:class:`~m_n_kappa.section.ComputationSectionStrain`.
 
-.. _theory_sections_cross_sections:
+.. _theory.sections.cross_section:
 
 Cross-section
 =============
