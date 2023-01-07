@@ -1,7 +1,7 @@
 .. _theory.geometries:
 
-Geometries
-**********
+Geometry
+********
 
 .. todo::
 
@@ -87,4 +87,3 @@ Implementation
 --------------
 Formula :math:numref:`eq:circle_area` is implemented in :py:class:`~m_n_kappa.Circle`.
 Combined with the vertical position of the centroid the moment may be computed as well.
-
