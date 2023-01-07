@@ -1,0 +1,11 @@
+html[data-theme="light"] {
+    --pst-color-primary: rgb(10, 50, 190);
+}
+
+html[data-theme="dark"] {
+    --pst-color-primary: rgb(10, 50, 190);
+}
+
+.card, .card img {
+  background-color: transparent !important;
+}
