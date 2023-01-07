@@ -8,10 +8,10 @@ Materials
 Basic functionality, concept and integration
 ============================================
 
-In steel-concrete composite structures :ref:`theory_materials_concrete`, :ref:`theory_materials_steel` and
-:ref:`theory_materials_reinforcement` are relevant materials.
+In steel-concrete composite structures :ref:`theory.materials.concrete`, :ref:`theory.materials.steel` and
+:ref:`theory.materials.reinforcement` are relevant materials.
 For these materials sophisticated material models are available to describe their behaviour under loading
-(see for example formula :math:numref:`eq:theory_materials_concrete_compression_nonlinear`).
+(see for example formula :math:numref:`eq:theory.materials.concrete.compression.nonlinear`).
 
 For integration into the program these -- in part discrete -- formulas need to be abstracted to multi-linear
 stress-strain relationships.
@@ -30,7 +30,7 @@ The classes describe the characteristic concrete compressive strength :math:`f_\
 Following :cite:t:`EN1992-1-1` most of the mechanical characteristic are derived from :math:`f_\mathrm{ck}`.
 
 The mean concrete compressive strength :math:`f_\mathrm{cm}` according to :cite:t:`EN1992-1-1` is given in formula
-:math:numref:`eq:theory_materials_f_cm`.
+:math:numref:`eq:theory.materials_f_cm`.
 
 .. math::
    :label: eq:theory.materials_f_cm
@@ -38,7 +38,7 @@ The mean concrete compressive strength :math:`f_\mathrm{cm}` according to :cite:
    f_\mathrm{cm} = f_\mathrm{ck} + 8 \text{ in N/mm²}
 
 The modulus of elasticity :math:`E_\mathrm{cm}` by :cite:t:`EN1992-1-1` is given in formula
-:math:numref:`eq:theory_materials_E_cm`.
+:math:numref:`eq:theory.materials_E_cm`.
 
 .. math::
    :label: eq:theory.materials_E_cm
@@ -56,8 +56,8 @@ Introduction
 ^^^^^^^^^^^^
 :cite:t:`EN1992-1-1` provides three material models to define the stress-strain-relationship of concrete in
 compression.
-These are :ref:`theory_materials_concrete_compression_nonlinear`, :ref:`theory_materials_concrete_compression_parabola`
-and :ref:`theory_materials_concrete_compression_bi_linear`.
+These are :ref:`theory.materials.concrete.compression.nonlinear`, :ref:`theory.materials.concrete.compression.parabola`
+and :ref:`theory.materials.concrete.compression.bi_linear`.
 Every of these three stress-strain-relationships of the concrete according to :cite:t:`EN1992-1-1` is implemented
 in :py:class:`~m_n_kappa.Concrete` and may be chosen argument ``compression_stress_strain_type``.
 
@@ -66,7 +66,7 @@ in :py:class:`~m_n_kappa.Concrete` and may be chosen argument ``compression_stre
 Stress-strain-relationship for non-linear determination of stress-resultants and deformations
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 The stresses according to the non-linear determination of stress-resultants and deformations are computed by
-formula :math:numref:`eq:theory_materials_concrete_compression_nonlinear` in the range
+formula :math:numref:`eq:theory.materials.concrete.compression.nonlinear` in the range
 :math:`0 < | \varepsilon_\mathrm{c1} | < | \varepsilon_\mathrm{cu1} |`.
 
 .. math::
@@ -91,7 +91,7 @@ strain at failure.
 
 The above given nonlinear stress-strain-relationship is implemented by passing
 ``compression_stress_strain_type='Nonlinear'`` to :py:class:`~m_n_kappa.Concrete`.
-Formula :math:numref:`eq:theory_materials_concrete_compression_nonlinear` is approximated by a multi-linear curve in
+Formula :math:numref:`eq:theory.materials.concrete.compression.nonlinear` is approximated by a multi-linear curve in
 :py:class:`~m_n_kappa.Concrete`.
 
 .. _theory.materials.concrete.compression.parabola:
@@ -151,7 +151,7 @@ Tension
 For a realistic load-carrying behaviour of the concrete the behaviour under tension is crucial.
 
 If the tensile strength of the concrete :math:`f_\mathrm{ctm}` is not given, it may be computed by formula
-:math:numref:`eq:theory_materials_concrete_f_ctm`.
+:math:numref:`eq:theory.materials.concrete_f_ctm`.
 
 .. math::
    :label: eq:theory.materials.concrete_f_ctm
@@ -160,14 +160,14 @@ If the tensile strength of the concrete :math:`f_\mathrm{ctm}` is not given, it 
 
    f_\mathrm{ctm} & = 2.12 \cdot \ln\left[1 + \frac{f_\mathrm{cm}}{10}\right] & & > \text{ C50/60}
 
-The strain when :math:`f_\mathrm{ctm}` is reached may than be computed by formula :math:numref:`eq:theory_materials_concrete_epsilon_ct`.
+The strain when :math:`f_\mathrm{ctm}` is reached may than be computed by formula :math:numref:`eq:theory.materials.concrete_epsilon_ct`.
 
 .. math::
    :label: eq:theory.materials.concrete_epsilon_ct
 
    \varepsilon_\mathrm{ct} = \frac{f_\mathrm{ctm}}{E_\mathrm{cm}}
 
-where :math:`E_\mathrm{cm}` is the modulus of elasticity according to formula :math:numref:`eq:theory_materials_E_cm`.
+where :math:`E_\mathrm{cm}` is the modulus of elasticity according to formula :math:numref:`eq:theory.materials_E_cm`.
 
 As soon as the strain reaches :math:`\varepsilon_\mathrm{ctm}` the concrete starts to break.
 Different post-failure behaviours are possible in :py:class:`~m_n_kappa.Concrete` if :math:`\varepsilon_\mathrm{c} > \varepsilon_\mathrm{ct}`.
@@ -175,7 +175,7 @@ Different post-failure behaviours are possible in :py:class:`~m_n_kappa.Concrete
 1. The resisting stresses drop immediately to :math:`\sigma_\mathrm{c} = 0`.
 2. The crack-opening behaviour follows the recommendations by :cite:t:`FIB2010`.
 
-:cite:t:`FIB2010` defines the crack-opening behaviour as described in formula :math:numref:`eq:theory_materials_concrete_crack_opening`.
+:cite:t:`FIB2010` defines the crack-opening behaviour as described in formula :math:numref:`eq:theory.materials.concrete_crack_opening`.
 
 .. math::
    :label: eq:theory.materials.concrete_tensile
@@ -184,7 +184,7 @@ Different post-failure behaviours are possible in :py:class:`~m_n_kappa.Concrete
 
    \sigma_\mathrm{ct} & = f_\mathrm{ctm} \cdot \left(0.25 - 0.05 \cdot \frac{w}{w_1}\right) & & \text{ for } w_1 < w \leq w_\mathrm{c}
 
-where :math:`w` is the crack opening in mm and :math:`w_1` and :math:`w_\mathrm{c}` are defined in :math:numref:`theory_materials_concrete_crack_opening_values`.
+where :math:`w` is the crack opening in mm and :math:`w_1` and :math:`w_\mathrm{c}` are defined in :math:numref:`theory.materials.concrete_crack_opening_values`.
 
 .. math::
    :label: eq:theory.materials.concrete_crack_opening
@@ -193,7 +193,7 @@ where :math:`w` is the crack opening in mm and :math:`w_1` and :math:`w_\mathrm{
 
    w_\mathrm{c} & = 5 \cdot \frac{G_\mathrm{f}}{f_\mathrm{ctm}} & & \text{ if } \sigma_\mathrm{ct} = 0
 
-The fracture energy :math:`G_\mathrm{F}` is computed by :math:numref:`eq:theory_materials_concrete_fracture_energy`.
+The fracture energy :math:`G_\mathrm{F}` is computed by :math:numref:`eq:theory.materials.concrete_fracture_energy`.
 
 .. math::
    :label: eq:theory.materials.concrete_fracture_energy
@@ -251,7 +251,7 @@ The above given three ways are implemented in :py:class:`~m_n_kappa.Steel`.
 Reinforcement
 =============
 
-The characteristics of the stress-strain-relationship of reinforcement steel is similar to those of :ref:`theory_materials_steel`.
+The characteristics of the stress-strain-relationship of reinforcement steel is similar to those of :ref:`theory.materials.steel`.
 Solely the input-parameters change in :py:class:`~m_n_kappa.Reinforcement` as follows:
 
 - Yield strength :math:`f_\mathrm{s}`: ``f_s`` (eqivalent to ``f_y`` in :py:class:`~m_n_kappa.Steel`)
