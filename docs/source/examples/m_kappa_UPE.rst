@@ -1,5 +1,9 @@
+.. _examples.m_kappa_UPE:
+
 Single span slim-floor beam with :math:`M`-:math:`\kappa`-Curve
 ***************************************************************
+
+.. _examples.m_kappa_UPE.intro:
 
 Introduction
 ============
@@ -11,7 +15,7 @@ Geometry- and material-values are defined hereafter and build later on to a :ref
 Cross-section
 =============
 
-.. _m_kappa_example_input_bottom_flange:
+.. _examples.m_kappa_UPE.input.bottom_flange:
 
 Bottom-flange
 -------------
@@ -54,7 +58,7 @@ A :py:class:`~m_n_kappa.Section` of the bottom-flange is created by simply addin
 
    bottom_flange = plate_geometry + bottom_flange_material
 
-.. _`m_kappa_example_input_upe200`:
+.. _examples.m_kappa_UPE.input.upe200:
 
 UPE 200
 -------
@@ -91,7 +95,7 @@ Geometry and material are merged easily to a :py:class:`~m_n_kappa.Crosssection`
    upe200 = upe200_geometry + upe200_material
 
 
-.. _m_kappa_example_input_concrete_slab:
+.. _examples.m_kappa_UPE.input.concrete_slab:
 
 Concrete slab
 -------------
@@ -129,7 +133,7 @@ The full concrete cross-section may be created by adding the material to the cre
    concrete_slab = concrete_geometry + concrete_material
 
 
-.. _m_kappa_example_input_reinforcement:
+.. _examples.m_kappa_UPE.input.reinforcement:
 
 Reinforcement
 -------------
@@ -173,7 +177,7 @@ By adding the resulting :py:class:`~m_n_kappa.Section` instance to each other a 
    rebar_bottom_layer_right = rebar_bottom_layer_right_geometry + rebar10_material
    rebar_layer = rebar_top_layer + rebar_bottom_layer_left + rebar_bottom_layer_right
 
-.. _m_kappa_example_input_building_cross_section:
+.. _examples.m_kappa_UPE.input.building_cross_section:
 
 Building the cross-section
 --------------------------
@@ -185,7 +189,7 @@ The overall :py:class:`~m_n_kappa.Crosssection` is created by adding all parts t
 
    cross_section = bottom_flange + upe200 + concrete_slab + rebar_layer
 
-.. _m_kappa_example_loading:
+.. _examples.m_kappa_UPE.loading:
 
 Loading
 =======
@@ -203,7 +207,7 @@ The :py:class:`~m_n_kappa.SingleLoad`-class represents a single load applied at 
    single_load_right = SingleLoad(position_in_beam=1375. + 1250., value=1.0)
    loading = SingleSpan(length=4000.0, uniform_load=None, loads=[single_load_left, single_load_right])
 
-.. _m_kappa_example_computation:
+.. _examples.m_kappa_UPE.computation:
 
 Computation
 ===========
@@ -222,7 +226,7 @@ At initialization the :py:class:`~m_n_kappa.Beam`-class does following things:
 In :ref:`m_kappa_example_without_effective_widths` the :math:`M`-:math:`\kappa`-curves are computed neglecting the effective widths of the computation.
 Whereas in :ref:`m_kappa_example_with_effective_widths` effective widths are considered considering the bending and membran effective widths.
 
-.. _m_kappa_example_geometrical_widths:
+.. _examples.m_kappa_UPE.geometrical_widths:
 
 Considering geometrical widths
 ------------------------------
@@ -244,7 +248,7 @@ Geometrical widths are in any case greater than the effective widths.
    )
 
 
-.. _m_kappa_example_effective_widths:
+.. _examples.m_kappa_UPE.effective_widths:
 
 Considering effective widths
 ----------------------------
@@ -286,7 +290,7 @@ The following graph shows how the effective widths are considered.
    ax.set_xlim(0., beam_effective_widths.length)
 
 
-.. _m_kappa_example_analysis:
+.. _examples.m_kappa_UPE.analysis:
 
 Analysis
 ========
@@ -294,7 +298,7 @@ Introduction
 ------------
 An instance of the :py:class:`~m_n_kappa.Beam`-class allows several analyses of the resistance behaviour of the computed composite beam.
 
-.. _m_kappa_example_analysis_load_deformation:
+.. _examples.m_kappa_UPE.analysis.load_deformation:
 
 Load-deformation-curve at point of maximum deformation
 ------------------------------------------------------
