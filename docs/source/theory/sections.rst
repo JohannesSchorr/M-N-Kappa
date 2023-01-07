@@ -31,6 +31,10 @@ corresponding with an applied :ref:`theory.general.curvature` or constant strain
 
 Procedure
 ---------
+.. todo::
+
+   add figure for better description of the procedure
+
 To compute axial force, lever arm and moment of a section first the following steps are conducted,
 assuming that curvature :math:`\kappa` and neutral-axis :math:`z_\mathrm{n}` are known.
 
