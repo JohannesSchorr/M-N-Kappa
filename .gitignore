@@ -1,7 +1,16 @@
+# Python
 *.pyc
-
 __pycache__/
-venv/
-docs/build/
 
+# Virtual environments
+venv/
+
+# Sphinx
+docs/build/
 docs/source/api/
+
+# Jupyter Notebooks
+.ipynb_checkpoints/
+
+# pyCharm
+.idea/
