@@ -259,6 +259,8 @@ def check_width(
 class Rectangle(Geometry):
     """
     Represents a rectangle
+
+    .. versionadded:: 0.1.0
     """
 
     def __init__(
@@ -271,11 +273,7 @@ class Rectangle(Geometry):
     ):
         """
         Neither two of the following arguments ``width``, ``right_edge`` and ``left_edge`` must be given.
-        If only argument ``width`` is given ``left_edge = 0.5*width``  and ``right_edge = 0.5*width``
-
-        .. figure:: ../images/rectangle.png
-
-           Rectangle - dimensions
+        If only argument ``width`` is given ``left_edge = -0.5*width``  and ``right_edge = 0.5*width``
 
         Parameters
         ----------
@@ -289,6 +287,42 @@ class Rectangle(Geometry):
             horizontal position of left-edge of the rectangle :math:`y_\\mathrm{left}` (Default: None).
         right_edge : float
             horizontal position of right-edge of the rectangle :math:`y_\\mathrm{right}` (Default: None)
+
+
+        .. figure:: ../images/geometry_rectangle-light.svg
+           :class: only-light
+        .. figure:: ../images/geometry_rectangle-dark.svg
+           :class: only-dark
+
+           Rectangle - dimensions
+
+        See Also
+        --------
+        Circle : creates a circular geometry object
+        Trapezoid : creates a trapezoidal geometry object
+        IProfile : creates a geometry object comprised of various :py:class:`~m_n_kappa.Rectangle`-objects forming an ``I``
+        UPEProfile : creates a geometry object comprised of varous :py:class:`~m_n_kappa.Rectangle`-objects forming an ``U``
+
+        Examples
+        --------
+        A rectangle object is easily instantiated as follows.
+
+        >>> from m_n_kappa import Rectangle
+        >>> rectangle = Rectangle(top_edge=10, bottom_edge=20, width=10)
+
+        In case only ``width`` is passed as argument the centerline of the rectangle is assumed to be a :math:`y = 0`.
+        In consequence ``left_edge = -0.5 * width`` and ``right_edge = 0.5 * width``
+
+        >>> rectangle.left_edge, rectangle.right_edge
+        -5.0, 5.0
+
+        For building a :py:class:`~m_n_kappa.Section` the ``rectangle`` must only be added to a material.
+
+        >>> from m_n_kappa import Steel
+        >>> steel = Steel(f_y=355)
+        >>> section = rectangle + steel
+        >>> type(section)
+        Section
         """
         self._top_edge = top_edge
         self._bottom_edge = bottom_edge
