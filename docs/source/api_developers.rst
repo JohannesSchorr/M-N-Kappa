@@ -3,6 +3,8 @@
 API for developers
 ******************
 
+.. _api_developers.general:
+
 General
 =======
 .. currentmodule:: m_n_kappa.general
@@ -30,6 +32,8 @@ General
    negative_sign
    interpolation
 
+.. _api_developers.geometries:
+
 Geometries
 ==========
 .. currentmodule:: m_n_kappa.geometry
@@ -38,6 +42,8 @@ Geometries
    :toctree: api/
 
    check_width
+
+.. _api_developers.material:
 
 Material
 ========
@@ -53,6 +59,8 @@ Material
    ConcreteCompressionBiLinear
    ConcreteTension
 
+.. _api_developers.sections:
+
 Sections
 ========
 .. currentmodule:: m_n_kappa.section
@@ -64,6 +72,8 @@ Sections
    ComputationSection
    ComputationSectionCurvature
    ComputationSectionStrain
+
+.. _api_developers.cross_section:
 
 Cross-sections
 ==============
@@ -92,6 +102,8 @@ Cross-sections
    determine_curvatures
    compute_neutral_axis
 
+.. _api_developers.cross_section_boundaries:
+
 Cross-section boundaries
 ========================
 
@@ -116,7 +128,9 @@ Cross-section boundaries
    remove_higher_strains
    remove_smaller_strains
    get_lower_positions
-   get_higher_positionsh
+   get_higher_positions
+
+.. _api_developers.strain_based_design:
 
 Strain-based design
 ===================
@@ -129,6 +143,8 @@ Strain-based design
    Computation
    MKappa
 
+.. _api_developers.solver:
+
 Solver
 ======
 
@@ -140,6 +156,8 @@ Solver
    Solver
    Bisection
    Newton
+
+.. _api_developers.loading:
 
 Loading
 =======
