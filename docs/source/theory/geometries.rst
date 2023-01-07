@@ -1,4 +1,4 @@
-.. _theory_geometry:
+.. _theory.geometries:
 
 Geometries
 **********
@@ -7,6 +7,8 @@ Geometries
 
    theory - geometries: draw figure(s)
 
+.. _theory.geometries.intro:
+
 Introduction
 ============
 Within this section the computation of the width :math:`b(x)` of rectangles and the area of circles
@@ -14,7 +16,7 @@ Within this section the computation of the width :math:`b(x)` of rectangles and 
 Combined with stress-values from :ref:`theory_materials` the axial force :math:`N_i`, the lever arm :math:`z_i` and
 the moment :math:`M_i` are computed (see :ref:`theory_sections`).
 
-.. _theory_geometry_rectangle_and_rectangle:
+.. _theory.geometries.rectangle_and_rectangle:
 
 Rectangle
 =========
@@ -62,7 +64,7 @@ and used to compute axial-force, the lever-arm of the axial-force and therefore 
 the rectangle or the trapezoid.
 
 
-.. _theory_geometry_circle:
+.. _theory.geometries.circle:
 
 Circle
 ======
