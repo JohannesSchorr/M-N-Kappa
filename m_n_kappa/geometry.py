@@ -1001,16 +1001,13 @@ class IProfile(ComposedGeometry):
     """
     I-Profile composed of :py:class:`~m_n_kappa.Rectangle` instances
 
+    .. versionadded:: 0.1.0
+
     Inherits from :py:class:`~m_n_kappa.geometry.ComposedGeometry` and makes a variety of geometries
     possible as the following figure shows.
     In case the desired profile has no bottom-flange choose ``has_bottom_flange=False``.
     Similar if no top-flange is needed then use ``has_top_flange=False``.
     In case top- and bottom flange are similar only passing values to ``t_fo`´ and ``t_fo`` is needed.
-
-    .. figure:: ../images/i-profile.png
-
-        I-Profile - dimensions - a) asymmetric I-profile, b) without bottom-flange, c) without top-flange,
-        d) without top- and bottom-flange
 
     Parameters
     ----------
@@ -1037,10 +1034,20 @@ class IProfile(ComposedGeometry):
     centroid_y: float
         horizontal position of the centroid of the I-profile (Default: 0)
 
+
+    .. figure:: ../images/geometry_i-profile-light.svg
+       :class: only-light
+    .. figure:: ../images/geometry_i-profile-dark.svg
+       :class: only-dark
+
+       I-Profile - dimensions - a) asymmetric I-profile, b) without bottom-flange, c) without top-flange,
+       d) without top- and bottom-flange
+
+
     See Also
     --------
+    Rectangle : basic geometry object
     UPEProfile : composed geometry consisting of several :py:class:`Rectangle` forming an ``U``
-
     RebarLayer : composed geometry consisting of several :py:class:`Circle`
 
     Example
@@ -1052,7 +1059,6 @@ class IProfile(ComposedGeometry):
     >>> heb200_geometry
     IProfile(top_edge=0.0, t_w=9.5, h_w=169.0, t_fo=15.5, b_fo=200.0, t_fu=15.5, b_fu=200.0, has_top_flange=True, has_bottom_flange=True, centroid_z=0.0, geometries=[Rectangle(top_edge=0.00, bottom_edge=15.50, width=200.00, left_edge=-100.00, right_edge=100.00), Rectangle(top_edge=15.50, bottom_edge=184.50, width=9.50, left_edge=-4.75, right_edge=4.75), Rectangle(top_edge=184.50, bottom_edge=200.00, width=200.00, left_edge=-100.00, right_edge=100.00)])
 
-
     As :py:class:`~m_n_kappa.geometry.IProfile` inherits from :py:class:`~m_n_kappa.geometry.ComposedGeometry` it also inherits its
     functionality tranforming to a :py:class:`m_n_kappa.Crosssection` by adding :py:class:`m_n_kappa.Material`.
 
@@ -1062,9 +1068,7 @@ class IProfile(ComposedGeometry):
     >>> cross_section
     Crosssection(sections=sections)
 
-
     """
-
     top_edge: float
     t_w: float
     h_w: float
