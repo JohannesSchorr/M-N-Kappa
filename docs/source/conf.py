@@ -31,6 +31,7 @@ templates_path = ['_templates']
 exclude_patterns = ['**.ipynb_checkpoints']
 
 # autodoc
+# https://www.sphinx-doc.org/en/master/usage/extensions/autodoc.html
 extensions.append('sphinx.ext.autodoc')
 autoclass_content = 'both'
 autodoc_typehints = 'description'
@@ -40,26 +41,36 @@ autodoc_default_options = {
 }
 
 # autosummary - sphinx.ext.autosummary
+# https://www.sphinx-doc.org/en/master/usage/extensions/autosummary.html
 extensions.append('sphinx.ext.autosummary')
 autosummary_generate = True
 
 # Matplotlib - matplotlib.sphinxext.plot_directive
+# https://matplotlib.org/stable/api/sphinxext_plot_directive_api.html
 extensions.append('matplotlib.sphinxext.plot_directive')
 plot_html_show_source_link = False
 plot_include_source = True
 
 # sphinx.ext.todo
+# https://www.sphinx-doc.org/en/master/usage/extensions/todo.html
 extensions.append('sphinx.ext.todo')
 todo_include_todos = True
 
 # Bibliography
+# https://sphinxcontrib-bibtex.readthedocs.io/en/latest/
 extensions.append('sphinxcontrib.bibtex')
 bibtex_bibfiles = ['literature.bib']
 bibtex_default_style = 'plain'
 
+# Sphinx-design
+# https://sphinx-design.readthedocs.io/en/latest/
+extensions.append('sphinx_design')
 
 # -- Options for HTML output -------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#options-for-html-output
 
-html_theme = 'pydata_sphinx_theme'
+# Furo
+# https://pradyunsg.me/furo/
+html_theme = "furo"
+
 html_static_path = ['_static']
