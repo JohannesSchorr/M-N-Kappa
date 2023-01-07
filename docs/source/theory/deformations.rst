@@ -1,3 +1,5 @@
+.. _theory.deformations:
+
 Deformations
 ************
 
@@ -5,13 +7,15 @@ Deformations
 
    Documentation of computation of deformations
 
+.. _theory.deformations.intro:
+
 Introduction
 ============
 
 In the following the computation of deformations from curvatures are described in :ref:`general <theory_deformations_general>`.
 Further detailed description is given for deformation computation of composite structures acting as a solid section and under consideration of the load-slip-behaviour of the shear connectors.
 
-.. _theory_deformations_general:
+.. _theory.deformations.general:
 
 General
 =======
