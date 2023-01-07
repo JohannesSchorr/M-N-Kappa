@@ -13,7 +13,7 @@ API reference
 
 Geometry
 ========
-.. currentmodule:: m_n_kappa.geometry
+.. currentmodule:: m_n_kappa
 
 .. rubric:: Basic geometries
 
@@ -30,7 +30,7 @@ Geometry
 .. autosummary::
    :toctree: api/
 
-   ComposedGeometry
+   geometry.ComposedGeometry
    IProfile
    UPEProfile
    RebarLayer
@@ -53,6 +53,7 @@ Material
 
 Sections and Cross-section
 =========================
+.. currentmodule:: m_n_kappa
 
 .. autosummary::
    :toctree: api/
@@ -64,6 +65,7 @@ Sections and Cross-section
 
 Strain-based-design
 ===================
+.. currentmodule:: m_n_kappa
 
 .. autosummary::
    :toctree: api/
@@ -73,6 +75,7 @@ Strain-based-design
 
 Loading
 =======
+.. currentmodule:: m_n_kappa
 
 .. autosummary::
    :toctree: api/
@@ -86,6 +89,7 @@ Loading
 
 Beam
 ====
+.. currentmodule:: m_n_kappa
 
 .. autosummary::
    :toctree: api/
