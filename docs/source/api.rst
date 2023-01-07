@@ -1,3 +1,5 @@
+.. _api:
+
 API reference
 *************
 
@@ -6,6 +8,8 @@ API reference
    :ref:`api_developers` : overview of all functions
 
 .. currentmodule:: m_n_kappa
+
+.. _api.geometry:
 
 Geometry
 ========
@@ -31,6 +35,7 @@ Geometry
    UPEProfile
    RebarLayer
 
+.. _api.material:
 
 Material
 ========
@@ -44,7 +49,9 @@ Material
    Steel
    Reinforcement
 
-Sections and Crosssection
+.. _api.sections:
+
+Sections and Cross-section
 =========================
 
 .. autosummary::
@@ -52,6 +59,8 @@ Sections and Crosssection
 
    Section
    Crosssection
+
+.. _api.strain_based_design:
 
 Strain-based-design
 ===================
@@ -73,6 +82,8 @@ Loading
    SingleSpanSingleLoads
    SingleSpan
 
+.. _api.beam:
+
 Beam
 ====
 
@@ -82,6 +93,7 @@ Beam
    Beam
    Node
 
+.. _api.developers:
 
 API for developers
 ==================
