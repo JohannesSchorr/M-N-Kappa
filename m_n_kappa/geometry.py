@@ -1297,9 +1297,7 @@ class UPEProfile(ComposedGeometry):
     """
     UPE-Profile composed of class Rectangles forming a reversed ``U``
 
-    .. figure:: ../images/upe.png
-
-        UPE-Profile - dimensions
+    .. versionadded:: 0.1.0
 
     Parameters
     ----------
@@ -1320,11 +1318,18 @@ class UPEProfile(ComposedGeometry):
     centroid_y: floats
         horizontal position of the centroid of the UPE-profile :math:`y_\\mathrm{centroid}` (Default: 0.0)
 
+
+    .. figure:: ../images/geometry_upe-light.svg
+       :class: only-light
+    .. figure:: ../images/geometry_upe-dark.svg
+       :class: only-dark
+
+       UPE-Profile - dimensions
+
+
     See Also
     --------
-
     IProfile : composed geometry consisting of several :py:class:`Rectangle` forming an ``I``
-
     RebarLayer : composed geometry consisting of several :py:class:`Circle`
 
     Example
@@ -1335,7 +1340,6 @@ class UPEProfile(ComposedGeometry):
     >>> upe200_geometry = UPEProfile(top_edge=10, t_f=5.2, b_f=76, t_w=9.0, h=200)
     >>> upe200_geometry
     UPEProfile(top_edge=10, t_f=5.2, b_f=76, t_w=9.0, h_w=189.6, h=200, centroid_y=0.0, geometries=[Rectangle(top_edge=10.00, bottom_edge=86.00, width=5.20, left_edge=-100.00, right_edge=-94.80), Rectangle(top_edge=10.00, bottom_edge=19.00, width=189.60, left_edge=-94.80, right_edge=94.80), Rectangle(top_edge=10.00, bottom_edge=86.00, width=5.20, left_edge=94.80, right_edge=100.00)])
-
 
     As :py:class:`~m_n_kappa.geometry.UPEProfile` inherits from :py:class:`~m_n_kappa.geometry.ComposedGeometry`
     it also inherits its functionality tranforming to a :py:class:`m_n_kappa.Crosssection`
@@ -1348,7 +1352,6 @@ class UPEProfile(ComposedGeometry):
     Crosssection(sections=sections)
 
     """
-
     top_edge: float
     t_f: float
     b_f: float
