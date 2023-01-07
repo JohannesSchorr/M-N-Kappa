@@ -491,11 +491,9 @@ class Circle(Geometry):
         """
         Circle
 
+        .. versionadded:: 0.1.0
+
         applies only for circles that are small compared to the other dimensions of the cross-section
-
-        .. figure:: ../images/circle.png
-
-           Circle - dimensions
 
         Parameters
         ----------
@@ -505,6 +503,36 @@ class Circle(Geometry):
             position of centroid of the circle in horizontal direction :math:`y_\\mathrm{centroid}`
         centroid_z: float
             position of centroid of the circle in vertical direction :math:`z_\\mathrm{centroid}`
+
+
+        .. figure:: ../images/geometry_circle-dark.svg
+           :class: only-dark
+           :alt: circle dimensions
+        .. figure:: ../images/geometry_circle-light.svg
+           :class: only-light
+           :alt: circle dimensions
+
+           Circle - dimensions
+
+        See Also
+        --------
+        Rectangle : creates a rectangular geometry object
+        Trapezoid : creates a trapezoidal geometry object
+        RebarLayer : creates a number of circular objects representing a layer of reinforcement-bars
+
+        Examples
+        --------
+        A circle object is easily instantiated as follows.
+
+        >>> from m_n_kappa import Circle
+        >>> circle = Circle(diameter=10, centroid_y=10, centroid_z=-10)
+
+        For building a :py:class:`~m_n_kappa.Section` the ``circle`` must only be added to a material.
+
+        >>> from m_n_kappa import Steel
+        >>> steel = Steel(f_y=355)
+        >>> section = circle + steel
+        >>> type(section)
         """
         self._diameter = diameter
         self._centroid_y = centroid_y
