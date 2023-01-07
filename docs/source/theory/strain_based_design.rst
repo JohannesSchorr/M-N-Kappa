@@ -34,7 +34,10 @@ The strain-distribution leading to equilibrium of the axial-forces is found by i
 Boundary values
 ===============
 
-.. figure:: ../images/max_curvature.png
+.. figure:: ../images/strain_based_design_max_curvature-light.svg
+   :class: only-light
+.. figure:: ../images/strain_based_design_max_curvature-dark.svg
+   :class: only-dark
 
    Computation of maximum possible curvature
 
