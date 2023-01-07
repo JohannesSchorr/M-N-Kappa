@@ -73,6 +73,21 @@ Strain-based-design
    MKappaByStrainPosition
    MKappaByConstantCurvature
 
+.. _api.moment_curvature_curve:
+
+Moment-Curvature-Curve
+======================
+.. currentmodule:: m_n_kappa
+
+.. autosummary::
+   :toctree: api/
+
+   MKappaCurve
+   curves_m_kappa.MKappaCurvePoint
+   curves_m_kappa.MKappaCurvePoints
+
+.. _api.loading:
+
 Loading
 =======
 .. currentmodule:: m_n_kappa
