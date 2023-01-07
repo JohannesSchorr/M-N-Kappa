@@ -20,10 +20,12 @@ Sections
 General
 -------
 Sections consist of:
-  - :ref:`geometric instance <theory_geometry>`
-  - :ref:`material instance <theory_materials>`
+  - :ref:`geometric instance <theory.geometries>`
+  - :ref:`material instance <theory.materials>`
 
-Regarding the creation and application of sections please refer to the :ref:`Users' guide <users_sections>`.
+The characteristics of geometry and material are combined to computed the :ref:`axial force <theory.sections.sections.axial_force>`,
+the :ref:`lever arm <theory.sections.sections.lever_arm>` and the :ref:`moment <theory.sections.sections.moment>`
+corresponding with an applied :ref:`theory.general.curvature` or constant strain.
 
 .. _theory.sections.sections.procedure:
 
@@ -38,7 +40,7 @@ assuming that curvature :math:`\kappa` and neutral-axis :math:`z_\mathrm{n}` are
 
 As the procedure above ensures that no material points - and therefore no change in stress-strain slope - are
 within each sub-section a linear relationship between vertical position :math:`z` and stress :math:`\sigma` is present.
-This allows to determine a :ref:`theory_sections_sections_stress_distribution` of each sub-section.
+This allows to determine a :ref:`theory.sections.sections.stress_distribution` of each sub-section.
 
 .. _theory.sections.sections.stress_distribution:
 
@@ -66,8 +68,8 @@ and (:math:`\sigma_\mathrm{bottom}` | :math:`z_\mathrm{bottom}` ).
 
    c_\mathrm{\sigma} = \sigma_\mathrm{top} - m_\mathrm{\sigma} \cdot z_\mathrm{top}
 
-Linear distributions allow easy integration, giving the opportunity to determine :ref:`theory_sections_sections_axial_force`,
-:ref:`theory_sections_sections_lever_arm` and :ref:`theory_sections_sections_moment` in conclusion.
+Linear distributions allow easy integration, giving the opportunity to determine :ref:`theory.sections.sections.axial_force`,
+:ref:`theory.sections.sections.lever_arm` and :ref:`theory.sections.sections.moment` in conclusion.
 
 .. _theory.sections.sections.axial_force:
 
@@ -84,12 +86,12 @@ It assumes that the stress distribution over its height is distributed linearly.
    = \int_{z_\mathrm{top}}^{z_\mathrm{bottom}} (m_\mathrm{\sigma} \cdot \varepsilon + c_\mathrm{\sigma}) \cdot (m_\mathrm{b} \cdot z + c_\mathrm{b}) dx
 
 with :math:`\sigma(z)` given in formula :math:numref:`eq:theory_section_stress` and :math:`b(z)`
-by formula :math:numref:`eq:rectangle_width` in :ref:`theory_geometry_rectangle_and_rectangle`.
+by formula :math:numref:`eq:rectangle_width` in :ref:`theory.geometries.rectangle_and_rectangle`.
 The axial-force :math:`N_i` of the sub-section is achieved by integration between the vertical position of the top-edge
 :math:`z_\mathrm{top}` and the vertical position of the bottom-edge :math:`z_\mathrm{bottom}`.
 
-Due to the very limited size of the :ref:`theory_geometry_circle` its axial force :math:`N_i` is computed according
-:ref:`eq:theory_section_axial_force_circle`.
+Due to the very limited size of the :ref:`theory.geometries.circle` its axial force :math:`N_i` is computed according
+Formula :math:numref:`eq:theory_section_axial_force_circle`.
 
 .. math::
    :label: eq:theory_section_axial_force_circle
@@ -97,10 +99,10 @@ Due to the very limited size of the :ref:`theory_geometry_circle` its axial forc
    N_i = A_\mathrm{circle} \cdot \sigma(z_\mathrm{circle-centroid})
 
 where :math:`A_\mathrm{circle}` is the cross-sectional area of the circle (see formula :math:numref:`eq:circle_area` in
-:ref:`theory_geometry_circle`) and the stress is obtained at the vertical position of the circle's centroid
+:ref:`theory.geometries.circle`) and the stress is obtained at the vertical position of the circle's centroid
 :math:`z_\mathrm{circle-centroid}`.
 
-Similar procedure is conducted for the :ref:`theory_sections_sections_lever_arm` and the :ref:`theory_sections_sections_moment`.
+Similar procedure is conducted for the :ref:`theory.sections.sections.lever_arm` and the :ref:`theory.sections.sections.moment`.
 
 .. _theory.sections.sections.lever_arm:
 
@@ -117,7 +119,7 @@ stress-distribution :math:`\sigma(z)`.
 
 where :math:`N_i` is the axial force of the sub-section (see Formula :math:numref:`eq:theory_section_axial_force_rectangle`),
 :math:`\sigma(z)` (see Formula :math:numref:`eq:theory_section_stress`) and :math:`b(z)` the width of the geometry at the vertical
-position :math:`z` (see formula :math:numref:`eq:rectangle_width` in :ref:`theory_geometry_rectangle_and_rectangle`).
+position :math:`z` (see formula :math:numref:`eq:rectangle_width` in :ref:`theory.geometries.rectangle_and_rectangle`).
 
 For circles the lever arm applies to the geometrical centroid in vertical direction, that is an input-parameter.
 
@@ -134,8 +136,8 @@ a given stress-distribution.
 Moment
 ------
 
-The moment of each sub-section :math:`M_i` is computed taking the :ref:`theory_sections_sections_axial_force` and
-the :ref:`_theory_sections_sections_lever_arm` into account as given in formula :math:numref:`eq:theory_section_moment`.
+The moment of each sub-section :math:`M_i` is computed taking the :ref:`theory.sections.sections.axial_force` and
+the :ref:`theory.sections.sections.lever_arm` into account as given in formula :math:numref:`eq:theory_section_moment`.
 
 .. math::
    :label: eq:theory_section_moment
@@ -176,4 +178,4 @@ split into appropriate sub-sections considering the stress-strain-relationship o
 The split is conducted in a way that each sub-section has a linear stress-distribution allowing to normalize the process
 of computing axial force, lever-arm and moment of each sub-section and in turn of the overall cross-section.
 
-The computation of a cross-section under a given strain-distribution is required for :ref:`theory_strain_based_design`.
+The computation of a cross-section under a given strain-distribution is required for :ref:`theory.strain_based_design`.
