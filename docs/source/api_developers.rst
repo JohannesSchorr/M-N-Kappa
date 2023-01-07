@@ -87,7 +87,7 @@ Cross-sections
 
    ComputationCrosssection
    ComputationCrosssectionStrain
-   ComputationCrosssectoinStrainAdd
+   ComputationCrosssectionStrainAdd
    ComputationCrosssectionCurvature
    EdgeStrains
    CrossSectionBoundaries
