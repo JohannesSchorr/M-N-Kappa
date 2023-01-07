@@ -12,7 +12,7 @@ Deformations
 Introduction
 ============
 
-In the following the computation of deformations from curvatures are described in :ref:`general <theory_deformations_general>`.
+In the following the computation of deformations from curvatures are described in :ref:`general <theory.deformations.general>`.
 Further detailed description is given for deformation computation of composite structures acting as a solid section and under consideration of the load-slip-behaviour of the shear connectors.
 
 .. _theory.deformations.general:
