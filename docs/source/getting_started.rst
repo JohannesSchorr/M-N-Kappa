@@ -1,5 +1,9 @@
+.. _getting_started:
+
 Getting Started
 ***************
+
+.. _getting_started.installation:
 
 Installation
 ============
