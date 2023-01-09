@@ -1411,6 +1411,11 @@ class Steel(Material):
         E_a : float
             modulus of elasticity :math:`E_\\mathrm{a}` (Default: 210000 N/mm²)
 
+        See Also
+        --------
+        Concrete : material-behaviour of concrete
+        Reinforcement : material-behaviour of reinforcement
+
         Notes
         -----
         .. grid:: 1 2 3 3
