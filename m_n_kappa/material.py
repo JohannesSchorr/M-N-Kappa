@@ -58,13 +58,19 @@ class Material:
         """
         Parameters
         ----------
-        stress_strain : list[:py:class:`~m_n_kappa.material.StressStrain´]
+        stress_strain : list[:py:class:`~m_n_kappa.material.StressStrain`]
             list with stress-strain_value-relationship
         section_type : str
             section_type of section this material is ordered to.
             Possible values are:
             - slab
             - girder
+
+        See Also
+        --------
+        Concrete : material-behaviour of concrete
+        Steel: material-behaviour of steel
+        Reinforcement : material-behaviour of reinforcement
 
         Examples
         --------
@@ -75,7 +81,7 @@ class Material:
         functionality.
 
         Stress-strain-points in the stress-strain-relationships need to be defined
-        by :py:class:`m_n_kappa.material.StressStrain`.
+        by :py:class:`~m_n_kappa.material.StressStrain`.
 
         **Adding new materials**
 
