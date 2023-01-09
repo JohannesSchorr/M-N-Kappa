@@ -1432,7 +1432,8 @@ class Steel(Material):
 
         Examples
         --------
-        The stress-strain-relationships consists always of a number of :py:class:`~m_n_kappa.material.StressStrain` points.
+        The stress-strain-relationships consists always of a number of :py:class:`~m_n_kappa.material.StressStrain`
+        points.
         Three forms of the stress-strain relationship are possible:
 
         1. ``f_u = None`` and ``epsilon_u = None``: Linear-elastic behaviour.
@@ -1630,7 +1631,7 @@ class Reinforcement(Steel):
     """
     Reinforcement material
 
-    Inherits from :py:class:`Steel`.
+    .. versionadded: 0.1.0
     """
 
     def __init__(self, f_s: float, f_su: float = None, epsilon_su: float = None, E_s: float = 200000.0):
@@ -1645,6 +1646,42 @@ class Reinforcement(Steel):
             Tensile strain of the reinforcement :math:`\\varepsilon_\\mathrm{su}` (Default: None)
         E_s  : float
             Modulus of elasticity of the reinforcement :math:`E_\\mathrm{s}` (Default: 200000 N/mm²)
+
+        Examples
+        --------
+        1. ``f_su = None`` and ``epsilon_su = None``: Linear-elastic behaviour.
+
+        >>> from m_n_kappa import Reinforcement
+        >>> elastic_reinforcement = Reinforcement(f_s=500.0)
+        >>> elastic_reinforcement.stress_strain
+        [StressStrain(stress=-200000.0, strain=-1.0), \
+StressStrain(stress=-0.0, strain=-0.0), \
+StressStrain(stress=200000.0, strain=1.0)]
+
+        2. ``f_su = None``: Bi-linear behaviour where ``f_su = f_s``
+
+        >>> bilinear_reinforcement = Reinforcement(f_s=500.0, epsilon_su=0.25)
+        >>> bilinear_reinforcement.stress_strain
+        [StressStrain(stress=-500.0, strain=-0.25), \
+StressStrain(stress=-500.0, strain=-0.0025), \
+StressStrain(stress=-0.0, strain=-0.0), \
+StressStrain(stress=500.0, strain=0.0025), \
+StressStrain(stress=500.0, strain=0.25)]
+
+        3. All values are not none:
+           Bi-linear behaviour with following stress-strain points
+           (:math:`f_\\mathrm{s}` | :math:`\\varepsilon_\\mathrm{s}`),
+           (:math:`f_\\mathrm{su}` | :math:`\\varepsilon_\\mathrm{su}`).
+           Where the strain at yield is computed like :math:`\\varepsilon_\\mathrm{s} = f_\\mathrm{s} / E_\\mathrm{s}`
+
+        >>> reinforcement = Reinforcement(f_s=500.0, f_su=550.0, epsilon_su=0.25)
+        >>> reinforcement.stress_strain
+        [StressStrain(stress=-550.0, strain=-0.25), \
+StressStrain(stress=-500.0, strain=-0.0025), \
+StressStrain(stress=-0.0, strain=-0.0), \
+StressStrain(stress=500.0, strain=0.0025), \
+StressStrain(stress=550.0, strain=0.25)]
+
         """
         super().__init__(f_s, f_su, epsilon_su, E_s)
 
@@ -1654,16 +1691,20 @@ class Reinforcement(Steel):
 
     @property
     def f_s(self) -> float:
+        """Yield strength of the reinforcement :math:`f_\\mathrm{s}`"""
         return self.f_y
 
     @property
     def f_su(self) -> float:
+        """Tensile strength of the reinforcement :math:`f_\\mathrm{su}`"""
         return self.f_u
 
     @property
     def epsilon_su(self) -> float:
+        """Failure-strain of reinforcement :math:`\\varepsilon_\\mathrm{su}`"""
         return self.epsilon_su
 
     @property
     def E_s(self) -> float:
+        """Modulus of elasticity of the reinforcement :math:`E_\\mathrm{s}`"""
         return self.E_a
