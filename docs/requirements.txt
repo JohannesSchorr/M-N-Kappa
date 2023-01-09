@@ -1,0 +1,6 @@
+sphinx-copybutton>=v0.5.1
+nbsphinx>=0.8.11
+matplotlib
+sphinxcontrib-bibtex>=2.5
+sphinx-design
+furo>=2022.12.07
