@@ -307,49 +307,93 @@ class Material:
 
 
 class ConcreteCompression(ABC):
+    """
+    Meta-class for concrete under compression
+
+    .. versionadded:: 0.1.0
+
+    Several models are given to describe concrete under compression.
+    This class works as basis for implementing these models and
+    give them a similar interface.
+    """
     def __init__(self, f_cm: float, yield_strain: float, E_cm: float):
+        """
+        Parameters
+        ----------
+        f_cm : float
+            mean concrete cylinder compressive strength :math:`f_\\mathrm{cm}`
+        yield_strain : float
+            strain up to which the concrete is assumed to be linear-elastic :math:`\\varepsilon_\\mathrm{y}`
+        E_cm : float
+            mean elasticity modulus of concrete :math:`E_\\mathrm{cm}`
+
+        See Also
+        --------
+        ConcreteCompressionNonlinear : Non-linear behaviour of concrete under compression
+        ConcreteCompressionParabolaRectangle : Parabola-rectangle behaviour of concrete under compression
+        ConcreteCompressionBiLinear: Bi-linear behaviour of concrete under compression
+        """
         self._f_cm = float(f_cm)
         self._yield_strain = float(yield_strain)
         self._E_cm = float(E_cm)
 
     @property
     def E_cm(self) -> float:
+        """mean elasticity modulus of concrete :math:`E_\\mathrm{cm}`"""
         return self._E_cm
 
     @property
     def yield_strain(self) -> float:
+        """strain up to which the concrete is assumed to be linear-elastic :math:`\\varepsilon_\\mathrm{y}`"""
         return self._yield_strain
 
     @property
     def f_cm(self) -> float:
+        """mean concrete cylinder compressive strength :math:`f_\\mathrm{cm}`"""
         return self._f_cm
 
     @property
     def f_ck(self) -> float:
+        """characteristic concrete cylinder compressive strength :math:`f_\\mathrm{ck}`"""
         return self.f_cm - 8.0
 
     @property
     @abstractmethod
     def c(self) -> float:
-        """strain_value at maximum stress"""
+        """strain_value at maximum stress :math:`\\varepsilon_\\mathrm{c}`"""
         ...
 
     @property
     @abstractmethod
     def cu(self) -> float:
-        """strain_value at failure"""
+        """strain_value at failure :math:`\\varepsilon_\\mathrm{cu}`"""
         ...
 
     @property
     @abstractmethod
     def strains(self) -> list:
+        """strains a corresponding stress-point is to be computed"""
         ...
 
     @abstractmethod
-    def stress(self, strain) -> float:
+    def stress(self, strain: float) -> float:
+        """
+        method to compute the stress for the given ``strain``
+
+        Parameters
+        ----------
+        strain : float
+            strain to compute a corresponding stress-point
+
+        Returns
+        -------
+        float
+            stress-point to the given ``strain``
+        """
         ...
 
     def stress_strain(self) -> list:
+        """stress-strain points of the material"""
         stress_strain = []  # [[0.0, 0.0]]
         for epsilon in self.strains:
             stress_strain.append([self.stress(epsilon), epsilon])
