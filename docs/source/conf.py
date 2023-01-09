@@ -80,6 +80,10 @@ bibtex_default_style = 'plain'
 # https://sphinx-design.readthedocs.io/en/latest/
 extensions.append('sphinx_design')
 
+# Sphinx-Copybutton
+# https://github.com/executablebooks/sphinx-copybutton
+extensions.append('sphinx_copybutton')
+
 # -- Options for HTML output -------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#options-for-html-output
 
