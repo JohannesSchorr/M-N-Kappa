@@ -1139,7 +1139,7 @@ Rectangle(top_edge=184.50, bottom_edge=200.00, width=200.00, left_edge=-100.00, 
     by adding :py:class:`m_n_kappa.Material`.
 
     >>> from m_n_kappa import Steel
-    >>> steel = Steel(f_y = 300.0, f_u = 350.0, epsilon_u=0.25)
+    >>> steel = Steel(f_y = 300.0, f_u = 350.0, failure_strain=0.25)
     >>> cross_section = heb200_geometry + steel
     >>> cross_section
     Crosssection(sections=sections)
