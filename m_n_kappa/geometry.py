@@ -1246,7 +1246,7 @@ class RebarLayer(ComposedGeometry):
     The following example creates 10 circles with diameter 12 and a vertical position of 10
 
     >>> from m_n_kappa import RebarLayer
-    >>> rebar_layer = RebarLayer(rebar_diameter=12.0, centroid=10.0, rebar_number=10)
+    >>> rebar_layer = RebarLayer(rebar_diameter=12.0, centroid=10.0, rebar_number=10, rebar_horizontal_distance=100)
 
     Adding a material to ``rebar_layer`` creates a cross-section.
 
