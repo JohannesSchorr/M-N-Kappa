@@ -546,10 +546,90 @@ class ConcreteCompressionNonlinear(ConcreteCompression):
 
 class ConcreteCompressionParabolaRectangle(ConcreteCompression):
 
-    """parabola-rectangle behaviour of concrete under compression according to EN 1992-1-1"""
+    """
+    parabola-rectangle behaviour of concrete under compression according to EN 1992-1-1 [1]_
+
+    .. versionadded:: 0.1.0
+    """
+
+    def __init__(self, f_cm: float, yield_strain: float, E_cm: float):
+        """
+        Parameters
+        ----------
+        f_cm : float
+            mean concrete cylinder compressive strength :math:`f_\\mathrm{cm}`
+        yield_strain : float
+            strain up to which the concrete is assumed to be linear-elastic :math:`\\varepsilon_\\mathrm{y}`
+        E_cm : float
+            mean elasticity modulus of concrete :math:`E_\\mathrm{cm}`
+
+
+        See Also
+        --------
+        ConcreteCompressionNonlinear : Describes non-linear behaviour of concrete under compression
+        ConcreteCompressionBiLinear : describes bi-linear behaviour of concrete under compression
+
+        Notes
+        -----
+        The formula for computation of the parabola-rectangle behaviour of concrete by EN 1992-1-1 [1]_, Formula 3.17
+        is given as follows. Formula :math:numref:`eq:material.concrete.parabola_rectangle` is valid in the range
+        :math:`0 < |\\varepsilon| < |\\varepsilon_\\mathrm{c}|`. The here given values are all absolute values.
+        As this model applies to the compression-range all values must be multiplied by (-1).
+
+        .. math::
+           :label: eq:material.concrete.parabola_rectangle
+
+           \\sigma_\\mathrm{c} & = f_\\mathrm{c} \\cdot \\left[1 - \\left(1 - \\frac{\\varepsilon}{\\varepsilon_\\mathrm{c}}
+           \\right)^{n} \\right] & & \\text{ for } 0 \\leq \\varepsilon \leq \\varepsilon_\\mathrm{c}
+
+           \\sigma_\\mathrm{c} & = f_\\mathrm{c} & & \\text{ for } \\varepsilon_\\mathrm{c} \\leq \\varepsilon \leq \\varepsilon_\\mathrm{cu}
+
+        where
+
+        .. math::
+           :label: eq:material.concrete.parabola_rectangle_helper
+
+           \\text{ for } f_\\mathrm{ck} \\leq 50 \\text{ N/mm²}: &
+
+           & \\varepsilon_\\mathrm{c}(Permil) = 2.0
+
+           & \\varepsilon_\\mathrm{cu}(Permil) = 3.5
+
+           & n = 2.0
+
+           \\text{for } f_\\mathrm{ck} \\geq 50 \\text{ N/mm²} &
+
+           & \\varepsilon_\\mathrm{c}(Permil) = 2.0 + 0.085 \\cdot (f_\\mathrm{ck} - 50)^{0.53}
+
+           & \\varepsilon_\\mathrm{cu}(Permil) = 2.6 + 35 \\left[\\frac{90-f_\\mathrm{ck}}{100} \\right]^{4}
+
+           & n = 1.4 + 23.4 \\cdot \\left[ \\frac{90-f_\\mathrm{ck}}{100} \\right]
+
+        where :math:`\\varepsilon_\\mathrm{c}` is the strain at peak stress and :math:`\\varepsilon_\\mathrm{cu}`
+        is the strain at failure.
+
+        .. figure:: ../images/material_concrete_parabola_rectangle-light.svg
+           :class: only-light
+        .. figure:: ../images/material_concrete_parabola_rectangle-dark.svg
+           :class: only-dark
+
+           Parabola-rectangle relationship of concrete by EN 1992-1-1 [1]_, Fig. 3.3
+
+        References
+        ----------
+        .. [1] EN 1992-1-1: Eurocode 2 - Design of concrete structures -
+           Part 1-1: General rules and rules for buildings, European Committee of Standardization (CEN),
+           April 2004
+
+        """
+        super().__init__(f_cm, yield_strain, E_cm)
 
     @property
     def c(self) -> float:
+        """
+        strain at peak stress :math:`\\varepsilon_\\mathrm{c}`
+        (see Formula :math:numref:`eq:material.concrete.parabola_rectangle_helper`)
+        """
         if self.f_ck <= 50:
             return 0.001 * 2.0
         else:
@@ -557,19 +637,51 @@ class ConcreteCompressionParabolaRectangle(ConcreteCompression):
 
     @property
     def cu(self) -> float:
+        """
+        failure strain of concrete :math:`\\varepsilon_\\mathrm{cu}`
+        (see Formula :math:numref:`eq:material.concrete.parabola_rectangle_helper`)
+        """
         return 0.001 * min(
             (2.6 + 35.0 * ((90.0 - float(self.f_ck)) / 100.0) ** 4.0), 3.5
         )
 
     @property
     def n(self) -> float:
+        """
+        exponent in formula :math:numref:`eq:material.concrete.parabola_rectangle`
+        given in formula :math:numref:`eq:material.concrete.parabola_rectangle_helper`
+        """
         return min(1.4 + 23.4 * ((90.0 - self.f_ck) / 100.0) ** 4.0, 2.0)
 
     @property
     def strains(self) -> list:
+        """
+        Strain-values where stresses are computed.
+
+        Current strain-values are:
+
+        - :math:`0.25 \\cdot \\varepsilon_\\mathrm{c}`
+        - :math:`0.50 \\cdot \\varepsilon_\\mathrm{c}`
+        - :math:`0.75 \\cdot \\varepsilon_\\mathrm{c}`
+        - :math:`\\varepsilon_\\mathrm{c}`
+        - :math:`\\varepsilon_\\mathrm{cu}`
+        """
         return [0.25 * self.c, 0.5 * self.c, 0.75*self.c, self.c, self.cu]
 
-    def stress(self, strain) -> float:
+    def stress(self, strain: float) -> float:
+        """
+        computation of stresses according to formula :math:numref:`eq:material.concrete.parabola_rectangle`
+
+        Parameters
+        ----------
+        strain : float
+            strain to compute corresponding stress
+
+        Returns
+        -------
+        float
+            stress to the given ``strain``
+        """
         if 0.0 <= strain <= self.c:
             return self.f_ck * (1 - (1 - strain / self.c) ** self.n)
         elif self.c < strain <= self.cu:
