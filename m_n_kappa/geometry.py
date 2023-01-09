@@ -313,7 +313,7 @@ class Rectangle(Geometry):
         In consequence ``left_edge = -0.5 * width`` and ``right_edge = 0.5 * width``
 
         >>> rectangle.left_edge, rectangle.right_edge
-        -5.0, 5.0
+        (-5.0, 5.0)
 
         For building a :py:class:`~m_n_kappa.Section` the ``rectangle`` must only be added to a material.
 
@@ -321,7 +321,8 @@ class Rectangle(Geometry):
         >>> steel = Steel(f_y=355)
         >>> section = rectangle + steel
         >>> type(section)
-        Section
+        <class 'm_n_kappa.section.Section'>
+
         """
         self._top_edge = top_edge
         self._bottom_edge = bottom_edge
