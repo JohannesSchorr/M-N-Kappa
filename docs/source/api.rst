@@ -52,7 +52,7 @@ Material
 .. _api.sections:
 
 Sections and Cross-section
-=========================
+==========================
 .. currentmodule:: m_n_kappa
 
 .. autosummary::
