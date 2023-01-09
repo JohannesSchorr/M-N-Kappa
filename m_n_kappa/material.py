@@ -997,11 +997,11 @@ class ConcreteTension:
         stress_strain = []  # [[0.0, 0.0]]
         if self.use_tension:
             stress_strain.append([self.f_ctm, self.yield_strain])
-        if self.consider_opening_behaviour:
-            stress_strain.append([0.2*self.f_ctm, self.fracture_energy / self.f_ctm])
-            stress_strain.append([0.0, 5.0 * self.fracture_energy / self.f_ctm])
-        else:
-            stress_strain.append([0.0, self.yield_strain + 0.000001])
+            if self.consider_opening_behaviour:
+                stress_strain.append([0.2*self.f_ctm, self.w])
+                stress_strain.append([0.0, self.wu])
+            else:
+                stress_strain.append([0.0, self.yield_strain + 0.000001])
         stress_strain.append([0.0, 10.0])
         return positive_sign(stress_strain)
 
