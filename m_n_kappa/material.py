@@ -825,6 +825,12 @@ class ConcreteCompressionBiLinear(ConcreteCompression):
 
 
 class ConcreteTension:
+
+    """
+    define concrete tensile behaviour
+
+    .. versionadded:: 0.1.0
+    """
     def __init__(
         self,
         f_cm: float,
@@ -838,7 +844,7 @@ class ConcreteTension:
         Parameters
         ----------
         f_cm : float
-            cylinder concrete compressive strength :math:`f_\\mathrm{cm}`
+            mean cylinder concrete compressive strength :math:`f_\\mathrm{cm}`
         E_cm : float
             mean modulus of elasticity of concrete :math:`E_\\mathrm{cm}`
         f_ctm : float
@@ -849,7 +855,68 @@ class ConcreteTension:
             - ``True``: compute tensile behaviour (Default)
             - ``False``: no tensile behaviour computed
         consider_opening_behaviour: bool
+            if ``True`` considers the crack opening under tension
 
+        Notes
+        -----
+        If not given the concrete tensile strength :math:`f_\\mathrm{ctm}` may be computed according to
+        EN 1992-1-1 [1]_, Tab. 3.1
+
+        .. math::
+           :label: eq:material.concrete.tension
+
+           f_\\mathrm{ctm} & = 0.3 \\cdot f_\\mathrm{ck}^{2/3} \\leq C50/50
+
+           f_\\mathrm{ctm} & = 2.12 \\cdot \\ln(1 + 0.1 \\cdot f_\\mathrm{cm}) > C50/60
+
+
+        .. figure:: ../images/material_concrete_tension-light.svg
+           :class: only-light
+        .. figure:: ../images/material_concrete_tension-dark.svg
+           :class: only-dark
+
+           Stress-strain relationship of concrete under tension
+
+        References
+        ----------
+        .. [1] EN 1992-1-1: Eurocode 2 - Design of concrete structures -
+           Part 1-1: General rules and rules for buildings, European Committee of Standardization (CEN),
+           April 2004
+
+        .. [2] fib Model Code for Concrete Structures, International Federation for Structural Concrete,
+           Ernst & Sohn GmbH & Co. KG, 2013, p. 78, Eq. 5.1-9
+
+        Examples
+        --------
+        In case no tension is to be considered :py:class:`ConcreteTension` is initialized as follows.
+
+        >>> from m_n_kappa.material import ConcreteTension
+        >>> no_tension = ConcreteTension(f_cm=38, E_cm=33000, use_tension=False)
+        >>> no_tension.stress_strain()
+        [[0.0, 10.0]]
+
+        The single tension point ``[[0.0, 10.0]]`` is needed otherwise the computation fails as soon as the concrete
+        is loaded by tension and effects like redistribution of tensile stresses into rebars.
+
+        If the tensile-capacity of the condrete is needed no parameter must be given  as ``use_tension=True`` is
+        the default.
+
+        >>> consider_tension = ConcreteTension(f_cm=38, E_cm=33000)
+        >>> consider_tension.stress_strain()
+        [[2.896468153816889, 8.777176223687542e-05], [0.5792936307633778, 0.1723892594303201], \
+[0.0, 0.8619462971516005], [0.0, 10.0]]
+
+        Under the hood :mod:`m_n_kappa` automatically computes the concrete tensile strength :math:`f_\\mathrm{ctm}`
+
+        >>> consider_tension.f_ctm
+        2.896468153816889
+
+        Furthermore, the crack opening behaviour according to fib Model Code 2010 [2]_ is considered.
+        If this shall not be considered :py:class:`ConcreteTension` may be initialized as follows.
+
+        >>> consider_tension = ConcreteTension(f_cm=38, E_cm=33000, consider_opening_behaviour=False)
+        >>> consider_tension.stress_strain()
+        [[2.896468153816889, 8.777176223687542e-05], [0.0, 8.877176223687542e-05], [0.0, 10.0]]
         """
         self._f_cm = f_cm
         self._E_cm = E_cm
@@ -860,18 +927,22 @@ class ConcreteTension:
 
     @property
     def f_cm(self):
+        """mean cylinder concrete compressive strength :math:`f_\\mathrm{cm}`"""
         return self._f_cm
 
     @property
     def f_ck(self):
+        """characteristic cylinder concrete compressive strength :math:`f_\\mathrm{ck}`"""
         return self._f_cm - 8.0
 
     @property
     def E_cm(self):
+        """mean modulus of elasticity of concrete :math:`E_\\mathrm{cm}`"""
         return self._E_cm
 
     @property
     def yield_strain(self):
+        """strain at peak stresses :math:`\\varepsilon_\\mathrm{y} = f_\\mathrm{ctm} / E_\\mathrm{cm}`"""
         return self.f_ctm / self.E_cm
 
     @property
@@ -879,29 +950,50 @@ class ConcreteTension:
         """
         Fracture energy of concrete :math:`G_\\mathrm{F}` in N/mm (Newton per millimeter)
 
-        .. note::
-
-            The formula assumes that the mean concrete compressive strength :math:`f_\\mathrm{cm}` is given in
-            N/mm².
-
-        .. seealso::
-
-            fib Model Code for Concrete Structures, International Federation for Structural Concrete,
-            Ernst & Sohn GmbH & Co. KG, 2013, p. 78, Eq. 5.1-9
+        Notes
+        -----
+        The formula assumes that the mean concrete compressive strength :math:`f_\\mathrm{cm}` is given in
+        N/mm².
         """
         return 0.001 * 73.0 * self.f_cm * 0.18
 
     @property
     def f_ctm(self) -> float:
+        """
+        concrete tensile strength :math:`f_\\mathrm{ctm}`.
+        If not given by input :math:`f_\\mathrm{ctm}` is computed by Formula :math:numref:`eq:material.concrete.tension`
+        """
         if self._f_ctm is None:
             if self.f_ck <= 50.0:
-                return 0.3 * self.f_cm
+                return 0.3 * self.f_ck ** (2./3.)
             else:
                 return 2.12 * log(1.0 + 0.1 * self.f_cm)
         else:
             return self._f_ctm
 
+    @property
+    def use_tension(self) -> bool:
+        return self._use_tension
+
+    @property
+    def consider_opening_behaviour(self) -> bool:
+        """if ``True`` considers the crack opening behaviour according to fib-model-code [2]_"""
+        return self._consider_opening_behaviour
+
+    @property
+    def w(self) -> float:
+        """crack-opening at :math:`0.2 \\cdot f_\\mathrm{ctm}`"""
+        return self.fracture_energy / self.f_ctm
+
+    @property
+    def wu(self) -> float:
+        """crack-opening where no tension is transmitted anymore :math:`w_\\mathrm{u} = 5.0 \\cdot w`"""
+        return 5.0 * self.w
+
     def stress_strain(self) -> list:
+        """
+        stress-strain-relationship of concrete under tension
+        """
         stress_strain = []  # [[0.0, 0.0]]
         if self.use_tension:
             stress_strain.append([self.f_ctm, self.yield_strain])
@@ -912,14 +1004,6 @@ class ConcreteTension:
             stress_strain.append([0.0, self.yield_strain + 0.000001])
         stress_strain.append([0.0, 10.0])
         return positive_sign(stress_strain)
-
-    @property
-    def use_tension(self) -> bool:
-        return self._use_tension
-
-    @property
-    def consider_opening_behaviour(self) -> bool:
-        return self._consider_opening_behaviour
 
 
 class Concrete(Material):
