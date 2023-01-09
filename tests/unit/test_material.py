@@ -161,7 +161,7 @@ class TestSteelBilinear(TestCase):
         self.f_y = 355.0
         self.f_u = 500.0
         self.epsilon_u = 0.15
-        self.steel = Steel(f_y=self.f_y, f_u=self.f_u, epsilon_u=self.epsilon_u)
+        self.steel = Steel(f_y=self.f_y, f_u=self.f_u, failure_strain=self.epsilon_u)
 
     def test_f_y(self):
         self.assertEqual(self.steel.f_y, self.f_y)
@@ -170,7 +170,7 @@ class TestSteelBilinear(TestCase):
         self.assertEqual(self.steel.f_u, self.f_u)
 
     def test_epsilon_u(self):
-        self.assertEqual(self.steel.epsilon_u, self.epsilon_u)
+        self.assertEqual(self.steel.failure_strain, self.epsilon_u)
 
     def test_epsilon_y(self):
         epsilon_y = self.f_y / 210000.0

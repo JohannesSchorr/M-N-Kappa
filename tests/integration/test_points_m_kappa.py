@@ -22,7 +22,7 @@ epsilon_u = 0.2
 steel_top_edge = 0.0
 steel_bottom_edge = 10.0
 steel_width = 10.0
-steel = Steel(f_y=f_y, f_u=f_u, epsilon_u=epsilon_u)
+steel = Steel(f_y=f_y, f_u=f_u, failure_strain=epsilon_u)
 steel_rectangle = Rectangle(top_edge=steel_top_edge, bottom_edge=steel_bottom_edge, width=steel_width)
 steel_section = steel + steel_rectangle
 
@@ -61,7 +61,7 @@ class TestMKappaByStrainPosition(TestCase):
         self.assertEqual(self.cs.bottom_edge, steel_bottom_edge)
 
     def test_maximum_curvature(self):
-        curvature = (self.strain - steel.epsilon_u) / (steel_top_edge - steel_bottom_edge)
+        curvature = (self.strain - steel.failure_strain) / (steel_top_edge - steel_bottom_edge)
         self.assertAlmostEqual(self.m_kappa.maximum_curvature, curvature, places=3)
 
     def test_minimum_curvature(self):

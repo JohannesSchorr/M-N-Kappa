@@ -31,7 +31,7 @@ epsilon_u = 0.2
 steel_top_edge = 20.0
 steel_bottom_edge = 30.0
 steel_width = 10.0
-steel = Steel(f_y=f_y, epsilon_u=epsilon_u)
+steel = Steel(f_y=f_y, failure_strain=epsilon_u)
 steel_rectangle = Rectangle(
     top_edge=steel_top_edge, bottom_edge=steel_bottom_edge, width=steel_width
 )
