@@ -467,6 +467,16 @@ class ConcreteCompressionNonlinear(ConcreteCompression):
            Part 1-1: General rules and rules for buildings, European Committee of Standardization (CEN),
            April 2004
 
+        Examples
+        --------
+        The non-linear stress-strain relationship of concrete under compression is computed as follows.
+
+        >>> from m_n_kappa.material import ConcreteCompressionNonlinear
+        >>> f_cm = 30.0 # mean concrete compressive strength
+        >>> E_cm = 33000 # modulus of elasticity of concrete
+        >>> concrete = ConcreteCompressionNonlinear(f_cm=f_cm, yield_strain=0.4*f_cm/E_cm, E_cm=E_cm)
+        >>> concrete.stress_strain()
+        [[-10.980238020734609, -0.0003636363636363636], [-20.067768095243533, -0.0007830092214998742], [-28.832492515864047, -0.0015660184429997484], [-30.0, -0.0020091188530299217], [-27.130958857945092, -0.0027545594265149607], [-19.399627516017674, -0.0035]]
         """
         super().__init__(f_cm, yield_strain, E_cm)
 
