@@ -1393,7 +1393,7 @@ class Steel(Material):
         self,
         f_y: float,
         f_u: float = None,
-        epsilon_u: float = None,
+        failure_strain: float = None,
         E_a: float = 210000.0,
     ):
         """
@@ -1403,7 +1403,7 @@ class Steel(Material):
             yield strength :math:`f_\\mathrm{y}`
         f_u : float
             tensile strength :math:`f_\\mathrm{u}` (Default: None)
-        epsilon_u : float
+        failure_strain : float
             tensile strain :math:`\\varepsilon_\\mathrm{u}` (Default: None)
         E_a : float
             modulus of elasticity :math:`E_\\mathrm{a}` (Default: 210000 N/mm²)
@@ -1411,7 +1411,7 @@ class Steel(Material):
         super().__init__(section_type="girder")
         self._f_y = float(f_y)
         self._f_u = make_float(f_u)
-        self._epsilon_u = make_float(epsilon_u)
+        self._failure_strain = make_float(failure_strain)
         self._E_a = make_float(E_a)
         self._stress_strain = self.__build_stress_strain()
 
@@ -1419,7 +1419,7 @@ class Steel(Material):
         return (
             f"Steel(f_y={self.f_y}, "
             f"f_u={self.f_u}, "
-            f"epsilon_u={self.epsilon_u}, "
+            f"failure_strain={self.failure_strain}, "
             f"E_a={self.E_a})"
         )
 
@@ -1449,8 +1449,8 @@ class Steel(Material):
             )
         if self.__is_plastic:
             text.append(
-                "f_u: {:.1f} N/mm^2 | epsilon_u: {:.5f}".format(
-                    self.f_u, self.epsilon_u
+                "f_u: {:.1f} N/mm^2 | failure_strain: {:.5f}".format(
+                    self.f_u, self.failure_strain
                 )
             )
         text += [
@@ -1470,22 +1470,25 @@ class Steel(Material):
         return "girder"
 
     @property
-    def __is_elastic(self):
-        if self.f_y is None or self.epsilon_u is None:
+    def __is_elastic(self) -> bool:
+        """determines if passed arguments allow an elastic stress-strain relationship"""
+        if self.f_y is None or self.failure_strain is None:
             return True
         else:
             return False
 
     @property
-    def __is_ideal_plastic(self):
-        if self.f_y is not None and self.epsilon_u is not None and self.f_u is None:
+    def __is_ideal_plastic(self) -> bool:
+        """determines if passed arguments allow a ideal-plastic stress-strain relationship"""
+        if self.f_y is not None and self.failure_strain is not None and self.f_u is None:
             return True
         else:
             return False
 
     @property
-    def __is_plastic(self):
-        if self.f_y is not None and self.epsilon_u is not None and self.f_u is not None:
+    def __is_plastic(self) -> bool:
+        """determines if passed arguments allow a plastic stress-strain relationship"""
+        if self.f_y is not None and self.failure_strain is not None and self.f_u is not None:
             return True
         else:
             return False
@@ -1505,12 +1508,13 @@ class Steel(Material):
 
     @property
     def f_u(self) -> float:
-        if self._f_u is not None and self._epsilon_u is not None:
+        if self._f_u is not None and self._failure_strain is not None:
             return self._f_u
 
     @property
-    def epsilon_u(self) -> float:
-        return self._epsilon_u
+    def failure_strain(self) -> float:
+        """tensile strain :math:`\\varepsilon_\\mathrm{u}`"""
+        return self._failure_strain
 
     @property
     def E_a(self) -> float:
@@ -1530,9 +1534,9 @@ class Steel(Material):
         else:
             stress_strain.append([self.f_y, self.epsilon_y])
         if self.__is_ideal_plastic:
-            stress_strain.append([self.f_y, self.epsilon_u])
+            stress_strain.append([self.f_y, self.failure_strain])
         if self.__is_plastic:
-            stress_strain.append([self.f_u, self.epsilon_u])
+            stress_strain.append([self.f_u, self.failure_strain])
         return stress_strain
 
     @property
