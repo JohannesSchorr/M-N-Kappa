@@ -1053,6 +1053,11 @@ class Concrete(Material):
             - ``'Default'``
             - ``'consider opening behaviour'``
 
+        See Also
+        --------
+        Steel: material-behaviour of steel
+        Reinforcement : material-behaviour of reinforcement
+
         Notes
         -----
         For Details regarding the computation of these relastionships check out the corresponding classes.
@@ -1177,7 +1182,8 @@ StressStrain(stress=0.0, strain=7.800353297574598e-05), \
 StressStrain(stress=0.0, strain=10.0)]
 
         Furthermore, the crack-opening of the conrete and its effect on the tensile behaviour may be considered by
-        adding ``tension_stress_strain_type='consider opening behaviour'``.
+        adding ``tension_stress_strain_type='consider opening behaviour'`` that is derived
+        from fib Model Code 2010 [2]_.
 
         >>> with_tension_opening = Concrete(f_cm=30.0,
         ...                        tension_stress_strain_type='consider opening behaviour')
