@@ -1369,24 +1369,10 @@ class Steel(Material):
     """
     Steel material
 
+    .. versionadded:: 0.1.0
+
     Provides a stress-strain material behaviour of structural steel material.
-    Three forms of the stress-strain relationship are possible:
-
-       1. ``f_u = None`` and ``epsilon_u = None``:
-          Linear-elastic behaviour.
-
-       2. ``f_u = None``:
-          Bi-linear behaviour where ``f_u = f_y``
-       3. All values are not none:
-          Bi-linear behaviour with following stress-strain points
-          (:math:`f_\\mathrm{y}` | :math:`\\varepsilon_\\mathrm{y}`),
-          (:math:`f_\\mathrm{u}` | :math:`\\varepsilon_\\mathrm{u}`).
-          Where the strain at yield is computed like :math:`\\varepsilon_\\mathrm{y} = f_\\mathrm{y} / E_\\mathrm{a}`
-
-    .. note::
-
-       Assumes Newton (N) and Millimeter (mm) as basic units.
-       In case other units are used appropriate value for modulus of elasticity `E_a` must be provided.
+    It is assumed that steel has the same behaviour under tension and under compression.
     """
 
     def __init__(
@@ -1397,6 +1383,11 @@ class Steel(Material):
         E_a: float = 210000.0,
     ):
         """
+        .. note::
+
+           Assumes Newton (N) and Millimeter (mm) as basic units.
+           In case other units are used appropriate value for modulus of elasticity `E_a` must be provided.
+
         Parameters
         ----------
         f_y : float
@@ -1407,6 +1398,76 @@ class Steel(Material):
             tensile strain :math:`\\varepsilon_\\mathrm{u}` (Default: None)
         E_a : float
             modulus of elasticity :math:`E_\\mathrm{a}` (Default: 210000 N/mm²)
+
+        Notes
+        -----
+        .. grid:: 1 2 3 3
+
+           .. grid-item::
+
+              .. figure:: ../images/material_steel_elastic-light.svg
+                 :class: only-light
+              .. figure:: ../images/material_steel_elastic-dark.svg
+                 :class: only-dark
+
+                 Elastic stress-strain-relationship of steel
+
+           .. grid-item::
+
+              .. figure:: ../images/material_steel_bilinear-light.svg
+                 :class: only-light
+              .. figure:: ../images/material_steel_bilinear-dark.svg
+                 :class: only-dark
+
+                 Bi-linear stress-strain-relationship of steel
+
+           .. grid-item::
+
+              .. figure:: ../images/material_steel_trilinear-light.svg
+                 :class: only-light
+              .. figure:: ../images/material_steel_trilinear-dark.svg
+                 :class: only-dark
+
+                 Bi-linear stress-strain-relationship with hardening of steel
+
+        Examples
+        --------
+        The stress-strain-relationships consists always of a number of :py:class:`~m_n_kappa.material.StressStrain` points.
+        Three forms of the stress-strain relationship are possible:
+
+        1. ``f_u = None`` and ``epsilon_u = None``: Linear-elastic behaviour.
+
+        >>> from m_n_kappa import Steel
+        >>> elastic_steel = Steel(f_y=355.0)
+        >>> elastic_steel.stress_strain
+        [StressStrain(stress=-210000.0, strain=-1.0), \
+StressStrain(stress=-0.0, strain=-0.0), \
+StressStrain(stress=210000.0, strain=1.0)]
+
+        2. ``f_u = None``: Bi-linear behaviour where ``f_u = f_y``
+
+        >>> bilinear_steel = Steel(f_y=355, failure_strain=0.15)
+        >>> bilinear_steel.stress_strain
+        [StressStrain(stress=-355.0, strain=-0.15), \
+StressStrain(stress=-355.0, strain=-0.0016904761904761904), \
+StressStrain(stress=-0.0, strain=-0.0), \
+StressStrain(stress=355.0, strain=0.0016904761904761904), \
+StressStrain(stress=355.0, strain=0.15)]
+
+        3. All values are not none:
+           Bi-linear behaviour with following stress-strain points
+           (:math:`f_\\mathrm{y}` | :math:`\\varepsilon_\\mathrm{y}`),
+           (:math:`f_\\mathrm{u}` | :math:`\\varepsilon_\\mathrm{u}`).
+           Where the strain at yield is computed like :math:`\\varepsilon_\\mathrm{y} = f_\\mathrm{y} / E_\\mathrm{a}`
+
+        >>> steel = Steel(f_y=355, f_u=400, failure_strain=0.15)
+        >>> steel.stress_strain
+        [StressStrain(stress=-400.0, strain=-0.15), \
+StressStrain(stress=-355.0, strain=-0.0016904761904761904), \
+StressStrain(stress=-0.0, strain=-0.0), \
+StressStrain(stress=355.0, strain=0.0016904761904761904), \
+StressStrain(stress=400.0, strain=0.15)]
+
         """
         super().__init__(section_type="girder")
         self._f_y = float(f_y)
@@ -1504,6 +1565,7 @@ class Steel(Material):
 
     @property
     def f_y(self) -> float:
+        """yield strength :math:`f_\\mathrm{y}`"""
         return self._f_y
 
     @property
@@ -1518,14 +1580,17 @@ class Steel(Material):
 
     @property
     def E_a(self) -> float:
+        """modulus of elasticity :math:`E_\\mathrm{a}`"""
         return self._E_a
 
     @property
     def epsilon_y(self) -> float:
+        """yield strength :math:`f_\\mathrm{y}`"""
         if self.f_y is not None:
             return self.f_y / self.E_a
 
     def stress_strain_standard(self) -> list:
+        """standard stress-strain-relationship"""
         stress_strain = [
             [0.0, 0.0],
         ]
@@ -1540,14 +1605,17 @@ class Steel(Material):
         return stress_strain
 
     @property
-    def tension_stress_strain(self):
+    def tension_stress_strain(self) -> list:
+        """stress-strain-relationship under tension (positive sign)"""
         return positive_sign(self.stress_strain_standard())
 
     @property
-    def compression_stress_strain(self):
+    def compression_stress_strain(self) -> list:
+        """stress-strain-relationship under compression (negative sign)"""
         return negative_sign(self.stress_strain_standard())
 
-    def __build_stress_strain(self):
+    def __build_stress_strain(self) -> list[StressStrain]:
+        """builds the full stress-strain-curve"""
         stress_strains = self.compression_stress_strain + self.tension_stress_strain
         stress_strains.sort()
         stress_strains = remove_duplicates(stress_strains)
