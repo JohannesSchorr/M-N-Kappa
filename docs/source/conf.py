@@ -50,7 +50,8 @@ autoclass_content = 'both'
 autodoc_typehints = 'description'
 autodoc_default_options = {
     'members': True,
-    'member-order': 'groupwise'
+    'member-order': 'groupwise',
+    'show-inheritance': True,
 }
 
 # autosummary - sphinx.ext.autosummary
