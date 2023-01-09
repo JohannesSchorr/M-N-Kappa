@@ -1348,7 +1348,7 @@ StressStrain(stress=0.0, strain=10.0)]
         else:
             raise ValueError(
                 str(stress_strain_type)
-                + ' is not a valid value. Valid value is "Default"'
+                + ' is not a valid value. Valid value is "Default" or "Consider Opening behaviour"'
             )
 
     def __build_stress_strain(self) -> list[StressStrain]:
