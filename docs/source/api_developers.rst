@@ -162,7 +162,7 @@ Solver
 Loading
 =======
 
-.. currentmodule:: m_n_kappa.internalforces
+.. currentmodule:: m_n_kappa.loading
 
 .. autosummary::
    :toctree: api/

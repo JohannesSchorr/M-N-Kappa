@@ -1,6 +1,6 @@
 from unittest import TestCase, main
 
-from m_n_kappa.internalforces import SingleSpan, SingleLoad
+from m_n_kappa.loading import SingleSpan, SingleLoad
 
 
 class TestSingleSpanUniformLoad(TestCase):

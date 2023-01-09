@@ -5,7 +5,7 @@ from .crosssection import Crosssection
 from .points import MKappaByStrainPosition, MKappaByConstantCurvature
 from .curves_m_kappa import MKappaCurve
 from .deformation import Beam, Node
-from .internalforces import (
+from .loading import (
     SingleSpanUniformLoad,
     SingleLoad,
     SingleSpanSingleLoads,

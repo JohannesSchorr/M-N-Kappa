@@ -3,7 +3,7 @@ from dataclasses import dataclass
 from .general import interpolation, EffectiveWidths
 from .crosssection import Crosssection
 from .curves_m_kappa import MKappaCurve, MKappaCurvePoints, MKappaCurvePoint
-from .internalforces import (
+from .loading import (
     ABCSingleSpan,
     SingleSpanSingleLoads,
     SingleLoad,
@@ -234,7 +234,7 @@ class Beam:
             length of the beam
         element_number : int
             number of elements the beam consists of
-        load : :py:class:`~m_n_kappa.internalforces.ABCSingleSpan`
+        load : :py:class:`~m_n_kappa.loading.ABCSingleSpan`
             load-section_type applied to the beam
         consider_widths : bool
             consider effective widths (Default: True)

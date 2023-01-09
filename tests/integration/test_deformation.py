@@ -1,7 +1,7 @@
 from m_n_kappa.material import Concrete, Steel
 from m_n_kappa.geometry import Rectangle
 from m_n_kappa.deformation import Beam
-from m_n_kappa.internalforces import SingleSpanUniformLoad
+from m_n_kappa.loading import SingleSpanUniformLoad
 
 from unittest import TestCase, main
 
