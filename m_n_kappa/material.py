@@ -27,6 +27,8 @@ class StressStrain:
     """
     container for a stress-strain-point
 
+    .. versionadded:: 0.1.0
+
     Parameters
     ----------
     stress : float
@@ -34,10 +36,7 @@ class StressStrain:
     strain : float
         strain of the point
     """
-
-    # stress at the given strain
     stress: float
-    # strain at the given stress
     strain: float
 
     def pair(self) -> list[float]:
