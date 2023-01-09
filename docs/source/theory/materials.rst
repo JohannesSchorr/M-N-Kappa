@@ -65,6 +65,14 @@ in :py:class:`~m_n_kappa.Concrete` and may be chosen argument ``compression_stre
 
 Stress-strain-relationship for non-linear determination of stress-resultants and deformations
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+.. figure:: ../images/material_concrete_nonlinear-light.svg
+   :class: only-light
+.. figure:: ../images/material_concrete_nonlinear-dark.svg
+   :class: only-dark
+
+   Non-linear stress-strain-relationship of concrete under compression acc. :cite:t:`EN1992-1-1`
+
 The stresses according to the non-linear determination of stress-resultants and deformations are computed by
 formula :math:numref:`eq:theory.materials.concrete.compression.nonlinear` in the range
 :math:`0 < | \varepsilon_\mathrm{c1} | < | \varepsilon_\mathrm{cu1} |`.
@@ -96,8 +104,15 @@ Formula :math:numref:`eq:theory.materials.concrete.compression.nonlinear` is app
 
 .. _theory.materials.concrete.compression.parabola:
 
-Stress-strain-relationship for section-design
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Parabola-rectangle stress-strain-relationship for section-design
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+.. figure:: ../images/material_concrete_parabola_rectangle-light.svg
+   :class: only-light
+.. figure:: ../images/material_concrete_parabola_rectangle-dark.svg
+   :class: only-dark
+
+   Parabola-Rectangle stress-strain-relationship of concrete under compression acc. :cite:t:`EN1992-1-1`
 
 .. math::
    :label: eq:theory.materials.concrete.compression.parabola
@@ -123,8 +138,15 @@ This stress-strain-relationship is applied by passing ``compression_stress_strai
 
 .. _theory.materials.concrete.compression.bi_linear:
 
-Stress-strain-relationship for section-design
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Bi-linear stress-strain-relationship for section-design
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+.. figure:: ../images/material_concrete_bilinear-light.svg
+   :class: only-light
+.. figure:: ../images/material_concrete_bilinear-dark.svg
+   :class: only-dark
+
+   Bi-linear stress-strain-relationship of concrete under compression acc. :cite:t:`EN1992-1-1`
 
 .. math::
    :label: eq:theory.materials.concrete.compression.bi_linear
@@ -147,6 +169,13 @@ The bi-linear stress-strain-relationship is applied by passing ``compression_str
 
 Tension
 -------
+.. figure:: ../images/material_concrete_tension-light.svg
+   :class: only-light
+.. figure:: ../images/material_concrete_tension-dark.svg
+   :class: only-dark
+
+   Stress-strain-relationship of concrete under tension
+
 
 For a realistic load-carrying behaviour of the concrete the behaviour under tension is crucial.
 
@@ -243,6 +272,35 @@ It may may be determined by one of following three ways:
    where :math:`f_\mathrm{y}` is the yield strength of the steel, :math:`\varepsilon_\mathrm{y} = \frac{f_\mathrm{y}}{E_\mathrm{a}}`
    is the strain at yielding, :math:`\varepsilon_\mathrm{u}` is the strain at failure and
    :math:`f_\mathrm{u}` is the stress at failure.
+
+.. grid:: 1 2 3 3
+
+   .. grid-item::
+
+      .. figure:: ../images/material_steel_elastic-light.svg
+         :class: only-light
+      .. figure:: ../images/material_steel_elastic-dark.svg
+         :class: only-dark
+
+         Elastic stress-strain-relationship of steel
+
+   .. grid-item::
+
+      .. figure:: ../images/material_steel_bilinear-light.svg
+         :class: only-light
+      .. figure:: ../images/material_steel_bilinear-dark.svg
+         :class: only-dark
+
+      Bi-linear stress-strain-relationship of steel
+
+   .. grid-item::
+
+      .. figure:: ../images/material_steel_trilinear-light.svg
+         :class: only-light
+      .. figure:: ../images/material_steel_trilinear-dark.svg
+         :class: only-dark
+
+      Bi-linear stress-strain-relationship with hardening of steel
 
 The above given three ways are implemented in :py:class:`~m_n_kappa.Steel`.
 
