@@ -1127,10 +1127,16 @@ class IProfile(ComposedGeometry):
     >>> from m_n_kappa import IProfile
     >>> heb200_geometry = IProfile(top_edge=0., t_fo=15.5, b_fo=200.0, t_w=9.5, h_w=169.0)
     >>> heb200_geometry
-    IProfile(top_edge=0.0, t_w=9.5, h_w=169.0, t_fo=15.5, b_fo=200.0, t_fu=15.5, b_fu=200.0, has_top_flange=True, has_bottom_flange=True, centroid_z=0.0, geometries=[Rectangle(top_edge=0.00, bottom_edge=15.50, width=200.00, left_edge=-100.00, right_edge=100.00), Rectangle(top_edge=15.50, bottom_edge=184.50, width=9.50, left_edge=-4.75, right_edge=4.75), Rectangle(top_edge=184.50, bottom_edge=200.00, width=200.00, left_edge=-100.00, right_edge=100.00)])
+    IProfile(top_edge=0.0, t_w=9.5, h_w=169.0, t_fo=15.5, b_fo=200.0, t_fu=15.5, b_fu=200.0, has_top_flange=True, \
+has_bottom_flange=True, centroid_y=0.0, geometries=[\
+Rectangle(top_edge=0.00, bottom_edge=15.50, width=200.00, left_edge=-100.00, right_edge=100.00), \
+Rectangle(top_edge=15.50, bottom_edge=184.50, width=9.50, left_edge=-4.75, right_edge=4.75), \
+Rectangle(top_edge=184.50, bottom_edge=200.00, width=200.00, left_edge=-100.00, right_edge=100.00)])
 
-    As :py:class:`~m_n_kappa.geometry.IProfile` inherits from :py:class:`~m_n_kappa.geometry.ComposedGeometry` it also inherits its
-    functionality tranforming to a :py:class:`m_n_kappa.Crosssection` by adding :py:class:`m_n_kappa.Material`.
+
+    As :py:class:`~m_n_kappa.geometry.IProfile` inherits from :py:class:`~m_n_kappa.geometry.ComposedGeometry`
+    it also inherits its functionality tranforming to a :py:class:`m_n_kappa.Crosssection`
+    by adding :py:class:`m_n_kappa.Material`.
 
     >>> from m_n_kappa import Steel
     >>> steel = Steel(f_y = 300.0, f_u = 350.0, epsilon_u=0.25)
