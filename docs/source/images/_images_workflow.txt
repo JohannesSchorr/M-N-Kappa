@@ -1,0 +1,19 @@
+Hints about creating and styling images
+
+Software
+--------
+All images are created using Inkscape
+
+Line-size
+---------
+Line-sizes follow DIN-EN-ISO-128
+- 0.13 mm
+- 0.25 mm
+- 0.50 mm
+
+Colors
+------
+Following colors shall be used to create images
+- white
+- black
+- blue - RGB(10, 50, 190)
