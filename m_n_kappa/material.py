@@ -402,20 +402,106 @@ class ConcreteCompression(ABC):
 
 class ConcreteCompressionNonlinear(ConcreteCompression):
 
-    """non-linear concrete behaviour according to EN 1992-1-1"""
+    """
+    non-linear concrete behaviour according to EN 1992-1-1 [1]_
+
+    .. versionadded:: 0.1.0
+    """
+
+    def __init__(self, f_cm: float, yield_strain: float, E_cm: float):
+        """
+        Parameters
+        ----------
+        f_cm : float
+            mean concrete cylinder compressive strength :math:`f_\\mathrm{cm}`
+        yield_strain : float
+            strain up to which the concrete is assumed to be linear-elastic :math:`\\varepsilon_\\mathrm{y}`
+        E_cm : float
+            mean elasticity modulus of concrete :math:`E_\\mathrm{cm}`
+
+
+        See Also
+        --------
+        ConcreteCompressionParabolaRectangle : Describes parabola rectangle behaviour of concrete under compression
+        ConcreteCompressionBiLinear : describes bi-linear behaviour of concrete under compression
+
+        Notes
+        -----
+        The formula for computation of the non-linear behaviour of concrete by EN 1992-1-1 [1]_, Formula 3.14
+        is given as follows. Formula :math:numref:`eq:material.concrete.nonlinear` is valid in the range
+        :math:`0 < |\\varepsilon| < |\\varepsilon_\\mathrm{c}|`. The here given values are all absolute values.
+        As this model applies to the compression-range all values must be multiplied by (-1).
+
+        .. math::
+           :label: eq:material.concrete.nonlinear
+
+           \\sigma_\\mathrm{c} = \\frac{k \\cdot \\eta - \\eta^{2}}{1.0 + (k - 2) \\cdot \\eta)} \\cdot f_\\mathrm{cm}
+
+        where
+
+        .. math::
+           :label: eq:material.concrete.nonlinear_helper
+
+           \\eta & = \\frac{\\varepsilon}{\\varepsilon_\\mathrm{c}}
+
+           k & = 1.05 \\cdot E_\\mathrm{cm} \\cdot \\frac{|\\varepsilon_\\mathrm{c}|}{f_\\mathrm{cm}}
+
+           \\varepsilon_\\mathrm{c}(Permil) & = 0.7 \\cdot f_\\mathrm{cm}^{0.31} \\leq 2.8
+
+           \\varepsilon_\\mathrm{cu}(Permil) & = 2.8 + 27.0 \\cdot \\left[\\frac{
+           98.0 - f_\\mathrm{cm}}{100.0} \\right]^{4} \\leq 3.5
+
+        where :math:`\\varepsilon_\\mathrm{c}` is the strain at peak stress and :math:`\\varepsilon_\\mathrm{cu}`
+        is the strain at failure.
+
+        .. figure:: ../images/material_concrete_nonlinear-light.svg
+           :class: only-light
+        .. figure:: ../images/material_concrete_nonlinear-dark.svg
+           :class: only-dark
+
+           Non-linear stress-strain relationship of concrete by EN 1992-1-1 [1]_, Fig. 3.2
+
+        References
+        ----------
+        .. [1] EN 1992-1-1: Eurocode 2 - Design of concrete structures -
+           Part 1-1: General rules and rules for buildings, European Committee of Standardization (CEN),
+           April 2004
+
+        """
+        super().__init__(f_cm, yield_strain, E_cm)
 
     @property
     def c(self) -> float:
+        """
+        strain at peak stress :math:`\\varepsilon_\\mathrm{c}`
+        (see Formula :math:numref:`eq:material.concrete.nonlinear_helper`)
+        """
         return min(0.7 * self.f_cm**0.31, 2.8) * 0.001
 
     @property
     def cu(self) -> float:
+        """
+        failure strain of concrete :math:`\\varepsilon_\\mathrm{cu}`
+        (see Formula :math:numref:`eq:material.concrete.nonlinear_helper`)
+        """
         return 0.001 * min(
             (2.8 + 27.0 * ((98.0 - float(self.f_cm)) / 100.0) ** 4.0), 3.5
         )
 
     @property
-    def strains(self) -> list:
+    def strains(self) -> list[float]:
+        """
+        Strain-values where stresses are computed.
+
+        Current strain-values are:
+
+        - :math:`\\varepsilon_\\mathrm{y}`
+        - :math:`0.33 \\cdot (\\varepsilon_\\mathrm{y} + \\varepsilon_\\mathrm{c})`
+        - :math:`0.66 \\cdot (\\varepsilon_\\mathrm{y} + \\varepsilon_\\mathrm{c})`
+        - :math:`\\varepsilon_\\mathrm{c}`
+        - :math:`0.5 \\cdot (\\varepsilon_\\mathrm{c} + \\varepsilon_\\mathrm{cu})`
+        - :math:`\\varepsilon_\\mathrm{cu}`
+        """
         return [
             self.yield_strain,
             0.33 * (self.yield_strain + self.c),
@@ -426,12 +512,30 @@ class ConcreteCompressionNonlinear(ConcreteCompression):
         ]
 
     def eta(self, strain):
+        """
+        ratio between strain and strain at peak stress :math:`\\eta`
+        (see Formula :math:numref:`eq:material.concrete.nonlinear_helper`)
+        """
         return strain / self.c
 
     def k(self):
+        """helper-function (see Formula :math:numref:`eq:material.concrete.nonlinear_helper`)"""
         return 1.05 * self.E_cm * abs(self.c) / self.f_cm
 
     def stress(self, strain: float) -> float:
+        """
+        computation of stresses according to formula :math:numref:`eq:material.concrete.nonlinear`
+
+        Parameters
+        ----------
+        strain : float
+            strain to compute corresponding stress
+
+        Returns
+        -------
+        float
+            stress to the given ``strain``
+        """
         if self.yield_strain <= strain <= self.cu:
             eta = self.eta(strain)
             k = self.k()
