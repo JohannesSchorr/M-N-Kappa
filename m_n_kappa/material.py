@@ -1309,14 +1309,15 @@ StressStrain(stress=0.0, strain=10.0)]
     def __set_compression(self) -> ConcreteCompression:
         """sets concrete under compression according to user-input"""
         typ = self.compression_stress_strain_type.replace("-", "").replace(" ", "")
-        if typ.upper() == "NONLINEAR":
+        typ = typ.upper()
+        if typ == "NONLINEAR":
             return ConcreteCompressionNonlinear(self.f_cm, self.epsilon_y, self.E_cm)
-        elif typ.upper() == "PARABOLA":
+        elif typ == "PARABOLA":
             return ConcreteCompressionParabolaRectangle(
-                self.f_cm, self.epsilon_y, self.E_cm
+                self.f_cm, self.epsilon_y
             )
-        elif typ.upper() == "BILINEAR":
-            return ConcreteCompressionBiLinear(self.f_cm, self.epsilon_y, self.E_cm)
+        elif typ == "BILINEAR":
+            return ConcreteCompressionBiLinear(self.f_cm)
         else:
             raise ValueError(
                 str(typ)
