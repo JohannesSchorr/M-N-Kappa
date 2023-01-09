@@ -743,7 +743,8 @@ class ConcreteCompressionBiLinear(ConcreteCompression):
 
            \\varepsilon_\\mathrm{c}(Permil) & = 1.75 + 0.55 \\cdot \\frac{f_\\mathrm{ck} - 50.0}{40.0} \\leq 1.75
 
-           \\varepsilon_\\mathrm{cu}(Permil) & = 2.6 + 35.0 \\cdot \\left(\\frac{90.0 - f_\\mathrm{ck}}{100} \\right)^{4} \\leq 3.5
+           \\varepsilon_\\mathrm{cu}(Permil) & = 2.6 + 35.0 \\cdot \\left(\\frac{90.0 -
+           f_\\mathrm{ck}}{100} \\right)^{4} \\leq 3.5
 
 
         .. figure:: ../images/material_concrete_bilinear-light.svg
@@ -752,7 +753,6 @@ class ConcreteCompressionBiLinear(ConcreteCompression):
            :class: only-dark
 
            Bi-linear stress-strain relationship of concrete by EN 1992-1-1 [1]_, Fig. 3.4
-
 
 
         References
