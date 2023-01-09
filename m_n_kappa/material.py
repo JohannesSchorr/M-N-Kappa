@@ -708,19 +708,107 @@ class ConcreteCompressionParabolaRectangle(ConcreteCompression):
 
 
 class ConcreteCompressionBiLinear(ConcreteCompression):
+    """
+        bi-linear behaviour of concrete under compression according to EN 1992-1-1 [1]_
+
+        .. versionadded:: 0.1.0
+        """
+
+    def __init__(self, f_cm: float):
+        """
+        Parameters
+        ----------
+        f_cm : float
+            mean concrete cylinder compressive strength :math:`f_\\mathrm{cm}`
+
+        See Also
+        --------
+        ConcreteCompressionNonlinear : Describes non-linear behaviour of concrete under compression
+        ConcreteCompressionParabolaRectangle : Describes parabola rectangle behaviour of concrete under compression
+
+        Notes
+        -----
+        Strain at peak stress :math:`\\varepsilon_\\mathrm{c}` and strain at failure :math:`\\varepsilon_\\mathrm{cu}`
+        are computed as follows according to EN 1992-1-1 [1]_, Tab. 3.1
+
+        .. math::
+           :label: eq:material.concrete.bi_linear_helper
+
+           \\varepsilon_\\mathrm{c}(Permil) & = 1.75 + 0.55 \\cdot \\frac{f_\\mathrm{ck} - 50.0}{40.0} \\leq 1.75
+
+           \\varepsilon_\\mathrm{cu}(Permil) & = 2.6 + 35.0 \\cdot \\left(\\frac{90.0 - f_\\mathrm{ck}}{100} \\right)^{4} \\leq 3.5
+
+
+        .. figure:: ../images/material_concrete_bilinear-light.svg
+           :class: only-light
+        .. figure:: ../images/material_concrete_bilinear-dark.svg
+           :class: only-dark
+
+           Bi-linear stress-strain relationship of concrete by EN 1992-1-1 [1]_, Fig. 3.4
+
+
+
+        References
+        ----------
+        .. [1] EN 1992-1-1: Eurocode 2 - Design of concrete structures -
+           Part 1-1: General rules and rules for buildings, European Committee of Standardization (CEN),
+           April 2004
+
+        Examples
+        --------
+        The stress-strain relationship of concrete under compression is computed as follows.
+
+        >>> from m_n_kappa.material import ConcreteCompressionBiLinear
+        >>> f_cm = 30.0 # mean concrete compressive strength
+        >>> E_cm = 33000 # modulus of elasticity of concrete
+        >>> concrete = ConcreteCompressionBiLinear(f_cm=f_cm)
+        >>> concrete.stress_strain()
+        [[-22.0, -0.00175], [-22.0, -0.0035]]
+        """
+        super().__init__(f_cm=f_cm, yield_strain=0.0, E_cm=0.0)
+
     @property
     def c(self) -> float:
+        """
+        strain at peak stress :math:`\\varepsilon_\\mathrm{c}`
+        (see Formula :math:numref:`eq:material.concrete.bi_linear_helper`)
+        """
         return 0.001 * max((1.75 + 0.55 * ((self.f_ck - 50.0) / 40.0)), 1.75)
 
     @property
     def cu(self) -> float:
+        """
+        failure strain of concrete :math:`\\varepsilon_\\mathrm{cu}`
+        (see Formula :math:numref:`eq:material.concrete.parabola_rectangle_helper`)
+        """
         return 0.001 * min((2.6 + 35.0 * ((90.0 - self.f_ck) / 100) ** 4.0), 3.5)
 
     @property
     def strains(self) -> list:
+        """
+        Strain-values where stresses are computed.
+
+        Current strain-values are:
+
+        - :math:`\\varepsilon_\\mathrm{c}`
+        - :math:`\\varepsilon_\\mathrm{cu}`
+        """
         return [self.c, self.cu]
 
     def stress(self, strain: float) -> float:
+        """
+        computation of stresses according to formula :math:numref:`eq:material.concrete.parabola_rectangle`
+
+        Parameters
+        ----------
+        strain : float
+            strain to compute corresponding stress
+
+        Returns
+        -------
+        float
+            stress to the given ``strain``
+        """
         if 0.0 <= strain < self.c:
             return self.f_ck * (self.c - strain) / self.c
         elif self.c <= strain <= self.cu:
