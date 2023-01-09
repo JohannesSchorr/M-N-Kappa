@@ -13,8 +13,8 @@ Introduction
 ============
 Within this section the computation of the width :math:`b(x)` of rectangles and the area of circles
 :math:`A_\mathrm{circle}` is presented.
-Combined with stress-values from :ref:`theory_materials` the axial force :math:`N_i`, the lever arm :math:`z_i` and
-the moment :math:`M_i` are computed (see :ref:`theory_sections`).
+Combined with stress-values from :ref:`theory.materials` the axial force :math:`N_i`, the lever arm :math:`z_i` and
+the moment :math:`M_i` are computed (see :ref:`theory.sections`).
 
 .. _theory.geometries.rectangle_and_rectangle:
 
