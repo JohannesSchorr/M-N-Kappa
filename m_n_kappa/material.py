@@ -360,13 +360,13 @@ class ConcreteCompression(ABC):
     @property
     @abstractmethod
     def c(self) -> float:
-        """strain_value at maximum stress :math:`\\varepsilon_\\mathrm{c}`"""
+        """strain-value at peak stress :math:`\\varepsilon_\\mathrm{c}`"""
         ...
 
     @property
     @abstractmethod
     def cu(self) -> float:
-        """strain_value at failure :math:`\\varepsilon_\\mathrm{cu}`"""
+        """strain-value at failure :math:`\\varepsilon_\\mathrm{cu}`"""
         ...
 
     @property
