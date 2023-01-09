@@ -1664,6 +1664,11 @@ class Reinforcement(Steel):
         E_s  : float
             Modulus of elasticity of the reinforcement :math:`E_\\mathrm{s}` (Default: 200000 N/mm²)
 
+        See Also
+        --------
+        Concrete : material-behaviour of concrete
+        Steel: material-behaviour of steel
+
         Examples
         --------
         1. ``f_su = None`` and ``epsilon_su = None``: Linear-elastic behaviour.
