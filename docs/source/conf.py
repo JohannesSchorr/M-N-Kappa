@@ -90,9 +90,14 @@ extensions.append('sphinx_copybutton')
 # Furo
 # https://pradyunsg.me/furo/
 html_theme = "furo"
-
+html_theme_options = {
+    "source_repository": "https://github.com/JohannesSchorr/M-N-Kappa/",
+    "source_branch": "master",
+    "source_directory": "docs/source/",
+}
 html_static_path = ['_static']
 html_logo = '_static/logo/m_kappa_logo.png'
+html_title = f"Release {release}"
 html_css_files = [
     'css/custom.css',
 ]
