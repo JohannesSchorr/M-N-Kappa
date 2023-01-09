@@ -15,7 +15,7 @@ the hood of this program.
       :link: theory.symbols
       :link-type: ref
       :text-align: center
-      :img-top: ../images/theory_symbols_badget.svg
+      :img-top: ../images/theory_symbols_icon.svg
 
       **Symbols**
       ^^^^^^^^^^^
@@ -25,7 +25,7 @@ the hood of this program.
       :link: theory.coordinates
       :link-type: ref
       :text-align: center
-      :img-top: ../images/theory_coordinates_badget.svg
+      :img-top: ../images/theory_coordinates_icon.svg
 
       **Coordinates**
       ^^^^^^^^^^^^^^^
@@ -35,7 +35,7 @@ the hood of this program.
       :link: theory.units
       :link-type: ref
       :text-align: center
-      :img-top: ../images/theory_units_badget.svg
+      :img-top: ../images/theory_units_icon.svg
 
       **Units**
       ^^^^^^^^^
@@ -45,7 +45,7 @@ the hood of this program.
       :link: theory.general
       :link-type: ref
       :text-align: center
-      :img-top: ../images/theory_general_badget.svg
+      :img-top: ../images/theory_general_icon.svg
 
       **General**
       ^^^^^^^^^^^
@@ -56,7 +56,7 @@ the hood of this program.
       :link: theory.geometries
       :link-type: ref
       :text-align: center
-      :img-top: ../images/theory_geometries_badget.svg
+      :img-top: ../images/theory_geometries_icon.svg
 
       **Geometries**
       ^^^^^^^^^^^^^^
@@ -67,7 +67,7 @@ the hood of this program.
       :link: theory.materials
       :link-type: ref
       :text-align: center
-      :img-top: ../images/theory_materials_badget.svg
+      :img-top: ../images/theory_materials_icon.svg
 
       **Materials**
       ^^^^^^^^^^^^^^
@@ -78,7 +78,7 @@ the hood of this program.
       :link: theory.sections
       :link-type: ref
       :text-align: center
-      :img-top: ../images/theory_sections_badget.svg
+      :img-top: ../images/theory_sections_icon.svg
 
       **Sections**
       ^^^^^^^^^^^^
@@ -99,7 +99,7 @@ the hood of this program.
       :link: theory.m_kappa
       :link-type: ref
       :text-align: center
-      :img-top: ../images/theory_moment_curvature_badget.svg
+      :img-top: ../images/theory_moment_curvature_icon.svg
 
       **Moment-Curvature-Curve**
       ^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -110,7 +110,7 @@ the hood of this program.
       :link: theory.effective_widths
       :link-type: ref
       :text-align: center
-      :img-top: ../images/theory_effective_widths_badget.svg
+      :img-top: ../images/theory_effective_widths_icon.svg
 
       **Effective widths**
       ^^^^^^^^^^^^^^^^^^^^
@@ -121,7 +121,7 @@ the hood of this program.
       :link: theory.loading
       :link-type: ref
       :text-align: center
-      :img-top: ../images/theory_loading_badget.svg
+      :img-top: ../images/theory_loading_icon.svg
 
       **Loading**
       ^^^^^^^^^^^^^^^^
@@ -132,7 +132,7 @@ the hood of this program.
       :link: theory.deformations
       :link-type: ref
       :text-align: center
-      :img-top: ../images/theory_deformation_badget.svg
+      :img-top: ../images/theory_deformation_icon.svg
 
       **Deformations**
       ^^^^^^^^^^^^^^^^
