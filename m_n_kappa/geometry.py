@@ -567,6 +567,8 @@ class Circle(Geometry):
         >>> steel = Steel(f_y=355)
         >>> section = circle + steel
         >>> type(section)
+        <class 'm_n_kappa.section.Section'>
+
         """
         self._diameter = diameter
         self._centroid_y = centroid_y
