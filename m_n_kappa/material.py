@@ -562,7 +562,7 @@ class ConcreteCompressionParabolaRectangle(ConcreteCompression):
     .. versionadded:: 0.1.0
     """
 
-    def __init__(self, f_cm: float, yield_strain: float, E_cm: float):
+    def __init__(self, f_cm: float, E_cm: float):
         """
         Parameters
         ----------
@@ -639,7 +639,7 @@ class ConcreteCompressionParabolaRectangle(ConcreteCompression):
         >>> concrete.stress_strain()
         [[-9.625, -0.0005], [-16.5, -0.001], [-20.625, -0.0015], [-22.0, -0.002], [-22.0, -0.0035]]
         """
-        super().__init__(f_cm, yield_strain, E_cm)
+        super().__init__(f_cm, 0.0, E_cm)
 
     @property
     def c(self) -> float:
