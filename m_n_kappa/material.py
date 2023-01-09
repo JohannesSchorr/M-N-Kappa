@@ -591,10 +591,12 @@ class ConcreteCompressionParabolaRectangle(ConcreteCompression):
         .. math::
            :label: eq:material.concrete.parabola_rectangle
 
-           \\sigma_\\mathrm{c} & = f_\\mathrm{c} \\cdot \\left[1 - \\left(1 - \\frac{\\varepsilon}{\\varepsilon_\\mathrm{c}}
-           \\right)^{n} \\right] & & \\text{ for } 0 \\leq \\varepsilon \leq \\varepsilon_\\mathrm{c}
+           \\sigma_\\mathrm{c} & = f_\\mathrm{c} \\cdot \\left[1 - \\left(1 -
+           \\frac{\\varepsilon}{\\varepsilon_\\mathrm{c}} \\right)^{n} \\right] & &
+           \\text{ for } 0 \\leq \\varepsilon \\leq \\varepsilon_\\mathrm{c}
 
-           \\sigma_\\mathrm{c} & = f_\\mathrm{c} & & \\text{ for } \\varepsilon_\\mathrm{c} \\leq \\varepsilon \leq \\varepsilon_\\mathrm{cu}
+           \\sigma_\\mathrm{c} & = f_\\mathrm{c} & & \\text{ for } \\varepsilon_\\mathrm{c} \\leq \\varepsilon
+           \\leq \\varepsilon_\\mathrm{cu}
 
         where
 
