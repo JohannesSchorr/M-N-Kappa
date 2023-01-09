@@ -568,11 +568,8 @@ class ConcreteCompressionParabolaRectangle(ConcreteCompression):
         ----------
         f_cm : float
             mean concrete cylinder compressive strength :math:`f_\\mathrm{cm}`
-        yield_strain : float
-            strain up to which the concrete is assumed to be linear-elastic :math:`\\varepsilon_\\mathrm{y}`
         E_cm : float
             mean elasticity modulus of concrete :math:`E_\\mathrm{cm}`
-
 
         See Also
         --------
@@ -631,6 +628,16 @@ class ConcreteCompressionParabolaRectangle(ConcreteCompression):
            Part 1-1: General rules and rules for buildings, European Committee of Standardization (CEN),
            April 2004
 
+        Examples
+        --------
+        The stress-strain relationship of concrete under compression is computed as follows.
+
+        >>> from m_n_kappa.material import ConcreteCompressionParabolaRectangle
+        >>> f_cm = 30.0 # mean concrete compressive strength
+        >>> E_cm = 33000 # modulus of elasticity of concrete
+        >>> concrete = ConcreteCompressionParabolaRectangle(f_cm=f_cm, E_cm=E_cm)
+        >>> concrete.stress_strain()
+        [[-9.625, -0.0005], [-16.5, -0.001], [-20.625, -0.0015], [-22.0, -0.002], [-22.0, -0.0035]]
         """
         super().__init__(f_cm, yield_strain, E_cm)
 
