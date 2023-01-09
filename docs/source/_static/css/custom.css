@@ -1,9 +1,5 @@
-html[data-theme="light"] {
-    --pst-color-primary: rgb(10, 50, 190);
-}
-
-html[data-theme="dark"] {
-    --pst-color-primary: rgb(10, 50, 190);
+:root {
+    font-size: 0.9em
 }
 
 .card, .card img {
