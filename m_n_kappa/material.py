@@ -1008,7 +1008,11 @@ class ConcreteTension:
 
 class Concrete(Material):
 
-    """Concrete material"""
+    """
+    Concrete material
+
+    .. versionadded:: 0.1.0
+    """
 
     def __init__(
         self,
@@ -1042,6 +1046,147 @@ class Concrete(Material):
 
             - ``'Default'``
             - ``'consider opening behaviour'``
+
+        Notes
+        -----
+        For Details regarding the computation of these relastionships check out the corresponding classes.
+
+        **Concrete under compression**
+
+        Following stress-strain-relationships may be chosen to describe the behaviour of concrete under compression.
+
+        .. grid:: 1 2 3 3
+
+           .. grid-item::
+
+              .. figure:: ../images/material_concrete_nonlinear-light.svg
+                 :class: only-light
+              .. figure:: ../images/material_concrete_nonlinear-dark.svg
+                 :class: only-dark
+
+                 ``Nonlinear`` stress-strain-relationship of concrete under compression acc. EN 1992-1-1 [1]_
+
+           .. grid-item::
+
+              .. figure:: ../images/material_concrete_parabola_rectangle-light.svg
+                 :class: only-light
+              .. figure:: ../images/material_concrete_parabola_rectangle-dark.svg
+                 :class: only-dark
+
+                 ``Parabola``-Rectangle stress-strain-relationship of concrete under compression acc. EN 1992-1-1 [1]_
+
+           .. grid-item::
+
+              .. figure:: ../images/material_concrete_bilinear-light.svg
+                 :class: only-light
+              .. figure:: ../images/material_concrete_bilinear-dark.svg
+                 :class: only-dark
+
+                 ``Bilinear`` stress-strain-relationship of concrete under compression acc. EN 1992-1-1 [1]_
+
+        Classes:
+
+        - ``Nonlinear``: :py:class:`~m_n_kappa.material.ConcreteCompressionNonlinear`
+        - ``Parabola``: :py:class:`~m_n_kappa.material.ConcreteCompressionParabolaRectangle`
+        - ``Bilinear``: :py:class:`~m_n_kappa.material.ConcreteCompressionBiLinear`
+
+        **Concrete under tension**
+
+        .. figure:: ../images/material_concrete_tension-light.svg
+           :class: only-light
+        .. figure:: ../images/material_concrete_tension-dark.svg
+           :class: only-dark
+
+           Stress-strain-relationship of concrete under tension
+           (Class :py:class:`~m_n_kappa.material.ConcreteTension`)
+
+        References
+        ----------
+        .. [1] EN 1992-1-1: Eurocode 2 - Design of concrete structures -
+           Part 1-1: General rules and rules for buildings, European Committee of Standardization (CEN),
+           April 2004
+
+        .. [2] fib Model Code for Concrete Structures, International Federation for Structural Concrete,
+           Ernst & Sohn GmbH & Co. KG, 2013, p. 78, Eq. 5.1-9
+
+        Examples
+        --------
+        A ``Nonlinear`` concrete stress-strain-relationship neglecting the tensile behaviour of concrete is computed as
+        follows.
+
+        >>> from m_n_kappa import Concrete
+        >>> nonlinear_no_tension = Concrete(f_cm=30.0, use_tension=False)
+        >>> nonlinear_no_tension.stress_strain
+        [StressStrain(stress=-16.920291540864202, strain=-0.0035), \
+StressStrain(stress=-26.578327535954056, strain=-0.0027545594265149607), \
+StressStrain(stress=-30.0, strain=-0.0020091188530299217), \
+StressStrain(stress=-28.80506123318835, strain=-0.0015849387565966995), \
+StressStrain(stress=-19.617030289467877, strain=-0.0007924693782983497), \
+StressStrain(stress=-11.128163239693242, strain=-0.00039230350544992604), \
+StressStrain(stress=0.0, strain=0.0), \
+StressStrain(stress=2.3554273231619067, strain=7.700353297574598e-05), \
+StressStrain(stress=0.0, strain=7.800353297574598e-05), \
+StressStrain(stress=0.0, strain=10.0)]
+
+        Whereas a ``Parabola``-Rectangle-behaviour is computed as follows.
+
+        >>> parabola_no_tension = Concrete(f_cm=30.0, use_tension=False,
+        ...                                compression_stress_strain_type='Parabola')
+        >>> parabola_no_tension.stress_strain
+        [StressStrain(stress=-22.0, strain=-0.0035), \
+StressStrain(stress=-22.0, strain=-0.002), \
+StressStrain(stress=-20.625, strain=-0.0015), \
+StressStrain(stress=-16.5, strain=-0.001), \
+StressStrain(stress=-9.625, strain=-0.0005), \
+StressStrain(stress=0.0, strain=0.0), \
+StressStrain(stress=2.3554273231619067, strain=7.700353297574598e-05), \
+StressStrain(stress=0.0, strain=7.800353297574598e-05), \
+StressStrain(stress=0.0, strain=10.0)]
+
+        And a ``Bilinear`` is computed as follows
+
+        >>> bilinear_no_tension = Concrete(f_cm=30.0, use_tension=False,
+        ...                                compression_stress_strain_type='Bilinear')
+        >>> bilinear_no_tension.stress_strain
+        [StressStrain(stress=-22.0, strain=-0.0035), \
+StressStrain(stress=-22.0, strain=-0.00175), \
+StressStrain(stress=0.0, strain=0.0), \
+StressStrain(stress=2.3554273231619067, strain=7.700353297574598e-05), \
+StressStrain(stress=0.0, strain=7.800353297574598e-05), \
+StressStrain(stress=0.0, strain=10.0)]
+
+        In case tension is to be considered the following expression is okay (with ``Nonlinear`` compression behaviour).
+
+        >>> with_tension = Concrete(f_cm=30.0)
+        >>> with_tension.stress_strain
+        [StressStrain(stress=-16.920291540864202, strain=-0.0035), \
+StressStrain(stress=-26.578327535954056, strain=-0.0027545594265149607), \
+StressStrain(stress=-30.0, strain=-0.0020091188530299217), \
+StressStrain(stress=-28.80506123318835, strain=-0.0015849387565966995), \
+StressStrain(stress=-19.617030289467877, strain=-0.0007924693782983497), \
+StressStrain(stress=-11.128163239693242, strain=-0.00039230350544992604), \
+StressStrain(stress=0.0, strain=0.0), \
+StressStrain(stress=2.3554273231619067, strain=7.700353297574598e-05), \
+StressStrain(stress=0.0, strain=7.800353297574598e-05), \
+StressStrain(stress=0.0, strain=10.0)]
+
+        Furthermore, the crack-opening of the conrete and its effect on the tensile behaviour may be considered by
+        adding ``tension_stress_strain_type='consider opening behaviour'``.
+
+        >>> with_tension_opening = Concrete(f_cm=30.0,
+        ...                        tension_stress_strain_type='consider opening behaviour')
+        >>> with_tension_opening.stress_strain
+        [StressStrain(stress=-16.920291540864202, strain=-0.0035), \
+StressStrain(stress=-26.578327535954056, strain=-0.0027545594265149607), \
+StressStrain(stress=-30.0, strain=-0.0020091188530299217), \
+StressStrain(stress=-28.80506123318835, strain=-0.0015849387565966995), \
+StressStrain(stress=-19.617030289467877, strain=-0.0007924693782983497), \
+StressStrain(stress=-11.128163239693242, strain=-0.00039230350544992604), \
+StressStrain(stress=0.0, strain=0.0), \
+StressStrain(stress=2.3554273231619067, strain=7.700353297574598e-05), \
+StressStrain(stress=0.4710854646323814, strain=0.16735816729459904), \
+StressStrain(stress=0.0, strain=0.8367908364729952), \
+StressStrain(stress=0.0, strain=10.0)]
         """
         super().__init__(section_type="slab")
         self._f_cm = float(f_cm)
@@ -1102,31 +1247,38 @@ class Concrete(Material):
 
     @property
     def compression(self) -> ConcreteCompression:
+        """concrete under compression"""
         return self._compression
 
     @property
     def compression_stress_strain_type(self) -> str:
+        """chosen stress-strain-type for concrete under compression"""
         return self._compression_stress_strain_type
 
     @compression_stress_strain_type.setter
     def compression_stress_strain_type(self, stress_strain_type: str) -> None:
+        """set new stress-strain-type for concrete under compression"""
         self._compression_stress_strain_type = stress_strain_type
         self.__set_compression()
 
     @property
     def E_cm(self) -> float:
+        """modulus of elasticity of concrete :math:`E_\\mathrm{cm}` acc. EN 1992-1-1 [1]_"""
         return 22000.0 * (self.f_cm / 10) ** 0.3
 
     @property
     def epsilon_y(self) -> float:
+        """yield strain of concrete under compression :math:`0.4 \\cdot f_\\mathrm{cm} / E_\\mathrm{cm}`"""
         return 0.4 * self.f_cm / self.E_cm
 
     @property
     def f_cm(self) -> float:
+        """mean concrete compressive strength :math:`f_\\mathrm{cm}`"""
         return self._f_cm
 
     @property
     def f_ck(self) -> float:
+        """mean concrete compressive strength :math:`f_\\mathrm{ck} = f_\\mathrm{cm}-8`"""
         return self.f_cm - 8.0
 
     @property
@@ -1135,22 +1287,27 @@ class Concrete(Material):
 
     @property
     def tension(self) -> ConcreteTension:
+        """concrete under tension"""
         return self._tension
 
     @property
     def tension_stress_strain_type(self) -> str:
+        """chosen stress-strain-type for concrete under tension"""
         return self._tension_stress_strain_type
 
     @tension_stress_strain_type.setter
     def tension_stress_strain_type(self, stress_strain_type: str) -> None:
+        """set new stress-strain-type for concrete under tension"""
         self._tension_stress_strain_type = stress_strain_type
         self.__set_tension()
 
     @property
     def use_tension(self) -> bool:
+        """defines usage of tension"""
         return self._use_tension
 
     def __set_compression(self) -> ConcreteCompression:
+        """sets concrete under compression according to user-input"""
         typ = self.compression_stress_strain_type.replace("-", "").replace(" ", "")
         if typ.upper() == "NONLINEAR":
             return ConcreteCompressionNonlinear(self.f_cm, self.epsilon_y, self.E_cm)
@@ -1167,6 +1324,7 @@ class Concrete(Material):
             )
 
     def __set_tension(self) -> ConcreteTension:
+        """sets concrete under tension according to user-input"""
         stress_strain_type = self.tension_stress_strain_type.replace("-", "").replace(
             " ", ""
         )
@@ -1193,6 +1351,7 @@ class Concrete(Material):
             )
 
     def __build_stress_strain(self) -> list[StressStrain]:
+        """builds the stress-strain-curve of the concrete"""
         stress_strains = self.compression.stress_strain() + self.tension.stress_strain()
         stress_strains.append([0.0, 0.0])
         stress_strains = remove_duplicates(stress_strains)
