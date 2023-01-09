@@ -778,7 +778,7 @@ class Trapezoid(Geometry):
         >>> steel = Steel(f_y=355)
         >>> section = trapezoid + steel
         >>> type(section)
-        Section
+        <class 'm_n_kappa.section.Section'>
 
         """
         self._top_edge = top_edge
