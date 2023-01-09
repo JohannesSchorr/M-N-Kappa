@@ -74,7 +74,7 @@ class ComposedGeometry:
     like :py:class:`~m_n_kappa.Steel` merging to a :py:class:`~m_n_kappa.Crosssection`
 
     >>> from m_n_kappa import Steel
-    >>> steel = Steel(f_y = 300.0, f_u = 350.0, epsilon_u=0.25)
+    >>> steel = Steel(f_y = 300.0, f_u = 350.0, failure_strain=0.25)
     >>> cross_section = composed_geometry + steel
     >>> cross_section
     Crosssection(sections=sections)
