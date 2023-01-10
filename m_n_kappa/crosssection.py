@@ -453,14 +453,21 @@ class Crosssection:
 class ComputationCrosssection(Crosssection):
 
     """
-    Base for computed cross-sections:
-      - :py:class:`ComputationCrosssectionStrain` cross-section that is loaded only by axial-forces
-      - :py:class:`ComputationCrosssectionCurvature` cross-section computing curvatures
+    Base for computed cross-sections
 
-    Both classes share the functions defined within this class.
-
-    This class has no initializer.
+    .. versionadded: 0.1.0
     """
+    def __init__(self):
+        """
+        This class is initialized by the classes that inherit from it.
+
+        See Also
+        --------
+        ComputationCrosssectionStrain: cross-section that is loaded only by axial-forces
+        ComputationCrosssectionCurvature: cross-section computing curvatures
+        """
+        self._sections = None
+        self._compute_sections = None
 
     @str_start_end
     def __str__(self) -> str:
@@ -476,7 +483,7 @@ class ComputationCrosssection(Crosssection):
 
     @property
     def compute_sections(self) -> list[ComputationSection]:
-        """:py:class:`~m_n_kappa.sections.Section` in ``sections``
+        """:py:class:`~m_n_kappa.Section` in ``sections``
         transformed into :py:class:`~m_n_kappa.section.ComputationSection`"""
         return self._compute_sections
 
@@ -485,8 +492,8 @@ class ComputationCrosssection(Crosssection):
         self._compute_sections = compute_sections
 
     @property
-    def compute_split_sections(self):
-
+    def compute_split_sections(self) -> list[ComputationSection]:
+        """split computation sections"""
         return self.compute_sections
 
     @property
