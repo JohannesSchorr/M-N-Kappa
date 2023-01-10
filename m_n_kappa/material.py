@@ -226,7 +226,7 @@ class Material:
         Returns
         -------
         float
-            stress corresponding to the given strain_value
+            stress corresponding to the given strain-value in the material-model
 
         Raises
         ------
@@ -260,7 +260,7 @@ class Material:
         """sorts stress-strain_value-relationship so strains are descending"""
         self.sort_strains(reverse=True)
 
-    def _get_material_index(self, strain_value: float):
+    def _get_material_index(self, strain_value: float) -> int:
         self.sort_strains_ascending()
         strain_value = self.__round_strain(strain_value)
         if strain_value == self.stress_strain[-1].strain:
