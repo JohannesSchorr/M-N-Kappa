@@ -457,7 +457,10 @@ class ComputationCrosssection(Crosssection):
 
     .. versionadded: 0.1.0
     """
-    def __init__(self):
+    def __init__(
+            self, sections: list[Section] | Crosssection = None,
+            slab_effective_width: EffectiveWidths = None
+    ):
         """
         This class is initialized by the classes that inherit from it.
 
@@ -466,7 +469,11 @@ class ComputationCrosssection(Crosssection):
         ComputationCrosssectionStrain: cross-section that is loaded only by axial-forces
         ComputationCrosssectionCurvature: cross-section computing curvatures
         """
-        self._sections = None
+        if isinstance(sections, Crosssection):
+            if slab_effective_width is None:
+                slab_effective_width = sections.slab_effective_width
+            sections = sections.sections
+        super().__init__(sections, slab_effective_width)
         self._compute_sections = None
 
     @str_start_end
