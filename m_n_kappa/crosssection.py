@@ -839,9 +839,10 @@ class ComputationCrosssectionCurvature(ComputationCrosssection):
 
     def __init__(
         self,
-        cross_section: Crosssection,
+        cross_section: Crosssection | list[Section],
         curvature: float,
         neutral_axis_value: float,
+        slab_effective_width: EffectiveWidths = None,
     ):
         """
         Parameters
@@ -890,7 +891,7 @@ class ComputationCrosssectionCurvature(ComputationCrosssection):
         221.07005829554043
 
         """
-        super().__init__(cross_section.sections, cross_section.slab_effective_width)
+        super().__init__(cross_section, slab_effective_width)
         self._curvature = curvature
         self._neutral_axis = neutral_axis_value
         self._compute_sections: list[
