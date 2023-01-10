@@ -192,7 +192,18 @@ class ComputationSection(Section):
 
     """
     base class for specified ComputationsSection-classes
-    :py:class:`~m_n_kappa.section.ComputationSectionCurvature` and :py:class:`~m_n_kappa.section.ComputationSectionStrain`
+
+    .. versionadded:: 0.1.0
+
+    See Also
+    --------
+    ComputationSectionStrain: ComputationSection to compute values under constant strain
+    ComputationSectionCurvature: ComputationSection to compute values under linear-distributed strain
+
+    Notes
+    -----
+    The computation of axial-force :math:`N_i`, lever-arm :math:`r_i` and moment :math:`M_i`
+
     """
     def __init_(self):
         self._section = None
@@ -204,46 +215,102 @@ class ComputationSection(Section):
 
     @property
     def geometry(self):
+        """geometry of the section"""
         return self.section.geometry
 
     @property
     def material(self):
+        """material of the section"""
         return self.section.material
 
     @property
     def edges_strain(self) -> list:
+        """
+        strains at the edges (bottom and top) of the section,
+        computed from the strain distribution
+        """
         return self._edges_strain
 
     @property
     def edges_stress(self) -> list:
+        """stresses at the edges (bottom and top) of the section"""
         return self._edges_stress
 
     @property
     def axial_force(self) -> float:
+        """
+        axial-force of the section in case of the given strain-distribution :math:`N_i`
+
+        See Also
+        --------
+        :ref:`theory.sections.sections.axial_force`: More descriptive explanation of the computation
+        """
         return self._axial_force
 
     @property
-    def section(self):
+    def section(self) -> Section:
+        """basic :py:class:`~m_n_kappa.Section`"""
         return self._section
 
     @property
     def stress_slope(self) -> float:
+        """linear slope of the stresses over the vertical direction of the section"""
         return self._stress_slope
 
     @property
     def stress_interception(self) -> float:
+        """interception-value of the linear stress-distribution of the section"""
         return self._stress_interception
 
     def lever_arm(self) -> float:
+        """
+        lever-arm of the section under the given strain-distribution :math:`r_i`
+
+        Returns
+        -------
+        float
+            lever-arm of the section under a given strain-distribution
+
+        See Also
+        --------
+        :ref:`theory.sections.sections.lever_arm`: More descriptive explanation of the computation
+
+        Notes
+        -----
+        In case of a :py:class:`~m_n_kappa.Rectangle` or a :py:class:`~m_n_kappa.Trapezoid` the lever-arm is computed
+        as follows.
+
+        .. math::
+           :label: eq:section_lever_arm_rectangle
+
+           r_i = \\frac{1}{N_i} \\int_{z_\\mathrm{top}}^{z_\\mathrm{bottom}} \\sigma(z) \\cdot b(z) \\cdot z~dz
+
+        In case of a :py:class:`~m_n_kappa.Circle` the lever-arm applies as the centroid of the circle.
+        It is assumed that only reinforcement-bars are modelled as circles and therefore small in comparison to
+        the rest of the cross-section.
+        """
         if self.axial_force == 0.0:
             return 0.0
         else:
             return self._lever_arm_numerator() / self.axial_force
 
     def moment(self) -> float:
+        """
+        moment under the given strain distribution
+
+        See Also
+        --------
+        :ref:`theory.sections.sections.moment`: More descriptive explanation of the computation
+
+        Returns
+        -------
+        float
+            moment under the given strain distribution
+        """
         return self.axial_force * self.lever_arm()
 
     def _axial_force_integrated(self):
+        """compute axial force for a :py:class:`~m_n_kappa.Rectangle` or a :py:class:`~m_n_kappa.Trapezoid`"""
         force = self._axial_force_integrated_at_position(
             position_value=self.geometry.edges[1]
         )
@@ -268,12 +335,20 @@ class ComputationSection(Section):
         pass
 
     def _get_edges_stress(self) -> list:
+        """
+        compute the stresses at the vertical edges of the section
+
+        These values allow to compute a stress-slope :math:`m_\\mathrm{\\sigma}` and a corresponding
+        stress-interception :math:`m_\\mathrm{\\sigma}`
+        """
         return [
             self._material_stress(strain_value) for strain_value in self.edges_strain
         ]
 
     def _axial_force_integrated_at_position(self, position_value: float) -> float:
         """
+        Integrate axial-force at a given position from the given strain-distribution
+
         Parameters
         ----------
         position_value : float
@@ -301,6 +376,23 @@ class ComputationSection(Section):
         )
 
     def _lever_arm_integrated_at_position(self, position_value: float):
+        """
+        Integrate lever-arm at a given position from the given strain-distribution
+
+        See Also
+        --------
+        :ref:`theory.sections.sections.lever_arm`: More descriptive explanation of the computation
+
+        Parameters
+        ----------
+        position_value : float
+            vertical position where the lever-arm is integrated
+
+        Returns
+        -------
+        float
+            integrated lever-arm
+        """
         return (
             (1.0 / 4.0)
             * self.geometry.width_slope
@@ -334,6 +426,19 @@ class ComputationSection(Section):
         return lever_arm
 
     def _material_stress(self, strain_value: float) -> float:
+        """
+        compute the stress :math:`\\sigma` at a given strain :math:`\\varepsilon`
+        using the material-curve of the section's material
+
+        Parameters
+        ----------
+        strain_value : float
+
+        Returns
+        -------
+        float
+            stress at given strain
+        """
         return self.material.get_material_stress(strain_value)
 
     def _print_results(self) -> str:
