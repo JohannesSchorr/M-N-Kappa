@@ -765,7 +765,7 @@ class Trapezoid(Geometry):
         A trapezoid object is easily instantiated as follows.
 
         >>> from m_n_kappa import Trapezoid
-        >>> trapezoid = Trapezoid(top_edge=10, bottom_edge=10, top_width=10, bottom_width=20)
+        >>> trapezoid = Trapezoid(top_edge=0, bottom_edge=10, top_width=10, bottom_width=20)
 
         In case only ``top_width`` or ``bottom_width`` is passed as argument the centerline of the specific
         width of the trapezoid is assumed to be a :math:`y = 0`.
