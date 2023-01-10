@@ -52,6 +52,7 @@ autodoc_default_options = {
     'members': True,
     'member-order': 'groupwise',
     'show-inheritance': True,
+    'inherited-members': True,
 }
 
 # autosummary - sphinx.ext.autosummary
