@@ -84,6 +84,10 @@ extensions.append('sphinx_design')
 # https://github.com/executablebooks/sphinx-copybutton
 extensions.append('sphinx_copybutton')
 
+# Sphinx-Toggleprompt
+# https://sphinx-toggleprompt.readthedocs.io/en/latest/
+extensions.append('sphinx_toggleprompt')
+
 # -- Options for HTML output -------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#options-for-html-output
 
