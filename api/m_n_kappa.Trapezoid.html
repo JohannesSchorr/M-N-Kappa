@@ -6,7 +6,7 @@
 <link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" /><link rel="next" title="m_n_kappa.geometry.ComposedGeometry" href="m_n_kappa.geometry.ComposedGeometry.html" /><link rel="prev" title="m_n_kappa.Circle" href="m_n_kappa.Circle.html" />
 
     <!-- Generated with Sphinx 5.3.0 and Furo 2022.12.07 -->
-        <title>m_n_kappa.Trapezoid - Release 0.1.0</title>
+        <title>m_n_kappa.Trapezoid - M-N-κ</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?digest=91d0f0d1c444bdcb17a68e833c7a53903343c195" />
     <link rel="stylesheet" type="text/css" href="../_static/plot_directive.css" />
@@ -131,7 +131,7 @@
       </label>
     </div>
     <div class="header-center">
-      <a href="../index.html"><div class="brand">Release 0.1.0</div></a>
+      <a href="../index.html"><div class="brand"><i>M</i>-<i>N</i>-<i>&#954</i></div></a>
     </div>
     <div class="header-right">
       <div class="theme-toggle-container theme-toggle-header">
@@ -157,7 +157,7 @@
     <img class="sidebar-logo" src="../_static/m_kappa_logo.png" alt="Logo"/>
   </div>
   
-  <span class="sidebar-brand-text">Release 0.1.0</span>
+  <span class="sidebar-brand-text"><i>M</i>-<i>N</i>-<i>&#954</i></span>
   
 </a><form class="sidebar-search-container" method="get" action="../search.html" role="search">
   <input class="sidebar-search" placeholder="Search" name="q" aria-label="Search">
@@ -168,6 +168,7 @@
   <ul>
 <li class="toctree-l1"><a class="reference internal" href="../getting_started.html">Getting Started</a></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../examples/index.html">Examples</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../examples/geometry.html">Creating Geometries</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../examples/m_kappa_UPE.html">Single span slim-floor beam with Moment-Curvature-Curves</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../examples/m_n_kappa_UPE.html">Single span slim-floor beam with Moment-Axial force-Curvature-Curves</a></li>
 </ul>
@@ -364,7 +365,7 @@ two horizontal edges that are <em>not parallel</em> to each other.</p>
 <p class="rubric">Examples</p>
 <p>A trapezoid object is easily instantiated as follows.</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">m_n_kappa</span> <span class="kn">import</span> <span class="n">Trapezoid</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">trapezoid</span> <span class="o">=</span> <span class="n">Trapezoid</span><span class="p">(</span><span class="n">top_edge</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">bottom_edge</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">top_width</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">bottom_width</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">trapezoid</span> <span class="o">=</span> <span class="n">Trapezoid</span><span class="p">(</span><span class="n">top_edge</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">bottom_edge</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">top_width</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">bottom_width</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>In case only <code class="docutils literal notranslate"><span class="pre">top_width</span></code> or <code class="docutils literal notranslate"><span class="pre">bottom_width</span></code> is passed as argument the centerline of the specific
