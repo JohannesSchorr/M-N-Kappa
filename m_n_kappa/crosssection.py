@@ -25,8 +25,34 @@ from .curvature_boundaries import (
 )
 
 
-def axial_force(sections: list[ComputationSection]):
-    """compute the sum of axial-force from a list of computed sections"""
+def axial_force(sections: list[ComputationSection]) -> float:
+    """
+    compute the sum of axial-force from a list of computed sections
+
+    .. versionadded:: 0.1.0
+
+    Parameters
+    ----------
+    sections : list[:py:class:`~m_n_kappa.section.ComputationSection`]
+        individual computed sections where the axial-forces are taken from
+
+    Returns
+    -------
+    float
+        sum of axial-forces from the computed sections
+
+    See Also
+    --------
+    moment : computes the sum of moments
+
+    Notes
+    -----
+    In mathematical notation the computation of the sum of axial forces :math:`N`
+    looks like this.
+
+    .. math::
+       N = \\sum_i N_i
+    """
     axial_forces = [section.axial_force for section in sections]
     return sum(axial_forces)
 
