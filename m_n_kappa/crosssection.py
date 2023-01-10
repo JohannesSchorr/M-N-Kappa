@@ -58,7 +58,33 @@ def axial_force(sections: list[ComputationSection]) -> float:
 
 
 def moment(sections: list[ComputationSection]):
-    """compute the sum of moments from a list of computed sections"""
+    """
+    compute the sum of moments from a list of computed sections
+
+    .. versionadded:: 0.1.0
+
+    Parameters
+    ----------
+    sections : list[:py:class:`~m_n_kappa.section.ComputationSection`]
+        individual computed sections where the moments are taken from
+
+    Returns
+    -------
+    float
+        sum of moments from the computed sections
+
+    See Also
+    --------
+    axial_force : computes the sum of axial-forces
+
+    Notes
+    -----
+    In mathematical notation the computation of the sum of axial forces :math:`N`
+    looks like this.
+
+    .. math::
+       M = \\sum_i M_i
+    """
     moments = [section.moment() for section in sections]
     return sum(moments)
 
