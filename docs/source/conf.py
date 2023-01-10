@@ -102,7 +102,8 @@ html_theme_options = {
     "announcement": "<em>Important</em> "
                     "This 'm_n_kappa'-package has not yet been published on PyPI! "
                     "This documentation is also currently under development. "
-                    "Plaese keep that in mind. ",
+                    "Plaese keep that in mind, while reading and testing. "
+                    "Thank you.",
 }
 html_static_path = ['_static']
 html_logo = '_static/logo/m_kappa_logo.png'
