@@ -1522,15 +1522,11 @@ StressStrain(stress=400.0, strain=0.15)]
             text.append("Plastic")
             text.append("-------")
             text.append(
-                "f_y: {:.1f} N/mm^2 | epsilon_y: {:.5f}".format(
-                    self.f_y, self.epsilon_y
-                )
+                f"f_y: {self.f_y:.1f} N/mm^2 | epsilon_y: {self.epsilon_y:.5f}"
             )
         if self.__is_plastic:
             text.append(
-                "f_u: {:.1f} N/mm^2 | failure_strain: {:.5f}".format(
-                    self.f_u, self.failure_strain
-                )
+                f"f_u: {self.f_u:.1f} N/mm^2 | failure_strain: {self.failure_strain:.5f}"
             )
         text += [
             "",
@@ -1541,7 +1537,7 @@ StressStrain(stress=400.0, strain=0.15)]
             "------------------------",
         ]
         for point in self.stress_strain:
-            text.append(" {:9.1f} | {:9.5f}".format(point[0], point[1]))
+            text.append(f" {point.stress:9.1f} | {point.strain:9.5f}")
         return "\n".join(text)
 
     @property
