@@ -457,7 +457,7 @@ class ComputationCrosssectionStrain(ComputationCrosssection):
         """
         Parameters
         ----------
-        sections : list[Section]
+        sections : list[:py:class:`~m_n_kappa.Section`]
             sections the cross_section consists of
         strain : float
             applied constant strain_value
