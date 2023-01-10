@@ -88,6 +88,7 @@ extensions.append('sphinx_copybutton')
 # Sphinx-Toggleprompt
 # https://sphinx-toggleprompt.readthedocs.io/en/latest/
 extensions.append('sphinx_toggleprompt')
+toggleprompt_offset_right = 30  # prevents overlapping with copybutton
 
 # -- Options for HTML output -------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#options-for-html-output
