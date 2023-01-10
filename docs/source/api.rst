@@ -59,9 +59,10 @@ Sections and Cross-section
    :toctree: api/
 
    Section
-   Crosssection
-   ComputationCrosssectionStrain
-   ComputationCrosssectionCurvature
+   Crosssections
+
+.. no need to show here ComputationCrosssectionStrain, ComputationCrosssectionCurvature
+   as only a single value is computed and no equilibrium of horizontal forces reached.
 
 .. _api.strain_based_design:
 

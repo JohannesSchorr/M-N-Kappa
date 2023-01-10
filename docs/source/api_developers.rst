@@ -85,6 +85,8 @@ Cross-sections
    :toctree: api/
 
    ComputationCrosssection
+   ComputationCrosssectionStrain
+   ComputationCrosssectionCurvature
    ComputationCrosssectionStrainAdd
    EdgeStrains
    CrossSectionBoundaries
