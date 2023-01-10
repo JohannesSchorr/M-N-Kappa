@@ -821,7 +821,11 @@ class ComputationCrosssectionStrainAdd(ComputationCrosssectionStrain):
 
 class ComputationCrosssectionCurvature(ComputationCrosssection):
 
-    """computes a cross-section given a curvature and a neutral axis"""
+    """
+    computes a cross-section given a curvature and a neutral axis
+
+    .. versionadded:: 0.1.0
+    """
 
     __slots__ = (
         "_sections",
@@ -842,12 +846,49 @@ class ComputationCrosssectionCurvature(ComputationCrosssection):
         """
         Parameters
         ----------
-        cross_section : list[:py:class:`~m_n_kappa.Crosssection`]
+        cross_section : :py:class:`~m_n_kappa.Crosssection` | list[:py:class:`~m_n_kappa.Section`]
             the cross-section
         curvature : float
             curvature to compute values
         neutral_axis_value : float
             position_value where strain_value is zero
+        slab_effective_width: :py:class:`~m_n_kappa.EffectiveWidths`
+            effective widths’ for the slab (concrete and reinforcement)
+
+        See Also
+        --------
+        ComputationCrosssectionStrain : computes a cross-section under a constant strain_value
+
+        Examples
+        --------
+        For example a HEB 200 steel girder is computed.
+        First it is created as follows.
+
+        >>> from m_n_kappa import IProfile, Steel
+        >>> steel = Steel(f_y=355, failure_strain=0.15)
+        >>> i_profile = IProfile(
+        ...     top_edge=0.0, t_w=9.5, h_w=200-2*15, b_fo=200.0, t_fo=15.0)
+        >>> steel_cross_section = i_profile + steel
+
+        To compute the girder a ``curvature``-value as well as a ``neutral_axis_value`` needs to be passed
+        to :py:class:`~m_n_kappa.crosssection.ComputationCrosssectionCurvature`.
+
+        >>> from m_n_kappa.crosssection import ComputationCrosssectionCurvature
+        >>> computed_cross_section = ComputationCrosssectionCurvature(
+        ...     cross_section=steel_cross_section, curvature=0.0001, neutral_axis_value=100.0)
+
+        As the ``neutral_axis_value`` is chosen to be in the mid-height of the cross-section, (almost) zero
+        axial-forces are computed.
+
+        >>> round(computed_cross_section.total_axial_force(), 7)
+        -0.0
+
+        The moment on the other hand is much higher and assuming Newton and Millimeter as input is here
+        computed to Kilo-Newton-Meter.
+
+        >>> computed_cross_section.total_moment() * 0.001 * 0.001
+        221.07005829554043
+
         """
         super().__init__(cross_section.sections, cross_section.slab_effective_width)
         self._curvature = curvature
@@ -907,7 +948,7 @@ class ComputationCrosssectionCurvature(ComputationCrosssection):
             "Stress-strain_value distribution",
             "--------------------------",
             "",
-            "  top edge | top strain_value | top stress | bot edge | bot strain_value | bot stress | axi. force | section | material ",
+            "  top edge | top strain | top stress | bot edge | bot strain | bot stress | axi. force | section | material ",
             "------------------------------------------------------------------------------------------------------------",
         ]
         for section in self.compute_split_sections:
