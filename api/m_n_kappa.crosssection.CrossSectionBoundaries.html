@@ -116,7 +116,11 @@
   <div class="visually-hidden">Hide table of contents sidebar</div>
 </label>
 
-
+<div class="announcement">
+  <aside class="announcement-content">
+     <em>Important</em> This 'm_n_kappa'-package has not yet been published on PyPI! This documentation is also currently under development. Plaese keep that in mind, while reading and testing. Thank you. 
+  </aside>
+</div>
 
 <div class="page">
   <header class="mobile-header">
@@ -164,8 +168,8 @@
   <ul>
 <li class="toctree-l1"><a class="reference internal" href="../getting_started.html">Getting Started</a></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../examples/index.html">Examples</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
-<li class="toctree-l2"><a class="reference internal" href="../examples/m_kappa_UPE.html">Single span slim-floor beam with :math:`M`-:math:`\kappa`-curve</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../examples/m_n_kappa_UPE.html">Single span slim-floor beam with :math:`M`-:math:`N`-:math:`\kappa`-curve</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../examples/m_kappa_UPE.html">Single span slim-floor beam with Moment-Curvature-Curves</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../examples/m_n_kappa_UPE.html">Single span slim-floor beam with Moment-Axial force-Curvature-Curves</a></li>
 </ul>
 </li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../theory/index.html">Theory guide</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" role="switch" type="checkbox"/><label for="toctree-checkbox-2"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
@@ -236,14 +240,13 @@
 <li class="toctree-l2"><a class="reference internal" href="m_n_kappa.material.ConcreteCompressionParabolaRectangle.html">m_n_kappa.material.ConcreteCompressionParabolaRectangle</a></li>
 <li class="toctree-l2"><a class="reference internal" href="m_n_kappa.material.ConcreteCompressionBiLinear.html">m_n_kappa.material.ConcreteCompressionBiLinear</a></li>
 <li class="toctree-l2"><a class="reference internal" href="m_n_kappa.material.ConcreteTension.html">m_n_kappa.material.ConcreteTension</a></li>
-<li class="toctree-l2"><a class="reference internal" href="m_n_kappa.section.Section.html">m_n_kappa.section.Section</a></li>
 <li class="toctree-l2"><a class="reference internal" href="m_n_kappa.section.ComputationSection.html">m_n_kappa.section.ComputationSection</a></li>
 <li class="toctree-l2"><a class="reference internal" href="m_n_kappa.section.ComputationSectionCurvature.html">m_n_kappa.section.ComputationSectionCurvature</a></li>
 <li class="toctree-l2"><a class="reference internal" href="m_n_kappa.section.ComputationSectionStrain.html">m_n_kappa.section.ComputationSectionStrain</a></li>
 <li class="toctree-l2"><a class="reference internal" href="m_n_kappa.crosssection.ComputationCrosssection.html">m_n_kappa.crosssection.ComputationCrosssection</a></li>
 <li class="toctree-l2"><a class="reference internal" href="m_n_kappa.crosssection.ComputationCrosssectionStrain.html">m_n_kappa.crosssection.ComputationCrosssectionStrain</a></li>
-<li class="toctree-l2"><a class="reference internal" href="m_n_kappa.crosssection.ComputationCrosssectionStrainAdd.html">m_n_kappa.crosssection.ComputationCrosssectionStrainAdd</a></li>
 <li class="toctree-l2"><a class="reference internal" href="m_n_kappa.crosssection.ComputationCrosssectionCurvature.html">m_n_kappa.crosssection.ComputationCrosssectionCurvature</a></li>
+<li class="toctree-l2"><a class="reference internal" href="m_n_kappa.crosssection.ComputationCrosssectionStrainAdd.html">m_n_kappa.crosssection.ComputationCrosssectionStrainAdd</a></li>
 <li class="toctree-l2"><a class="reference internal" href="m_n_kappa.crosssection.EdgeStrains.html">m_n_kappa.crosssection.EdgeStrains</a></li>
 <li class="toctree-l2 current current-page"><a class="current reference internal" href="#">m_n_kappa.crosssection.CrossSectionBoundaries</a></li>
 <li class="toctree-l2"><a class="reference internal" href="m_n_kappa.crosssection.axial_force.html">m_n_kappa.crosssection.axial_force</a></li>
@@ -342,34 +345,34 @@ under positive and negative curvature</p>
 </dl>
 </p></td>
 </tr>
-<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">add_section</span></code>(section)</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#m_n_kappa.crosssection.CrossSectionBoundaries.add_section" title="m_n_kappa.crosssection.CrossSectionBoundaries.add_section"><code class="xref py py-obj docutils literal notranslate"><span class="pre">add_section</span></code></a>(section)</p></td>
 <td><p>add a <code class="xref py py-class docutils literal notranslate"><span class="pre">Section</span></code> to this cross-section</p></td>
 </tr>
-<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">concrete_slab_width</span></code>()</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#m_n_kappa.crosssection.CrossSectionBoundaries.concrete_slab_width" title="m_n_kappa.crosssection.CrossSectionBoundaries.concrete_slab_width"><code class="xref py py-obj docutils literal notranslate"><span class="pre">concrete_slab_width</span></code></a>()</p></td>
 <td><p>full width of the concrete slab</p></td>
 </tr>
 <tr class="row-even"><td><p><a class="reference internal" href="#m_n_kappa.crosssection.CrossSectionBoundaries.get_boundaries" title="m_n_kappa.crosssection.CrossSectionBoundaries.get_boundaries"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_boundaries</span></code></a>()</p></td>
 <td><p>curvature boundary values under positive and negative curvature</p></td>
 </tr>
-<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_boundary_conditions</span></code>()</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#m_n_kappa.crosssection.CrossSectionBoundaries.get_boundary_conditions" title="m_n_kappa.crosssection.CrossSectionBoundaries.get_boundary_conditions"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_boundary_conditions</span></code></a>()</p></td>
 <td><p>curvature boundary values under positive and negative curvature</p></td>
 </tr>
-<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">left_edge</span></code>()</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#m_n_kappa.crosssection.CrossSectionBoundaries.left_edge" title="m_n_kappa.crosssection.CrossSectionBoundaries.left_edge"><code class="xref py py-obj docutils literal notranslate"><span class="pre">left_edge</span></code></a>()</p></td>
 <td><p>outer left-edge of the concrete-slab</p></td>
 </tr>
-<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">maximum_negative_strain</span></code>()</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#m_n_kappa.crosssection.CrossSectionBoundaries.maximum_negative_strain" title="m_n_kappa.crosssection.CrossSectionBoundaries.maximum_negative_strain"><code class="xref py py-obj docutils literal notranslate"><span class="pre">maximum_negative_strain</span></code></a>()</p></td>
 <td><p>determine maximum positive strain of all sections associated with this cross-section</p></td>
 </tr>
-<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">maximum_positive_strain</span></code>()</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#m_n_kappa.crosssection.CrossSectionBoundaries.maximum_positive_strain" title="m_n_kappa.crosssection.CrossSectionBoundaries.maximum_positive_strain"><code class="xref py py-obj docutils literal notranslate"><span class="pre">maximum_positive_strain</span></code></a>()</p></td>
 <td><p>determine maximum positive strain of all sections associated with this cross-section</p></td>
 </tr>
-<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">right_edge</span></code>()</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#m_n_kappa.crosssection.CrossSectionBoundaries.right_edge" title="m_n_kappa.crosssection.CrossSectionBoundaries.right_edge"><code class="xref py py-obj docutils literal notranslate"><span class="pre">right_edge</span></code></a>()</p></td>
 <td><p>outer right-edge of the concrete-slab</p></td>
 </tr>
-<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">sections_not_of_type</span></code>(section_type)</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#m_n_kappa.crosssection.CrossSectionBoundaries.sections_not_of_type" title="m_n_kappa.crosssection.CrossSectionBoundaries.sections_not_of_type"><code class="xref py py-obj docutils literal notranslate"><span class="pre">sections_not_of_type</span></code></a>(section_type)</p></td>
 <td><p>get a list of sections that are not of the specified typ</p></td>
 </tr>
-<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">sections_of_type</span></code>(section_type)</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#m_n_kappa.crosssection.CrossSectionBoundaries.sections_of_type" title="m_n_kappa.crosssection.CrossSectionBoundaries.sections_of_type"><code class="xref py py-obj docutils literal notranslate"><span class="pre">sections_of_type</span></code></a>(section_type)</p></td>
 <td><p>get a list of sections that are of the specified type associated with this cross-section</p></td>
 </tr>
 </tbody>
@@ -379,16 +382,16 @@ under positive and negative curvature</p>
 <div class="table-wrapper autosummary longtable docutils container">
 <table class="autosummary longtable docutils align-default">
 <tbody>
-<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">bottom_edge</span></code></p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#m_n_kappa.crosssection.CrossSectionBoundaries.bottom_edge" title="m_n_kappa.crosssection.CrossSectionBoundaries.bottom_edge"><code class="xref py py-obj docutils literal notranslate"><span class="pre">bottom_edge</span></code></a></p></td>
 <td><p>overall vertical position of the bottom edge of the cross-section <span class="math notranslate nohighlight">\(z_\mathrm{bottom}\)</span></p></td>
 </tr>
-<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">girder_sections</span></code></p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#m_n_kappa.crosssection.CrossSectionBoundaries.girder_sections" title="m_n_kappa.crosssection.CrossSectionBoundaries.girder_sections"><code class="xref py py-obj docutils literal notranslate"><span class="pre">girder_sections</span></code></a></p></td>
 <td><p>class:<a href="#id1"><span class="problematic" id="id2">`</span></a>~m_n_kappa.section.Section belonging to te girder</p></td>
 </tr>
-<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">half_point</span></code></p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#m_n_kappa.crosssection.CrossSectionBoundaries.half_point" title="m_n_kappa.crosssection.CrossSectionBoundaries.half_point"><code class="xref py py-obj docutils literal notranslate"><span class="pre">half_point</span></code></a></p></td>
 <td><p>vertical middle between and bottom</p></td>
 </tr>
-<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">height</span></code></p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#m_n_kappa.crosssection.CrossSectionBoundaries.height" title="m_n_kappa.crosssection.CrossSectionBoundaries.height"><code class="xref py py-obj docutils literal notranslate"><span class="pre">height</span></code></a></p></td>
 <td><p>height of the cross-section</p></td>
 </tr>
 <tr class="row-odd"><td><p><a class="reference internal" href="#m_n_kappa.crosssection.CrossSectionBoundaries.maximum_negative_curvature" title="m_n_kappa.crosssection.CrossSectionBoundaries.maximum_negative_curvature"><code class="xref py py-obj docutils literal notranslate"><span class="pre">maximum_negative_curvature</span></code></a></p></td>
@@ -397,24 +400,52 @@ under positive and negative curvature</p>
 <tr class="row-even"><td><p><a class="reference internal" href="#m_n_kappa.crosssection.CrossSectionBoundaries.maximum_positive_curvature" title="m_n_kappa.crosssection.CrossSectionBoundaries.maximum_positive_curvature"><code class="xref py py-obj docutils literal notranslate"><span class="pre">maximum_positive_curvature</span></code></a></p></td>
 <td><p><a class="reference internal" href="m_n_kappa.crosssection.EdgeStrains.html#m_n_kappa.crosssection.EdgeStrains" title="m_n_kappa.crosssection.EdgeStrains"><code class="xref py py-class docutils literal notranslate"><span class="pre">EdgeStrains</span></code></a> reaching the maximum possible positive curvature</p></td>
 </tr>
-<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">section_type</span></code></p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#m_n_kappa.crosssection.CrossSectionBoundaries.section_type" title="m_n_kappa.crosssection.CrossSectionBoundaries.section_type"><code class="xref py py-obj docutils literal notranslate"><span class="pre">section_type</span></code></a></p></td>
 <td><p>section-type this cross-section is associated with, if it is only one</p></td>
 </tr>
-<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">sections</span></code></p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#m_n_kappa.crosssection.CrossSectionBoundaries.sections" title="m_n_kappa.crosssection.CrossSectionBoundaries.sections"><code class="xref py py-obj docutils literal notranslate"><span class="pre">sections</span></code></a></p></td>
 <td><p>all sections associated with this cross-section</p></td>
 </tr>
-<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">slab_effective_width</span></code></p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#m_n_kappa.crosssection.CrossSectionBoundaries.slab_effective_width" title="m_n_kappa.crosssection.CrossSectionBoundaries.slab_effective_width"><code class="xref py py-obj docutils literal notranslate"><span class="pre">slab_effective_width</span></code></a></p></td>
 <td><p>effective widths of the (concrete) slab</p></td>
 </tr>
-<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">slab_sections</span></code></p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#m_n_kappa.crosssection.CrossSectionBoundaries.slab_sections" title="m_n_kappa.crosssection.CrossSectionBoundaries.slab_sections"><code class="xref py py-obj docutils literal notranslate"><span class="pre">slab_sections</span></code></a></p></td>
 <td><p>all slab-sections of this cross-section</p></td>
 </tr>
-<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">top_edge</span></code></p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#m_n_kappa.crosssection.CrossSectionBoundaries.top_edge" title="m_n_kappa.crosssection.CrossSectionBoundaries.top_edge"><code class="xref py py-obj docutils literal notranslate"><span class="pre">top_edge</span></code></a></p></td>
 <td><p>top-edge of the cross-section <span class="math notranslate nohighlight">\(z_\mathrm{top}\)</span></p></td>
 </tr>
 </tbody>
 </table>
 </div>
+<dl class="py method">
+<dt class="sig sig-object py" id="m_n_kappa.crosssection.CrossSectionBoundaries.add_section">
+<span class="sig-name descname"><span class="pre">add_section</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">section</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#m_n_kappa.crosssection.CrossSectionBoundaries.add_section" title="Permalink to this definition">#</a></dt>
+<dd><p>add a <code class="xref py py-class docutils literal notranslate"><span class="pre">Section</span></code> to this cross-section</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>section</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">Section</span></code>) – section to add to this cross-section</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>None</p>
+</dd>
+<dt class="field-odd">Raises<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>ValueError</strong> – if <code class="docutils literal notranslate"><span class="pre">section</span></code> is not of type <a class="reference internal" href="m_n_kappa.Section.html#m_n_kappa.Section" title="m_n_kappa.section.Section"><code class="xref py py-class docutils literal notranslate"><span class="pre">Section</span></code></a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="m_n_kappa.crosssection.CrossSectionBoundaries.concrete_slab_width">
+<span class="sig-name descname"><span class="pre">concrete_slab_width</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#m_n_kappa.crosssection.CrossSectionBoundaries.concrete_slab_width" title="Permalink to this definition">#</a></dt>
+<dd><p>full width of the concrete slab</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
 <dl class="py method">
 <dt class="sig sig-object py" id="m_n_kappa.crosssection.CrossSectionBoundaries.get_boundaries">
 <span class="sig-name descname"><span class="pre">get_boundaries</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#m_n_kappa.crosssection.CrossSectionBoundaries.get_boundaries" title="Permalink to this definition">#</a></dt>
@@ -433,6 +464,152 @@ derived from the given material curves</p>
 </dl>
 </dd></dl>
 
+<dl class="py method">
+<dt class="sig sig-object py" id="m_n_kappa.crosssection.CrossSectionBoundaries.get_boundary_conditions">
+<span class="sig-name descname"><span class="pre">get_boundary_conditions</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#m_n_kappa.crosssection.CrossSectionBoundaries.get_boundary_conditions" title="Permalink to this definition">#</a></dt>
+<dd><p>curvature boundary values under positive and negative curvature</p>
+<p>see <a class="reference internal" href="#m_n_kappa.crosssection.CrossSectionBoundaries.get_boundaries" title="m_n_kappa.crosssection.CrossSectionBoundaries.get_boundaries"><code class="xref py py-meth docutils literal notranslate"><span class="pre">get_boundaries()</span></code></a></p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>curvature boundary values under positive and negative curvature</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference internal" href="m_n_kappa.curvature_boundaries.Boundaries.html#m_n_kappa.curvature_boundaries.Boundaries" title="m_n_kappa.curvature_boundaries.Boundaries"><code class="xref py py-class docutils literal notranslate"><span class="pre">Boundaries</span></code></a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="m_n_kappa.crosssection.CrossSectionBoundaries.left_edge">
+<span class="sig-name descname"><span class="pre">left_edge</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#m_n_kappa.crosssection.CrossSectionBoundaries.left_edge" title="Permalink to this definition">#</a></dt>
+<dd><p>outer left-edge of the concrete-slab</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>will fail in case concrete is a trapezoid or a circle</p>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="m_n_kappa.crosssection.CrossSectionBoundaries.maximum_negative_strain">
+<span class="sig-name descname"><span class="pre">maximum_negative_strain</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#m_n_kappa.crosssection.CrossSectionBoundaries.maximum_negative_strain" title="Permalink to this definition">#</a></dt>
+<dd><p>determine maximum positive strain of all sections
+associated with this cross-section</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="m_n_kappa.crosssection.CrossSectionBoundaries.maximum_positive_strain">
+<span class="sig-name descname"><span class="pre">maximum_positive_strain</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#m_n_kappa.crosssection.CrossSectionBoundaries.maximum_positive_strain" title="Permalink to this definition">#</a></dt>
+<dd><p>determine maximum positive strain of all sections
+associated with this cross-section</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="m_n_kappa.crosssection.CrossSectionBoundaries.right_edge">
+<span class="sig-name descname"><span class="pre">right_edge</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#m_n_kappa.crosssection.CrossSectionBoundaries.right_edge" title="Permalink to this definition">#</a></dt>
+<dd><p>outer right-edge of the concrete-slab</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>will fail in case concrete is a trapezoid or a circle</p>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="m_n_kappa.crosssection.CrossSectionBoundaries.sections_not_of_type">
+<span class="sig-name descname"><span class="pre">sections_not_of_type</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">section_type</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#m_n_kappa.crosssection.CrossSectionBoundaries.sections_not_of_type" title="Permalink to this definition">#</a></dt>
+<dd><p>get a list of sections that are not of the specified typ</p>
+<dl class="simple">
+<dt>Possible section-types are:</dt><dd><ul class="simple">
+<li><p>‘slab’   -&gt; concrete slab + reinforcement</p></li>
+<li><p>‘girder’ -&gt; Steel girder</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>section_type</strong> (<em>str</em>) – </p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>list[<a class="reference internal" href="m_n_kappa.Section.html#m_n_kappa.Section" title="m_n_kappa.section.Section">m_n_kappa.section.Section</a>]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="m_n_kappa.crosssection.CrossSectionBoundaries.sections_of_type">
+<span class="sig-name descname"><span class="pre">sections_of_type</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">section_type</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#m_n_kappa.crosssection.CrossSectionBoundaries.sections_of_type" title="Permalink to this definition">#</a></dt>
+<dd><p>get a list of sections that are of the specified type associated with this cross-section</p>
+<p>Associated sections are listed in property <cite>sections</cite>.
+Therefore, these sections must have been added before to this cross-section.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>section_type</strong> (<em>str</em>) – <p>type of section to search for.
+Possible section-types are:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>’slab’   -&gt; concrete slab + reinforcement</p></li>
+<li><p>’girder’ -&gt; Steel girder</p></li>
+</ul>
+</div></blockquote>
+</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>sections of the specified type associated with this cross-section</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>list[<a class="reference internal" href="m_n_kappa.Section.html#m_n_kappa.Section" title="m_n_kappa.Section">Section</a>]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="m_n_kappa.crosssection.CrossSectionBoundaries.bottom_edge">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">bottom_edge</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">float</span></em><a class="headerlink" href="#m_n_kappa.crosssection.CrossSectionBoundaries.bottom_edge" title="Permalink to this definition">#</a></dt>
+<dd><p>overall vertical position of the bottom edge of the cross-section <span class="math notranslate nohighlight">\(z_\mathrm{bottom}\)</span></p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="m_n_kappa.crosssection.CrossSectionBoundaries.girder_sections">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">girder_sections</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">list</span></em><a class="headerlink" href="#m_n_kappa.crosssection.CrossSectionBoundaries.girder_sections" title="Permalink to this definition">#</a></dt>
+<dd><p>class:<a href="#id3"><span class="problematic" id="id4">`</span></a>~m_n_kappa.section.Section belonging to te girder</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>py</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="m_n_kappa.crosssection.CrossSectionBoundaries.half_point">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">half_point</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">float</span></em><a class="headerlink" href="#m_n_kappa.crosssection.CrossSectionBoundaries.half_point" title="Permalink to this definition">#</a></dt>
+<dd><p>vertical middle between and bottom</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="m_n_kappa.crosssection.CrossSectionBoundaries.height">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">height</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">float</span></em><a class="headerlink" href="#m_n_kappa.crosssection.CrossSectionBoundaries.height" title="Permalink to this definition">#</a></dt>
+<dd><p>height of the cross-section</p>
+</dd></dl>
+
 <dl class="py property">
 <dt class="sig sig-object py" id="m_n_kappa.crosssection.CrossSectionBoundaries.maximum_negative_curvature">
 <em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">maximum_negative_curvature</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="m_n_kappa.crosssection.EdgeStrains.html#m_n_kappa.crosssection.EdgeStrains" title="m_n_kappa.crosssection.EdgeStrains"><span class="pre">EdgeStrains</span></a></em><a class="headerlink" href="#m_n_kappa.crosssection.CrossSectionBoundaries.maximum_negative_curvature" title="Permalink to this definition">#</a></dt>
@@ -445,6 +622,37 @@ possible negative curvature</p>
 <em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">maximum_positive_curvature</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="m_n_kappa.crosssection.EdgeStrains.html#m_n_kappa.crosssection.EdgeStrains" title="m_n_kappa.crosssection.EdgeStrains"><span class="pre">EdgeStrains</span></a></em><a class="headerlink" href="#m_n_kappa.crosssection.CrossSectionBoundaries.maximum_positive_curvature" title="Permalink to this definition">#</a></dt>
 <dd><p><a class="reference internal" href="m_n_kappa.crosssection.EdgeStrains.html#m_n_kappa.crosssection.EdgeStrains" title="m_n_kappa.crosssection.EdgeStrains"><code class="xref py py-class docutils literal notranslate"><span class="pre">EdgeStrains</span></code></a> reaching the maximum possible
 positive curvature</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="m_n_kappa.crosssection.CrossSectionBoundaries.section_type">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">section_type</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></em><a class="headerlink" href="#m_n_kappa.crosssection.CrossSectionBoundaries.section_type" title="Permalink to this definition">#</a></dt>
+<dd><p>section-type this cross-section is associated with,
+if it is only one</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="m_n_kappa.crosssection.CrossSectionBoundaries.sections">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">sections</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">list</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="m_n_kappa.Section.html#m_n_kappa.Section" title="m_n_kappa.section.Section"><span class="pre">m_n_kappa.section.Section</span></a><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#m_n_kappa.crosssection.CrossSectionBoundaries.sections" title="Permalink to this definition">#</a></dt>
+<dd><p>all sections associated with this cross-section</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="m_n_kappa.crosssection.CrossSectionBoundaries.slab_effective_width">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">slab_effective_width</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="m_n_kappa.general.EffectiveWidths.html#m_n_kappa.general.EffectiveWidths" title="m_n_kappa.general.EffectiveWidths"><span class="pre">EffectiveWidths</span></a></em><a class="headerlink" href="#m_n_kappa.crosssection.CrossSectionBoundaries.slab_effective_width" title="Permalink to this definition">#</a></dt>
+<dd><p>effective widths of the (concrete) slab</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="m_n_kappa.crosssection.CrossSectionBoundaries.slab_sections">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">slab_sections</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">list</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="m_n_kappa.Section.html#m_n_kappa.Section" title="m_n_kappa.section.Section"><span class="pre">m_n_kappa.section.Section</span></a><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#m_n_kappa.crosssection.CrossSectionBoundaries.slab_sections" title="Permalink to this definition">#</a></dt>
+<dd><p>all slab-sections of this cross-section</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="m_n_kappa.crosssection.CrossSectionBoundaries.top_edge">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">top_edge</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">float</span></em><a class="headerlink" href="#m_n_kappa.crosssection.CrossSectionBoundaries.top_edge" title="Permalink to this definition">#</a></dt>
+<dd><p>top-edge of the cross-section <span class="math notranslate nohighlight">\(z_\mathrm{top}\)</span></p>
 </dd></dl>
 
 </dd></dl>
@@ -508,9 +716,27 @@ positive curvature</p>
             <ul>
 <li><a class="reference internal" href="#">m_n_kappa.crosssection.CrossSectionBoundaries</a><ul>
 <li><a class="reference internal" href="#m_n_kappa.crosssection.CrossSectionBoundaries"><code class="docutils literal notranslate"><span class="pre">CrossSectionBoundaries</span></code></a><ul>
+<li><a class="reference internal" href="#m_n_kappa.crosssection.CrossSectionBoundaries.add_section"><code class="docutils literal notranslate"><span class="pre">CrossSectionBoundaries.add_section()</span></code></a></li>
+<li><a class="reference internal" href="#m_n_kappa.crosssection.CrossSectionBoundaries.concrete_slab_width"><code class="docutils literal notranslate"><span class="pre">CrossSectionBoundaries.concrete_slab_width()</span></code></a></li>
 <li><a class="reference internal" href="#m_n_kappa.crosssection.CrossSectionBoundaries.get_boundaries"><code class="docutils literal notranslate"><span class="pre">CrossSectionBoundaries.get_boundaries()</span></code></a></li>
+<li><a class="reference internal" href="#m_n_kappa.crosssection.CrossSectionBoundaries.get_boundary_conditions"><code class="docutils literal notranslate"><span class="pre">CrossSectionBoundaries.get_boundary_conditions()</span></code></a></li>
+<li><a class="reference internal" href="#m_n_kappa.crosssection.CrossSectionBoundaries.left_edge"><code class="docutils literal notranslate"><span class="pre">CrossSectionBoundaries.left_edge()</span></code></a></li>
+<li><a class="reference internal" href="#m_n_kappa.crosssection.CrossSectionBoundaries.maximum_negative_strain"><code class="docutils literal notranslate"><span class="pre">CrossSectionBoundaries.maximum_negative_strain()</span></code></a></li>
+<li><a class="reference internal" href="#m_n_kappa.crosssection.CrossSectionBoundaries.maximum_positive_strain"><code class="docutils literal notranslate"><span class="pre">CrossSectionBoundaries.maximum_positive_strain()</span></code></a></li>
+<li><a class="reference internal" href="#m_n_kappa.crosssection.CrossSectionBoundaries.right_edge"><code class="docutils literal notranslate"><span class="pre">CrossSectionBoundaries.right_edge()</span></code></a></li>
+<li><a class="reference internal" href="#m_n_kappa.crosssection.CrossSectionBoundaries.sections_not_of_type"><code class="docutils literal notranslate"><span class="pre">CrossSectionBoundaries.sections_not_of_type()</span></code></a></li>
+<li><a class="reference internal" href="#m_n_kappa.crosssection.CrossSectionBoundaries.sections_of_type"><code class="docutils literal notranslate"><span class="pre">CrossSectionBoundaries.sections_of_type()</span></code></a></li>
+<li><a class="reference internal" href="#m_n_kappa.crosssection.CrossSectionBoundaries.bottom_edge"><code class="docutils literal notranslate"><span class="pre">CrossSectionBoundaries.bottom_edge</span></code></a></li>
+<li><a class="reference internal" href="#m_n_kappa.crosssection.CrossSectionBoundaries.girder_sections"><code class="docutils literal notranslate"><span class="pre">CrossSectionBoundaries.girder_sections</span></code></a></li>
+<li><a class="reference internal" href="#m_n_kappa.crosssection.CrossSectionBoundaries.half_point"><code class="docutils literal notranslate"><span class="pre">CrossSectionBoundaries.half_point</span></code></a></li>
+<li><a class="reference internal" href="#m_n_kappa.crosssection.CrossSectionBoundaries.height"><code class="docutils literal notranslate"><span class="pre">CrossSectionBoundaries.height</span></code></a></li>
 <li><a class="reference internal" href="#m_n_kappa.crosssection.CrossSectionBoundaries.maximum_negative_curvature"><code class="docutils literal notranslate"><span class="pre">CrossSectionBoundaries.maximum_negative_curvature</span></code></a></li>
 <li><a class="reference internal" href="#m_n_kappa.crosssection.CrossSectionBoundaries.maximum_positive_curvature"><code class="docutils literal notranslate"><span class="pre">CrossSectionBoundaries.maximum_positive_curvature</span></code></a></li>
+<li><a class="reference internal" href="#m_n_kappa.crosssection.CrossSectionBoundaries.section_type"><code class="docutils literal notranslate"><span class="pre">CrossSectionBoundaries.section_type</span></code></a></li>
+<li><a class="reference internal" href="#m_n_kappa.crosssection.CrossSectionBoundaries.sections"><code class="docutils literal notranslate"><span class="pre">CrossSectionBoundaries.sections</span></code></a></li>
+<li><a class="reference internal" href="#m_n_kappa.crosssection.CrossSectionBoundaries.slab_effective_width"><code class="docutils literal notranslate"><span class="pre">CrossSectionBoundaries.slab_effective_width</span></code></a></li>
+<li><a class="reference internal" href="#m_n_kappa.crosssection.CrossSectionBoundaries.slab_sections"><code class="docutils literal notranslate"><span class="pre">CrossSectionBoundaries.slab_sections</span></code></a></li>
+<li><a class="reference internal" href="#m_n_kappa.crosssection.CrossSectionBoundaries.top_edge"><code class="docutils literal notranslate"><span class="pre">CrossSectionBoundaries.top_edge</span></code></a></li>
 </ul>
 </li>
 </ul>

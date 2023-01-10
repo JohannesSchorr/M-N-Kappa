@@ -116,7 +116,11 @@
   <div class="visually-hidden">Hide table of contents sidebar</div>
 </label>
 
-
+<div class="announcement">
+  <aside class="announcement-content">
+     <em>Important</em> This 'm_n_kappa'-package has not yet been published on PyPI! This documentation is also currently under development. Plaese keep that in mind, while reading and testing. Thank you. 
+  </aside>
+</div>
 
 <div class="page">
   <header class="mobile-header">
@@ -164,8 +168,8 @@
   <ul>
 <li class="toctree-l1"><a class="reference internal" href="getting_started.html">Getting Started</a></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="examples/index.html">Examples</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
-<li class="toctree-l2"><a class="reference internal" href="examples/m_kappa_UPE.html">Single span slim-floor beam with :math:`M`-:math:`\kappa`-curve</a></li>
-<li class="toctree-l2"><a class="reference internal" href="examples/m_n_kappa_UPE.html">Single span slim-floor beam with :math:`M`-:math:`N`-:math:`\kappa`-curve</a></li>
+<li class="toctree-l2"><a class="reference internal" href="examples/m_kappa_UPE.html">Single span slim-floor beam with Moment-Curvature-Curves</a></li>
+<li class="toctree-l2"><a class="reference internal" href="examples/m_n_kappa_UPE.html">Single span slim-floor beam with Moment-Axial force-Curvature-Curves</a></li>
 </ul>
 </li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="theory/index.html">Theory guide</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" role="switch" type="checkbox"/><label for="toctree-checkbox-2"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
@@ -236,14 +240,13 @@
 <li class="toctree-l2"><a class="reference internal" href="api/m_n_kappa.material.ConcreteCompressionParabolaRectangle.html">m_n_kappa.material.ConcreteCompressionParabolaRectangle</a></li>
 <li class="toctree-l2"><a class="reference internal" href="api/m_n_kappa.material.ConcreteCompressionBiLinear.html">m_n_kappa.material.ConcreteCompressionBiLinear</a></li>
 <li class="toctree-l2"><a class="reference internal" href="api/m_n_kappa.material.ConcreteTension.html">m_n_kappa.material.ConcreteTension</a></li>
-<li class="toctree-l2"><a class="reference internal" href="api/m_n_kappa.section.Section.html">m_n_kappa.section.Section</a></li>
 <li class="toctree-l2"><a class="reference internal" href="api/m_n_kappa.section.ComputationSection.html">m_n_kappa.section.ComputationSection</a></li>
 <li class="toctree-l2"><a class="reference internal" href="api/m_n_kappa.section.ComputationSectionCurvature.html">m_n_kappa.section.ComputationSectionCurvature</a></li>
 <li class="toctree-l2"><a class="reference internal" href="api/m_n_kappa.section.ComputationSectionStrain.html">m_n_kappa.section.ComputationSectionStrain</a></li>
 <li class="toctree-l2"><a class="reference internal" href="api/m_n_kappa.crosssection.ComputationCrosssection.html">m_n_kappa.crosssection.ComputationCrosssection</a></li>
 <li class="toctree-l2"><a class="reference internal" href="api/m_n_kappa.crosssection.ComputationCrosssectionStrain.html">m_n_kappa.crosssection.ComputationCrosssectionStrain</a></li>
-<li class="toctree-l2"><a class="reference internal" href="api/m_n_kappa.crosssection.ComputationCrosssectionStrainAdd.html">m_n_kappa.crosssection.ComputationCrosssectionStrainAdd</a></li>
 <li class="toctree-l2"><a class="reference internal" href="api/m_n_kappa.crosssection.ComputationCrosssectionCurvature.html">m_n_kappa.crosssection.ComputationCrosssectionCurvature</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/m_n_kappa.crosssection.ComputationCrosssectionStrainAdd.html">m_n_kappa.crosssection.ComputationCrosssectionStrainAdd</a></li>
 <li class="toctree-l2"><a class="reference internal" href="api/m_n_kappa.crosssection.EdgeStrains.html">m_n_kappa.crosssection.EdgeStrains</a></li>
 <li class="toctree-l2"><a class="reference internal" href="api/m_n_kappa.crosssection.CrossSectionBoundaries.html">m_n_kappa.crosssection.CrossSectionBoundaries</a></li>
 <li class="toctree-l2"><a class="reference internal" href="api/m_n_kappa.crosssection.axial_force.html">m_n_kappa.crosssection.axial_force</a></li>
@@ -412,16 +415,13 @@
 <div class="table-wrapper autosummary longtable docutils container">
 <table class="autosummary longtable docutils align-default">
 <tbody>
-<tr class="row-odd"><td><p><a class="reference internal" href="api/m_n_kappa.section.Section.html#m_n_kappa.section.Section" title="m_n_kappa.section.Section"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Section</span></code></a>(geometry, material)</p></td>
-<td><p>Combines material and geometric entity</p></td>
-</tr>
-<tr class="row-even"><td><p><a class="reference internal" href="api/m_n_kappa.section.ComputationSection.html#m_n_kappa.section.ComputationSection" title="m_n_kappa.section.ComputationSection"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ComputationSection</span></code></a>(geometry, material)</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/m_n_kappa.section.ComputationSection.html#m_n_kappa.section.ComputationSection" title="m_n_kappa.section.ComputationSection"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ComputationSection</span></code></a>(geometry, material)</p></td>
 <td><p>base class for specified ComputationsSection-classes</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="api/m_n_kappa.section.ComputationSectionCurvature.html#m_n_kappa.section.ComputationSectionCurvature" title="m_n_kappa.section.ComputationSectionCurvature"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ComputationSectionCurvature</span></code></a>(section, ...)</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="api/m_n_kappa.section.ComputationSectionCurvature.html#m_n_kappa.section.ComputationSectionCurvature" title="m_n_kappa.section.ComputationSectionCurvature"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ComputationSectionCurvature</span></code></a>(section, ...)</p></td>
 <td><p>compute section given a curvature and a neutral axis</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="api/m_n_kappa.section.ComputationSectionStrain.html#m_n_kappa.section.ComputationSectionStrain" title="m_n_kappa.section.ComputationSectionStrain"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ComputationSectionStrain</span></code></a>(section, strain_value)</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/m_n_kappa.section.ComputationSectionStrain.html#m_n_kappa.section.ComputationSectionStrain" title="m_n_kappa.section.ComputationSectionStrain"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ComputationSectionStrain</span></code></a>(section, strain_value)</p></td>
 <td><p>compute section under a constant strain-value</p></td>
 </tr>
 </tbody>
@@ -440,16 +440,16 @@
 <tr class="row-even"><td><p><a class="reference internal" href="api/m_n_kappa.crosssection.ComputationCrosssectionStrain.html#m_n_kappa.crosssection.ComputationCrosssectionStrain" title="m_n_kappa.crosssection.ComputationCrosssectionStrain"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ComputationCrosssectionStrain</span></code></a>(sections, strain)</p></td>
 <td><p>computes a cross_section under a constant strain_value</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="api/m_n_kappa.crosssection.ComputationCrosssectionStrainAdd.html#m_n_kappa.crosssection.ComputationCrosssectionStrainAdd" title="m_n_kappa.crosssection.ComputationCrosssectionStrainAdd"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ComputationCrosssectionStrainAdd</span></code></a>(...)</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/m_n_kappa.crosssection.ComputationCrosssectionCurvature.html#m_n_kappa.crosssection.ComputationCrosssectionCurvature" title="m_n_kappa.crosssection.ComputationCrosssectionCurvature"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ComputationCrosssectionCurvature</span></code></a>(...)</p></td>
+<td><p>computes a cross-section given a curvature and a neutral axis</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/m_n_kappa.crosssection.ComputationCrosssectionStrainAdd.html#m_n_kappa.crosssection.ComputationCrosssectionStrainAdd" title="m_n_kappa.crosssection.ComputationCrosssectionStrainAdd"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ComputationCrosssectionStrainAdd</span></code></a>(...)</p></td>
 <td><p><dl class="field-list simple">
 <dt class="field-odd">param sections<span class="colon">:</span></dt>
 <dd class="field-odd"><p>sections the cross_section consists of</p>
 </dd>
 </dl>
 </p></td>
-</tr>
-<tr class="row-even"><td><p><a class="reference internal" href="api/m_n_kappa.crosssection.ComputationCrosssectionCurvature.html#m_n_kappa.crosssection.ComputationCrosssectionCurvature" title="m_n_kappa.crosssection.ComputationCrosssectionCurvature"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ComputationCrosssectionCurvature</span></code></a>(...)</p></td>
-<td><p>computes a cross-section given a curvature and a neutral axis</p></td>
 </tr>
 <tr class="row-odd"><td><p><a class="reference internal" href="api/m_n_kappa.crosssection.EdgeStrains.html#m_n_kappa.crosssection.EdgeStrains" title="m_n_kappa.crosssection.EdgeStrains"><code class="xref py py-obj docutils literal notranslate"><span class="pre">EdgeStrains</span></code></a>(bottom_edge_strain, top_edge_strain)</p></td>
 <td><p>store strains at edges and compute curvature from these points</p></td>

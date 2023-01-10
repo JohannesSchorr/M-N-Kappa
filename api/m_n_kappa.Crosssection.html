@@ -116,7 +116,11 @@
   <div class="visually-hidden">Hide table of contents sidebar</div>
 </label>
 
-
+<div class="announcement">
+  <aside class="announcement-content">
+     <em>Important</em> This 'm_n_kappa'-package has not yet been published on PyPI! This documentation is also currently under development. Plaese keep that in mind, while reading and testing. Thank you. 
+  </aside>
+</div>
 
 <div class="page">
   <header class="mobile-header">
@@ -164,8 +168,8 @@
   <ul>
 <li class="toctree-l1"><a class="reference internal" href="../getting_started.html">Getting Started</a></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../examples/index.html">Examples</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
-<li class="toctree-l2"><a class="reference internal" href="../examples/m_kappa_UPE.html">Single span slim-floor beam with :math:`M`-:math:`\kappa`-curve</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../examples/m_n_kappa_UPE.html">Single span slim-floor beam with :math:`M`-:math:`N`-:math:`\kappa`-curve</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../examples/m_kappa_UPE.html">Single span slim-floor beam with Moment-Curvature-Curves</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../examples/m_n_kappa_UPE.html">Single span slim-floor beam with Moment-Axial force-Curvature-Curves</a></li>
 </ul>
 </li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../theory/index.html">Theory guide</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" role="switch" type="checkbox"/><label for="toctree-checkbox-2"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
@@ -236,14 +240,13 @@
 <li class="toctree-l2"><a class="reference internal" href="m_n_kappa.material.ConcreteCompressionParabolaRectangle.html">m_n_kappa.material.ConcreteCompressionParabolaRectangle</a></li>
 <li class="toctree-l2"><a class="reference internal" href="m_n_kappa.material.ConcreteCompressionBiLinear.html">m_n_kappa.material.ConcreteCompressionBiLinear</a></li>
 <li class="toctree-l2"><a class="reference internal" href="m_n_kappa.material.ConcreteTension.html">m_n_kappa.material.ConcreteTension</a></li>
-<li class="toctree-l2"><a class="reference internal" href="m_n_kappa.section.Section.html">m_n_kappa.section.Section</a></li>
 <li class="toctree-l2"><a class="reference internal" href="m_n_kappa.section.ComputationSection.html">m_n_kappa.section.ComputationSection</a></li>
 <li class="toctree-l2"><a class="reference internal" href="m_n_kappa.section.ComputationSectionCurvature.html">m_n_kappa.section.ComputationSectionCurvature</a></li>
 <li class="toctree-l2"><a class="reference internal" href="m_n_kappa.section.ComputationSectionStrain.html">m_n_kappa.section.ComputationSectionStrain</a></li>
 <li class="toctree-l2"><a class="reference internal" href="m_n_kappa.crosssection.ComputationCrosssection.html">m_n_kappa.crosssection.ComputationCrosssection</a></li>
 <li class="toctree-l2"><a class="reference internal" href="m_n_kappa.crosssection.ComputationCrosssectionStrain.html">m_n_kappa.crosssection.ComputationCrosssectionStrain</a></li>
-<li class="toctree-l2"><a class="reference internal" href="m_n_kappa.crosssection.ComputationCrosssectionStrainAdd.html">m_n_kappa.crosssection.ComputationCrosssectionStrainAdd</a></li>
 <li class="toctree-l2"><a class="reference internal" href="m_n_kappa.crosssection.ComputationCrosssectionCurvature.html">m_n_kappa.crosssection.ComputationCrosssectionCurvature</a></li>
+<li class="toctree-l2"><a class="reference internal" href="m_n_kappa.crosssection.ComputationCrosssectionStrainAdd.html">m_n_kappa.crosssection.ComputationCrosssectionStrainAdd</a></li>
 <li class="toctree-l2"><a class="reference internal" href="m_n_kappa.crosssection.EdgeStrains.html">m_n_kappa.crosssection.EdgeStrains</a></li>
 <li class="toctree-l2"><a class="reference internal" href="m_n_kappa.crosssection.CrossSectionBoundaries.html">m_n_kappa.crosssection.CrossSectionBoundaries</a></li>
 <li class="toctree-l2"><a class="reference internal" href="m_n_kappa.crosssection.axial_force.html">m_n_kappa.crosssection.axial_force</a></li>
@@ -326,7 +329,7 @@
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>sections</strong> (list[<a class="reference internal" href="m_n_kappa.section.Section.html#m_n_kappa.section.Section" title="m_n_kappa.section.Section"><code class="xref py py-class docutils literal notranslate"><span class="pre">Section</span></code></a>]) – sections the cross-section consists of</p></li>
+<li><p><strong>sections</strong> (list[<a class="reference internal" href="m_n_kappa.Section.html#m_n_kappa.Section" title="m_n_kappa.section.Section"><code class="xref py py-class docutils literal notranslate"><span class="pre">Section</span></code></a>]) – sections the cross-section consists of</p></li>
 <li><p><strong>slab_effective_widths</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">EffectiveWidths</span></code>) – effective widths’ for the slab (concrete and reinforcement)</p></li>
 </ul>
 </dd>
@@ -419,7 +422,7 @@
 <dd class="field-even"><p>None</p>
 </dd>
 <dt class="field-odd">Raises<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>ValueError</strong> – if <code class="docutils literal notranslate"><span class="pre">section</span></code> is not of type <a class="reference internal" href="m_n_kappa.section.Section.html#m_n_kappa.section.Section" title="m_n_kappa.section.Section"><code class="xref py py-class docutils literal notranslate"><span class="pre">Section</span></code></a></p>
+<dd class="field-odd"><p><strong>ValueError</strong> – if <code class="docutils literal notranslate"><span class="pre">section</span></code> is not of type <a class="reference internal" href="m_n_kappa.Section.html#m_n_kappa.Section" title="m_n_kappa.section.Section"><code class="xref py py-class docutils literal notranslate"><span class="pre">Section</span></code></a></p>
 </dd>
 </dl>
 </dd></dl>
@@ -520,7 +523,7 @@ associated with this cross-section</p>
 <dd class="field-odd"><p><strong>section_type</strong> (<em>str</em>) – </p>
 </dd>
 <dt class="field-even">Return type<span class="colon">:</span></dt>
-<dd class="field-even"><p>list[<a class="reference internal" href="m_n_kappa.section.Section.html#m_n_kappa.section.Section" title="m_n_kappa.section.Section">m_n_kappa.section.Section</a>]</p>
+<dd class="field-even"><p>list[<a class="reference internal" href="m_n_kappa.Section.html#m_n_kappa.Section" title="m_n_kappa.section.Section">m_n_kappa.section.Section</a>]</p>
 </dd>
 </dl>
 </dd></dl>
@@ -590,7 +593,7 @@ if it is only one</p>
 
 <dl class="py property">
 <dt class="sig sig-object py" id="m_n_kappa.Crosssection.sections">
-<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">sections</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">list</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="m_n_kappa.section.Section.html#m_n_kappa.section.Section" title="m_n_kappa.section.Section"><span class="pre">m_n_kappa.section.Section</span></a><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#m_n_kappa.Crosssection.sections" title="Permalink to this definition">#</a></dt>
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">sections</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">list</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="m_n_kappa.Section.html#m_n_kappa.Section" title="m_n_kappa.section.Section"><span class="pre">m_n_kappa.section.Section</span></a><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#m_n_kappa.Crosssection.sections" title="Permalink to this definition">#</a></dt>
 <dd><p>all sections associated with this cross-section</p>
 </dd></dl>
 
@@ -602,7 +605,7 @@ if it is only one</p>
 
 <dl class="py property">
 <dt class="sig sig-object py" id="m_n_kappa.Crosssection.slab_sections">
-<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">slab_sections</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">list</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="m_n_kappa.section.Section.html#m_n_kappa.section.Section" title="m_n_kappa.section.Section"><span class="pre">m_n_kappa.section.Section</span></a><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#m_n_kappa.Crosssection.slab_sections" title="Permalink to this definition">#</a></dt>
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">slab_sections</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">list</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="m_n_kappa.Section.html#m_n_kappa.Section" title="m_n_kappa.section.Section"><span class="pre">m_n_kappa.section.Section</span></a><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#m_n_kappa.Crosssection.slab_sections" title="Permalink to this definition">#</a></dt>
 <dd><p>all slab-sections of this cross-section</p>
 </dd></dl>
 

@@ -116,7 +116,11 @@
   <div class="visually-hidden">Hide table of contents sidebar</div>
 </label>
 
-
+<div class="announcement">
+  <aside class="announcement-content">
+     <em>Important</em> This 'm_n_kappa'-package has not yet been published on PyPI! This documentation is also currently under development. Plaese keep that in mind, while reading and testing. Thank you. 
+  </aside>
+</div>
 
 <div class="page">
   <header class="mobile-header">
@@ -164,8 +168,8 @@
   <ul>
 <li class="toctree-l1"><a class="reference internal" href="../getting_started.html">Getting Started</a></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../examples/index.html">Examples</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
-<li class="toctree-l2"><a class="reference internal" href="../examples/m_kappa_UPE.html">Single span slim-floor beam with :math:`M`-:math:`\kappa`-curve</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../examples/m_n_kappa_UPE.html">Single span slim-floor beam with :math:`M`-:math:`N`-:math:`\kappa`-curve</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../examples/m_kappa_UPE.html">Single span slim-floor beam with Moment-Curvature-Curves</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../examples/m_n_kappa_UPE.html">Single span slim-floor beam with Moment-Axial force-Curvature-Curves</a></li>
 </ul>
 </li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../theory/index.html">Theory guide</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" role="switch" type="checkbox"/><label for="toctree-checkbox-2"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
@@ -236,14 +240,13 @@
 <li class="toctree-l2"><a class="reference internal" href="m_n_kappa.material.ConcreteCompressionParabolaRectangle.html">m_n_kappa.material.ConcreteCompressionParabolaRectangle</a></li>
 <li class="toctree-l2"><a class="reference internal" href="m_n_kappa.material.ConcreteCompressionBiLinear.html">m_n_kappa.material.ConcreteCompressionBiLinear</a></li>
 <li class="toctree-l2"><a class="reference internal" href="m_n_kappa.material.ConcreteTension.html">m_n_kappa.material.ConcreteTension</a></li>
-<li class="toctree-l2"><a class="reference internal" href="m_n_kappa.section.Section.html">m_n_kappa.section.Section</a></li>
 <li class="toctree-l2"><a class="reference internal" href="m_n_kappa.section.ComputationSection.html">m_n_kappa.section.ComputationSection</a></li>
 <li class="toctree-l2"><a class="reference internal" href="m_n_kappa.section.ComputationSectionCurvature.html">m_n_kappa.section.ComputationSectionCurvature</a></li>
 <li class="toctree-l2"><a class="reference internal" href="m_n_kappa.section.ComputationSectionStrain.html">m_n_kappa.section.ComputationSectionStrain</a></li>
 <li class="toctree-l2"><a class="reference internal" href="m_n_kappa.crosssection.ComputationCrosssection.html">m_n_kappa.crosssection.ComputationCrosssection</a></li>
 <li class="toctree-l2"><a class="reference internal" href="m_n_kappa.crosssection.ComputationCrosssectionStrain.html">m_n_kappa.crosssection.ComputationCrosssectionStrain</a></li>
-<li class="toctree-l2"><a class="reference internal" href="m_n_kappa.crosssection.ComputationCrosssectionStrainAdd.html">m_n_kappa.crosssection.ComputationCrosssectionStrainAdd</a></li>
 <li class="toctree-l2"><a class="reference internal" href="m_n_kappa.crosssection.ComputationCrosssectionCurvature.html">m_n_kappa.crosssection.ComputationCrosssectionCurvature</a></li>
+<li class="toctree-l2"><a class="reference internal" href="m_n_kappa.crosssection.ComputationCrosssectionStrainAdd.html">m_n_kappa.crosssection.ComputationCrosssectionStrainAdd</a></li>
 <li class="toctree-l2"><a class="reference internal" href="m_n_kappa.crosssection.EdgeStrains.html">m_n_kappa.crosssection.EdgeStrains</a></li>
 <li class="toctree-l2"><a class="reference internal" href="m_n_kappa.crosssection.CrossSectionBoundaries.html">m_n_kappa.crosssection.CrossSectionBoundaries</a></li>
 <li class="toctree-l2"><a class="reference internal" href="m_n_kappa.crosssection.axial_force.html">m_n_kappa.crosssection.axial_force</a></li>
@@ -424,19 +427,19 @@ Where the strain at yield is computed like <span class="math notranslate nohighl
 <tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">__init__</span></code>(f_y[, f_u, failure_strain, E_a])</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_intermediate_strains</span></code>(strain_1[, strain_2])</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#m_n_kappa.Steel.get_intermediate_strains" title="m_n_kappa.Steel.get_intermediate_strains"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_intermediate_strains</span></code></a>(strain_1[, strain_2])</p></td>
 <td><p>determine material points with strains between zero and given strain_value</p></td>
 </tr>
-<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_material_stress</span></code>(strain)</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#m_n_kappa.Steel.get_material_stress" title="m_n_kappa.Steel.get_material_stress"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_material_stress</span></code></a>(strain)</p></td>
 <td><p>gives stress from the stress-strain_value-relationship corresponding with the given strain_value</p></td>
 </tr>
-<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">sort_strains</span></code>([reverse])</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#m_n_kappa.Steel.sort_strains" title="m_n_kappa.Steel.sort_strains"><code class="xref py py-obj docutils literal notranslate"><span class="pre">sort_strains</span></code></a>([reverse])</p></td>
 <td><p>sorts stress-strain_value-relationship depending on strains</p></td>
 </tr>
-<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">sort_strains_ascending</span></code>()</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#m_n_kappa.Steel.sort_strains_ascending" title="m_n_kappa.Steel.sort_strains_ascending"><code class="xref py py-obj docutils literal notranslate"><span class="pre">sort_strains_ascending</span></code></a>()</p></td>
 <td><p>sorts stress-strain_value-relationship so strains are ascending</p></td>
 </tr>
-<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">sort_strains_descending</span></code>()</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#m_n_kappa.Steel.sort_strains_descending" title="m_n_kappa.Steel.sort_strains_descending"><code class="xref py py-obj docutils literal notranslate"><span class="pre">sort_strains_descending</span></code></a>()</p></td>
 <td><p>sorts stress-strain_value-relationship so strains are descending</p></td>
 </tr>
 <tr class="row-odd"><td><p><a class="reference internal" href="#m_n_kappa.Steel.stress_strain_standard" title="m_n_kappa.Steel.stress_strain_standard"><code class="xref py py-obj docutils literal notranslate"><span class="pre">stress_strain_standard</span></code></a>()</p></td>
@@ -467,25 +470,25 @@ Where the strain at yield is computed like <span class="math notranslate nohighl
 <tr class="row-even"><td><p><a class="reference internal" href="#m_n_kappa.Steel.failure_strain" title="m_n_kappa.Steel.failure_strain"><code class="xref py py-obj docutils literal notranslate"><span class="pre">failure_strain</span></code></a></p></td>
 <td><p>tensile strain <span class="math notranslate nohighlight">\(\varepsilon_\mathrm{u}\)</span></p></td>
 </tr>
-<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">maximum_strain</span></code></p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#m_n_kappa.Steel.maximum_strain" title="m_n_kappa.Steel.maximum_strain"><code class="xref py py-obj docutils literal notranslate"><span class="pre">maximum_strain</span></code></a></p></td>
 <td><p>maximum strain_value in the stress-strain_value-relationship</p></td>
 </tr>
-<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">minimum_strain</span></code></p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#m_n_kappa.Steel.minimum_strain" title="m_n_kappa.Steel.minimum_strain"><code class="xref py py-obj docutils literal notranslate"><span class="pre">minimum_strain</span></code></a></p></td>
 <td><p>minimum strain_value in the stress-strain_value-relationship</p></td>
 </tr>
 <tr class="row-odd"><td><p><a class="reference internal" href="#m_n_kappa.Steel.section_type" title="m_n_kappa.Steel.section_type"><code class="xref py py-obj docutils literal notranslate"><span class="pre">section_type</span></code></a></p></td>
 <td><p>section section_type</p></td>
 </tr>
-<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">strains</span></code></p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#m_n_kappa.Steel.strains" title="m_n_kappa.Steel.strains"><code class="xref py py-obj docutils literal notranslate"><span class="pre">strains</span></code></a></p></td>
 <td><p>strains from the stress-strain_value-relationship</p></td>
 </tr>
-<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">stress_strain</span></code></p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#m_n_kappa.Steel.stress_strain" title="m_n_kappa.Steel.stress_strain"><code class="xref py py-obj docutils literal notranslate"><span class="pre">stress_strain</span></code></a></p></td>
 <td><p>list of stress-strain_value points</p></td>
 </tr>
 <tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">stress_strain_type</span></code></p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">stresses</span></code></p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#m_n_kappa.Steel.stresses" title="m_n_kappa.Steel.stresses"><code class="xref py py-obj docutils literal notranslate"><span class="pre">stresses</span></code></a></p></td>
 <td><p>stresses from the stress-strain_value-relationship</p></td>
 </tr>
 <tr class="row-even"><td><p><a class="reference internal" href="#m_n_kappa.Steel.tension_stress_strain" title="m_n_kappa.Steel.tension_stress_strain"><code class="xref py py-obj docutils literal notranslate"><span class="pre">tension_stress_strain</span></code></a></p></td>
@@ -494,6 +497,83 @@ Where the strain at yield is computed like <span class="math notranslate nohighl
 </tbody>
 </table>
 </div>
+<dl class="py method">
+<dt class="sig sig-object py" id="m_n_kappa.Steel.get_intermediate_strains">
+<span class="sig-name descname"><span class="pre">get_intermediate_strains</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">strain_1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">strain_2</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.0</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#m_n_kappa.Steel.get_intermediate_strains" title="Permalink to this definition">#</a></dt>
+<dd><p>determine material points with strains between zero and given strain_value</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>strain_1</strong> (<em>float</em>) – </p></li>
+<li><p><strong>strain_2</strong> (<em>float</em>) – </p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>list</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="m_n_kappa.Steel.get_material_stress">
+<span class="sig-name descname"><span class="pre">get_material_stress</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">strain</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#m_n_kappa.Steel.get_material_stress" title="Permalink to this definition">#</a></dt>
+<dd><p>gives stress from the stress-strain_value-relationship corresponding with the given strain_value</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>strain</strong> (<em>float</em>) – strain_value a corresponding stress value should be given</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>stress corresponding to the given strain-value in the material-model</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>ValueError</strong> – when strain is outside the boundary values of the material-model</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="m_n_kappa.Steel.sort_strains">
+<span class="sig-name descname"><span class="pre">sort_strains</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">reverse</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#m_n_kappa.Steel.sort_strains" title="Permalink to this definition">#</a></dt>
+<dd><p>sorts stress-strain_value-relationship depending on strains</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>reverse</strong> (<em>bool</em>) – <ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">True</span></code>: sorts strains descending</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">False</span></code>: sorts strains ascending (Default)</p></li>
+</ul>
+</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="m_n_kappa.Steel.sort_strains_ascending">
+<span class="sig-name descname"><span class="pre">sort_strains_ascending</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#m_n_kappa.Steel.sort_strains_ascending" title="Permalink to this definition">#</a></dt>
+<dd><p>sorts stress-strain_value-relationship so strains are ascending</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="m_n_kappa.Steel.sort_strains_descending">
+<span class="sig-name descname"><span class="pre">sort_strains_descending</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#m_n_kappa.Steel.sort_strains_descending" title="Permalink to this definition">#</a></dt>
+<dd><p>sorts stress-strain_value-relationship so strains are descending</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
 <dl class="py method">
 <dt class="sig sig-object py" id="m_n_kappa.Steel.stress_strain_standard">
 <span class="sig-name descname"><span class="pre">stress_strain_standard</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#m_n_kappa.Steel.stress_strain_standard" title="Permalink to this definition">#</a></dt>
@@ -536,9 +616,39 @@ Where the strain at yield is computed like <span class="math notranslate nohighl
 </dd></dl>
 
 <dl class="py property">
+<dt class="sig sig-object py" id="m_n_kappa.Steel.maximum_strain">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">maximum_strain</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">float</span></em><a class="headerlink" href="#m_n_kappa.Steel.maximum_strain" title="Permalink to this definition">#</a></dt>
+<dd><p>maximum strain_value in the stress-strain_value-relationship</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="m_n_kappa.Steel.minimum_strain">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">minimum_strain</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">float</span></em><a class="headerlink" href="#m_n_kappa.Steel.minimum_strain" title="Permalink to this definition">#</a></dt>
+<dd><p>minimum strain_value in the stress-strain_value-relationship</p>
+</dd></dl>
+
+<dl class="py property">
 <dt class="sig sig-object py" id="m_n_kappa.Steel.section_type">
 <em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">section_type</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></em><a class="headerlink" href="#m_n_kappa.Steel.section_type" title="Permalink to this definition">#</a></dt>
 <dd><p>section section_type</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="m_n_kappa.Steel.strains">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">strains</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">list</span></em><a class="headerlink" href="#m_n_kappa.Steel.strains" title="Permalink to this definition">#</a></dt>
+<dd><p>strains from the stress-strain_value-relationship</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="m_n_kappa.Steel.stress_strain">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">stress_strain</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">list</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="m_n_kappa.material.StressStrain.html#m_n_kappa.material.StressStrain" title="m_n_kappa.material.StressStrain"><span class="pre">m_n_kappa.material.StressStrain</span></a><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#m_n_kappa.Steel.stress_strain" title="Permalink to this definition">#</a></dt>
+<dd><p>list of stress-strain_value points</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="m_n_kappa.Steel.stresses">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">stresses</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">list</span></em><a class="headerlink" href="#m_n_kappa.Steel.stresses" title="Permalink to this definition">#</a></dt>
+<dd><p>stresses from the stress-strain_value-relationship</p>
 </dd></dl>
 
 <dl class="py property">
@@ -608,13 +718,23 @@ Where the strain at yield is computed like <span class="math notranslate nohighl
             <ul>
 <li><a class="reference internal" href="#">m_n_kappa.Steel</a><ul>
 <li><a class="reference internal" href="#m_n_kappa.Steel"><code class="docutils literal notranslate"><span class="pre">Steel</span></code></a><ul>
+<li><a class="reference internal" href="#m_n_kappa.Steel.get_intermediate_strains"><code class="docutils literal notranslate"><span class="pre">Steel.get_intermediate_strains()</span></code></a></li>
+<li><a class="reference internal" href="#m_n_kappa.Steel.get_material_stress"><code class="docutils literal notranslate"><span class="pre">Steel.get_material_stress()</span></code></a></li>
+<li><a class="reference internal" href="#m_n_kappa.Steel.sort_strains"><code class="docutils literal notranslate"><span class="pre">Steel.sort_strains()</span></code></a></li>
+<li><a class="reference internal" href="#m_n_kappa.Steel.sort_strains_ascending"><code class="docutils literal notranslate"><span class="pre">Steel.sort_strains_ascending()</span></code></a></li>
+<li><a class="reference internal" href="#m_n_kappa.Steel.sort_strains_descending"><code class="docutils literal notranslate"><span class="pre">Steel.sort_strains_descending()</span></code></a></li>
 <li><a class="reference internal" href="#m_n_kappa.Steel.stress_strain_standard"><code class="docutils literal notranslate"><span class="pre">Steel.stress_strain_standard()</span></code></a></li>
 <li><a class="reference internal" href="#m_n_kappa.Steel.E_a"><code class="docutils literal notranslate"><span class="pre">Steel.E_a</span></code></a></li>
 <li><a class="reference internal" href="#m_n_kappa.Steel.compression_stress_strain"><code class="docutils literal notranslate"><span class="pre">Steel.compression_stress_strain</span></code></a></li>
 <li><a class="reference internal" href="#m_n_kappa.Steel.epsilon_y"><code class="docutils literal notranslate"><span class="pre">Steel.epsilon_y</span></code></a></li>
 <li><a class="reference internal" href="#m_n_kappa.Steel.f_y"><code class="docutils literal notranslate"><span class="pre">Steel.f_y</span></code></a></li>
 <li><a class="reference internal" href="#m_n_kappa.Steel.failure_strain"><code class="docutils literal notranslate"><span class="pre">Steel.failure_strain</span></code></a></li>
+<li><a class="reference internal" href="#m_n_kappa.Steel.maximum_strain"><code class="docutils literal notranslate"><span class="pre">Steel.maximum_strain</span></code></a></li>
+<li><a class="reference internal" href="#m_n_kappa.Steel.minimum_strain"><code class="docutils literal notranslate"><span class="pre">Steel.minimum_strain</span></code></a></li>
 <li><a class="reference internal" href="#m_n_kappa.Steel.section_type"><code class="docutils literal notranslate"><span class="pre">Steel.section_type</span></code></a></li>
+<li><a class="reference internal" href="#m_n_kappa.Steel.strains"><code class="docutils literal notranslate"><span class="pre">Steel.strains</span></code></a></li>
+<li><a class="reference internal" href="#m_n_kappa.Steel.stress_strain"><code class="docutils literal notranslate"><span class="pre">Steel.stress_strain</span></code></a></li>
+<li><a class="reference internal" href="#m_n_kappa.Steel.stresses"><code class="docutils literal notranslate"><span class="pre">Steel.stresses</span></code></a></li>
 <li><a class="reference internal" href="#m_n_kappa.Steel.tension_stress_strain"><code class="docutils literal notranslate"><span class="pre">Steel.tension_stress_strain</span></code></a></li>
 </ul>
 </li>

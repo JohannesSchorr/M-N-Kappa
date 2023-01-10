@@ -116,7 +116,11 @@
   <div class="visually-hidden">Hide table of contents sidebar</div>
 </label>
 
-
+<div class="announcement">
+  <aside class="announcement-content">
+     <em>Important</em> This 'm_n_kappa'-package has not yet been published on PyPI! This documentation is also currently under development. Plaese keep that in mind, while reading and testing. Thank you. 
+  </aside>
+</div>
 
 <div class="page">
   <header class="mobile-header">
@@ -164,8 +168,8 @@
   <ul>
 <li class="toctree-l1"><a class="reference internal" href="../getting_started.html">Getting Started</a></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../examples/index.html">Examples</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
-<li class="toctree-l2"><a class="reference internal" href="../examples/m_kappa_UPE.html">Single span slim-floor beam with :math:`M`-:math:`\kappa`-curve</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../examples/m_n_kappa_UPE.html">Single span slim-floor beam with :math:`M`-:math:`N`-:math:`\kappa`-curve</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../examples/m_kappa_UPE.html">Single span slim-floor beam with Moment-Curvature-Curves</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../examples/m_n_kappa_UPE.html">Single span slim-floor beam with Moment-Axial force-Curvature-Curves</a></li>
 </ul>
 </li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../theory/index.html">Theory guide</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" role="switch" type="checkbox"/><label for="toctree-checkbox-2"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
@@ -236,14 +240,13 @@
 <li class="toctree-l2 current current-page"><a class="current reference internal" href="#">m_n_kappa.material.ConcreteCompressionParabolaRectangle</a></li>
 <li class="toctree-l2"><a class="reference internal" href="m_n_kappa.material.ConcreteCompressionBiLinear.html">m_n_kappa.material.ConcreteCompressionBiLinear</a></li>
 <li class="toctree-l2"><a class="reference internal" href="m_n_kappa.material.ConcreteTension.html">m_n_kappa.material.ConcreteTension</a></li>
-<li class="toctree-l2"><a class="reference internal" href="m_n_kappa.section.Section.html">m_n_kappa.section.Section</a></li>
 <li class="toctree-l2"><a class="reference internal" href="m_n_kappa.section.ComputationSection.html">m_n_kappa.section.ComputationSection</a></li>
 <li class="toctree-l2"><a class="reference internal" href="m_n_kappa.section.ComputationSectionCurvature.html">m_n_kappa.section.ComputationSectionCurvature</a></li>
 <li class="toctree-l2"><a class="reference internal" href="m_n_kappa.section.ComputationSectionStrain.html">m_n_kappa.section.ComputationSectionStrain</a></li>
 <li class="toctree-l2"><a class="reference internal" href="m_n_kappa.crosssection.ComputationCrosssection.html">m_n_kappa.crosssection.ComputationCrosssection</a></li>
 <li class="toctree-l2"><a class="reference internal" href="m_n_kappa.crosssection.ComputationCrosssectionStrain.html">m_n_kappa.crosssection.ComputationCrosssectionStrain</a></li>
-<li class="toctree-l2"><a class="reference internal" href="m_n_kappa.crosssection.ComputationCrosssectionStrainAdd.html">m_n_kappa.crosssection.ComputationCrosssectionStrainAdd</a></li>
 <li class="toctree-l2"><a class="reference internal" href="m_n_kappa.crosssection.ComputationCrosssectionCurvature.html">m_n_kappa.crosssection.ComputationCrosssectionCurvature</a></li>
+<li class="toctree-l2"><a class="reference internal" href="m_n_kappa.crosssection.ComputationCrosssectionStrainAdd.html">m_n_kappa.crosssection.ComputationCrosssectionStrainAdd</a></li>
 <li class="toctree-l2"><a class="reference internal" href="m_n_kappa.crosssection.EdgeStrains.html">m_n_kappa.crosssection.EdgeStrains</a></li>
 <li class="toctree-l2"><a class="reference internal" href="m_n_kappa.crosssection.CrossSectionBoundaries.html">m_n_kappa.crosssection.CrossSectionBoundaries</a></li>
 <li class="toctree-l2"><a class="reference internal" href="m_n_kappa.crosssection.axial_force.html">m_n_kappa.crosssection.axial_force</a></li>
@@ -404,7 +407,7 @@ April 2004</p>
 <tr class="row-even"><td><p><a class="reference internal" href="#m_n_kappa.material.ConcreteCompressionParabolaRectangle.stress" title="m_n_kappa.material.ConcreteCompressionParabolaRectangle.stress"><code class="xref py py-obj docutils literal notranslate"><span class="pre">stress</span></code></a>(strain)</p></td>
 <td><p>computation of stresses according to formula <a class="reference internal" href="#equation-eq-material-concrete-parabola-rectangle">(1)</a></p></td>
 </tr>
-<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">stress_strain</span></code>()</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#m_n_kappa.material.ConcreteCompressionParabolaRectangle.stress_strain" title="m_n_kappa.material.ConcreteCompressionParabolaRectangle.stress_strain"><code class="xref py py-obj docutils literal notranslate"><span class="pre">stress_strain</span></code></a>()</p></td>
 <td><p>stress-strain points of the material</p></td>
 </tr>
 </tbody>
@@ -414,7 +417,7 @@ April 2004</p>
 <div class="table-wrapper autosummary longtable docutils container">
 <table class="autosummary longtable docutils align-default">
 <tbody>
-<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">E_cm</span></code></p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#m_n_kappa.material.ConcreteCompressionParabolaRectangle.E_cm" title="m_n_kappa.material.ConcreteCompressionParabolaRectangle.E_cm"><code class="xref py py-obj docutils literal notranslate"><span class="pre">E_cm</span></code></a></p></td>
 <td><p>mean elasticity modulus of concrete <span class="math notranslate nohighlight">\(E_\mathrm{cm}\)</span></p></td>
 </tr>
 <tr class="row-even"><td><p><a class="reference internal" href="#m_n_kappa.material.ConcreteCompressionParabolaRectangle.c" title="m_n_kappa.material.ConcreteCompressionParabolaRectangle.c"><code class="xref py py-obj docutils literal notranslate"><span class="pre">c</span></code></a></p></td>
@@ -423,10 +426,10 @@ April 2004</p>
 <tr class="row-odd"><td><p><a class="reference internal" href="#m_n_kappa.material.ConcreteCompressionParabolaRectangle.cu" title="m_n_kappa.material.ConcreteCompressionParabolaRectangle.cu"><code class="xref py py-obj docutils literal notranslate"><span class="pre">cu</span></code></a></p></td>
 <td><p>failure strain of concrete <span class="math notranslate nohighlight">\(\varepsilon_\mathrm{cu}\)</span> (see Formula <a class="reference internal" href="#equation-eq-material-concrete-parabola-rectangle-helper">(2)</a>)</p></td>
 </tr>
-<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">f_ck</span></code></p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#m_n_kappa.material.ConcreteCompressionParabolaRectangle.f_ck" title="m_n_kappa.material.ConcreteCompressionParabolaRectangle.f_ck"><code class="xref py py-obj docutils literal notranslate"><span class="pre">f_ck</span></code></a></p></td>
 <td><p>characteristic concrete cylinder compressive strength <span class="math notranslate nohighlight">\(f_\mathrm{ck}\)</span></p></td>
 </tr>
-<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">f_cm</span></code></p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#m_n_kappa.material.ConcreteCompressionParabolaRectangle.f_cm" title="m_n_kappa.material.ConcreteCompressionParabolaRectangle.f_cm"><code class="xref py py-obj docutils literal notranslate"><span class="pre">f_cm</span></code></a></p></td>
 <td><p>mean concrete cylinder compressive strength <span class="math notranslate nohighlight">\(f_\mathrm{cm}\)</span></p></td>
 </tr>
 <tr class="row-even"><td><p><a class="reference internal" href="#m_n_kappa.material.ConcreteCompressionParabolaRectangle.n" title="m_n_kappa.material.ConcreteCompressionParabolaRectangle.n"><code class="xref py py-obj docutils literal notranslate"><span class="pre">n</span></code></a></p></td>
@@ -435,7 +438,7 @@ April 2004</p>
 <tr class="row-odd"><td><p><a class="reference internal" href="#m_n_kappa.material.ConcreteCompressionParabolaRectangle.strains" title="m_n_kappa.material.ConcreteCompressionParabolaRectangle.strains"><code class="xref py py-obj docutils literal notranslate"><span class="pre">strains</span></code></a></p></td>
 <td><p>Strain-values where stresses are computed.</p></td>
 </tr>
-<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">yield_strain</span></code></p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#m_n_kappa.material.ConcreteCompressionParabolaRectangle.yield_strain" title="m_n_kappa.material.ConcreteCompressionParabolaRectangle.yield_strain"><code class="xref py py-obj docutils literal notranslate"><span class="pre">yield_strain</span></code></a></p></td>
 <td><p>strain up to which the concrete is assumed to be linear-elastic <span class="math notranslate nohighlight">\(\varepsilon_\mathrm{y}\)</span></p></td>
 </tr>
 </tbody>
@@ -458,6 +461,23 @@ April 2004</p>
 </dl>
 </dd></dl>
 
+<dl class="py method">
+<dt class="sig sig-object py" id="m_n_kappa.material.ConcreteCompressionParabolaRectangle.stress_strain">
+<span class="sig-name descname"><span class="pre">stress_strain</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#m_n_kappa.material.ConcreteCompressionParabolaRectangle.stress_strain" title="Permalink to this definition">#</a></dt>
+<dd><p>stress-strain points of the material</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>list</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="m_n_kappa.material.ConcreteCompressionParabolaRectangle.E_cm">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">E_cm</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">float</span></em><a class="headerlink" href="#m_n_kappa.material.ConcreteCompressionParabolaRectangle.E_cm" title="Permalink to this definition">#</a></dt>
+<dd><p>mean elasticity modulus of concrete <span class="math notranslate nohighlight">\(E_\mathrm{cm}\)</span></p>
+</dd></dl>
+
 <dl class="py property">
 <dt class="sig sig-object py" id="m_n_kappa.material.ConcreteCompressionParabolaRectangle.c">
 <em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">c</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">float</span></em><a class="headerlink" href="#m_n_kappa.material.ConcreteCompressionParabolaRectangle.c" title="Permalink to this definition">#</a></dt>
@@ -470,6 +490,18 @@ April 2004</p>
 <em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">cu</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">float</span></em><a class="headerlink" href="#m_n_kappa.material.ConcreteCompressionParabolaRectangle.cu" title="Permalink to this definition">#</a></dt>
 <dd><p>failure strain of concrete <span class="math notranslate nohighlight">\(\varepsilon_\mathrm{cu}\)</span>
 (see Formula <a class="reference internal" href="#equation-eq-material-concrete-parabola-rectangle-helper">(2)</a>)</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="m_n_kappa.material.ConcreteCompressionParabolaRectangle.f_ck">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">f_ck</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">float</span></em><a class="headerlink" href="#m_n_kappa.material.ConcreteCompressionParabolaRectangle.f_ck" title="Permalink to this definition">#</a></dt>
+<dd><p>characteristic concrete cylinder compressive strength <span class="math notranslate nohighlight">\(f_\mathrm{ck}\)</span></p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="m_n_kappa.material.ConcreteCompressionParabolaRectangle.f_cm">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">f_cm</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">float</span></em><a class="headerlink" href="#m_n_kappa.material.ConcreteCompressionParabolaRectangle.f_cm" title="Permalink to this definition">#</a></dt>
+<dd><p>mean concrete cylinder compressive strength <span class="math notranslate nohighlight">\(f_\mathrm{cm}\)</span></p>
 </dd></dl>
 
 <dl class="py property">
@@ -491,6 +523,12 @@ given in formula <a class="reference internal" href="#equation-eq-material-concr
 <li><p><span class="math notranslate nohighlight">\(\varepsilon_\mathrm{c}\)</span></p></li>
 <li><p><span class="math notranslate nohighlight">\(\varepsilon_\mathrm{cu}\)</span></p></li>
 </ul>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="m_n_kappa.material.ConcreteCompressionParabolaRectangle.yield_strain">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">yield_strain</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">float</span></em><a class="headerlink" href="#m_n_kappa.material.ConcreteCompressionParabolaRectangle.yield_strain" title="Permalink to this definition">#</a></dt>
+<dd><p>strain up to which the concrete is assumed to be linear-elastic <span class="math notranslate nohighlight">\(\varepsilon_\mathrm{y}\)</span></p>
 </dd></dl>
 
 </dd></dl>
@@ -555,10 +593,15 @@ given in formula <a class="reference internal" href="#equation-eq-material-concr
 <li><a class="reference internal" href="#">m_n_kappa.material.ConcreteCompressionParabolaRectangle</a><ul>
 <li><a class="reference internal" href="#m_n_kappa.material.ConcreteCompressionParabolaRectangle"><code class="docutils literal notranslate"><span class="pre">ConcreteCompressionParabolaRectangle</span></code></a><ul>
 <li><a class="reference internal" href="#m_n_kappa.material.ConcreteCompressionParabolaRectangle.stress"><code class="docutils literal notranslate"><span class="pre">ConcreteCompressionParabolaRectangle.stress()</span></code></a></li>
+<li><a class="reference internal" href="#m_n_kappa.material.ConcreteCompressionParabolaRectangle.stress_strain"><code class="docutils literal notranslate"><span class="pre">ConcreteCompressionParabolaRectangle.stress_strain()</span></code></a></li>
+<li><a class="reference internal" href="#m_n_kappa.material.ConcreteCompressionParabolaRectangle.E_cm"><code class="docutils literal notranslate"><span class="pre">ConcreteCompressionParabolaRectangle.E_cm</span></code></a></li>
 <li><a class="reference internal" href="#m_n_kappa.material.ConcreteCompressionParabolaRectangle.c"><code class="docutils literal notranslate"><span class="pre">ConcreteCompressionParabolaRectangle.c</span></code></a></li>
 <li><a class="reference internal" href="#m_n_kappa.material.ConcreteCompressionParabolaRectangle.cu"><code class="docutils literal notranslate"><span class="pre">ConcreteCompressionParabolaRectangle.cu</span></code></a></li>
+<li><a class="reference internal" href="#m_n_kappa.material.ConcreteCompressionParabolaRectangle.f_ck"><code class="docutils literal notranslate"><span class="pre">ConcreteCompressionParabolaRectangle.f_ck</span></code></a></li>
+<li><a class="reference internal" href="#m_n_kappa.material.ConcreteCompressionParabolaRectangle.f_cm"><code class="docutils literal notranslate"><span class="pre">ConcreteCompressionParabolaRectangle.f_cm</span></code></a></li>
 <li><a class="reference internal" href="#m_n_kappa.material.ConcreteCompressionParabolaRectangle.n"><code class="docutils literal notranslate"><span class="pre">ConcreteCompressionParabolaRectangle.n</span></code></a></li>
 <li><a class="reference internal" href="#m_n_kappa.material.ConcreteCompressionParabolaRectangle.strains"><code class="docutils literal notranslate"><span class="pre">ConcreteCompressionParabolaRectangle.strains</span></code></a></li>
+<li><a class="reference internal" href="#m_n_kappa.material.ConcreteCompressionParabolaRectangle.yield_strain"><code class="docutils literal notranslate"><span class="pre">ConcreteCompressionParabolaRectangle.yield_strain</span></code></a></li>
 </ul>
 </li>
 </ul>

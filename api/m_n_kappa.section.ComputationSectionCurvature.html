@@ -116,7 +116,11 @@
   <div class="visually-hidden">Hide table of contents sidebar</div>
 </label>
 
-
+<div class="announcement">
+  <aside class="announcement-content">
+     <em>Important</em> This 'm_n_kappa'-package has not yet been published on PyPI! This documentation is also currently under development. Plaese keep that in mind, while reading and testing. Thank you. 
+  </aside>
+</div>
 
 <div class="page">
   <header class="mobile-header">
@@ -164,8 +168,8 @@
   <ul>
 <li class="toctree-l1"><a class="reference internal" href="../getting_started.html">Getting Started</a></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../examples/index.html">Examples</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
-<li class="toctree-l2"><a class="reference internal" href="../examples/m_kappa_UPE.html">Single span slim-floor beam with :math:`M`-:math:`\kappa`-curve</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../examples/m_n_kappa_UPE.html">Single span slim-floor beam with :math:`M`-:math:`N`-:math:`\kappa`-curve</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../examples/m_kappa_UPE.html">Single span slim-floor beam with Moment-Curvature-Curves</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../examples/m_n_kappa_UPE.html">Single span slim-floor beam with Moment-Axial force-Curvature-Curves</a></li>
 </ul>
 </li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../theory/index.html">Theory guide</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" role="switch" type="checkbox"/><label for="toctree-checkbox-2"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
@@ -236,14 +240,13 @@
 <li class="toctree-l2"><a class="reference internal" href="m_n_kappa.material.ConcreteCompressionParabolaRectangle.html">m_n_kappa.material.ConcreteCompressionParabolaRectangle</a></li>
 <li class="toctree-l2"><a class="reference internal" href="m_n_kappa.material.ConcreteCompressionBiLinear.html">m_n_kappa.material.ConcreteCompressionBiLinear</a></li>
 <li class="toctree-l2"><a class="reference internal" href="m_n_kappa.material.ConcreteTension.html">m_n_kappa.material.ConcreteTension</a></li>
-<li class="toctree-l2"><a class="reference internal" href="m_n_kappa.section.Section.html">m_n_kappa.section.Section</a></li>
 <li class="toctree-l2"><a class="reference internal" href="m_n_kappa.section.ComputationSection.html">m_n_kappa.section.ComputationSection</a></li>
 <li class="toctree-l2 current current-page"><a class="current reference internal" href="#">m_n_kappa.section.ComputationSectionCurvature</a></li>
 <li class="toctree-l2"><a class="reference internal" href="m_n_kappa.section.ComputationSectionStrain.html">m_n_kappa.section.ComputationSectionStrain</a></li>
 <li class="toctree-l2"><a class="reference internal" href="m_n_kappa.crosssection.ComputationCrosssection.html">m_n_kappa.crosssection.ComputationCrosssection</a></li>
 <li class="toctree-l2"><a class="reference internal" href="m_n_kappa.crosssection.ComputationCrosssectionStrain.html">m_n_kappa.crosssection.ComputationCrosssectionStrain</a></li>
-<li class="toctree-l2"><a class="reference internal" href="m_n_kappa.crosssection.ComputationCrosssectionStrainAdd.html">m_n_kappa.crosssection.ComputationCrosssectionStrainAdd</a></li>
 <li class="toctree-l2"><a class="reference internal" href="m_n_kappa.crosssection.ComputationCrosssectionCurvature.html">m_n_kappa.crosssection.ComputationCrosssectionCurvature</a></li>
+<li class="toctree-l2"><a class="reference internal" href="m_n_kappa.crosssection.ComputationCrosssectionStrainAdd.html">m_n_kappa.crosssection.ComputationCrosssectionStrainAdd</a></li>
 <li class="toctree-l2"><a class="reference internal" href="m_n_kappa.crosssection.EdgeStrains.html">m_n_kappa.crosssection.EdgeStrains</a></li>
 <li class="toctree-l2"><a class="reference internal" href="m_n_kappa.crosssection.CrossSectionBoundaries.html">m_n_kappa.crosssection.CrossSectionBoundaries</a></li>
 <li class="toctree-l2"><a class="reference internal" href="m_n_kappa.crosssection.axial_force.html">m_n_kappa.crosssection.axial_force</a></li>
@@ -397,25 +400,25 @@ crosssectional area of the section</p></li>
 </dl>
 </p></td>
 </tr>
-<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">lever_arm</span></code>()</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#m_n_kappa.section.ComputationSectionCurvature.lever_arm" title="m_n_kappa.section.ComputationSectionCurvature.lever_arm"><code class="xref py py-obj docutils literal notranslate"><span class="pre">lever_arm</span></code></a>()</p></td>
 <td><p>lever-arm of the section under the given strain-distribution <span class="math notranslate nohighlight">\(r_i\)</span></p></td>
 </tr>
 <tr class="row-odd"><td><p><a class="reference internal" href="#m_n_kappa.section.ComputationSectionCurvature.material_points_inside_curvature" title="m_n_kappa.section.ComputationSectionCurvature.material_points_inside_curvature"><code class="xref py py-obj docutils literal notranslate"><span class="pre">material_points_inside_curvature</span></code></a>()</p></td>
 <td><p>compute those material-points that are between the given strains from the given curvature and zero strain.</p></td>
 </tr>
-<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">material_strains</span></code>()</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#m_n_kappa.section.ComputationSectionCurvature.material_strains" title="m_n_kappa.section.ComputationSectionCurvature.material_strains"><code class="xref py py-obj docutils literal notranslate"><span class="pre">material_strains</span></code></a>()</p></td>
 <td><p>strains of the associated material-model</p></td>
 </tr>
-<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">maximum_negative_strain</span></code>()</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#m_n_kappa.section.ComputationSectionCurvature.maximum_negative_strain" title="m_n_kappa.section.ComputationSectionCurvature.maximum_negative_strain"><code class="xref py py-obj docutils literal notranslate"><span class="pre">maximum_negative_strain</span></code></a>()</p></td>
 <td><p>maximum negative strain from associated material-model</p></td>
 </tr>
-<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">maximum_positive_strain</span></code>()</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#m_n_kappa.section.ComputationSectionCurvature.maximum_positive_strain" title="m_n_kappa.section.ComputationSectionCurvature.maximum_positive_strain"><code class="xref py py-obj docutils literal notranslate"><span class="pre">maximum_positive_strain</span></code></a>()</p></td>
 <td><p>maximum positive strain from associated material-model</p></td>
 </tr>
-<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">moment</span></code>()</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#m_n_kappa.section.ComputationSectionCurvature.moment" title="m_n_kappa.section.ComputationSectionCurvature.moment"><code class="xref py py-obj docutils literal notranslate"><span class="pre">moment</span></code></a>()</p></td>
 <td><p>moment under the given strain distribution</p></td>
 </tr>
-<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">section_strains</span></code>()</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#m_n_kappa.section.ComputationSectionCurvature.section_strains" title="m_n_kappa.section.ComputationSectionCurvature.section_strains"><code class="xref py py-obj docutils literal notranslate"><span class="pre">section_strains</span></code></a>()</p></td>
 <td><p>strains of the associated material-model</p></td>
 </tr>
 <tr class="row-odd"><td><p><a class="reference internal" href="#m_n_kappa.section.ComputationSectionCurvature.split_section" title="m_n_kappa.section.ComputationSectionCurvature.split_section"><code class="xref py py-obj docutils literal notranslate"><span class="pre">split_section</span></code></a>([effective_widths])</p></td>
@@ -428,57 +431,88 @@ crosssectional area of the section</p></li>
 <div class="table-wrapper autosummary longtable docutils container">
 <table class="autosummary longtable docutils align-default">
 <tbody>
-<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">axial_force</span></code></p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#m_n_kappa.section.ComputationSectionCurvature.axial_force" title="m_n_kappa.section.ComputationSectionCurvature.axial_force"><code class="xref py py-obj docutils literal notranslate"><span class="pre">axial_force</span></code></a></p></td>
 <td><p>axial-force of the section in case of the given strain-distribution <span class="math notranslate nohighlight">\(N_i\)</span></p></td>
 </tr>
-<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">bottom_edge_maximum_strain</span></code></p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#m_n_kappa.section.ComputationSectionCurvature.bottom_edge_maximum_strain" title="m_n_kappa.section.ComputationSectionCurvature.bottom_edge_maximum_strain"><code class="xref py py-obj docutils literal notranslate"><span class="pre">bottom_edge_maximum_strain</span></code></a></p></td>
 <td><p><a class="reference internal" href="m_n_kappa.general.StrainPosition.html#m_n_kappa.general.StrainPosition" title="m_n_kappa.general.StrainPosition"><code class="xref py py-class docutils literal notranslate"><span class="pre">StrainPosition</span></code></a> with maximum strain on bottom edge of section</p></td>
 </tr>
-<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">bottom_edge_minimum_strain</span></code></p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#m_n_kappa.section.ComputationSectionCurvature.bottom_edge_minimum_strain" title="m_n_kappa.section.ComputationSectionCurvature.bottom_edge_minimum_strain"><code class="xref py py-obj docutils literal notranslate"><span class="pre">bottom_edge_minimum_strain</span></code></a></p></td>
 <td><p><a class="reference internal" href="m_n_kappa.general.StrainPosition.html#m_n_kappa.general.StrainPosition" title="m_n_kappa.general.StrainPosition"><code class="xref py py-class docutils literal notranslate"><span class="pre">StrainPosition</span></code></a> with minimum strain on bottom edge of section</p></td>
 </tr>
 <tr class="row-even"><td><p><a class="reference internal" href="#m_n_kappa.section.ComputationSectionCurvature.curvature" title="m_n_kappa.section.ComputationSectionCurvature.curvature"><code class="xref py py-obj docutils literal notranslate"><span class="pre">curvature</span></code></a></p></td>
 <td><p>input-curvature <span class="math notranslate nohighlight">\(\kappa\)</span></p></td>
 </tr>
-<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">edges_strain</span></code></p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#m_n_kappa.section.ComputationSectionCurvature.edges_strain" title="m_n_kappa.section.ComputationSectionCurvature.edges_strain"><code class="xref py py-obj docutils literal notranslate"><span class="pre">edges_strain</span></code></a></p></td>
 <td><p>strains at the edges (bottom and top) of the section, computed from the strain distribution</p></td>
 </tr>
-<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">edges_stress</span></code></p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#m_n_kappa.section.ComputationSectionCurvature.edges_stress" title="m_n_kappa.section.ComputationSectionCurvature.edges_stress"><code class="xref py py-obj docutils literal notranslate"><span class="pre">edges_stress</span></code></a></p></td>
 <td><p>stresses at the edges (bottom and top) of the section</p></td>
 </tr>
 <tr class="row-odd"><td><p><a class="reference internal" href="#m_n_kappa.section.ComputationSectionCurvature.edges_stress_difference" title="m_n_kappa.section.ComputationSectionCurvature.edges_stress_difference"><code class="xref py py-obj docutils literal notranslate"><span class="pre">edges_stress_difference</span></code></a></p></td>
 <td><p>difference of stresses between the given edges</p></td>
 </tr>
-<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">geometry</span></code></p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#m_n_kappa.section.ComputationSectionCurvature.geometry" title="m_n_kappa.section.ComputationSectionCurvature.geometry"><code class="xref py py-obj docutils literal notranslate"><span class="pre">geometry</span></code></a></p></td>
 <td><p>geometry of the section</p></td>
 </tr>
-<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">material</span></code></p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#m_n_kappa.section.ComputationSectionCurvature.material" title="m_n_kappa.section.ComputationSectionCurvature.material"><code class="xref py py-obj docutils literal notranslate"><span class="pre">material</span></code></a></p></td>
 <td><p>material of the section</p></td>
 </tr>
 <tr class="row-even"><td><p><a class="reference internal" href="#m_n_kappa.section.ComputationSectionCurvature.neutral_axis" title="m_n_kappa.section.ComputationSectionCurvature.neutral_axis"><code class="xref py py-obj docutils literal notranslate"><span class="pre">neutral_axis</span></code></a></p></td>
 <td><p>input neutral axis <span class="math notranslate nohighlight">\(z_\mathrm{n}\)</span></p></td>
 </tr>
-<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">section</span></code></p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#m_n_kappa.section.ComputationSectionCurvature.section" title="m_n_kappa.section.ComputationSectionCurvature.section"><code class="xref py py-obj docutils literal notranslate"><span class="pre">section</span></code></a></p></td>
 <td><p>basic <a class="reference internal" href="m_n_kappa.Section.html#m_n_kappa.Section" title="m_n_kappa.Section"><code class="xref py py-class docutils literal notranslate"><span class="pre">Section</span></code></a></p></td>
 </tr>
 <tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">section_type</span></code></p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">stress_interception</span></code></p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#m_n_kappa.section.ComputationSectionCurvature.stress_interception" title="m_n_kappa.section.ComputationSectionCurvature.stress_interception"><code class="xref py py-obj docutils literal notranslate"><span class="pre">stress_interception</span></code></a></p></td>
 <td><p>interception-value of the linear stress-distribution of the section</p></td>
 </tr>
-<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">stress_slope</span></code></p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#m_n_kappa.section.ComputationSectionCurvature.stress_slope" title="m_n_kappa.section.ComputationSectionCurvature.stress_slope"><code class="xref py py-obj docutils literal notranslate"><span class="pre">stress_slope</span></code></a></p></td>
 <td><p>linear slope of the stresses over the vertical direction of the section</p></td>
 </tr>
-<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">top_edge_maximum_strain</span></code></p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#m_n_kappa.section.ComputationSectionCurvature.top_edge_maximum_strain" title="m_n_kappa.section.ComputationSectionCurvature.top_edge_maximum_strain"><code class="xref py py-obj docutils literal notranslate"><span class="pre">top_edge_maximum_strain</span></code></a></p></td>
 <td><p><a class="reference internal" href="m_n_kappa.general.StrainPosition.html#m_n_kappa.general.StrainPosition" title="m_n_kappa.general.StrainPosition"><code class="xref py py-class docutils literal notranslate"><span class="pre">StrainPosition</span></code></a> with maximum strain on top edge of section</p></td>
 </tr>
-<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">top_edge_minimum_strain</span></code></p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#m_n_kappa.section.ComputationSectionCurvature.top_edge_minimum_strain" title="m_n_kappa.section.ComputationSectionCurvature.top_edge_minimum_strain"><code class="xref py py-obj docutils literal notranslate"><span class="pre">top_edge_minimum_strain</span></code></a></p></td>
 <td><p><a class="reference internal" href="m_n_kappa.general.StrainPosition.html#m_n_kappa.general.StrainPosition" title="m_n_kappa.general.StrainPosition"><code class="xref py py-class docutils literal notranslate"><span class="pre">StrainPosition</span></code></a> with minimum strain on top edge of section</p></td>
 </tr>
 </tbody>
 </table>
 </div>
+<dl class="py method">
+<dt class="sig sig-object py" id="m_n_kappa.section.ComputationSectionCurvature.lever_arm">
+<span class="sig-name descname"><span class="pre">lever_arm</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#m_n_kappa.section.ComputationSectionCurvature.lever_arm" title="Permalink to this definition">#</a></dt>
+<dd><p>lever-arm of the section under the given strain-distribution <span class="math notranslate nohighlight">\(r_i\)</span></p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>lever-arm of the section under a given strain-distribution</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>float</p>
+</dd>
+</dl>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<dl class="simple">
+<dt><a class="reference internal" href="../theory/sections.html#theory-sections-sections-lever-arm"><span class="std std-ref">Lever arm</span></a></dt><dd><p>More descriptive explanation of the computation</p>
+</dd>
+</dl>
+</div>
+<p class="rubric">Notes</p>
+<p>In case of a <a class="reference internal" href="m_n_kappa.Rectangle.html#m_n_kappa.Rectangle" title="m_n_kappa.Rectangle"><code class="xref py py-class docutils literal notranslate"><span class="pre">Rectangle</span></code></a> or a <a class="reference internal" href="m_n_kappa.Trapezoid.html#m_n_kappa.Trapezoid" title="m_n_kappa.Trapezoid"><code class="xref py py-class docutils literal notranslate"><span class="pre">Trapezoid</span></code></a> the lever-arm is computed
+as follows.</p>
+<div class="math-wrapper docutils container" id="equation-eq-section-lever-arm-rectangle">
+<div class="math notranslate nohighlight" id="equation-eq-section-lever-arm-rectangle">
+<span class="eqno">(1)<a class="headerlink" href="#equation-eq-section-lever-arm-rectangle" title="Permalink to this equation">#</a></span>\[r_i = \frac{1}{N_i} \int_{z_\mathrm{top}}^{z_\mathrm{bottom}} \sigma(z) \cdot b(z) \cdot z~dz\]</div>
+</div>
+<p>In case of a <a class="reference internal" href="m_n_kappa.Circle.html#m_n_kappa.Circle" title="m_n_kappa.Circle"><code class="xref py py-class docutils literal notranslate"><span class="pre">Circle</span></code></a> the lever-arm applies as the centroid of the circle.
+It is assumed that only reinforcement-bars are modelled as circles and therefore small in comparison to
+the rest of the cross-section.</p>
+</dd></dl>
+
 <dl class="py method">
 <dt class="sig sig-object py" id="m_n_kappa.section.ComputationSectionCurvature.material_points_inside_curvature">
 <span class="sig-name descname"><span class="pre">material_points_inside_curvature</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#m_n_kappa.section.ComputationSectionCurvature.material_points_inside_curvature" title="Permalink to this definition">#</a></dt>
@@ -487,6 +521,71 @@ the given curvature and zero strain.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>list[<a class="reference internal" href="m_n_kappa.general.StrainPosition.html#m_n_kappa.general.StrainPosition" title="m_n_kappa.general.StrainPosition"><code class="xref py py-class docutils literal notranslate"><span class="pre">StrainPosition</span></code></a>]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="m_n_kappa.section.ComputationSectionCurvature.material_strains">
+<span class="sig-name descname"><span class="pre">material_strains</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#m_n_kappa.section.ComputationSectionCurvature.material_strains" title="Permalink to this definition">#</a></dt>
+<dd><p>strains of the associated material-model</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>list[float]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="m_n_kappa.section.ComputationSectionCurvature.maximum_negative_strain">
+<span class="sig-name descname"><span class="pre">maximum_negative_strain</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#m_n_kappa.section.ComputationSectionCurvature.maximum_negative_strain" title="Permalink to this definition">#</a></dt>
+<dd><p>maximum negative strain from associated material-model</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="m_n_kappa.section.ComputationSectionCurvature.maximum_positive_strain">
+<span class="sig-name descname"><span class="pre">maximum_positive_strain</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#m_n_kappa.section.ComputationSectionCurvature.maximum_positive_strain" title="Permalink to this definition">#</a></dt>
+<dd><p>maximum positive strain from associated material-model</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="m_n_kappa.section.ComputationSectionCurvature.moment">
+<span class="sig-name descname"><span class="pre">moment</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#m_n_kappa.section.ComputationSectionCurvature.moment" title="Permalink to this definition">#</a></dt>
+<dd><p>moment under the given strain distribution</p>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<dl class="simple">
+<dt><a class="reference internal" href="../theory/sections.html#theory-sections-sections-moment"><span class="std std-ref">Moment</span></a></dt><dd><p>More descriptive explanation of the computation</p>
+</dd>
+</dl>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>moment under the given strain distribution</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="m_n_kappa.section.ComputationSectionCurvature.section_strains">
+<span class="sig-name descname"><span class="pre">section_strains</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#m_n_kappa.section.ComputationSectionCurvature.section_strains" title="Permalink to this definition">#</a></dt>
+<dd><p>strains of the associated material-model</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>list[dict]</p>
 </dd>
 </dl>
 </dd></dl>
@@ -509,9 +608,47 @@ the given curvature and zero strain.</p>
 </dd></dl>
 
 <dl class="py property">
+<dt class="sig sig-object py" id="m_n_kappa.section.ComputationSectionCurvature.axial_force">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">axial_force</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">float</span></em><a class="headerlink" href="#m_n_kappa.section.ComputationSectionCurvature.axial_force" title="Permalink to this definition">#</a></dt>
+<dd><p>axial-force of the section in case of the given strain-distribution <span class="math notranslate nohighlight">\(N_i\)</span></p>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<dl class="simple">
+<dt><a class="reference internal" href="../theory/sections.html#theory-sections-sections-axial-force"><span class="std std-ref">Axial force</span></a></dt><dd><p>More descriptive explanation of the computation</p>
+</dd>
+</dl>
+</div>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="m_n_kappa.section.ComputationSectionCurvature.bottom_edge_maximum_strain">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">bottom_edge_maximum_strain</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="m_n_kappa.general.StrainPosition.html#m_n_kappa.general.StrainPosition" title="m_n_kappa.general.StrainPosition"><span class="pre">StrainPosition</span></a></em><a class="headerlink" href="#m_n_kappa.section.ComputationSectionCurvature.bottom_edge_maximum_strain" title="Permalink to this definition">#</a></dt>
+<dd><p><a class="reference internal" href="m_n_kappa.general.StrainPosition.html#m_n_kappa.general.StrainPosition" title="m_n_kappa.general.StrainPosition"><code class="xref py py-class docutils literal notranslate"><span class="pre">StrainPosition</span></code></a> with maximum strain on bottom edge of section</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="m_n_kappa.section.ComputationSectionCurvature.bottom_edge_minimum_strain">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">bottom_edge_minimum_strain</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="m_n_kappa.general.StrainPosition.html#m_n_kappa.general.StrainPosition" title="m_n_kappa.general.StrainPosition"><span class="pre">StrainPosition</span></a></em><a class="headerlink" href="#m_n_kappa.section.ComputationSectionCurvature.bottom_edge_minimum_strain" title="Permalink to this definition">#</a></dt>
+<dd><p><a class="reference internal" href="m_n_kappa.general.StrainPosition.html#m_n_kappa.general.StrainPosition" title="m_n_kappa.general.StrainPosition"><code class="xref py py-class docutils literal notranslate"><span class="pre">StrainPosition</span></code></a> with minimum strain on bottom edge of section</p>
+</dd></dl>
+
+<dl class="py property">
 <dt class="sig sig-object py" id="m_n_kappa.section.ComputationSectionCurvature.curvature">
 <em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">curvature</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">float</span></em><a class="headerlink" href="#m_n_kappa.section.ComputationSectionCurvature.curvature" title="Permalink to this definition">#</a></dt>
 <dd><p>input-curvature <span class="math notranslate nohighlight">\(\kappa\)</span></p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="m_n_kappa.section.ComputationSectionCurvature.edges_strain">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">edges_strain</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">list</span></em><a class="headerlink" href="#m_n_kappa.section.ComputationSectionCurvature.edges_strain" title="Permalink to this definition">#</a></dt>
+<dd><p>strains at the edges (bottom and top) of the section,
+computed from the strain distribution</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="m_n_kappa.section.ComputationSectionCurvature.edges_stress">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">edges_stress</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">list</span></em><a class="headerlink" href="#m_n_kappa.section.ComputationSectionCurvature.edges_stress" title="Permalink to this definition">#</a></dt>
+<dd><p>stresses at the edges (bottom and top) of the section</p>
 </dd></dl>
 
 <dl class="py property">
@@ -521,9 +658,51 @@ the given curvature and zero strain.</p>
 </dd></dl>
 
 <dl class="py property">
+<dt class="sig sig-object py" id="m_n_kappa.section.ComputationSectionCurvature.geometry">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">geometry</span></span><a class="headerlink" href="#m_n_kappa.section.ComputationSectionCurvature.geometry" title="Permalink to this definition">#</a></dt>
+<dd><p>geometry of the section</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="m_n_kappa.section.ComputationSectionCurvature.material">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">material</span></span><a class="headerlink" href="#m_n_kappa.section.ComputationSectionCurvature.material" title="Permalink to this definition">#</a></dt>
+<dd><p>material of the section</p>
+</dd></dl>
+
+<dl class="py property">
 <dt class="sig sig-object py" id="m_n_kappa.section.ComputationSectionCurvature.neutral_axis">
 <em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">neutral_axis</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">float</span></em><a class="headerlink" href="#m_n_kappa.section.ComputationSectionCurvature.neutral_axis" title="Permalink to this definition">#</a></dt>
 <dd><p>input neutral axis <span class="math notranslate nohighlight">\(z_\mathrm{n}\)</span></p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="m_n_kappa.section.ComputationSectionCurvature.section">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">section</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="m_n_kappa.Section.html#m_n_kappa.Section" title="m_n_kappa.section.Section"><span class="pre">Section</span></a></em><a class="headerlink" href="#m_n_kappa.section.ComputationSectionCurvature.section" title="Permalink to this definition">#</a></dt>
+<dd><p>basic <a class="reference internal" href="m_n_kappa.Section.html#m_n_kappa.Section" title="m_n_kappa.Section"><code class="xref py py-class docutils literal notranslate"><span class="pre">Section</span></code></a></p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="m_n_kappa.section.ComputationSectionCurvature.stress_interception">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">stress_interception</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">float</span></em><a class="headerlink" href="#m_n_kappa.section.ComputationSectionCurvature.stress_interception" title="Permalink to this definition">#</a></dt>
+<dd><p>interception-value of the linear stress-distribution of the section</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="m_n_kappa.section.ComputationSectionCurvature.stress_slope">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">stress_slope</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">float</span></em><a class="headerlink" href="#m_n_kappa.section.ComputationSectionCurvature.stress_slope" title="Permalink to this definition">#</a></dt>
+<dd><p>linear slope of the stresses over the vertical direction of the section</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="m_n_kappa.section.ComputationSectionCurvature.top_edge_maximum_strain">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">top_edge_maximum_strain</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="m_n_kappa.general.StrainPosition.html#m_n_kappa.general.StrainPosition" title="m_n_kappa.general.StrainPosition"><span class="pre">StrainPosition</span></a></em><a class="headerlink" href="#m_n_kappa.section.ComputationSectionCurvature.top_edge_maximum_strain" title="Permalink to this definition">#</a></dt>
+<dd><p><a class="reference internal" href="m_n_kappa.general.StrainPosition.html#m_n_kappa.general.StrainPosition" title="m_n_kappa.general.StrainPosition"><code class="xref py py-class docutils literal notranslate"><span class="pre">StrainPosition</span></code></a> with maximum strain on top edge of section</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="m_n_kappa.section.ComputationSectionCurvature.top_edge_minimum_strain">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">top_edge_minimum_strain</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="m_n_kappa.general.StrainPosition.html#m_n_kappa.general.StrainPosition" title="m_n_kappa.general.StrainPosition"><span class="pre">StrainPosition</span></a></em><a class="headerlink" href="#m_n_kappa.section.ComputationSectionCurvature.top_edge_minimum_strain" title="Permalink to this definition">#</a></dt>
+<dd><p><a class="reference internal" href="m_n_kappa.general.StrainPosition.html#m_n_kappa.general.StrainPosition" title="m_n_kappa.general.StrainPosition"><code class="xref py py-class docutils literal notranslate"><span class="pre">StrainPosition</span></code></a> with minimum strain on top edge of section</p>
 </dd></dl>
 
 </dd></dl>
@@ -587,11 +766,29 @@ the given curvature and zero strain.</p>
             <ul>
 <li><a class="reference internal" href="#">m_n_kappa.section.ComputationSectionCurvature</a><ul>
 <li><a class="reference internal" href="#m_n_kappa.section.ComputationSectionCurvature"><code class="docutils literal notranslate"><span class="pre">ComputationSectionCurvature</span></code></a><ul>
+<li><a class="reference internal" href="#m_n_kappa.section.ComputationSectionCurvature.lever_arm"><code class="docutils literal notranslate"><span class="pre">ComputationSectionCurvature.lever_arm()</span></code></a></li>
 <li><a class="reference internal" href="#m_n_kappa.section.ComputationSectionCurvature.material_points_inside_curvature"><code class="docutils literal notranslate"><span class="pre">ComputationSectionCurvature.material_points_inside_curvature()</span></code></a></li>
+<li><a class="reference internal" href="#m_n_kappa.section.ComputationSectionCurvature.material_strains"><code class="docutils literal notranslate"><span class="pre">ComputationSectionCurvature.material_strains()</span></code></a></li>
+<li><a class="reference internal" href="#m_n_kappa.section.ComputationSectionCurvature.maximum_negative_strain"><code class="docutils literal notranslate"><span class="pre">ComputationSectionCurvature.maximum_negative_strain()</span></code></a></li>
+<li><a class="reference internal" href="#m_n_kappa.section.ComputationSectionCurvature.maximum_positive_strain"><code class="docutils literal notranslate"><span class="pre">ComputationSectionCurvature.maximum_positive_strain()</span></code></a></li>
+<li><a class="reference internal" href="#m_n_kappa.section.ComputationSectionCurvature.moment"><code class="docutils literal notranslate"><span class="pre">ComputationSectionCurvature.moment()</span></code></a></li>
+<li><a class="reference internal" href="#m_n_kappa.section.ComputationSectionCurvature.section_strains"><code class="docutils literal notranslate"><span class="pre">ComputationSectionCurvature.section_strains()</span></code></a></li>
 <li><a class="reference internal" href="#m_n_kappa.section.ComputationSectionCurvature.split_section"><code class="docutils literal notranslate"><span class="pre">ComputationSectionCurvature.split_section()</span></code></a></li>
+<li><a class="reference internal" href="#m_n_kappa.section.ComputationSectionCurvature.axial_force"><code class="docutils literal notranslate"><span class="pre">ComputationSectionCurvature.axial_force</span></code></a></li>
+<li><a class="reference internal" href="#m_n_kappa.section.ComputationSectionCurvature.bottom_edge_maximum_strain"><code class="docutils literal notranslate"><span class="pre">ComputationSectionCurvature.bottom_edge_maximum_strain</span></code></a></li>
+<li><a class="reference internal" href="#m_n_kappa.section.ComputationSectionCurvature.bottom_edge_minimum_strain"><code class="docutils literal notranslate"><span class="pre">ComputationSectionCurvature.bottom_edge_minimum_strain</span></code></a></li>
 <li><a class="reference internal" href="#m_n_kappa.section.ComputationSectionCurvature.curvature"><code class="docutils literal notranslate"><span class="pre">ComputationSectionCurvature.curvature</span></code></a></li>
+<li><a class="reference internal" href="#m_n_kappa.section.ComputationSectionCurvature.edges_strain"><code class="docutils literal notranslate"><span class="pre">ComputationSectionCurvature.edges_strain</span></code></a></li>
+<li><a class="reference internal" href="#m_n_kappa.section.ComputationSectionCurvature.edges_stress"><code class="docutils literal notranslate"><span class="pre">ComputationSectionCurvature.edges_stress</span></code></a></li>
 <li><a class="reference internal" href="#m_n_kappa.section.ComputationSectionCurvature.edges_stress_difference"><code class="docutils literal notranslate"><span class="pre">ComputationSectionCurvature.edges_stress_difference</span></code></a></li>
+<li><a class="reference internal" href="#m_n_kappa.section.ComputationSectionCurvature.geometry"><code class="docutils literal notranslate"><span class="pre">ComputationSectionCurvature.geometry</span></code></a></li>
+<li><a class="reference internal" href="#m_n_kappa.section.ComputationSectionCurvature.material"><code class="docutils literal notranslate"><span class="pre">ComputationSectionCurvature.material</span></code></a></li>
 <li><a class="reference internal" href="#m_n_kappa.section.ComputationSectionCurvature.neutral_axis"><code class="docutils literal notranslate"><span class="pre">ComputationSectionCurvature.neutral_axis</span></code></a></li>
+<li><a class="reference internal" href="#m_n_kappa.section.ComputationSectionCurvature.section"><code class="docutils literal notranslate"><span class="pre">ComputationSectionCurvature.section</span></code></a></li>
+<li><a class="reference internal" href="#m_n_kappa.section.ComputationSectionCurvature.stress_interception"><code class="docutils literal notranslate"><span class="pre">ComputationSectionCurvature.stress_interception</span></code></a></li>
+<li><a class="reference internal" href="#m_n_kappa.section.ComputationSectionCurvature.stress_slope"><code class="docutils literal notranslate"><span class="pre">ComputationSectionCurvature.stress_slope</span></code></a></li>
+<li><a class="reference internal" href="#m_n_kappa.section.ComputationSectionCurvature.top_edge_maximum_strain"><code class="docutils literal notranslate"><span class="pre">ComputationSectionCurvature.top_edge_maximum_strain</span></code></a></li>
+<li><a class="reference internal" href="#m_n_kappa.section.ComputationSectionCurvature.top_edge_minimum_strain"><code class="docutils literal notranslate"><span class="pre">ComputationSectionCurvature.top_edge_minimum_strain</span></code></a></li>
 </ul>
 </li>
 </ul>

@@ -116,7 +116,11 @@
   <div class="visually-hidden">Hide table of contents sidebar</div>
 </label>
 
-
+<div class="announcement">
+  <aside class="announcement-content">
+     <em>Important</em> This 'm_n_kappa'-package has not yet been published on PyPI! This documentation is also currently under development. Plaese keep that in mind, while reading and testing. Thank you. 
+  </aside>
+</div>
 
 <div class="page">
   <header class="mobile-header">
@@ -164,8 +168,8 @@
   <ul>
 <li class="toctree-l1"><a class="reference internal" href="../getting_started.html">Getting Started</a></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../examples/index.html">Examples</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
-<li class="toctree-l2"><a class="reference internal" href="../examples/m_kappa_UPE.html">Single span slim-floor beam with :math:`M`-:math:`\kappa`-curve</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../examples/m_n_kappa_UPE.html">Single span slim-floor beam with :math:`M`-:math:`N`-:math:`\kappa`-curve</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../examples/m_kappa_UPE.html">Single span slim-floor beam with Moment-Curvature-Curves</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../examples/m_n_kappa_UPE.html">Single span slim-floor beam with Moment-Axial force-Curvature-Curves</a></li>
 </ul>
 </li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../theory/index.html">Theory guide</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" role="switch" type="checkbox"/><label for="toctree-checkbox-2"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
@@ -236,14 +240,13 @@
 <li class="toctree-l2"><a class="reference internal" href="m_n_kappa.material.ConcreteCompressionParabolaRectangle.html">m_n_kappa.material.ConcreteCompressionParabolaRectangle</a></li>
 <li class="toctree-l2"><a class="reference internal" href="m_n_kappa.material.ConcreteCompressionBiLinear.html">m_n_kappa.material.ConcreteCompressionBiLinear</a></li>
 <li class="toctree-l2"><a class="reference internal" href="m_n_kappa.material.ConcreteTension.html">m_n_kappa.material.ConcreteTension</a></li>
-<li class="toctree-l2"><a class="reference internal" href="m_n_kappa.section.Section.html">m_n_kappa.section.Section</a></li>
 <li class="toctree-l2"><a class="reference internal" href="m_n_kappa.section.ComputationSection.html">m_n_kappa.section.ComputationSection</a></li>
 <li class="toctree-l2"><a class="reference internal" href="m_n_kappa.section.ComputationSectionCurvature.html">m_n_kappa.section.ComputationSectionCurvature</a></li>
 <li class="toctree-l2"><a class="reference internal" href="m_n_kappa.section.ComputationSectionStrain.html">m_n_kappa.section.ComputationSectionStrain</a></li>
 <li class="toctree-l2"><a class="reference internal" href="m_n_kappa.crosssection.ComputationCrosssection.html">m_n_kappa.crosssection.ComputationCrosssection</a></li>
 <li class="toctree-l2"><a class="reference internal" href="m_n_kappa.crosssection.ComputationCrosssectionStrain.html">m_n_kappa.crosssection.ComputationCrosssectionStrain</a></li>
-<li class="toctree-l2"><a class="reference internal" href="m_n_kappa.crosssection.ComputationCrosssectionStrainAdd.html">m_n_kappa.crosssection.ComputationCrosssectionStrainAdd</a></li>
 <li class="toctree-l2"><a class="reference internal" href="m_n_kappa.crosssection.ComputationCrosssectionCurvature.html">m_n_kappa.crosssection.ComputationCrosssectionCurvature</a></li>
+<li class="toctree-l2"><a class="reference internal" href="m_n_kappa.crosssection.ComputationCrosssectionStrainAdd.html">m_n_kappa.crosssection.ComputationCrosssectionStrainAdd</a></li>
 <li class="toctree-l2"><a class="reference internal" href="m_n_kappa.crosssection.EdgeStrains.html">m_n_kappa.crosssection.EdgeStrains</a></li>
 <li class="toctree-l2"><a class="reference internal" href="m_n_kappa.crosssection.CrossSectionBoundaries.html">m_n_kappa.crosssection.CrossSectionBoundaries</a></li>
 <li class="toctree-l2"><a class="reference internal" href="m_n_kappa.crosssection.axial_force.html">m_n_kappa.crosssection.axial_force</a></li>
@@ -358,7 +361,7 @@
 <tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">moment_by</span></code>(load, at_position)</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">position_of_maximum_deformation</span></code>()</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#m_n_kappa.SingleSpanSingleLoads.position_of_maximum_deformation" title="m_n_kappa.SingleSpanSingleLoads.position_of_maximum_deformation"><code class="xref py py-obj docutils literal notranslate"><span class="pre">position_of_maximum_deformation</span></code></a>()</p></td>
 <td><p>positions-value of the maximum-deformation</p></td>
 </tr>
 <tr class="row-even"><td><p><a class="reference internal" href="#m_n_kappa.SingleSpanSingleLoads.positions_of_maximum_moment" title="m_n_kappa.SingleSpanSingleLoads.positions_of_maximum_moment"><code class="xref py py-obj docutils literal notranslate"><span class="pre">positions_of_maximum_moment</span></code></a>()</p></td>
@@ -435,6 +438,17 @@ ohne Profilblech, dissertation, University of Stuttgart, Institute of Structural
 <dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p>moment at the given position_value</p>
 </dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="m_n_kappa.SingleSpanSingleLoads.position_of_maximum_deformation">
+<span class="sig-name descname"><span class="pre">position_of_maximum_deformation</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#m_n_kappa.SingleSpanSingleLoads.position_of_maximum_deformation" title="Permalink to this definition">#</a></dt>
+<dd><p>positions-value of the maximum-deformation</p>
+<dl class="field-list simple">
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>float</p>
 </dd>
@@ -596,6 +610,7 @@ ohne Profilblech, dissertation, University of Stuttgart, Institute of Structural
 <li><a class="reference internal" href="#m_n_kappa.SingleSpanSingleLoads"><code class="docutils literal notranslate"><span class="pre">SingleSpanSingleLoads</span></code></a><ul>
 <li><a class="reference internal" href="#m_n_kappa.SingleSpanSingleLoads.load_distribution_factor"><code class="docutils literal notranslate"><span class="pre">SingleSpanSingleLoads.load_distribution_factor()</span></code></a></li>
 <li><a class="reference internal" href="#m_n_kappa.SingleSpanSingleLoads.moment"><code class="docutils literal notranslate"><span class="pre">SingleSpanSingleLoads.moment()</span></code></a></li>
+<li><a class="reference internal" href="#m_n_kappa.SingleSpanSingleLoads.position_of_maximum_deformation"><code class="docutils literal notranslate"><span class="pre">SingleSpanSingleLoads.position_of_maximum_deformation()</span></code></a></li>
 <li><a class="reference internal" href="#m_n_kappa.SingleSpanSingleLoads.positions_of_maximum_moment"><code class="docutils literal notranslate"><span class="pre">SingleSpanSingleLoads.positions_of_maximum_moment()</span></code></a></li>
 <li><a class="reference internal" href="#m_n_kappa.SingleSpanSingleLoads.single_loads_with_factor"><code class="docutils literal notranslate"><span class="pre">SingleSpanSingleLoads.single_loads_with_factor()</span></code></a></li>
 <li><a class="reference internal" href="#m_n_kappa.SingleSpanSingleLoads.single_loads_with_value"><code class="docutils literal notranslate"><span class="pre">SingleSpanSingleLoads.single_loads_with_value()</span></code></a></li>

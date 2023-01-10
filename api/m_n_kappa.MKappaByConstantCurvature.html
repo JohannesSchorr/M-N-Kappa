@@ -116,7 +116,11 @@
   <div class="visually-hidden">Hide table of contents sidebar</div>
 </label>
 
-
+<div class="announcement">
+  <aside class="announcement-content">
+     <em>Important</em> This 'm_n_kappa'-package has not yet been published on PyPI! This documentation is also currently under development. Plaese keep that in mind, while reading and testing. Thank you. 
+  </aside>
+</div>
 
 <div class="page">
   <header class="mobile-header">
@@ -164,8 +168,8 @@
   <ul>
 <li class="toctree-l1"><a class="reference internal" href="../getting_started.html">Getting Started</a></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../examples/index.html">Examples</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
-<li class="toctree-l2"><a class="reference internal" href="../examples/m_kappa_UPE.html">Single span slim-floor beam with :math:`M`-:math:`\kappa`-curve</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../examples/m_n_kappa_UPE.html">Single span slim-floor beam with :math:`M`-:math:`N`-:math:`\kappa`-curve</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../examples/m_kappa_UPE.html">Single span slim-floor beam with Moment-Curvature-Curves</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../examples/m_n_kappa_UPE.html">Single span slim-floor beam with Moment-Axial force-Curvature-Curves</a></li>
 </ul>
 </li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../theory/index.html">Theory guide</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" role="switch" type="checkbox"/><label for="toctree-checkbox-2"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
@@ -236,14 +240,13 @@
 <li class="toctree-l2"><a class="reference internal" href="m_n_kappa.material.ConcreteCompressionParabolaRectangle.html">m_n_kappa.material.ConcreteCompressionParabolaRectangle</a></li>
 <li class="toctree-l2"><a class="reference internal" href="m_n_kappa.material.ConcreteCompressionBiLinear.html">m_n_kappa.material.ConcreteCompressionBiLinear</a></li>
 <li class="toctree-l2"><a class="reference internal" href="m_n_kappa.material.ConcreteTension.html">m_n_kappa.material.ConcreteTension</a></li>
-<li class="toctree-l2"><a class="reference internal" href="m_n_kappa.section.Section.html">m_n_kappa.section.Section</a></li>
 <li class="toctree-l2"><a class="reference internal" href="m_n_kappa.section.ComputationSection.html">m_n_kappa.section.ComputationSection</a></li>
 <li class="toctree-l2"><a class="reference internal" href="m_n_kappa.section.ComputationSectionCurvature.html">m_n_kappa.section.ComputationSectionCurvature</a></li>
 <li class="toctree-l2"><a class="reference internal" href="m_n_kappa.section.ComputationSectionStrain.html">m_n_kappa.section.ComputationSectionStrain</a></li>
 <li class="toctree-l2"><a class="reference internal" href="m_n_kappa.crosssection.ComputationCrosssection.html">m_n_kappa.crosssection.ComputationCrosssection</a></li>
 <li class="toctree-l2"><a class="reference internal" href="m_n_kappa.crosssection.ComputationCrosssectionStrain.html">m_n_kappa.crosssection.ComputationCrosssectionStrain</a></li>
-<li class="toctree-l2"><a class="reference internal" href="m_n_kappa.crosssection.ComputationCrosssectionStrainAdd.html">m_n_kappa.crosssection.ComputationCrosssectionStrainAdd</a></li>
 <li class="toctree-l2"><a class="reference internal" href="m_n_kappa.crosssection.ComputationCrosssectionCurvature.html">m_n_kappa.crosssection.ComputationCrosssectionCurvature</a></li>
+<li class="toctree-l2"><a class="reference internal" href="m_n_kappa.crosssection.ComputationCrosssectionStrainAdd.html">m_n_kappa.crosssection.ComputationCrosssectionStrainAdd</a></li>
 <li class="toctree-l2"><a class="reference internal" href="m_n_kappa.crosssection.EdgeStrains.html">m_n_kappa.crosssection.EdgeStrains</a></li>
 <li class="toctree-l2"><a class="reference internal" href="m_n_kappa.crosssection.CrossSectionBoundaries.html">m_n_kappa.crosssection.CrossSectionBoundaries</a></li>
 <li class="toctree-l2"><a class="reference internal" href="m_n_kappa.crosssection.axial_force.html">m_n_kappa.crosssection.axial_force</a></li>
@@ -353,16 +356,16 @@ classified as successful (Default: 5.0)</p></li>
 </dl>
 </p></td>
 </tr>
-<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">compute</span></code>()</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#m_n_kappa.MKappaByConstantCurvature.compute" title="m_n_kappa.MKappaByConstantCurvature.compute"><code class="xref py py-obj docutils literal notranslate"><span class="pre">compute</span></code></a>()</p></td>
 <td><p>compute the cross-section with given initial values (curvature and neutral axis) and save it</p></td>
 </tr>
-<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">initialize</span></code>()</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#m_n_kappa.MKappaByConstantCurvature.initialize" title="m_n_kappa.MKappaByConstantCurvature.initialize"><code class="xref py py-obj docutils literal notranslate"><span class="pre">initialize</span></code></a>()</p></td>
 <td><p>initialize computation</p></td>
 </tr>
 <tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">initialize_boundary_curvatures</span></code>()</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">iterate</span></code>()</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#m_n_kappa.MKappaByConstantCurvature.iterate" title="m_n_kappa.MKappaByConstantCurvature.iterate"><code class="xref py py-obj docutils literal notranslate"><span class="pre">iterate</span></code></a>()</p></td>
 <td><p>iterate as long as one of the following criteria are reached: - number of maximum iterations - absolute axial force smaller than desired one</p></td>
 </tr>
 </tbody>
@@ -372,34 +375,34 @@ classified as successful (Default: 5.0)</p></li>
 <div class="table-wrapper autosummary longtable docutils container">
 <table class="autosummary longtable docutils align-default">
 <tbody>
-<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">applied_axial_force</span></code></p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#m_n_kappa.MKappaByConstantCurvature.applied_axial_force" title="m_n_kappa.MKappaByConstantCurvature.applied_axial_force"><code class="xref py py-obj docutils literal notranslate"><span class="pre">applied_axial_force</span></code></a></p></td>
 <td><p>applied axial force</p></td>
 </tr>
 <tr class="row-even"><td><p><a class="reference internal" href="#m_n_kappa.MKappaByConstantCurvature.applied_curvature" title="m_n_kappa.MKappaByConstantCurvature.applied_curvature"><code class="xref py py-obj docutils literal notranslate"><span class="pre">applied_curvature</span></code></a></p></td>
 <td><p>applied curvature (no variation)</p></td>
 </tr>
-<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">axial_force</span></code></p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#m_n_kappa.MKappaByConstantCurvature.axial_force" title="m_n_kappa.MKappaByConstantCurvature.axial_force"><code class="xref py py-obj docutils literal notranslate"><span class="pre">axial_force</span></code></a></p></td>
 <td><p>computed axial force</p></td>
 </tr>
-<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">axial_force_tolerance</span></code></p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#m_n_kappa.MKappaByConstantCurvature.axial_force_tolerance" title="m_n_kappa.MKappaByConstantCurvature.axial_force_tolerance"><code class="xref py py-obj docutils literal notranslate"><span class="pre">axial_force_tolerance</span></code></a></p></td>
 <td><p>if axial force within this tolerance the computation is terminated and classified as successful</p></td>
 </tr>
-<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">computations</span></code></p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#m_n_kappa.MKappaByConstantCurvature.computations" title="m_n_kappa.MKappaByConstantCurvature.computations"><code class="xref py py-obj docutils literal notranslate"><span class="pre">computations</span></code></a></p></td>
 <td><p>saved computations</p></td>
 </tr>
-<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">computed_cross_section</span></code></p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#m_n_kappa.MKappaByConstantCurvature.computed_cross_section" title="m_n_kappa.MKappaByConstantCurvature.computed_cross_section"><code class="xref py py-obj docutils literal notranslate"><span class="pre">computed_cross_section</span></code></a></p></td>
 <td><p>computed cross_section of the current iteration</p></td>
 </tr>
-<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">cross_section</span></code></p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#m_n_kappa.MKappaByConstantCurvature.cross_section" title="m_n_kappa.MKappaByConstantCurvature.cross_section"><code class="xref py py-obj docutils literal notranslate"><span class="pre">cross_section</span></code></a></p></td>
 <td><p>cross-section to compute</p></td>
 </tr>
-<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">curvature</span></code></p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#m_n_kappa.MKappaByConstantCurvature.curvature" title="m_n_kappa.MKappaByConstantCurvature.curvature"><code class="xref py py-obj docutils literal notranslate"><span class="pre">curvature</span></code></a></p></td>
 <td><p>applied curvature</p></td>
 </tr>
-<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">iteration</span></code></p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#m_n_kappa.MKappaByConstantCurvature.iteration" title="m_n_kappa.MKappaByConstantCurvature.iteration"><code class="xref py py-obj docutils literal notranslate"><span class="pre">iteration</span></code></a></p></td>
 <td><p>number of current iteration</p></td>
 </tr>
-<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">maximum_iterations</span></code></p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#m_n_kappa.MKappaByConstantCurvature.maximum_iterations" title="m_n_kappa.MKappaByConstantCurvature.maximum_iterations"><code class="xref py py-obj docutils literal notranslate"><span class="pre">maximum_iterations</span></code></a></p></td>
 <td><p>maximum allowed iterations</p></td>
 </tr>
 <tr class="row-odd"><td><p><a class="reference internal" href="#m_n_kappa.MKappaByConstantCurvature.maximum_neutral_axis" title="m_n_kappa.MKappaByConstantCurvature.maximum_neutral_axis"><code class="xref py py-obj docutils literal notranslate"><span class="pre">maximum_neutral_axis</span></code></a></p></td>
@@ -408,25 +411,101 @@ classified as successful (Default: 5.0)</p></li>
 <tr class="row-even"><td><p><a class="reference internal" href="#m_n_kappa.MKappaByConstantCurvature.minimum_neutral_axis" title="m_n_kappa.MKappaByConstantCurvature.minimum_neutral_axis"><code class="xref py py-obj docutils literal notranslate"><span class="pre">minimum_neutral_axis</span></code></a></p></td>
 <td><p>boundary_condition of the neutral axis</p></td>
 </tr>
-<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">moment</span></code></p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#m_n_kappa.MKappaByConstantCurvature.moment" title="m_n_kappa.MKappaByConstantCurvature.moment"><code class="xref py py-obj docutils literal notranslate"><span class="pre">moment</span></code></a></p></td>
 <td><p>computed moment of the cross_section</p></td>
 </tr>
-<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">neutral_axis</span></code></p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#m_n_kappa.MKappaByConstantCurvature.neutral_axis" title="m_n_kappa.MKappaByConstantCurvature.neutral_axis"><code class="xref py py-obj docutils literal notranslate"><span class="pre">neutral_axis</span></code></a></p></td>
 <td><p>point where strain_value is zero</p></td>
 </tr>
-<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">solver</span></code></p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#m_n_kappa.MKappaByConstantCurvature.solver" title="m_n_kappa.MKappaByConstantCurvature.solver"><code class="xref py py-obj docutils literal notranslate"><span class="pre">solver</span></code></a></p></td>
 <td><p>used solver to computed equilibrium</p></td>
 </tr>
-<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">successful</span></code></p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#m_n_kappa.MKappaByConstantCurvature.successful" title="m_n_kappa.MKappaByConstantCurvature.successful"><code class="xref py py-obj docutils literal notranslate"><span class="pre">successful</span></code></a></p></td>
 <td><p>equilibrium has been found, False: equilibrium has not (yet) been found</p></td>
 </tr>
 </tbody>
 </table>
 </div>
+<dl class="py method">
+<dt class="sig sig-object py" id="m_n_kappa.MKappaByConstantCurvature.compute">
+<span class="sig-name descname"><span class="pre">compute</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#m_n_kappa.MKappaByConstantCurvature.compute" title="Permalink to this definition">#</a></dt>
+<dd><p>compute the cross-section with given initial values (curvature and neutral axis)
+and save it</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="m_n_kappa.MKappaByConstantCurvature.initialize">
+<span class="sig-name descname"><span class="pre">initialize</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#m_n_kappa.MKappaByConstantCurvature.initialize" title="Permalink to this definition">#</a></dt>
+<dd><p>initialize computation</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="m_n_kappa.MKappaByConstantCurvature.iterate">
+<span class="sig-name descname"><span class="pre">iterate</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#m_n_kappa.MKappaByConstantCurvature.iterate" title="Permalink to this definition">#</a></dt>
+<dd><p>iterate as long as one of the following criteria are reached:
+- number of maximum iterations
+- absolute axial force smaller than desired one</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="m_n_kappa.MKappaByConstantCurvature.applied_axial_force">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">applied_axial_force</span></span><a class="headerlink" href="#m_n_kappa.MKappaByConstantCurvature.applied_axial_force" title="Permalink to this definition">#</a></dt>
+<dd><p>applied axial force</p>
+</dd></dl>
+
 <dl class="py property">
 <dt class="sig sig-object py" id="m_n_kappa.MKappaByConstantCurvature.applied_curvature">
 <em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">applied_curvature</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">float</span></em><a class="headerlink" href="#m_n_kappa.MKappaByConstantCurvature.applied_curvature" title="Permalink to this definition">#</a></dt>
 <dd><p>applied curvature (no variation)</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="m_n_kappa.MKappaByConstantCurvature.axial_force">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">axial_force</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">float</span></em><a class="headerlink" href="#m_n_kappa.MKappaByConstantCurvature.axial_force" title="Permalink to this definition">#</a></dt>
+<dd><p>computed axial force</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="m_n_kappa.MKappaByConstantCurvature.axial_force_tolerance">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">axial_force_tolerance</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">float</span></em><a class="headerlink" href="#m_n_kappa.MKappaByConstantCurvature.axial_force_tolerance" title="Permalink to this definition">#</a></dt>
+<dd><p>if axial force within this tolerance the computation is terminated and
+classified as successful</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="m_n_kappa.MKappaByConstantCurvature.computations">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">computations</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">list</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="m_n_kappa.points.Computation.html#m_n_kappa.points.Computation" title="m_n_kappa.points.Computation"><span class="pre">m_n_kappa.points.Computation</span></a><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#m_n_kappa.MKappaByConstantCurvature.computations" title="Permalink to this definition">#</a></dt>
+<dd><p>saved computations</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="m_n_kappa.MKappaByConstantCurvature.computed_cross_section">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">computed_cross_section</span></span><a class="headerlink" href="#m_n_kappa.MKappaByConstantCurvature.computed_cross_section" title="Permalink to this definition">#</a></dt>
+<dd><p>computed cross_section of the current iteration</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="m_n_kappa.MKappaByConstantCurvature.cross_section">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">cross_section</span></span><a class="headerlink" href="#m_n_kappa.MKappaByConstantCurvature.cross_section" title="Permalink to this definition">#</a></dt>
+<dd><p>cross-section to compute</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="m_n_kappa.MKappaByConstantCurvature.curvature">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">curvature</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">float</span></em><a class="headerlink" href="#m_n_kappa.MKappaByConstantCurvature.curvature" title="Permalink to this definition">#</a></dt>
+<dd><p>applied curvature</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="m_n_kappa.MKappaByConstantCurvature.iteration">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">iteration</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">int</span></em><a class="headerlink" href="#m_n_kappa.MKappaByConstantCurvature.iteration" title="Permalink to this definition">#</a></dt>
+<dd><p>number of current iteration</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="m_n_kappa.MKappaByConstantCurvature.maximum_iterations">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">maximum_iterations</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">int</span></em><a class="headerlink" href="#m_n_kappa.MKappaByConstantCurvature.maximum_iterations" title="Permalink to this definition">#</a></dt>
+<dd><p>maximum allowed iterations</p>
 </dd></dl>
 
 <dl class="py property">
@@ -439,6 +518,36 @@ classified as successful (Default: 5.0)</p></li>
 <dt class="sig sig-object py" id="m_n_kappa.MKappaByConstantCurvature.minimum_neutral_axis">
 <em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">minimum_neutral_axis</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">float</span></em><a class="headerlink" href="#m_n_kappa.MKappaByConstantCurvature.minimum_neutral_axis" title="Permalink to this definition">#</a></dt>
 <dd><p>boundary_condition of the neutral axis</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="m_n_kappa.MKappaByConstantCurvature.moment">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">moment</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">float</span></em><a class="headerlink" href="#m_n_kappa.MKappaByConstantCurvature.moment" title="Permalink to this definition">#</a></dt>
+<dd><p>computed moment of the cross_section</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="m_n_kappa.MKappaByConstantCurvature.neutral_axis">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">neutral_axis</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">float</span></em><a class="headerlink" href="#m_n_kappa.MKappaByConstantCurvature.neutral_axis" title="Permalink to this definition">#</a></dt>
+<dd><p>point where strain_value is zero</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="m_n_kappa.MKappaByConstantCurvature.solver">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">solver</span></span><a class="headerlink" href="#m_n_kappa.MKappaByConstantCurvature.solver" title="Permalink to this definition">#</a></dt>
+<dd><p>used solver to computed equilibrium</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="m_n_kappa.MKappaByConstantCurvature.successful">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">successful</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">bool</span></em><a class="headerlink" href="#m_n_kappa.MKappaByConstantCurvature.successful" title="Permalink to this definition">#</a></dt>
+<dd><p>equilibrium has been found,
+False: equilibrium has not (yet) been found</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>True</p>
+</dd>
+</dl>
 </dd></dl>
 
 </dd></dl>
@@ -502,9 +611,25 @@ classified as successful (Default: 5.0)</p></li>
             <ul>
 <li><a class="reference internal" href="#">m_n_kappa.MKappaByConstantCurvature</a><ul>
 <li><a class="reference internal" href="#m_n_kappa.MKappaByConstantCurvature"><code class="docutils literal notranslate"><span class="pre">MKappaByConstantCurvature</span></code></a><ul>
+<li><a class="reference internal" href="#m_n_kappa.MKappaByConstantCurvature.compute"><code class="docutils literal notranslate"><span class="pre">MKappaByConstantCurvature.compute()</span></code></a></li>
+<li><a class="reference internal" href="#m_n_kappa.MKappaByConstantCurvature.initialize"><code class="docutils literal notranslate"><span class="pre">MKappaByConstantCurvature.initialize()</span></code></a></li>
+<li><a class="reference internal" href="#m_n_kappa.MKappaByConstantCurvature.iterate"><code class="docutils literal notranslate"><span class="pre">MKappaByConstantCurvature.iterate()</span></code></a></li>
+<li><a class="reference internal" href="#m_n_kappa.MKappaByConstantCurvature.applied_axial_force"><code class="docutils literal notranslate"><span class="pre">MKappaByConstantCurvature.applied_axial_force</span></code></a></li>
 <li><a class="reference internal" href="#m_n_kappa.MKappaByConstantCurvature.applied_curvature"><code class="docutils literal notranslate"><span class="pre">MKappaByConstantCurvature.applied_curvature</span></code></a></li>
+<li><a class="reference internal" href="#m_n_kappa.MKappaByConstantCurvature.axial_force"><code class="docutils literal notranslate"><span class="pre">MKappaByConstantCurvature.axial_force</span></code></a></li>
+<li><a class="reference internal" href="#m_n_kappa.MKappaByConstantCurvature.axial_force_tolerance"><code class="docutils literal notranslate"><span class="pre">MKappaByConstantCurvature.axial_force_tolerance</span></code></a></li>
+<li><a class="reference internal" href="#m_n_kappa.MKappaByConstantCurvature.computations"><code class="docutils literal notranslate"><span class="pre">MKappaByConstantCurvature.computations</span></code></a></li>
+<li><a class="reference internal" href="#m_n_kappa.MKappaByConstantCurvature.computed_cross_section"><code class="docutils literal notranslate"><span class="pre">MKappaByConstantCurvature.computed_cross_section</span></code></a></li>
+<li><a class="reference internal" href="#m_n_kappa.MKappaByConstantCurvature.cross_section"><code class="docutils literal notranslate"><span class="pre">MKappaByConstantCurvature.cross_section</span></code></a></li>
+<li><a class="reference internal" href="#m_n_kappa.MKappaByConstantCurvature.curvature"><code class="docutils literal notranslate"><span class="pre">MKappaByConstantCurvature.curvature</span></code></a></li>
+<li><a class="reference internal" href="#m_n_kappa.MKappaByConstantCurvature.iteration"><code class="docutils literal notranslate"><span class="pre">MKappaByConstantCurvature.iteration</span></code></a></li>
+<li><a class="reference internal" href="#m_n_kappa.MKappaByConstantCurvature.maximum_iterations"><code class="docutils literal notranslate"><span class="pre">MKappaByConstantCurvature.maximum_iterations</span></code></a></li>
 <li><a class="reference internal" href="#m_n_kappa.MKappaByConstantCurvature.maximum_neutral_axis"><code class="docutils literal notranslate"><span class="pre">MKappaByConstantCurvature.maximum_neutral_axis</span></code></a></li>
 <li><a class="reference internal" href="#m_n_kappa.MKappaByConstantCurvature.minimum_neutral_axis"><code class="docutils literal notranslate"><span class="pre">MKappaByConstantCurvature.minimum_neutral_axis</span></code></a></li>
+<li><a class="reference internal" href="#m_n_kappa.MKappaByConstantCurvature.moment"><code class="docutils literal notranslate"><span class="pre">MKappaByConstantCurvature.moment</span></code></a></li>
+<li><a class="reference internal" href="#m_n_kappa.MKappaByConstantCurvature.neutral_axis"><code class="docutils literal notranslate"><span class="pre">MKappaByConstantCurvature.neutral_axis</span></code></a></li>
+<li><a class="reference internal" href="#m_n_kappa.MKappaByConstantCurvature.solver"><code class="docutils literal notranslate"><span class="pre">MKappaByConstantCurvature.solver</span></code></a></li>
+<li><a class="reference internal" href="#m_n_kappa.MKappaByConstantCurvature.successful"><code class="docutils literal notranslate"><span class="pre">MKappaByConstantCurvature.successful</span></code></a></li>
 </ul>
 </li>
 </ul>

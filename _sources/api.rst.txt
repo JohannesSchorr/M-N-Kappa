@@ -61,6 +61,9 @@ Sections and Cross-section
    Section
    Crosssection
 
+.. no need to show here ComputationCrosssectionStrain, ComputationCrosssectionCurvature
+   as only a single value is computed and no equilibrium of horizontal forces reached.
+
 .. _api.strain_based_design:
 
 Strain-based-design
