@@ -454,7 +454,11 @@ class ComputationSection(Section):
 
 class ComputationSectionStrain(ComputationSection):
 
-    """compute section  under a constant strain_value"""
+    """
+    compute section under a constant strain-value
+
+    .. versionadded:: 0.1.0
+    """
 
     __slots__ = (
         "_section",
@@ -468,14 +472,50 @@ class ComputationSectionStrain(ComputationSection):
 
     def __init__(self, section: Section, strain_value: float):
         """
-        Initialize
-
         Parameters
         ----------
-        section : Section
-                section to compute
+        section : :py:class:`~m_n_kappa.Section`
+            section to compute
         strain_value : float
-                given strain_value to compute
+            given strain-value to compute
+
+        See Also
+        --------
+        ComputationSectionCurvature: ComputationSection to compute values under linear-distributed strain
+
+        Notes
+        -----
+        For the basic computation refer to :py:class:`~m_n_kappa.ComputationSection`.
+
+        Examples
+        --------
+        A :py:class:`~m_n_kappa.Section` is defined as follows.
+
+        >>> from m_n_kappa import Rectangle, Steel
+        >>> steel = Steel(f_y=355)
+        >>> rectangle = Rectangle(top_edge=0.0, bottom_edge=10, width=10)
+        >>> section = steel + rectangle
+
+        The computation for a given strain started by initializing
+        :py:class:`~m_n_kappa.section.ComputationSectionStrain`
+
+        >>> from m_n_kappa.section import ComputationSectionStrain
+        >>> computed_section = ComputationSectionStrain(section, strain_value=0.001)
+
+        The computed axial-force :math:`N_i` is given as follows:
+
+        >>> computed_section.axial_force
+        21000.0
+
+        The lever-arm :math:`r_i` is computed as follows:
+
+        >>> computed_section.lever_arm()
+        5.0
+
+        And the moment :math:`M_i` is given as follows
+
+        >>> computed_section.moment()
+        105000.0
         """
         self._section = section
         self._strain = strain_value
@@ -504,6 +544,7 @@ class ComputationSectionStrain(ComputationSection):
 
     @property
     def strain(self) -> float:
+        """applied strain"""
         return self._strain
 
     def _get_edges_strain(self) -> list:
