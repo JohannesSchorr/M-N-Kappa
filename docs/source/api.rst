@@ -59,7 +59,7 @@ Sections and Cross-section
    :toctree: api/
 
    Section
-   Crosssections
+   Crosssection
 
 .. no need to show here ComputationCrosssectionStrain, ComputationCrosssectionCurvature
    as only a single value is computed and no equilibrium of horizontal forces reached.
