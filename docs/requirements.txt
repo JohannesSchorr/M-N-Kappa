@@ -1,7 +1,7 @@
-sphinx-copybutton>=v0.5.1
-nbsphinx>=0.8.11
+furo==2022.12.07
 matplotlib
 sphinxcontrib-bibtex>=2.5
 sphinx-design
-furo>=2022.12.07
 sphinx-toggleprompt>=0.3.1
+sphinx-copybutton>=v0.5.1
+nbsphinx>=0.8.11
