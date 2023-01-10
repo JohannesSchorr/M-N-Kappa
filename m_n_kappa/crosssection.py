@@ -597,14 +597,12 @@ class ComputationCrosssectionCurvature(ComputationCrosssection):
         """
         Parameters
         ----------
-        sections : list[Section]
-            sections the cross_section consists of
+        cross_section : list[:py:class:`~m_n_kappa.Crosssection`]
+            the cross-section
         curvature : float
             curvature to compute values
         neutral_axis_value : float
             position_value where strain_value is zero
-        slab_effective_widths : EffectiveWidths
-            effective widths' for the slab (concrete and reinforcement)
         """
         super().__init__(cross_section.sections, cross_section.slab_effective_width)
         self._curvature = curvature
