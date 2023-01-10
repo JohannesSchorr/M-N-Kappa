@@ -13,6 +13,8 @@ class Section:
 
     """
     Combines material and geometric entity
+
+    .. versionadded:: 0.1.0
     """
 
     def __init__(self, geometry, material):
@@ -25,6 +27,36 @@ class Section:
         material: :py:class:`~m_n_kappa.material.Material`
             material of the section, e.g. :py:class:`~m_n_kappa.Steel`, :py:class:`~m_n_kappa.Reinforcement`
             or :py:class:`~m_n_kappa.Concrete`
+
+        Examples
+        --------
+        A section may be created in two ways.
+        In both cases a :py:class:`~m_n_kappa.Material` and a :py:class:`~m_n_kappa.Geometry` instance
+        is needed.
+
+        >>> from m_n_kappa import Steel, Rectangle
+        >>> steel = Steel(f_y=355.0)
+        >>> rectangle = Rectangle(top_edge=0.0, bottom_edge=10, width=10.0)
+
+        The first way is by simply adding the ``steel`` (:py:class:`~m_n_kappa.Material` instance)
+        and a ``rectangle`` (:py:class:`~m_n_kappa.Geometry` instance).
+
+        >>> section_1 = steel + rectangle
+        >>> section_1
+        Section(\
+geometry=Rectangle(top_edge=0.00, bottom_edge=10.00, width=10.00, left_edge=-5.00, right_edge=5.00), \
+material=Steel(f_y=355.0, f_u=None, failure_strain=None, E_a=210000.0))
+
+        Alternatively a section is created by passing ``rectangle`` and ``steel`` as arguments to
+        :py:class:`~m_n_kappa.Section`.
+
+        >>> from m_n_kappa import Section
+        >>> section_2 = Section(geometry=rectangle, material=steel)
+        >>> section_2
+        Section(\
+geometry=Rectangle(top_edge=0.00, bottom_edge=10.00, width=10.00, left_edge=-5.00, right_edge=5.00), \
+material=Steel(f_y=355.0, f_u=None, failure_strain=None, E_a=210000.0))
+
         """
         self._geometry = geometry
         self._material = material
