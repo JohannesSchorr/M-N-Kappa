@@ -108,7 +108,7 @@ html_theme_options = {
 }
 html_static_path = ['_static']
 html_logo = '_static/logo/m_kappa_logo.png'
-html_title = f"Release {release}"
+html_title = f"<i>M</i>-<i>N</i>-<i>&#954</i>"
 html_css_files = [
     'css/custom.css',
 ]
