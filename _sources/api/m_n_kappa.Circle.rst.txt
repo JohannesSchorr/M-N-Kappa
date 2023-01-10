@@ -1,0 +1,36 @@
+﻿m\_n\_kappa.Circle
+==================
+
+.. currentmodule:: m_n_kappa
+
+.. autoclass:: Circle
+
+   
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      ~Circle.__init__
+      ~Circle.split
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+   
+      ~Circle.area
+      ~Circle.bottom_edge
+      ~Circle.centroid
+      ~Circle.centroid_y
+      ~Circle.centroid_z
+      ~Circle.diameter
+      ~Circle.edges
+      ~Circle.height
+      ~Circle.sides
+      ~Circle.top_edge
+   
+   

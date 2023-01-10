@@ -1,0 +1,42 @@
+﻿m\_n\_kappa.points.MKappa
+=========================
+
+.. currentmodule:: m_n_kappa.points
+
+.. autoclass:: MKappa
+
+   
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      ~MKappa.__init__
+      ~MKappa.compute
+      ~MKappa.initialize
+      ~MKappa.initialize_boundary_curvatures
+      ~MKappa.iterate
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+   
+      ~MKappa.applied_axial_force
+      ~MKappa.axial_force
+      ~MKappa.axial_force_tolerance
+      ~MKappa.computations
+      ~MKappa.computed_cross_section
+      ~MKappa.cross_section
+      ~MKappa.curvature
+      ~MKappa.iteration
+      ~MKappa.maximum_iterations
+      ~MKappa.moment
+      ~MKappa.neutral_axis
+      ~MKappa.solver
+      ~MKappa.successful
+   
+   

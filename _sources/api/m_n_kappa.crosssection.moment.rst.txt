@@ -1,0 +1,6 @@
+﻿m\_n\_kappa.crosssection.moment
+===============================
+
+.. currentmodule:: m_n_kappa.crosssection
+
+.. autofunction:: moment

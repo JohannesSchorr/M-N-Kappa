@@ -1,0 +1,39 @@
+﻿m\_n\_kappa.Rectangle
+=====================
+
+.. currentmodule:: m_n_kappa
+
+.. autoclass:: Rectangle
+
+   
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      ~Rectangle.__init__
+      ~Rectangle.get_horizontal_edges
+      ~Rectangle.split
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+   
+      ~Rectangle.area
+      ~Rectangle.bottom_edge
+      ~Rectangle.centroid
+      ~Rectangle.edges
+      ~Rectangle.height
+      ~Rectangle.left_edge
+      ~Rectangle.right_edge
+      ~Rectangle.sides
+      ~Rectangle.top_edge
+      ~Rectangle.width
+      ~Rectangle.width_interception
+      ~Rectangle.width_slope
+   
+   

@@ -1,0 +1,32 @@
+﻿m\_n\_kappa.Node
+================
+
+.. currentmodule:: m_n_kappa
+
+.. autoclass:: Node
+
+   
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      ~Node.__init__
+      ~Node.curvature_by
+      ~Node.incremental_deformation
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+   
+      ~Node.cross_section
+      ~Node.m_kappa_curve
+      ~Node.node_number
+      ~Node.number
+      ~Node.position
+   
+   

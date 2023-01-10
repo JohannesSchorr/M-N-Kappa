@@ -1,0 +1,26 @@
+﻿m\_n\_kappa.geometry.ComposedGeometry
+=====================================
+
+.. currentmodule:: m_n_kappa.geometry
+
+.. autoclass:: ComposedGeometry
+
+   
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      ~ComposedGeometry.__init__
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+   
+      ~ComposedGeometry.geometries
+   
+   

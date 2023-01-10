@@ -1,0 +1,33 @@
+﻿m\_n\_kappa.solver.Solver
+=========================
+
+.. currentmodule:: m_n_kappa.solver
+
+.. autoclass:: Solver
+
+   
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      ~Solver.__init__
+      ~Solver.compute
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+   
+      ~Solver.data
+      ~Solver.maximum_variable
+      ~Solver.minimum_variable
+      ~Solver.target
+      ~Solver.target_value
+      ~Solver.variable
+      ~Solver.x_n
+   
+   

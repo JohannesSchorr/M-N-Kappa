@@ -1,0 +1,657 @@
+<!doctype html>
+<html class="no-js" lang="en">
+  <head><meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width,initial-scale=1"/>
+    <meta name="color-scheme" content="light dark"><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
+<link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" /><link rel="next" title="Sections and cross-sections" href="sections.html" /><link rel="prev" title="Geometry" href="geometries.html" />
+
+    <!-- Generated with Sphinx 5.3.0 and Furo 2022.12.07 -->
+        <title>Materials - Release 0.1.0</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?digest=91d0f0d1c444bdcb17a68e833c7a53903343c195" />
+    <link rel="stylesheet" type="text/css" href="../_static/plot_directive.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/furo-extensions.css?digest=30d1aed668e5c3a91c3e3bf6a60b675221979f0e" />
+    <link rel="stylesheet" type="text/css" href="../_static/css/custom.css" />
+    
+    
+
+
+<style>
+  body {
+    --color-code-background: #f8f8f8;
+  --color-code-foreground: black;
+  
+  }
+  @media not print {
+    body[data-theme="dark"] {
+      --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  
+    }
+    @media (prefers-color-scheme: dark) {
+      body:not([data-theme="light"]) {
+        --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  
+      }
+    }
+  }
+</style></head>
+  <body>
+    
+    <script>
+      document.body.dataset.theme = localStorage.getItem("theme") || "auto";
+    </script>
+    
+
+<svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+  <symbol id="svg-toc" viewBox="0 0 24 24">
+    <title>Contents</title>
+    <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 1024 1024">
+      <path d="M408 442h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8zm-8 204c0 4.4 3.6 8 8 8h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56zm504-486H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zm0 632H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zM115.4 518.9L271.7 642c5.8 4.6 14.4.5 14.4-6.9V388.9c0-7.4-8.5-11.5-14.4-6.9L115.4 505.1a8.74 8.74 0 0 0 0 13.8z"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-menu" viewBox="0 0 24 24">
+    <title>Menu</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-menu">
+      <line x1="3" y1="12" x2="21" y2="12"></line>
+      <line x1="3" y1="6" x2="21" y2="6"></line>
+      <line x1="3" y1="18" x2="21" y2="18"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-arrow-right" viewBox="0 0 24 24">
+    <title>Expand</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-chevron-right">
+      <polyline points="9 18 15 12 9 6"></polyline>
+    </svg>
+  </symbol>
+  <symbol id="svg-sun" viewBox="0 0 24 24">
+    <title>Light mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="feather-sun">
+      <circle cx="12" cy="12" r="5"></circle>
+      <line x1="12" y1="1" x2="12" y2="3"></line>
+      <line x1="12" y1="21" x2="12" y2="23"></line>
+      <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+      <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+      <line x1="1" y1="12" x2="3" y2="12"></line>
+      <line x1="21" y1="12" x2="23" y2="12"></line>
+      <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+      <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-moon" viewBox="0 0 24 24">
+    <title>Dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-moon">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M12 3c.132 0 .263 0 .393 0a7.5 7.5 0 0 0 7.92 12.446a9 9 0 1 1 -8.313 -12.454z" />
+    </svg>
+  </symbol>
+  <symbol id="svg-sun-half" viewBox="0 0 24 24">
+    <title>Auto light/dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-shadow">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+      <circle cx="12" cy="12" r="9" />
+      <path d="M13 12h5" />
+      <path d="M13 15h4" />
+      <path d="M13 18h1" />
+      <path d="M13 9h4" />
+      <path d="M13 6h1" />
+    </svg>
+  </symbol>
+</svg>
+
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation">
+<input type="checkbox" class="sidebar-toggle" name="__toc" id="__toc">
+<label class="overlay sidebar-overlay" for="__navigation">
+  <div class="visually-hidden">Hide navigation sidebar</div>
+</label>
+<label class="overlay toc-overlay" for="__toc">
+  <div class="visually-hidden">Hide table of contents sidebar</div>
+</label>
+
+
+
+<div class="page">
+  <header class="mobile-header">
+    <div class="header-left">
+      <label class="nav-overlay-icon" for="__navigation">
+        <div class="visually-hidden">Toggle site navigation sidebar</div>
+        <i class="icon"><svg><use href="#svg-menu"></use></svg></i>
+      </label>
+    </div>
+    <div class="header-center">
+      <a href="../index.html"><div class="brand">Release 0.1.0</div></a>
+    </div>
+    <div class="header-right">
+      <div class="theme-toggle-container theme-toggle-header">
+        <button class="theme-toggle">
+          <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
+          <svg class="theme-icon-when-auto"><use href="#svg-sun-half"></use></svg>
+          <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+          <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+        </button>
+      </div>
+      <label class="toc-overlay-icon toc-header-icon" for="__toc">
+        <div class="visually-hidden">Toggle table of contents sidebar</div>
+        <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+      </label>
+    </div>
+  </header>
+  <aside class="sidebar-drawer">
+    <div class="sidebar-container">
+      
+      <div class="sidebar-sticky"><a class="sidebar-brand centered" href="../index.html">
+  
+  <div class="sidebar-logo-container">
+    <img class="sidebar-logo" src="../_static/m_kappa_logo.png" alt="Logo"/>
+  </div>
+  
+  <span class="sidebar-brand-text">Release 0.1.0</span>
+  
+</a><form class="sidebar-search-container" method="get" action="../search.html" role="search">
+  <input class="sidebar-search" placeholder="Search" name="q" aria-label="Search">
+  <input type="hidden" name="check_keywords" value="yes">
+  <input type="hidden" name="area" value="default">
+</form>
+<div id="searchbox"></div><div class="sidebar-scroll"><div class="sidebar-tree">
+  <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../getting_started.html">Getting Started</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../examples/index.html">Examples</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../examples/m_kappa_UPE.html">Single span slim-floor beam with :math:`M`-:math:`\kappa`-curve</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../examples/m_n_kappa_UPE.html">Single span slim-floor beam with :math:`M`-:math:`N`-:math:`\kappa`-curve</a></li>
+</ul>
+</li>
+<li class="toctree-l1 current has-children"><a class="reference internal" href="index.html">Theory guide</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" role="switch" type="checkbox"/><label for="toctree-checkbox-2"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="symbols.html">Symbols</a></li>
+<li class="toctree-l2"><a class="reference internal" href="coordinates.html">Coordinates</a></li>
+<li class="toctree-l2"><a class="reference internal" href="units.html">Units</a></li>
+<li class="toctree-l2"><a class="reference internal" href="general.html">General</a></li>
+<li class="toctree-l2"><a class="reference internal" href="geometries.html">Geometry</a></li>
+<li class="toctree-l2 current current-page"><a class="current reference internal" href="#">Materials</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sections.html">Sections and cross-sections</a></li>
+<li class="toctree-l2"><a class="reference internal" href="strain_based_design.html">Strain based design</a></li>
+<li class="toctree-l2"><a class="reference internal" href="m_kappa_curve.html"><span class="math notranslate nohighlight">\(M\)</span>-<span class="math notranslate nohighlight">\(\kappa\)</span>-curve</a></li>
+<li class="toctree-l2"><a class="reference internal" href="effective_widths.html">Effective widths</a></li>
+<li class="toctree-l2"><a class="reference internal" href="loading.html">Loading</a></li>
+<li class="toctree-l2"><a class="reference internal" href="deformations.html">Deformations</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../verification/index.html">Verification</a><input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" role="switch" type="checkbox"/><label for="toctree-checkbox-3"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="simple">
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Development</span></p>
+<ul>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../api.html">API reference</a><input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" role="switch" type="checkbox"/><label for="toctree-checkbox-4"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../api/m_n_kappa.Geometry.html">m_n_kappa.Geometry</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api/m_n_kappa.Rectangle.html">m_n_kappa.Rectangle</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api/m_n_kappa.Circle.html">m_n_kappa.Circle</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api/m_n_kappa.Trapezoid.html">m_n_kappa.Trapezoid</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api/m_n_kappa.geometry.ComposedGeometry.html">m_n_kappa.geometry.ComposedGeometry</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api/m_n_kappa.IProfile.html">m_n_kappa.IProfile</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api/m_n_kappa.UPEProfile.html">m_n_kappa.UPEProfile</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api/m_n_kappa.RebarLayer.html">m_n_kappa.RebarLayer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api/m_n_kappa.Material.html">m_n_kappa.Material</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api/m_n_kappa.Concrete.html">m_n_kappa.Concrete</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api/m_n_kappa.Steel.html">m_n_kappa.Steel</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api/m_n_kappa.Reinforcement.html">m_n_kappa.Reinforcement</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api/m_n_kappa.Section.html">m_n_kappa.Section</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api/m_n_kappa.Crosssection.html">m_n_kappa.Crosssection</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api/m_n_kappa.MKappaByStrainPosition.html">m_n_kappa.MKappaByStrainPosition</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api/m_n_kappa.MKappaByConstantCurvature.html">m_n_kappa.MKappaByConstantCurvature</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api/m_n_kappa.MKappaCurve.html">m_n_kappa.MKappaCurve</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api/m_n_kappa.curves_m_kappa.MKappaCurvePoint.html">m_n_kappa.curves_m_kappa.MKappaCurvePoint</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api/m_n_kappa.curves_m_kappa.MKappaCurvePoints.html">m_n_kappa.curves_m_kappa.MKappaCurvePoints</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api/m_n_kappa.SingleSpanUniformLoad.html">m_n_kappa.SingleSpanUniformLoad</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api/m_n_kappa.SingleLoad.html">m_n_kappa.SingleLoad</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api/m_n_kappa.SingleSpanSingleLoads.html">m_n_kappa.SingleSpanSingleLoads</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api/m_n_kappa.SingleSpan.html">m_n_kappa.SingleSpan</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api/m_n_kappa.Beam.html">m_n_kappa.Beam</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api/m_n_kappa.Node.html">m_n_kappa.Node</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../api_developers.html">API for developers</a><input class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" role="switch" type="checkbox"/><label for="toctree-checkbox-5"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../api/m_n_kappa.general.StrainPosition.html">m_n_kappa.general.StrainPosition</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api/m_n_kappa.general.EffectiveWidths.html">m_n_kappa.general.EffectiveWidths</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api/m_n_kappa.general.curvature.html">m_n_kappa.general.curvature</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api/m_n_kappa.general.curvature_by_points.html">m_n_kappa.general.curvature_by_points</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api/m_n_kappa.general.strain.html">m_n_kappa.general.strain</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api/m_n_kappa.general.position.html">m_n_kappa.general.position</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api/m_n_kappa.general.neutral_axis.html">m_n_kappa.general.neutral_axis</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api/m_n_kappa.general.remove_duplicates.html">m_n_kappa.general.remove_duplicates</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api/m_n_kappa.general.positive_sign.html">m_n_kappa.general.positive_sign</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api/m_n_kappa.general.negative_sign.html">m_n_kappa.general.negative_sign</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api/m_n_kappa.general.interpolation.html">m_n_kappa.general.interpolation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api/m_n_kappa.geometry.check_width.html">m_n_kappa.geometry.check_width</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api/m_n_kappa.material.StressStrain.html">m_n_kappa.material.StressStrain</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api/m_n_kappa.material.ConcreteCompression.html">m_n_kappa.material.ConcreteCompression</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api/m_n_kappa.material.ConcreteCompressionNonlinear.html">m_n_kappa.material.ConcreteCompressionNonlinear</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api/m_n_kappa.material.ConcreteCompressionParabolaRectangle.html">m_n_kappa.material.ConcreteCompressionParabolaRectangle</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api/m_n_kappa.material.ConcreteCompressionBiLinear.html">m_n_kappa.material.ConcreteCompressionBiLinear</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api/m_n_kappa.material.ConcreteTension.html">m_n_kappa.material.ConcreteTension</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api/m_n_kappa.section.Section.html">m_n_kappa.section.Section</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api/m_n_kappa.section.ComputationSection.html">m_n_kappa.section.ComputationSection</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api/m_n_kappa.section.ComputationSectionCurvature.html">m_n_kappa.section.ComputationSectionCurvature</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api/m_n_kappa.section.ComputationSectionStrain.html">m_n_kappa.section.ComputationSectionStrain</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api/m_n_kappa.crosssection.ComputationCrosssection.html">m_n_kappa.crosssection.ComputationCrosssection</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api/m_n_kappa.crosssection.ComputationCrosssectionStrain.html">m_n_kappa.crosssection.ComputationCrosssectionStrain</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api/m_n_kappa.crosssection.ComputationCrosssectionStrainAdd.html">m_n_kappa.crosssection.ComputationCrosssectionStrainAdd</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api/m_n_kappa.crosssection.ComputationCrosssectionCurvature.html">m_n_kappa.crosssection.ComputationCrosssectionCurvature</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api/m_n_kappa.crosssection.EdgeStrains.html">m_n_kappa.crosssection.EdgeStrains</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api/m_n_kappa.crosssection.CrossSectionBoundaries.html">m_n_kappa.crosssection.CrossSectionBoundaries</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api/m_n_kappa.crosssection.axial_force.html">m_n_kappa.crosssection.axial_force</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api/m_n_kappa.crosssection.moment.html">m_n_kappa.crosssection.moment</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api/m_n_kappa.crosssection.determine_curvatures.html">m_n_kappa.crosssection.determine_curvatures</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api/m_n_kappa.crosssection.compute_neutral_axis.html">m_n_kappa.crosssection.compute_neutral_axis</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api/m_n_kappa.curvature_boundaries.MaximumCurvature.html">m_n_kappa.curvature_boundaries.MaximumCurvature</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api/m_n_kappa.curvature_boundaries.MinimumCurvature.html">m_n_kappa.curvature_boundaries.MinimumCurvature</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api/m_n_kappa.curvature_boundaries.BoundaryValues.html">m_n_kappa.curvature_boundaries.BoundaryValues</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api/m_n_kappa.curvature_boundaries.Boundaries.html">m_n_kappa.curvature_boundaries.Boundaries</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api/m_n_kappa.curvature_boundaries.compute_curvatures.html">m_n_kappa.curvature_boundaries.compute_curvatures</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api/m_n_kappa.curvature_boundaries.remove_higher_strains.html">m_n_kappa.curvature_boundaries.remove_higher_strains</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api/m_n_kappa.curvature_boundaries.remove_smaller_strains.html">m_n_kappa.curvature_boundaries.remove_smaller_strains</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api/m_n_kappa.curvature_boundaries.get_lower_positions.html">m_n_kappa.curvature_boundaries.get_lower_positions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api/m_n_kappa.curvature_boundaries.get_higher_positions.html">m_n_kappa.curvature_boundaries.get_higher_positions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api/m_n_kappa.points.Computation.html">m_n_kappa.points.Computation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api/m_n_kappa.points.MKappa.html">m_n_kappa.points.MKappa</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api/m_n_kappa.solver.Solver.html">m_n_kappa.solver.Solver</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api/m_n_kappa.solver.Bisection.html">m_n_kappa.solver.Bisection</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api/m_n_kappa.solver.Newton.html">m_n_kappa.solver.Newton</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api/m_n_kappa.loading.ABCSingleSpan.html">m_n_kappa.loading.ABCSingleSpan</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../roadmap.html">Roadmap and To Do’s</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../contributing.html">Contributing</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../whatsnew/index.html">Release Notes</a><input class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" role="switch" type="checkbox"/><label for="toctree-checkbox-6"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../whatsnew/v0.1.0.html">What’s new in 0.1.0 (??. January 2023)</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../license.html">License</a></li>
+</ul>
+
+</div>
+</div>
+
+      </div>
+      
+    </div>
+  </aside>
+  <div class="main">
+    <div class="content">
+      <div class="article-container">
+        <a href="#" class="back-to-top muted-link">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12z"></path>
+          </svg>
+          <span>Back to top</span>
+        </a>
+        <div class="content-icon-container">
+          <div class="edit-this-page">
+  <a class="muted-link" href="https://github.com/JohannesSchorr/M-N-Kappa/edit/master/docs/source/theory/materials.rst" title="Edit this page">
+    <svg aria-hidden="true" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+      <path d="M4 20h4l10.5 -10.5a1.5 1.5 0 0 0 -4 -4l-10.5 10.5v4" />
+      <line x1="13.5" y1="6.5" x2="17.5" y2="10.5" />
+    </svg>
+    <span class="visually-hidden">Edit this page</span>
+  </a>
+</div><div class="theme-toggle-container theme-toggle-content">
+            <button class="theme-toggle">
+              <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
+              <svg class="theme-icon-when-auto"><use href="#svg-sun-half"></use></svg>
+              <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+              <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+            </button>
+          </div>
+          <label class="toc-overlay-icon toc-content-icon" for="__toc">
+            <div class="visually-hidden">Toggle table of contents sidebar</div>
+            <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+          </label>
+        </div>
+        <article role="main">
+          <section id="materials">
+<span id="theory-materials"></span><h1>Materials<a class="headerlink" href="#materials" title="Permalink to this heading">#</a></h1>
+<section id="basic-functionality-concept-and-integration">
+<span id="theory-m-kappa-basis"></span><h2>Basic functionality, concept and integration<a class="headerlink" href="#basic-functionality-concept-and-integration" title="Permalink to this heading">#</a></h2>
+<p>In steel-concrete composite structures <a class="reference internal" href="#theory-materials-concrete"><span class="std std-ref">Concrete</span></a>, <a class="reference internal" href="#theory-materials-steel"><span class="std std-ref">Steel</span></a> and
+<a class="reference internal" href="#theory-materials-reinforcement"><span class="std std-ref">Reinforcement</span></a> are relevant materials.
+For these materials sophisticated material models are available to describe their behaviour under loading
+(see for example formula <a class="reference internal" href="#equation-eq-theory-materials-concrete-compression-nonlinear">(3)</a>).</p>
+<p>For integration into the program these – in part discrete – formulas need to be abstracted to multi-linear
+stress-strain relationships.</p>
+</section>
+<section id="concrete">
+<span id="theory-materials-concrete"></span><h2>Concrete<a class="headerlink" href="#concrete" title="Permalink to this heading">#</a></h2>
+<section id="general">
+<span id="theory-materials-concrete-general"></span><h3>General<a class="headerlink" href="#general" title="Permalink to this heading">#</a></h3>
+<p>Concrete is in general characterised by it class.
+The classes describe the characteristic concrete compressive strength <span class="math notranslate nohighlight">\(f_\mathrm{ck}\)</span>.
+Following <span id="id1">EN 1992-1-1 [<a class="reference internal" href="#id12" title="EN 1992-1-1. Eurocode 2: design of concrete structures - part 1-1: general rules and rules for buildings. 2004.">1</a>]</span> most of the mechanical characteristic are derived from <span class="math notranslate nohighlight">\(f_\mathrm{ck}\)</span>.</p>
+<p>The mean concrete compressive strength <span class="math notranslate nohighlight">\(f_\mathrm{cm}\)</span> according to <span id="id2">EN 1992-1-1 [<a class="reference internal" href="#id12" title="EN 1992-1-1. Eurocode 2: design of concrete structures - part 1-1: general rules and rules for buildings. 2004.">1</a>]</span> is given in formula
+<a class="reference internal" href="#equation-eq-theory-materials-f-cm">(1)</a>.</p>
+<div class="math-wrapper docutils container" id="equation-eq-theory-materials-f-cm">
+<div class="math notranslate nohighlight" id="equation-eq-theory-materials-f-cm">
+<span class="eqno">(1)<a class="headerlink" href="#equation-eq-theory-materials-f-cm" title="Permalink to this equation">#</a></span>\[f_\mathrm{cm} = f_\mathrm{ck} + 8 \text{ in N/mm²}\]</div>
+</div>
+<p>The modulus of elasticity <span class="math notranslate nohighlight">\(E_\mathrm{cm}\)</span> by <span id="id3">EN 1992-1-1 [<a class="reference internal" href="#id12" title="EN 1992-1-1. Eurocode 2: design of concrete structures - part 1-1: general rules and rules for buildings. 2004.">1</a>]</span> is given in formula
+<a class="reference internal" href="#equation-eq-theory-materials-e-cm">(2)</a>.</p>
+<div class="math-wrapper docutils container" id="equation-eq-theory-materials-e-cm">
+<div class="math notranslate nohighlight" id="equation-eq-theory-materials-e-cm">
+<span class="eqno">(2)<a class="headerlink" href="#equation-eq-theory-materials-e-cm" title="Permalink to this equation">#</a></span>\[E_\mathrm{cm} = 22000 \cdot \left(\frac{f_\mathrm{cm}}{10} \right)^{0.3}\]</div>
+</div>
+</section>
+<section id="compression">
+<span id="theory-materials-concrete-compression"></span><h3>Compression<a class="headerlink" href="#compression" title="Permalink to this heading">#</a></h3>
+<section id="introduction">
+<span id="theory-materials-concrete-intro"></span><h4>Introduction<a class="headerlink" href="#introduction" title="Permalink to this heading">#</a></h4>
+<p><span id="id4">EN 1992-1-1 [<a class="reference internal" href="#id12" title="EN 1992-1-1. Eurocode 2: design of concrete structures - part 1-1: general rules and rules for buildings. 2004.">1</a>]</span> provides three material models to define the stress-strain-relationship of concrete in
+compression.
+These are <a class="reference internal" href="#theory-materials-concrete-compression-nonlinear"><span class="std std-ref">Stress-strain-relationship for non-linear determination of stress-resultants and deformations</span></a>, <a class="reference internal" href="#theory-materials-concrete-compression-parabola"><span class="std std-ref">Parabola-rectangle stress-strain-relationship for section-design</span></a>
+and <a class="reference internal" href="#theory-materials-concrete-compression-bi-linear"><span class="std std-ref">Bi-linear stress-strain-relationship for section-design</span></a>.
+Every of these three stress-strain-relationships of the concrete according to <span id="id5">EN 1992-1-1 [<a class="reference internal" href="#id12" title="EN 1992-1-1. Eurocode 2: design of concrete structures - part 1-1: general rules and rules for buildings. 2004.">1</a>]</span> is implemented
+in <a class="reference internal" href="../api/m_n_kappa.Concrete.html#m_n_kappa.Concrete" title="m_n_kappa.Concrete"><code class="xref py py-class docutils literal notranslate"><span class="pre">Concrete</span></code></a> and may be chosen argument <code class="docutils literal notranslate"><span class="pre">compression_stress_strain_type</span></code>.</p>
+</section>
+<section id="stress-strain-relationship-for-non-linear-determination-of-stress-resultants-and-deformations">
+<span id="theory-materials-concrete-compression-nonlinear"></span><h4>Stress-strain-relationship for non-linear determination of stress-resultants and deformations<a class="headerlink" href="#stress-strain-relationship-for-non-linear-determination-of-stress-resultants-and-deformations" title="Permalink to this heading">#</a></h4>
+<figure class="align-default">
+<img alt="../_images/material_concrete_nonlinear-light.svg" class="only-light" src="../_images/material_concrete_nonlinear-light.svg" /></figure>
+<figure class="align-default" id="id19">
+<img alt="../_images/material_concrete_nonlinear-dark.svg" class="only-dark" src="../_images/material_concrete_nonlinear-dark.svg" /><figcaption>
+<p><span class="caption-text">Non-linear stress-strain-relationship of concrete under compression acc. <span id="id6">EN 1992-1-1 [<a class="reference internal" href="#id12" title="EN 1992-1-1. Eurocode 2: design of concrete structures - part 1-1: general rules and rules for buildings. 2004.">1</a>]</span></span><a class="headerlink" href="#id19" title="Permalink to this image">#</a></p>
+</figcaption>
+</figure>
+<p>The stresses according to the non-linear determination of stress-resultants and deformations are computed by
+formula <a class="reference internal" href="#equation-eq-theory-materials-concrete-compression-nonlinear">(3)</a> in the range
+<span class="math notranslate nohighlight">\(0 &lt; | \varepsilon_\mathrm{c1} | &lt; | \varepsilon_\mathrm{cu1} |\)</span>.</p>
+<div class="math-wrapper docutils container" id="equation-eq-theory-materials-concrete-compression-nonlinear">
+<div class="math notranslate nohighlight" id="equation-eq-theory-materials-concrete-compression-nonlinear">
+<span class="eqno">(3)<a class="headerlink" href="#equation-eq-theory-materials-concrete-compression-nonlinear" title="Permalink to this equation">#</a></span>\[\sigma_\mathrm{c} = \frac{k \cdot \eta - \eta^{2}}{1 + (k - 2) \cdot \eta} \cdot f_\mathrm{cm}\]</div>
+</div>
+<p>Where:</p>
+<div class="math-wrapper docutils container">
+<div class="math notranslate nohighlight">
+\[ \begin{align}\begin{aligned}\eta &amp; = \varepsilon_\mathrm{c} / \varepsilon_\mathrm{c1}\\\varepsilon_\mathrm{c1} &amp; = 0.7 \cdot f_\mathrm{cm}^{0.31} \leq 2.8\\k &amp; = 1.05 \cdot E_\mathrm{cm} \cdot | \varepsilon_\mathrm{c1} | / f_\mathrm{cm}\\\varepsilon_\mathrm{cu1} &amp; = 2.8 + 27 \cdot \left[\frac{98-f_\mathrm{cm}}{100}\right]^{4}\end{aligned}\end{align} \]</div>
+</div>
+<p><span class="math notranslate nohighlight">\(\varepsilon_\mathrm{c1}\)</span> is the strain at maximum stress, whereas <span class="math notranslate nohighlight">\(\varepsilon_\mathrm{cu1}\)</span> is the
+strain at failure.</p>
+<p>The above given nonlinear stress-strain-relationship is implemented by passing
+<code class="docutils literal notranslate"><span class="pre">compression_stress_strain_type='Nonlinear'</span></code> to <a class="reference internal" href="../api/m_n_kappa.Concrete.html#m_n_kappa.Concrete" title="m_n_kappa.Concrete"><code class="xref py py-class docutils literal notranslate"><span class="pre">Concrete</span></code></a>.
+Formula <a class="reference internal" href="#equation-eq-theory-materials-concrete-compression-nonlinear">(3)</a> is approximated by a multi-linear curve in
+<a class="reference internal" href="../api/m_n_kappa.Concrete.html#m_n_kappa.Concrete" title="m_n_kappa.Concrete"><code class="xref py py-class docutils literal notranslate"><span class="pre">Concrete</span></code></a>.</p>
+</section>
+<section id="parabola-rectangle-stress-strain-relationship-for-section-design">
+<span id="theory-materials-concrete-compression-parabola"></span><h4>Parabola-rectangle stress-strain-relationship for section-design<a class="headerlink" href="#parabola-rectangle-stress-strain-relationship-for-section-design" title="Permalink to this heading">#</a></h4>
+<figure class="align-default">
+<img alt="../_images/material_concrete_parabola_rectangle-light.svg" class="only-light" src="../_images/material_concrete_parabola_rectangle-light.svg" /></figure>
+<figure class="align-default" id="id20">
+<img alt="../_images/material_concrete_parabola_rectangle-dark.svg" class="only-dark" src="../_images/material_concrete_parabola_rectangle-dark.svg" /><figcaption>
+<p><span class="caption-text">Parabola-Rectangle stress-strain-relationship of concrete under compression acc. <span id="id7">EN 1992-1-1 [<a class="reference internal" href="#id12" title="EN 1992-1-1. Eurocode 2: design of concrete structures - part 1-1: general rules and rules for buildings. 2004.">1</a>]</span></span><a class="headerlink" href="#id20" title="Permalink to this image">#</a></p>
+</figcaption>
+</figure>
+<div class="math-wrapper docutils container" id="equation-eq-theory-materials-concrete-compression-parabola">
+<div class="math notranslate nohighlight" id="equation-eq-theory-materials-concrete-compression-parabola">
+<span class="eqno">(4)<a class="headerlink" href="#equation-eq-theory-materials-concrete-compression-parabola" title="Permalink to this equation">#</a></span>\[ \begin{align}\begin{aligned}\sigma_\mathrm{c} &amp; = f_\mathrm{ck} \cdot \left[1 - \left(1 - \frac{\varepsilon_\mathrm{c}}{\varepsilon_\mathrm{c2}} \right)^{n} \right] &amp; &amp; \text{ for } 0 \leq \varepsilon_\mathrm{c} \leq \varepsilon_\mathrm{c2}\\\sigma_\mathrm{c} &amp; = f_\mathrm{ck} &amp; &amp; \text{ for } \varepsilon_\mathrm{c2} \leq \varepsilon_\mathrm{c} \leq \varepsilon_\mathrm{cu2}\end{aligned}\end{align} \]</div>
+</div>
+<p>where</p>
+<div class="math-wrapper docutils container">
+<div class="math notranslate nohighlight">
+\[ \begin{align}\begin{aligned}\varepsilon_\mathrm{c2} &amp; = 2.0 + 0.085 \cdot (f_\mathrm{ck} - 50)^{0.53}\\\varepsilon_\mathrm{cu2} &amp; = 2.6 + 35 \cdot \left[\frac{90 - f_\mathrm{ck}}{100}\right]^{4}\\n &amp; = 1.4 + 23.4 \cdot \left[\frac{90 - f_\mathrm{ck}}{100}\right]^{4}\end{aligned}\end{align} \]</div>
+</div>
+<p><span class="math notranslate nohighlight">\(\varepsilon_\mathrm{c2}\)</span> is the strain at maximum stress and <span class="math notranslate nohighlight">\(\varepsilon_\mathrm{cu2}\)</span> is the strain at failure.</p>
+<p>This stress-strain-relationship is applied by passing <code class="docutils literal notranslate"><span class="pre">compression_stress_strain_type='Parabola'</span></code> to <a class="reference internal" href="../api/m_n_kappa.Concrete.html#m_n_kappa.Concrete" title="m_n_kappa.Concrete"><code class="xref py py-class docutils literal notranslate"><span class="pre">Concrete</span></code></a>.</p>
+</section>
+<section id="bi-linear-stress-strain-relationship-for-section-design">
+<span id="theory-materials-concrete-compression-bi-linear"></span><h4>Bi-linear stress-strain-relationship for section-design<a class="headerlink" href="#bi-linear-stress-strain-relationship-for-section-design" title="Permalink to this heading">#</a></h4>
+<figure class="align-default">
+<img alt="../_images/material_concrete_bilinear-light.svg" class="only-light" src="../_images/material_concrete_bilinear-light.svg" /></figure>
+<figure class="align-default" id="id21">
+<img alt="../_images/material_concrete_bilinear-dark.svg" class="only-dark" src="../_images/material_concrete_bilinear-dark.svg" /><figcaption>
+<p><span class="caption-text">Bi-linear stress-strain-relationship of concrete under compression acc. <span id="id8">EN 1992-1-1 [<a class="reference internal" href="#id12" title="EN 1992-1-1. Eurocode 2: design of concrete structures - part 1-1: general rules and rules for buildings. 2004.">1</a>]</span></span><a class="headerlink" href="#id21" title="Permalink to this image">#</a></p>
+</figcaption>
+</figure>
+<div class="math-wrapper docutils container" id="equation-eq-theory-materials-concrete-compression-bi-linear">
+<div class="math notranslate nohighlight" id="equation-eq-theory-materials-concrete-compression-bi-linear">
+<span class="eqno">(5)<a class="headerlink" href="#equation-eq-theory-materials-concrete-compression-bi-linear" title="Permalink to this equation">#</a></span>\[ \begin{align}\begin{aligned}\sigma_\mathrm{c} &amp; = f_\mathrm{ck} \cdot \frac{\varepsilon_\mathrm{c}}{\varepsilon_\mathrm{c2}} &amp; &amp; \text{ for } 0 \leq \varepsilon_\mathrm{c} \leq \varepsilon_\mathrm{c3}\\\sigma_\mathrm{c} &amp; = f_\mathrm{ck} &amp; &amp; \text{ for } \varepsilon_\mathrm{c3} \leq \varepsilon_\mathrm{c} \leq \varepsilon_\mathrm{cu3}\end{aligned}\end{align} \]</div>
+</div>
+<p>where</p>
+<div class="math-wrapper docutils container">
+<div class="math notranslate nohighlight">
+\[ \begin{align}\begin{aligned}\varepsilon_\mathrm{c3} &amp; = 1.75 + 0.55 \cdot (\frac{f_\mathrm{ck} - 50}{40})\\\varepsilon_\mathrm{cu3} &amp; = \varepsilon_\mathrm{cu2}\end{aligned}\end{align} \]</div>
+</div>
+<p>The bi-linear stress-strain-relationship is applied by passing <code class="docutils literal notranslate"><span class="pre">compression_stress_strain_type='Bilinear'</span></code> to <a class="reference internal" href="../api/m_n_kappa.Concrete.html#m_n_kappa.Concrete" title="m_n_kappa.Concrete"><code class="xref py py-class docutils literal notranslate"><span class="pre">Concrete</span></code></a>.</p>
+</section>
+</section>
+<section id="tension">
+<span id="theory-materials-concrete-tension"></span><h3>Tension<a class="headerlink" href="#tension" title="Permalink to this heading">#</a></h3>
+<figure class="align-default">
+<img alt="../_images/material_concrete_tension-light.svg" class="only-light" src="../_images/material_concrete_tension-light.svg" /></figure>
+<figure class="align-default" id="id22">
+<img alt="../_images/material_concrete_tension-dark.svg" class="only-dark" src="../_images/material_concrete_tension-dark.svg" /><figcaption>
+<p><span class="caption-text">Stress-strain-relationship of concrete under tension</span><a class="headerlink" href="#id22" title="Permalink to this image">#</a></p>
+</figcaption>
+</figure>
+<p>For a realistic load-carrying behaviour of the concrete the behaviour under tension is crucial.</p>
+<p>If the tensile strength of the concrete <span class="math notranslate nohighlight">\(f_\mathrm{ctm}\)</span> is not given, it may be computed by formula
+<a class="reference internal" href="#equation-eq-theory-materials-concrete-f-ctm">(6)</a>.</p>
+<div class="math-wrapper docutils container" id="equation-eq-theory-materials-concrete-f-ctm">
+<div class="math notranslate nohighlight" id="equation-eq-theory-materials-concrete-f-ctm">
+<span class="eqno">(6)<a class="headerlink" href="#equation-eq-theory-materials-concrete-f-ctm" title="Permalink to this equation">#</a></span>\[ \begin{align}\begin{aligned}f_\mathrm{ctm} &amp; = 0.3 \cdot f_\mathrm{ck}^{2/3} &amp; &amp; \leq \text{ C50/60}\\f_\mathrm{ctm} &amp; = 2.12 \cdot \ln\left[1 + \frac{f_\mathrm{cm}}{10}\right] &amp; &amp; &gt; \text{ C50/60}\end{aligned}\end{align} \]</div>
+</div>
+<p>The strain when <span class="math notranslate nohighlight">\(f_\mathrm{ctm}\)</span> is reached may than be computed by formula <a class="reference internal" href="#equation-eq-theory-materials-concrete-epsilon-ct">(7)</a>.</p>
+<div class="math-wrapper docutils container" id="equation-eq-theory-materials-concrete-epsilon-ct">
+<div class="math notranslate nohighlight" id="equation-eq-theory-materials-concrete-epsilon-ct">
+<span class="eqno">(7)<a class="headerlink" href="#equation-eq-theory-materials-concrete-epsilon-ct" title="Permalink to this equation">#</a></span>\[\varepsilon_\mathrm{ct} = \frac{f_\mathrm{ctm}}{E_\mathrm{cm}}\]</div>
+</div>
+<p>where <span class="math notranslate nohighlight">\(E_\mathrm{cm}\)</span> is the modulus of elasticity according to formula <a class="reference internal" href="#equation-eq-theory-materials-e-cm">(2)</a>.</p>
+<p>As soon as the strain reaches <span class="math notranslate nohighlight">\(\varepsilon_\mathrm{ctm}\)</span> the concrete starts to break.
+Different post-failure behaviours are possible in <a class="reference internal" href="../api/m_n_kappa.Concrete.html#m_n_kappa.Concrete" title="m_n_kappa.Concrete"><code class="xref py py-class docutils literal notranslate"><span class="pre">Concrete</span></code></a> if <span class="math notranslate nohighlight">\(\varepsilon_\mathrm{c} &gt; \varepsilon_\mathrm{ct}\)</span>.</p>
+<ol class="arabic simple">
+<li><p>The resisting stresses drop immediately to <span class="math notranslate nohighlight">\(\sigma_\mathrm{c} = 0\)</span>.</p></li>
+<li><p>The crack-opening behaviour follows the recommendations by <span id="id9">fib Model Code 2010 [<a class="reference internal" href="#id15" title="fib Model Code 2010. Fib model code for concrete structures 2010. 2013.">2</a>]</span>.</p></li>
+</ol>
+<p><span id="id10">fib Model Code 2010 [<a class="reference internal" href="#id15" title="fib Model Code 2010. Fib model code for concrete structures 2010. 2013.">2</a>]</span> defines the crack-opening behaviour as described in formula <a class="reference internal" href="#equation-eq-theory-materials-concrete-crack-opening">(9)</a>.</p>
+<div class="math-wrapper docutils container" id="equation-eq-theory-materials-concrete-tensile">
+<div class="math notranslate nohighlight" id="equation-eq-theory-materials-concrete-tensile">
+<span class="eqno">(8)<a class="headerlink" href="#equation-eq-theory-materials-concrete-tensile" title="Permalink to this equation">#</a></span>\[ \begin{align}\begin{aligned}\sigma_\mathrm{ct} &amp; = f_\mathrm{ctm} \cdot \left(1.0 - 0.8 \cdot \frac{w}{w_1}\right) &amp; &amp; \text{ for } w \leq w_1\\\sigma_\mathrm{ct} &amp; = f_\mathrm{ctm} \cdot \left(0.25 - 0.05 \cdot \frac{w}{w_1}\right) &amp; &amp; \text{ for } w_1 &lt; w \leq w_\mathrm{c}\end{aligned}\end{align} \]</div>
+</div>
+<p>where <span class="math notranslate nohighlight">\(w\)</span> is the crack opening in mm and <span class="math notranslate nohighlight">\(w_1\)</span> and <span class="math notranslate nohighlight">\(w_\mathrm{c}\)</span> are defined in <code class="xref math math-numref docutils literal notranslate"><span class="pre">theory.materials.concrete_crack_opening_values</span></code>.</p>
+<div class="math-wrapper docutils container" id="equation-eq-theory-materials-concrete-crack-opening">
+<div class="math notranslate nohighlight" id="equation-eq-theory-materials-concrete-crack-opening">
+<span class="eqno">(9)<a class="headerlink" href="#equation-eq-theory-materials-concrete-crack-opening" title="Permalink to this equation">#</a></span>\[ \begin{align}\begin{aligned}w_1 &amp; = \frac{G_\mathrm{f}}{f_\mathrm{ctm}} &amp; &amp; \text{ if } \sigma_\mathrm{ct} = 0.2 \cdot f_\mathrm{ctm}\\w_\mathrm{c} &amp; = 5 \cdot \frac{G_\mathrm{f}}{f_\mathrm{ctm}} &amp; &amp; \text{ if } \sigma_\mathrm{ct} = 0\end{aligned}\end{align} \]</div>
+</div>
+<p>The fracture energy <span class="math notranslate nohighlight">\(G_\mathrm{F}\)</span> is computed by <a class="reference internal" href="#equation-eq-theory-materials-concrete-fracture-energy">(10)</a>.</p>
+<div class="math-wrapper docutils container" id="equation-eq-theory-materials-concrete-fracture-energy">
+<div class="math notranslate nohighlight" id="equation-eq-theory-materials-concrete-fracture-energy">
+<span class="eqno">(10)<a class="headerlink" href="#equation-eq-theory-materials-concrete-fracture-energy" title="Permalink to this equation">#</a></span>\[G_\mathrm{F} = 73 \cdot f_\mathrm{cm}^{0.18}\]</div>
+</div>
+<p>where <span class="math notranslate nohighlight">\(f_\mathrm{cm}\)</span> is the mean concrete compressive strength in N/mm².</p>
+<p>The crack opening is considered by passing <code class="docutils literal notranslate"><span class="pre">tension_stress_strain_type='consider</span> <span class="pre">opening</span> <span class="pre">behaviour'</span></code> to py:class:<cite>~m_n_kappa.Concrete</cite>.</p>
+</section>
+</section>
+<section id="steel">
+<span id="theory-materials-steel"></span><h2>Steel<a class="headerlink" href="#steel" title="Permalink to this heading">#</a></h2>
+<p>The stress-strain-relationship of structural steel is assumed to be point-symmetric around the origin.
+It may may be determined by one of following three ways:</p>
+<ol class="arabic">
+<li><p>Linear-elastic behaviour <span class="math notranslate nohighlight">\(\sigma_\mathrm{a} = \varepsilon_\mathrm{a} \cdot E_\mathrm{a}\)</span>.</p>
+<p>Achieved if <code class="docutils literal notranslate"><span class="pre">f_u</span> <span class="pre">=</span> <span class="pre">None</span></code> and <code class="docutils literal notranslate"><span class="pre">epsilon_u</span> <span class="pre">=</span> <span class="pre">None</span></code> are passed to <a class="reference internal" href="../api/m_n_kappa.Steel.html#m_n_kappa.Steel" title="m_n_kappa.Steel"><code class="xref py py-class docutils literal notranslate"><span class="pre">Steel</span></code></a>.</p>
+</li>
+<li><p>Bi-linear behaviour where <span class="math notranslate nohighlight">\(f_\mathrm{y} = f_\mathrm{u}\)</span></p>
+<div class="math-wrapper docutils container" id="equation-eq-theory-materials-steel-bilinear">
+<div class="math notranslate nohighlight" id="equation-eq-theory-materials-steel-bilinear">
+<span class="eqno">(11)<a class="headerlink" href="#equation-eq-theory-materials-steel-bilinear" title="Permalink to this equation">#</a></span>\[ \begin{align}\begin{aligned}\sigma_\mathrm{a} &amp; = \varepsilon_\mathrm{a} \cdot E_\mathrm{a} &amp; &amp; \text{ if } 0 &lt; | \varepsilon_\mathrm{a} | \leq | \varepsilon_\mathrm{y} |\\\sigma_\mathrm{a} &amp; = f_\mathrm{y} &amp; &amp; \text{ if } | \frac{f_\mathrm{y}}{E_\mathrm{a}} | &lt; | \varepsilon_\mathrm{a} | &lt; | \varepsilon_\mathrm{u} |\end{aligned}\end{align} \]</div>
+</div>
+<p>where <span class="math notranslate nohighlight">\(f_\mathrm{y}\)</span> is the yield strength of the steel and <span class="math notranslate nohighlight">\(\varepsilon_\mathrm{y} = \frac{f_\mathrm{y}}{E_\mathrm{a}}\)</span>
+is the strain at yielding and <span class="math notranslate nohighlight">\(\varepsilon_\mathrm{u}\)</span> is the strain at failure.</p>
+<p>Achieved if and <code class="docutils literal notranslate"><span class="pre">epsilon_u</span> <span class="pre">!=</span> <span class="pre">None</span></code> is passed to <a class="reference internal" href="../api/m_n_kappa.Steel.html#m_n_kappa.Steel" title="m_n_kappa.Steel"><code class="xref py py-class docutils literal notranslate"><span class="pre">Steel</span></code></a>.</p>
+</li>
+<li><p>Bi-linear behaviour where <span class="math notranslate nohighlight">\(f_\mathrm{y} &lt; f_\mathrm{u}\)</span></p>
+<div class="math-wrapper docutils container" id="equation-eq-theory-materials-steel-bilinear-2">
+<div class="math notranslate nohighlight" id="equation-eq-theory-materials-steel-bilinear-2">
+<span class="eqno">(12)<a class="headerlink" href="#equation-eq-theory-materials-steel-bilinear-2" title="Permalink to this equation">#</a></span>\[ \begin{align}\begin{aligned}\sigma_\mathrm{a} &amp; = \varepsilon_\mathrm{a} \cdot E_\mathrm{a} &amp; &amp; \text{ if } 0 &lt; | \varepsilon_\mathrm{a} | \leq | \varepsilon_\mathrm{y} |\\\sigma_\mathrm{a} &amp; = f_\mathrm{y} + (f_\mathrm{u} - f_\mathrm{y}) \cdot \frac{\varepsilon_\mathrm{a} - \varepsilon_\mathrm{y}}{\varepsilon_\mathrm{u} - \varepsilon_\mathrm{y}} &amp; &amp; \text{ if } | \varepsilon_\mathrm{y} | &lt; | \varepsilon_\mathrm{a} | &lt; | \varepsilon_\mathrm{u} |\end{aligned}\end{align} \]</div>
+</div>
+<p>where <span class="math notranslate nohighlight">\(f_\mathrm{y}\)</span> is the yield strength of the steel, <span class="math notranslate nohighlight">\(\varepsilon_\mathrm{y} = \frac{f_\mathrm{y}}{E_\mathrm{a}}\)</span>
+is the strain at yielding, <span class="math notranslate nohighlight">\(\varepsilon_\mathrm{u}\)</span> is the strain at failure and
+<span class="math notranslate nohighlight">\(f_\mathrm{u}\)</span> is the stress at failure.</p>
+</li>
+</ol>
+<div class="sd-container-fluid sd-sphinx-override sd-mb-4 docutils">
+<div class="sd-row sd-row-cols-1 sd-row-cols-xs-1 sd-row-cols-sm-2 sd-row-cols-md-3 sd-row-cols-lg-3 docutils">
+<div class="sd-col sd-d-flex-column docutils">
+<figure class="align-default">
+<img alt="../_images/material_steel_elastic-light.svg" class="only-light" src="../_images/material_steel_elastic-light.svg" /></figure>
+<figure class="align-default" id="id23">
+<img alt="../_images/material_steel_elastic-dark.svg" class="only-dark" src="../_images/material_steel_elastic-dark.svg" /><figcaption>
+<p><span class="caption-text">Elastic stress-strain-relationship of steel</span><a class="headerlink" href="#id23" title="Permalink to this image">#</a></p>
+</figcaption>
+</figure>
+</div>
+<div class="sd-col sd-d-flex-column docutils">
+<figure class="align-default">
+<img alt="../_images/material_steel_bilinear-light.svg" class="only-light" src="../_images/material_steel_bilinear-light.svg" /></figure>
+<figure class="align-default">
+<img alt="../_images/material_steel_bilinear-dark.svg" class="only-dark" src="../_images/material_steel_bilinear-dark.svg" /></figure>
+<p>Bi-linear stress-strain-relationship of steel</p>
+</div>
+<div class="sd-col sd-d-flex-column docutils">
+<figure class="align-default">
+<img alt="../_images/material_steel_trilinear-light.svg" class="only-light" src="../_images/material_steel_trilinear-light.svg" /></figure>
+<figure class="align-default">
+<img alt="../_images/material_steel_trilinear-dark.svg" class="only-dark" src="../_images/material_steel_trilinear-dark.svg" /></figure>
+<p>Bi-linear stress-strain-relationship with hardening of steel</p>
+</div>
+</div>
+</div>
+<p>The above given three ways are implemented in <a class="reference internal" href="../api/m_n_kappa.Steel.html#m_n_kappa.Steel" title="m_n_kappa.Steel"><code class="xref py py-class docutils literal notranslate"><span class="pre">Steel</span></code></a>.</p>
+</section>
+<section id="reinforcement">
+<span id="theory-materials-reinforcement"></span><h2>Reinforcement<a class="headerlink" href="#reinforcement" title="Permalink to this heading">#</a></h2>
+<p>The characteristics of the stress-strain-relationship of reinforcement steel is similar to those of <a class="reference internal" href="#theory-materials-steel"><span class="std std-ref">Steel</span></a>.
+Solely the input-parameters change in <a class="reference internal" href="../api/m_n_kappa.Reinforcement.html#m_n_kappa.Reinforcement" title="m_n_kappa.Reinforcement"><code class="xref py py-class docutils literal notranslate"><span class="pre">Reinforcement</span></code></a> as follows:</p>
+<ul class="simple">
+<li><p>Yield strength <span class="math notranslate nohighlight">\(f_\mathrm{s}\)</span>: <code class="docutils literal notranslate"><span class="pre">f_s</span></code> (eqivalent to <code class="docutils literal notranslate"><span class="pre">f_y</span></code> in <a class="reference internal" href="../api/m_n_kappa.Steel.html#m_n_kappa.Steel" title="m_n_kappa.Steel"><code class="xref py py-class docutils literal notranslate"><span class="pre">Steel</span></code></a>)</p></li>
+<li><p>Failure strain <span class="math notranslate nohighlight">\(\varepsilon_\mathrm{su}\)</span>: <code class="docutils literal notranslate"><span class="pre">epsilon_su</span></code>  (eqivalent to <code class="docutils literal notranslate"><span class="pre">epsilon_u</span></code> in <a class="reference internal" href="../api/m_n_kappa.Steel.html#m_n_kappa.Steel" title="m_n_kappa.Steel"><code class="xref py py-class docutils literal notranslate"><span class="pre">Steel</span></code></a>)</p></li>
+<li><p>Failure strength <span class="math notranslate nohighlight">\(f_\mathrm{su}\)</span>: <code class="docutils literal notranslate"><span class="pre">f_su</span></code> (eqivalent to <code class="docutils literal notranslate"><span class="pre">f_u</span></code> in <a class="reference internal" href="../api/m_n_kappa.Steel.html#m_n_kappa.Steel" title="m_n_kappa.Steel"><code class="xref py py-class docutils literal notranslate"><span class="pre">Steel</span></code></a>)</p></li>
+</ul>
+<p class="rubric">References</p>
+<div class="docutils container" id="id11">
+<div class="citation" id="id12" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>1<span class="fn-bracket">]</span></span>
+<span class="backrefs">(<a role="doc-backlink" href="#id1">1</a>,<a role="doc-backlink" href="#id2">2</a>,<a role="doc-backlink" href="#id3">3</a>,<a role="doc-backlink" href="#id4">4</a>,<a role="doc-backlink" href="#id5">5</a>,<a role="doc-backlink" href="#id6">6</a>,<a role="doc-backlink" href="#id7">7</a>,<a role="doc-backlink" href="#id8">8</a>)</span>
+<p>EN 1992-1-1. Eurocode 2: design of concrete structures - part 1-1: general rules and rules for buildings. 2004.</p>
+</div>
+<div class="citation" id="id15" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>2<span class="fn-bracket">]</span></span>
+<span class="backrefs">(<a role="doc-backlink" href="#id9">1</a>,<a role="doc-backlink" href="#id10">2</a>)</span>
+<p>fib Model Code 2010. Fib model code for concrete structures 2010. 2013.</p>
+</div>
+</div>
+</div>
+</section>
+</section>
+
+        </article>
+      </div>
+      <footer>
+        
+        <div class="related-pages">
+          <a class="next-page" href="sections.html">
+              <div class="page-info">
+                <div class="context">
+                  <span>Next</span>
+                </div>
+                <div class="title">Sections and cross-sections</div>
+              </div>
+              <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
+            </a>
+          <a class="prev-page" href="geometries.html">
+              <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
+              <div class="page-info">
+                <div class="context">
+                  <span>Previous</span>
+                </div>
+                
+                <div class="title">Geometry</div>
+                
+              </div>
+            </a>
+        </div>
+        <div class="bottom-of-page">
+          <div class="left-details">
+            <div class="copyright">
+                Copyright &#169; 2023, Johannes Schorr
+            </div>
+            Made with <a href="https://www.sphinx-doc.org/">Sphinx</a> and <a class="muted-link" href="https://pradyunsg.me">@pradyunsg</a>'s
+            
+            <a href="https://github.com/pradyunsg/furo">Furo</a>
+            
+          </div>
+          <div class="right-details">
+            
+          </div>
+        </div>
+        
+      </footer>
+    </div>
+    <aside class="toc-drawer">
+      
+      
+      <div class="toc-sticky toc-scroll">
+        <div class="toc-title-container">
+          <span class="toc-title">
+            On this page
+          </span>
+        </div>
+        <div class="toc-tree-container">
+          <div class="toc-tree">
+            <ul>
+<li><a class="reference internal" href="#">Materials</a><ul>
+<li><a class="reference internal" href="#basic-functionality-concept-and-integration">Basic functionality, concept and integration</a></li>
+<li><a class="reference internal" href="#concrete">Concrete</a><ul>
+<li><a class="reference internal" href="#general">General</a></li>
+<li><a class="reference internal" href="#compression">Compression</a><ul>
+<li><a class="reference internal" href="#introduction">Introduction</a></li>
+<li><a class="reference internal" href="#stress-strain-relationship-for-non-linear-determination-of-stress-resultants-and-deformations">Stress-strain-relationship for non-linear determination of stress-resultants and deformations</a></li>
+<li><a class="reference internal" href="#parabola-rectangle-stress-strain-relationship-for-section-design">Parabola-rectangle stress-strain-relationship for section-design</a></li>
+<li><a class="reference internal" href="#bi-linear-stress-strain-relationship-for-section-design">Bi-linear stress-strain-relationship for section-design</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#tension">Tension</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#steel">Steel</a></li>
+<li><a class="reference internal" href="#reinforcement">Reinforcement</a></li>
+</ul>
+</li>
+</ul>
+
+          </div>
+        </div>
+      </div>
+      
+      
+    </aside>
+  </div>
+</div><script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/sphinx_highlight.js"></script>
+    <script src="../_static/scripts/furo.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script src="../_static/toggleprompt.js"></script>
+    <script src="../_static/design-tabs.js"></script>
+    <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    </body>
+</html>

@@ -1,0 +1,31 @@
+﻿m\_n\_kappa.curvature\_boundaries.MinimumCurvature
+==================================================
+
+.. currentmodule:: m_n_kappa.curvature_boundaries
+
+.. autoclass:: MinimumCurvature
+
+   
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      ~MinimumCurvature.__init__
+      ~MinimumCurvature.compute
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+   
+      ~MinimumCurvature.negative
+      ~MinimumCurvature.positive
+      ~MinimumCurvature.maximum_positive_section_strains
+      ~MinimumCurvature.maximum_negative_section_strains
+      ~MinimumCurvature.curvature_is_positive
+   
+   

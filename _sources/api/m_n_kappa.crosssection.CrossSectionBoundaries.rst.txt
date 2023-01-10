@@ -1,0 +1,46 @@
+﻿m\_n\_kappa.crosssection.CrossSectionBoundaries
+===============================================
+
+.. currentmodule:: m_n_kappa.crosssection
+
+.. autoclass:: CrossSectionBoundaries
+
+   
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      ~CrossSectionBoundaries.__init__
+      ~CrossSectionBoundaries.add_section
+      ~CrossSectionBoundaries.concrete_slab_width
+      ~CrossSectionBoundaries.get_boundaries
+      ~CrossSectionBoundaries.get_boundary_conditions
+      ~CrossSectionBoundaries.left_edge
+      ~CrossSectionBoundaries.maximum_negative_strain
+      ~CrossSectionBoundaries.maximum_positive_strain
+      ~CrossSectionBoundaries.right_edge
+      ~CrossSectionBoundaries.sections_not_of_type
+      ~CrossSectionBoundaries.sections_of_type
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+   
+      ~CrossSectionBoundaries.bottom_edge
+      ~CrossSectionBoundaries.girder_sections
+      ~CrossSectionBoundaries.half_point
+      ~CrossSectionBoundaries.height
+      ~CrossSectionBoundaries.maximum_negative_curvature
+      ~CrossSectionBoundaries.maximum_positive_curvature
+      ~CrossSectionBoundaries.section_type
+      ~CrossSectionBoundaries.sections
+      ~CrossSectionBoundaries.slab_effective_width
+      ~CrossSectionBoundaries.slab_sections
+      ~CrossSectionBoundaries.top_edge
+   
+   

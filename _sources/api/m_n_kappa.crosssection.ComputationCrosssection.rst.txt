@@ -1,0 +1,53 @@
+﻿m\_n\_kappa.crosssection.ComputationCrosssection
+================================================
+
+.. currentmodule:: m_n_kappa.crosssection
+
+.. autoclass:: ComputationCrosssection
+
+   
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      ~ComputationCrosssection.__init__
+      ~ComputationCrosssection.add_section
+      ~ComputationCrosssection.concrete_slab_width
+      ~ComputationCrosssection.get_boundary_conditions
+      ~ComputationCrosssection.girder_sections_axial_force
+      ~ComputationCrosssection.girder_sections_moment
+      ~ComputationCrosssection.left_edge
+      ~ComputationCrosssection.maximum_negative_strain
+      ~ComputationCrosssection.maximum_positive_strain
+      ~ComputationCrosssection.right_edge
+      ~ComputationCrosssection.sections_not_of_type
+      ~ComputationCrosssection.sections_of_type
+      ~ComputationCrosssection.slab_sections_axial_force
+      ~ComputationCrosssection.slab_sections_moment
+      ~ComputationCrosssection.total_axial_force
+      ~ComputationCrosssection.total_moment
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+   
+      ~ComputationCrosssection.bottom_edge
+      ~ComputationCrosssection.compute_sections
+      ~ComputationCrosssection.compute_split_sections
+      ~ComputationCrosssection.computed_girder_sections
+      ~ComputationCrosssection.computed_slab_sections
+      ~ComputationCrosssection.girder_sections
+      ~ComputationCrosssection.half_point
+      ~ComputationCrosssection.height
+      ~ComputationCrosssection.section_type
+      ~ComputationCrosssection.sections
+      ~ComputationCrosssection.slab_effective_width
+      ~ComputationCrosssection.slab_sections
+      ~ComputationCrosssection.top_edge
+   
+   

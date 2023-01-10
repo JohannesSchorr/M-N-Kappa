@@ -1,0 +1,6 @@
+﻿m\_n\_kappa.curvature\_boundaries.compute\_curvatures
+=====================================================
+
+.. currentmodule:: m_n_kappa.curvature_boundaries
+
+.. autofunction:: compute_curvatures

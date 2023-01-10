@@ -1,0 +1,28 @@
+﻿m\_n\_kappa.SingleLoad
+======================
+
+.. currentmodule:: m_n_kappa
+
+.. autoclass:: SingleLoad
+
+   
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      ~SingleLoad.__init__
+      ~SingleLoad.moment
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+   
+      ~SingleLoad.position_in_beam
+      ~SingleLoad.value
+   
+   

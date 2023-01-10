@@ -1,0 +1,36 @@
+﻿m\_n\_kappa.Material
+====================
+
+.. currentmodule:: m_n_kappa
+
+.. autoclass:: Material
+
+   
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      ~Material.__init__
+      ~Material.get_intermediate_strains
+      ~Material.get_material_stress
+      ~Material.sort_strains
+      ~Material.sort_strains_ascending
+      ~Material.sort_strains_descending
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+   
+      ~Material.maximum_strain
+      ~Material.minimum_strain
+      ~Material.section_type
+      ~Material.strains
+      ~Material.stress_strain
+      ~Material.stresses
+   
+   

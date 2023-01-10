@@ -1,0 +1,28 @@
+﻿m\_n\_kappa.material.StressStrain
+=================================
+
+.. currentmodule:: m_n_kappa.material
+
+.. autoclass:: StressStrain
+
+   
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      ~StressStrain.__init__
+      ~StressStrain.pair
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+   
+      ~StressStrain.stress
+      ~StressStrain.strain
+   
+   

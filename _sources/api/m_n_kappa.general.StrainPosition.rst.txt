@@ -1,0 +1,28 @@
+﻿m\_n\_kappa.general.StrainPosition
+==================================
+
+.. currentmodule:: m_n_kappa.general
+
+.. autoclass:: StrainPosition
+
+   
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      ~StrainPosition.__init__
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+   
+      ~StrainPosition.strain
+      ~StrainPosition.position
+      ~StrainPosition.material
+   
+   

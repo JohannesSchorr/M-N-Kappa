@@ -1,0 +1,8 @@
+:root {
+    font-size: 0.9em
+}
+
+.card, .card img {
+  background-color: transparent !important;
+  padding: 30px 10px 20px 10px;
+}

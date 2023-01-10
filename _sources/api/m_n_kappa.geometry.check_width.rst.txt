@@ -1,0 +1,6 @@
+﻿m\_n\_kappa.geometry.check\_width
+=================================
+
+.. currentmodule:: m_n_kappa.geometry
+
+.. autofunction:: check_width

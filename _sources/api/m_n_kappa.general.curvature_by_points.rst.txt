@@ -1,0 +1,6 @@
+﻿m\_n\_kappa.general.curvature\_by\_points
+=========================================
+
+.. currentmodule:: m_n_kappa.general
+
+.. autofunction:: curvature_by_points

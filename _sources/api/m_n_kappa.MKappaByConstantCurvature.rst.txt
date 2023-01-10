@@ -1,0 +1,45 @@
+﻿m\_n\_kappa.MKappaByConstantCurvature
+=====================================
+
+.. currentmodule:: m_n_kappa
+
+.. autoclass:: MKappaByConstantCurvature
+
+   
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      ~MKappaByConstantCurvature.__init__
+      ~MKappaByConstantCurvature.compute
+      ~MKappaByConstantCurvature.initialize
+      ~MKappaByConstantCurvature.initialize_boundary_curvatures
+      ~MKappaByConstantCurvature.iterate
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+   
+      ~MKappaByConstantCurvature.applied_axial_force
+      ~MKappaByConstantCurvature.applied_curvature
+      ~MKappaByConstantCurvature.axial_force
+      ~MKappaByConstantCurvature.axial_force_tolerance
+      ~MKappaByConstantCurvature.computations
+      ~MKappaByConstantCurvature.computed_cross_section
+      ~MKappaByConstantCurvature.cross_section
+      ~MKappaByConstantCurvature.curvature
+      ~MKappaByConstantCurvature.iteration
+      ~MKappaByConstantCurvature.maximum_iterations
+      ~MKappaByConstantCurvature.maximum_neutral_axis
+      ~MKappaByConstantCurvature.minimum_neutral_axis
+      ~MKappaByConstantCurvature.moment
+      ~MKappaByConstantCurvature.neutral_axis
+      ~MKappaByConstantCurvature.solver
+      ~MKappaByConstantCurvature.successful
+   
+   

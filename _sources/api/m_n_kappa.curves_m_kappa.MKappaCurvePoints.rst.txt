@@ -1,0 +1,30 @@
+﻿m\_n\_kappa.curves\_m\_kappa.MKappaCurvePoints
+==============================================
+
+.. currentmodule:: m_n_kappa.curves_m_kappa
+
+.. autoclass:: MKappaCurvePoints
+
+   
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      ~MKappaCurvePoints.__init__
+      ~MKappaCurvePoints.add
+      ~MKappaCurvePoints.curvature
+      ~MKappaCurvePoints.maximum_moment
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+   
+      ~MKappaCurvePoints.moments
+      ~MKappaCurvePoints.points
+   
+   

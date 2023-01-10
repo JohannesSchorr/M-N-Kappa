@@ -1,0 +1,30 @@
+﻿m\_n\_kappa.Geometry
+====================
+
+.. currentmodule:: m_n_kappa
+
+.. autoclass:: Geometry
+
+   
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      ~Geometry.__init__
+      ~Geometry.area
+      ~Geometry.centroid
+      ~Geometry.split
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+   
+      ~Geometry.edges
+      ~Geometry.sides
+   
+   

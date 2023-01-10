@@ -1,0 +1,33 @@
+﻿m\_n\_kappa.UPEProfile
+======================
+
+.. currentmodule:: m_n_kappa
+
+.. autoclass:: UPEProfile
+
+   
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      ~UPEProfile.__init__
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+   
+      ~UPEProfile.centroid_y
+      ~UPEProfile.geometries
+      ~UPEProfile.h
+      ~UPEProfile.h_w
+      ~UPEProfile.top_edge
+      ~UPEProfile.t_f
+      ~UPEProfile.b_f
+      ~UPEProfile.t_w
+   
+   

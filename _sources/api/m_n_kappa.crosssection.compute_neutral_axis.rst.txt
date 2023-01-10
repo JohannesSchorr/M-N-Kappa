@@ -1,0 +1,6 @@
+﻿m\_n\_kappa.crosssection.compute\_neutral\_axis
+===============================================
+
+.. currentmodule:: m_n_kappa.crosssection
+
+.. autofunction:: compute_neutral_axis

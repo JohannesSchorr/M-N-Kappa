@@ -1,0 +1,32 @@
+﻿m\_n\_kappa.curves\_m\_kappa.MKappaCurvePoint
+=============================================
+
+.. currentmodule:: m_n_kappa.curves_m_kappa
+
+.. autoclass:: MKappaCurvePoint
+
+   
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      ~MKappaCurvePoint.__init__
+      ~MKappaCurvePoint.curvature_moment
+      ~MKappaCurvePoint.moment_curvature
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+   
+      ~MKappaCurvePoint.moment
+      ~MKappaCurvePoint.curvature
+      ~MKappaCurvePoint.neutral_axis
+      ~MKappaCurvePoint.cross_section
+      ~MKappaCurvePoint.strain_position
+   
+   

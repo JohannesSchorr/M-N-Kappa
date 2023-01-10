@@ -1,0 +1,44 @@
+﻿m\_n\_kappa.Trapezoid
+=====================
+
+.. currentmodule:: m_n_kappa
+
+.. autoclass:: Trapezoid
+
+   
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      ~Trapezoid.__init__
+      ~Trapezoid.left_edge
+      ~Trapezoid.right_edge
+      ~Trapezoid.split
+      ~Trapezoid.width
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+   
+      ~Trapezoid.area
+      ~Trapezoid.bottom_edge
+      ~Trapezoid.bottom_left_edge
+      ~Trapezoid.bottom_right_edge
+      ~Trapezoid.bottom_width
+      ~Trapezoid.centroid
+      ~Trapezoid.edges
+      ~Trapezoid.height
+      ~Trapezoid.sides
+      ~Trapezoid.top_edge
+      ~Trapezoid.top_left_edge
+      ~Trapezoid.top_right_edge
+      ~Trapezoid.top_width
+      ~Trapezoid.width_interception
+      ~Trapezoid.width_slope
+   
+   

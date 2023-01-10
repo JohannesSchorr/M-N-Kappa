@@ -1,0 +1,56 @@
+﻿m\_n\_kappa.crosssection.ComputationCrosssectionCurvature
+=========================================================
+
+.. currentmodule:: m_n_kappa.crosssection
+
+.. autoclass:: ComputationCrosssectionCurvature
+
+   
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      ~ComputationCrosssectionCurvature.__init__
+      ~ComputationCrosssectionCurvature.add_section
+      ~ComputationCrosssectionCurvature.concrete_slab_width
+      ~ComputationCrosssectionCurvature.get_boundary_conditions
+      ~ComputationCrosssectionCurvature.get_material_points_inside_curvature
+      ~ComputationCrosssectionCurvature.girder_sections_axial_force
+      ~ComputationCrosssectionCurvature.girder_sections_moment
+      ~ComputationCrosssectionCurvature.left_edge
+      ~ComputationCrosssectionCurvature.maximum_negative_strain
+      ~ComputationCrosssectionCurvature.maximum_positive_strain
+      ~ComputationCrosssectionCurvature.right_edge
+      ~ComputationCrosssectionCurvature.sections_not_of_type
+      ~ComputationCrosssectionCurvature.sections_of_type
+      ~ComputationCrosssectionCurvature.slab_sections_axial_force
+      ~ComputationCrosssectionCurvature.slab_sections_moment
+      ~ComputationCrosssectionCurvature.total_axial_force
+      ~ComputationCrosssectionCurvature.total_moment
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+   
+      ~ComputationCrosssectionCurvature.bottom_edge
+      ~ComputationCrosssectionCurvature.compute_sections
+      ~ComputationCrosssectionCurvature.compute_split_sections
+      ~ComputationCrosssectionCurvature.computed_girder_sections
+      ~ComputationCrosssectionCurvature.computed_slab_sections
+      ~ComputationCrosssectionCurvature.curvature
+      ~ComputationCrosssectionCurvature.girder_sections
+      ~ComputationCrosssectionCurvature.half_point
+      ~ComputationCrosssectionCurvature.height
+      ~ComputationCrosssectionCurvature.neutral_axis
+      ~ComputationCrosssectionCurvature.section_type
+      ~ComputationCrosssectionCurvature.sections
+      ~ComputationCrosssectionCurvature.slab_effective_width
+      ~ComputationCrosssectionCurvature.slab_sections
+      ~ComputationCrosssectionCurvature.top_edge
+   
+   

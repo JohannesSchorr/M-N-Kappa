@@ -1,0 +1,34 @@
+﻿m\_n\_kappa.solver.Bisection
+============================
+
+.. currentmodule:: m_n_kappa.solver
+
+.. autoclass:: Bisection
+
+   
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      ~Bisection.__init__
+      ~Bisection.compute
+      ~Bisection.print_values
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+   
+      ~Bisection.data
+      ~Bisection.maximum_variable
+      ~Bisection.minimum_variable
+      ~Bisection.target
+      ~Bisection.target_value
+      ~Bisection.variable
+      ~Bisection.x_n
+   
+   

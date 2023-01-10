@@ -1,0 +1,36 @@
+﻿m\_n\_kappa.IProfile
+====================
+
+.. currentmodule:: m_n_kappa
+
+.. autoclass:: IProfile
+
+   
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      ~IProfile.__init__
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+   
+      ~IProfile.b_fo
+      ~IProfile.b_fu
+      ~IProfile.centroid_y
+      ~IProfile.geometries
+      ~IProfile.has_bottom_flange
+      ~IProfile.has_top_flange
+      ~IProfile.t_fo
+      ~IProfile.t_fu
+      ~IProfile.top_edge
+      ~IProfile.t_w
+      ~IProfile.h_w
+   
+   

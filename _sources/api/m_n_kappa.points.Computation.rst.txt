@@ -1,0 +1,30 @@
+﻿m\_n\_kappa.points.Computation
+==============================
+
+.. currentmodule:: m_n_kappa.points
+
+.. autoclass:: Computation
+
+   
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      ~Computation.__init__
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+   
+      ~Computation.iteration
+      ~Computation.computed_cross_section
+      ~Computation.curvature
+      ~Computation.neutral_axis_value
+      ~Computation.axial_force
+   
+   

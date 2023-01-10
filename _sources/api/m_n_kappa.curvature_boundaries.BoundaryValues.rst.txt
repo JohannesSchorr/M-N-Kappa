@@ -1,0 +1,27 @@
+﻿m\_n\_kappa.curvature\_boundaries.BoundaryValues
+================================================
+
+.. currentmodule:: m_n_kappa.curvature_boundaries
+
+.. autoclass:: BoundaryValues
+
+   
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      ~BoundaryValues.__init__
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+   
+      ~BoundaryValues.maximum_curvature
+      ~BoundaryValues.minimum_curvature
+   
+   

@@ -1,0 +1,43 @@
+﻿m\_n\_kappa.Beam
+================
+
+.. currentmodule:: m_n_kappa
+
+.. autoclass:: Beam
+
+   
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      ~Beam.__init__
+      ~Beam.bending_widths
+      ~Beam.deformation
+      ~Beam.deformation_over_beam_length
+      ~Beam.deformations
+      ~Beam.deformations_at_maximum_deformation_position
+      ~Beam.deformations_at_maximum_moment_position
+      ~Beam.membran_widths
+      ~Beam.nodes_at
+      ~Beam.nodes_at_decisive_position
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+   
+      ~Beam.consider_widths
+      ~Beam.cross_section
+      ~Beam.element_number
+      ~Beam.element_standard_length
+      ~Beam.length
+      ~Beam.load
+      ~Beam.load_steps
+      ~Beam.nodes
+      ~Beam.positions
+   
+   

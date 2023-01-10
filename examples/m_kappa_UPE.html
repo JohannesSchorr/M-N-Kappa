@@ -1,0 +1,657 @@
+<!doctype html>
+<html class="no-js" lang="en">
+  <head><meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width,initial-scale=1"/>
+    <meta name="color-scheme" content="light dark"><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
+<link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" /><link rel="next" title="Single span Slim-Floor Beam with \(M\)-\(N\)-\(\kappa\)-Curve" href="m_n_kappa_UPE.html" /><link rel="prev" title="Examples" href="index.html" />
+
+    <!-- Generated with Sphinx 5.3.0 and Furo 2022.12.07 -->
+        <title>Single span slim-floor beam with \(M\)-\(\kappa\)-Curve - Release 0.1.0</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?digest=91d0f0d1c444bdcb17a68e833c7a53903343c195" />
+    <link rel="stylesheet" type="text/css" href="../_static/plot_directive.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/furo-extensions.css?digest=30d1aed668e5c3a91c3e3bf6a60b675221979f0e" />
+    <link rel="stylesheet" type="text/css" href="../_static/css/custom.css" />
+    
+    
+
+
+<style>
+  body {
+    --color-code-background: #f8f8f8;
+  --color-code-foreground: black;
+  
+  }
+  @media not print {
+    body[data-theme="dark"] {
+      --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  
+    }
+    @media (prefers-color-scheme: dark) {
+      body:not([data-theme="light"]) {
+        --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  
+      }
+    }
+  }
+</style></head>
+  <body>
+    
+    <script>
+      document.body.dataset.theme = localStorage.getItem("theme") || "auto";
+    </script>
+    
+
+<svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+  <symbol id="svg-toc" viewBox="0 0 24 24">
+    <title>Contents</title>
+    <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 1024 1024">
+      <path d="M408 442h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8zm-8 204c0 4.4 3.6 8 8 8h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56zm504-486H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zm0 632H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zM115.4 518.9L271.7 642c5.8 4.6 14.4.5 14.4-6.9V388.9c0-7.4-8.5-11.5-14.4-6.9L115.4 505.1a8.74 8.74 0 0 0 0 13.8z"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-menu" viewBox="0 0 24 24">
+    <title>Menu</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-menu">
+      <line x1="3" y1="12" x2="21" y2="12"></line>
+      <line x1="3" y1="6" x2="21" y2="6"></line>
+      <line x1="3" y1="18" x2="21" y2="18"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-arrow-right" viewBox="0 0 24 24">
+    <title>Expand</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-chevron-right">
+      <polyline points="9 18 15 12 9 6"></polyline>
+    </svg>
+  </symbol>
+  <symbol id="svg-sun" viewBox="0 0 24 24">
+    <title>Light mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="feather-sun">
+      <circle cx="12" cy="12" r="5"></circle>
+      <line x1="12" y1="1" x2="12" y2="3"></line>
+      <line x1="12" y1="21" x2="12" y2="23"></line>
+      <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+      <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+      <line x1="1" y1="12" x2="3" y2="12"></line>
+      <line x1="21" y1="12" x2="23" y2="12"></line>
+      <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+      <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-moon" viewBox="0 0 24 24">
+    <title>Dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-moon">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M12 3c.132 0 .263 0 .393 0a7.5 7.5 0 0 0 7.92 12.446a9 9 0 1 1 -8.313 -12.454z" />
+    </svg>
+  </symbol>
+  <symbol id="svg-sun-half" viewBox="0 0 24 24">
+    <title>Auto light/dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-shadow">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+      <circle cx="12" cy="12" r="9" />
+      <path d="M13 12h5" />
+      <path d="M13 15h4" />
+      <path d="M13 18h1" />
+      <path d="M13 9h4" />
+      <path d="M13 6h1" />
+    </svg>
+  </symbol>
+</svg>
+
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation">
+<input type="checkbox" class="sidebar-toggle" name="__toc" id="__toc">
+<label class="overlay sidebar-overlay" for="__navigation">
+  <div class="visually-hidden">Hide navigation sidebar</div>
+</label>
+<label class="overlay toc-overlay" for="__toc">
+  <div class="visually-hidden">Hide table of contents sidebar</div>
+</label>
+
+
+
+<div class="page">
+  <header class="mobile-header">
+    <div class="header-left">
+      <label class="nav-overlay-icon" for="__navigation">
+        <div class="visually-hidden">Toggle site navigation sidebar</div>
+        <i class="icon"><svg><use href="#svg-menu"></use></svg></i>
+      </label>
+    </div>
+    <div class="header-center">
+      <a href="../index.html"><div class="brand">Release 0.1.0</div></a>
+    </div>
+    <div class="header-right">
+      <div class="theme-toggle-container theme-toggle-header">
+        <button class="theme-toggle">
+          <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
+          <svg class="theme-icon-when-auto"><use href="#svg-sun-half"></use></svg>
+          <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+          <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+        </button>
+      </div>
+      <label class="toc-overlay-icon toc-header-icon" for="__toc">
+        <div class="visually-hidden">Toggle table of contents sidebar</div>
+        <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+      </label>
+    </div>
+  </header>
+  <aside class="sidebar-drawer">
+    <div class="sidebar-container">
+      
+      <div class="sidebar-sticky"><a class="sidebar-brand centered" href="../index.html">
+  
+  <div class="sidebar-logo-container">
+    <img class="sidebar-logo" src="../_static/m_kappa_logo.png" alt="Logo"/>
+  </div>
+  
+  <span class="sidebar-brand-text">Release 0.1.0</span>
+  
+</a><form class="sidebar-search-container" method="get" action="../search.html" role="search">
+  <input class="sidebar-search" placeholder="Search" name="q" aria-label="Search">
+  <input type="hidden" name="check_keywords" value="yes">
+  <input type="hidden" name="area" value="default">
+</form>
+<div id="searchbox"></div><div class="sidebar-scroll"><div class="sidebar-tree">
+  <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../getting_started.html">Getting Started</a></li>
+<li class="toctree-l1 current has-children"><a class="reference internal" href="index.html">Examples</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="current">
+<li class="toctree-l2 current current-page"><a class="current reference internal" href="#">Single span slim-floor beam with :math:`M`-:math:`\kappa`-curve</a></li>
+<li class="toctree-l2"><a class="reference internal" href="m_n_kappa_UPE.html">Single span slim-floor beam with :math:`M`-:math:`N`-:math:`\kappa`-curve</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../theory/index.html">Theory guide</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" role="switch" type="checkbox"/><label for="toctree-checkbox-2"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../theory/symbols.html">Symbols</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../theory/coordinates.html">Coordinates</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../theory/units.html">Units</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../theory/general.html">General</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../theory/geometries.html">Geometry</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../theory/materials.html">Materials</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../theory/sections.html">Sections and cross-sections</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../theory/strain_based_design.html">Strain based design</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../theory/m_kappa_curve.html"><span class="math notranslate nohighlight">\(M\)</span>-<span class="math notranslate nohighlight">\(\kappa\)</span>-curve</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../theory/effective_widths.html">Effective widths</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../theory/loading.html">Loading</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../theory/deformations.html">Deformations</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../verification/index.html">Verification</a><input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" role="switch" type="checkbox"/><label for="toctree-checkbox-3"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="simple">
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Development</span></p>
+<ul>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../api.html">API reference</a><input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" role="switch" type="checkbox"/><label for="toctree-checkbox-4"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../api/m_n_kappa.Geometry.html">m_n_kappa.Geometry</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api/m_n_kappa.Rectangle.html">m_n_kappa.Rectangle</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api/m_n_kappa.Circle.html">m_n_kappa.Circle</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api/m_n_kappa.Trapezoid.html">m_n_kappa.Trapezoid</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api/m_n_kappa.geometry.ComposedGeometry.html">m_n_kappa.geometry.ComposedGeometry</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api/m_n_kappa.IProfile.html">m_n_kappa.IProfile</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api/m_n_kappa.UPEProfile.html">m_n_kappa.UPEProfile</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api/m_n_kappa.RebarLayer.html">m_n_kappa.RebarLayer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api/m_n_kappa.Material.html">m_n_kappa.Material</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api/m_n_kappa.Concrete.html">m_n_kappa.Concrete</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api/m_n_kappa.Steel.html">m_n_kappa.Steel</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api/m_n_kappa.Reinforcement.html">m_n_kappa.Reinforcement</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api/m_n_kappa.Section.html">m_n_kappa.Section</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api/m_n_kappa.Crosssection.html">m_n_kappa.Crosssection</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api/m_n_kappa.MKappaByStrainPosition.html">m_n_kappa.MKappaByStrainPosition</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api/m_n_kappa.MKappaByConstantCurvature.html">m_n_kappa.MKappaByConstantCurvature</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api/m_n_kappa.MKappaCurve.html">m_n_kappa.MKappaCurve</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api/m_n_kappa.curves_m_kappa.MKappaCurvePoint.html">m_n_kappa.curves_m_kappa.MKappaCurvePoint</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api/m_n_kappa.curves_m_kappa.MKappaCurvePoints.html">m_n_kappa.curves_m_kappa.MKappaCurvePoints</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api/m_n_kappa.SingleSpanUniformLoad.html">m_n_kappa.SingleSpanUniformLoad</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api/m_n_kappa.SingleLoad.html">m_n_kappa.SingleLoad</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api/m_n_kappa.SingleSpanSingleLoads.html">m_n_kappa.SingleSpanSingleLoads</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api/m_n_kappa.SingleSpan.html">m_n_kappa.SingleSpan</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api/m_n_kappa.Beam.html">m_n_kappa.Beam</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api/m_n_kappa.Node.html">m_n_kappa.Node</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../api_developers.html">API for developers</a><input class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" role="switch" type="checkbox"/><label for="toctree-checkbox-5"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../api/m_n_kappa.general.StrainPosition.html">m_n_kappa.general.StrainPosition</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api/m_n_kappa.general.EffectiveWidths.html">m_n_kappa.general.EffectiveWidths</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api/m_n_kappa.general.curvature.html">m_n_kappa.general.curvature</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api/m_n_kappa.general.curvature_by_points.html">m_n_kappa.general.curvature_by_points</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api/m_n_kappa.general.strain.html">m_n_kappa.general.strain</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api/m_n_kappa.general.position.html">m_n_kappa.general.position</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api/m_n_kappa.general.neutral_axis.html">m_n_kappa.general.neutral_axis</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api/m_n_kappa.general.remove_duplicates.html">m_n_kappa.general.remove_duplicates</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api/m_n_kappa.general.positive_sign.html">m_n_kappa.general.positive_sign</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api/m_n_kappa.general.negative_sign.html">m_n_kappa.general.negative_sign</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api/m_n_kappa.general.interpolation.html">m_n_kappa.general.interpolation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api/m_n_kappa.geometry.check_width.html">m_n_kappa.geometry.check_width</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api/m_n_kappa.material.StressStrain.html">m_n_kappa.material.StressStrain</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api/m_n_kappa.material.ConcreteCompression.html">m_n_kappa.material.ConcreteCompression</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api/m_n_kappa.material.ConcreteCompressionNonlinear.html">m_n_kappa.material.ConcreteCompressionNonlinear</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api/m_n_kappa.material.ConcreteCompressionParabolaRectangle.html">m_n_kappa.material.ConcreteCompressionParabolaRectangle</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api/m_n_kappa.material.ConcreteCompressionBiLinear.html">m_n_kappa.material.ConcreteCompressionBiLinear</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api/m_n_kappa.material.ConcreteTension.html">m_n_kappa.material.ConcreteTension</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api/m_n_kappa.section.Section.html">m_n_kappa.section.Section</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api/m_n_kappa.section.ComputationSection.html">m_n_kappa.section.ComputationSection</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api/m_n_kappa.section.ComputationSectionCurvature.html">m_n_kappa.section.ComputationSectionCurvature</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api/m_n_kappa.section.ComputationSectionStrain.html">m_n_kappa.section.ComputationSectionStrain</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api/m_n_kappa.crosssection.ComputationCrosssection.html">m_n_kappa.crosssection.ComputationCrosssection</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api/m_n_kappa.crosssection.ComputationCrosssectionStrain.html">m_n_kappa.crosssection.ComputationCrosssectionStrain</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api/m_n_kappa.crosssection.ComputationCrosssectionStrainAdd.html">m_n_kappa.crosssection.ComputationCrosssectionStrainAdd</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api/m_n_kappa.crosssection.ComputationCrosssectionCurvature.html">m_n_kappa.crosssection.ComputationCrosssectionCurvature</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api/m_n_kappa.crosssection.EdgeStrains.html">m_n_kappa.crosssection.EdgeStrains</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api/m_n_kappa.crosssection.CrossSectionBoundaries.html">m_n_kappa.crosssection.CrossSectionBoundaries</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api/m_n_kappa.crosssection.axial_force.html">m_n_kappa.crosssection.axial_force</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api/m_n_kappa.crosssection.moment.html">m_n_kappa.crosssection.moment</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api/m_n_kappa.crosssection.determine_curvatures.html">m_n_kappa.crosssection.determine_curvatures</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api/m_n_kappa.crosssection.compute_neutral_axis.html">m_n_kappa.crosssection.compute_neutral_axis</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api/m_n_kappa.curvature_boundaries.MaximumCurvature.html">m_n_kappa.curvature_boundaries.MaximumCurvature</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api/m_n_kappa.curvature_boundaries.MinimumCurvature.html">m_n_kappa.curvature_boundaries.MinimumCurvature</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api/m_n_kappa.curvature_boundaries.BoundaryValues.html">m_n_kappa.curvature_boundaries.BoundaryValues</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api/m_n_kappa.curvature_boundaries.Boundaries.html">m_n_kappa.curvature_boundaries.Boundaries</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api/m_n_kappa.curvature_boundaries.compute_curvatures.html">m_n_kappa.curvature_boundaries.compute_curvatures</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api/m_n_kappa.curvature_boundaries.remove_higher_strains.html">m_n_kappa.curvature_boundaries.remove_higher_strains</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api/m_n_kappa.curvature_boundaries.remove_smaller_strains.html">m_n_kappa.curvature_boundaries.remove_smaller_strains</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api/m_n_kappa.curvature_boundaries.get_lower_positions.html">m_n_kappa.curvature_boundaries.get_lower_positions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api/m_n_kappa.curvature_boundaries.get_higher_positions.html">m_n_kappa.curvature_boundaries.get_higher_positions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api/m_n_kappa.points.Computation.html">m_n_kappa.points.Computation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api/m_n_kappa.points.MKappa.html">m_n_kappa.points.MKappa</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api/m_n_kappa.solver.Solver.html">m_n_kappa.solver.Solver</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api/m_n_kappa.solver.Bisection.html">m_n_kappa.solver.Bisection</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api/m_n_kappa.solver.Newton.html">m_n_kappa.solver.Newton</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api/m_n_kappa.loading.ABCSingleSpan.html">m_n_kappa.loading.ABCSingleSpan</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../roadmap.html">Roadmap and To Do’s</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../contributing.html">Contributing</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../whatsnew/index.html">Release Notes</a><input class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" role="switch" type="checkbox"/><label for="toctree-checkbox-6"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../whatsnew/v0.1.0.html">What’s new in 0.1.0 (??. January 2023)</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../license.html">License</a></li>
+</ul>
+
+</div>
+</div>
+
+      </div>
+      
+    </div>
+  </aside>
+  <div class="main">
+    <div class="content">
+      <div class="article-container">
+        <a href="#" class="back-to-top muted-link">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12z"></path>
+          </svg>
+          <span>Back to top</span>
+        </a>
+        <div class="content-icon-container">
+          <div class="edit-this-page">
+  <a class="muted-link" href="https://github.com/JohannesSchorr/M-N-Kappa/edit/master/docs/source/examples/m_kappa_UPE.rst" title="Edit this page">
+    <svg aria-hidden="true" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+      <path d="M4 20h4l10.5 -10.5a1.5 1.5 0 0 0 -4 -4l-10.5 10.5v4" />
+      <line x1="13.5" y1="6.5" x2="17.5" y2="10.5" />
+    </svg>
+    <span class="visually-hidden">Edit this page</span>
+  </a>
+</div><div class="theme-toggle-container theme-toggle-content">
+            <button class="theme-toggle">
+              <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
+              <svg class="theme-icon-when-auto"><use href="#svg-sun-half"></use></svg>
+              <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+              <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+            </button>
+          </div>
+          <label class="toc-overlay-icon toc-content-icon" for="__toc">
+            <div class="visually-hidden">Toggle table of contents sidebar</div>
+            <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+          </label>
+        </div>
+        <article role="main">
+          <section id="single-span-slim-floor-beam-with-m-kappa-curve">
+<span id="examples-m-kappa-upe"></span><h1>Single span slim-floor beam with <span class="math notranslate nohighlight">\(M\)</span>-<span class="math notranslate nohighlight">\(\kappa\)</span>-Curve<a class="headerlink" href="#single-span-slim-floor-beam-with-m-kappa-curve" title="Permalink to this heading">#</a></h1>
+<section id="introduction">
+<span id="examples-m-kappa-upe-intro"></span><h2>Introduction<a class="headerlink" href="#introduction" title="Permalink to this heading">#</a></h2>
+<p>The slim-floor beam in this example consists of a <a class="reference internal" href="#examples-m-kappa-upe-input-upe200"><span class="std std-ref">UPE 200</span></a> steel-profile welded onto a <a class="reference internal" href="#examples-m-kappa-upe-input-bottom-flange"><span class="std std-ref">Bottom-flange</span></a>.
+The created steel-beam is integrated into a <a class="reference internal" href="#examples-m-kappa-upe-input-concrete-slab"><span class="std std-ref">Concrete slab</span></a>.
+Within in the <a class="reference internal" href="#examples-m-kappa-upe-input-concrete-slab"><span class="std std-ref">Concrete slab</span></a> also some <a class="reference internal" href="#examples-m-kappa-upe-input-reinforcement"><span class="std std-ref">Reinforcement</span></a>-Layers are integrated.
+Geometry- and material-values are defined hereafter and build later on to a <a class="reference internal" href="#examples-m-kappa-upe-input-reinforcement"><span class="std std-ref">cross-section</span></a>.</p>
+</section>
+<section id="cross-section">
+<span id="examples-m-kappa-upe-input"></span><h2>Cross-section<a class="headerlink" href="#cross-section" title="Permalink to this heading">#</a></h2>
+<section id="bottom-flange">
+<span id="examples-m-kappa-upe-input-bottom-flange"></span><h3>Bottom-flange<a class="headerlink" href="#bottom-flange" title="Permalink to this heading">#</a></h3>
+<p>The bottom-flange is an ordinary rectangle and located at the bottom-edge of the concrete slab.
+It has a thickness <span class="math notranslate nohighlight">\(t_\mathrm{f}\)</span> = 10 mm and a width <span class="math notranslate nohighlight">\(b_\mathrm{f}\)</span> = 400 mm.
+The corresponding geometry is defined as <a class="reference internal" href="../api/m_n_kappa.Rectangle.html#m_n_kappa.Rectangle" title="m_n_kappa.Rectangle"><code class="xref py py-class docutils literal notranslate"><span class="pre">Rectangle</span></code></a>:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">m_n_kappa</span> <span class="kn">import</span> <span class="n">Rectangle</span>
+<span class="n">plate_geometry</span> <span class="o">=</span> <span class="n">Rectangle</span><span class="p">(</span><span class="n">top_edge</span><span class="o">=</span><span class="mf">220.0</span><span class="p">,</span> <span class="n">bottom_edge</span><span class="o">=</span><span class="mf">220.0</span><span class="o">+</span><span class="mf">10.</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="mf">400.0</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>The material of the bottom-flange is steel with following characteristic material values:</p>
+<ul class="simple">
+<li><p>Yield-strength:  <span class="math notranslate nohighlight">\(f_\mathrm{y}\)</span> = 313 N/mm²</p></li>
+<li><p>Tensile-strength:  <span class="math notranslate nohighlight">\(f_\mathrm{u}\)</span> = 460 N/mm²</p></li>
+<li><p>Tensile-strain:  <span class="math notranslate nohighlight">\(\varepsilon_\mathrm{u}\)</span> = 15 %</p></li>
+</ul>
+<p>Using these values the corresponding material may be defined using <a class="reference internal" href="../api/m_n_kappa.Steel.html#m_n_kappa.Steel" title="m_n_kappa.Steel"><code class="xref py py-class docutils literal notranslate"><span class="pre">Steel</span></code></a>:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">m_n_kappa</span> <span class="kn">import</span> <span class="n">Steel</span>
+<span class="n">bottom_flange_material</span> <span class="o">=</span> <span class="n">Steel</span><span class="p">(</span><span class="n">f_y</span><span class="o">=</span><span class="mi">313</span><span class="p">,</span> <span class="n">f_u</span><span class="o">=</span><span class="mi">460</span><span class="p">,</span> <span class="n">epsilon_u</span><span class="o">=</span><span class="mf">0.15</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>The modulus of elasticity is assumed to be <span class="math notranslate nohighlight">\(E_\mathrm{a}\)</span> = 210000 N/mm².
+The strain at yielding may be derived by <span class="math notranslate nohighlight">\(\varepsilon_\mathrm{y} = f_\mathrm{y} / E_\mathrm{a}\)</span>.
+This is applied automatically by the <a class="reference internal" href="../api/m_n_kappa.Steel.html#m_n_kappa.Steel" title="m_n_kappa.Steel"><code class="xref py py-class docutils literal notranslate"><span class="pre">Steel</span></code></a>.
+Changes to the modulus of elasticity may be applied by passing the corresponding argument to the <a class="reference internal" href="../api/m_n_kappa.Steel.html#m_n_kappa.Steel" title="m_n_kappa.Steel"><code class="xref py py-class docutils literal notranslate"><span class="pre">Steel</span></code></a> (<code class="docutils literal notranslate"><span class="pre">E_a</span></code>).</p>
+<p>A <a class="reference internal" href="../api/m_n_kappa.Section.html#m_n_kappa.Section" title="m_n_kappa.Section"><code class="xref py py-class docutils literal notranslate"><span class="pre">Section</span></code></a> of the bottom-flange is created by simply adding <code class="docutils literal notranslate"><span class="pre">plate_geometry</span></code> and <code class="docutils literal notranslate"><span class="pre">bottom_flange_material</span></code> to each other:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">bottom_flange</span> <span class="o">=</span> <span class="n">plate_geometry</span> <span class="o">+</span> <span class="n">bottom_flange_material</span>
+</pre></div>
+</div>
+</section>
+<section id="upe-200">
+<span id="examples-m-kappa-upe-input-upe200"></span><h3>UPE 200<a class="headerlink" href="#upe-200" title="Permalink to this heading">#</a></h3>
+<p>The m-n-kappa-package provides the <a class="reference internal" href="../api/m_n_kappa.UPEProfile.html#m_n_kappa.UPEProfile" title="m_n_kappa.UPEProfile"><code class="xref py py-class docutils literal notranslate"><span class="pre">UPEProfile</span></code></a> to create an UPE 200 profile easily.
+The <code class="docutils literal notranslate"><span class="pre">top_edge</span></code> must be computed accordingly:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">m_n_kappa</span> <span class="kn">import</span> <span class="n">UPEProfile</span>
+<span class="n">upe200_geometry</span> <span class="o">=</span> <span class="n">UPEProfile</span><span class="p">(</span><span class="n">top_edge</span><span class="o">=</span><span class="mi">144</span><span class="p">,</span> <span class="n">t_f</span><span class="o">=</span><span class="mf">5.2</span><span class="p">,</span> <span class="n">b_f</span><span class="o">=</span><span class="mi">76</span><span class="p">,</span> <span class="n">t_w</span><span class="o">=</span><span class="mf">9.0</span><span class="p">,</span> <span class="n">h</span><span class="o">=</span><span class="mi">200</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><a class="reference internal" href="../api/m_n_kappa.UPEProfile.html#m_n_kappa.UPEProfile" title="m_n_kappa.UPEProfile"><code class="xref py py-class docutils literal notranslate"><span class="pre">UPEProfile</span></code></a> is derived from the <a class="reference internal" href="../api/m_n_kappa.geometry.ComposedGeometry.html#m_n_kappa.geometry.ComposedGeometry" title="m_n_kappa.geometry.ComposedGeometry"><code class="xref py py-class docutils literal notranslate"><span class="pre">ComposedGeometry</span></code></a>.
+Therefore, it consists of a set of basic geometry-instances (e.g. several <a class="reference internal" href="../api/m_n_kappa.Rectangle.html#m_n_kappa.Rectangle" title="m_n_kappa.Rectangle"><code class="xref py py-class docutils literal notranslate"><span class="pre">Rectangle</span></code></a>):</p>
+<p>&gt; upe200_geometry.geometries</p>
+<p>The material of the UPE-profile is also created using <a class="reference internal" href="../api/m_n_kappa.Steel.html#m_n_kappa.Steel" title="m_n_kappa.Steel"><code class="xref py py-class docutils literal notranslate"><span class="pre">Steel</span></code></a> analogous to the creation of the material for the <a class="reference internal" href="#examples-m-kappa-upe-input-bottom-flange"><span class="std std-ref">Bottom-flange</span></a>:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">m_n_kappa</span> <span class="kn">import</span> <span class="n">Steel</span>
+<span class="n">upe200_material</span> <span class="o">=</span> <span class="n">Steel</span><span class="p">(</span><span class="n">f_y</span><span class="o">=</span><span class="mi">293</span><span class="p">,</span> <span class="n">f_u</span><span class="o">=</span><span class="mi">443</span><span class="p">,</span> <span class="n">epsilon_u</span><span class="o">=</span><span class="mf">0.15</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Geometry and material are merged easily to a <a class="reference internal" href="../api/m_n_kappa.Crosssection.html#m_n_kappa.Crosssection" title="m_n_kappa.Crosssection"><code class="xref py py-class docutils literal notranslate"><span class="pre">Crosssection</span></code></a> by addition:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">upe200</span> <span class="o">=</span> <span class="n">upe200_geometry</span> <span class="o">+</span> <span class="n">upe200_material</span>
+</pre></div>
+</div>
+</section>
+<section id="concrete-slab">
+<span id="examples-m-kappa-upe-input-concrete-slab"></span><h3>Concrete slab<a class="headerlink" href="#concrete-slab" title="Permalink to this heading">#</a></h3>
+<p>The concrete-slab composes of three <a class="reference internal" href="../api/m_n_kappa.Rectangle.html#m_n_kappa.Rectangle" title="m_n_kappa.Rectangle"><code class="xref py py-class docutils literal notranslate"><span class="pre">Rectangle</span></code></a>-instances to consider the integrated steel-profile:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">concrete_left</span> <span class="o">=</span> <span class="n">Rectangle</span><span class="p">(</span><span class="n">top_edge</span><span class="o">=</span><span class="mf">0.00</span><span class="p">,</span> <span class="n">bottom_edge</span><span class="o">=</span><span class="mf">220.00</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="mf">1650.00</span><span class="p">,</span> <span class="n">left_edge</span><span class="o">=-</span><span class="mf">1750.00</span><span class="p">,</span> <span class="n">right_edge</span><span class="o">=-</span><span class="mf">100.00</span><span class="p">)</span>
+<span class="n">concrete_middle</span> <span class="o">=</span> <span class="n">Rectangle</span><span class="p">(</span><span class="n">top_edge</span><span class="o">=</span><span class="mf">0.00</span><span class="p">,</span> <span class="n">bottom_edge</span><span class="o">=</span><span class="mf">144.00</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="mf">200.00</span><span class="p">,</span> <span class="n">left_edge</span><span class="o">=-</span><span class="mf">100.00</span><span class="p">,</span> <span class="n">right_edge</span><span class="o">=</span><span class="mf">100.00</span><span class="p">)</span>
+<span class="n">concrete_right</span> <span class="o">=</span> <span class="n">Rectangle</span><span class="p">(</span><span class="n">top_edge</span><span class="o">=</span><span class="mf">0.00</span><span class="p">,</span> <span class="n">bottom_edge</span><span class="o">=</span><span class="mf">220.00</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="mf">1650.00</span><span class="p">,</span> <span class="n">left_edge</span><span class="o">=</span><span class="mf">100.00</span><span class="p">,</span> <span class="n">right_edge</span><span class="o">=</span><span class="mf">1750.00</span><span class="p">)</span>
+<span class="n">concrete_geometry</span> <span class="o">=</span> <span class="n">concrete_left</span> <span class="o">+</span> <span class="n">concrete_middle</span> <span class="o">+</span> <span class="n">concrete_right</span>
+</pre></div>
+</div>
+<p>The material-behaviour of the concrete slab is considered by the <a class="reference internal" href="../api/m_n_kappa.Concrete.html#m_n_kappa.Concrete" title="m_n_kappa.Concrete"><code class="xref py py-class docutils literal notranslate"><span class="pre">Concrete</span></code></a>-instance as follows:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">m_n_kappa</span> <span class="kn">import</span> <span class="n">Concrete</span>
+<span class="n">concrete_material</span> <span class="o">=</span> <span class="n">Concrete</span><span class="p">(</span>
+   <span class="n">f_cm</span><span class="o">=</span><span class="mf">29.5</span><span class="p">,</span>
+   <span class="n">f_ctm</span><span class="o">=</span><span class="mf">2.8</span><span class="p">,</span>
+   <span class="n">compression_stress_strain_type</span><span class="o">=</span><span class="s1">&#39;Nonlinear&#39;</span><span class="p">,</span>
+   <span class="n">tension_stress_strain_type</span><span class="o">=</span><span class="s1">&#39;consider opening behaviour&#39;</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<p>The full concrete cross-section may be created by adding the material to the created concrete-slab geometries:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">concrete_slab</span> <span class="o">=</span> <span class="n">concrete_geometry</span> <span class="o">+</span> <span class="n">concrete_material</span>
+</pre></div>
+</div>
+</section>
+<section id="reinforcement">
+<span id="examples-m-kappa-upe-input-reinforcement"></span><h3>Reinforcement<a class="headerlink" href="#reinforcement" title="Permalink to this heading">#</a></h3>
+<p>Reinforcement-bars may be created by <a class="reference internal" href="../api/m_n_kappa.Circle.html#m_n_kappa.Circle" title="m_n_kappa.Circle"><code class="xref py py-class docutils literal notranslate"><span class="pre">Circle</span></code></a>-class.
+The simplify this process <a class="reference internal" href="../api/m_n_kappa.RebarLayer.html#m_n_kappa.RebarLayer" title="m_n_kappa.RebarLayer"><code class="xref py py-class docutils literal notranslate"><span class="pre">RebarLayer</span></code></a> may be used as follows, creating a set of reinforcement-bar cross-sections:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">m_n_kappa</span> <span class="kn">import</span> <span class="n">RebarLayer</span>
+<span class="n">rebar_top_layer_geometry</span> <span class="o">=</span> <span class="n">RebarLayer</span><span class="p">(</span><span class="n">rebar_diameter</span><span class="o">=</span><span class="mf">12.</span><span class="p">,</span> <span class="n">centroid</span><span class="o">=</span><span class="mf">10.0</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="mi">3500</span><span class="p">,</span> <span class="n">rebar_horizontal_distance</span><span class="o">=</span><span class="mf">100.</span><span class="p">)</span>
+<span class="n">rebar_bottom_layer_left_geometry</span> <span class="o">=</span> <span class="n">RebarLayer</span><span class="p">(</span>
+        <span class="n">rebar_diameter</span><span class="o">=</span><span class="mf">10.</span><span class="p">,</span> <span class="n">centroid</span><span class="o">=</span><span class="mi">220</span><span class="o">-</span><span class="mi">10</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="mf">1650.0</span><span class="p">,</span> <span class="n">rebar_horizontal_distance</span><span class="o">=</span><span class="mf">100.</span><span class="p">,</span> <span class="n">left_edge</span><span class="o">=-</span><span class="mf">1740.</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="n">rebar_bottom_layer_right_geometry</span> <span class="o">=</span> <span class="n">RebarLayer</span><span class="p">(</span>
+        <span class="n">rebar_diameter</span><span class="o">=</span><span class="mf">10.</span><span class="p">,</span> <span class="n">centroid</span><span class="o">=</span><span class="mi">220</span><span class="o">-</span><span class="mi">10</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="mf">1650.0</span><span class="p">,</span> <span class="n">rebar_horizontal_distance</span><span class="o">=</span><span class="mf">100.</span><span class="p">,</span> <span class="n">right_edge</span><span class="o">=</span><span class="mf">1740.</span><span class="p">,</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<p>The bottom-reinforcement-layer must be split into two layers to consider the recess in the concrete-slab due to the UPE-steel profile.</p>
+<p>The material-behaviour of the reinforcement <a class="reference internal" href="../api/m_n_kappa.Reinforcement.html#m_n_kappa.Reinforcement" title="m_n_kappa.Reinforcement"><code class="xref py py-class docutils literal notranslate"><span class="pre">Reinforcement</span></code></a> derives from the <a class="reference internal" href="../api/m_n_kappa.Steel.html#m_n_kappa.Steel" title="m_n_kappa.Steel"><code class="xref py py-class docutils literal notranslate"><span class="pre">Steel</span></code></a>-class:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">m_n_kappa</span> <span class="kn">import</span> <span class="n">Reinforcement</span>
+<span class="n">rebar10_material</span> <span class="o">=</span> <span class="n">Reinforcement</span><span class="p">(</span><span class="n">f_s</span><span class="o">=</span><span class="mi">594</span><span class="p">,</span> <span class="n">f_su</span><span class="o">=</span><span class="mi">685</span><span class="p">,</span> <span class="n">epsilon_su</span><span class="o">=</span><span class="mf">0.25</span><span class="p">,</span> <span class="n">E_s</span><span class="o">=</span><span class="mi">200000</span><span class="p">)</span>
+<span class="n">rebar12_material</span> <span class="o">=</span> <span class="n">Reinforcement</span><span class="p">(</span><span class="n">f_s</span><span class="o">=</span><span class="mi">558</span><span class="p">,</span> <span class="n">f_su</span><span class="o">=</span><span class="mi">643</span><span class="p">,</span> <span class="n">epsilon_su</span><span class="o">=</span><span class="mf">0.25</span><span class="p">,</span> <span class="n">E_s</span><span class="o">=</span><span class="mi">200000</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>For combination of <code class="docutils literal notranslate"><span class="pre">Geometry</span></code> and <code class="docutils literal notranslate"><span class="pre">Material</span></code> both instance only need to be added to each other.
+By adding the resulting <a class="reference internal" href="../api/m_n_kappa.Section.html#m_n_kappa.Section" title="m_n_kappa.Section"><code class="xref py py-class docutils literal notranslate"><span class="pre">Section</span></code></a> instance to each other a <a class="reference internal" href="../api/m_n_kappa.Crosssection.html#m_n_kappa.Crosssection" title="m_n_kappa.Crosssection"><code class="xref py py-class docutils literal notranslate"><span class="pre">Crosssection</span></code></a> of rebars is created:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">rebar_top_layer</span> <span class="o">=</span> <span class="n">rebar_top_layer_geometry</span> <span class="o">+</span> <span class="n">rebar12_material</span>
+<span class="n">rebar_bottom_layer_left</span> <span class="o">=</span> <span class="n">rebar_bottom_layer_left_geometry</span> <span class="o">+</span> <span class="n">rebar10_material</span>
+<span class="n">rebar_bottom_layer_right</span> <span class="o">=</span> <span class="n">rebar_bottom_layer_right_geometry</span> <span class="o">+</span> <span class="n">rebar10_material</span>
+<span class="n">rebar_layer</span> <span class="o">=</span> <span class="n">rebar_top_layer</span> <span class="o">+</span> <span class="n">rebar_bottom_layer_left</span> <span class="o">+</span> <span class="n">rebar_bottom_layer_right</span>
+</pre></div>
+</div>
+</section>
+<section id="building-the-cross-section">
+<span id="examples-m-kappa-upe-input-building-cross-section"></span><h3>Building the cross-section<a class="headerlink" href="#building-the-cross-section" title="Permalink to this heading">#</a></h3>
+<p>The overall <a class="reference internal" href="../api/m_n_kappa.Crosssection.html#m_n_kappa.Crosssection" title="m_n_kappa.Crosssection"><code class="xref py py-class docutils literal notranslate"><span class="pre">Crosssection</span></code></a> is created by adding all parts together:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">cross_section</span> <span class="o">=</span> <span class="n">bottom_flange</span> <span class="o">+</span> <span class="n">upe200</span> <span class="o">+</span> <span class="n">concrete_slab</span> <span class="o">+</span> <span class="n">rebar_layer</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="loading">
+<span id="examples-m-kappa-upe-loading"></span><h2>Loading<a class="headerlink" href="#loading" title="Permalink to this heading">#</a></h2>
+<p>The loading of the beam is considered by <a class="reference internal" href="../api/m_n_kappa.SingleSpan.html#m_n_kappa.SingleSpan" title="m_n_kappa.SingleSpan"><code class="xref py py-class docutils literal notranslate"><span class="pre">SingleSpan</span></code></a>-class.
+The <a class="reference internal" href="../api/m_n_kappa.SingleSpan.html#m_n_kappa.SingleSpan" title="m_n_kappa.SingleSpan"><code class="xref py py-class docutils literal notranslate"><span class="pre">SingleSpan</span></code></a>-class accepts either a uniform load or a list of <a class="reference internal" href="../api/m_n_kappa.SingleLoad.html#m_n_kappa.SingleLoad" title="m_n_kappa.SingleLoad"><code class="xref py py-class docutils literal notranslate"><span class="pre">SingleLoad</span></code></a>.
+The <code class="docutils literal notranslate"><span class="pre">uniform_load</span></code>-argument accepts a float that describes a line-load that is applied uniformly over the length of the girder.
+The <a class="reference internal" href="../api/m_n_kappa.SingleLoad.html#m_n_kappa.SingleLoad" title="m_n_kappa.SingleLoad"><code class="xref py py-class docutils literal notranslate"><span class="pre">SingleLoad</span></code></a>-class represents a single load applied at a specific position along the beam:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">m_n_kappa</span> <span class="kn">import</span> <span class="n">SingleLoad</span><span class="p">,</span> <span class="n">SingleSpan</span>
+<span class="n">single_load_left</span> <span class="o">=</span> <span class="n">SingleLoad</span><span class="p">(</span><span class="n">position_in_beam</span><span class="o">=</span><span class="mf">1375.</span><span class="p">,</span> <span class="n">value</span><span class="o">=</span><span class="mf">1.0</span><span class="p">)</span>
+<span class="n">single_load_right</span> <span class="o">=</span> <span class="n">SingleLoad</span><span class="p">(</span><span class="n">position_in_beam</span><span class="o">=</span><span class="mf">1375.</span> <span class="o">+</span> <span class="mf">1250.</span><span class="p">,</span> <span class="n">value</span><span class="o">=</span><span class="mf">1.0</span><span class="p">)</span>
+<span class="n">loading</span> <span class="o">=</span> <span class="n">SingleSpan</span><span class="p">(</span><span class="n">length</span><span class="o">=</span><span class="mf">4000.0</span><span class="p">,</span> <span class="n">uniform_load</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">loads</span><span class="o">=</span><span class="p">[</span><span class="n">single_load_left</span><span class="p">,</span> <span class="n">single_load_right</span><span class="p">])</span>
+</pre></div>
+</div>
+</section>
+<section id="computation">
+<span id="examples-m-kappa-upe-computation"></span><h2>Computation<a class="headerlink" href="#computation" title="Permalink to this heading">#</a></h2>
+<section id="id1">
+<h3>Introduction<a class="headerlink" href="#id1" title="Permalink to this heading">#</a></h3>
+<p>For computation of its reaction behaviour in form of moment-curvature-curves (<span class="math notranslate nohighlight">\(M\)</span>-<span class="math notranslate nohighlight">\(\kappa\)</span>) along the beam the <a class="reference internal" href="../api/m_n_kappa.Beam.html#m_n_kappa.Beam" title="m_n_kappa.Beam"><code class="xref py py-class docutils literal notranslate"><span class="pre">Beam</span></code></a>-class is provided.</p>
+<p>At initialization the <a class="reference internal" href="../api/m_n_kappa.Beam.html#m_n_kappa.Beam" title="m_n_kappa.Beam"><code class="xref py py-class docutils literal notranslate"><span class="pre">Beam</span></code></a>-class does following things:</p>
+<ol class="arabic simple">
+<li><p>split beam into elements along the length</p></li>
+<li><p>create a <a class="reference internal" href="../api/m_n_kappa.Node.html#m_n_kappa.Node" title="m_n_kappa.deformation.Node"><code class="xref py py-class docutils literal notranslate"><span class="pre">Node</span></code></a> between these elements</p></li>
+<li><p>compute load-steps by determination of the decisive <a class="reference internal" href="../api/m_n_kappa.Node.html#m_n_kappa.Node" title="m_n_kappa.deformation.Node"><code class="xref py py-class docutils literal notranslate"><span class="pre">Node</span></code></a> and its <span class="math notranslate nohighlight">\(M\)</span>-<span class="math notranslate nohighlight">\(\kappa\)</span>-curve</p></li>
+</ol>
+<p>In <a class="reference internal" href="#examples-m-kappa-upe-geometrical-widths"><span class="std std-ref">Considering geometrical widths</span></a> the <span class="math notranslate nohighlight">\(M\)</span>-<span class="math notranslate nohighlight">\(\kappa\)</span>-curves are computed neglecting the effective widths of the computation.
+Whereas in <a class="reference internal" href="#examples-m-kappa-upe-effective-widths"><span class="std std-ref">Considering effective widths</span></a> effective widths are considered considering the bending and membran effective widths.</p>
+</section>
+<section id="considering-geometrical-widths">
+<span id="examples-m-kappa-upe-geometrical-widths"></span><h3>Considering geometrical widths<a class="headerlink" href="#considering-geometrical-widths" title="Permalink to this heading">#</a></h3>
+<p>Considering geometrical widths and neglecting effective widths are accomplished by setting <code class="docutils literal notranslate"><span class="pre">consider_widths=False</span></code>.
+Geometrical widths are in any case greater than the effective widths.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">m_n_kappa</span> <span class="kn">import</span> <span class="n">Beam</span>
+<span class="n">beam_geometrical_widths</span> <span class="o">=</span> <span class="n">Beam</span><span class="p">(</span>
+   <span class="n">cross_section</span><span class="o">=</span><span class="n">cross_section</span><span class="p">,</span>
+   <span class="n">length</span><span class="o">=</span><span class="mf">4000.</span><span class="p">,</span>
+   <span class="n">element_number</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span>
+   <span class="n">load</span><span class="o">=</span><span class="n">loading</span><span class="p">,</span>
+   <span class="n">consider_widths</span><span class="o">=</span><span class="kc">False</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="considering-effective-widths">
+<span id="examples-m-kappa-upe-effective-widths"></span><h3>Considering effective widths<a class="headerlink" href="#considering-effective-widths" title="Permalink to this heading">#</a></h3>
+<p>The effective widths of the concrete slab are taken into account during computation by passing <code class="docutils literal notranslate"><span class="pre">consider_widths=True</span></code>.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">beam_effective_widths</span> <span class="o">=</span> <span class="n">Beam</span><span class="p">(</span>
+   <span class="n">cross_section</span><span class="o">=</span><span class="n">cross_section</span><span class="p">,</span>
+   <span class="n">length</span><span class="o">=</span><span class="mf">4000.</span><span class="p">,</span>
+   <span class="n">element_number</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span>
+   <span class="n">load</span><span class="o">=</span><span class="n">loading</span><span class="p">,</span>
+   <span class="n">consider_widths</span><span class="o">=</span><span class="kc">True</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<p>The following graph shows how the effective widths are considered.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+
+<span class="n">fig</span><span class="p">,</span><span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mf">8.</span><span class="p">,</span> <span class="mf">3.</span><span class="p">))</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span>
+   <span class="n">beam_effective_widths</span><span class="o">.</span><span class="n">positions</span><span class="p">,</span>
+   <span class="n">beam_effective_widths</span><span class="o">.</span><span class="n">bending_widths</span><span class="p">(),</span>
+   <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;.&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Bending&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span>
+   <span class="n">beam_effective_widths</span><span class="o">.</span><span class="n">positions</span><span class="p">,</span>
+   <span class="n">beam_effective_widths</span><span class="o">.</span><span class="n">membran_widths</span><span class="p">(),</span>
+   <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;.&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Membran&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ticks</span><span class="p">(</span><span class="n">position</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;Position along the beam&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;Effective width&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylim</span><span class="p">(</span><span class="mf">0.</span><span class="p">,</span> <span class="mf">0.5</span><span class="o">*</span><span class="n">concrete_slab_width</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlim</span><span class="p">(</span><span class="mf">0.</span><span class="p">,</span> <span class="n">beam_effective_widths</span><span class="o">.</span><span class="n">length</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="analysis">
+<span id="examples-m-kappa-upe-analysis"></span><h2>Analysis<a class="headerlink" href="#analysis" title="Permalink to this heading">#</a></h2>
+<section id="id2">
+<h3>Introduction<a class="headerlink" href="#id2" title="Permalink to this heading">#</a></h3>
+<p>An instance of the <a class="reference internal" href="../api/m_n_kappa.Beam.html#m_n_kappa.Beam" title="m_n_kappa.Beam"><code class="xref py py-class docutils literal notranslate"><span class="pre">Beam</span></code></a>-class allows several analyses of the resistance behaviour of the computed composite beam.</p>
+</section>
+<section id="load-deformation-curve-at-point-of-maximum-deformation">
+<span id="examples-m-kappa-upe-analysis-load-deformation"></span><h3>Load-deformation-curve at point of maximum deformation<a class="headerlink" href="#load-deformation-curve-at-point-of-maximum-deformation" title="Permalink to this heading">#</a></h3>
+<p>The load-bearing behaviour of beams is often characterised by the load-deformation-curve at the point of maximum deformation under the given loading.
+<a href="#id3"><span class="problematic" id="id4">:py:method:`m_n_kappa.Beam.deformations_at_maximum_deformation_position`</span></a> returns the deformations for the decisive load-steps at this point:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">beam_deformations_geometrical_widths</span> <span class="o">=</span> <span class="n">beam_geometrical_widths</span><span class="o">.</span><span class="n">deformations_at_maximum_deformation_position</span><span class="p">()</span>
+<span class="n">beam_deformations_effective_widths</span> <span class="o">=</span> <span class="n">beam_effective_widths</span><span class="o">.</span><span class="n">deformations_at_maximum_deformation_position</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>The resulting deformations may be visualized by choosing an appropriate visualization-library, e.g. <a class="reference external" href="https://matplotlib.org/">Matplotlib</a>, <a class="reference external" href="https://altair-viz.github.io/">Altair</a> or other.
+The following example uses Matplotlib:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span><span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span>
+   <span class="n">beam_geometrical_widths</span><span class="o">.</span><span class="n">values</span><span class="p">(),</span>
+   <span class="n">beam_geometrical_widths</span><span class="o">.</span><span class="n">loadings</span><span class="p">(),</span>
+   <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;.&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;geometrical widths&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span>
+   <span class="n">beam_effective_widths</span><span class="o">.</span><span class="n">values</span><span class="p">(),</span>
+   <span class="n">beam_effective_widths</span><span class="o">.</span><span class="n">loadings</span><span class="p">(),</span>
+   <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;.&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;effective widths&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlim</span><span class="p">(</span><span class="mi">0</span><span class="p">,)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylim</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;Deformation&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Vertical Force&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="s1">&#39;major&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</section>
+</section>
+</section>
+
+        </article>
+      </div>
+      <footer>
+        
+        <div class="related-pages">
+          <a class="next-page" href="m_n_kappa_UPE.html">
+              <div class="page-info">
+                <div class="context">
+                  <span>Next</span>
+                </div>
+                <div class="title">Single span Slim-Floor Beam with <span class="math notranslate nohighlight">\(M\)</span>-<span class="math notranslate nohighlight">\(N\)</span>-<span class="math notranslate nohighlight">\(\kappa\)</span>-Curve</div>
+              </div>
+              <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
+            </a>
+          <a class="prev-page" href="index.html">
+              <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
+              <div class="page-info">
+                <div class="context">
+                  <span>Previous</span>
+                </div>
+                
+                <div class="title">Examples</div>
+                
+              </div>
+            </a>
+        </div>
+        <div class="bottom-of-page">
+          <div class="left-details">
+            <div class="copyright">
+                Copyright &#169; 2023, Johannes Schorr
+            </div>
+            Made with <a href="https://www.sphinx-doc.org/">Sphinx</a> and <a class="muted-link" href="https://pradyunsg.me">@pradyunsg</a>'s
+            
+            <a href="https://github.com/pradyunsg/furo">Furo</a>
+            
+          </div>
+          <div class="right-details">
+            
+          </div>
+        </div>
+        
+      </footer>
+    </div>
+    <aside class="toc-drawer">
+      
+      
+      <div class="toc-sticky toc-scroll">
+        <div class="toc-title-container">
+          <span class="toc-title">
+            On this page
+          </span>
+        </div>
+        <div class="toc-tree-container">
+          <div class="toc-tree">
+            <ul>
+<li><a class="reference internal" href="#">Single span slim-floor beam with <span class="math notranslate nohighlight">\(M\)</span>-<span class="math notranslate nohighlight">\(\kappa\)</span>-Curve</a><ul>
+<li><a class="reference internal" href="#introduction">Introduction</a></li>
+<li><a class="reference internal" href="#cross-section">Cross-section</a><ul>
+<li><a class="reference internal" href="#bottom-flange">Bottom-flange</a></li>
+<li><a class="reference internal" href="#upe-200">UPE 200</a></li>
+<li><a class="reference internal" href="#concrete-slab">Concrete slab</a></li>
+<li><a class="reference internal" href="#reinforcement">Reinforcement</a></li>
+<li><a class="reference internal" href="#building-the-cross-section">Building the cross-section</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#loading">Loading</a></li>
+<li><a class="reference internal" href="#computation">Computation</a><ul>
+<li><a class="reference internal" href="#id1">Introduction</a></li>
+<li><a class="reference internal" href="#considering-geometrical-widths">Considering geometrical widths</a></li>
+<li><a class="reference internal" href="#considering-effective-widths">Considering effective widths</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#analysis">Analysis</a><ul>
+<li><a class="reference internal" href="#id2">Introduction</a></li>
+<li><a class="reference internal" href="#load-deformation-curve-at-point-of-maximum-deformation">Load-deformation-curve at point of maximum deformation</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+          </div>
+        </div>
+      </div>
+      
+      
+    </aside>
+  </div>
+</div><script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/sphinx_highlight.js"></script>
+    <script src="../_static/scripts/furo.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script src="../_static/toggleprompt.js"></script>
+    <script src="../_static/design-tabs.js"></script>
+    <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    </body>
+</html>

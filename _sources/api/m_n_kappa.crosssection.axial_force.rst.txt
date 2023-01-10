@@ -1,0 +1,6 @@
+﻿m\_n\_kappa.crosssection.axial\_force
+=====================================
+
+.. currentmodule:: m_n_kappa.crosssection
+
+.. autofunction:: axial_force

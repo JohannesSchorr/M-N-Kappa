@@ -1,0 +1,28 @@
+﻿m\_n\_kappa.crosssection.EdgeStrains
+====================================
+
+.. currentmodule:: m_n_kappa.crosssection
+
+.. autoclass:: EdgeStrains
+
+   
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      ~EdgeStrains.__init__
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+   
+      ~EdgeStrains.curvature
+      ~EdgeStrains.bottom_edge_strain
+      ~EdgeStrains.top_edge_strain
+   
+   

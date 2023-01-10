@@ -1,0 +1,37 @@
+﻿m\_n\_kappa.loading.ABCSingleSpan
+=================================
+
+.. currentmodule:: m_n_kappa.loading
+
+.. autoclass:: ABCSingleSpan
+
+   
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      ~ABCSingleSpan.__init__
+      ~ABCSingleSpan.load_by
+      ~ABCSingleSpan.load_distribution_factor
+      ~ABCSingleSpan.moment
+      ~ABCSingleSpan.position_of_maximum_deformation
+      ~ABCSingleSpan.positions_of_maximum_moment
+      ~ABCSingleSpan.transversal_shear
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+   
+      ~ABCSingleSpan.length
+      ~ABCSingleSpan.loading
+      ~ABCSingleSpan.maximum_moment
+      ~ABCSingleSpan.positions
+      ~ABCSingleSpan.transversal_shear_support_left
+      ~ABCSingleSpan.transversal_shear_support_right
+   
+   

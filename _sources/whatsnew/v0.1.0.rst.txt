@@ -1,0 +1,22 @@
+.. _whatsnew010:
+
+What's new in 0.1.0 (??. January 2023)
+**************************************
+
+.. These are the changes in pandas 1.5.2. See Release notes for a full changelog including other versions of pandas.
+
+This is the initial version of :math:`M`-:math:`N`-:math:`\kappa`.
+
+.. _whatsnew010.new_features:
+
+.. New Features
+.. ============
+
+
+.. _whatsnew010.bug_fixes:
+
+.. Bug Fixes
+.. =========
+
+
+

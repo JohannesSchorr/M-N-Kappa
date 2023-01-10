@@ -1,0 +1,44 @@
+﻿m\_n\_kappa.section.ComputationSection
+======================================
+
+.. currentmodule:: m_n_kappa.section
+
+.. autoclass:: ComputationSection
+
+   
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      ~ComputationSection.__init__
+      ~ComputationSection.lever_arm
+      ~ComputationSection.material_strains
+      ~ComputationSection.maximum_negative_strain
+      ~ComputationSection.maximum_positive_strain
+      ~ComputationSection.moment
+      ~ComputationSection.section_strains
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+   
+      ~ComputationSection.axial_force
+      ~ComputationSection.bottom_edge_maximum_strain
+      ~ComputationSection.bottom_edge_minimum_strain
+      ~ComputationSection.edges_strain
+      ~ComputationSection.edges_stress
+      ~ComputationSection.geometry
+      ~ComputationSection.material
+      ~ComputationSection.section
+      ~ComputationSection.section_type
+      ~ComputationSection.stress_interception
+      ~ComputationSection.stress_slope
+      ~ComputationSection.top_edge_maximum_strain
+      ~ComputationSection.top_edge_minimum_strain
+   
+   

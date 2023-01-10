@@ -1,0 +1,58 @@
+﻿m\_n\_kappa.crosssection.ComputationCrosssectionStrainAdd
+=========================================================
+
+.. currentmodule:: m_n_kappa.crosssection
+
+.. autoclass:: ComputationCrosssectionStrainAdd
+
+   
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      ~ComputationCrosssectionStrainAdd.__init__
+      ~ComputationCrosssectionStrainAdd.add_section
+      ~ComputationCrosssectionStrainAdd.concrete_slab_width
+      ~ComputationCrosssectionStrainAdd.get_boundary_conditions
+      ~ComputationCrosssectionStrainAdd.girder_sections_axial_force
+      ~ComputationCrosssectionStrainAdd.girder_sections_moment
+      ~ComputationCrosssectionStrainAdd.left_edge
+      ~ComputationCrosssectionStrainAdd.maximum_negative_strain
+      ~ComputationCrosssectionStrainAdd.maximum_positive_strain
+      ~ComputationCrosssectionStrainAdd.right_edge
+      ~ComputationCrosssectionStrainAdd.sections_not_of_type
+      ~ComputationCrosssectionStrainAdd.sections_of_type
+      ~ComputationCrosssectionStrainAdd.slab_sections_axial_force
+      ~ComputationCrosssectionStrainAdd.slab_sections_moment
+      ~ComputationCrosssectionStrainAdd.total_axial_force
+      ~ComputationCrosssectionStrainAdd.total_moment
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+   
+      ~ComputationCrosssectionStrainAdd.axial_force
+      ~ComputationCrosssectionStrainAdd.bottom_edge
+      ~ComputationCrosssectionStrainAdd.compute_sections
+      ~ComputationCrosssectionStrainAdd.compute_split_sections
+      ~ComputationCrosssectionStrainAdd.computed_cross_section_1
+      ~ComputationCrosssectionStrainAdd.computed_cross_section_2
+      ~ComputationCrosssectionStrainAdd.computed_girder_sections
+      ~ComputationCrosssectionStrainAdd.computed_slab_sections
+      ~ComputationCrosssectionStrainAdd.girder_sections
+      ~ComputationCrosssectionStrainAdd.half_point
+      ~ComputationCrosssectionStrainAdd.height
+      ~ComputationCrosssectionStrainAdd.section_type
+      ~ComputationCrosssectionStrainAdd.sections
+      ~ComputationCrosssectionStrainAdd.slab_effective_width
+      ~ComputationCrosssectionStrainAdd.slab_sections
+      ~ComputationCrosssectionStrainAdd.strain
+      ~ComputationCrosssectionStrainAdd.strain_difference
+      ~ComputationCrosssectionStrainAdd.top_edge
+   
+   

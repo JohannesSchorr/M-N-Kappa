@@ -1,0 +1,49 @@
+﻿m\_n\_kappa.section.ComputationSectionCurvature
+===============================================
+
+.. currentmodule:: m_n_kappa.section
+
+.. autoclass:: ComputationSectionCurvature
+
+   
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      ~ComputationSectionCurvature.__init__
+      ~ComputationSectionCurvature.lever_arm
+      ~ComputationSectionCurvature.material_points_inside_curvature
+      ~ComputationSectionCurvature.material_strains
+      ~ComputationSectionCurvature.maximum_negative_strain
+      ~ComputationSectionCurvature.maximum_positive_strain
+      ~ComputationSectionCurvature.moment
+      ~ComputationSectionCurvature.section_strains
+      ~ComputationSectionCurvature.split_section
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+   
+      ~ComputationSectionCurvature.axial_force
+      ~ComputationSectionCurvature.bottom_edge_maximum_strain
+      ~ComputationSectionCurvature.bottom_edge_minimum_strain
+      ~ComputationSectionCurvature.curvature
+      ~ComputationSectionCurvature.edges_strain
+      ~ComputationSectionCurvature.edges_stress
+      ~ComputationSectionCurvature.edges_stress_difference
+      ~ComputationSectionCurvature.geometry
+      ~ComputationSectionCurvature.material
+      ~ComputationSectionCurvature.neutral_axis
+      ~ComputationSectionCurvature.section
+      ~ComputationSectionCurvature.section_type
+      ~ComputationSectionCurvature.stress_interception
+      ~ComputationSectionCurvature.stress_slope
+      ~ComputationSectionCurvature.top_edge_maximum_strain
+      ~ComputationSectionCurvature.top_edge_minimum_strain
+   
+   

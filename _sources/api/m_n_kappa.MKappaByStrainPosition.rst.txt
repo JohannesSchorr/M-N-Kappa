@@ -1,0 +1,45 @@
+﻿m\_n\_kappa.MKappaByStrainPosition
+==================================
+
+.. currentmodule:: m_n_kappa
+
+.. autoclass:: MKappaByStrainPosition
+
+   
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      ~MKappaByStrainPosition.__init__
+      ~MKappaByStrainPosition.compute
+      ~MKappaByStrainPosition.initialize
+      ~MKappaByStrainPosition.initialize_boundary_curvatures
+      ~MKappaByStrainPosition.iterate
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+   
+      ~MKappaByStrainPosition.applied_axial_force
+      ~MKappaByStrainPosition.axial_force
+      ~MKappaByStrainPosition.axial_force_tolerance
+      ~MKappaByStrainPosition.computations
+      ~MKappaByStrainPosition.computed_cross_section
+      ~MKappaByStrainPosition.cross_section
+      ~MKappaByStrainPosition.curvature
+      ~MKappaByStrainPosition.iteration
+      ~MKappaByStrainPosition.maximum_curvature
+      ~MKappaByStrainPosition.maximum_iterations
+      ~MKappaByStrainPosition.minimum_curvature
+      ~MKappaByStrainPosition.moment
+      ~MKappaByStrainPosition.neutral_axis
+      ~MKappaByStrainPosition.solver
+      ~MKappaByStrainPosition.strain_position
+      ~MKappaByStrainPosition.successful
+   
+   

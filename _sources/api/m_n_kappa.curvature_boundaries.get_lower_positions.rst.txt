@@ -1,0 +1,6 @@
+﻿m\_n\_kappa.curvature\_boundaries.get\_lower\_positions
+=======================================================
+
+.. currentmodule:: m_n_kappa.curvature_boundaries
+
+.. autofunction:: get_lower_positions

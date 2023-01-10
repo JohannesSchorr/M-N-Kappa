@@ -1,0 +1,38 @@
+﻿m\_n\_kappa.SingleSpan
+======================
+
+.. currentmodule:: m_n_kappa
+
+.. autoclass:: SingleSpan
+
+   
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      ~SingleSpan.__init__
+      ~SingleSpan.load_by
+      ~SingleSpan.load_distribution_factor
+      ~SingleSpan.moment
+      ~SingleSpan.position_of_maximum_deformation
+      ~SingleSpan.positions_of_maximum_moment
+      ~SingleSpan.transversal_shear
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+   
+      ~SingleSpan.beam
+      ~SingleSpan.length
+      ~SingleSpan.loading
+      ~SingleSpan.maximum_moment
+      ~SingleSpan.positions
+      ~SingleSpan.transversal_shear_support_left
+      ~SingleSpan.transversal_shear_support_right
+   
+   

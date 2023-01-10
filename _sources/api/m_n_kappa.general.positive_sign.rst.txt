@@ -1,0 +1,6 @@
+﻿m\_n\_kappa.general.positive\_sign
+==================================
+
+.. currentmodule:: m_n_kappa.general
+
+.. autofunction:: positive_sign
