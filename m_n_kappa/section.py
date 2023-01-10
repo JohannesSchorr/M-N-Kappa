@@ -564,7 +564,11 @@ class ComputationSectionStrain(ComputationSection):
 
 class ComputationSectionCurvature(ComputationSection):
 
-    """compute section given a curvature and a neutral axis"""
+    """
+    compute section given a curvature and a neutral axis
+
+    .. versionadded:: 0.1.0
+    """
 
     __slots__ = (
         "_section",
@@ -586,12 +590,62 @@ class ComputationSectionCurvature(ComputationSection):
         """
         Parameters
         ----------
-        section : Section
+        section : :py:class:`~m_n_kappa.Section`
             section to compute
         curvature : float
-            curvature to apply to the section
+            curvature to apply to the section :math:`\\kappa`
         neutral_axis : float
-            point where the strain_value is zero
+            point where the strain_value is zero :math:`z_\\mathrm{n}`
+
+        See Also
+        --------
+        ComputationSectionStrain: ComputationSection to compute values under constant strain
+        :ref:`theory.sections.sections`: check out for a more detailed explanation.
+
+        Notes
+        -----
+        For the basic computation refer to :py:class:`~m_n_kappa.ComputationSection`.
+
+        The overall procedure is:
+
+        1. Determine the strains at the edges from the given strain-distribution.
+           The strain-distribution is computed by the curvature and the neutral axis
+        2. Compute the stresses at the edges passing the strains to the material-model
+        3. Determine the stress-distribution (slope and interception)
+        4. Compute the axial-force by combining the stress-distribution with the
+           crosssectional area of the section
+
+        Lever-arm and moment may be computed in succession, if needed.
+
+        Examples
+        --------
+        A :py:class:`~m_n_kappa.Section` is defined as follows.
+
+        >>> from m_n_kappa import Rectangle, Steel
+        >>> steel = Steel(f_y=355)
+        >>> rectangle = Rectangle(top_edge=0.0, bottom_edge=10, width=10)
+        >>> section = steel + rectangle
+
+        The computation for a given curvature and a given neutral-axis started by invoking
+        :py:class:`~m_n_kappa.section.ComputationSectionCurvature`
+
+        >>> from m_n_kappa.section import ComputationSectionCurvature
+        >>> computed_section = ComputationSectionCurvature(section, curvature=0.0001, neutral_axis=10.0)
+
+        The computed axial-force :math:`N_i` is given as follows:
+
+        >>> computed_section.axial_force
+        -10500.0
+
+        The lever-arm :math:`r_i` is computed as follows:
+
+        >>> computed_section.lever_arm()
+        3.3333333333333335
+
+        And the moment :math:`M_i` is given as follows
+
+        >>> computed_section.moment()
+        -35000.0
         """
         self._section = section
         self._curvature = curvature
@@ -678,18 +732,33 @@ class ComputationSectionCurvature(ComputationSection):
 
     @property
     def curvature(self) -> float:
+        """input-curvature :math:`\\kappa`"""
         return self._curvature
 
     @property
     def neutral_axis(self) -> float:
+        """input neutral axis :math:`z_\\mathrm{n}`"""
         return self._neutral_axis
 
     @property
     def edges_stress_difference(self) -> float:
+        """difference of stresses between the given edges"""
         return self.edges_stress[1] - self.edges_stress[0]
 
     def split_section(self, effective_widths: EffectiveWidths = None) -> list[ComputationSection]:
-        """split sections considering the material points and the maximum effective widths"""
+        """
+        split sections considering the material points and the maximum effective widths
+
+        Parameters
+        ----------
+        effective_widths : :py:class:`~m_n_kappa.general.EffectiveWidths`
+            effective widths applied to the split section
+
+        Returns
+        -------
+        list[:py:class:`~m_n_kappa.section.ComputationSection`]
+            the split sections
+        """
         if effective_widths is not None and effective_widths.for_section_type != self.section_type:
             effective_widths = None
         sub_geometries = self.__get_sub_geometries(effective_widths)
@@ -697,6 +766,14 @@ class ComputationSectionCurvature(ComputationSection):
         return split_sections
 
     def material_points_inside_curvature(self) -> list[StrainPosition]:
+        """
+        compute those material-points that are between the given strains from
+        the given curvature and zero strain.
+
+        Returns
+        -------
+        list[:py:class:`~m_n_kappa.general.StrainPosition`]
+        """
         strain_position = []
         for strain_index, strain_value in enumerate(self._edges_strain):
             if strain_index == self.__get_allowed_position_index(strain_value):
