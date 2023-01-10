@@ -60,6 +60,8 @@ Sections and Cross-section
 
    Section
    Crosssection
+   ComputationCrosssectionStrain
+   ComputationCrosssectionCurvature
 
 .. _api.strain_based_design:
 

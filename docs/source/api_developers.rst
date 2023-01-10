@@ -68,7 +68,6 @@ Sections
 .. autosummary::
    :toctree: api/
 
-   Section
    ComputationSection
    ComputationSectionCurvature
    ComputationSectionStrain
@@ -86,9 +85,7 @@ Cross-sections
    :toctree: api/
 
    ComputationCrosssection
-   ComputationCrosssectionStrain
    ComputationCrosssectionStrainAdd
-   ComputationCrosssectionCurvature
    EdgeStrains
    CrossSectionBoundaries
 
