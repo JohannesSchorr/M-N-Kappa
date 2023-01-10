@@ -45,7 +45,7 @@ Using these values the corresponding material may be defined using :py:class:`~m
    :context:
 
    from m_n_kappa import Steel
-   bottom_flange_material = Steel(f_y=313, f_u=460, epsilon_u=0.15)
+   bottom_flange_material = Steel(f_y=313, f_u=460, failure_strain=0.15)
 
 The modulus of elasticity is assumed to be :math:`E_\mathrm{a}` = 210000 N/mm².
 The strain at yielding may be derived by :math:`\varepsilon_\mathrm{y} = f_\mathrm{y} / E_\mathrm{a}`.
@@ -86,7 +86,7 @@ The material of the UPE-profile is also created using :py:class:`~m_n_kappa.Stee
    :context:
 
    from m_n_kappa import Steel
-   upe200_material = Steel(f_y=293, f_u=443, epsilon_u=0.15)
+   upe200_material = Steel(f_y=293, f_u=443, failure_strain=0.15)
 
 Geometry and material are merged easily to a :py:class:`~m_n_kappa.Crosssection` by addition:
 
