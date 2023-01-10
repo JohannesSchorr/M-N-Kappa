@@ -98,6 +98,10 @@ html_theme_options = {
     "source_repository": "https://github.com/JohannesSchorr/M-N-Kappa/",
     "source_branch": "master",
     "source_directory": "docs/source/",
+    "announcement": "<em>Important</em> "
+                    "This 'm_n_kappa'-package has not yet been published on PyPI! "
+                    "This documentation is also currently under development. "
+                    "Plaese keep that in mind. ",
 }
 html_static_path = ['_static']
 html_logo = '_static/logo/m_kappa_logo.png'
