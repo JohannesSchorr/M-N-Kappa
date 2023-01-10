@@ -702,10 +702,61 @@ class ComputationCrosssectionStrain(ComputationCrosssection):
 
 
 class ComputationCrosssectionStrainAdd(ComputationCrosssectionStrain):
+    """
+    result of adding two ComputationCrosssectionStrain-classes to each other
 
-    def __init__(self, computed_cross_section_1, computed_cross_section_2):
+    .. versionadded: 0.1.0
+
+    If the relative displacement between two cross-sections is important, these have
+    to be looked at independent of each other.
+    This class provides the functionality to compute this relative displacement.
+    """
+    def __init__(
+        self,
+        computed_cross_section_1: ComputationCrosssectionStrain,
+        computed_cross_section_2: ComputationCrosssectionStrain
+    ):
+        """
+        Parameters
+        ----------
+        computed_cross_section_1 : :py:class:`~m_n_kappa.crosssection.ComputationCrosssectionStrain`
+            1st computed strain cross-section
+        computed_cross_section_2 : :py:class:`~m_n_kappa.crosssection.ComputationCrosssectionStrain`
+            2nd computed strain cross-section
+
+        See Also
+        --------
+        ComputationCrosssectionStrain : computed cross-section under a constant strain_value
+
+        Examples
+        --------
+        This example looks at a composite beam.
+        Therefore, first the concrete-slab is created.
+
+        >>> from m_n_kappa import Concrete, Rectangle, Crosssection
+        >>> concrete = Concrete(f_cm=35.0)
+        >>> concrete_slab = Rectangle(
+        ...     top_edge=0.0, bottom_edge=100.0, width=2000.0)
+        >>> concrete_section = concrete + concrete_slab
+        >>> concrete_cross_section = Crosssection(sections=[concrete_section])
+
+        Then a steel-beam is created.
+
+        >>> from m_n_kappa import IProfile, Steel
+        >>> steel = Steel(f_y=355)
+        >>> i_profile = IProfile(
+        ...     top_edge=100.0, t_w=9.5, h_w=200-2*15, b_fo=200.0, t_fo=15.0)
+        >>> steel_cross_section = i_profile + steel
+
+        >>> from m_n_kappa.crosssection import ComputationCrosssectionStrain
+
+        .. todo::
+           finish doc-string
+        """
         self._computed_cross_section_1 = computed_cross_section_1
         self._computed_cross_section_2 = computed_cross_section_2
+
+    # TODO: finish doc-string - this class is of importance for m-n-kappa, not for m-kappa, therefore skipped now.
 
     def __repr__(self) -> str:
         return (
