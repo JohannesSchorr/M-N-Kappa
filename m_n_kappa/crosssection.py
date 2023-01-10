@@ -1002,6 +1002,8 @@ def determine_curvatures(
     determine curvatures by combining the bottom- and
     top-edge-strains
 
+    .. versionadded:: 0.1.0
+
     :py:class:`~m_n_kappa.crosssection.EdgeStrains` allow to compute the corresponding curvature
 
     Parameters
