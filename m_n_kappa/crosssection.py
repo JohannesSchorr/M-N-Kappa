@@ -595,9 +595,11 @@ class ComputationCrosssection(Crosssection):
 
 class ComputationCrosssectionStrain(ComputationCrosssection):
 
-    """computes a cross_section under a constant strain_value"""
+    """
+    computes a cross-section under a constant strain_value
 
-    __slots__ = "_strain", "_compute_sections", "_bottom_edge", "_top_edge"
+    .. versionadded:: 0.1.0
+    """
 
     __slots__ = "_strain", "_compute_sections", "_bottom_edge", "_top_edge", "_slab_effective_widths"
 
@@ -609,10 +611,50 @@ class ComputationCrosssectionStrain(ComputationCrosssection):
         """
         Parameters
         ----------
-        sections : list[:py:class:`~m_n_kappa.Section`]
+        sections : list[:py:class:`~m_n_kappa.Section`] | :py:class:`~m_n_kappa.Crosssection`
             sections the cross_section consists of
         strain : float
-            applied constant strain_value
+            applied constant strain_value :math:`\\varepsilon`
+        slab_effective_widths: :py:class:`~m_n_kappa.EffectiveWidths`
+            effective widths’ for the slab (concrete and reinforcement)
+
+        See Also
+        --------
+        ComputationCrosssectionCurvature : computes a cross-section under a strain-distribution initialized
+           by a curvature and a neutral-axis-value
+
+        Examples
+        --------
+        >>> from m_n_kappa import IProfile, Steel
+        >>> steel = Steel(f_y=355.0)
+        >>> i_geometry = IProfile(
+        ...     top_edge=0.0, t_w=9.5, h_w=200-15*2 , t_fo=15.0, b_fo=200)
+        >>> cross_section = i_geometry + steel
+
+        To apply a ``strain`` onto the cross-section :py:class:`~m_n_kappa.crosssection.ComputationCrosssectionStrain`
+        has to be initialized as follows.
+
+        >>> from m_n_kappa.crosssection import ComputationCrosssectionStrain
+        >>> compute_cross_section = ComputationCrosssectionStrain(
+        ...     sections=cross_section, strain=0.001)
+
+        The total axial-force is given by calling
+        :py:meth:`~m_n_kappa.crosssection.ComputationCrosssectionStrain.total_axial_force()` as follows.
+
+        >>> compute_cross_section.total_axial_force()
+        1599150.0
+
+        The axial-force carryied by the slab (concrete + reinforcement) is computed by calling
+        :py:meth:`~m_n_kappa.crosssection.ComputationCrosssectionStrain.slab_sections_axial_force()`.
+
+        >>> compute_cross_section.slab_sections_axial_force()
+        0
+
+        Whereas the axial-force of the streel-girder is computed by
+        :py:meth:`~m_n_kappa.crosssection.ComputationCrosssectionStrain.girder_sections_axial_force()`.
+
+        >>> compute_cross_section.girder_sections_axial_force()
+        1599150.0
         """
         super().__init__(sections, slab_effective_widths)
         self._strain = strain
@@ -634,12 +676,12 @@ class ComputationCrosssectionStrain(ComputationCrosssection):
         return self.compute_sections
 
     def _create_computation_sections(self) -> list[ComputationSectionStrain]:
-        """transforms each :py:class:`~m_n_kappa.section.Section`
+        """transforms each :py:class:`~m_n_kappa.Section`
         into :py:class:`~m_n_kappa.section.ComputationSectionStrain`"""
         return [self._create_section(section) for section in self.sections]
 
     def _create_section(self, basic_section: Section) -> ComputationSectionStrain:
-        """transform :py:class:`~m_n_kappa.section.Section` into
+        """transform :py:class:`~m_n_kappa.Section` into
         :py:class:`~m_n_kappa.section.ComputationSection` under given ``strain``"""
         return ComputationSectionStrain(basic_section, self.strain)
 
