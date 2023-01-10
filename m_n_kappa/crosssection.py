@@ -599,7 +599,13 @@ class ComputationCrosssectionStrain(ComputationCrosssection):
 
     __slots__ = "_strain", "_compute_sections", "_bottom_edge", "_top_edge"
 
-    def __init__(self, sections: list, strain: float):
+    __slots__ = "_strain", "_compute_sections", "_bottom_edge", "_top_edge", "_slab_effective_widths"
+
+    def __init__(
+            self, sections: list | Crosssection,
+            strain: float,
+            slab_effective_widths: EffectiveWidths = None
+    ):
         """
         Parameters
         ----------
@@ -608,7 +614,7 @@ class ComputationCrosssectionStrain(ComputationCrosssection):
         strain : float
             applied constant strain_value
         """
-        super().__init__(sections)
+        super().__init__(sections, slab_effective_widths)
         self._strain = strain
         self._compute_sections = self._create_computation_sections()
 
