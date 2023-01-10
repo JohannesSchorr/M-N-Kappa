@@ -965,12 +965,15 @@ class EdgeStrains:
     """
     store strains at edges and compute curvature from these points
 
+    .. versionadded:: 0.1.0
+
+    Parameters
+    ----------
     bottom_edge_strain : StrainPosition
         strain and position at the bottom-edge
     top_edge_strain : StrainPosition
         strain and position at the top-edge
     """
-
     bottom_edge_strain: StrainPosition
     top_edge_strain: StrainPosition
 
