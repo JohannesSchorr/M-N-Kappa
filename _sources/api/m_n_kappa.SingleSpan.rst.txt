@@ -11,13 +11,25 @@
 
    .. autosummary::
    
-      ~SingleSpan.__init__
-      ~SingleSpan.load_by
-      ~SingleSpan.load_distribution_factor
-      ~SingleSpan.moment
-      ~SingleSpan.position_of_maximum_deformation
-      ~SingleSpan.positions_of_maximum_moment
-      ~SingleSpan.transversal_shear
+      
+      
+         ~SingleSpan.load_by
+      
+      
+         ~SingleSpan.load_distribution_factor
+      
+      
+         ~SingleSpan.moment
+      
+      
+         ~SingleSpan.position_of_maximum_deformation
+      
+      
+         ~SingleSpan.positions_of_maximum_moment
+      
+      
+         ~SingleSpan.transversal_shear
+      
    
    
 

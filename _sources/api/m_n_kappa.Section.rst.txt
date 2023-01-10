@@ -11,11 +11,19 @@
 
    .. autosummary::
    
-      ~Section.__init__
-      ~Section.material_strains
-      ~Section.maximum_negative_strain
-      ~Section.maximum_positive_strain
-      ~Section.section_strains
+      
+      
+         ~Section.material_strains
+      
+      
+         ~Section.maximum_negative_strain
+      
+      
+         ~Section.maximum_positive_strain
+      
+      
+         ~Section.section_strains
+      
    
    
 

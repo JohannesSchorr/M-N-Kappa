@@ -11,15 +11,31 @@
 
    .. autosummary::
    
-      ~ComputationSectionCurvature.__init__
-      ~ComputationSectionCurvature.lever_arm
-      ~ComputationSectionCurvature.material_points_inside_curvature
-      ~ComputationSectionCurvature.material_strains
-      ~ComputationSectionCurvature.maximum_negative_strain
-      ~ComputationSectionCurvature.maximum_positive_strain
-      ~ComputationSectionCurvature.moment
-      ~ComputationSectionCurvature.section_strains
-      ~ComputationSectionCurvature.split_section
+      
+      
+         ~ComputationSectionCurvature.lever_arm
+      
+      
+         ~ComputationSectionCurvature.material_points_inside_curvature
+      
+      
+         ~ComputationSectionCurvature.material_strains
+      
+      
+         ~ComputationSectionCurvature.maximum_negative_strain
+      
+      
+         ~ComputationSectionCurvature.maximum_positive_strain
+      
+      
+         ~ComputationSectionCurvature.moment
+      
+      
+         ~ComputationSectionCurvature.section_strains
+      
+      
+         ~ComputationSectionCurvature.split_section
+      
    
    
 

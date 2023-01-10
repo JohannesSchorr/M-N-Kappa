@@ -11,13 +11,25 @@
 
    .. autosummary::
    
-      ~ComputationSectionStrain.__init__
-      ~ComputationSectionStrain.lever_arm
-      ~ComputationSectionStrain.material_strains
-      ~ComputationSectionStrain.maximum_negative_strain
-      ~ComputationSectionStrain.maximum_positive_strain
-      ~ComputationSectionStrain.moment
-      ~ComputationSectionStrain.section_strains
+      
+      
+         ~ComputationSectionStrain.lever_arm
+      
+      
+         ~ComputationSectionStrain.material_strains
+      
+      
+         ~ComputationSectionStrain.maximum_negative_strain
+      
+      
+         ~ComputationSectionStrain.maximum_positive_strain
+      
+      
+         ~ComputationSectionStrain.moment
+      
+      
+         ~ComputationSectionStrain.section_strains
+      
    
    
 

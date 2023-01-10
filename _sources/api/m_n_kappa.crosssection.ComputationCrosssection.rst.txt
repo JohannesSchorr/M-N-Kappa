@@ -11,22 +11,52 @@
 
    .. autosummary::
    
-      ~ComputationCrosssection.__init__
-      ~ComputationCrosssection.add_section
-      ~ComputationCrosssection.concrete_slab_width
-      ~ComputationCrosssection.get_boundary_conditions
-      ~ComputationCrosssection.girder_sections_axial_force
-      ~ComputationCrosssection.girder_sections_moment
-      ~ComputationCrosssection.left_edge
-      ~ComputationCrosssection.maximum_negative_strain
-      ~ComputationCrosssection.maximum_positive_strain
-      ~ComputationCrosssection.right_edge
-      ~ComputationCrosssection.sections_not_of_type
-      ~ComputationCrosssection.sections_of_type
-      ~ComputationCrosssection.slab_sections_axial_force
-      ~ComputationCrosssection.slab_sections_moment
-      ~ComputationCrosssection.total_axial_force
-      ~ComputationCrosssection.total_moment
+      
+      
+         ~ComputationCrosssection.add_section
+      
+      
+         ~ComputationCrosssection.concrete_slab_width
+      
+      
+         ~ComputationCrosssection.get_boundary_conditions
+      
+      
+         ~ComputationCrosssection.girder_sections_axial_force
+      
+      
+         ~ComputationCrosssection.girder_sections_moment
+      
+      
+         ~ComputationCrosssection.left_edge
+      
+      
+         ~ComputationCrosssection.maximum_negative_strain
+      
+      
+         ~ComputationCrosssection.maximum_positive_strain
+      
+      
+         ~ComputationCrosssection.right_edge
+      
+      
+         ~ComputationCrosssection.sections_not_of_type
+      
+      
+         ~ComputationCrosssection.sections_of_type
+      
+      
+         ~ComputationCrosssection.slab_sections_axial_force
+      
+      
+         ~ComputationCrosssection.slab_sections_moment
+      
+      
+         ~ComputationCrosssection.total_axial_force
+      
+      
+         ~ComputationCrosssection.total_moment
+      
    
    
 

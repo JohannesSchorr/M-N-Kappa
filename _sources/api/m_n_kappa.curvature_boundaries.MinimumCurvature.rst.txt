@@ -11,8 +11,10 @@
 
    .. autosummary::
    
-      ~MinimumCurvature.__init__
-      ~MinimumCurvature.compute
+      
+      
+         ~MinimumCurvature.compute
+      
    
    
 

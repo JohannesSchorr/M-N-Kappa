@@ -11,22 +11,52 @@
 
    .. autosummary::
    
-      ~ComputationCrosssectionStrain.__init__
-      ~ComputationCrosssectionStrain.add_section
-      ~ComputationCrosssectionStrain.concrete_slab_width
-      ~ComputationCrosssectionStrain.get_boundary_conditions
-      ~ComputationCrosssectionStrain.girder_sections_axial_force
-      ~ComputationCrosssectionStrain.girder_sections_moment
-      ~ComputationCrosssectionStrain.left_edge
-      ~ComputationCrosssectionStrain.maximum_negative_strain
-      ~ComputationCrosssectionStrain.maximum_positive_strain
-      ~ComputationCrosssectionStrain.right_edge
-      ~ComputationCrosssectionStrain.sections_not_of_type
-      ~ComputationCrosssectionStrain.sections_of_type
-      ~ComputationCrosssectionStrain.slab_sections_axial_force
-      ~ComputationCrosssectionStrain.slab_sections_moment
-      ~ComputationCrosssectionStrain.total_axial_force
-      ~ComputationCrosssectionStrain.total_moment
+      
+      
+         ~ComputationCrosssectionStrain.add_section
+      
+      
+         ~ComputationCrosssectionStrain.concrete_slab_width
+      
+      
+         ~ComputationCrosssectionStrain.get_boundary_conditions
+      
+      
+         ~ComputationCrosssectionStrain.girder_sections_axial_force
+      
+      
+         ~ComputationCrosssectionStrain.girder_sections_moment
+      
+      
+         ~ComputationCrosssectionStrain.left_edge
+      
+      
+         ~ComputationCrosssectionStrain.maximum_negative_strain
+      
+      
+         ~ComputationCrosssectionStrain.maximum_positive_strain
+      
+      
+         ~ComputationCrosssectionStrain.right_edge
+      
+      
+         ~ComputationCrosssectionStrain.sections_not_of_type
+      
+      
+         ~ComputationCrosssectionStrain.sections_of_type
+      
+      
+         ~ComputationCrosssectionStrain.slab_sections_axial_force
+      
+      
+         ~ComputationCrosssectionStrain.slab_sections_moment
+      
+      
+         ~ComputationCrosssectionStrain.total_axial_force
+      
+      
+         ~ComputationCrosssectionStrain.total_moment
+      
    
    
 

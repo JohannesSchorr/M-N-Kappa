@@ -11,8 +11,10 @@
 
    .. autosummary::
    
-      ~SingleLoad.__init__
-      ~SingleLoad.moment
+      
+      
+         ~SingleLoad.moment
+      
    
    
 

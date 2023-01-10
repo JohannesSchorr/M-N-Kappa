@@ -325,11 +325,34 @@
 <dt class="sig sig-object py" id="m_n_kappa.crosssection.axial_force">
 <span class="sig-prename descclassname"><span class="pre">m_n_kappa.crosssection.</span></span><span class="sig-name descname"><span class="pre">axial_force</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">sections</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#m_n_kappa.crosssection.axial_force" title="Permalink to this definition">#</a></dt>
 <dd><p>compute the sum of axial-force from a list of computed sections</p>
+<div class="versionadded">
+<p><span class="versionmodified added">New in version 0.1.0.</span></p>
+</div>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>sections</strong> (<em>list</em><em>[</em><a class="reference internal" href="m_n_kappa.section.ComputationSection.html#m_n_kappa.section.ComputationSection" title="m_n_kappa.section.ComputationSection"><em>m_n_kappa.section.ComputationSection</em></a><em>]</em>) – </p>
+<dd class="field-odd"><p><strong>sections</strong> (list[<a class="reference internal" href="m_n_kappa.section.ComputationSection.html#m_n_kappa.section.ComputationSection" title="m_n_kappa.section.ComputationSection"><code class="xref py py-class docutils literal notranslate"><span class="pre">ComputationSection</span></code></a>]) – individual computed sections where the axial-forces are taken from</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>sum of axial-forces from the computed sections</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>float</p>
 </dd>
 </dl>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<dl class="simple">
+<dt><a class="reference internal" href="m_n_kappa.crosssection.moment.html#m_n_kappa.crosssection.moment" title="m_n_kappa.crosssection.moment"><code class="xref py py-obj docutils literal notranslate"><span class="pre">moment</span></code></a></dt><dd><p>computes the sum of moments</p>
+</dd>
+</dl>
+</div>
+<p class="rubric">Notes</p>
+<p>In mathematical notation the computation of the sum of axial forces <span class="math notranslate nohighlight">\(N\)</span>
+looks like this.</p>
+<div class="math-wrapper docutils container">
+<div class="math notranslate nohighlight">
+\[N = \sum_i N_i\]</div>
+</div>
 </dd></dl>
 
 </section>
@@ -414,5 +437,7 @@
     <script src="../_static/toggleprompt.js"></script>
     <script src="../_static/design-tabs.js"></script>
     <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     </body>
 </html>

@@ -11,8 +11,10 @@
 
    .. autosummary::
    
-      ~EffectiveWidths.__init__
-      ~EffectiveWidths.width
+      
+      
+         ~EffectiveWidths.width
+      
    
    
 

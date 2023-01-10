@@ -11,9 +11,13 @@
 
    .. autosummary::
    
-      ~Node.__init__
-      ~Node.curvature_by
-      ~Node.incremental_deformation
+      
+      
+         ~Node.curvature_by
+      
+      
+         ~Node.incremental_deformation
+      
    
    
 

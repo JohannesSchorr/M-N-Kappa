@@ -11,9 +11,13 @@
 
    .. autosummary::
    
-      ~Rectangle.__init__
-      ~Rectangle.get_horizontal_edges
-      ~Rectangle.split
+      
+      
+         ~Rectangle.get_horizontal_edges
+      
+      
+         ~Rectangle.split
+      
    
    
 

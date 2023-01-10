@@ -11,11 +11,19 @@
 
    .. autosummary::
    
-      ~MKappaByStrainPosition.__init__
-      ~MKappaByStrainPosition.compute
-      ~MKappaByStrainPosition.initialize
-      ~MKappaByStrainPosition.initialize_boundary_curvatures
-      ~MKappaByStrainPosition.iterate
+      
+      
+         ~MKappaByStrainPosition.compute
+      
+      
+         ~MKappaByStrainPosition.initialize
+      
+      
+         ~MKappaByStrainPosition.initialize_boundary_curvatures
+      
+      
+         ~MKappaByStrainPosition.iterate
+      
    
    
 

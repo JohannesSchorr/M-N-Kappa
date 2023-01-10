@@ -11,19 +11,43 @@
 
    .. autosummary::
    
-      ~SingleSpanSingleLoads.__init__
-      ~SingleSpanSingleLoads.load_by
-      ~SingleSpanSingleLoads.load_by_factor
-      ~SingleSpanSingleLoads.load_distribution_factor
-      ~SingleSpanSingleLoads.moment
-      ~SingleSpanSingleLoads.moment_by
-      ~SingleSpanSingleLoads.position_of_maximum_deformation
-      ~SingleSpanSingleLoads.positions_of_maximum_moment
-      ~SingleSpanSingleLoads.single_loads_with_factor
-      ~SingleSpanSingleLoads.single_loads_with_value
-      ~SingleSpanSingleLoads.single_span_with_factor
-      ~SingleSpanSingleLoads.single_span_with_value
-      ~SingleSpanSingleLoads.transversal_shear
+      
+      
+         ~SingleSpanSingleLoads.load_by
+      
+      
+         ~SingleSpanSingleLoads.load_by_factor
+      
+      
+         ~SingleSpanSingleLoads.load_distribution_factor
+      
+      
+         ~SingleSpanSingleLoads.moment
+      
+      
+         ~SingleSpanSingleLoads.moment_by
+      
+      
+         ~SingleSpanSingleLoads.position_of_maximum_deformation
+      
+      
+         ~SingleSpanSingleLoads.positions_of_maximum_moment
+      
+      
+         ~SingleSpanSingleLoads.single_loads_with_factor
+      
+      
+         ~SingleSpanSingleLoads.single_loads_with_value
+      
+      
+         ~SingleSpanSingleLoads.single_span_with_factor
+      
+      
+         ~SingleSpanSingleLoads.single_span_with_value
+      
+      
+         ~SingleSpanSingleLoads.transversal_shear
+      
    
    
 

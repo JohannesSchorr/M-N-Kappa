@@ -11,9 +11,13 @@
 
    .. autosummary::
    
-      ~ConcreteCompressionParabolaRectangle.__init__
-      ~ConcreteCompressionParabolaRectangle.stress
-      ~ConcreteCompressionParabolaRectangle.stress_strain
+      
+      
+         ~ConcreteCompressionParabolaRectangle.stress
+      
+      
+         ~ConcreteCompressionParabolaRectangle.stress_strain
+      
    
    
 

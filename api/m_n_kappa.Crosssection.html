@@ -326,51 +326,108 @@
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">m_n_kappa.</span></span><span class="sig-name descname"><span class="pre">Crosssection</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">sections</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">slab_effective_widths</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#m_n_kappa.Crosssection" title="Permalink to this definition">#</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
 <p>Combines a number of sections</p>
+<div class="versionadded">
+<p><span class="versionmodified added">New in version 0.1.0.</span></p>
+</div>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>sections</strong> (list[<a class="reference internal" href="m_n_kappa.Section.html#m_n_kappa.Section" title="m_n_kappa.section.Section"><code class="xref py py-class docutils literal notranslate"><span class="pre">Section</span></code></a>]) – sections the cross-section consists of</p></li>
+<li><p><strong>sections</strong> (list[<a class="reference internal" href="m_n_kappa.Section.html#m_n_kappa.Section" title="m_n_kappa.Section"><code class="xref py py-class docutils literal notranslate"><span class="pre">Section</span></code></a>]) – sections the cross-section consists of</p></li>
 <li><p><strong>slab_effective_widths</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">EffectiveWidths</span></code>) – effective widths’ for the slab (concrete and reinforcement)</p></li>
 </ul>
 </dd>
 </dl>
+<p class="rubric">Examples</p>
+<p>There are several ways you can create a cross-section.
+Basis are either a number of <a class="reference internal" href="m_n_kappa.Section.html#m_n_kappa.Section" title="m_n_kappa.Section"><code class="xref py py-class docutils literal notranslate"><span class="pre">Section</span></code></a>.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">m_n_kappa</span> <span class="kn">import</span> <span class="n">Concrete</span><span class="p">,</span> <span class="n">Steel</span><span class="p">,</span> <span class="n">Rectangle</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">concrete</span> <span class="o">=</span> <span class="n">Concrete</span><span class="p">(</span><span class="n">f_cm</span><span class="o">=</span><span class="mf">35.0</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">concrete_geometry_1</span> <span class="o">=</span> <span class="n">Rectangle</span><span class="p">(</span>
+<span class="gp">... </span>    <span class="n">top_edge</span><span class="o">=</span><span class="mf">0.0</span><span class="p">,</span> <span class="n">bottom_edge</span><span class="o">=</span><span class="mf">10.0</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="mf">10.0</span><span class="p">,</span> <span class="n">left_edge</span><span class="o">=-</span><span class="mf">10.0</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">concrete_section_1</span> <span class="o">=</span> <span class="n">concrete</span> <span class="o">+</span> <span class="n">concrete_geometry_1</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">steel</span> <span class="o">=</span> <span class="n">Steel</span><span class="p">(</span><span class="n">f_y</span><span class="o">=</span><span class="mf">355.0</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">steel_geometry</span> <span class="o">=</span> <span class="n">Rectangle</span><span class="p">(</span>
+<span class="gp">... </span>    <span class="n">top_edge</span><span class="o">=</span><span class="mf">10.0</span><span class="p">,</span> <span class="n">bottom_edge</span><span class="o">=</span><span class="mf">20.0</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="mf">10.0</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">steel_section</span> <span class="o">=</span> <span class="n">steel</span> <span class="o">+</span> <span class="n">steel_geometry</span>
+</pre></div>
+</div>
+<p>The above create <a class="reference internal" href="m_n_kappa.Section.html#m_n_kappa.Section" title="m_n_kappa.Section"><code class="xref py py-class docutils literal notranslate"><span class="pre">Section</span></code></a> may be combined to a cross-section like:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">cross_section_1</span> <span class="o">=</span> <span class="n">steel_section</span> <span class="o">+</span> <span class="n">concrete_section_1</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">cross_section_1</span>
+<span class="go">Crosssection(sections=sections)</span>
+</pre></div>
+</div>
+<p>Or alternatively like:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">m_n_kappa</span> <span class="kn">import</span> <span class="n">Crosssection</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">sections_list</span> <span class="o">=</span> <span class="p">[</span><span class="n">steel_section</span><span class="p">,</span> <span class="n">concrete_section_1</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">cross_section_2</span> <span class="o">=</span> <span class="n">Crosssection</span><span class="p">(</span><span class="n">sections</span><span class="o">=</span><span class="n">sections_list</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">cross_section_2</span>
+<span class="go">Crosssection(sections=sections)</span>
+</pre></div>
+</div>
+<p>This is also the only way nn case an <code class="xref py py-class docutils literal notranslate"><span class="pre">EffectiveWidths</span></code> is to be applied.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">m_n_kappa</span> <span class="kn">import</span> <span class="n">EffectiveWidths</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">widths</span> <span class="o">=</span> <span class="n">EffectiveWidths</span><span class="p">(</span><span class="n">membran</span><span class="o">=</span><span class="mf">2.0</span><span class="p">,</span> <span class="n">bending</span><span class="o">=</span><span class="mf">3.0</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">cross_section_3</span> <span class="o">=</span> <span class="n">Crosssection</span><span class="p">(</span>
+<span class="gp">... </span>    <span class="n">sections</span><span class="o">=</span><span class="n">sections_list</span><span class="p">,</span> <span class="n">slab_effective_widths</span><span class="o">=</span><span class="n">widths</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">cross_section_3</span><span class="o">.</span><span class="n">slab_effective_width</span><span class="o">.</span><span class="n">bending</span>
+<span class="go">3.0</span>
+</pre></div>
+</div>
+<p>By using a predifined <code class="xref py py-class docutils literal notranslate"><span class="pre">ComposedGeometry</span></code> a <a class="reference internal" href="#m_n_kappa.Crosssection" title="m_n_kappa.Crosssection"><code class="xref py py-class docutils literal notranslate"><span class="pre">Crosssection</span></code></a> may
+also be created easily:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">m_n_kappa</span> <span class="kn">import</span> <span class="n">IProfile</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">i_geometry</span> <span class="o">=</span> <span class="n">IProfile</span><span class="p">(</span>
+<span class="gp">... </span>    <span class="n">top_edge</span><span class="o">=</span><span class="mf">0.0</span><span class="p">,</span> <span class="n">t_w</span><span class="o">=</span><span class="mf">9.5</span><span class="p">,</span> <span class="n">h_w</span><span class="o">=</span><span class="mi">200</span><span class="o">-</span><span class="mi">15</span><span class="o">*</span><span class="mi">2</span> <span class="p">,</span> <span class="n">t_fo</span><span class="o">=</span><span class="mf">15.0</span><span class="p">,</span> <span class="n">b_fo</span><span class="o">=</span><span class="mi">200</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">cross_section_4</span> <span class="o">=</span> <span class="n">i_geometry</span> <span class="o">+</span> <span class="n">steel</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">cross_section_4</span>
+<span class="go">Crosssection(sections=sections)</span>
+</pre></div>
+</div>
+<p>Another <a class="reference internal" href="m_n_kappa.Section.html#m_n_kappa.Section" title="m_n_kappa.Section"><code class="xref py py-class docutils literal notranslate"><span class="pre">Section</span></code></a> may be added also on different ways:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">concrete_geometry_2</span> <span class="o">=</span> <span class="n">Rectangle</span><span class="p">(</span>
+<span class="gp">... </span>    <span class="n">top_edge</span><span class="o">=</span><span class="mf">0.0</span><span class="p">,</span> <span class="n">bottom_edge</span><span class="o">=</span><span class="mf">10.0</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="mf">10.0</span><span class="p">,</span> <span class="n">left_edge</span><span class="o">=</span><span class="mf">0.0</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">concrete_section_2</span> <span class="o">=</span> <span class="n">concrete</span> <span class="o">+</span> <span class="n">concrete_geometry_2</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">cross_section_1</span> <span class="o">=</span> <span class="n">cross_section_1</span> <span class="o">+</span> <span class="n">concrete_section_2</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">len</span><span class="p">(</span><span class="n">cross_section_1</span><span class="o">.</span><span class="n">sections</span><span class="p">)</span>
+<span class="go">3</span>
+</pre></div>
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">cross_section_2</span><span class="o">.</span><span class="n">add_section</span><span class="p">(</span><span class="n">concrete_section_2</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">len</span><span class="p">(</span><span class="n">cross_section_2</span><span class="o">.</span><span class="n">sections</span><span class="p">)</span>
+<span class="go">3</span>
+</pre></div>
+</div>
+<p>Subsequently, the <a class="reference internal" href="#m_n_kappa.Crosssection" title="m_n_kappa.Crosssection"><code class="xref py py-class docutils literal notranslate"><span class="pre">Crosssection</span></code></a> is needed for all computations.</p>
 <p class="rubric">Methods</p>
 <div class="table-wrapper autosummary longtable docutils container">
 <table class="autosummary longtable docutils align-default">
 <tbody>
-<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">__init__</span></code>([sections, slab_effective_widths])</p></td>
-<td><p><dl class="field-list simple">
-<dt class="field-odd">param sections<span class="colon">:</span></dt>
-<dd class="field-odd"><p>sections the cross-section consists of</p>
-</dd>
-</dl>
-</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#m_n_kappa.Crosssection.add_section" title="m_n_kappa.Crosssection.add_section"><code class="xref py py-obj docutils literal notranslate"><span class="pre">add_section</span></code></a>(section)</p></td>
+<td><p>add a <a class="reference internal" href="m_n_kappa.Section.html#m_n_kappa.Section" title="m_n_kappa.Section"><code class="xref py py-class docutils literal notranslate"><span class="pre">Section</span></code></a> to this cross-section</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#m_n_kappa.Crosssection.add_section" title="m_n_kappa.Crosssection.add_section"><code class="xref py py-obj docutils literal notranslate"><span class="pre">add_section</span></code></a>(section)</p></td>
-<td><p>add a <code class="xref py py-class docutils literal notranslate"><span class="pre">Section</span></code> to this cross-section</p></td>
-</tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#m_n_kappa.Crosssection.concrete_slab_width" title="m_n_kappa.Crosssection.concrete_slab_width"><code class="xref py py-obj docutils literal notranslate"><span class="pre">concrete_slab_width</span></code></a>()</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#m_n_kappa.Crosssection.concrete_slab_width" title="m_n_kappa.Crosssection.concrete_slab_width"><code class="xref py py-obj docutils literal notranslate"><span class="pre">concrete_slab_width</span></code></a>()</p></td>
 <td><p>full width of the concrete slab</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#m_n_kappa.Crosssection.get_boundary_conditions" title="m_n_kappa.Crosssection.get_boundary_conditions"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_boundary_conditions</span></code></a>()</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#m_n_kappa.Crosssection.get_boundary_conditions" title="m_n_kappa.Crosssection.get_boundary_conditions"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_boundary_conditions</span></code></a>()</p></td>
 <td><p>curvature boundary values under positive and negative curvature</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#m_n_kappa.Crosssection.left_edge" title="m_n_kappa.Crosssection.left_edge"><code class="xref py py-obj docutils literal notranslate"><span class="pre">left_edge</span></code></a>()</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#m_n_kappa.Crosssection.left_edge" title="m_n_kappa.Crosssection.left_edge"><code class="xref py py-obj docutils literal notranslate"><span class="pre">left_edge</span></code></a>()</p></td>
 <td><p>outer left-edge of the concrete-slab</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#m_n_kappa.Crosssection.maximum_negative_strain" title="m_n_kappa.Crosssection.maximum_negative_strain"><code class="xref py py-obj docutils literal notranslate"><span class="pre">maximum_negative_strain</span></code></a>()</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#m_n_kappa.Crosssection.maximum_negative_strain" title="m_n_kappa.Crosssection.maximum_negative_strain"><code class="xref py py-obj docutils literal notranslate"><span class="pre">maximum_negative_strain</span></code></a>()</p></td>
 <td><p>determine maximum positive strain of all sections associated with this cross-section</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#m_n_kappa.Crosssection.maximum_positive_strain" title="m_n_kappa.Crosssection.maximum_positive_strain"><code class="xref py py-obj docutils literal notranslate"><span class="pre">maximum_positive_strain</span></code></a>()</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#m_n_kappa.Crosssection.maximum_positive_strain" title="m_n_kappa.Crosssection.maximum_positive_strain"><code class="xref py py-obj docutils literal notranslate"><span class="pre">maximum_positive_strain</span></code></a>()</p></td>
 <td><p>determine maximum positive strain of all sections associated with this cross-section</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#m_n_kappa.Crosssection.right_edge" title="m_n_kappa.Crosssection.right_edge"><code class="xref py py-obj docutils literal notranslate"><span class="pre">right_edge</span></code></a>()</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#m_n_kappa.Crosssection.right_edge" title="m_n_kappa.Crosssection.right_edge"><code class="xref py py-obj docutils literal notranslate"><span class="pre">right_edge</span></code></a>()</p></td>
 <td><p>outer right-edge of the concrete-slab</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#m_n_kappa.Crosssection.sections_not_of_type" title="m_n_kappa.Crosssection.sections_not_of_type"><code class="xref py py-obj docutils literal notranslate"><span class="pre">sections_not_of_type</span></code></a>(section_type)</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#m_n_kappa.Crosssection.sections_not_of_type" title="m_n_kappa.Crosssection.sections_not_of_type"><code class="xref py py-obj docutils literal notranslate"><span class="pre">sections_not_of_type</span></code></a>(section_type)</p></td>
 <td><p>get a list of sections that are not of the specified typ</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#m_n_kappa.Crosssection.sections_of_type" title="m_n_kappa.Crosssection.sections_of_type"><code class="xref py py-obj docutils literal notranslate"><span class="pre">sections_of_type</span></code></a>(section_type)</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#m_n_kappa.Crosssection.sections_of_type" title="m_n_kappa.Crosssection.sections_of_type"><code class="xref py py-obj docutils literal notranslate"><span class="pre">sections_of_type</span></code></a>(section_type)</p></td>
 <td><p>get a list of sections that are of the specified type associated with this cross-section</p></td>
 </tr>
 </tbody>
@@ -384,7 +441,7 @@
 <td><p>overall vertical position of the bottom edge of the cross-section <span class="math notranslate nohighlight">\(z_\mathrm{bottom}\)</span></p></td>
 </tr>
 <tr class="row-even"><td><p><a class="reference internal" href="#m_n_kappa.Crosssection.girder_sections" title="m_n_kappa.Crosssection.girder_sections"><code class="xref py py-obj docutils literal notranslate"><span class="pre">girder_sections</span></code></a></p></td>
-<td><p>class:<a href="#id1"><span class="problematic" id="id2">`</span></a>~m_n_kappa.section.Section belonging to te girder</p></td>
+<td><p><a class="reference internal" href="m_n_kappa.Section.html#m_n_kappa.Section" title="m_n_kappa.Section"><code class="xref py py-class docutils literal notranslate"><span class="pre">Section</span></code></a> belonging to te girder</p></td>
 </tr>
 <tr class="row-odd"><td><p><a class="reference internal" href="#m_n_kappa.Crosssection.half_point" title="m_n_kappa.Crosssection.half_point"><code class="xref py py-obj docutils literal notranslate"><span class="pre">half_point</span></code></a></p></td>
 <td><p>vertical middle between and bottom</p></td>
@@ -413,16 +470,16 @@
 <dl class="py method">
 <dt class="sig sig-object py" id="m_n_kappa.Crosssection.add_section">
 <span class="sig-name descname"><span class="pre">add_section</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">section</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#m_n_kappa.Crosssection.add_section" title="Permalink to this definition">#</a></dt>
-<dd><p>add a <code class="xref py py-class docutils literal notranslate"><span class="pre">Section</span></code> to this cross-section</p>
+<dd><p>add a <a class="reference internal" href="m_n_kappa.Section.html#m_n_kappa.Section" title="m_n_kappa.Section"><code class="xref py py-class docutils literal notranslate"><span class="pre">Section</span></code></a> to this cross-section</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>section</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">Section</span></code>) – section to add to this cross-section</p>
+<dd class="field-odd"><p><strong>section</strong> (<a class="reference internal" href="m_n_kappa.Section.html#m_n_kappa.Section" title="m_n_kappa.Section"><code class="xref py py-class docutils literal notranslate"><span class="pre">Section</span></code></a>) – section to add to this cross-section</p>
 </dd>
 <dt class="field-even">Return type<span class="colon">:</span></dt>
 <dd class="field-even"><p>None</p>
 </dd>
 <dt class="field-odd">Raises<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>ValueError</strong> – if <code class="docutils literal notranslate"><span class="pre">section</span></code> is not of type <a class="reference internal" href="m_n_kappa.Section.html#m_n_kappa.Section" title="m_n_kappa.section.Section"><code class="xref py py-class docutils literal notranslate"><span class="pre">Section</span></code></a></p>
+<dd class="field-odd"><p><strong>ValueError</strong> – if <code class="docutils literal notranslate"><span class="pre">section</span></code> is not of type <a class="reference internal" href="m_n_kappa.Section.html#m_n_kappa.Section" title="m_n_kappa.Section"><code class="xref py py-class docutils literal notranslate"><span class="pre">Section</span></code></a></p>
 </dd>
 </dl>
 </dd></dl>
@@ -442,7 +499,6 @@
 <dt class="sig sig-object py" id="m_n_kappa.Crosssection.get_boundary_conditions">
 <span class="sig-name descname"><span class="pre">get_boundary_conditions</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#m_n_kappa.Crosssection.get_boundary_conditions" title="Permalink to this definition">#</a></dt>
 <dd><p>curvature boundary values under positive and negative curvature</p>
-<p>see <a class="reference internal" href="m_n_kappa.crosssection.CrossSectionBoundaries.html#m_n_kappa.crosssection.CrossSectionBoundaries.get_boundaries" title="m_n_kappa.crosssection.CrossSectionBoundaries.get_boundaries"><code class="xref py py-meth docutils literal notranslate"><span class="pre">get_boundaries()</span></code></a></p>
 <dl class="field-list simple">
 <dt class="field-odd">Returns<span class="colon">:</span></dt>
 <dd class="field-odd"><p>curvature boundary values under positive and negative curvature</p>
@@ -451,6 +507,10 @@
 <dd class="field-even"><p><a class="reference internal" href="m_n_kappa.curvature_boundaries.Boundaries.html#m_n_kappa.curvature_boundaries.Boundaries" title="m_n_kappa.curvature_boundaries.Boundaries"><code class="xref py py-class docutils literal notranslate"><span class="pre">Boundaries</span></code></a></p>
 </dd>
 </dl>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p><a class="reference internal" href="m_n_kappa.crosssection.CrossSectionBoundaries.html#m_n_kappa.crosssection.CrossSectionBoundaries.get_boundaries" title="m_n_kappa.crosssection.CrossSectionBoundaries.get_boundaries"><code class="xref py py-meth docutils literal notranslate"><span class="pre">get_boundaries()</span></code></a></p>
+</div>
 </dd></dl>
 
 <dl class="py method">
@@ -511,19 +571,21 @@ associated with this cross-section</p>
 <dt class="sig sig-object py" id="m_n_kappa.Crosssection.sections_not_of_type">
 <span class="sig-name descname"><span class="pre">sections_not_of_type</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">section_type</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#m_n_kappa.Crosssection.sections_not_of_type" title="Permalink to this definition">#</a></dt>
 <dd><p>get a list of sections that are not of the specified typ</p>
-<dl class="simple">
-<dt>Possible section-types are:</dt><dd><ul class="simple">
-<li><p>‘slab’   -&gt; concrete slab + reinforcement</p></li>
-<li><p>‘girder’ -&gt; Steel girder</p></li>
-</ul>
-</dd>
-</dl>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>section_type</strong> (<em>str</em>) – </p>
+<dd class="field-odd"><p><strong>section_type</strong> (<em>str</em>) – <p>type of section to search for.
+Possible section-types are:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">'slab'</span></code>   -&gt; concrete slab + reinforcement</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">'girder'</span></code> -&gt; Steel girder</p></li>
+</ul>
+</p>
 </dd>
-<dt class="field-even">Return type<span class="colon">:</span></dt>
-<dd class="field-even"><p>list[<a class="reference internal" href="m_n_kappa.Section.html#m_n_kappa.Section" title="m_n_kappa.section.Section">m_n_kappa.section.Section</a>]</p>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>sections of the specified type associated with this cross-section</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>list[<a class="reference internal" href="m_n_kappa.Section.html#m_n_kappa.Section" title="m_n_kappa.Section"><code class="xref py py-class docutils literal notranslate"><span class="pre">Section</span></code></a>]</p>
 </dd>
 </dl>
 </dd></dl>
@@ -538,19 +600,17 @@ Therefore, these sections must have been added before to this cross-section.</p>
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>section_type</strong> (<em>str</em>) – <p>type of section to search for.
 Possible section-types are:</p>
-<blockquote>
-<div><ul class="simple">
-<li><p>’slab’   -&gt; concrete slab + reinforcement</p></li>
-<li><p>’girder’ -&gt; Steel girder</p></li>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">'slab'</span></code>   -&gt; concrete slab + reinforcement</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">'girder'</span></code> -&gt; Steel girder</p></li>
 </ul>
-</div></blockquote>
 </p>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p>sections of the specified type associated with this cross-section</p>
 </dd>
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>list[<a class="reference internal" href="m_n_kappa.Section.html#m_n_kappa.Section" title="m_n_kappa.Section">Section</a>]</p>
+<dd class="field-odd"><p>list[<a class="reference internal" href="m_n_kappa.Section.html#m_n_kappa.Section" title="m_n_kappa.Section"><code class="xref py py-class docutils literal notranslate"><span class="pre">Section</span></code></a>]</p>
 </dd>
 </dl>
 </dd></dl>
@@ -564,12 +624,7 @@ Possible section-types are:</p>
 <dl class="py property">
 <dt class="sig sig-object py" id="m_n_kappa.Crosssection.girder_sections">
 <em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">girder_sections</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">list</span></em><a class="headerlink" href="#m_n_kappa.Crosssection.girder_sections" title="Permalink to this definition">#</a></dt>
-<dd><p>class:<a href="#id3"><span class="problematic" id="id4">`</span></a>~m_n_kappa.section.Section belonging to te girder</p>
-<dl class="field-list simple">
-<dt class="field-odd">Type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>py</p>
-</dd>
-</dl>
+<dd><p><a class="reference internal" href="m_n_kappa.Section.html#m_n_kappa.Section" title="m_n_kappa.Section"><code class="xref py py-class docutils literal notranslate"><span class="pre">Section</span></code></a> belonging to te girder</p>
 </dd></dl>
 
 <dl class="py property">

@@ -326,22 +326,17 @@
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">m_n_kappa.crosssection.</span></span><span class="sig-name descname"><span class="pre">EdgeStrains</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">bottom_edge_strain</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">top_edge_strain</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#m_n_kappa.crosssection.EdgeStrains" title="Permalink to this definition">#</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
 <p>store strains at edges and compute curvature from these points</p>
-<dl class="simple">
-<dt>bottom_edge_strain<span class="classifier">StrainPosition</span></dt><dd><p>strain and position at the bottom-edge</p>
-</dd>
-<dt>top_edge_strain<span class="classifier">StrainPosition</span></dt><dd><p>strain and position at the top-edge</p>
+<div class="versionadded">
+<p><span class="versionmodified added">New in version 0.1.0.</span></p>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>bottom_edge_strain</strong> (<a class="reference internal" href="m_n_kappa.general.StrainPosition.html#m_n_kappa.general.StrainPosition" title="m_n_kappa.general.StrainPosition"><em>StrainPosition</em></a>) – strain and position at the bottom-edge</p></li>
+<li><p><strong>top_edge_strain</strong> (<a class="reference internal" href="m_n_kappa.general.StrainPosition.html#m_n_kappa.general.StrainPosition" title="m_n_kappa.general.StrainPosition"><em>StrainPosition</em></a>) – strain and position at the top-edge</p></li>
+</ul>
 </dd>
 </dl>
-<p class="rubric">Methods</p>
-<div class="table-wrapper autosummary longtable docutils container">
-<table class="autosummary longtable docutils align-default">
-<tbody>
-<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">__init__</span></code>(bottom_edge_strain, top_edge_strain)</p></td>
-<td><p></p></td>
-</tr>
-</tbody>
-</table>
-</div>
 <p class="rubric">Attributes</p>
 <div class="table-wrapper autosummary longtable docutils container">
 <table class="autosummary longtable docutils align-default">
@@ -358,14 +353,6 @@
 </tbody>
 </table>
 </div>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>bottom_edge_strain</strong> (<a class="reference internal" href="m_n_kappa.general.StrainPosition.html#m_n_kappa.general.StrainPosition" title="m_n_kappa.general.StrainPosition"><em>StrainPosition</em></a>) – </p></li>
-<li><p><strong>top_edge_strain</strong> (<a class="reference internal" href="m_n_kappa.general.StrainPosition.html#m_n_kappa.general.StrainPosition" title="m_n_kappa.general.StrainPosition"><em>StrainPosition</em></a>) – </p></li>
-</ul>
-</dd>
-</dl>
 <dl class="py property">
 <dt class="sig sig-object py" id="m_n_kappa.crosssection.EdgeStrains.curvature">
 <em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">curvature</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">float</span></em><a class="headerlink" href="#m_n_kappa.crosssection.EdgeStrains.curvature" title="Permalink to this definition">#</a></dt>

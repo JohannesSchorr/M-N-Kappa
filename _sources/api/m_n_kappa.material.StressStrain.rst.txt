@@ -11,8 +11,10 @@
 
    .. autosummary::
    
-      ~StressStrain.__init__
-      ~StressStrain.pair
+      
+      
+         ~StressStrain.pair
+      
    
    
 

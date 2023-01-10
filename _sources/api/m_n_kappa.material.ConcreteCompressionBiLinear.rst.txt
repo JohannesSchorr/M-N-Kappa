@@ -11,9 +11,13 @@
 
    .. autosummary::
    
-      ~ConcreteCompressionBiLinear.__init__
-      ~ConcreteCompressionBiLinear.stress
-      ~ConcreteCompressionBiLinear.stress_strain
+      
+      
+         ~ConcreteCompressionBiLinear.stress
+      
+      
+         ~ConcreteCompressionBiLinear.stress_strain
+      
    
    
 

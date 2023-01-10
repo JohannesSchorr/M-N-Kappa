@@ -11,8 +11,10 @@
 
    .. autosummary::
    
-      ~MaximumCurvature.__init__
-      ~MaximumCurvature.compute
+      
+      
+         ~MaximumCurvature.compute
+      
    
    
 

@@ -11,10 +11,16 @@
 
    .. autosummary::
    
-      ~Geometry.__init__
-      ~Geometry.area
-      ~Geometry.centroid
-      ~Geometry.split
+      
+      
+         ~Geometry.area
+      
+      
+         ~Geometry.centroid
+      
+      
+         ~Geometry.split
+      
    
    
 

@@ -11,23 +11,55 @@
 
    .. autosummary::
    
-      ~ComputationCrosssectionCurvature.__init__
-      ~ComputationCrosssectionCurvature.add_section
-      ~ComputationCrosssectionCurvature.concrete_slab_width
-      ~ComputationCrosssectionCurvature.get_boundary_conditions
-      ~ComputationCrosssectionCurvature.get_material_points_inside_curvature
-      ~ComputationCrosssectionCurvature.girder_sections_axial_force
-      ~ComputationCrosssectionCurvature.girder_sections_moment
-      ~ComputationCrosssectionCurvature.left_edge
-      ~ComputationCrosssectionCurvature.maximum_negative_strain
-      ~ComputationCrosssectionCurvature.maximum_positive_strain
-      ~ComputationCrosssectionCurvature.right_edge
-      ~ComputationCrosssectionCurvature.sections_not_of_type
-      ~ComputationCrosssectionCurvature.sections_of_type
-      ~ComputationCrosssectionCurvature.slab_sections_axial_force
-      ~ComputationCrosssectionCurvature.slab_sections_moment
-      ~ComputationCrosssectionCurvature.total_axial_force
-      ~ComputationCrosssectionCurvature.total_moment
+      
+      
+         ~ComputationCrosssectionCurvature.add_section
+      
+      
+         ~ComputationCrosssectionCurvature.concrete_slab_width
+      
+      
+         ~ComputationCrosssectionCurvature.get_boundary_conditions
+      
+      
+         ~ComputationCrosssectionCurvature.get_material_points_inside_curvature
+      
+      
+         ~ComputationCrosssectionCurvature.girder_sections_axial_force
+      
+      
+         ~ComputationCrosssectionCurvature.girder_sections_moment
+      
+      
+         ~ComputationCrosssectionCurvature.left_edge
+      
+      
+         ~ComputationCrosssectionCurvature.maximum_negative_strain
+      
+      
+         ~ComputationCrosssectionCurvature.maximum_positive_strain
+      
+      
+         ~ComputationCrosssectionCurvature.right_edge
+      
+      
+         ~ComputationCrosssectionCurvature.sections_not_of_type
+      
+      
+         ~ComputationCrosssectionCurvature.sections_of_type
+      
+      
+         ~ComputationCrosssectionCurvature.slab_sections_axial_force
+      
+      
+         ~ComputationCrosssectionCurvature.slab_sections_moment
+      
+      
+         ~ComputationCrosssectionCurvature.total_axial_force
+      
+      
+         ~ComputationCrosssectionCurvature.total_moment
+      
    
    
 

@@ -11,11 +11,19 @@
 
    .. autosummary::
    
-      ~Trapezoid.__init__
-      ~Trapezoid.left_edge
-      ~Trapezoid.right_edge
-      ~Trapezoid.split
-      ~Trapezoid.width
+      
+      
+         ~Trapezoid.left_edge
+      
+      
+         ~Trapezoid.right_edge
+      
+      
+         ~Trapezoid.split
+      
+      
+         ~Trapezoid.width
+      
    
    
 

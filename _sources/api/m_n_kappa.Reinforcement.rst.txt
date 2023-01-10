@@ -11,13 +11,25 @@
 
    .. autosummary::
    
-      ~Reinforcement.__init__
-      ~Reinforcement.get_intermediate_strains
-      ~Reinforcement.get_material_stress
-      ~Reinforcement.sort_strains
-      ~Reinforcement.sort_strains_ascending
-      ~Reinforcement.sort_strains_descending
-      ~Reinforcement.stress_strain_standard
+      
+      
+         ~Reinforcement.get_intermediate_strains
+      
+      
+         ~Reinforcement.get_material_stress
+      
+      
+         ~Reinforcement.sort_strains
+      
+      
+         ~Reinforcement.sort_strains_ascending
+      
+      
+         ~Reinforcement.sort_strains_descending
+      
+      
+         ~Reinforcement.stress_strain_standard
+      
    
    
 

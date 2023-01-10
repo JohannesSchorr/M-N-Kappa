@@ -11,8 +11,10 @@
 
    .. autosummary::
    
-      ~ConcreteTension.__init__
-      ~ConcreteTension.stress_strain
+      
+      
+         ~ConcreteTension.stress_strain
+      
    
    
 

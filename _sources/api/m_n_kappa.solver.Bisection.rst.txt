@@ -11,9 +11,13 @@
 
    .. autosummary::
    
-      ~Bisection.__init__
-      ~Bisection.compute
-      ~Bisection.print_values
+      
+      
+         ~Bisection.compute
+      
+      
+         ~Bisection.print_values
+      
    
    
 

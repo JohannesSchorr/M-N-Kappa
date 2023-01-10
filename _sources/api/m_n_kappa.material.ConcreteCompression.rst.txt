@@ -11,9 +11,13 @@
 
    .. autosummary::
    
-      ~ConcreteCompression.__init__
-      ~ConcreteCompression.stress
-      ~ConcreteCompression.stress_strain
+      
+      
+         ~ConcreteCompression.stress
+      
+      
+         ~ConcreteCompression.stress_strain
+      
    
    
 

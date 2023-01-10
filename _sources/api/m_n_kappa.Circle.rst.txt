@@ -11,8 +11,10 @@
 
    .. autosummary::
    
-      ~Circle.__init__
-      ~Circle.split
+      
+      
+         ~Circle.split
+      
    
    
 

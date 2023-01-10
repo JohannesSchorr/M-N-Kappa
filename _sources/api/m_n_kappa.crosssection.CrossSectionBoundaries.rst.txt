@@ -11,17 +11,37 @@
 
    .. autosummary::
    
-      ~CrossSectionBoundaries.__init__
-      ~CrossSectionBoundaries.add_section
-      ~CrossSectionBoundaries.concrete_slab_width
-      ~CrossSectionBoundaries.get_boundaries
-      ~CrossSectionBoundaries.get_boundary_conditions
-      ~CrossSectionBoundaries.left_edge
-      ~CrossSectionBoundaries.maximum_negative_strain
-      ~CrossSectionBoundaries.maximum_positive_strain
-      ~CrossSectionBoundaries.right_edge
-      ~CrossSectionBoundaries.sections_not_of_type
-      ~CrossSectionBoundaries.sections_of_type
+      
+      
+         ~CrossSectionBoundaries.add_section
+      
+      
+         ~CrossSectionBoundaries.concrete_slab_width
+      
+      
+         ~CrossSectionBoundaries.get_boundaries
+      
+      
+         ~CrossSectionBoundaries.get_boundary_conditions
+      
+      
+         ~CrossSectionBoundaries.left_edge
+      
+      
+         ~CrossSectionBoundaries.maximum_negative_strain
+      
+      
+         ~CrossSectionBoundaries.maximum_positive_strain
+      
+      
+         ~CrossSectionBoundaries.right_edge
+      
+      
+         ~CrossSectionBoundaries.sections_not_of_type
+      
+      
+         ~CrossSectionBoundaries.sections_of_type
+      
    
    
 

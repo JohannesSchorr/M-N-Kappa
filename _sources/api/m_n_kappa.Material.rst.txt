@@ -11,12 +11,22 @@
 
    .. autosummary::
    
-      ~Material.__init__
-      ~Material.get_intermediate_strains
-      ~Material.get_material_stress
-      ~Material.sort_strains
-      ~Material.sort_strains_ascending
-      ~Material.sort_strains_descending
+      
+      
+         ~Material.get_intermediate_strains
+      
+      
+         ~Material.get_material_stress
+      
+      
+         ~Material.sort_strains
+      
+      
+         ~Material.sort_strains_ascending
+      
+      
+         ~Material.sort_strains_descending
+      
    
    
 

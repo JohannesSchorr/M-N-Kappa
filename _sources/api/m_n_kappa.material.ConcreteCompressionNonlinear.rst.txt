@@ -11,11 +11,19 @@
 
    .. autosummary::
    
-      ~ConcreteCompressionNonlinear.__init__
-      ~ConcreteCompressionNonlinear.eta
-      ~ConcreteCompressionNonlinear.k
-      ~ConcreteCompressionNonlinear.stress
-      ~ConcreteCompressionNonlinear.stress_strain
+      
+      
+         ~ConcreteCompressionNonlinear.eta
+      
+      
+         ~ConcreteCompressionNonlinear.k
+      
+      
+         ~ConcreteCompressionNonlinear.stress
+      
+      
+         ~ConcreteCompressionNonlinear.stress_strain
+      
    
    
 

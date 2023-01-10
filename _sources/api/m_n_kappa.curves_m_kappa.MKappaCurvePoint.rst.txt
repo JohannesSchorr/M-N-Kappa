@@ -11,9 +11,13 @@
 
    .. autosummary::
    
-      ~MKappaCurvePoint.__init__
-      ~MKappaCurvePoint.curvature_moment
-      ~MKappaCurvePoint.moment_curvature
+      
+      
+         ~MKappaCurvePoint.curvature_moment
+      
+      
+         ~MKappaCurvePoint.moment_curvature
+      
    
    
 

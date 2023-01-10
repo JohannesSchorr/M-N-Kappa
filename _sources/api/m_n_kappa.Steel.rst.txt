@@ -11,13 +11,25 @@
 
    .. autosummary::
    
-      ~Steel.__init__
-      ~Steel.get_intermediate_strains
-      ~Steel.get_material_stress
-      ~Steel.sort_strains
-      ~Steel.sort_strains_ascending
-      ~Steel.sort_strains_descending
-      ~Steel.stress_strain_standard
+      
+      
+         ~Steel.get_intermediate_strains
+      
+      
+         ~Steel.get_material_stress
+      
+      
+         ~Steel.sort_strains
+      
+      
+         ~Steel.sort_strains_ascending
+      
+      
+         ~Steel.sort_strains_descending
+      
+      
+         ~Steel.stress_strain_standard
+      
    
    
 

@@ -11,8 +11,10 @@
 
    .. autosummary::
    
-      ~Solver.__init__
-      ~Solver.compute
+      
+      
+         ~Solver.compute
+      
    
    
 

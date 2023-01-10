@@ -11,12 +11,22 @@
 
    .. autosummary::
    
-      ~Concrete.__init__
-      ~Concrete.get_intermediate_strains
-      ~Concrete.get_material_stress
-      ~Concrete.sort_strains
-      ~Concrete.sort_strains_ascending
-      ~Concrete.sort_strains_descending
+      
+      
+         ~Concrete.get_intermediate_strains
+      
+      
+         ~Concrete.get_material_stress
+      
+      
+         ~Concrete.sort_strains
+      
+      
+         ~Concrete.sort_strains_ascending
+      
+      
+         ~Concrete.sort_strains_descending
+      
    
    
 

@@ -11,14 +11,28 @@
 
    .. autosummary::
    
-      ~SingleSpanUniformLoad.__init__
-      ~SingleSpanUniformLoad.load_by
-      ~SingleSpanUniformLoad.load_by_moment
-      ~SingleSpanUniformLoad.load_distribution_factor
-      ~SingleSpanUniformLoad.moment
-      ~SingleSpanUniformLoad.position_of_maximum_deformation
-      ~SingleSpanUniformLoad.positions_of_maximum_moment
-      ~SingleSpanUniformLoad.transversal_shear
+      
+      
+         ~SingleSpanUniformLoad.load_by
+      
+      
+         ~SingleSpanUniformLoad.load_by_moment
+      
+      
+         ~SingleSpanUniformLoad.load_distribution_factor
+      
+      
+         ~SingleSpanUniformLoad.moment
+      
+      
+         ~SingleSpanUniformLoad.position_of_maximum_deformation
+      
+      
+         ~SingleSpanUniformLoad.positions_of_maximum_moment
+      
+      
+         ~SingleSpanUniformLoad.transversal_shear
+      
    
    
 

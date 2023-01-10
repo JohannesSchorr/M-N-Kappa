@@ -325,13 +325,19 @@
 <dt class="sig sig-object py" id="m_n_kappa.crosssection.compute_neutral_axis">
 <span class="sig-prename descclassname"><span class="pre">m_n_kappa.crosssection.</span></span><span class="sig-name descname"><span class="pre">compute_neutral_axis</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">edge_strains</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">starts_top</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#m_n_kappa.crosssection.compute_neutral_axis" title="Permalink to this definition">#</a></dt>
 <dd><p>compute the neutral axis with given curvature and strain a top or at bottom</p>
+<div class="versionadded">
+<p><span class="versionmodified added">New in version 0.1.0.</span></p>
+</div>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>edge_strains</strong> (<a class="reference internal" href="m_n_kappa.crosssection.EdgeStrains.html#m_n_kappa.crosssection.EdgeStrains" title="m_n_kappa.crosssection.EdgeStrains"><em>EdgeStrains</em></a>) – edge-strains to compute</p></li>
-<li><p><strong>starts_top</strong> (<em>bool</em>) – which edge-strain is to be used for computing the neutral axis
-True: edge-strain at top
-False: edge-strain at bottom</p></li>
+<li><p><strong>starts_top</strong> (<em>bool</em>) – <p>which edge-strain is to be used for computing the neutral axis</p>
+<ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">True</span></code>: edge-strain at top</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">False</span></code>: edge-strain at bottom</p></li>
+</ul>
+</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>

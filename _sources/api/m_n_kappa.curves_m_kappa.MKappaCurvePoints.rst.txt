@@ -11,10 +11,16 @@
 
    .. autosummary::
    
-      ~MKappaCurvePoints.__init__
-      ~MKappaCurvePoints.add
-      ~MKappaCurvePoints.curvature
-      ~MKappaCurvePoints.maximum_moment
+      
+      
+         ~MKappaCurvePoints.add
+      
+      
+         ~MKappaCurvePoints.curvature
+      
+      
+         ~MKappaCurvePoints.maximum_moment
+      
    
    
 

@@ -11,11 +11,19 @@
 
    .. autosummary::
    
-      ~MKappa.__init__
-      ~MKappa.compute
-      ~MKappa.initialize
-      ~MKappa.initialize_boundary_curvatures
-      ~MKappa.iterate
+      
+      
+         ~MKappa.compute
+      
+      
+         ~MKappa.initialize
+      
+      
+         ~MKappa.initialize_boundary_curvatures
+      
+      
+         ~MKappa.iterate
+      
    
    
 
