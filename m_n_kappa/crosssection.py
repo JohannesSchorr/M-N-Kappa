@@ -91,7 +91,11 @@ def moment(sections: list[ComputationSection]):
 
 class Crosssection:
 
-    """Combines a number of sections"""
+    """
+    Combines a number of sections
+
+    .. versionadded:: 0.1.0
+    """
 
     def __init__(
         self,
@@ -101,10 +105,73 @@ class Crosssection:
         """
         Parameters
         ----------
-        sections : list[:py:class:`~m_n_kappa.section.Section`]
+        sections : list[:py:class:`~m_n_kappa.Section`]
             sections the cross-section consists of
-        slab_effective_widths : :py:class:`~m_n_kappa.crosssection.EffectiveWidths`
+        slab_effective_widths : :py:class:`~m_n_kappa.EffectiveWidths`
             effective widths' for the slab (concrete and reinforcement)
+
+        Examples
+        --------
+        There are several ways you can create a cross-section.
+        Basis are either a number of :py:class:`~m_n_kappa.Section`.
+
+        >>> from m_n_kappa import Concrete, Steel, Rectangle
+        >>> concrete = Concrete(f_cm=35.0)
+        >>> concrete_geometry_1 = Rectangle(
+        ...     top_edge=0.0, bottom_edge=10.0, width=10.0, left_edge=-10.0)
+        >>> concrete_section_1 = concrete + concrete_geometry_1
+        >>> steel = Steel(f_y=355.0)
+        >>> steel_geometry = Rectangle(
+        ...     top_edge=10.0, bottom_edge=20.0, width=10.0)
+        >>> steel_section = steel + steel_geometry
+
+        The above create :py:class:`~m_n_kappa.Section` may be combined to a cross-section like:
+
+        >>> cross_section_1 = steel_section + concrete_section_1
+        >>> cross_section_1
+        Crosssection(sections=sections)
+
+        Or alternatively like:
+
+        >>> from m_n_kappa import Crosssection
+        >>> sections_list = [steel_section, concrete_section_1]
+        >>> cross_section_2 = Crosssection(sections=sections_list)
+        >>> cross_section_2
+        Crosssection(sections=sections)
+
+        This is also the only way nn case an :py:class:`~m_n_kappa.EffectiveWidths` is to be applied.
+
+        >>> from m_n_kappa import EffectiveWidths
+        >>> widths = EffectiveWidths(membran=2.0, bending=3.0)
+        >>> cross_section_3 = Crosssection(
+        ...     sections=sections_list, slab_effective_widths=widths)
+        >>> cross_section_3.slab_effective_width.bending
+        3.0
+
+        By using a predifined :py:class:`~m_n_kappa.ComposedGeometry` a :py:class:`~m_n_kappa.Crosssection` may
+        also be created easily:
+
+        >>> from m_n_kappa import IProfile
+        >>> i_geometry = IProfile(
+        ...     top_edge=0.0, t_w=9.5, h_w=200-15*2 , t_fo=15.0, b_fo=200)
+        >>> cross_section_4 = i_geometry + steel
+        >>> cross_section_4
+        Crosssection(sections=sections)
+
+        Another :py:class:`~m_n_kappa.Section` may be added also on different ways:
+
+        >>> concrete_geometry_2 = Rectangle(
+        ...     top_edge=0.0, bottom_edge=10.0, width=10.0, left_edge=0.0)
+        >>> concrete_section_2 = concrete + concrete_geometry_2
+        >>> cross_section_1 = cross_section_1 + concrete_section_2
+        >>> len(cross_section_1.sections)
+        3
+
+        >>> cross_section_2.add_section(concrete_section_2)
+        >>> len(cross_section_2.sections)
+        3
+
+        Subsequently, the :py:class:`~m_n_kappa.Crosssection` is needed for all computations.
         """
         self._sections = sections
         self._slab_effective_widths = slab_effective_widths
@@ -192,7 +259,7 @@ class Crosssection:
 
     @property
     def girder_sections(self) -> list:
-        """:py:class:`~m_n_kappa.section.Section belonging to te girder"""
+        """:py:class:`~m_n_kappa.Section` belonging to te girder"""
         return self.sections_of_type(section_type="girder")
 
     @property
@@ -233,11 +300,11 @@ class Crosssection:
 
     def add_section(self, section: Section) -> None:
         """
-        add a :py:class:`~m_n_kappa.sections.Section` to this cross-section
+        add a :py:class:`~m_n_kappa.Section` to this cross-section
 
         Parameters
         ----------
-        section : :py:class:`~m_n_kappa.sections.Section`
+        section : :py:class:`~m_n_kappa.Section`
             section to add to this cross-section
 
         Returns
@@ -247,7 +314,7 @@ class Crosssection:
         Raises
         ------
         ValueError
-            if ``section`` is not of type :py:class:`~m_n_kappa.section.Section`
+            if ``section`` is not of type :py:class:`~m_n_kappa.Section`
         """
         if not isinstance(section, Section):
             raise ValueError(f"section is type '{type(Section)}', "
@@ -269,12 +336,13 @@ class Crosssection:
         section_type : str
             type of section to search for.
             Possible section-types are:
-              - 'slab'   -> concrete slab + reinforcement
-              - 'girder' -> Steel girder
+
+            - ``'slab'``   -> concrete slab + reinforcement
+            - ``'girder'`` -> Steel girder
 
         Returns
         -------
-        list[Section]
+        list[:py:class:`~m_n_kappa.Section`]
             sections of the specified type associated with this cross-section
         """
         return [
@@ -285,9 +353,19 @@ class Crosssection:
         """
         get a list of sections that are not of the specified typ
 
-        Possible section-types are:
-          - 'slab'   -> concrete slab + reinforcement
-          - 'girder' -> Steel girder
+        Parameters
+        ----------
+        section_type : str
+            type of section to search for.
+            Possible section-types are:
+
+            - ``'slab'``   -> concrete slab + reinforcement
+            - ``'girder'`` -> Steel girder
+
+        Returns
+        -------
+        list[:py:class:`~m_n_kappa.Section`]
+            sections of the specified type associated with this cross-section
         """
         return [
             section for section in self.sections if section.section_type != section_type
@@ -297,12 +375,14 @@ class Crosssection:
         """
         curvature boundary values under positive and negative curvature
 
-        see :py:meth:`~m_n_kappa.crosssection.CrossSectionBoundaries.get_boundaries`
-
         Returns
         -------
         :py:class:`~m_n_kappa.curvature_boundaries.Boundaries`
             curvature boundary values under positive and negative curvature
+
+        See Also
+        --------
+        :py:meth:`~m_n_kappa.crosssection.CrossSectionBoundaries.get_boundaries`
         """
         cross_section_boundaries = CrossSectionBoundaries(self.sections)
         return cross_section_boundaries.get_boundaries()
