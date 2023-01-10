@@ -1035,14 +1035,17 @@ def compute_neutral_axis(edge_strains: EdgeStrains, starts_top: bool) -> float:
     """
     compute the neutral axis with given curvature and strain a top or at bottom
 
+    .. versionadded:: 0.1.0
+
     Parameters
     ----------
     edge_strains : EdgeStrains
         edge-strains to compute
     starts_top : bool
         which edge-strain is to be used for computing the neutral axis
-        True: edge-strain at top
-        False: edge-strain at bottom
+
+        - ``True``: edge-strain at top
+        - ``False``: edge-strain at bottom
 
     Returns
     -------
