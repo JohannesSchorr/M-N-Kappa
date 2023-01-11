@@ -1215,7 +1215,7 @@ class RebarLayer(ComposedGeometry):
     ----------
     rebar_diameter: float
         diameter of rebars in the layer
-    centroid: float
+    centroid_z: float
         position of the centroid in vertical direction
     rebar_number: int = None
         number of rebars within the layer (Alternative to argument ``width``)
@@ -1252,7 +1252,7 @@ class RebarLayer(ComposedGeometry):
     The following example creates 10 circles with diameter 12 and a vertical position of 10
 
     >>> from m_n_kappa import RebarLayer
-    >>> rebar_layer = RebarLayer(rebar_diameter=12.0, centroid=10.0, rebar_number=10, rebar_horizontal_distance=100)
+    >>> rebar_layer = RebarLayer(rebar_diameter=12.0, centroid_z=10.0, rebar_number=10, rebar_horizontal_distance=100)
 
     Adding a material to ``rebar_layer`` creates a cross-section.
 
@@ -1265,7 +1265,7 @@ class RebarLayer(ComposedGeometry):
     """
 
     rebar_diameter: float
-    centroid: float
+    centroid_z: float
     rebar_number: int = None
     width: float = None
     left_edge: float = None
@@ -1295,7 +1295,7 @@ class RebarLayer(ComposedGeometry):
             self.geometries.append(
                 Circle(
                     diameter=self.rebar_diameter,
-                    centroid_y=self.centroid,
+                    centroid_y=self.centroid_z,
                     centroid_z=centroid_z,
                 ))
 
