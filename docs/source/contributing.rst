@@ -3,22 +3,21 @@
 Contributing
 ************
 
-Contributes to this package are highly appreciated.
-Please consider the given
+Contributes to :py:mod:`m_n_kappa` are highly appreciated.
 
 .. _contributing.bug:
 
 Found a bug?
 ============
 
-Please open an issue in the GitHub-Repository.
+Please open an issue in the `GitHub-Repository <https://github.com/JohannesSchorr/M-N-Kappa/issues>`_.
 
 .. _contributing.commit:
 
 Make a commit
 =============
 In case you commit to the project please follow the recommendations for the
-`Perfect Commit <https://simonwillison.net/2022/Oct/29/the-perfect-commit/>`.
+`Perfect Commit <https://simonwillison.net/2022/Oct/29/the-perfect-commit/>`_.
 
 The following four points must be considered in the commit:
 
