@@ -333,6 +333,66 @@
 </pre></div>
 </div>
 </section>
+<section id="introducing-example-computing-a-steel-concrete-composite-beam">
+<span id="getting-started-example"></span><h2>Introducing example: Computing a steel-concrete composite beam<a class="headerlink" href="#introducing-example-computing-a-steel-concrete-composite-beam" title="Permalink to this heading">#</a></h2>
+<p>The following example shows how easy and straightforward <code class="xref py py-mod docutils literal notranslate"><span class="pre">m_n_kappa</span></code> is applied to
+computing the deformation of a composite beam.</p>
+<figure class="align-default">
+<img alt="images/getting_started_example-dark.svg" class="only-dark" src="images/getting_started_example-dark.svg" /></figure>
+<figure class="align-default" id="id2">
+<img alt="images/getting_started_example-light.svg" class="only-light" src="images/getting_started_example-light.svg" /><figcaption>
+<p><span class="caption-text">Composite beam (Measurements are given in Millimeter)</span><a class="headerlink" href="#id2" title="Permalink to this image">#</a></p>
+</figcaption>
+</figure>
+<p>The slab is a rectangle of concrete of type C30/35.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">m_n_kappa</span> <span class="kn">import</span> <span class="n">Rectangle</span><span class="p">,</span> <span class="n">Concrete</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">slab</span> <span class="o">=</span> <span class="n">Rectangle</span><span class="p">(</span><span class="n">top_edge</span><span class="o">=</span><span class="mf">0.0</span><span class="p">,</span> <span class="n">bottom_edge</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="mi">2000</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">concrete</span> <span class="o">=</span> <span class="n">Concrete</span><span class="p">(</span><span class="n">f_cm</span><span class="o">=</span><span class="mi">38</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">concrete_slab</span> <span class="o">=</span> <span class="n">concrete</span> <span class="o">+</span> <span class="n">slab</span>
+</pre></div>
+</div>
+<p>The girder is a HEB 200 steel-profile of type S355.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">m_n_kappa</span> <span class="kn">import</span> <span class="n">IProfile</span><span class="p">,</span> <span class="n">Steel</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">girder</span> <span class="o">=</span> <span class="n">IProfile</span><span class="p">(</span><span class="n">top_edge</span><span class="o">=</span><span class="mf">100.0</span><span class="p">,</span> <span class="n">t_w</span><span class="o">=</span><span class="mf">9.5</span><span class="p">,</span> <span class="n">h_w</span><span class="o">=</span><span class="mi">200</span><span class="o">-</span><span class="mi">2</span><span class="o">*</span><span class="mi">15</span><span class="p">,</span> <span class="n">t_fo</span><span class="o">=</span><span class="mi">15</span><span class="p">,</span> <span class="n">b_fo</span><span class="o">=</span><span class="mi">200</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">steel</span> <span class="o">=</span> <span class="n">Steel</span><span class="p">(</span><span class="n">f_y</span><span class="o">=</span><span class="mi">355</span><span class="p">,</span> <span class="n">failure_strain</span><span class="o">=</span><span class="mf">0.15</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">steel_girder</span> <span class="o">=</span> <span class="n">steel</span> <span class="o">+</span> <span class="n">girder</span>
+</pre></div>
+</div>
+<p>Merging the <code class="docutils literal notranslate"><span class="pre">concrete_slab</span></code> and the <code class="docutils literal notranslate"><span class="pre">steel_girder</span></code> to a composite cross-section
+is accomplished also easily.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">composite_cross_section</span> <span class="o">=</span> <span class="n">concrete_slab</span> <span class="o">+</span> <span class="n">steel_girder</span>
+</pre></div>
+</div>
+<p>This <a class="reference internal" href="api/m_n_kappa.Crosssection.html#m_n_kappa.Crosssection" title="m_n_kappa.Crosssection"><code class="xref py py-class docutils literal notranslate"><span class="pre">Crosssection</span></code></a>-object of a composite beam allows you to do several things like
+computing the curvature <span class="math notranslate nohighlight">\(\kappa\)</span>, the <em>M</em>-<span class="math notranslate nohighlight">\(\kappa\)</span>-curve or the deformation of the beam
+under a given loading.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">m_n_kappa</span> <span class="kn">import</span> <span class="n">SingleSpanUniformLoad</span><span class="p">,</span> <span class="n">Beam</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">loading</span> <span class="o">=</span> <span class="n">SingleSpanUniformLoad</span><span class="p">(</span><span class="n">length</span><span class="o">=</span><span class="mi">8000</span><span class="p">,</span> <span class="n">load</span><span class="o">=</span><span class="mf">1.0</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">beam</span> <span class="o">=</span> <span class="n">Beam</span><span class="p">(</span>
+<span class="gp">... </span>   <span class="n">cross_section</span><span class="o">=</span><span class="n">composite_cross_section</span><span class="p">,</span>
+<span class="gp">... </span>   <span class="n">length</span><span class="o">=</span><span class="mi">8000</span><span class="p">,</span>
+<span class="gp">... </span>   <span class="n">element_number</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span>
+<span class="gp">... </span>   <span class="n">load</span><span class="o">=</span><span class="n">loading</span>
+<span class="gp">... </span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">deformation_at_maximum_position</span> <span class="o">=</span> <span class="n">beam</span><span class="o">.</span><span class="n">deformations_at_maximum_deformation_position</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>The load-deformation pairs are then easily extracted as follows:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">deformation</span> <span class="ow">in</span> <span class="n">deformation_at_maximum_position</span><span class="p">:</span>
+<span class="gp">... </span>    <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">deformation</span><span class="o">.</span><span class="n">load</span><span class="o">*</span><span class="mf">0.001</span><span class="si">:</span><span class="s2">.1f</span><span class="si">}</span><span class="s2">, </span><span class="si">{</span><span class="n">deformation</span><span class="o">.</span><span class="n">deformation</span><span class="si">:</span><span class="s2">.1f</span><span class="si">}</span><span class="s2">&quot;</span>
+<span class="go">&#39;0.0, 0.0&#39;</span>
+<span class="go">&#39;45.3, 15.6&#39;</span>
+<span class="go">&#39;45.7, 15.7&#39;</span>
+<span class="go">&#39;157.6, 58.7&#39;</span>
+<span class="go">&#39;234.0, 125.7&#39;</span>
+<span class="go">&#39;249.3, 270.9&#39;</span>
+<span class="go">&#39;249.6, 279.3&#39;</span>
+<span class="go">&#39;251.2, 354.5&#39;</span>
+<span class="go">&#39;251.9, 451.9&#39;</span>
+</pre></div>
+</div>
+<p>For more example please refer to <a class="reference internal" href="examples/index.html#examples"><span class="std std-ref">Examples</span></a>.</p>
+</section>
 </section>
 
         </article>
@@ -392,6 +452,7 @@
             <ul>
 <li><a class="reference internal" href="#">Getting Started</a><ul>
 <li><a class="reference internal" href="#installation">Installation</a></li>
+<li><a class="reference internal" href="#introducing-example-computing-a-steel-concrete-composite-beam">Introducing example: Computing a steel-concrete composite beam</a></li>
 </ul>
 </li>
 </ul>
@@ -415,5 +476,7 @@
     <script src="_static/toggleprompt.js"></script>
     <script src="_static/design-tabs.js"></script>
     <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     </body>
 </html>

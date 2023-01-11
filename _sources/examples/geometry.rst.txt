@@ -129,11 +129,11 @@ may also be neglected as the Figure above shows.
 ...     top_edge=0., t_fo=15.5, b_fo=200.0, t_w=9.5, h_w=169.0)
 >>> i_profile_no_topflange = IProfile(
 ...     top_edge=0., t_fo=15.5, b_fo=200.0, t_w=9.5, h_w=169.0,
-        has_top_flange=False
+...     has_top_flange=False
 ... )
 >>> i_profile_no_bottomflange = IProfile(
 ...     top_edge=0., t_fo=15.5, b_fo=200.0, t_w=9.5, h_w=169.0,
-        has_bottom_flange=False
+...     has_bottom_flange=False
 ... )
 
 .. figure:: ../images/geometry_upe-dark.svg
@@ -144,4 +144,4 @@ may also be neglected as the Figure above shows.
    UPE-Profile dimensions
 
 >>> from m_n_kappa import UPEProfile
->>> UPEProfile(top_edge=10, t_f=5.2, b_f=76, t_w=9.0, h=200)
+>>> upe_profile = UPEProfile(top_edge=10, t_f=5.2, b_f=76, t_w=9.0, h=200)
