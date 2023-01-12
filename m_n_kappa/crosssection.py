@@ -201,6 +201,13 @@ class Crosssection:
     def __radd__(self, other):
         return self._build_cross_section(other)
 
+    def __eq__(self, other) -> bool:
+        """two cross-sections are the same if they have the same sections"""
+        for section in self.sections:
+            if section not in other.sections:
+                return False
+        return True
+
     def _build_cross_section(self, other):
         if isinstance(other, Crosssection):
             sections = self.sections + other.sections
