@@ -1257,7 +1257,7 @@ class RebarLayer(ComposedGeometry):
     Adding a material to ``rebar_layer`` creates a cross-section.
 
     >>> from m_n_kappa import Reinforcement
-    >>> rebar_steel = Reinforcement(f_s=500, f_su=550, epsilon_su=0.25)
+    >>> rebar_steel = Reinforcement(f_s=500, f_su=550, failure_strain=0.25)
     >>> rebars = rebar_layer + rebar_steel
     >>> rebars
     Crosssection(sections=sections)
