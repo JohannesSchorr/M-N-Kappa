@@ -1,4 +1,4 @@
-from .general import EffectiveWidths
+from .general import EffectiveWidths, StrainPosition
 from .material import Material, Concrete, Steel, Reinforcement
 from .geometry import Geometry, Rectangle, Trapezoid, UPEProfile, RebarLayer, IProfile, Circle
 from .section import Section
