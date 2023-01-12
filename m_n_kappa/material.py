@@ -1135,8 +1135,6 @@ StressStrain(stress=-28.80506123318835, strain=-0.0015849387565966995), \
 StressStrain(stress=-19.617030289467877, strain=-0.0007924693782983497), \
 StressStrain(stress=-11.128163239693242, strain=-0.00039230350544992604), \
 StressStrain(stress=0.0, strain=0.0), \
-StressStrain(stress=2.3554273231619067, strain=7.700353297574598e-05), \
-StressStrain(stress=0.0, strain=7.800353297574598e-05), \
 StressStrain(stress=0.0, strain=10.0)]
 
         Whereas a ``Parabola``-Rectangle-behaviour is computed as follows.
@@ -1150,8 +1148,6 @@ StressStrain(stress=-20.625, strain=-0.0015), \
 StressStrain(stress=-16.5, strain=-0.001), \
 StressStrain(stress=-9.625, strain=-0.0005), \
 StressStrain(stress=0.0, strain=0.0), \
-StressStrain(stress=2.3554273231619067, strain=7.700353297574598e-05), \
-StressStrain(stress=0.0, strain=7.800353297574598e-05), \
 StressStrain(stress=0.0, strain=10.0)]
 
         And a ``Bilinear`` is computed as follows
@@ -1162,8 +1158,6 @@ StressStrain(stress=0.0, strain=10.0)]
         [StressStrain(stress=-22.0, strain=-0.0035), \
 StressStrain(stress=-22.0, strain=-0.00175), \
 StressStrain(stress=0.0, strain=0.0), \
-StressStrain(stress=2.3554273231619067, strain=7.700353297574598e-05), \
-StressStrain(stress=0.0, strain=7.800353297574598e-05), \
 StressStrain(stress=0.0, strain=10.0)]
 
         In case tension is to be considered the following expression is okay (with ``Nonlinear`` compression behaviour).
@@ -1346,7 +1340,7 @@ StressStrain(stress=0.0, strain=10.0)]
                 self.f_cm,
                 self.E_cm,
                 self._f_ctm,
-                self.use_tension,
+                use_tension=self.use_tension,
                 consider_opening_behaviour=False
             )
         elif stress_strain_type.upper() == "CONSIDEROPENINGBEHAVIOUR":
@@ -1354,7 +1348,7 @@ StressStrain(stress=0.0, strain=10.0)]
                 self.f_cm,
                 self.E_cm,
                 self._f_ctm,
-                self.use_tension,
+                use_tension=self.use_tension,
                 consider_opening_behaviour=True
             )
         else:
