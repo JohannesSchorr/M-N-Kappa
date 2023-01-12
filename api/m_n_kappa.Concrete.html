@@ -169,6 +169,8 @@
 <li class="toctree-l1"><a class="reference internal" href="../getting_started.html">Getting Started</a></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../examples/index.html">Examples</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
 <li class="toctree-l2"><a class="reference internal" href="../examples/geometry.html">Creating Geometries</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../examples/material.html">Creating materials</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../examples/section.html">Build a section</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../examples/m_kappa_UPE.html">Single span slim-floor beam with Moment-Curvature-Curves</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../examples/m_n_kappa_UPE.html">Single span slim-floor beam with Moment-Axial force-Curvature-Curves</a></li>
 </ul>
@@ -438,21 +440,21 @@ follows.</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">m_n_kappa</span> <span class="kn">import</span> <span class="n">Concrete</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">nonlinear_no_tension</span> <span class="o">=</span> <span class="n">Concrete</span><span class="p">(</span><span class="n">f_cm</span><span class="o">=</span><span class="mf">30.0</span><span class="p">,</span> <span class="n">use_tension</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">nonlinear_no_tension</span><span class="o">.</span><span class="n">stress_strain</span>
-<span class="go">[StressStrain(stress=-16.920291540864202, strain=-0.0035), StressStrain(stress=-26.578327535954056, strain=-0.0027545594265149607), StressStrain(stress=-30.0, strain=-0.0020091188530299217), StressStrain(stress=-28.80506123318835, strain=-0.0015849387565966995), StressStrain(stress=-19.617030289467877, strain=-0.0007924693782983497), StressStrain(stress=-11.128163239693242, strain=-0.00039230350544992604), StressStrain(stress=0.0, strain=0.0), StressStrain(stress=2.3554273231619067, strain=7.700353297574598e-05), StressStrain(stress=0.0, strain=7.800353297574598e-05), StressStrain(stress=0.0, strain=10.0)]</span>
+<span class="go">[StressStrain(stress=-16.920291540864202, strain=-0.0035), StressStrain(stress=-26.578327535954056, strain=-0.0027545594265149607), StressStrain(stress=-30.0, strain=-0.0020091188530299217), StressStrain(stress=-28.80506123318835, strain=-0.0015849387565966995), StressStrain(stress=-19.617030289467877, strain=-0.0007924693782983497), StressStrain(stress=-11.128163239693242, strain=-0.00039230350544992604), StressStrain(stress=0.0, strain=0.0), StressStrain(stress=0.0, strain=10.0)]</span>
 </pre></div>
 </div>
 <p>Whereas a <code class="docutils literal notranslate"><span class="pre">Parabola</span></code>-Rectangle-behaviour is computed as follows.</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">parabola_no_tension</span> <span class="o">=</span> <span class="n">Concrete</span><span class="p">(</span><span class="n">f_cm</span><span class="o">=</span><span class="mf">30.0</span><span class="p">,</span> <span class="n">use_tension</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
 <span class="gp">... </span>                               <span class="n">compression_stress_strain_type</span><span class="o">=</span><span class="s1">&#39;Parabola&#39;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">parabola_no_tension</span><span class="o">.</span><span class="n">stress_strain</span>
-<span class="go">[StressStrain(stress=-22.0, strain=-0.0035), StressStrain(stress=-22.0, strain=-0.002), StressStrain(stress=-20.625, strain=-0.0015), StressStrain(stress=-16.5, strain=-0.001), StressStrain(stress=-9.625, strain=-0.0005), StressStrain(stress=0.0, strain=0.0), StressStrain(stress=2.3554273231619067, strain=7.700353297574598e-05), StressStrain(stress=0.0, strain=7.800353297574598e-05), StressStrain(stress=0.0, strain=10.0)]</span>
+<span class="go">[StressStrain(stress=-22.0, strain=-0.0035), StressStrain(stress=-22.0, strain=-0.002), StressStrain(stress=-20.625, strain=-0.0015), StressStrain(stress=-16.5, strain=-0.001), StressStrain(stress=-9.625, strain=-0.0005), StressStrain(stress=0.0, strain=0.0), StressStrain(stress=0.0, strain=10.0)]</span>
 </pre></div>
 </div>
 <p>And a <code class="docutils literal notranslate"><span class="pre">Bilinear</span></code> is computed as follows</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">bilinear_no_tension</span> <span class="o">=</span> <span class="n">Concrete</span><span class="p">(</span><span class="n">f_cm</span><span class="o">=</span><span class="mf">30.0</span><span class="p">,</span> <span class="n">use_tension</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
 <span class="gp">... </span>                               <span class="n">compression_stress_strain_type</span><span class="o">=</span><span class="s1">&#39;Bilinear&#39;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">bilinear_no_tension</span><span class="o">.</span><span class="n">stress_strain</span>
-<span class="go">[StressStrain(stress=-22.0, strain=-0.0035), StressStrain(stress=-22.0, strain=-0.00175), StressStrain(stress=0.0, strain=0.0), StressStrain(stress=2.3554273231619067, strain=7.700353297574598e-05), StressStrain(stress=0.0, strain=7.800353297574598e-05), StressStrain(stress=0.0, strain=10.0)]</span>
+<span class="go">[StressStrain(stress=-22.0, strain=-0.0035), StressStrain(stress=-22.0, strain=-0.00175), StressStrain(stress=0.0, strain=0.0), StressStrain(stress=0.0, strain=10.0)]</span>
 </pre></div>
 </div>
 <p>In case tension is to be considered the following expression is okay (with <code class="docutils literal notranslate"><span class="pre">Nonlinear</span></code> compression behaviour).</p>

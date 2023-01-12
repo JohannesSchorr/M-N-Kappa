@@ -3,10 +3,10 @@
   <head><meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width,initial-scale=1"/>
     <meta name="color-scheme" content="light dark"><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
-<link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" /><link rel="next" title="Theory guide" href="../theory/index.html" /><link rel="prev" title="Single span slim-floor beam with \(M\)-\(\kappa\)-Curve" href="m_kappa_UPE.html" />
+<link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" /><link rel="next" title="Build a section" href="section.html" /><link rel="prev" title="Creating Geometries" href="geometry.html" />
 
     <!-- Generated with Sphinx 5.3.0 and Furo 2022.12.07 -->
-        <title>Single span Slim-Floor Beam with \(M\)-\(N\)-\(\kappa\)-Curve - M-N-κ</title>
+        <title>Creating materials - M-N-κ</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?digest=91d0f0d1c444bdcb17a68e833c7a53903343c195" />
     <link rel="stylesheet" type="text/css" href="../_static/plot_directive.css" />
@@ -142,7 +142,7 @@
           <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
         </button>
       </div>
-      <label class="toc-overlay-icon toc-header-icon no-toc" for="__toc">
+      <label class="toc-overlay-icon toc-header-icon" for="__toc">
         <div class="visually-hidden">Toggle table of contents sidebar</div>
         <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
       </label>
@@ -169,10 +169,10 @@
 <li class="toctree-l1"><a class="reference internal" href="../getting_started.html">Getting Started</a></li>
 <li class="toctree-l1 current has-children"><a class="reference internal" href="index.html">Examples</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="geometry.html">Creating Geometries</a></li>
-<li class="toctree-l2"><a class="reference internal" href="material.html">Creating materials</a></li>
+<li class="toctree-l2 current current-page"><a class="current reference internal" href="#">Creating materials</a></li>
 <li class="toctree-l2"><a class="reference internal" href="section.html">Build a section</a></li>
 <li class="toctree-l2"><a class="reference internal" href="m_kappa_UPE.html">Single span slim-floor beam with Moment-Curvature-Curves</a></li>
-<li class="toctree-l2 current current-page"><a class="current reference internal" href="#">Single span slim-floor beam with Moment-Axial force-Curvature-Curves</a></li>
+<li class="toctree-l2"><a class="reference internal" href="m_n_kappa_UPE.html">Single span slim-floor beam with Moment-Axial force-Curvature-Curves</a></li>
 </ul>
 </li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../theory/index.html">Theory guide</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" role="switch" type="checkbox"/><label for="toctree-checkbox-2"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
@@ -300,7 +300,7 @@
         </a>
         <div class="content-icon-container">
           <div class="edit-this-page">
-  <a class="muted-link" href="https://github.com/JohannesSchorr/M-N-Kappa/edit/master/docs/source/examples/m_n_kappa_UPE.rst" title="Edit this page">
+  <a class="muted-link" href="https://github.com/JohannesSchorr/M-N-Kappa/edit/master/docs/source/examples/material.rst" title="Edit this page">
     <svg aria-hidden="true" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
       <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
       <path d="M4 20h4l10.5 -10.5a1.5 1.5 0 0 0 -4 -4l-10.5 10.5v4" />
@@ -316,18 +316,227 @@
               <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
             </button>
           </div>
-          <label class="toc-overlay-icon toc-content-icon no-toc" for="__toc">
+          <label class="toc-overlay-icon toc-content-icon" for="__toc">
             <div class="visually-hidden">Toggle table of contents sidebar</div>
             <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
           </label>
         </div>
         <article role="main">
-          <section id="single-span-slim-floor-beam-with-m-n-kappa-curve">
-<span id="examples-m-n-kappa-upe"></span><h1>Single span Slim-Floor Beam with <span class="math notranslate nohighlight">\(M\)</span>-<span class="math notranslate nohighlight">\(N\)</span>-<span class="math notranslate nohighlight">\(\kappa\)</span>-Curve<a class="headerlink" href="#single-span-slim-floor-beam-with-m-n-kappa-curve" title="Permalink to this heading">#</a></h1>
-<div class="admonition-todo admonition" id="id1">
-<p class="admonition-title">Todo</p>
-<p>create example “Single span Slim-Floor Beam with <span class="math notranslate nohighlight">\(M\)</span>-<span class="math notranslate nohighlight">\(N\)</span>-<span class="math notranslate nohighlight">\(\kappa\)</span>-Curve”</p>
+          <section id="creating-materials">
+<span id="examples-material"></span><h1>Creating materials<a class="headerlink" href="#creating-materials" title="Permalink to this heading">#</a></h1>
+<p>The definition of an appropriate material-model is - beside the geometry - another basic component
+for building a cross-section in <code class="xref py py-mod docutils literal notranslate"><span class="pre">m_n_kappa</span></code>.
+In succession it is crucial for a successful computation.</p>
+<p>For steel-concrete composite structures <a class="reference internal" href="#examples-material-concrete"><span class="std std-ref">Concrete</span></a>, <a class="reference internal" href="#examples-material-steel"><span class="std std-ref">Steel</span></a>
+and <a class="reference internal" href="#examples-material-reinforcement"><span class="std std-ref">Reinforcement</span></a> are pre-defined materials you can use right away.
+If these materials do not fit your needs.
+No problem!
+<a class="reference internal" href="#examples-material-create"><span class="std std-ref">You can create your own material</span></a>.</p>
+<section id="concrete">
+<span id="examples-material-concrete"></span><h2>Concrete<a class="headerlink" href="#concrete" title="Permalink to this heading">#</a></h2>
+<p>For creating <a class="reference internal" href="../api/m_n_kappa.Concrete.html#m_n_kappa.Concrete" title="m_n_kappa.Concrete"><code class="xref py py-class docutils literal notranslate"><span class="pre">Concrete</span></code></a> you can choose between different material-models
+under compression and under tension.</p>
+<p>In any case you have to pass the mean concrete compressive strength <code class="docutils literal notranslate"><span class="pre">f_cm</span></code> to <a class="reference internal" href="../api/m_n_kappa.Concrete.html#m_n_kappa.Concrete" title="m_n_kappa.Concrete"><code class="xref py py-class docutils literal notranslate"><span class="pre">Concrete</span></code></a></p>
+<p><strong>Under compression</strong> you may decide if the stress-strain-relationship is <code class="docutils literal notranslate"><span class="pre">Nonlinear</span></code>,
+<code class="docutils literal notranslate"><span class="pre">Parabola</span></code>-Rectangle or <code class="docutils literal notranslate"><span class="pre">Bilinear</span></code> shaped.
+This is controlled by argument <code class="docutils literal notranslate"><span class="pre">compression_stress_strain_type</span></code>.
+The default-value is <code class="docutils literal notranslate"><span class="pre">compression_stress_strain_type='Nonlinear'</span></code>.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">m_n_kappa</span> <span class="kn">import</span> <span class="n">Concrete</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">nonlinear_no_tension</span> <span class="o">=</span> <span class="n">Concrete</span><span class="p">(</span><span class="n">f_cm</span><span class="o">=</span><span class="mf">30.0</span><span class="p">,</span> <span class="n">use_tension</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">parabola_no_tension</span> <span class="o">=</span> <span class="n">Concrete</span><span class="p">(</span><span class="n">f_cm</span><span class="o">=</span><span class="mf">30.0</span><span class="p">,</span> <span class="n">use_tension</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+<span class="gp">... </span>                               <span class="n">compression_stress_strain_type</span><span class="o">=</span><span class="s1">&#39;Parabola&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">bilinear_no_tension</span> <span class="o">=</span> <span class="n">Concrete</span><span class="p">(</span><span class="n">f_cm</span><span class="o">=</span><span class="mf">30.0</span><span class="p">,</span> <span class="n">use_tension</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+<span class="gp">... </span>                               <span class="n">compression_stress_strain_type</span><span class="o">=</span><span class="s1">&#39;Bilinear&#39;</span><span class="p">)</span>
+</pre></div>
 </div>
+<div class="sd-container-fluid sd-sphinx-override sd-mb-4 docutils">
+<div class="sd-row sd-row-cols-1 sd-row-cols-xs-1 sd-row-cols-sm-2 sd-row-cols-md-3 sd-row-cols-lg-3 docutils">
+<div class="sd-col sd-d-flex-column docutils">
+<figure class="align-default">
+<img alt="../_images/material_concrete_nonlinear-light.svg" class="only-light" src="../_images/material_concrete_nonlinear-light.svg" /></figure>
+<figure class="align-default" id="id1">
+<img alt="../_images/material_concrete_nonlinear-dark.svg" class="only-dark" src="../_images/material_concrete_nonlinear-dark.svg" /><figcaption>
+<p><span class="caption-text"><code class="docutils literal notranslate"><span class="pre">Nonlinear</span></code> stress-strain-relationship of concrete under compression acc. EN 1992-1-1 (Default)</span><a class="headerlink" href="#id1" title="Permalink to this image">#</a></p>
+</figcaption>
+</figure>
+</div>
+<div class="sd-col sd-d-flex-column docutils">
+<figure class="align-default">
+<img alt="../_images/material_concrete_parabola_rectangle-light.svg" class="only-light" src="../_images/material_concrete_parabola_rectangle-light.svg" /></figure>
+<figure class="align-default" id="id2">
+<img alt="../_images/material_concrete_parabola_rectangle-dark.svg" class="only-dark" src="../_images/material_concrete_parabola_rectangle-dark.svg" /><figcaption>
+<p><span class="caption-text"><code class="docutils literal notranslate"><span class="pre">Parabola</span></code>-Rectangle stress-strain-relationship of concrete under compression acc. EN 1992-1-1</span><a class="headerlink" href="#id2" title="Permalink to this image">#</a></p>
+</figcaption>
+</figure>
+</div>
+<div class="sd-col sd-d-flex-column docutils">
+<figure class="align-default">
+<img alt="../_images/material_concrete_bilinear-light.svg" class="only-light" src="../_images/material_concrete_bilinear-light.svg" /></figure>
+<figure class="align-default" id="id3">
+<img alt="../_images/material_concrete_bilinear-dark.svg" class="only-dark" src="../_images/material_concrete_bilinear-dark.svg" /><figcaption>
+<p><span class="caption-text"><code class="docutils literal notranslate"><span class="pre">Bilinear</span></code> stress-strain-relationship of concrete under compression acc. EN 1992-1-1</span><a class="headerlink" href="#id3" title="Permalink to this image">#</a></p>
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>The behaviour <strong>under tension</strong> is first controlled by argument <code class="docutils literal notranslate"><span class="pre">use_tension</span></code>.
+In case <code class="docutils literal notranslate"><span class="pre">use_tension</span></code> is set to <code class="docutils literal notranslate"><span class="pre">False</span></code> no tensile capacity is defined, but a single stress-strain-point
+(0.0 | 10.0) is applied.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">nonlinear_no_tension</span><span class="o">.</span><span class="n">tension</span><span class="o">.</span><span class="n">stress_strain</span><span class="p">()</span>
+<span class="go">[[0.0, 10.0]]</span>
+</pre></div>
+</div>
+<p>This value makes sure, that <code class="xref py py-mod docutils literal notranslate"><span class="pre">m_n_kappa</span></code> does not stop computing if the concrete starts cracking
+due exceeding the maximum tensile strain under tensile loading.</p>
+<p>If you want to apply concrete tensile behaviour set <code class="docutils literal notranslate"><span class="pre">use_tension=True</span></code>.
+The tensile strength may be controlled by argument <code class="docutils literal notranslate"><span class="pre">f_ctm</span></code>.
+If not provided it may be computed using the given mean concrete compressive strength.</p>
+<p>The tensile behaviour is controlled by argument <code class="docutils literal notranslate"><span class="pre">tension_stress_strain_type</span></code>.
+By default <code class="docutils literal notranslate"><span class="pre">tension_stress_strain_type='Default'</span></code> is set, that leads to an immediate drop of the stresses
+after the maximum tensile stress has been reached.
+In contrary <code class="docutils literal notranslate"><span class="pre">tension_stress_strain_type='consider</span> <span class="pre">opening</span> <span class="pre">behaviour'</span></code>  leads to a post-breaking behaviour
+as indicated in the following figure.</p>
+<figure class="align-default">
+<img alt="../_images/material_concrete_tension-light.svg" class="only-light" src="../_images/material_concrete_tension-light.svg" /></figure>
+<figure class="align-default" id="id4">
+<img alt="../_images/material_concrete_tension-dark.svg" class="only-dark" src="../_images/material_concrete_tension-dark.svg" /><figcaption>
+<p><span class="caption-text">Stress-strain-relationship of concrete under tension</span><a class="headerlink" href="#id4" title="Permalink to this image">#</a></p>
+</figcaption>
+</figure>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p><a class="reference internal" href="../theory/materials.html#theory-materials-concrete"><span class="std std-ref">Concrete</span></a>: Background how stress-strain relationships are computed</p>
+</div>
+</section>
+<section id="steel">
+<span id="examples-material-steel"></span><h2>Steel<a class="headerlink" href="#steel" title="Permalink to this heading">#</a></h2>
+<p>The stress-strain behaviour of <a class="reference internal" href="../api/m_n_kappa.Steel.html#m_n_kappa.Steel" title="m_n_kappa.Steel"><code class="xref py py-class docutils literal notranslate"><span class="pre">Steel</span></code></a> is defined to be
+<a class="reference external" href="https://en.wikipedia.org/wiki/Isotropy">isotropic</a>.
+In consequence it behaves under compression exactly like under tension.</p>
+<p>In <a class="reference internal" href="../api/m_n_kappa.Steel.html#m_n_kappa.Steel" title="m_n_kappa.Steel"><code class="xref py py-class docutils literal notranslate"><span class="pre">Steel</span></code></a> is initialized without arguments pure elastic behaviour with modulus
+of elasticity <span class="math notranslate nohighlight">\(E_\mathrm{a}\)</span> defined as <cite>E_a=210000.0</cite> [N/mm²] utilizing
+<cite>Hooke’s law &lt;https://en.wikipedia.org/wiki/Hooke%27s_law</cite>&gt;_.
+The maximum strain in this case is set to <code class="docutils literal notranslate"><span class="pre">1.0</span></code>.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">m_n_kappa</span> <span class="kn">import</span> <span class="n">Steel</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">elastic_steel</span> <span class="o">=</span> <span class="n">Steel</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">point</span> <span class="ow">in</span> <span class="n">elastic_steel</span><span class="o">.</span><span class="n">stress_strain</span><span class="p">:</span>
+<span class="gp">... </span>    <span class="nb">print</span><span class="p">(</span><span class="n">point</span><span class="o">.</span><span class="n">stress</span><span class="p">,</span> <span class="n">point</span><span class="o">.</span><span class="n">strain</span><span class="p">)</span>
+<span class="go">-210000.0 -1.0</span>
+<span class="go">-0.0 -0.0</span>
+<span class="go">210000.0 1.0</span>
+</pre></div>
+</div>
+<p>If you want to apply bi-linear ideal-plastic stress-strain behaviour of steel you must pass the yield strength
+<code class="docutils literal notranslate"><span class="pre">f_y</span></code> as well as the <code class="docutils literal notranslate"><span class="pre">failure_strain</span></code> to <a class="reference internal" href="../api/m_n_kappa.Steel.html#m_n_kappa.Steel" title="m_n_kappa.Steel"><code class="xref py py-class docutils literal notranslate"><span class="pre">Steel</span></code></a>.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">bilinear_steel</span> <span class="o">=</span> <span class="n">Steel</span><span class="p">(</span><span class="n">f_y</span><span class="o">=</span><span class="mi">355</span><span class="p">,</span> <span class="n">failure_strain</span><span class="o">=</span><span class="mf">0.15</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">point</span> <span class="ow">in</span> <span class="n">bilinear_steel</span><span class="o">.</span><span class="n">stress_strain</span><span class="p">:</span>
+<span class="gp">... </span>    <span class="nb">print</span><span class="p">(</span><span class="n">point</span><span class="o">.</span><span class="n">stress</span><span class="p">,</span> <span class="nb">round</span><span class="p">(</span><span class="n">point</span><span class="o">.</span><span class="n">strain</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
+<span class="go">-355.0 -0.15</span>
+<span class="go">-355.0 -0.0017</span>
+<span class="go">-0.0 -0.0</span>
+<span class="go">355.0 0.0017</span>
+<span class="go">355.0 0.15</span>
+</pre></div>
+</div>
+<p>If additional harding shall be applied you only have to pass the tensile stress <code class="docutils literal notranslate"><span class="pre">f_u</span></code> to the
+<a class="reference internal" href="../api/m_n_kappa.Steel.html#m_n_kappa.Steel" title="m_n_kappa.Steel"><code class="xref py py-class docutils literal notranslate"><span class="pre">Steel</span></code></a>.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">bilinear_hardening_steel</span> <span class="o">=</span> <span class="n">Steel</span><span class="p">(</span><span class="n">f_y</span><span class="o">=</span><span class="mi">355</span><span class="p">,</span> <span class="n">f_u</span><span class="o">=</span><span class="mi">400</span><span class="p">,</span> <span class="n">failure_strain</span><span class="o">=</span><span class="mf">0.15</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="sd-container-fluid sd-sphinx-override sd-mb-4 docutils">
+<div class="sd-row sd-row-cols-1 sd-row-cols-xs-1 sd-row-cols-sm-2 sd-row-cols-md-3 sd-row-cols-lg-3 docutils">
+<div class="sd-col sd-d-flex-column docutils">
+<figure class="align-default">
+<img alt="../_images/material_steel_elastic-light.svg" class="only-light" src="../_images/material_steel_elastic-light.svg" /></figure>
+<figure class="align-default" id="id5">
+<img alt="../_images/material_steel_elastic-dark.svg" class="only-dark" src="../_images/material_steel_elastic-dark.svg" /><figcaption>
+<p><span class="caption-text">Elastic stress-strain-relationship of steel</span><a class="headerlink" href="#id5" title="Permalink to this image">#</a></p>
+</figcaption>
+</figure>
+</div>
+<div class="sd-col sd-d-flex-column docutils">
+<figure class="align-default">
+<img alt="../_images/material_steel_bilinear-light.svg" class="only-light" src="../_images/material_steel_bilinear-light.svg" /></figure>
+<figure class="align-default" id="id6">
+<img alt="../_images/material_steel_bilinear-dark.svg" class="only-dark" src="../_images/material_steel_bilinear-dark.svg" /><figcaption>
+<p><span class="caption-text">Bi-linear stress-strain-relationship of steel</span><a class="headerlink" href="#id6" title="Permalink to this image">#</a></p>
+</figcaption>
+</figure>
+</div>
+<div class="sd-col sd-d-flex-column docutils">
+<figure class="align-default">
+<img alt="../_images/material_steel_trilinear-light.svg" class="only-light" src="../_images/material_steel_trilinear-light.svg" /></figure>
+<figure class="align-default" id="id7">
+<img alt="../_images/material_steel_trilinear-dark.svg" class="only-dark" src="../_images/material_steel_trilinear-dark.svg" /><figcaption>
+<p><span class="caption-text">Bi-linear stress-strain-relationship with hardening of steel</span><a class="headerlink" href="#id7" title="Permalink to this image">#</a></p>
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="reinforcement">
+<span id="examples-material-reinforcement"></span><h2>Reinforcement<a class="headerlink" href="#reinforcement" title="Permalink to this heading">#</a></h2>
+<p><a class="reference internal" href="../api/m_n_kappa.Reinforcement.html#m_n_kappa.Reinforcement" title="m_n_kappa.Reinforcement"><code class="xref py py-class docutils literal notranslate"><span class="pre">Reinforcement</span></code></a> works similar as <a class="reference internal" href="../api/m_n_kappa.Steel.html#m_n_kappa.Steel" title="m_n_kappa.Steel"><code class="xref py py-class docutils literal notranslate"><span class="pre">Steel</span></code></a>, but the arguments switch as follows:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">f_s</span></code>: yield strength</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">f_su</span></code>: tensile strength</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">E_s</span></code>: modulus of elasticity</p></li>
+</ul>
+<p>The following code therefore describes bi-linear behaviour of the reinforcement with hardening.
+Linear-elastic and ideal-plastic behaviour are of course also possible.
+<a class="reference external" href="https://en.wikipedia.org/wiki/Isotropy">Isotropy</a> applies similarly to <a class="reference internal" href="../api/m_n_kappa.Steel.html#m_n_kappa.Steel" title="m_n_kappa.Steel"><code class="xref py py-class docutils literal notranslate"><span class="pre">Steel</span></code></a>.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">m_n_kappa</span> <span class="kn">import</span> <span class="n">Reinforcement</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">reinforcement</span> <span class="o">=</span> <span class="n">Reinforcement</span><span class="p">(</span><span class="n">f_s</span><span class="o">=</span><span class="mf">500.0</span><span class="p">,</span> <span class="n">f_su</span><span class="o">=</span><span class="mf">550.0</span><span class="p">,</span> <span class="n">failure_strain</span><span class="o">=</span><span class="mf">0.25</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="nothing-found-for-your-needs-create-your-own-material">
+<span id="examples-material-create"></span><h2>Nothing found for your needs? Create your own material!<a class="headerlink" href="#nothing-found-for-your-needs-create-your-own-material" title="Permalink to this heading">#</a></h2>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>You should have a basic understanding of <a class="reference external" href="https://docs.python.org/3/tutorial/classes.html">python classes</a>
+to create your own material.</p>
+</div>
+<p>All materials you create must fulfil the following requirements to have the full functionality for computation
+in <code class="xref py py-mod docutils literal notranslate"><span class="pre">m_n_kappa</span></code>:</p>
+<ul class="simple">
+<li><p>inherit from <a class="reference internal" href="../api/m_n_kappa.Material.html#m_n_kappa.Material" title="m_n_kappa.Material"><code class="xref py py-class docutils literal notranslate"><span class="pre">Material</span></code></a></p></li>
+<li><p>feeding the <code class="docutils literal notranslate"><span class="pre">_stress_strain</span></code>-Attribute with a list of <a class="reference internal" href="../api/m_n_kappa.material.StressStrain.html#m_n_kappa.material.StressStrain" title="m_n_kappa.material.StressStrain"><code class="xref py py-class docutils literal notranslate"><span class="pre">StressStrain</span></code></a>.</p></li>
+</ul>
+<p>Beside its functionality for computation the inheritance from <a class="reference internal" href="../api/m_n_kappa.Material.html#m_n_kappa.Material" title="m_n_kappa.Material"><code class="xref py py-class docutils literal notranslate"><span class="pre">Material</span></code></a> is also needed to merge
+your material with geometric instances to a <a class="reference internal" href="../api/m_n_kappa.Section.html#m_n_kappa.Section" title="m_n_kappa.Section"><code class="xref py py-class docutils literal notranslate"><span class="pre">Section</span></code></a> (see <a class="reference internal" href="section.html#examples-section"><span class="std std-ref">Build a section</span></a>).</p>
+<p>The following example creates a new material called <code class="docutils literal notranslate"><span class="pre">Arbitrary</span></code>.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">m_n_kappa.material</span> <span class="kn">import</span> <span class="n">Material</span><span class="p">,</span> <span class="n">StressStrain</span>
+
+<span class="k">class</span> <span class="nc">Arbitrary</span><span class="p">(</span><span class="n">Material</span><span class="p">):</span>
+
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;arbitrary material&quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_stress_strain</span> <span class="o">=</span> <span class="p">[</span>
+            <span class="n">StressStrain</span><span class="p">(</span><span class="n">stress</span><span class="o">=-</span><span class="mf">10.0</span><span class="p">,</span> <span class="n">strain</span><span class="o">=-</span><span class="mf">0.001</span><span class="p">),</span>
+            <span class="n">StressStrain</span><span class="p">(</span><span class="n">stress</span><span class="o">=</span><span class="mf">0.0</span><span class="p">,</span> <span class="n">strain</span><span class="o">=</span><span class="mf">0.0</span><span class="p">),</span>
+            <span class="n">StressStrain</span><span class="p">(</span><span class="n">stress</span><span class="o">=</span><span class="mf">10.0</span><span class="p">,</span> <span class="n">strain</span><span class="o">=</span><span class="mf">0.001</span><span class="p">),</span>
+            <span class="n">StressStrain</span><span class="p">(</span><span class="n">stress</span><span class="o">=</span><span class="mf">10.0</span><span class="p">,</span> <span class="n">strain</span><span class="o">=</span><span class="mf">0.01</span><span class="p">),</span>
+        <span class="p">]</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">section_type</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="s2">&quot;girder&quot;</span>
+</pre></div>
+</div>
+<p>Of course, you can produce the stress-strain-relationship programmatically i.e. by using models
+from literature.</p>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p>Please be aware that <code class="xref py py-mod docutils literal notranslate"><span class="pre">m_n_kappa</span></code> is not able to compute strains that exceed the maximum strain
+or fall below the minium strain of a material model. See also <a class="reference internal" href="#examples-material-concrete"><span class="std std-ref">Concrete</span></a>.</p>
+</div>
+<p>If you implemented your <a class="reference internal" href="../api/m_n_kappa.Material.html#m_n_kappa.Material" title="m_n_kappa.Material"><code class="xref py py-class docutils literal notranslate"><span class="pre">Material</span></code></a> successfully, please consider
+<a class="reference internal" href="../contributing.html#contributing"><span class="std std-ref">Contributing</span></a> it to help others.</p>
+</section>
 </section>
 
         </article>
@@ -335,23 +544,23 @@
       <footer>
         
         <div class="related-pages">
-          <a class="next-page" href="../theory/index.html">
+          <a class="next-page" href="section.html">
               <div class="page-info">
                 <div class="context">
                   <span>Next</span>
                 </div>
-                <div class="title">Theory guide</div>
+                <div class="title">Build a section</div>
               </div>
               <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
             </a>
-          <a class="prev-page" href="m_kappa_UPE.html">
+          <a class="prev-page" href="geometry.html">
               <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
               <div class="page-info">
                 <div class="context">
                   <span>Previous</span>
                 </div>
                 
-                <div class="title">Single span slim-floor beam with <span class="math notranslate nohighlight">\(M\)</span>-<span class="math notranslate nohighlight">\(\kappa\)</span>-Curve</div>
+                <div class="title">Creating Geometries</div>
                 
               </div>
             </a>
@@ -373,8 +582,30 @@
         
       </footer>
     </div>
-    <aside class="toc-drawer no-toc">
+    <aside class="toc-drawer">
       
+      
+      <div class="toc-sticky toc-scroll">
+        <div class="toc-title-container">
+          <span class="toc-title">
+            On this page
+          </span>
+        </div>
+        <div class="toc-tree-container">
+          <div class="toc-tree">
+            <ul>
+<li><a class="reference internal" href="#">Creating materials</a><ul>
+<li><a class="reference internal" href="#concrete">Concrete</a></li>
+<li><a class="reference internal" href="#steel">Steel</a></li>
+<li><a class="reference internal" href="#reinforcement">Reinforcement</a></li>
+<li><a class="reference internal" href="#nothing-found-for-your-needs-create-your-own-material">Nothing found for your needs? Create your own material!</a></li>
+</ul>
+</li>
+</ul>
+
+          </div>
+        </div>
+      </div>
       
       
     </aside>

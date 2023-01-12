@@ -3,7 +3,7 @@
   <head><meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width,initial-scale=1"/>
     <meta name="color-scheme" content="light dark"><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
-<link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" /><link rel="next" title="Single span slim-floor beam with \(M\)-\(\kappa\)-Curve" href="m_kappa_UPE.html" /><link rel="prev" title="Examples" href="index.html" />
+<link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" /><link rel="next" title="Creating materials" href="material.html" /><link rel="prev" title="Examples" href="index.html" />
 
     <!-- Generated with Sphinx 5.3.0 and Furo 2022.12.07 -->
         <title>Creating Geometries - M-N-κ</title>
@@ -169,6 +169,8 @@
 <li class="toctree-l1"><a class="reference internal" href="../getting_started.html">Getting Started</a></li>
 <li class="toctree-l1 current has-children"><a class="reference internal" href="index.html">Examples</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="current">
 <li class="toctree-l2 current current-page"><a class="current reference internal" href="#">Creating Geometries</a></li>
+<li class="toctree-l2"><a class="reference internal" href="material.html">Creating materials</a></li>
+<li class="toctree-l2"><a class="reference internal" href="section.html">Build a section</a></li>
 <li class="toctree-l2"><a class="reference internal" href="m_kappa_UPE.html">Single span slim-floor beam with Moment-Curvature-Curves</a></li>
 <li class="toctree-l2"><a class="reference internal" href="m_n_kappa_UPE.html">Single span slim-floor beam with Moment-Axial force-Curvature-Curves</a></li>
 </ul>
@@ -322,15 +324,10 @@
         <article role="main">
           <section id="creating-geometries">
 <span id="examples-geometry"></span><h1>Creating Geometries<a class="headerlink" href="#creating-geometries" title="Permalink to this heading">#</a></h1>
-<section id="the-basics-rectangle-trapezoid-and-circles">
-<span id="examples-geometry-basis"></span><h2>The basics: Rectangle, Trapezoid and Circles<a class="headerlink" href="#the-basics-rectangle-trapezoid-and-circles" title="Permalink to this heading">#</a></h2>
-<p><a class="reference internal" href="../api/m_n_kappa.Rectangle.html#m_n_kappa.Rectangle" title="m_n_kappa.Rectangle"><code class="xref py py-class docutils literal notranslate"><span class="pre">Rectangle</span></code></a>, <a class="reference internal" href="../api/m_n_kappa.Trapezoid.html#m_n_kappa.Trapezoid" title="m_n_kappa.Trapezoid"><code class="xref py py-class docutils literal notranslate"><span class="pre">Trapezoid</span></code></a>
-and <a class="reference internal" href="../api/m_n_kappa.Circle.html#m_n_kappa.Circle" title="m_n_kappa.Circle"><code class="xref py py-class docutils literal notranslate"><span class="pre">Circle</span></code></a> are available as basis for creating
-geometries.
-In the following sections you learn how to create your own geometries
-and what you have to consider.</p>
+<p>By the following sections you learn how to create your own geometries
+and what you have to consider while creating it.</p>
 <section id="directions-and-coordinates">
-<span id="examples-geometry-basis-coordinates"></span><h3>Directions and coordinates<a class="headerlink" href="#directions-and-coordinates" title="Permalink to this heading">#</a></h3>
+<span id="examples-geometry-basis-coordinates"></span><h2>Directions and coordinates<a class="headerlink" href="#directions-and-coordinates" title="Permalink to this heading">#</a></h2>
 <figure class="align-default">
 <img alt="../_images/coordinates-dark.svg" class="only-dark" src="../_images/coordinates-dark.svg" /></figure>
 <figure class="align-default" id="id1">
@@ -349,7 +346,21 @@ Therefore, a higher value means a point at lower level.</p>
 <p class="admonition-title">See also</p>
 <p><a class="reference internal" href="../theory/coordinates.html#theory-coordinates"><span class="std std-ref">Coordinates</span></a> : Coordinates in the <a class="reference internal" href="../theory/index.html#theory"><span class="std std-ref">Theory guide</span></a></p>
 </div>
+<p>Following descriptions apply universally:</p>
+<ul class="simple">
+<li><p><cite>top_edge</cite>: distance between origin and top-edge of the geometric entity in vertical direction</p></li>
+<li><p><cite>bottom_edge</cite>: distance between origin and bottom-edge of the geometric entity in vertical direction</p></li>
+<li><p><cite>left_edge</cite>: distance between origin and left edge of the geometric entity in horizontal direction</p></li>
+<li><p><cite>right_edge</cite>: distance between origin and right edge of the geometric entity in horizontal direction</p></li>
+<li><p><cite>centroid_y</cite>: distance between origin and centroid of the geometry in <strong>horizontal</strong> direction</p></li>
+<li><p><cite>centroid_z</cite>: distance between origin and centroid of the geometry in <strong>vertical</strong> direction</p></li>
+</ul>
 </section>
+<section id="the-basics-rectangle-trapezoid-and-circles">
+<span id="examples-geometry-basis"></span><h2>The basics: Rectangle, Trapezoid and Circles<a class="headerlink" href="#the-basics-rectangle-trapezoid-and-circles" title="Permalink to this heading">#</a></h2>
+<p><a class="reference internal" href="../api/m_n_kappa.Rectangle.html#m_n_kappa.Rectangle" title="m_n_kappa.Rectangle"><code class="xref py py-class docutils literal notranslate"><span class="pre">Rectangle</span></code></a>, <a class="reference internal" href="../api/m_n_kappa.Trapezoid.html#m_n_kappa.Trapezoid" title="m_n_kappa.Trapezoid"><code class="xref py py-class docutils literal notranslate"><span class="pre">Trapezoid</span></code></a>
+and <a class="reference internal" href="../api/m_n_kappa.Circle.html#m_n_kappa.Circle" title="m_n_kappa.Circle"><code class="xref py py-class docutils literal notranslate"><span class="pre">Circle</span></code></a> are available as basic geometric entities
+for creating individual geometries.</p>
 <section id="rectangle-and-trapezoid">
 <span id="examples-geometry-basis-rectangle"></span><h3>Rectangle and Trapezoid<a class="headerlink" href="#rectangle-and-trapezoid" title="Permalink to this heading">#</a></h3>
 <figure class="align-default">
@@ -385,8 +396,7 @@ All of the following are the same in size and position.</p>
 <p>Defining the <code class="docutils literal notranslate"><span class="pre">width</span></code> and the horizontal position of a
 <a class="reference internal" href="../api/m_n_kappa.Trapezoid.html#m_n_kappa.Trapezoid" title="m_n_kappa.Trapezoid"><code class="xref py py-class docutils literal notranslate"><span class="pre">Trapezoid</span></code></a> is similar to the definition of
 a Rectangle.
-The only exception is that the definition must be conducted for the
-<code class="docutils literal notranslate"><span class="pre">top_edge</span></code> as well as for the <code class="docutils literal notranslate"><span class="pre">bottom_edge</span></code>.</p>
+But the definition must be conducted for the <code class="docutils literal notranslate"><span class="pre">top_edge</span></code> as well as for the <code class="docutils literal notranslate"><span class="pre">bottom_edge</span></code>.</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">m_n_kappa</span> <span class="kn">import</span> <span class="n">Trapezoid</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">trapezoid_1</span> <span class="o">=</span> <span class="n">Trapezoid</span><span class="p">(</span>
 <span class="gp">... </span>    <span class="n">top_edge</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">bottom_edge</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">top_width</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">bottom_width</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span>
@@ -403,7 +413,9 @@ The only exception is that the definition must be conducted for the
 </div>
 </section>
 <section id="the-circle">
-<span id="example-geometry-basis-circle"></span><h3>The Circle<a class="headerlink" href="#the-circle" title="Permalink to this heading">#</a></h3>
+<span id="examples-geometry-basis-circle"></span><h3>The Circle<a class="headerlink" href="#the-circle" title="Permalink to this heading">#</a></h3>
+<p>A <a class="reference internal" href="../api/m_n_kappa.Circle.html#m_n_kappa.Circle" title="m_n_kappa.Circle"><code class="xref py py-class docutils literal notranslate"><span class="pre">m_n_kappa.Circle</span></code></a> is created by passing the horizontal and
+the vertical (Z) position of the centroid as well as its diameter.</p>
 <figure class="align-default">
 <img alt="../_images/geometry_circle-dark.svg" class="only-dark" src="../_images/geometry_circle-dark.svg" /></figure>
 <figure class="align-default" id="id4">
@@ -412,18 +424,40 @@ The only exception is that the definition must be conducted for the
 </figcaption>
 </figure>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">m_n_kappa</span> <span class="kn">import</span> <span class="n">Circle</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">circle</span> <span class="o">=</span> <span class="n">Circle</span><span class="p">(</span><span class="n">diameter</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">centroid_y</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">centroid_z</span><span class="o">=-</span><span class="mi">10</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">circle</span> <span class="o">=</span> <span class="n">Circle</span><span class="p">(</span><span class="n">diameter</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">centroid_y</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">centroid_z</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
 </pre></div>
 </div>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p>The diameter of circle must be small compared to the other dimensions of the cross-section.
+Otherwise large deviations are possible.</p>
+</div>
+</section>
+<section id="final-notes-on-rectangle-co">
+<span id="examples-geometry-basis-final"></span><h3>Final notes on Rectangle &amp; Co.<a class="headerlink" href="#final-notes-on-rectangle-co" title="Permalink to this heading">#</a></h3>
+<p>In a further step you will merge a single <a class="reference internal" href="../api/m_n_kappa.Rectangle.html#m_n_kappa.Rectangle" title="m_n_kappa.Rectangle"><code class="xref py py-class docutils literal notranslate"><span class="pre">Rectangle</span></code></a>,
+<a class="reference internal" href="../api/m_n_kappa.Trapezoid.html#m_n_kappa.Trapezoid" title="m_n_kappa.Trapezoid"><code class="xref py py-class docutils literal notranslate"><span class="pre">Trapezoid</span></code></a> or <a class="reference internal" href="../api/m_n_kappa.Circle.html#m_n_kappa.Circle" title="m_n_kappa.Circle"><code class="xref py py-class docutils literal notranslate"><span class="pre">Circle</span></code></a> with a
+Material.
+This will create a <a class="reference internal" href="../api/m_n_kappa.Section.html#m_n_kappa.Section" title="m_n_kappa.Section"><code class="xref py py-class docutils literal notranslate"><span class="pre">Section</span></code></a>, what you will learn
+in <a class="reference internal" href="section.html#examples-section"><span class="std std-ref">Build a section</span></a></p>
+<p>Of course, you can add geometries up, creating a <a class="reference internal" href="../api/m_n_kappa.geometry.ComposedGeometry.html#m_n_kappa.geometry.ComposedGeometry" title="m_n_kappa.geometry.ComposedGeometry"><code class="xref py py-class docutils literal notranslate"><span class="pre">ComposedGeometry</span></code></a>.
+This is particularly useful if these geometries are of the same material.
+Merging a <a class="reference internal" href="../api/m_n_kappa.geometry.ComposedGeometry.html#m_n_kappa.geometry.ComposedGeometry" title="m_n_kappa.geometry.ComposedGeometry"><code class="xref py py-class docutils literal notranslate"><span class="pre">ComposedGeometry</span></code></a> with a material creates
+a cross-section (see <span class="xref std std-ref">examples.cross_section</span>)</p>
 </section>
 </section>
-<section id="the-shortcut-composing-geometries">
-<span id="examples-geometry-compose"></span><h2>The shortcut: composing geometries<a class="headerlink" href="#the-shortcut-composing-geometries" title="Permalink to this heading">#</a></h2>
-<p>Some geometries consisting of a number of basic geometries
-may be used often like the I-profile.
-Therefore, these often used geometries are provided as extra classes, like
+<section id="the-shortcut-predefined-composed-geometries">
+<span id="examples-geometry-compose"></span><h2>The shortcut: predefined composed geometries<a class="headerlink" href="#the-shortcut-predefined-composed-geometries" title="Permalink to this heading">#</a></h2>
+<p>Some geometries that consist of a number of <a class="reference internal" href="#examples-geometry-basis"><span class="std std-ref">basic geometries</span></a>
+may be used often, like I-profiles, UPE-profiles or rebar-layers.
+Building these geometries may be tedious and time-consuming.
+Therefore, these geometries are provided as extra classes, like
 <a class="reference internal" href="../api/m_n_kappa.IProfile.html#m_n_kappa.IProfile" title="m_n_kappa.IProfile"><code class="xref py py-class docutils literal notranslate"><span class="pre">IProfile</span></code></a>, <a class="reference internal" href="../api/m_n_kappa.UPEProfile.html#m_n_kappa.UPEProfile" title="m_n_kappa.UPEProfile"><code class="xref py py-class docutils literal notranslate"><span class="pre">UPEProfile</span></code></a> and
 <a class="reference internal" href="../api/m_n_kappa.RebarLayer.html#m_n_kappa.RebarLayer" title="m_n_kappa.RebarLayer"><code class="xref py py-class docutils literal notranslate"><span class="pre">RebarLayer</span></code></a>.</p>
+<p>The <a class="reference internal" href="../api/m_n_kappa.IProfile.html#m_n_kappa.IProfile" title="m_n_kappa.IProfile"><code class="xref py py-class docutils literal notranslate"><span class="pre">IProfile</span></code></a> consist in general of a top-flange,
+a web and a bottom-flange.
+All of the above mentioned elements are defined as <a class="reference internal" href="../api/m_n_kappa.Rectangle.html#m_n_kappa.Rectangle" title="m_n_kappa.Rectangle"><code class="xref py py-class docutils literal notranslate"><span class="pre">Rectangle</span></code></a>.
+If needed only a fraction of these elements is used as the Figure above shows.</p>
 <figure class="align-default">
 <img alt="../_images/geometry_i-profile-dark.svg" class="only-dark" src="../_images/geometry_i-profile-dark.svg" /></figure>
 <figure class="align-default" id="id5">
@@ -431,10 +465,6 @@ Therefore, these often used geometries are provided as extra classes, like
 <p><span class="caption-text">I-Profile dimensions</span><a class="headerlink" href="#id5" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
-<p>The <a class="reference internal" href="../api/m_n_kappa.IProfile.html#m_n_kappa.IProfile" title="m_n_kappa.IProfile"><code class="xref py py-class docutils literal notranslate"><span class="pre">IProfile</span></code></a> consist in general of a top-flange,
-a web and a bottom-flange.
-All of these elements are defined as <a class="reference internal" href="../api/m_n_kappa.Rectangle.html#m_n_kappa.Rectangle" title="m_n_kappa.Rectangle"><code class="xref py py-class docutils literal notranslate"><span class="pre">Rectangle</span></code></a>, but
-may also be neglected as the Figure above shows.</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">m_n_kappa</span> <span class="kn">import</span> <span class="n">IProfile</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">i_profile_1</span> <span class="o">=</span> <span class="n">IProfile</span><span class="p">(</span>
 <span class="gp">... </span>    <span class="n">top_edge</span><span class="o">=</span><span class="mf">0.</span><span class="p">,</span> <span class="n">t_fo</span><span class="o">=</span><span class="mf">15.5</span><span class="p">,</span> <span class="n">b_fo</span><span class="o">=</span><span class="mf">200.0</span><span class="p">,</span> <span class="n">t_w</span><span class="o">=</span><span class="mf">9.5</span><span class="p">,</span> <span class="n">h_w</span><span class="o">=</span><span class="mf">169.0</span><span class="p">)</span>
@@ -446,8 +476,13 @@ may also be neglected as the Figure above shows.</p>
 <span class="gp">... </span>    <span class="n">top_edge</span><span class="o">=</span><span class="mf">0.</span><span class="p">,</span> <span class="n">t_fo</span><span class="o">=</span><span class="mf">15.5</span><span class="p">,</span> <span class="n">b_fo</span><span class="o">=</span><span class="mf">200.0</span><span class="p">,</span> <span class="n">t_w</span><span class="o">=</span><span class="mf">9.5</span><span class="p">,</span> <span class="n">h_w</span><span class="o">=</span><span class="mf">169.0</span><span class="p">,</span>
 <span class="gp">... </span>    <span class="n">has_bottom_flange</span><span class="o">=</span><span class="kc">False</span>
 <span class="gp">... </span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">i_profile_shift10</span> <span class="o">=</span> <span class="n">IProfile</span><span class="p">(</span>
+<span class="gp">... </span>    <span class="n">top_edge</span><span class="o">=</span><span class="mf">0.</span><span class="p">,</span> <span class="n">t_fo</span><span class="o">=</span><span class="mf">15.5</span><span class="p">,</span> <span class="n">b_fo</span><span class="o">=</span><span class="mf">200.0</span><span class="p">,</span> <span class="n">t_w</span><span class="o">=</span><span class="mf">9.5</span><span class="p">,</span> <span class="n">h_w</span><span class="o">=</span><span class="mf">169.0</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="n">centroid_y</span><span class="o">=</span><span class="mf">10.</span><span class="p">)</span> <span class="c1"># the I-Profile is shifted 10 mm to the right</span>
 </pre></div>
 </div>
+<p>The UPE-profile forms a flipped <cite>U</cite>.
+The two flanges and the web are each an individual <a class="reference internal" href="../api/m_n_kappa.Rectangle.html#m_n_kappa.Rectangle" title="m_n_kappa.Rectangle"><code class="xref py py-class docutils literal notranslate"><span class="pre">Rectangle</span></code></a>.</p>
 <figure class="align-default">
 <img alt="../_images/geometry_upe-dark.svg" class="only-dark" src="../_images/geometry_upe-dark.svg" /></figure>
 <figure class="align-default" id="id6">
@@ -457,7 +492,37 @@ may also be neglected as the Figure above shows.</p>
 </figure>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">m_n_kappa</span> <span class="kn">import</span> <span class="n">UPEProfile</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">upe_profile</span> <span class="o">=</span> <span class="n">UPEProfile</span><span class="p">(</span><span class="n">top_edge</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">t_f</span><span class="o">=</span><span class="mf">5.2</span><span class="p">,</span> <span class="n">b_f</span><span class="o">=</span><span class="mi">76</span><span class="p">,</span> <span class="n">t_w</span><span class="o">=</span><span class="mf">9.0</span><span class="p">,</span> <span class="n">h</span><span class="o">=</span><span class="mi">200</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">upe_profile</span> <span class="o">=</span> <span class="n">UPEProfile</span><span class="p">(</span><span class="n">top_edge</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">t_f</span><span class="o">=</span><span class="mf">5.2</span><span class="p">,</span> <span class="n">b_f</span><span class="o">=</span><span class="mi">76</span><span class="p">,</span> <span class="n">t_w</span><span class="o">=</span><span class="mf">9.0</span><span class="p">,</span> <span class="n">h_w</span><span class="o">=</span><span class="mi">200</span><span class="o">-</span><span class="mi">2</span><span class="o">*</span><span class="mf">5.2</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">upe_profile_shift10</span> <span class="o">=</span> <span class="n">UPEProfile</span><span class="p">(</span><span class="n">top_edge</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">t_f</span><span class="o">=</span><span class="mf">5.2</span><span class="p">,</span> <span class="n">b_f</span><span class="o">=</span><span class="mi">76</span><span class="p">,</span> <span class="n">t_w</span><span class="o">=</span><span class="mf">9.0</span><span class="p">,</span> <span class="n">h</span><span class="o">=</span><span class="mi">200</span><span class="p">,</span> <span class="n">centroid_y</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
 </pre></div>
+</div>
+<p>A number of rebars at the same level may be defined using a <cite>for</cite>-loop.
+What might be tedious.
+As alternative to the <cite>for</cite>-loop the <a class="reference internal" href="../api/m_n_kappa.RebarLayer.html#m_n_kappa.RebarLayer" title="m_n_kappa.RebarLayer"><code class="xref py py-class docutils literal notranslate"><span class="pre">RebarLayer</span></code></a> has been implemented simplifying
+this process dramatically.
+<a class="reference internal" href="../api/m_n_kappa.RebarLayer.html#m_n_kappa.RebarLayer" title="m_n_kappa.RebarLayer"><code class="xref py py-class docutils literal notranslate"><span class="pre">RebarLayer</span></code></a> creates a specified number of rebars with a specific horizontal
+distance between each other.
+Or if you pass the number and the overall width it computes the horizontal distance by itself.</p>
+<figure class="align-default">
+<img alt="../_images/geometry_rebar-layer-dark.svg" class="only-dark" src="../_images/geometry_rebar-layer-dark.svg" /></figure>
+<figure class="align-default" id="id7">
+<img alt="../_images/geometry_rebar-layer-light.svg" class="only-light" src="../_images/geometry_rebar-layer-light.svg" /><figcaption>
+<p><span class="caption-text">Rebar-Layer - dimensions</span><a class="headerlink" href="#id7" title="Permalink to this image">#</a></p>
+</figcaption>
+</figure>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">m_n_kappa</span> <span class="kn">import</span> <span class="n">RebarLayer</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">rebar_layer_1</span> <span class="o">=</span> <span class="n">RebarLayer</span><span class="p">(</span>
+<span class="gp">... </span>    <span class="n">rebar_diameter</span><span class="o">=</span><span class="mf">12.0</span><span class="p">,</span> <span class="n">centroid_z</span><span class="o">=</span><span class="mf">10.0</span><span class="p">,</span> <span class="n">rebar_number</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">rebar_horizontal_distance</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">rebar_layer_2</span> <span class="o">=</span> <span class="n">RebarLayer</span><span class="p">(</span>
+<span class="gp">... </span>    <span class="n">rebar_diameter</span><span class="o">=</span><span class="mf">12.0</span><span class="p">,</span> <span class="n">centroid_z</span><span class="o">=</span><span class="mf">10.0</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="mi">1000</span><span class="p">,</span> <span class="n">rebar_horizontal_distance</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">rebar_layer_3</span> <span class="o">=</span> <span class="n">RebarLayer</span><span class="p">(</span>
+<span class="gp">... </span>    <span class="n">rebar_diameter</span><span class="o">=</span><span class="mf">12.0</span><span class="p">,</span> <span class="n">centroid_z</span><span class="o">=</span><span class="mf">10.0</span><span class="p">,</span> <span class="n">rebar_number</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="mi">1000</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Do you have another idea or need for a predefined composed geometry consider
+<a class="reference internal" href="../contributing.html#contributing"><span class="std std-ref">Contributing</span></a> or open a new issue describing your idea.</p>
 </div>
 </section>
 </section>
@@ -467,12 +532,12 @@ may also be neglected as the Figure above shows.</p>
       <footer>
         
         <div class="related-pages">
-          <a class="next-page" href="m_kappa_UPE.html">
+          <a class="next-page" href="material.html">
               <div class="page-info">
                 <div class="context">
                   <span>Next</span>
                 </div>
-                <div class="title">Single span slim-floor beam with <span class="math notranslate nohighlight">\(M\)</span>-<span class="math notranslate nohighlight">\(\kappa\)</span>-Curve</div>
+                <div class="title">Creating materials</div>
               </div>
               <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
             </a>
@@ -518,13 +583,14 @@ may also be neglected as the Figure above shows.</p>
           <div class="toc-tree">
             <ul>
 <li><a class="reference internal" href="#">Creating Geometries</a><ul>
-<li><a class="reference internal" href="#the-basics-rectangle-trapezoid-and-circles">The basics: Rectangle, Trapezoid and Circles</a><ul>
 <li><a class="reference internal" href="#directions-and-coordinates">Directions and coordinates</a></li>
+<li><a class="reference internal" href="#the-basics-rectangle-trapezoid-and-circles">The basics: Rectangle, Trapezoid and Circles</a><ul>
 <li><a class="reference internal" href="#rectangle-and-trapezoid">Rectangle and Trapezoid</a></li>
 <li><a class="reference internal" href="#the-circle">The Circle</a></li>
+<li><a class="reference internal" href="#final-notes-on-rectangle-co">Final notes on Rectangle &amp; Co.</a></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#the-shortcut-composing-geometries">The shortcut: composing geometries</a></li>
+<li><a class="reference internal" href="#the-shortcut-predefined-composed-geometries">The shortcut: predefined composed geometries</a></li>
 </ul>
 </li>
 </ul>

@@ -169,6 +169,8 @@
 <li class="toctree-l1"><a class="reference internal" href="getting_started.html">Getting Started</a></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="examples/index.html">Examples</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
 <li class="toctree-l2"><a class="reference internal" href="examples/geometry.html">Creating Geometries</a></li>
+<li class="toctree-l2"><a class="reference internal" href="examples/material.html">Creating materials</a></li>
+<li class="toctree-l2"><a class="reference internal" href="examples/section.html">Build a section</a></li>
 <li class="toctree-l2"><a class="reference internal" href="examples/m_kappa_UPE.html">Single span slim-floor beam with Moment-Curvature-Curves</a></li>
 <li class="toctree-l2"><a class="reference internal" href="examples/m_n_kappa_UPE.html">Single span slim-floor beam with Moment-Axial force-Curvature-Curves</a></li>
 </ul>
@@ -363,7 +365,7 @@
 <tr class="row-odd"><td><p><a class="reference internal" href="api/m_n_kappa.UPEProfile.html#m_n_kappa.UPEProfile" title="m_n_kappa.UPEProfile"><code class="xref py py-obj docutils literal notranslate"><span class="pre">UPEProfile</span></code></a>(top_edge, t_f, b_f, t_w[, h_w, ...])</p></td>
 <td><p>UPE-Profile composed of class Rectangles forming a reversed <code class="docutils literal notranslate"><span class="pre">U</span></code></p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="api/m_n_kappa.RebarLayer.html#m_n_kappa.RebarLayer" title="m_n_kappa.RebarLayer"><code class="xref py py-obj docutils literal notranslate"><span class="pre">RebarLayer</span></code></a>(rebar_diameter, centroid[, ...])</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="api/m_n_kappa.RebarLayer.html#m_n_kappa.RebarLayer" title="m_n_kappa.RebarLayer"><code class="xref py py-obj docutils literal notranslate"><span class="pre">RebarLayer</span></code></a>(rebar_diameter, centroid_z[, ...])</p></td>
 <td><p>rebar-layer composed of several reinforcement-bars of <a class="reference internal" href="api/m_n_kappa.Circle.html#m_n_kappa.Circle" title="m_n_kappa.Circle"><code class="xref py py-class docutils literal notranslate"><span class="pre">Circle</span></code></a></p></td>
 </tr>
 </tbody>
@@ -381,10 +383,10 @@
 <tr class="row-even"><td><p><a class="reference internal" href="api/m_n_kappa.Concrete.html#m_n_kappa.Concrete" title="m_n_kappa.Concrete"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Concrete</span></code></a>(f_cm[, f_ctm, use_tension, ...])</p></td>
 <td><p>Concrete material</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="api/m_n_kappa.Steel.html#m_n_kappa.Steel" title="m_n_kappa.Steel"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Steel</span></code></a>(f_y[, f_u, failure_strain, E_a])</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/m_n_kappa.Steel.html#m_n_kappa.Steel" title="m_n_kappa.Steel"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Steel</span></code></a>([f_y, f_u, failure_strain, E_a])</p></td>
 <td><p>Steel material</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="api/m_n_kappa.Reinforcement.html#m_n_kappa.Reinforcement" title="m_n_kappa.Reinforcement"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Reinforcement</span></code></a>(f_s[, f_su, epsilon_su, E_s])</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="api/m_n_kappa.Reinforcement.html#m_n_kappa.Reinforcement" title="m_n_kappa.Reinforcement"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Reinforcement</span></code></a>([f_s, f_su, failure_strain, E_s])</p></td>
 <td><p>Reinforcement material</p></td>
 </tr>
 </tbody>

@@ -169,6 +169,8 @@
 <li class="toctree-l1"><a class="reference internal" href="../getting_started.html">Getting Started</a></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../examples/index.html">Examples</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
 <li class="toctree-l2"><a class="reference internal" href="../examples/geometry.html">Creating Geometries</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../examples/material.html">Creating materials</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../examples/section.html">Build a section</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../examples/m_kappa_UPE.html">Single span slim-floor beam with Moment-Curvature-Curves</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../examples/m_n_kappa_UPE.html">Single span slim-floor beam with Moment-Axial force-Curvature-Curves</a></li>
 </ul>
@@ -324,15 +326,15 @@
 <h1>m_n_kappa.Reinforcement<a class="headerlink" href="#m-n-kappa-reinforcement" title="Permalink to this heading">#</a></h1>
 <dl class="py class">
 <dt class="sig sig-object py" id="m_n_kappa.Reinforcement">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">m_n_kappa.</span></span><span class="sig-name descname"><span class="pre">Reinforcement</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">f_s</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">f_su</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">epsilon_su</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">E_s</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">200000.0</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#m_n_kappa.Reinforcement" title="Permalink to this definition">#</a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">m_n_kappa.</span></span><span class="sig-name descname"><span class="pre">Reinforcement</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">f_s</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">f_su</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">failure_strain</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">E_s</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">200000.0</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#m_n_kappa.Reinforcement" title="Permalink to this definition">#</a></dt>
 <dd><p>Bases: <a class="reference internal" href="m_n_kappa.Steel.html#m_n_kappa.Steel" title="m_n_kappa.material.Steel"><code class="xref py py-class docutils literal notranslate"><span class="pre">Steel</span></code></a></p>
 <p>Reinforcement material</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>f_s</strong> (<em>float</em>) – Yield strength of the reinforcement <span class="math notranslate nohighlight">\(f_\mathrm{s}\)</span></p></li>
+<li><p><strong>f_s</strong> (<em>float</em>) – Yield strength of the reinforcement <span class="math notranslate nohighlight">\(f_\mathrm{s}\)</span> (Default: None)</p></li>
 <li><p><strong>f_su</strong> (<em>float</em>) – Tensile strength of the reinforcement <span class="math notranslate nohighlight">\(f_\mathrm{su}\)</span> (Default: None)</p></li>
-<li><p><strong>epsilon_su</strong> (<em>float</em>) – Tensile strain of the reinforcement <span class="math notranslate nohighlight">\(\varepsilon_\mathrm{su}\)</span> (Default: None)</p></li>
+<li><p><strong>failure_strain</strong> (<em>float</em>) – Tensile strain of the reinforcement <span class="math notranslate nohighlight">\(\varepsilon_\mathrm{su}\)</span> (Default: None)</p></li>
 <li><p><strong>E_s</strong> (<em>float</em>) – Modulus of elasticity of the reinforcement <span class="math notranslate nohighlight">\(E_\mathrm{s}\)</span> (Default: 200000 N/mm²)</p></li>
 </ul>
 </dd>
@@ -351,7 +353,7 @@
 <li><p><code class="docutils literal notranslate"><span class="pre">f_su</span> <span class="pre">=</span> <span class="pre">None</span></code> and <code class="docutils literal notranslate"><span class="pre">epsilon_su</span> <span class="pre">=</span> <span class="pre">None</span></code>: Linear-elastic behaviour.</p></li>
 </ol>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">m_n_kappa</span> <span class="kn">import</span> <span class="n">Reinforcement</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">elastic_reinforcement</span> <span class="o">=</span> <span class="n">Reinforcement</span><span class="p">(</span><span class="n">f_s</span><span class="o">=</span><span class="mf">500.0</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">elastic_reinforcement</span> <span class="o">=</span> <span class="n">Reinforcement</span><span class="p">()</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">elastic_reinforcement</span><span class="o">.</span><span class="n">stress_strain</span>
 <span class="go">[StressStrain(stress=-200000.0, strain=-1.0), StressStrain(stress=-0.0, strain=-0.0), StressStrain(stress=200000.0, strain=1.0)]</span>
 </pre></div>
@@ -359,7 +361,7 @@
 <ol class="arabic simple" start="2">
 <li><p><code class="docutils literal notranslate"><span class="pre">f_su</span> <span class="pre">=</span> <span class="pre">None</span></code>: Bi-linear behaviour where <code class="docutils literal notranslate"><span class="pre">f_su</span> <span class="pre">=</span> <span class="pre">f_s</span></code></p></li>
 </ol>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">bilinear_reinforcement</span> <span class="o">=</span> <span class="n">Reinforcement</span><span class="p">(</span><span class="n">f_s</span><span class="o">=</span><span class="mf">500.0</span><span class="p">,</span> <span class="n">epsilon_su</span><span class="o">=</span><span class="mf">0.25</span><span class="p">)</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">bilinear_reinforcement</span> <span class="o">=</span> <span class="n">Reinforcement</span><span class="p">(</span><span class="n">f_s</span><span class="o">=</span><span class="mf">500.0</span><span class="p">,</span> <span class="n">failure_strain</span><span class="o">=</span><span class="mf">0.25</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">bilinear_reinforcement</span><span class="o">.</span><span class="n">stress_strain</span>
 <span class="go">[StressStrain(stress=-500.0, strain=-0.25), StressStrain(stress=-500.0, strain=-0.0025), StressStrain(stress=-0.0, strain=-0.0), StressStrain(stress=500.0, strain=0.0025), StressStrain(stress=500.0, strain=0.25)]</span>
 </pre></div>
@@ -371,7 +373,7 @@ Bi-linear behaviour with following stress-strain points
 (<span class="math notranslate nohighlight">\(f_\mathrm{su}\)</span> | <span class="math notranslate nohighlight">\(\varepsilon_\mathrm{su}\)</span>).
 Where the strain at yield is computed like <span class="math notranslate nohighlight">\(\varepsilon_\mathrm{s} = f_\mathrm{s} / E_\mathrm{s}\)</span></p></li>
 </ol>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">reinforcement</span> <span class="o">=</span> <span class="n">Reinforcement</span><span class="p">(</span><span class="n">f_s</span><span class="o">=</span><span class="mf">500.0</span><span class="p">,</span> <span class="n">f_su</span><span class="o">=</span><span class="mf">550.0</span><span class="p">,</span> <span class="n">epsilon_su</span><span class="o">=</span><span class="mf">0.25</span><span class="p">)</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">reinforcement</span> <span class="o">=</span> <span class="n">Reinforcement</span><span class="p">(</span><span class="n">f_s</span><span class="o">=</span><span class="mf">500.0</span><span class="p">,</span> <span class="n">f_su</span><span class="o">=</span><span class="mf">550.0</span><span class="p">,</span> <span class="n">failure_strain</span><span class="o">=</span><span class="mf">0.25</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">reinforcement</span><span class="o">.</span><span class="n">stress_strain</span>
 <span class="go">[StressStrain(stress=-550.0, strain=-0.25), StressStrain(stress=-500.0, strain=-0.0025), StressStrain(stress=-0.0, strain=-0.0), StressStrain(stress=500.0, strain=0.0025), StressStrain(stress=550.0, strain=0.25)]</span>
 </pre></div>
@@ -414,49 +416,46 @@ Where the strain at yield is computed like <span class="math notranslate nohighl
 <tr class="row-odd"><td><p><a class="reference internal" href="#m_n_kappa.Reinforcement.compression_stress_strain" title="m_n_kappa.Reinforcement.compression_stress_strain"><code class="xref py py-obj docutils literal notranslate"><span class="pre">compression_stress_strain</span></code></a></p></td>
 <td><p>stress-strain-relationship under compression (negative sign)</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#m_n_kappa.Reinforcement.epsilon_su" title="m_n_kappa.Reinforcement.epsilon_su"><code class="xref py py-obj docutils literal notranslate"><span class="pre">epsilon_su</span></code></a></p></td>
-<td><p>Failure-strain of reinforcement <span class="math notranslate nohighlight">\(\varepsilon_\mathrm{su}\)</span></p></td>
-</tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#m_n_kappa.Reinforcement.epsilon_y" title="m_n_kappa.Reinforcement.epsilon_y"><code class="xref py py-obj docutils literal notranslate"><span class="pre">epsilon_y</span></code></a></p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#m_n_kappa.Reinforcement.epsilon_y" title="m_n_kappa.Reinforcement.epsilon_y"><code class="xref py py-obj docutils literal notranslate"><span class="pre">epsilon_y</span></code></a></p></td>
 <td><p>yield strength <span class="math notranslate nohighlight">\(f_\mathrm{y}\)</span></p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#m_n_kappa.Reinforcement.f_s" title="m_n_kappa.Reinforcement.f_s"><code class="xref py py-obj docutils literal notranslate"><span class="pre">f_s</span></code></a></p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#m_n_kappa.Reinforcement.f_s" title="m_n_kappa.Reinforcement.f_s"><code class="xref py py-obj docutils literal notranslate"><span class="pre">f_s</span></code></a></p></td>
 <td><p>Yield strength of the reinforcement <span class="math notranslate nohighlight">\(f_\mathrm{s}\)</span></p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#m_n_kappa.Reinforcement.f_su" title="m_n_kappa.Reinforcement.f_su"><code class="xref py py-obj docutils literal notranslate"><span class="pre">f_su</span></code></a></p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#m_n_kappa.Reinforcement.f_su" title="m_n_kappa.Reinforcement.f_su"><code class="xref py py-obj docutils literal notranslate"><span class="pre">f_su</span></code></a></p></td>
 <td><p>Tensile strength of the reinforcement <span class="math notranslate nohighlight">\(f_\mathrm{su}\)</span></p></td>
 </tr>
-<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">f_u</span></code></p></td>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">f_u</span></code></p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#m_n_kappa.Reinforcement.f_y" title="m_n_kappa.Reinforcement.f_y"><code class="xref py py-obj docutils literal notranslate"><span class="pre">f_y</span></code></a></p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#m_n_kappa.Reinforcement.f_y" title="m_n_kappa.Reinforcement.f_y"><code class="xref py py-obj docutils literal notranslate"><span class="pre">f_y</span></code></a></p></td>
 <td><p>yield strength <span class="math notranslate nohighlight">\(f_\mathrm{y}\)</span></p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#m_n_kappa.Reinforcement.failure_strain" title="m_n_kappa.Reinforcement.failure_strain"><code class="xref py py-obj docutils literal notranslate"><span class="pre">failure_strain</span></code></a></p></td>
-<td><p>tensile strain <span class="math notranslate nohighlight">\(\varepsilon_\mathrm{u}\)</span></p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#m_n_kappa.Reinforcement.failure_strain" title="m_n_kappa.Reinforcement.failure_strain"><code class="xref py py-obj docutils literal notranslate"><span class="pre">failure_strain</span></code></a></p></td>
+<td><p>Failure-strain of reinforcement <span class="math notranslate nohighlight">\(\varepsilon_\mathrm{su}\)</span></p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#m_n_kappa.Reinforcement.maximum_strain" title="m_n_kappa.Reinforcement.maximum_strain"><code class="xref py py-obj docutils literal notranslate"><span class="pre">maximum_strain</span></code></a></p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#m_n_kappa.Reinforcement.maximum_strain" title="m_n_kappa.Reinforcement.maximum_strain"><code class="xref py py-obj docutils literal notranslate"><span class="pre">maximum_strain</span></code></a></p></td>
 <td><p>maximum strain_value in the stress-strain_value-relationship</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#m_n_kappa.Reinforcement.minimum_strain" title="m_n_kappa.Reinforcement.minimum_strain"><code class="xref py py-obj docutils literal notranslate"><span class="pre">minimum_strain</span></code></a></p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#m_n_kappa.Reinforcement.minimum_strain" title="m_n_kappa.Reinforcement.minimum_strain"><code class="xref py py-obj docutils literal notranslate"><span class="pre">minimum_strain</span></code></a></p></td>
 <td><p>minimum strain_value in the stress-strain_value-relationship</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#m_n_kappa.Reinforcement.section_type" title="m_n_kappa.Reinforcement.section_type"><code class="xref py py-obj docutils literal notranslate"><span class="pre">section_type</span></code></a></p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#m_n_kappa.Reinforcement.section_type" title="m_n_kappa.Reinforcement.section_type"><code class="xref py py-obj docutils literal notranslate"><span class="pre">section_type</span></code></a></p></td>
 <td><p>section section_type</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#m_n_kappa.Reinforcement.strains" title="m_n_kappa.Reinforcement.strains"><code class="xref py py-obj docutils literal notranslate"><span class="pre">strains</span></code></a></p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#m_n_kappa.Reinforcement.strains" title="m_n_kappa.Reinforcement.strains"><code class="xref py py-obj docutils literal notranslate"><span class="pre">strains</span></code></a></p></td>
 <td><p>strains from the stress-strain_value-relationship</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#m_n_kappa.Reinforcement.stress_strain" title="m_n_kappa.Reinforcement.stress_strain"><code class="xref py py-obj docutils literal notranslate"><span class="pre">stress_strain</span></code></a></p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#m_n_kappa.Reinforcement.stress_strain" title="m_n_kappa.Reinforcement.stress_strain"><code class="xref py py-obj docutils literal notranslate"><span class="pre">stress_strain</span></code></a></p></td>
 <td><p>list of stress-strain_value points</p></td>
 </tr>
-<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">stress_strain_type</span></code></p></td>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">stress_strain_type</span></code></p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#m_n_kappa.Reinforcement.stresses" title="m_n_kappa.Reinforcement.stresses"><code class="xref py py-obj docutils literal notranslate"><span class="pre">stresses</span></code></a></p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#m_n_kappa.Reinforcement.stresses" title="m_n_kappa.Reinforcement.stresses"><code class="xref py py-obj docutils literal notranslate"><span class="pre">stresses</span></code></a></p></td>
 <td><p>stresses from the stress-strain_value-relationship</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#m_n_kappa.Reinforcement.tension_stress_strain" title="m_n_kappa.Reinforcement.tension_stress_strain"><code class="xref py py-obj docutils literal notranslate"><span class="pre">tension_stress_strain</span></code></a></p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#m_n_kappa.Reinforcement.tension_stress_strain" title="m_n_kappa.Reinforcement.tension_stress_strain"><code class="xref py py-obj docutils literal notranslate"><span class="pre">tension_stress_strain</span></code></a></p></td>
 <td><p>stress-strain-relationship under tension (positive sign)</p></td>
 </tr>
 </tbody>
@@ -569,12 +568,6 @@ Where the strain at yield is computed like <span class="math notranslate nohighl
 </dd></dl>
 
 <dl class="py property">
-<dt class="sig sig-object py" id="m_n_kappa.Reinforcement.epsilon_su">
-<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">epsilon_su</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">float</span></em><a class="headerlink" href="#m_n_kappa.Reinforcement.epsilon_su" title="Permalink to this definition">#</a></dt>
-<dd><p>Failure-strain of reinforcement <span class="math notranslate nohighlight">\(\varepsilon_\mathrm{su}\)</span></p>
-</dd></dl>
-
-<dl class="py property">
 <dt class="sig sig-object py" id="m_n_kappa.Reinforcement.epsilon_y">
 <em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">epsilon_y</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">float</span></em><a class="headerlink" href="#m_n_kappa.Reinforcement.epsilon_y" title="Permalink to this definition">#</a></dt>
 <dd><p>yield strength <span class="math notranslate nohighlight">\(f_\mathrm{y}\)</span></p>
@@ -601,7 +594,7 @@ Where the strain at yield is computed like <span class="math notranslate nohighl
 <dl class="py property">
 <dt class="sig sig-object py" id="m_n_kappa.Reinforcement.failure_strain">
 <em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">failure_strain</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">float</span></em><a class="headerlink" href="#m_n_kappa.Reinforcement.failure_strain" title="Permalink to this definition">#</a></dt>
-<dd><p>tensile strain <span class="math notranslate nohighlight">\(\varepsilon_\mathrm{u}\)</span></p>
+<dd><p>Failure-strain of reinforcement <span class="math notranslate nohighlight">\(\varepsilon_\mathrm{su}\)</span></p>
 </dd></dl>
 
 <dl class="py property">
@@ -716,7 +709,6 @@ Where the strain at yield is computed like <span class="math notranslate nohighl
 <li><a class="reference internal" href="#m_n_kappa.Reinforcement.E_a"><code class="docutils literal notranslate"><span class="pre">Reinforcement.E_a</span></code></a></li>
 <li><a class="reference internal" href="#m_n_kappa.Reinforcement.E_s"><code class="docutils literal notranslate"><span class="pre">Reinforcement.E_s</span></code></a></li>
 <li><a class="reference internal" href="#m_n_kappa.Reinforcement.compression_stress_strain"><code class="docutils literal notranslate"><span class="pre">Reinforcement.compression_stress_strain</span></code></a></li>
-<li><a class="reference internal" href="#m_n_kappa.Reinforcement.epsilon_su"><code class="docutils literal notranslate"><span class="pre">Reinforcement.epsilon_su</span></code></a></li>
 <li><a class="reference internal" href="#m_n_kappa.Reinforcement.epsilon_y"><code class="docutils literal notranslate"><span class="pre">Reinforcement.epsilon_y</span></code></a></li>
 <li><a class="reference internal" href="#m_n_kappa.Reinforcement.f_s"><code class="docutils literal notranslate"><span class="pre">Reinforcement.f_s</span></code></a></li>
 <li><a class="reference internal" href="#m_n_kappa.Reinforcement.f_su"><code class="docutils literal notranslate"><span class="pre">Reinforcement.f_su</span></code></a></li>

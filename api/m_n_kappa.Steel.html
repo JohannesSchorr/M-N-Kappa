@@ -169,6 +169,8 @@
 <li class="toctree-l1"><a class="reference internal" href="../getting_started.html">Getting Started</a></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../examples/index.html">Examples</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
 <li class="toctree-l2"><a class="reference internal" href="../examples/geometry.html">Creating Geometries</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../examples/material.html">Creating materials</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../examples/section.html">Build a section</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../examples/m_kappa_UPE.html">Single span slim-floor beam with Moment-Curvature-Curves</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../examples/m_n_kappa_UPE.html">Single span slim-floor beam with Moment-Axial force-Curvature-Curves</a></li>
 </ul>
@@ -324,7 +326,7 @@
 <h1>m_n_kappa.Steel<a class="headerlink" href="#m-n-kappa-steel" title="Permalink to this heading">#</a></h1>
 <dl class="py class">
 <dt class="sig sig-object py" id="m_n_kappa.Steel">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">m_n_kappa.</span></span><span class="sig-name descname"><span class="pre">Steel</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">f_y</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">f_u</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">failure_strain</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">E_a</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">210000.0</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#m_n_kappa.Steel" title="Permalink to this definition">#</a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">m_n_kappa.</span></span><span class="sig-name descname"><span class="pre">Steel</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">f_y</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">f_u</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">failure_strain</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">E_a</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">210000.0</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#m_n_kappa.Steel" title="Permalink to this definition">#</a></dt>
 <dd><p>Bases: <a class="reference internal" href="m_n_kappa.Material.html#m_n_kappa.Material" title="m_n_kappa.material.Material"><code class="xref py py-class docutils literal notranslate"><span class="pre">Material</span></code></a></p>
 <p>Steel material</p>
 <div class="versionadded">
@@ -340,7 +342,7 @@ In case other units are used appropriate value for modulus of elasticity <cite>E
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>f_y</strong> (<em>float</em>) – yield strength <span class="math notranslate nohighlight">\(f_\mathrm{y}\)</span></p></li>
+<li><p><strong>f_y</strong> (<em>float</em>) – yield strength <span class="math notranslate nohighlight">\(f_\mathrm{y}\)</span> (Default: None)</p></li>
 <li><p><strong>f_u</strong> (<em>float</em>) – tensile strength <span class="math notranslate nohighlight">\(f_\mathrm{u}\)</span> (Default: None)</p></li>
 <li><p><strong>failure_strain</strong> (<em>float</em>) – tensile strain <span class="math notranslate nohighlight">\(\varepsilon_\mathrm{u}\)</span> (Default: None)</p></li>
 <li><p><strong>E_a</strong> (<em>float</em>) – modulus of elasticity <span class="math notranslate nohighlight">\(E_\mathrm{a}\)</span> (Default: 210000 N/mm²)</p></li>
@@ -396,7 +398,7 @@ Three forms of the stress-strain relationship are possible:</p>
 <li><p><code class="docutils literal notranslate"><span class="pre">f_u</span> <span class="pre">=</span> <span class="pre">None</span></code> and <code class="docutils literal notranslate"><span class="pre">epsilon_u</span> <span class="pre">=</span> <span class="pre">None</span></code>: Linear-elastic behaviour.</p></li>
 </ol>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">m_n_kappa</span> <span class="kn">import</span> <span class="n">Steel</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">elastic_steel</span> <span class="o">=</span> <span class="n">Steel</span><span class="p">(</span><span class="n">f_y</span><span class="o">=</span><span class="mf">355.0</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">elastic_steel</span> <span class="o">=</span> <span class="n">Steel</span><span class="p">()</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">elastic_steel</span><span class="o">.</span><span class="n">stress_strain</span>
 <span class="go">[StressStrain(stress=-210000.0, strain=-1.0), StressStrain(stress=-0.0, strain=-0.0), StressStrain(stress=210000.0, strain=1.0)]</span>
 </pre></div>

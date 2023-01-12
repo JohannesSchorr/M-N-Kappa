@@ -22,6 +22,6 @@
       ~RebarLayer.right_edge
       ~RebarLayer.width
       ~RebarLayer.rebar_diameter
-      ~RebarLayer.centroid
+      ~RebarLayer.centroid_z
    
    

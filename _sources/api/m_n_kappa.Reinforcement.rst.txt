@@ -42,7 +42,6 @@
       ~Reinforcement.E_a
       ~Reinforcement.E_s
       ~Reinforcement.compression_stress_strain
-      ~Reinforcement.epsilon_su
       ~Reinforcement.epsilon_y
       ~Reinforcement.f_s
       ~Reinforcement.f_su
