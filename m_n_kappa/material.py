@@ -1649,7 +1649,7 @@ class Reinforcement(Steel):
             Yield strength of the reinforcement :math:`f_\\mathrm{s}` (Default: None)
         f_su : float
             Tensile strength of the reinforcement :math:`f_\\mathrm{su}` (Default: None)
-        epsilon_su : float
+        failure_strain : float
             Tensile strain of the reinforcement :math:`\\varepsilon_\\mathrm{su}` (Default: None)
         E_s  : float
             Modulus of elasticity of the reinforcement :math:`E_\\mathrm{s}` (Default: 200000 N/mm²)
@@ -1672,7 +1672,7 @@ StressStrain(stress=200000.0, strain=1.0)]
 
         2. ``f_su = None``: Bi-linear behaviour where ``f_su = f_s``
 
-        >>> bilinear_reinforcement = Reinforcement(f_s=500.0, epsilon_su=0.25)
+        >>> bilinear_reinforcement = Reinforcement(f_s=500.0, failure_strain=0.25)
         >>> bilinear_reinforcement.stress_strain
         [StressStrain(stress=-500.0, strain=-0.25), \
 StressStrain(stress=-500.0, strain=-0.0025), \
@@ -1686,7 +1686,7 @@ StressStrain(stress=500.0, strain=0.25)]
            (:math:`f_\\mathrm{su}` | :math:`\\varepsilon_\\mathrm{su}`).
            Where the strain at yield is computed like :math:`\\varepsilon_\\mathrm{s} = f_\\mathrm{s} / E_\\mathrm{s}`
 
-        >>> reinforcement = Reinforcement(f_s=500.0, f_su=550.0, epsilon_su=0.25)
+        >>> reinforcement = Reinforcement(f_s=500.0, f_su=550.0, failure_strain=0.25)
         >>> reinforcement.stress_strain
         [StressStrain(stress=-550.0, strain=-0.25), \
 StressStrain(stress=-500.0, strain=-0.0025), \
@@ -1695,7 +1695,7 @@ StressStrain(stress=500.0, strain=0.0025), \
 StressStrain(stress=550.0, strain=0.25)]
 
         """
-        super().__init__(f_s, f_su, epsilon_su, E_s)
+        super().__init__(f_s, f_su, failure_strain, E_s)
 
     @property
     def section_type(self):
@@ -1712,9 +1712,9 @@ StressStrain(stress=550.0, strain=0.25)]
         return self.f_u
 
     @property
-    def epsilon_su(self) -> float:
+    def failure_strain(self) -> float:
         """Failure-strain of reinforcement :math:`\\varepsilon_\\mathrm{su}`"""
-        return self.epsilon_su
+        return self._failure_strain
 
     @property
     def E_s(self) -> float:
