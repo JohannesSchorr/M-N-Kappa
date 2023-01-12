@@ -1641,12 +1641,12 @@ class Reinforcement(Steel):
     .. versionadded: 0.1.0
     """
 
-    def __init__(self, f_s: float, f_su: float = None, epsilon_su: float = None, E_s: float = 200000.0):
+    def __init__(self, f_s: float = None, f_su: float = None, failure_strain: float = None, E_s: float = 200000.0):
         """
         Parameters
         ----------
         f_s : float
-            Yield strength of the reinforcement :math:`f_\\mathrm{s}`
+            Yield strength of the reinforcement :math:`f_\\mathrm{s}` (Default: None)
         f_su : float
             Tensile strength of the reinforcement :math:`f_\\mathrm{su}` (Default: None)
         epsilon_su : float
@@ -1664,7 +1664,7 @@ class Reinforcement(Steel):
         1. ``f_su = None`` and ``epsilon_su = None``: Linear-elastic behaviour.
 
         >>> from m_n_kappa import Reinforcement
-        >>> elastic_reinforcement = Reinforcement(f_s=500.0)
+        >>> elastic_reinforcement = Reinforcement()
         >>> elastic_reinforcement.stress_strain
         [StressStrain(stress=-200000.0, strain=-1.0), \
 StressStrain(stress=-0.0, strain=-0.0), \
