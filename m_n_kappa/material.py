@@ -1383,7 +1383,7 @@ class Steel(Material):
 
     def __init__(
         self,
-        f_y: float,
+        f_y: float = None,
         f_u: float = None,
         failure_strain: float = None,
         E_a: float = 210000.0,
@@ -1397,7 +1397,7 @@ class Steel(Material):
         Parameters
         ----------
         f_y : float
-            yield strength :math:`f_\\mathrm{y}`
+            yield strength :math:`f_\\mathrm{y}` (Default: None)
         f_u : float
             tensile strength :math:`f_\\mathrm{u}` (Default: None)
         failure_strain : float
@@ -1450,7 +1450,7 @@ class Steel(Material):
         1. ``f_u = None`` and ``epsilon_u = None``: Linear-elastic behaviour.
 
         >>> from m_n_kappa import Steel
-        >>> elastic_steel = Steel(f_y=355.0)
+        >>> elastic_steel = Steel()
         >>> elastic_steel.stress_strain
         [StressStrain(stress=-210000.0, strain=-1.0), \
 StressStrain(stress=-0.0, strain=-0.0), \
@@ -1482,7 +1482,7 @@ StressStrain(stress=400.0, strain=0.15)]
 
         """
         super().__init__(section_type="girder")
-        self._f_y = float(f_y)
+        self._f_y = make_float(f_y)
         self._f_u = make_float(f_u)
         self._failure_strain = make_float(failure_strain)
         self._E_a = make_float(E_a)
