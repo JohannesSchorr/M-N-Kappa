@@ -188,12 +188,13 @@ The two flanges and the web are each an individual :py:class:`~m_n_kappa.Rectang
 
 >>> from m_n_kappa import UPEProfile
 >>> upe_profile = UPEProfile(top_edge=10, t_f=5.2, b_f=76, t_w=9.0, h=200)
->>> upe_profile = UPEProfile(top_edge=10, t_f=5.2, b_f=76, t_w=9.0, h_w=200-2*t_f)
+>>> upe_profile = UPEProfile(top_edge=10, t_f=5.2, b_f=76, t_w=9.0, h_w=200-2*5.2)
 >>> upe_profile_shift10 = UPEProfile(top_edge=10, t_f=5.2, b_f=76, t_w=9.0, h=200, centroid_y=10)
 
 
 A number of rebars at the same level may be defined using a `for`-loop.
-As alternative the :py:class:`~m_n_kappa.RebarLayer` has been implemented simplyfying
+What might be tedious.
+As alternative to the `for`-loop the :py:class:`~m_n_kappa.RebarLayer` has been implemented simplifying
 this process dramatically.
 :py:class:`~m_n_kappa.RebarLayer` creates a specified number of rebars with a specific horizontal
 distance between each other.
