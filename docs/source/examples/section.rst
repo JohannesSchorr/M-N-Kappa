@@ -41,8 +41,6 @@ Both ways lead to exactly the same result.
 True
 
 Congratulations!
-You mastered to create as :py:class:`~m_n_kappa.Section`.
+You have mastered to create a :py:class:`~m_n_kappa.Section`.
 In :ref:`examples.cross_section` you will learn how to utilize this knowledge creating a
 full cross-section.
-
-
