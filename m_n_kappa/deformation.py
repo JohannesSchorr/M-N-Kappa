@@ -14,7 +14,10 @@ from .width import OneWeb
 
 class Node:
 
-    """Beam-Node
+    """
+    Beam-Node
+
+    .. versionadded:: 0.1.0
 
     stores the cross-section, the position_value in the beam and the computed M-Kappa-Curve
     """
@@ -27,10 +30,42 @@ class Node:
         """
         Parameters
         ----------
-        cross_section : :py:class:`~m_n_kappa.crosssection.Crosssection`
+        cross_section : :py:class:`~m_n_kappa.Crosssection`
             Cross-section at this node
         position : float
             position of the node along the beam
+            
+        Examples
+        --------
+        For computation of a Node, first a :py:class.`~m_n_kappa.Crosssection` is needed. 
+        
+        >>> from m_n_kappa import Concrete, Steel, Rectangle
+        >>> concrete = Concrete(f_cm=35.0)
+        >>> concrete_geometry_1 = Rectangle(
+        ...     top_edge=0.0, bottom_edge=10.0, width=20.0)
+        >>> concrete_section_1 = concrete + concrete_geometry_1
+        >>> steel = Steel(f_y=355.0)
+        >>> steel_geometry = Rectangle(
+        ...     top_edge=10.0, bottom_edge=20.0, width=10.0)
+        >>> steel_section = steel + steel_geometry
+        >>> cross_section = concrete_section_1 + steel_section
+        >>> cross_section
+        Crosssection(sections=sections)
+        
+        The node is initialized by: 
+        
+        >>> from m_n_kappa import Node
+        >>> node = Node(cross_section=cross_section, position=0.0)
+
+        During initialization the Moment-Curvature-Curve is computed.
+        :py:meth:`~m_n_kappa.Node.curvature` allows us to determine the corresponding curvature
+        to a given moment
+
+        >>> node.curvature_by(moment=100)
+        1.4446749198863875e-07
+
+        For computation of the incremental deformation at this node
+        :py:meth:`~m_n_kappa.Node.incremental_deformation`.
         """
         self._cross_section = cross_section
         self._position = position
@@ -42,18 +77,22 @@ class Node:
 
     @property
     def cross_section(self) -> Crosssection:
+        """:py:class:`Crosssection` at the node"""
         return self._cross_section
 
     @property
     def m_kappa_curve(self) -> MKappaCurvePoints:
+        """computed Moment-Curvature-Curve at the node"""
         return self._m_kappa_curve
 
     @property
     def position(self) -> float:
+        """position of the node along the beam"""
         return self._position
 
     @property
     def number(self) -> int:
+        """number of the node"""
         return self._number
 
     def curvature_by(self, moment: float) -> float:
@@ -64,13 +103,16 @@ class Node:
         self, load: ABCSingleSpan, single_load: SingleSpanSingleLoads
     ) -> float:
         """
-        determine curvature and single-load-moment at the node under given loading
+        determine incremental deformation at this node
+
+        for the deformation the curvature and single-load-moment at the node under given loading
+        are computed
 
         Parameters
         ----------
-        load : ABCSingleSpan
+        load : :py:class:`~m_n_kappa.loading.ABCSingleSpan`
            load applied to the beam
-        single_load : SingleSpanSingleLoads
+        single_load : :py:class:`~m_n_kappa.SingleSpanSingleLoads`
             single-load applied at the point, where deformation is computed
 
         Returns
