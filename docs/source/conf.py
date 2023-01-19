@@ -66,6 +66,10 @@ extensions.append('matplotlib.sphinxext.plot_directive')
 plot_html_show_source_link = False
 plot_include_source = True
 
+# Altair
+# https://altair-viz.github.io/
+extensions.append('altair.sphinxext.altairplot')
+
 # sphinx.ext.todo
 # https://www.sphinx-doc.org/en/master/usage/extensions/todo.html
 extensions.append('sphinx.ext.todo')
