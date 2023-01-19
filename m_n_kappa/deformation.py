@@ -203,6 +203,8 @@ class Deformation:
     """
     container for computed deformations
 
+    .. versionadded:: 0.1.0
+
     Parameters
     ----------
     position : float
