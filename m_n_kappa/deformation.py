@@ -128,7 +128,18 @@ class Node:
 
 @dataclass
 class LoadStep:
+    """
+    Load-step re-computed from a :py:class:`~m_n_kappa.curves_m_kappa.MKappaCurvePoint`
 
+    .. versionadded:: 0.1.0
+
+    Parameters
+    ----------
+    load: :py:class:`~m_n_kappa.loading.ABCSingleSpan`
+        load-step-value, may be any class derived from :py:class:`~m_n_kappa.loading.ABCSingleSpan`
+    point : :py:class:`~m_n_kappa.curves_m_kappa.MKappaCurvePoint`
+        Moment-curvature-point the load-step is derived from
+    """
     load: ABCSingleSpan
     point: MKappaCurvePoint
 
