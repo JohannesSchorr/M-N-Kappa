@@ -1,4 +1,5 @@
-.. rubric:: Computation
+Computation
+===========
 
 The ``cross_section`` you created above is the basis to do a variety of computations:
 
