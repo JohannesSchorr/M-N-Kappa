@@ -258,7 +258,11 @@ class Deformations:
 
 class Beam:
 
-    """Beam consisting of nodes"""
+    """
+    Beam consisting of nodes with computed moment-curvature-curves
+
+    .. versionadded:: 0.1.0
+    """
 
     __slots__ = (
         "_cross_section",
@@ -285,12 +289,10 @@ class Beam:
         ----------
         cross_section : :py:class:`~m_n_kappa.Crosssection`
             cross-section the beam consists of
-        length : float
-            length of the beam
         element_number : int
             number of elements the beam consists of
         load : :py:class:`~m_n_kappa.loading.ABCSingleSpan`
-            load-section_type applied to the beam
+            load-type applied to the beam
         consider_widths : bool
             consider effective widths (Default: True)
         """
@@ -306,6 +308,7 @@ class Beam:
 
     @property
     def consider_widths(self) -> bool:
+        """"""
         return self._consider_widths
 
     @property
@@ -314,30 +317,37 @@ class Beam:
 
     @property
     def length(self) -> float:
-        return self._length
+        """length of the beam"""
+        return self.load.length
 
     @property
     def load(self) -> ABCSingleSpan:
+        """loading of the beam"""
         return self._load
 
     @property
     def load_steps(self) -> list[LoadStep]:
+        """computed load-steps of the beam"""
         return self._load_steps
 
     @property
     def element_number(self) -> int:
+        """input-number of elements"""
         return self._element_number
 
     @property
     def element_standard_length(self) -> float:
+        """standard-length of the elements computed using input ``element_number``"""
         return self._element_standard_length
 
     @property
     def positions(self) -> list[float]:
+        """positions in the beam where nodes are applied"""
         return self._positions
 
     @property
     def nodes(self) -> list[Node]:
+        """nodes in the beam"""
         return self._nodes
 
     def bending_widths(self) -> list[float]:
@@ -444,12 +454,12 @@ class Beam:
 
         Parameters
         ----------
-        load_step : :py:class:`ABCSingleSpan`
+        load_step : :py:class:`~m_n_kappa.loading.ABCSingleSpan`
             load-step the deformation is computed at
 
         Returns
         -------
-        :py:class:`Deformations`
+        :py:class:`~m_n_kappa.beam.Deformations`
             deformations over the length of the beam at the given load-step
         """
         deformations = [Deformation(
@@ -499,9 +509,31 @@ class Beam:
         ]
 
     def _incremental_deformation(
-        self, node_index: int, load: ABCSingleSpan, single_load: SingleSpanSingleLoads
-    ):
-        node_1_result = self.nodes[node_index].incremental_deformation(
+        self, element_index: int, load: ABCSingleSpan, single_load: SingleSpanSingleLoads
+    ) -> float:
+        """
+        compute the incremental deformation of
+
+        Parameters
+        ----------
+        element_index : int
+            index of the element where the incremental deformation is to be computed
+        load : :py:class:´~m_n_kappa.loading.ABCSingleSpan`
+            loading of the beam
+        single_load : :py:class:´~m_n_kappa.SingleSpanSingleLoads`
+            single load that indicates where the deformation is to be computed
+
+        Returns
+        -------
+        float
+            incremental deformation from the element with the given index under given loading
+
+        See Also
+        --------
+        :py:meth:`~m_n_kappa.Node.incremental_deformation` : compute the incremental deformation at the node
+
+        """
+        node_1_result = self.nodes[element_index].incremental_deformation(
             load, single_load
         )
         node_2_result = self.nodes[node_index + 1].incremental_deformation(
