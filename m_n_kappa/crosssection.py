@@ -682,6 +682,10 @@ class ComputationCrosssectionStrain(ComputationCrosssection):
         super().__init__(sections, slab_effective_widths)
         self._strain = strain
         self._compute_sections = self._create_computation_sections()
+        if logger.level == logging.DEBUG:
+            logger.debug(f'{self.__str__()}')
+        else:
+            logger.info(f'Created {self.__repr__()}')
 
     def __repr__(self) -> str:
         return f"ComputationCrosssectionStrain(sections=sections, strain_value={self.strain})"
