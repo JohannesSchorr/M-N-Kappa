@@ -186,6 +186,11 @@ class Crosssection:
         self._slab_effective_widths = slab_effective_widths
         self._top_edge = self.__compute_top_edge()
         self._bottom_edge = self.__compute_bottom_edge()
+        if not issubclass(type(self), Crosssection):
+            if logger.level == logging.DEBUG:
+                logger.debug(f'{self.__str__()}')
+            else:
+                logger.info(f'Created {self.__repr__()}')
 
     # TODO: check if rebars are within the concrete slab
 
@@ -220,9 +225,11 @@ class Crosssection:
     def _build_cross_section(self, other):
         if isinstance(other, Crosssection):
             sections = self.sections + other.sections
+            logger.info('Merged two Crosssection')
             return Crosssection(sections)
         elif isinstance(other, Section):
             self.add_section(other)
+            logger.info(f'Add {other.__repr__()} to Crosssection')
             return self
         else:
             raise TypeError(
