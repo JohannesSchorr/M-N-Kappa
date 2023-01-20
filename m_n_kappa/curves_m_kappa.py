@@ -260,6 +260,10 @@ class MKappaCurve:
         self._compute_positive_curvature_values()
         self._compute_negative_curvature_values()
         self._insert_zero()
+        if logger.level == logging.DEBUG:
+            logger.debug(f'{self.__str__()}')
+        else:
+            logger.info(f'Created {self.__repr__()}')
 
     def __repr__(self):
         return f"MKappaCurve(cross_section=cross_section)"
