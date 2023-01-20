@@ -334,6 +334,10 @@ class Beam:
         self._positions = self._create_positions()
         self._nodes = self._create_nodes()
         self._load_steps = Loading(self.length, self.nodes, self.load).load_steps()
+        if logger.level == logging.DEBUG:
+            logger.debug(f'{self.__str__()}')
+        else:
+            logger.info(f'Created {self.__repr__()}')
 
     @property
     def consider_widths(self) -> bool:
@@ -448,9 +452,11 @@ class Beam:
             return 0.0
         if self._position_in_beam(at_position):
             if at_position in self.positions:
-                return self._deformation_at_node(at_position, load)
+                deformation = self._deformation_at_node(at_position, load)
             else:
-                return self._deformation_between_nodes(at_position, load)
+                deformation = self._deformation_between_nodes(at_position, load)
+            logger.info(f'Computed deformation at position {at_position} under {load=}')
+            return deformation
 
     def deformations(self, at_position: float) -> Deformations:
         """computes deformations at given position_value for relevant load-steps"""
@@ -465,17 +471,23 @@ class Beam:
                     m_kappa_point=load_step.point,
                 )
             )
-        return Deformations(deformations)
+        deformations = Deformations(deformations)
+        logger.info(f'Computed deformations at position {at_position}')
+        return deformations
 
     def deformations_at_maximum_moment_position(self) -> Deformations:
         """computes deformations at the decisive position_value for relevant load-steps"""
         position_of_maximum_moment = self.load.positions_of_maximum_moment()
-        return self.deformations(position_of_maximum_moment[0])
+        deformations = self.deformations(position_of_maximum_moment[0])
+        logger.info('Computed deformations at position of maximum deformation')
+        return deformations
 
     def deformations_at_maximum_deformation_position(self) -> Deformations:
         """computes deformations at the decisive beam-position for relevant load-steps"""
         position_of_maximum_deformation = self.load.position_of_maximum_deformation()
-        return self.deformations(position_of_maximum_deformation)
+        deformations = self.deformations(position_of_maximum_deformation)
+        logger.info('Computed deformations at position of maximum deformation')
+        return deformations
 
     def deformation_over_beam_length(self, load_step: ABCSingleSpan) -> Deformations:
         """
@@ -497,6 +509,7 @@ class Beam:
             load=load_step.loading,
         )
                 for position in self.positions]
+        logger.info('Computed Deformations over beam length')
         return Deformations(deformations)
 
     def _deformation_at_node(self, at_position: float, load: ABCSingleSpan) -> float:
