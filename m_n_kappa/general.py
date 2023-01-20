@@ -63,13 +63,26 @@ def curvature_by_points(
     Point 1: (``top_edge``
     Parameters
     ----------
-    top_edge
-    bottom_edge
-    top_strain
-    bottom_strain
+    top_edge : float
+        vertical position of the top-edge
+    bottom_edge : float
+        vertical position of the bottom-edge
+    top_strain : float
+        strain at the top-edge
+    bottom_strain : float
+        strain at the bottom-edge
 
     Returns
     -------
+    float
+        curvature-value from two strain-position-values
+
+    See Also
+    --------
+    :py:meth:`~m_n_kappa.general.curvature` : compute curvature from strain, its position and neutral axis
+    :py:meth:`~m_n_kappa.general.neutral_axis` : compute curvature from strain, its position and curvature
+    :py:meth:`~m_n_kappa.general.position` : compute position of strain from neutral-axis and curvature
+    :py:meth:`~m_n_kappa.general.strain` : compute strain from its vertical position, neutral-axis and curvature
 
     """
     return float((Decimal(top_strain) - Decimal(bottom_strain)) / (Decimal(top_edge) - Decimal(bottom_edge)))
