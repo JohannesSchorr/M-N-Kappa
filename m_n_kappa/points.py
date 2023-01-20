@@ -95,6 +95,11 @@ class MKappa:
         self._neutral_axis = None
         self._computed_cross_section = None
         self._axial_force = None
+        if not issubclass(type(self), MKappa):
+            if logger.level == logging.DEBUG:
+                logger.debug(f'{self.__str__()}')
+            else:
+                logger.info(f'Created {self.__repr__()}')
 
     def __repr__(self):
         return (
