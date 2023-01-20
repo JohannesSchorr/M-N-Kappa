@@ -554,6 +554,10 @@ class MKappaByConstantCurvature(MKappa):
         self._maximum_neutral_axis = maximum_neutral_axis
         self._minimum_neutral_axis = minimum_neutral_axis
         self.initialize()
+        if logger.level == logging.DEBUG:
+            logger.debug(f'{self.__str__()}')
+        else:
+            logger.info(f'Created {self.__repr__()}')
 
     def __repr__(self):
         return (
