@@ -632,10 +632,12 @@ class Circle(Geometry):
 
     @property
     def edges(self) -> list[float]:
+        """edges in vertical direction"""
         return [self.centroid_z]
 
     @property
     def sides(self) -> list[float]:
+        """edges in horizontal direction"""
         return [self.centroid_y]
 
     @property
