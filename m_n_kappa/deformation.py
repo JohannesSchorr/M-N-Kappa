@@ -239,6 +239,12 @@ class Deformation:
     deformation: float
     m_kappa_point: MKappaCurvePoint = None
 
+    def __post_init__(self):
+        if logger.level == logging.DEBUG:
+            logger.debug(f'{self.__str__()}')
+        else:
+            logger.info(f'Created {self.__repr__()}')
+
 
 @dataclass
 class Deformations:
