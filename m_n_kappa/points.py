@@ -434,6 +434,10 @@ class MKappaByStrainPosition(MKappa):
         self._maximum_curvature = maximum_curvature
         self._minimum_curvature = minimum_curvature
         self.initialize()
+        if logger.level == logging.DEBUG:
+            logger.debug(f'{self.__str__()}')
+        else:
+            logger.info(f'Created {self.__repr__()}')
 
     def __repr__(self):
         return (
