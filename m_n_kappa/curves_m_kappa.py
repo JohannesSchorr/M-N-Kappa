@@ -62,6 +62,7 @@ class MKappaCurvePoints:
 
     def __init__(self) -> None:
         self._points = []
+        logger.info(f'Created MKappaCurvePoints')
 
     @property
     def moments(self) -> list[float]:
@@ -104,6 +105,7 @@ class MKappaCurvePoints:
         if point not in self.points:
             self._points.append(point)
             self._sort_points_by_curvature()
+            logger.info(f'Added {point} to MKappaCurvePoints')
 
     def curvature(self, by_moment: float) -> float:
         """get curvature at given moment"""
