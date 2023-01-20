@@ -1376,7 +1376,7 @@ class CrossSectionBoundaries(Crosssection):
         )
 
     def __get_curvature_start_values(
-        self, maximum_curvature: EdgeStrains
+        self, maximum_curvature: EdgeStrains, curvature_change_factor: float = 0.9
     ) -> StrainPosition:
         """
 
@@ -1391,8 +1391,6 @@ class CrossSectionBoundaries(Crosssection):
             maximum_curvature, compute_with_strain_at_top=True, factor_curvature=1.0
         )
         initial_axial_force = cross_section_initial.total_axial_force()
-        # ---
-        curvature_change_factor = 0.5
         # --- axial force with strain on top
         cross_section_start_with_strain_on_top = self._create_computation_cross_section(
             maximum_curvature,
