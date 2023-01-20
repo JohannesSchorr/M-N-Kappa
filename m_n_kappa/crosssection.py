@@ -1104,7 +1104,9 @@ class CrossSectionBoundaries(Crosssection):
     """
     Compute the Boundary-Values for the cross_section
 
-    :py:meth:`CrossSectionBoundaries:get_boundaries` gives the curvature boundary values
+    .. versionadded:: 0.1.0
+
+    :py:meth:`~m_n_kappa.crosssection.CrossSectionBoundaries.get_boundaries` gives the curvature boundary values
     under positive and negative curvature
     """
 
@@ -1123,6 +1125,56 @@ class CrossSectionBoundaries(Crosssection):
         ----------
         sections : list[Section]
             sections of the given cross_section
+
+        Examples
+        --------
+        First the sections for the cross-section are created.
+
+        >>> from m_n_kappa import Concrete, Steel, Rectangle
+        >>> concrete = Concrete(f_cm=35.0)
+        >>> concrete_geometry_1 = Rectangle(
+        ...     top_edge=0.0, bottom_edge=10.0, width=10.0, left_edge=-10.0)
+        >>> concrete_section_1 = concrete + concrete_geometry_1
+        >>> steel = Steel(f_y=355, failure_strain=0.15)
+        >>> steel_geometry = Rectangle(
+        ...     top_edge=10.0, bottom_edge=20.0, width=10.0)
+        >>> steel_section = steel + steel_geometry
+
+
+        These sections are passed to :py:class:`~m_n_kappa.crosssection.CrossSectionBoundaries` in form of a
+        list.
+
+        >>> from m_n_kappa.crosssection import CrossSectionBoundaries
+        >>> cross_section_boundaries = CrossSectionBoundaries(sections=[concrete_section_1, steel_section])
+
+        :py:class:`~m_n_kappa.crosssection.CrossSectionBoundaries.get_boundaries` gives us then a
+        :py:class:`~m_n_kappa.curvature_boundaries.Boundaries` class, where a variety of values are saved regarding
+        the boundaries of our cross-section.
+
+        >>> boundaries = cross_section_boundaries.get_boundaries()
+
+        The following values are given for positive and negative curvature.
+        In case of values under negative curvature only ``boundaries.negative`` plus the desired property is to
+        be called.
+        Hereafter, only examples under positive curvature are given.
+
+        The maximum positive curvature is given as follows:
+
+        >>> boundaries.positive.maximum_curvature.curvature
+        0.0076749999999999995
+
+        The boundary-condition representing the point of failure is given as follows:
+
+        >>> boundaries.positive.maximum_curvature.start
+        StrainPosition(strain=-0.0035, position=0.0, material='Concrete')
+
+        Whereas method ``compute`` gives as the maximum curvature assuming another :py:class:`~m_n_kappa.StrainPosition`
+        points.
+
+        >>> from m_n_kappa import StrainPosition
+        >>> boundaries.positive.maximum_curvature.compute(StrainPosition(-0.0035, 0, 'Concrete'))
+        0.0076749999999999995
+
         """
         super().__init__(sections)
         self._sections_maximum_strains = self._get_sections_maximum_strain()
@@ -1328,7 +1380,7 @@ class CrossSectionBoundaries(Crosssection):
 
         computes two scenarios:
         1. change of curvature with strain on top
-        2. change of curvature with strain on top
+        2. change of curvature with strain on bottom
 
         The subsequent
 
