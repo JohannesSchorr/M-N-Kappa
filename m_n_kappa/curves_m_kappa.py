@@ -1,4 +1,12 @@
 from dataclasses import dataclass
+import logging
+
+logger = logging.getLogger(__name__)
+logger.setLevel(logging.DEBUG)
+
+stream_handler = logging.StreamHandler()
+stream_handler.setLevel(logging.WARN)
+logger.addHandler(stream_handler)
 
 from .crosssection import Crosssection
 from .curvature_boundaries import BoundaryValues, Boundaries
