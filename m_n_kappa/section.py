@@ -538,6 +538,10 @@ class ComputationSectionStrain(ComputationSection):
         self._stress_slope = 0.0
         self._stress_interception = self._compute_stress_interception()
         self._axial_force = self._compute_axial_force()
+        if logger.level == logging.DEBUG:
+            logger.debug(f'{self.__str__()}')
+        else:
+            logger.info(f'Created {self.__repr__()}')
 
     def __repr__(self):
         return (
