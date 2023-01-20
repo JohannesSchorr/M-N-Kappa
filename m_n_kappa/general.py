@@ -232,6 +232,7 @@ def negative_sign(list_of_lists: list) -> list:
 def str_start_end(func):
     def wrapper(*args):
         text = [
+            "",
             "***************************************************",
             "",
             func(*args),
