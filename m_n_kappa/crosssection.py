@@ -1357,8 +1357,14 @@ class CrossSectionBoundaries(Crosssection):
         create a Computations-cross-section
         with given curvature and strains at bottom or at top of the section
         """
-        neutral_axis_value = compute_neutral_axis(
-            maximum_curvature, starts_top=compute_with_strain_at_top
+        if compute_with_strain_at_top:
+            position_strain = maximum_curvature.top_edge_strain
+        else:
+            position_strain = maximum_curvature.bottom_edge_strain
+        neutral_axis_value = neutral_axis(
+            curvature_value=factor_curvature * maximum_curvature.curvature,
+            strain_at_position=position_strain.strain,
+            position_value=position_strain.position,
         )
         logger.debug(f'{maximum_curvature},\n\t'
                      f'Use strain on top: {compute_with_strain_at_top},\n\t'
@@ -1366,9 +1372,6 @@ class CrossSectionBoundaries(Crosssection):
                      f'curvature: {maximum_curvature.curvature}, with factor {factor_curvature}: '
                      f'{maximum_curvature.curvature * factor_curvature}\n\t'
                      f'Neutral axis: {neutral_axis_value:.1f}')
-        #neutral_axis_value = compute_neutral_axis(
-        #    maximum_curvature, starts_top=compute_with_strain_at_top
-        #)
         return ComputationCrosssectionCurvature(
             cross_section=Crosssection(self.sections, self.slab_effective_width),
             curvature=factor_curvature * maximum_curvature.curvature,
