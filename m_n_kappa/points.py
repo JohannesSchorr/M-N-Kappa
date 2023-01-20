@@ -44,6 +44,9 @@ class Computation:
     neutral_axis_value: float
     axial_force: float
 
+    def __post_init__(self):
+        logger.info(f"Created {self.__repr__()}")
+
 
 class MKappa:
 
