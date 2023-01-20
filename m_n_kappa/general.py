@@ -92,7 +92,43 @@ def position(
 
 def neutral_axis(
     strain_at_position: float, curvature_value: float, position_value: float
-):
+) -> float:
+    """
+    compute the neutral axis from strain, its geometric position and the curvature
+
+    The neutral axis describes the point where no strain is given from a linear
+    strain distribution.
+    This method assumes a linear strain distribution over the height.
+
+    Parameters
+    ----------
+    strain_at_position : float
+        strain at a geometric position
+    curvature_value : float
+        value of the curvature
+    position_value : float
+        geometric position of the strain
+
+    Returns
+    -------
+    float
+        geometric point where strain is zero
+
+    See Also
+    --------
+    py:meth:`~m_n_kappa.general.position` : compute position of strain from neutral-axis and curvature
+    py:meth:`~m_n_kappa.general.curvature` : compute curvature from strain, the strain-position and
+        neutral-axis and
+    :py:meth:`~m_n_kappa.general.strain` : compute strain from its vertical position, neutral-axis and curvature
+
+    Examples
+    --------
+
+    >>> from m_n_kappa.general import neutral_axis
+    >>> neutral_axis(strain_at_position=0.1, curvature_value=0.0001, position_value=10)
+    -990
+
+    """
     return position_value - (strain_at_position / curvature_value)
 
 
