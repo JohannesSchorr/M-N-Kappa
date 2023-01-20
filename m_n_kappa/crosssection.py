@@ -1129,12 +1129,17 @@ class CrossSectionBoundaries(Crosssection):
         self._sections_minimum_strains = self._get_sections_minimum_strain()
         self._maximum_positive_curvature = self._get_maximum_positive_curvature()
         self._maximum_negative_curvature = self._get_maximum_negative_curvature()
+        logger.info('-------\nPositive_start_bound')
         self._positive_start_bound = self.__get_curvature_start_values(
             self._maximum_positive_curvature
         )
+        logger.info('-------\nNegative_start_bound')
         self._negative_start_bound = self.__get_curvature_start_values(
             self._maximum_negative_curvature
         )
+
+        logger.info(f'Created {self.__repr__()}')
+        logger.debug(self.__str__())
 
     def __repr__(self):
         return "CrossSectionBoundaries(sections=sections)"
@@ -1301,6 +1306,15 @@ class CrossSectionBoundaries(Crosssection):
         neutral_axis_value = compute_neutral_axis(
             maximum_curvature, starts_top=compute_with_strain_at_top
         )
+        logger.debug(f'{maximum_curvature},\n\t'
+                     f'Use strain on top: {compute_with_strain_at_top},\n\t'
+                     f'{position_strain},\n\t'
+                     f'curvature: {maximum_curvature.curvature}, with factor {factor_curvature}: '
+                     f'{maximum_curvature.curvature * factor_curvature}\n\t'
+                     f'Neutral axis: {neutral_axis_value:.1f}')
+        #neutral_axis_value = compute_neutral_axis(
+        #    maximum_curvature, starts_top=compute_with_strain_at_top
+        #)
         return ComputationCrosssectionCurvature(
             cross_section=Crosssection(self.sections, self.slab_effective_width),
             curvature=factor_curvature * maximum_curvature.curvature,
@@ -1346,7 +1360,11 @@ class CrossSectionBoundaries(Crosssection):
             cross_section_start_with_strain_on_bottom.total_axial_force()
         )
         # --- comparing the maximum change in axial-forces with similar change of curvature
-        if abs(strain_on_top_axial_force - initial_axial_force) < abs(
+        logger.debug(f"Axial Forces:"
+                     f"\n\tInitial: {initial_axial_force:.1f},"
+                     f"\n\tStrain on top: {strain_on_top_axial_force:.1f}, -> abs({strain_on_top_axial_force:.1f} - {initial_axial_force:.1f}) = {abs(strain_on_top_axial_force - initial_axial_force):.1f}"
+                     f"\n\tStrain on bottom: {strain_on_bottom_axial_force:.1f}, -> abs({strain_on_bottom_axial_force:.1f} - {initial_axial_force:.1f}) = {abs(strain_on_bottom_axial_force - initial_axial_force):.1f}")
+        if abs(strain_on_top_axial_force - initial_axial_force) > abs(
             strain_on_bottom_axial_force - initial_axial_force
         ):
             return maximum_curvature.bottom_edge_strain
