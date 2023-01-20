@@ -172,6 +172,10 @@ class Loading:
     def __post_init__(self):
         if self.load is None:
             self.load = SingleSpanUniformLoad(self.beam_length, 1.0)
+        if logger.level == logging.DEBUG:
+            logger.debug(f'{self.__str__()}')
+        else:
+            logger.info(f'Created {self.__repr__()}')
 
     def maximum_resistance_moments(self) -> list[float]:
         return [node.m_kappa_curve.maximum_moment() for node in self.nodes]
