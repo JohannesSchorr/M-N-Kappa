@@ -24,6 +24,9 @@ class MKappaCurvePoint:
     cross_section: Crosssection
     strain_position: StrainPosition
 
+    def __post_init__(self):
+        logger.info(f'Created {self.__repr__()}')
+
     def __eq__(self, other) -> bool:
         if not isinstance(other, MKappaCurvePoint):
             return False
