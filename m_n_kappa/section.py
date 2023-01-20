@@ -69,6 +69,11 @@ material=Steel(f_y=355.0, f_u=None, failure_strain=None, E_a=210000.0))
         """
         self._geometry = geometry
         self._material = material
+        if not issubclass(type(self), Section):
+            if logger.level == logging.DEBUG:
+                logger.debug(f'{self.__str__()}')
+            else:
+                logger.info(f'Created {self.__repr__()}')
 
     def __repr__(self):
         return (
