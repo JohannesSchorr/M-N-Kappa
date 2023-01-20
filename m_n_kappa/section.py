@@ -674,6 +674,10 @@ class ComputationSectionCurvature(ComputationSection):
         self._stress_slope = self._compute_stress_slope()
         self._stress_interception = self._compute_stress_interception()
         self._axial_force = self._compute_axial_force()
+        if logger.level == logging.DEBUG:
+            logger.debug(f'{self.__str__()}')
+        else:
+            logger.info(f'Created {self.__repr__()}')
 
     def __repr__(self) -> str:
         return (
@@ -736,13 +740,19 @@ class ComputationSectionCurvature(ComputationSection):
         return print_sections(text)
 
     def _print_result(self) -> str:
+        if len(self.edges_strain) == 1:
+            edges_strain = [f'{self.edges_strain[0]:10.6f}', '-']
+            edges_stress = [f'{self.edges_stress[0]:10.6f}', '-']
+        else:
+            edges_strain = [f'{self.edges_strain[0]:10.6f}', f'{self.edges_strain[1]:10.6f}']
+            edges_stress = [f'{self.edges_stress[0]:10.6f}', f'{self.edges_stress[1]:10.6f}']
         return (
             f"{self.geometry.top_edge:10.2f} | "
-            f"{self.edges_strain[0]:10.6f} | "
-            f"{self.edges_stress[0]:10.2f} | "
+            f"{edges_strain[0]} | "
+            f"{edges_stress[0]} | "
             f"{self.geometry.bottom_edge:8.2f} | "
-            f"{self.edges_strain[1]:10.6f} | "
-            f"{self.edges_stress[1]:10.2f} | "
+            f"{edges_strain[1]} | "
+            f"{edges_stress[1]} | "
             f"{self.axial_force:10.2f} | "
             f"{self.section_type:7} | "
             f"{self.material.__class__.__name__}"
