@@ -1175,6 +1175,8 @@ class CrossSectionBoundaries(Crosssection):
         >>> boundaries.positive.maximum_curvature.compute(StrainPosition(-0.0035, 0, 'Concrete'))
         0.0076749999999999995
 
+        :py:meth:`~m_n_kappa.Crosssection.get_boundaries` implements the above given behaviour and returns the
+        boundary values directly without using :py:class:`~m_n_kappa.crosssection.CrossSectionBoundaries`.
         """
         super().__init__(sections)
         self._sections_maximum_strains = self._get_sections_maximum_strain()
