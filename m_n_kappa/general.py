@@ -137,7 +137,39 @@ def strain(neutral_axis_value: float, curvature_value: float, position_value: fl
 
 def position(
     strain_at_position: float, neutral_axis_value: float, curvature_value: float
-):
+) -> float:
+    """
+    compute the vertical position of a given strain using neutral-axis and curvature
+
+    This method assumes a linear strain distribution over the height.
+
+    Parameters
+    ----------
+    strain_at_position : float
+        strain at a geometric position
+    neutral_axis_value : float
+        position where strain is zero
+    curvature_value : float
+        value of the curvature
+
+    Returns
+    -------
+        position of the given strain under given strain-distribution
+
+    See Also
+    --------
+    :py:meth:`~m_n_kappa.general.curvature` : compute curvature from strain, its position and neutral axis
+    :py:meth:`~m_n_kappa.general.neutral_axis` : compute curvature from strain, its position and curvature
+    :py:meth:`~m_n_kappa.general.strain` : compute strain from its vertical position, neutral-axis and curvature
+
+    Examples
+    --------
+
+    >>> from m_n_kappa.general import position
+    >>> position(strain_at_position=-0.1, curvature_value=0.0001, neutral_axis_value=10)
+    -990
+
+    """
     return neutral_axis_value + (strain_at_position / curvature_value)
 
 
