@@ -259,6 +259,12 @@ class Deformations:
     """
     deformations: list[Deformation]
 
+    def __post_init__(self):
+        if logger.level == logging.DEBUG:
+            logger.debug(f'{self.__str__()}')
+        else:
+            logger.info(f'Created {self.__repr__()}')
+
     def __iter__(self):
         self._deformation_iterator = iter(self.deformations)
         return self
