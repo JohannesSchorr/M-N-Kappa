@@ -1300,6 +1300,7 @@ class CrossSectionBoundaries(Crosssection):
             self._sections_maximum_strains, self._sections_minimum_strains
         )
         edge_strain = min(curvatures, key=lambda x: x.curvature)
+        logger.debug(f'Maximum positive curvature values: {edge_strain}')
         return edge_strain
 
     def _get_maximum_negative_curvature(self) -> EdgeStrains:
@@ -1313,6 +1314,7 @@ class CrossSectionBoundaries(Crosssection):
             self._sections_minimum_strains, self._sections_maximum_strains
         )
         edge_strains = max(curvatures, key=lambda x: x.curvature)
+        logger.debug(f'Maximum negative curvature: {edge_strains}')
         return edge_strains
 
     def _get_sections_maximum_strain(self) -> list[StrainPosition]:
