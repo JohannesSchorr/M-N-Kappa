@@ -643,12 +643,12 @@ class Circle(Geometry):
     @property
     def top_edge(self):
         """vertical position (Z-Axis) of the top-edge of the circle"""
-        return self.centroid_y - 0.5 * self.diameter
+        return self.centroid_z - 0.5 * self.diameter
 
     @property
     def bottom_edge(self):
         """vertical position (Z-Axis) of the bottom-edge of the circle"""
-        return self.centroid_y + 0.5 * self.diameter
+        return self.centroid_z + 0.5 * self.diameter
 
     @property
     def height(self) -> float:
