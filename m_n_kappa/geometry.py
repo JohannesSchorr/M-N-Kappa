@@ -1293,12 +1293,12 @@ class RebarLayer(ComposedGeometry):
 
         self.geometries = []
         for index in range(self.rebar_number):
-            centroid_z = index * self.rebar_horizontal_distance + self.left_edge
+            centroid_y = index * self.rebar_horizontal_distance + self.left_edge
             self.geometries.append(
                 Circle(
                     diameter=self.rebar_diameter,
-                    centroid_y=self.centroid_z,
-                    centroid_z=centroid_z,
+                    centroid_y=centroid_y,
+                    centroid_z=self.centroid_z,
                 ))
 
 
