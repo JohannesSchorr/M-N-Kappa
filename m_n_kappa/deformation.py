@@ -83,6 +83,10 @@ class Node:
         ).m_kappa_points
         Node.node_number += 1
         self._number = Node.node_number
+        if logger.level == logging.DEBUG:
+            logger.debug(f'{self.__str__()}')
+        else:
+            logger.info(f'Created {self.__repr__()}')
 
     @property
     def cross_section(self) -> Crosssection:
