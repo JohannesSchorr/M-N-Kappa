@@ -169,6 +169,7 @@ class MKappaCurveCurvature:
         self._minimum_curvature = minimum_curvature
         self._start_strain_position = start_strain_position
         self._m_kappa_failure = self._get_m_kappa_failure()
+        logger.info("Computed M-Kappa-Point at failure (MKappaCurveCurvature)")
 
     @property
     def cross_section(self) -> Crosssection:
