@@ -200,7 +200,7 @@ class Crosssection:
         return self._slab_effective_widths
 
     def __repr__(self) -> str:
-        return "Crosssection(sections=sections)"
+        return f"{self.__class__.__name__}(sections=sections)"
 
     def __iter__(self):
         self._section_iterator = iter(self.sections)
