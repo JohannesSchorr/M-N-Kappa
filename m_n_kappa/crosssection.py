@@ -932,7 +932,7 @@ class ComputationCrosssectionCurvature(ComputationCrosssection):
 
     def __repr__(self) -> str:
         return (
-            f"ComputationCrosssection("
+            f"{self.__class__.__name__}("
             f"sections=sections, "
             f"curvature={self.curvature}, "
             f"neutral_axis_value={self.neutral_axis})"
