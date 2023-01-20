@@ -1008,6 +1008,11 @@ class EdgeStrains:
     bottom_edge_strain: StrainPosition
     top_edge_strain: StrainPosition
 
+    def __post_init_(self):
+        if self.top_edge_strain.position < self.bottom_edge_strain.position:
+            self.top_edge_strain, self.bottom_edge_strain = self.bottom_edge_strain, self.top_edge_strain
+            logger.info("EdgeStrains: changed bottom-edge and top-edge")
+
     @property
     def curvature(self) -> float:
         """
