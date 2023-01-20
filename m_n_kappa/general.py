@@ -89,6 +89,44 @@ def curvature_by_points(
 
 
 def strain(neutral_axis_value: float, curvature_value: float, position_value: float) -> float:
+    """
+    compute the strain from its position, the neutral axis and the curvature value
+
+    This method assumes a linear strain distribution over the height.
+
+    Parameters
+    ----------
+    neutral_axis_value : float
+        position where strain is zero
+    curvature_value : float
+        value of the curvature
+    position_value : float
+        geometric position of the strain
+
+    Returns
+    -------
+    float
+        strain from its position, neutral axis and curvature value
+
+    Raises
+    ------
+    ValueError
+        if curvature is zero
+
+    See Also
+    --------
+    :py:meth:`~m_n_kappa.general.curvature` : compute curvature from strain, its position and neutral axis
+    :py:meth:`~m_n_kappa.general.neutral_axis` : compute curvature from strain, its position and curvature
+    :py:meth:`~m_n_kappa.general.position` : compute position of strain from neutral-axis and curvature
+
+    Examples
+    --------
+
+    >>> from m_n_kappa.general import strain
+    >>> strain(neutral_axis_value=10, curvature_value=0.0001, position_value=0.0)
+    -0.001
+
+    """
     if neutral_axis_value == position:
         return 0.0
     elif curvature_value == 0.0:
