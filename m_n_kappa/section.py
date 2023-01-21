@@ -1,12 +1,3 @@
-import logging
-
-logger = logging.getLogger(__name__)
-logger.setLevel(logging.DEBUG)
-
-stream_handler = logging.StreamHandler()
-stream_handler.setLevel(logging.WARN)
-logger.addHandler(stream_handler)
-
 from .general import (
     str_start_end,
     print_chapter,
@@ -16,6 +7,17 @@ from .general import (
     StrainPosition,
     EffectiveWidths,
 )
+
+import logging
+import logging.config
+import yaml
+import pathlib
+
+with open(pathlib.Path(__file__).parent.absolute() / "logging-config.yaml", 'r') as f:
+    config = yaml.safe_load(f.read())
+    logging.config.dictConfig(config)
+
+logger = logging.getLogger(__name__)
 
 
 class Section:
