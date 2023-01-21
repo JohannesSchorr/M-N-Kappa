@@ -12,6 +12,17 @@ from .material import Material
 from .section import Section
 from .crosssection import Crosssection
 
+import logging
+import logging.config
+import yaml
+import pathlib
+
+with open(pathlib.Path(__file__).parent.absolute() / "logging-config.yaml", 'r') as f:
+    config = yaml.safe_load(f.read())
+    logging.config.dictConfig(config)
+
+logger = logging.getLogger(__name__)
+
 """
 Geometries
 ##########
