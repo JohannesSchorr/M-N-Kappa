@@ -1,0 +1,81 @@
+version: 1
+
+handlers:
+  console:
+    class: logging.StreamHandler
+    formatter: elaborated
+    level: DEBUG
+    stream: ext://sys.stdout
+
+  #file:
+    # configuration of file handler goes here
+
+loggers:
+  m_n_kappa.crosssection:
+    level: WARN
+    handlers: [console]
+    propagate: no
+  m_n_kappa.curvature_boundaries:
+    level: WARN
+    handlers: [ console ]
+    propagate: no
+  m_n_kappa.curves_m_kappa:
+    level: WARN
+    handlers: [ console ]
+    propagate: no
+  m_n_kappa.deformation:
+    level: WARN
+    handlers: [ console ]
+    propagate: no
+  m_n_kappa.function:
+    level: WARN
+    handlers: [ console ]
+    propagate: no
+  m_n_kappa.general:
+    level: WARN
+    handlers: [ console ]
+    propagate: no
+  m_n_kappa.geometry:
+    level: WARN
+    handlers: [ console ]
+    propagate: no
+  m_n_kappa.loading:
+    level: WARN
+    handlers: [ console ]
+    propagate: no
+  m_n_kappa.material:
+    level: WARN
+    handlers: [ console ]
+    propagate: no
+  m_n_kappa.points:
+    level: WARN
+    handlers: [ console ]
+    propagate: no
+  m_n_kappa.section:
+    level: WARN
+    handlers: [ console ]
+    propagate: no
+  m_n_kappa.solver:
+    level: WARN
+    handlers: [ console ]
+    propagate: no
+  m_n_kappa.width:
+    level: WARN
+    handlers: [ console ]
+    propagate: no
+
+
+formatters:
+  brief:
+    format: '%(message)s'
+
+  elaborated:
+    format: '%(name)-15s: %(message)s'
+
+  default:
+    format: '%(asctime)s %(levelname)-8s %(name)-15s %(message)s'
+    datefmt: '%Y-%m-%d %H:%M:%S'
+
+root:
+  level: DEBUG
+  handlers: [console]
