@@ -112,15 +112,18 @@ class ComposedGeometry:
                 Section(geometry=geometry, material=other)
                 for geometry in self.geometries
             ]
+            logger.info('Create Crosssection by adding Material')
             return Crosssection(sections)
         elif isinstance(other, Geometry):
             new_geometry = ComposedGeometry()
             new_geometry._geometries = self.geometries
             new_geometry._geometries.append(other)
+            logger.info('Add Geometry-instance')
             return new_geometry
         elif isinstance(other, ComposedGeometry):
             new_geometry = ComposedGeometry()
             new_geometry._geometries = self.geometries + other.geometries
+            logger.info('Add other ComposedGeometry')
             return new_geometry
         else:
             raise TypeError(
