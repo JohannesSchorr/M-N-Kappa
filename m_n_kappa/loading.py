@@ -135,6 +135,9 @@ class SingleLoad:
     position_in_beam: float
     value: float
 
+    def __post_init__(self):
+        logger.info(f'Created {self.__repr__()}')
+
     def moment(self):
         """moment by the single load (load x position_in_beam)"""
         return self.position_in_beam * self.value
