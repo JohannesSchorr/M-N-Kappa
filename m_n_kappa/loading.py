@@ -32,7 +32,11 @@ Systems available
 
 
 class ABCSingleSpan(ABC):
-    """Meta class single span loading conditions shall be derived from"""
+    """
+    Meta class single span loading conditions shall be derived from
+
+    .. versionadded:: 0.1.0
+    """
 
     @property
     @abstractmethod
