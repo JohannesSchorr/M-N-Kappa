@@ -344,8 +344,18 @@ class SingleSpan(ABCSingleSpan):
 
 @dataclass
 class Moment:
-    """container for moment at position_value"""
+    """
+    container for moment at position_value
 
+    .. versionadded:: 0.1.0
+
+    Parameters
+    ----------
+    position_in_beam : float
+        position of the moment in the beam
+    value : float
+        value of the moment
+    """
     position_in_beam: float
     value: float
 
