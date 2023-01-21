@@ -514,6 +514,7 @@ class ConcreteCompressionNonlinear(ConcreteCompression):
 [-27.130958857945092, -0.0027545594265149607], [-19.399627516017674, -0.0035]]
         """
         super().__init__(f_cm, yield_strain, E_cm)
+        logger.info(f'Created ConcreteCompressionNonlinear')
 
     @property
     def c(self) -> float:
