@@ -366,6 +366,9 @@ class ConcreteCompression(ABC):
         self._f_cm = float(f_cm)
         self._yield_strain = float(yield_strain)
         self._E_cm = float(E_cm)
+        if not issubclass(type(self), Material):
+            logger.info(f'Created ConcreteCompression')
+
 
     @property
     def E_cm(self) -> float:
