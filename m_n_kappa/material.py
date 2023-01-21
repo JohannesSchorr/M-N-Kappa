@@ -135,6 +135,11 @@ class Material:
         """
         self._stress_strain = stress_strain
         self._section_type = section_type
+        if not issubclass(type(self), Material):
+            if logger.level == logging.DEBUG:
+                logger.debug(f'{self.__str__()}')
+            else:
+                logger.info(f'Created {self.__repr__()}')
 
     def __repr__(self) -> str:
         return f"""Material(stress_strain={self.stress_strain}, 
@@ -277,18 +282,20 @@ class Material:
     def _get_material_index(self, strain_value: float) -> int:
         self.sort_strains_ascending()
         strain_value = self.__round_strain(strain_value)
-        if strain_value == self.stress_strain[-1].strain:
-            return len(self.stress_strain) - 2
-        for material_index in range(len(self.stress_strain) - 1):
-            if (
-                self.stress_strain[material_index].strain
-                <= strain_value
-                < self.stress_strain[material_index + 1].strain
-            ):
-                return material_index
-        print(f"No stress-strain_value-pair found in {self.__class__.__name__}")
-        print(f"strain_value: {strain_value}")
-        print(f"stress-strains: {self.stress_strain}")
+        if self.stress_strain[0].strain <= strain_value <= self.stress_strain[-1].strain:
+            if strain_value == self.stress_strain[-1].strain:
+                return len(self.stress_strain) - 2
+            for material_index in range(len(self.stress_strain) - 1):
+                if (
+                    self.stress_strain[material_index].strain
+                    <= strain_value
+                    < self.stress_strain[material_index + 1].strain
+                ):
+                    return material_index
+        else:
+            logger.critical(
+                f"No stress-strain_value-pair found in {self.__class__.__name__} for {strain_value=}\n"
+            )
 
     def _get_material_stress_by_index(self, index: int) -> float:
         return self.stress_strain[index].stress
