@@ -506,7 +506,7 @@ class Rectangle(Geometry):
             edge = top_edge
         left_edge, right_edge = self.get_horizontal_edges(edge, max_widths)
         rectangles.append(Rectangle(top_edge.position, self.bottom_edge, left_edge=left_edge, right_edge=right_edge))
-        logger.debug(f'Split rectangle into following rectangles: {rectangles}')
+        logger.debug(f'Split {self.__repr__()} into following rectangles: {rectangles}')
         return rectangles
 
     def get_horizontal_edges(
