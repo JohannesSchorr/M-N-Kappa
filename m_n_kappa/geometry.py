@@ -359,12 +359,14 @@ class Rectangle(Geometry):
         """rearrange input-values to match the needed arrangement"""
         if self.bottom_edge < self.top_edge:
             self._top_edge, self._bottom_edge = self.bottom_edge, self.top_edge
+            logger.info(f'{self.__repr__()} switched values: top_edge and bottom_edge')
         if (
             self.left_edge is not None
             and self.right_edge is not None
             and self.right_edge < self.left_edge
         ):
             self._left_edge, self._right_edge = self.right_edge, self.left_edge
+            logger.info(f'{self.__repr__()} switched values: left_edge and right_edge')
 
     def __eq__(self, other):
         return (
@@ -825,6 +827,10 @@ class Trapezoid(Geometry):
         ) = check_width(
             self.bottom_width, self.bottom_left_edge, self.bottom_right_edge
         )
+        if logger.level == logging.DEBUG:
+            logger.debug(self.__str__())
+        else:
+            logger.info(f'Created {self.__repr__()}')
 
     def _check_input_values(self) -> None:
         """check input-value to match the needed arrangement"""
@@ -1077,6 +1083,7 @@ class Trapezoid(Geometry):
                 bottom_left_edge=self.bottom_left_edge,
             )
         )
+        logger.debug(f'{self.__repr__()} split into following trapezoids: {trapazoids}')
         return trapazoids
 
     @property
