@@ -635,16 +635,60 @@ class SingleSpanSingleLoads(ABCSingleSpan):
 
 
 class SingleSpanUniformLoad(ABCSingleSpan):
-    """single span with uniform load"""
+    """
+    single span with uniform load
 
-    def __init__(self, length: float, load: float):
+    .. versionadded:: 0.1.0
+    """
+
+    def __init__(self, length: float, load: float = 1.0):
         """
         Parameters
         ----------
         length : float
             length of the beam-span
         load : float
-            line-load the beam is uniformly loaded with
+            line-load the beam is uniformly loaded with (default: 1.0)
+
+        See Also
+        --------
+        SingleSpanSingleLoads : single-span with a number of single loads
+
+        Examples
+        --------
+        For computation of the internal forces of a single span girder under a uniform load
+        :py:class:`~m_n_kappa.SingleSpanUniformLoad` has to be initialized as follows.
+
+        >>> from m_n_kappa import SingleSpanUniformLoad
+        >>> uniform_loading = SingleSpanUniformLoad(length=8000, load=10)
+
+        The total loading from the uniform loading may be derived as follows.
+
+        >>> uniform_loading.loading
+        80000
+
+        The maximum moment is returned by attribute :py:attr:`~m_n_kappa.SingleSpan.maximum_moment`.
+
+        >>> uniform_loading.maximum_moment
+        80000000.0
+
+        Similar moment is computed by using :py:meth:`~m_n_kappa.SingleSpan.positions_of_maximum_moment()` and
+        pass the resulting value :py:meth:`~m_n_kappa.SingleSpan.moment()`.
+
+        >>> uniform_max_loading_position = uniform_loading.positions_of_maximum_moment()
+        >>> uniform_loading.moment(at_position=uniform_max_loading_position[0])
+        80000000.0
+
+        The resulting transversal shear loads at the support are computed as follows.
+
+        >>> uniform_loading.transversal_shear_support_left, uniform_loading.transversal_shear_support_right
+        (40000.0, -40000.0)
+
+        Using the corresponding :py:meth:`~m_n_kappa.SingleLoad.transversal_shear()`-method gives us at the
+        position of maximum moment a value of 0.0, as expected.
+
+        >>> uniform_loading.transversal_shear(at_position=uniform_max_loading_position[0])
+        0.0
         """
         self._length = length
         self._load = load
@@ -657,7 +701,7 @@ class SingleSpanUniformLoad(ABCSingleSpan):
         return f"SingleSpanUniformLoad(length={self.length}, load={self.load})"
 
     @str_start_end
-    def __str__(self):
+    def __str__(self) -> str:
         text = [
             "Single span with uniform load",
             "-----------------------------",
@@ -683,37 +727,93 @@ class SingleSpanUniformLoad(ABCSingleSpan):
         return self._load
 
     @property
-    def loading(self):
+    def loading(self) -> float:
         """total load of the beam span"""
         return self._loading()
 
     @property
-    def maximum_moment(self):
+    def maximum_moment(self) -> float:
+        """maximum moment"""
         return self._maximum_moment()
 
     @property
     def transversal_shear_support_left(self):
+        """value of transversal shear at the left support"""
         return self._support_transversal_shear()
 
     @property
     def transversal_shear_support_right(self):
+        """value of transversal shear at the right support"""
         return (-1) * self._support_transversal_shear()
 
     @property
     def positions(self) -> list[float]:
         return []
 
-    def moment(self, at_position: float):
+    def moment(self, at_position: float) -> float:
+        """
+        moment at the given position
+
+        Parameters
+        ----------
+        at_position : float
+            position where the moment is to be computed
+
+        Returns
+        -------
+        float
+            moment at the given position
+        """
         return self._moment(at_position)
 
-    def transversal_shear(self, at_position: float):
+    def transversal_shear(self, at_position: float) -> float:
+        """
+        transversal shear value at the given position
+
+        Parameters
+        ----------
+        at_position : float
+            position where the transversal shear is to be computed
+
+        Returns
+        -------
+        float
+            transversal shear at the given position
+        """
         return self._transversal_shear(at_position)
 
-    def load_by_moment(self, maximum_moment) -> float:
-        """compute load by given maximum moment"""
+    def load_by_moment(self, maximum_moment: float) -> float:
+        """
+        compute load by given maximum moment
+
+        Parameters
+        ----------
+        maximum_moment : float
+            maximum moment
+
+        Returns
+        -------
+        float
+            load leading to the given maximum moment
+        """
         return maximum_moment * 8.0 / (self.length ** 2.0)
 
     def load_by(self, moment: float, at_position: float) -> ABCSingleSpan:
+        """
+        load by the given moment at the given position
+
+        Parameters
+        ----------
+        moment : float
+            moment the load leads to
+        at_position : float
+            position-value of the moment
+
+        Returns
+        -------
+        float
+            load by the moment at the position
+        """
         load = moment / (0.5 * (self.length * at_position - at_position ** 2.0))
         return SingleSpanUniformLoad(self.length, load)
 
@@ -740,4 +840,5 @@ class SingleSpanUniformLoad(ABCSingleSpan):
         return self._support_transversal_shear() - self.load * at_position
 
     def load_distribution_factor(self) -> float:
+        """factor showing how the moment is distributed"""
         return 2. / 3.
