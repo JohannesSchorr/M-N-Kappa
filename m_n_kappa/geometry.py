@@ -836,6 +836,7 @@ class Trapezoid(Geometry):
         """check input-value to match the needed arrangement"""
         if self.bottom_edge < self.top_edge:
             self._top_edge, self._bottom_edge = self.bottom_edge, self.top_edge
+            logger.info(f'{self.__repr__()} switched: top-edge and bottom-edge')
         if (
             self.top_left_edge is not None
             and self.top_right_edge is not None
@@ -845,6 +846,7 @@ class Trapezoid(Geometry):
                 self.top_right_edge,
                 self.top_left_edge,
             )
+            logger.info(f'{self.__repr__()} switched: top-left-edge and top-right-edge')
         if (
             self.bottom_left_edge is not None
             and self.bottom_right_edge is not None
@@ -854,6 +856,7 @@ class Trapezoid(Geometry):
                 self.bottom_right_edge,
                 self.bottom_left_edge,
             )
+            logger.info(f'{self.__repr__()} switched: bottom-left-edge and bottom-right-edge')
 
     @property
     def top_left_edge(self) -> float:
