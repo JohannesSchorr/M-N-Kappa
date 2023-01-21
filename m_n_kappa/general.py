@@ -403,3 +403,42 @@ class EffectiveWidths:
             return self.membran
         else:
             return self.bending
+
+
+@dataclass
+class EdgeStrains:
+    """
+    store strains at edges and compute curvature from these points
+
+    .. versionadded:: 0.1.0
+
+    Parameters
+    ----------
+    bottom_edge_strain : :py:class:`~m_n_kappa.StrainPosition`
+        strain and position at the bottom-edge
+    top_edge_strain : :py:class:`~m_n_kappa.StrainPosition`
+        strain and position at the top-edge
+    """
+    bottom_edge_strain: StrainPosition
+    top_edge_strain: StrainPosition
+
+    def __post_init_(self):
+        if self.top_edge_strain.position < self.bottom_edge_strain.position:
+            self.top_edge_strain, self.bottom_edge_strain = self.bottom_edge_strain, self.top_edge_strain
+            logger.info("EdgeStrains: changed bottom-edge and top-edge")
+
+    @property
+    def curvature(self) -> float:
+        """
+        curvature by comparison of the strains at the edges
+
+        See Also
+        --------
+        curvature_by_points : method to compute curvature from two stress-position points
+        """
+        return curvature_by_points(
+            top_edge=self.top_edge_strain.position,
+            bottom_edge=self.bottom_edge_strain.position,
+            top_strain=self.top_edge_strain.strain,
+            bottom_strain=self.bottom_edge_strain.strain,
+        )
