@@ -590,6 +590,10 @@ class Circle(Geometry):
         self._diameter = diameter
         self._centroid_y = centroid_y
         self._centroid_z = centroid_z
+        if logger.level == logging.DEBUG:
+            logger.debug(self.__str__())
+        else:
+            logger.info(f'Created {self.__repr__()}')
 
     def __eq__(self, other) -> bool:
         return (
@@ -720,8 +724,10 @@ class Circle(Geometry):
                     points[0].material,
                     sum([points[point_index].strain, points[point_index + 1].strain]),
                 )
+                logger.info(f'{self.__repr__()} is within effective width')
                 return -width <= self.centroid_z <= width
             else:
+                logger.info(f'{self.__repr__()} is NOT within effective width')
                 return False
 
 
