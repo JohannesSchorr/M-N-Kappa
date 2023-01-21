@@ -957,6 +957,7 @@ class ConcreteTension:
         self._g_f = g_f
         self._use_tension = use_tension
         self._consider_opening_behaviour = consider_opening_behaviour
+        logger.info(f'Created ConcreteTension')
 
     @property
     def f_cm(self):
