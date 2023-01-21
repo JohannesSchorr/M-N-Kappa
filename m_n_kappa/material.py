@@ -1231,6 +1231,10 @@ StressStrain(stress=0.0, strain=10.0)]
         self._compression = self.__set_compression()
         self._tension = self.__set_tension()
         self._stress_strain = self.__build_stress_strain()
+        if logger.level == logging.DEBUG:
+            logger.debug(self.__str__())
+        else:
+            logger.info(f'Created {self.__repr__()}')
 
     def __repr__(self) -> str:
         return (
