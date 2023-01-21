@@ -1201,6 +1201,7 @@ Rectangle(top_edge=184.50, bottom_edge=200.00, width=200.00, left_edge=-100.00, 
         self._add_top_flange()
         self._add_web()
         self._add_bottom_flange()
+        logger.info(f'Created {self.__repr__()}')
 
     def _add_top_flange(self):
         """add top-flange to geometry if wanted and geometric values are given"""
