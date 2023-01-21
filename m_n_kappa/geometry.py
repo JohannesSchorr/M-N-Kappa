@@ -472,9 +472,9 @@ class Rectangle(Geometry):
 
         Parameters
         ----------
-        at_points : list[StrainPosition]
+        at_points : list[:py:class:`~m_n_kappa.StrainPosition`]
             points where the rectangle is split into smaller rectangles
-        max_widths: EffectiveWidths
+        max_widths: :py:class:`~m_n_kappa.EffectiveWidths`
             widths under consideration of bending or membran loading
 
         Returns
