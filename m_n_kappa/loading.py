@@ -361,7 +361,11 @@ class Moment:
 
 
 class SingleSpanSingleLoads(ABCSingleSpan):
-    """single span with single load(s)"""
+    """
+    single span with single load(s)
+
+    .. versionadded:: 0.1.0
+    """
 
     __slots__ = "_length", "_loads"
 
@@ -373,6 +377,50 @@ class SingleSpanSingleLoads(ABCSingleSpan):
             length of the beam-span
         loads : list[:py:class:`SingleLoad`]
             loads applied to the beam
+
+        See Also
+        --------
+        SingleSpanUniformLoad : single-span with uniform loading
+
+        Examples
+        --------
+        For computation of the internal forces of a single span girder under a single load(s),
+        before initializing  :py:class:`~m_n_kappa.SingleSpanSingleLoads` at least one
+        :py:class`~m_n_kappa.SingleLoad` is needed to define the position and its magnitude.
+
+        >>> from m_n_kappa import SingleSpanSingleLoads, SingleLoad
+        >>> single_load_middle = SingleLoad(position_in_beam=4000, value=10)
+        >>> single_loading = SingleSpanSingleLoads(length=8000, loads=[single_load_middle])
+
+        The total loading from the single loading may be derived as follows.
+
+        >>> single_loading.loading
+        10
+
+        The maximum moment is returned by attribute :py:attr:`~m_n_kappa.SingleSpanSingleLoads.maximum_moment`.
+
+        >>> single_loading.maximum_moment
+        20000.0
+
+        Similar moment is computed by using :py:meth:`~m_n_kappa.SingleSpanSingleLoads.positions_of_maximum_moment()`
+        and pass the resulting value :py:meth:`~m_n_kappa.SingleSpanSingleLoads.moment()`.
+        Of course, all positions along the beam may be passed to :py:meth:`~m_n_kappa.SingleSpanSingleLoads.moment()` to
+        compute the corresponding moment.
+
+        >>> max_loading_position = single_loading.positions_of_maximum_moment()
+        >>> single_loading.moment(at_positions=max_loading_position)
+        20000.0
+
+        The resulting transversal shear loads at the support are computed as follows.
+
+        >>> single_loading.transversal_shear_support_left, single_loading.transversal_shear_support_right
+        (5.0, -5.0)
+
+        Using the corresponding :py:meth:`~m_n_kappa.SingleSpanSingleLoads.transversal_shear()`-method gives us at the
+        position of maximum moment a value of 0.0, as expected.
+
+        >>> single_loading.transversal_shear(at_position=max_loading_position[0])
+        0.0
         """
         self._length = length
         self._loads = loads
@@ -402,42 +450,91 @@ class SingleSpanSingleLoads(ABCSingleSpan):
 
     @property
     def length(self) -> float:
+        """length of the beam"""
         return self._length
 
     @property
     def loads(self) -> list[SingleLoad]:
+        """single loads applied to the beam"""
         return self._loads
 
     @property
     def maximum_moment(self) -> float:
+        """maximum moment under the given moment"""
         return self._maximum_moment_value()
 
     @property
     def transversal_shear_support_left(self) -> float:
+        """transversal shear load of the left support"""
         return self._loading() + self._column_right()
 
     @property
     def transversal_shear_support_right(self) -> float:
+        """transversal shear load of the right support"""
         return self._column_right()
 
     @property
     def loading(self) -> float:
+        """sum of all loads"""
         return self._loading()
 
     @property
     def positions(self) -> list[float]:
+        """position of the single loads along the beam"""
         return [load.position_in_beam for load in self.loads]
 
     def moment(self, at_position: float) -> float:
+        """
+        moment at the given position_value
+
+        Parameters
+        ----------
+        at_position : float
+            position_value where the moment needs to be computed at
+
+        Returns
+        -------
+        float
+            moment at the given position_value
+        """
         return self._moment(at_position)
 
     def positions_of_maximum_moment(self) -> list[float]:
+        """position_value of the maximum moment"""
         return self._maximum_moment_positions()
 
     def transversal_shear(self, at_position) -> float:
+        """
+        transversal shear at the given position_value
+
+        Parameters
+        ----------
+        at_position : float
+            position_value where the transversal shear needs to be computed at
+
+        Returns
+        -------
+        float
+            transversal shear at the given position_value
+        """
         return self._transversal_shear(at_position)
 
     def load_by(self, moment: float, at_position: float):
+        """
+        load by the given moment at the given position
+
+        Parameters
+        ----------
+        moment : float
+            moment the load leads to
+        at_position : float
+            position-value of the moment
+
+        Returns
+        -------
+        float
+            load by the moment at the position
+        """
         return self.load_by_factor(moment, at_position)
 
     def load_by_factor(self, moment: float, at_position: float):
@@ -482,6 +579,19 @@ class SingleSpanSingleLoads(ABCSingleSpan):
         return moment
 
     def moment_by(self, load: SingleLoad, at_position: float) -> float:
+        """
+        moment at the given position by the given load
+
+        Parameters
+        ----------
+        load : :py:class:`~m_n_kappa.SingleLoad`
+            load applied to th
+        at_position
+
+        Returns
+        -------
+
+        """
         return (at_position - load.position_in_beam) * load.value
 
     def _moments(self) -> list[Moment]:
@@ -515,6 +625,7 @@ class SingleSpanSingleLoads(ABCSingleSpan):
         return shear
 
     def load_distribution_factor(self) -> float:
+        """factor showing how the moment is distributed depending on the loads"""
         if len(self.loads) == 1 and self.loads[0].position_in_beam == 0.5 * self.length:
             return 0.5
         elif len(self.loads) > 1 and self.length-self.loads[-1].position_in_beam == self.loads[0].position_in_beam:
