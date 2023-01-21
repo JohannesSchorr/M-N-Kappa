@@ -1519,6 +1519,10 @@ StressStrain(stress=400.0, strain=0.15)]
         self._failure_strain = make_float(failure_strain)
         self._E_a = make_float(E_a)
         self._stress_strain = self.__build_stress_strain()
+        if logger.level == logging.DEBUG:
+            logger.debug(self.__str__())
+        else:
+            logger.info(f'Created {self.__repr__()}')
 
     def __repr__(self):
         return (
