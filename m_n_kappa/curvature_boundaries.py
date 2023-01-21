@@ -1,6 +1,17 @@
 from dataclasses import dataclass
 
-from .general import StrainPosition, curvature_by_points
+from .general import StrainPosition, EdgeStrains
+
+import logging
+import logging.config
+import yaml
+import pathlib
+
+with open(pathlib.Path(__file__).parent.absolute() / "logging-config.yaml", 'r') as f:
+    config = yaml.safe_load(f.read())
+    logging.config.dictConfig(config)
+
+logger = logging.getLogger(__name__)
 
 
 def compute_curvatures(
