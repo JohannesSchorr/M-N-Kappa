@@ -417,6 +417,10 @@ class SingleSpanUniformLoad(ABCSingleSpan):
         """
         self._length = length
         self._load = load
+        if logger.level == logging.DEBUG:
+            logger.debug(self.__str__())
+        else:
+            logger.info(f'Created {self.__repr__()}')
 
     def __repr__(self) -> str:
         return f"SingleSpanUniformLoad(length={self.length}, load={self.load})"
