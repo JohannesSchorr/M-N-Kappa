@@ -134,7 +134,18 @@ class ABCSingleSpan(ABC):
 
 @dataclass
 class SingleLoad:
-    """container for single load"""
+    """
+    container for single load
+
+    .. versionadded:: 0.1.0
+
+    Parameters
+    ----------
+    position_in_beam : float
+        position of the single load along the beam
+    value : float
+        value of the load
+    """
 
     position_in_beam: float
     value: float
