@@ -160,12 +160,15 @@ class Geometry(ABC):
         if isinstance(other, Geometry):
             new_geometry = ComposedGeometry()
             new_geometry._geometries = [self, other]
+            logger.info('Build ComposedGeometry by adding Geometry-Instance')
             return new_geometry
         elif isinstance(other, ComposedGeometry):
             new_geometry = other
             new_geometry._geometries.append(self)
+            logger.info('Build ComposedGeometry by adding ComposedGeometry-Instance')
             return new_geometry
         elif isinstance(other, Material):
+            logger.info('Build section by adding material')
             return Section(geometry=self, material=other)
         else:
             raise TypeError(
