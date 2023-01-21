@@ -49,6 +49,9 @@ class StressStrain:
     """
     stress: float
     strain: float
+    
+    def __post_init__(self):
+        logger.info(f'Created {self.__repr__()}')
 
     def pair(self) -> list[float]:
         """stress-strain-point as list"""
