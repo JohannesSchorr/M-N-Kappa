@@ -13,11 +13,11 @@ from .general import (
     str_start_end,
     print_chapter,
     print_sections,
-    curvature_by_points,
     neutral_axis,
     remove_duplicates,
     StrainPosition,
     EffectiveWidths,
+    EdgeStrains,
 )
 from .section import (
     Section,
@@ -1259,7 +1259,7 @@ class CrossSectionBoundaries(Crosssection):
     @property
     def maximum_positive_curvature(self) -> EdgeStrains:
         """
-        :py:class:`~m_n_kappa.crosssection.EdgeStrains` reaching the maximum possible
+        :py:class:`~m_n_kappa.general.EdgeStrains` reaching the maximum possible
         positive curvature
         """
         return self._maximum_positive_curvature
@@ -1267,7 +1267,7 @@ class CrossSectionBoundaries(Crosssection):
     @property
     def maximum_negative_curvature(self) -> EdgeStrains:
         """
-        :py:class:`~m_n_kappa.crosssection.EdgeStrains` reaching the maximum
+        :py:class:`~m_n_kappa.general.EdgeStrains` reaching the maximum
         possible negative curvature
         """
         return self._maximum_negative_curvature
@@ -1295,7 +1295,7 @@ class CrossSectionBoundaries(Crosssection):
         """
         Returns
         -------
-        :py:class:`~m_n_kappa.crosssection.EdgeStrains`
+        :py:class:`~m_n_kappa.general.EdgeStrains`
            maximum possible positive curvature for the given cross-section
         """
         curvatures = determine_curvatures(
@@ -1309,7 +1309,7 @@ class CrossSectionBoundaries(Crosssection):
         """
         Returns
         -------
-        :py:class:`~m_n_kappa.crosssection.EdgeStrains`
+        :py:class:`~m_n_kappa.general.EdgeStrains`
            maximum possible negative curvature for the given cross-section
         """
         curvatures = determine_curvatures(
