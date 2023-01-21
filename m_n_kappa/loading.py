@@ -256,6 +256,10 @@ class SingleSpanSingleLoads(ABCSingleSpan):
         """
         self._length = length
         self._loads = loads
+        if logger.level == logging.DEBUG:
+            logger.debug(self.__str__())
+        else:
+            logger.info(f'Created {self.__repr__()}')
 
     def __repr__(self) -> str:
         return f"SingleSpanSingleLoads(length={self.length}, loads={self.loads})"
