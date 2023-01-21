@@ -1334,6 +1334,7 @@ class RebarLayer(ComposedGeometry):
                     centroid_y=centroid_y,
                     centroid_z=self.centroid_z,
                 ))
+        logger.info(f'Created {self.__repr__()}')
 
 
 @dataclass
