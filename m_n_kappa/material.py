@@ -805,6 +805,7 @@ class ConcreteCompressionBiLinear(ConcreteCompression):
         [[-22.0, -0.00175], [-22.0, -0.0035]]
         """
         super().__init__(f_cm=f_cm, yield_strain=0.0, E_cm=0.0)
+        logger.info(f'Created ConcreteCompressionBiLinear')
 
     @property
     def c(self) -> float:
