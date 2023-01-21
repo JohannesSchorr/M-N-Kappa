@@ -48,6 +48,10 @@ class Solver:
         self._set_variable_boundaries()
         self._sorted_data = self._sort_data()
         self._prepare()
+        if logger.level == logging.DEBUG:
+            logger.debug(f'{self.__str__()}')
+        else:
+            logger.info(f'Created {self.__repr__()}')
 
     def __repr__(self) -> str:
         return f"{self.__class__.__name__}(" \
