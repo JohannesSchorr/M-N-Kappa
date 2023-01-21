@@ -1424,6 +1424,8 @@ Rectangle(top_edge=10.00, bottom_edge=86.00, width=5.20, left_edge=94.80, right_
             self._right_flange(),
         ]
 
+        logger.info(f'Created {self.__repr__()}')
+
     def _left_flange(self) -> Rectangle:
         return Rectangle(
             top_edge=self.top_edge,
