@@ -161,11 +161,11 @@ class Bisection(Solver):
 
     def compute(self, use_fallback: bool = False) -> float:
         variables = [data_point[self.variable] for data_point in self.data]
-        # print(f'{variables=}') # TODO: Logging?
+        logger.debug(f'{variables=}')
         for factor in [0.5, 0.25, 0.75, 0.1, 0.2, 0.3, 0.4, 0.6, 0.7, 0.8, 0.9]:
             new_variable = self._compute_with(factor)
             if new_variable not in variables:
-                # print(new_variable) # TODO: Logging?
+                logger.debug(new_variable)
                 return new_variable
 
     def _compute_with(self, factor: float = 0.5):
