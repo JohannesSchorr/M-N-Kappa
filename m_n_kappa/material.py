@@ -678,6 +678,7 @@ class ConcreteCompressionParabolaRectangle(ConcreteCompression):
         [[-9.625, -0.0005], [-16.5, -0.001], [-20.625, -0.0015], [-22.0, -0.002], [-22.0, -0.0035]]
         """
         super().__init__(f_cm, 0.0, E_cm)
+        logger.info(f'Created ConcreteCompressionParabolaRectangle')
 
     @property
     def c(self) -> float:
