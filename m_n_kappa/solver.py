@@ -229,11 +229,11 @@ class Newton(Solver):
         if self.minimum_variable <= self.x_n_plus_1 <= self.maximum_variable:
             return True
         else:
-            #print(f'Value {self.x_n_plus_1=} is not in range. '
-            #      f'x_n: {self.x_n}, '
-            #      f'Minimum: {self.minimum_variable=}, '
-            #      f'Maximum: {self.maximum_variable=},\n'
-            #      f'Data: {self.data}') # TODO: Logging
+            logger.debug(f'Value {self.x_n_plus_1=} is not in range. '
+                  f'x_n: {self.x_n}, '
+                  f'Minimum: {self.minimum_variable=}, '
+                  f'Maximum: {self.maximum_variable=},\n'
+                  f'Data: {self.data}')
             return False
 
     def value_has_changed(self) -> bool:
@@ -242,13 +242,13 @@ class Newton(Solver):
         else:
             denominator = self.x_n_plus_1
         if abs(self.x_n_plus_1 - self.x_n / denominator) < 0.0001:
-            # print(f'value has not changed {self.x_n_plus_1=}, {self.x_n=}') # TODO: Logging
+            logger.info(f'value has not changed {self.x_n_plus_1=}, {self.x_n=}')
             return False
         else:
             return True
 
     def fallback(self) -> float:
-        # print("Fallback: Bisection") # TODO: Logging
+        logger.info("Fallback: Bisection")
         bisection = Bisection(self.data, self.target, self.variable)
         return bisection.compute()
 
