@@ -350,6 +350,10 @@ class Rectangle(Geometry):
         self._width, self._left_edge, self._right_edge = check_width(
             self.width, self.left_edge, self.right_edge
         )
+        if logger.level == logging.DEBUG:
+            logger.debug(self.__str__())
+        else:
+            logger.info(f'Created {self.__repr__()}')
 
     def _check_input_values(self) -> None:
         """rearrange input-values to match the needed arrangement"""
@@ -500,7 +504,7 @@ class Rectangle(Geometry):
             edge = top_edge
         left_edge, right_edge = self.get_horizontal_edges(edge, max_widths)
         rectangles.append(Rectangle(top_edge.position, self.bottom_edge, left_edge=left_edge, right_edge=right_edge))
-        #print(rectangles)
+        logger.debug(f'Split rectangle into following rectangles: {rectangles}')
         return rectangles
 
     def get_horizontal_edges(
@@ -527,10 +531,6 @@ class Rectangle(Geometry):
             effective_width = max_widths.width(point.material, point.strain)
             right_edge = min(effective_width, self.right_edge)
             left_edge = max(-effective_width, self.left_edge)
-            # if right_edge != self.right_edge or left_edge != self.left_edge:
-                # print(f"{point.strain}, {point.material}, "
-                #      f"{left_edge=:.2f} != {self.left_edge} or "
-                #      f"{right_edge=:.2f} != {self.right_edge}")
         else:
             right_edge, left_edge = self.right_edge, self.left_edge
         return left_edge, right_edge
