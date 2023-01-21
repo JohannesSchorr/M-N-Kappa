@@ -12,13 +12,15 @@ from .loading import (
 from .width import OneWeb
 
 import logging
+import logging.config
+import yaml
+import pathlib
+
+with open(pathlib.Path(__file__).parent.absolute() / "logging-config.yaml", 'r') as f:
+    config = yaml.safe_load(f.read())
+    logging.config.dictConfig(config)
 
 logger = logging.getLogger(__name__)
-logger.setLevel(logging.DEBUG)
-
-stream_handler = logging.StreamHandler()
-stream_handler.setLevel(logging.INFO)
-logger.addHandler(stream_handler)
 
 
 class Node:
