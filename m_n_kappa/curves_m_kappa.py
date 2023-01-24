@@ -89,6 +89,37 @@ class MKappaCurvePoints:
         self._points = []
         logger.info(f'Created MKappaCurvePoints')
 
+    def __repr__(self) -> str:
+        return """MKappaCurvePoints()"""
+
+    def __str__(self) -> str:
+        text = [
+            self._print_initialization(),
+            self._print_points(),
+        ]
+        return print_chapter(text)
+
+    def _print_initialization(self) -> str:
+        text = ['Initialization', '------------', self.__repr__()]
+        return print_sections(text)
+
+    def _print_points(self) -> str:
+        points = sorted(self._points, key=lambda x: x.curvature)
+        line = 81 * '-'
+        text = [
+            line,
+            "   Moment   | Curvature  | Neutral A. |   Strain   |  Position  |    Material    ",
+            line
+        ]
+        for point in points:
+            text.append(
+                f'{point.moment:10.1f} | {point.curvature:10.6f} | {point.neutral_axis:10.2f} | '
+                f'{point.strain_position.strain:10.2f} | {point.strain_position.position:10.1f} | '
+                f'{point.strain_position.material}'
+            )
+        text.append(line)
+        return print_sections(text)
+
     @property
     def moments(self) -> list[float]:
         """computed moments of the Moment-Curvature-Curve"""
