@@ -162,9 +162,21 @@ class LoadStep:
 @dataclass
 class Loading:
 
-    """compute the load-steps by analysis of decisive m-kappa-curve
+    """
+    compute the load-steps by analysis of decisive m-kappa-curve
+
+    .. versionadded:: 0.1.0
 
     decisive M-Kappa-curve is determined by the position_value of the maximum moment
+
+    Parameters
+    ----------
+    beam_length: float
+        length of the beam
+    nodes: list[:py:class:`~m_n_kappa.Node`]
+        beam-nodes
+    load: :py:class:`~m_n_kappa.loading.ABCSingleSpan` = None
+        loading of the beam
     """
 
     beam_length: float
