@@ -395,6 +395,8 @@ class MKappaByStrainPosition(MKappa):
     """
     computation of one Moment-Curvature-Point by fixed stress-strain_value-point and
     varying the neutral axis
+
+    .. versionadded:: 0.1.0
     """
 
     __slots__ = (
@@ -426,25 +428,25 @@ class MKappaByStrainPosition(MKappa):
         """
         Parameters
         ----------
-        cross_section : cross_section.Crossection
+        cross_section : :py:class:`~m_n_kappa.Crossection`
             cross-section to compute
+        strain_position : :py:class:`~m_n_kappa.StrainPosition`
+            position_value of the given strain_value (Default: None)
         maximum_curvature : float
-            maximum positive or negative allowed curvature
+            maximum positive or negative allowed curvature (Default: None)
         minimum_curvature : float
             minimum positive or negative allowed curvature
-            (needs same sign as edge_strains)
-        strain_position : StrainPosition
-            position_value of the given strain_value (Default: None)
+            (needs same sign as edge_strains, Default: None)
         applied_axial_force : float
             applied axial force (Default: 0.0)
         maximum_iterations : int
             maximum allowed iterations (Default: 10)
             In case the given number of iterations before axial force within desired tolerance,
-            the computation is classified as unsuccessful and will be stopped
+            the computation is classified as not successful and will be stopped
         axial_force_tolerance : float
             if axial force within this tolerance the computation is terminated and
             classified as successful (Default: 5.0)
-        solver : solver.Solver
+        solver : :py:class:`~m_n_kappa.solver.Solver`
             used solver (Default: solver.Newton)
         """
         super().__init__(
