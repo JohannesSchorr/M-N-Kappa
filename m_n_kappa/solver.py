@@ -320,7 +320,10 @@ class Newton(Solver):
         if self._is_between_nearest_values():
             return self.x_n_plus_1
         else:
-            return self.fallback()
+            logger.info(f"Newton-algorithm gives {self.x_n_plus_1}. "
+                        f"Not between {self._min_under_zero_variable()} and "
+                        f"{self._min_over_zero_variable()}. Use fallback.")
+            return self._fallback()
 
     def is_value_in_range(self) -> bool:
         """check if computed value is between maximum and minimum variable value"""
@@ -375,7 +378,9 @@ class Newton(Solver):
             self._function = Polynominal(
                 data=self._sorted_data, variable=self.variable, target=self.target
             )
+            logger.debug('Set function "Polynominal"')
         else:
             self._function = Linear(
                 data=self._sorted_data, variable=self.variable, target=self.target
             )
+            logger.debug('Set function "Linear"')
