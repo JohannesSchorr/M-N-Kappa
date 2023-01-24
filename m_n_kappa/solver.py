@@ -333,7 +333,8 @@ class Newton(Solver):
         else:
             return False
 
-    def fallback(self) -> float:
+    def _fallback(self) -> float:
+        """fallback mechanism"""
         logger.info("Fallback: Bisection")
         bisection = Bisection(self.data, self.target, self.variable)
         return bisection.compute()
