@@ -78,7 +78,12 @@ class MKappaCurvePoint:
 
 class MKappaCurvePoints:
 
-    """Container for points on computed M-Kappa-Curve"""
+    """
+    Container for points on computed :math:`M`-:math:`\\kappa`-Curve
+
+    .. versionadded:: 0.1.0
+
+    """
 
     def __init__(self) -> None:
         self._points = []
@@ -86,10 +91,19 @@ class MKappaCurvePoints:
 
     @property
     def moments(self) -> list[float]:
+        """computed moments of the Moment-Curvature-Curve"""
         return [point.moment for point in self.points]
 
     @property
+    def curvatures(self) -> list[float]:
+        """computed curvatures of the Moment-Curvature-Curve"""
+        return [point.curvature for point in self.points]
+
+    @property
     def points(self) -> list[MKappaCurvePoint]:
+        """
+        :math:`M`-:math:`\\kappa`-curve points
+        """
         return self._points
 
     def add(
@@ -105,14 +119,14 @@ class MKappaCurvePoints:
         Parameters
         ----------
         moment : float
-            moment of the point
+            computed moment of the point
         curvature : float
-            curvature of the point
+            computed curvature of the point
         neutral_axis : float
-            neutral-axis leading to equilibrium (after variation)
-        cross_section : MKappaByStrainPosition
+            computed neutral-axis leading to equilibrium (after variation)
+        cross_section : :py:class:`~m_n_kappa.points.MKappaByStrainPosition`
             computed cross-section
-        strain_position : StrainPosition
+        strain_position : :py:class:`~m_n_kappa.general.StrainPosition`
             strain and its position
         """
         point = MKappaCurvePoint(
@@ -128,7 +142,24 @@ class MKappaCurvePoints:
             logger.info(f'Added {point} to MKappaCurvePoints')
 
     def curvature(self, by_moment: float) -> float:
-        """get curvature at given moment"""
+        """
+        get curvature at given moment
+
+        Parameters
+        ----------
+        by_moment : float
+            moment the curvature is to be computed from
+
+        Returns
+        -------
+        float
+            curvature :math:`\\kappa` computed from the given moment
+
+        Raises
+        ------
+        ValueError
+            in case the moment is outside the computed moment-range
+        """
         if -.00001 <= by_moment <= 0.00001:
             return 0.0
         if self.maximum_moment() < by_moment:
@@ -146,22 +177,44 @@ class MKappaCurvePoints:
             self._curvature_moment(point_index + 1),
         )
 
-    def _moment_curvature(self, by_index) -> list[float]:
+    def _moment_curvature(self, by_index: int) -> list[float]:
+        """get moment-curvature of curve-point at given index.rst"""
         return self.points[by_index].moment_curvature()
 
-    def _curvature_moment(self, by_index) -> list[float]:
+    def _curvature_moment(self, by_index: int) -> list[float]:
+        """get curvature-moment of curve-point at given index.rst"""
         return self.points[by_index].curvature_moment()
 
     def _determine_index(self, moment: float) -> int:
+        """
+        get index.rst of curve-point that has greater or equal moment as given
+
+        Parameters
+        ----------
+        moment : float
+            moment to find the index.rst of the moment-curvature-index.rst
+
+        Returns
+        -------
+        int
+            index.rst of the moment-curvature-point that has smaller or equal moment than the given moment
+
+        Raises
+        ------
+        ValueError
+            in case no moment is found that lies between two moment-curvature-points
+        """
         for index in range(len(self.points) - 1):
             if self.points[index].moment <= moment <= self.points[index + 1].moment:
                 return index
         raise ValueError(f"No index found for {moment=}")
 
     def _sort_points_by_curvature(self):
+        """sorts the moment-curvature-points ascending by its curvature"""
         self.points.sort(key=lambda x: x.curvature)
 
     def maximum_moment(self) -> float:
+        """computes the maximum moment of the curve"""
         return max(self.moments)
 
 
