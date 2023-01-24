@@ -325,28 +325,13 @@ class Newton(Solver):
                         f"{self._min_over_zero_variable()}. Use fallback.")
             return self._fallback()
 
-    def is_value_in_range(self) -> bool:
-        """check if computed value is between maximum and minimum variable value"""
-        if self.minimum_variable <= self.x_n_plus_1 <= self.maximum_variable:
+    def _is_between_nearest_values(self) -> bool:
+        """is the newly computed value between the minimum smaller and greater value"""
+        min_values = [self._min_under_zero_variable(), self._min_over_zero_variable()]
+        if min(min_values) < self.x_n_plus_1 < max(min_values):
             return True
         else:
-            logger.debug(f'Value {self.x_n_plus_1=} is not in range. '
-                  f'x_n: {self.x_n}, '
-                  f'Minimum: {self.minimum_variable=}, '
-                  f'Maximum: {self.maximum_variable=},\n'
-                  f'Data: {self.data}')
             return False
-
-    def value_has_changed(self) -> bool:
-        if self.x_n != 0.0:
-            denominator = self.x_n
-        else:
-            denominator = self.x_n_plus_1
-        if abs(self.x_n_plus_1 - self.x_n / denominator) < 0.0001:
-            logger.info(f'value has not changed {self.x_n_plus_1=}, {self.x_n=}')
-            return False
-        else:
-            return True
 
     def fallback(self) -> float:
         logger.info("Fallback: Bisection")
