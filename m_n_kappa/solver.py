@@ -190,6 +190,18 @@ class Solver:
         """compute the minimum variable value"""
         return min(self._data, key=lambda x: x[self.variable])[self.variable]
 
+    def _min_over_zero_variable(self) -> float:
+        """compute the variable value that has the target value nearest above zero"""
+        return min(self._target_values_greater_zero(), key=lambda x: x[self.target])[
+            self.variable
+        ]
+
+    def _min_under_zero_variable(self) -> float:
+        """compute the variable value that has the target value nearest below zero"""
+        return max(self._target_values_smaller_zero(), key=lambda x: x[self.target])[
+            self.variable
+        ]
+
 
 class Bisection(Solver):
 
@@ -222,22 +234,6 @@ class Bisection(Solver):
             f"min under zero: {self._min_under_zero_variable()} | "
             f"mean: {self.compute()}"
         )
-
-    def _min_over_zero_variable(self) -> float:
-        return min(self._data_with_target_over_zero(), key=lambda x: x[self.target])[
-            self.variable
-        ]
-
-    def _min_under_zero_variable(self) -> float:
-        return max(self._data_with_target_under_zero(), key=lambda x: x[self.target])[
-            self.variable
-        ]
-
-    def _data_with_target_over_zero(self) -> list:
-        return list(filter(lambda x: x[self.target] > 0.0, self.data))
-
-    def _data_with_target_under_zero(self) -> list:
-        return list(filter(lambda x: x[self.target] < 0.0, self.data))
 
 
 class Newton(Solver):
