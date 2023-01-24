@@ -564,14 +564,20 @@ class MKappaCurve:
         self._compute_values(m_kappa)
 
     def _compute_positive_curvature_intermediate(self) -> None:
+        """compute all moment-curvature pairs between failure and zero under positive curvature"""
+        logger.info('Start computing intermediate values')
         for strain_position in self.positive.get_material_points_inside_curvature():
+            logger.info(
+                f'Compute intermediate value by {strain_position} with positive curvature values\n'
+                f'\tmaximum: {self._maximum_positive_curvature(strain_position)} | '
+                f'minimum: {self._minimum_positive_curvature(strain_position)}')
             m_kappa = self._m_kappa(
                 position_strain=strain_position,
                 maximum_curvature=self._maximum_positive_curvature(strain_position),
                 minimum_curvature=self._minimum_positive_curvature(strain_position),
             )
             if not m_kappa.successful:
-                # print(m_kappa._print_iterations()) # TODO: Logging?
+                logger.info(f'Computation with Newton algorithm not successful, try Bisection')
                 m_kappa = MKappaByStrainPosition(
                     self.cross_section,
                     strain_position=strain_position,
@@ -618,7 +624,7 @@ class MKappaCurve:
                 m_kappa.strain_position,
             )
         else:
-            print(
+            logger.info(
                 f"============\n"
                 f"not successful:\n"
                 f"position_value={m_kappa.strain_position},\n"
