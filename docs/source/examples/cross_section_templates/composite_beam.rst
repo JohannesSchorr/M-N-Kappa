@@ -101,7 +101,7 @@ Composite cross-section
 ...     centroid_z=75, width=2000, rebar_horizontal_distance=100, rebar_diameter=10)
 >>> bottom_rebar_layer = reinforcement + bottom_layer
 >>> i_profile = IProfile(
-...     top_edge=0.0, b_fo=200, t_fo=15, h_w=200-2*15, t_w=15, centroid_y=0.0)
+...     top_edge=100.0, b_fo=200, t_fo=15, h_w=200-2*15, t_w=15, centroid_y=0.0)
 >>> steel = Steel(f_y=355.0, f_u=400, failure_strain=0.15)
 >>> steel_section = i_profile + steel
 >>> cross_section = concrete_section + top_rebar_layer + bottom_rebar_layer + steel_section
