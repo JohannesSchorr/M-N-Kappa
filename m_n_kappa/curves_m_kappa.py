@@ -27,8 +27,25 @@ logger = logging.getLogger(__name__)
 
 @dataclass
 class MKappaCurvePoint:
-    """Container for single point on M-Kappa-Curve"""
+    """
+    Container for single point on Moment-Curvature-Curve
 
+    .. versionadded:: 0.1.0
+
+    Parameters
+    ----------
+    moment: float
+        the computed moment of the curve-point
+    curvature: float
+        the computed curvature of the curve-point
+    neutral_axis: float
+        the computed neutral-axis of the computed curve-point
+    cross_section: :py:class:`~m_n_kappa.Crosssection`
+        computed cross-section
+    strain_position: :py:class:`~m_n_kappa.StrainPosition`
+        :py:class:`~m_n_kappa.StrainPosition` leading to the
+        resulting moment, curvature and neutral-axis
+    """
     moment: float
     curvature: float
     neutral_axis: float
