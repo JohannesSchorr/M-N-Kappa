@@ -69,6 +69,7 @@ class Solver:
         text = [
             self._print_title(),
             self._print_initialization(),
+            self._print_data(),
             self._print_initial_value(),
             self._print_result(),
         ]
@@ -88,7 +89,26 @@ class Solver:
         )
 
     def _print_result(self) -> str:
-        return "\n".join(["Result", "------", "x_n+1 = {:.2f}".format(self.compute())])
+        return print_sections([
+            "Result", "------", f"x_n+1 = {self.x_n_plus_1:.2f}",
+            f"min_under_zero: {self._min_under_zero_variable()} | min_over_zero: {self._min_over_zero_variable()}",
+        ])
+
+    def _print_data(self) -> str:
+        """print the data that has been passed"""
+        line = (2*10+5)*'-'
+        text = [
+            'Data', '----', '',
+            line,
+            f'{self.variable} | {self.target}',
+            line,
+        ]
+        for point in self.data:
+            text.append(
+                f'{point[self.variable]:10.2f} | {point[self.target]:10.2f}'
+            )
+        text.append(line)
+        return print_sections(text)
 
     @property
     def data(self) -> list:
