@@ -410,11 +410,18 @@ class MKappaCurve:
         self._include_positive_curvature = include_positive_curvature
         self._include_negative_curvature = include_negative_curvature
         self._boundaries = self.cross_section.get_boundary_conditions()
-        self._positive = self._get_positive_m_kappa_curve_curvature()
-        self._negative = self._get_negative_m_kappa_curve_curvature()
         self._m_kappa_points: MKappaCurvePoints = MKappaCurvePoints()
-        self._compute_positive_curvature_values()
-        self._compute_negative_curvature_values()
+        self._not_successful = None
+        if self.include_positive_curvature:
+            self._positive = self._get_positive_m_kappa_curve_curvature()
+            self._compute_positive_curvature_failure()
+            self._compute_positive_curvature_intermediate()
+            logger.info('Computed positive M-Kappa-Curve-Points')
+        if self.include_negative_curvature:
+            self._negative = self._get_negative_m_kappa_curve_curvature()
+            self._compute_negative_curvature_failure()
+            self._compute_negative_curvature_intermediate()
+            logger.info('Computed negative M-Kappa-Curve-Points')
         self._insert_zero()
         if logger.level == logging.DEBUG:
             logger.debug(f'{self.__str__()}')
@@ -554,11 +561,6 @@ class MKappaCurve:
             )
             self._compute_values(m_kappa)
 
-    def _compute_negative_curvature_values(self) -> None:
-        if self.negative is not None:
-            self._compute_negative_curvature_failure()
-            self._compute_negative_curvature_intermediate()
-
     def _compute_positive_curvature_failure(self) -> None:
         """save the moment-curvature pair at failure under positive curvature"""
         m_kappa = self.positive.m_kappa_failure
@@ -608,11 +610,6 @@ class MKappaCurve:
         """compute the minimum possible negative curvature given the strain_value
         and its position_value for the cross-section"""
         return self.boundaries.negative.minimum_curvature.compute(strain_position)
-
-    def _compute_positive_curvature_values(self) -> None:
-        if self.positive is not None:
-            self._compute_positive_curvature_failure()
-            self._compute_positive_curvature_intermediate()
 
     def _compute_values(self, m_kappa: MKappaByStrainPosition) -> None:
         """save moment-curvature-pair"""
