@@ -564,8 +564,8 @@ class Beam:
         single_load = SingleLoad(for_position, 1.0)
         single_span_single_load = SingleSpanSingleLoads(self.length, [single_load])
         return [
-            self._incremental_deformation(node_index, load, single_span_single_load)
-            for node_index in range(len(self.nodes) - 1)
+            self._incremental_deformation(element_index, load, single_span_single_load)
+            for element_index in range(len(self.nodes) - 1)
         ]
 
     def _incremental_deformation(
@@ -596,10 +596,10 @@ class Beam:
         node_1_result = self.nodes[element_index].incremental_deformation(
             load, single_load
         )
-        node_2_result = self.nodes[node_index + 1].incremental_deformation(
+        node_2_result = self.nodes[element_index + 1].incremental_deformation(
             load, single_load
         )
-        return 0.5 * (node_1_result + node_2_result) * self._element_length(node_index)
+        return 0.5 * (node_1_result + node_2_result) * self._element_length(element_index)
 
     def _create_positions(self) -> list[float]:
         positions = [
