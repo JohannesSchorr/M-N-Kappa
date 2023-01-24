@@ -428,11 +428,11 @@ class MKappaCurve:
         else:
             logger.info(f'Created {self.__repr__()}')
 
-    def __repr__(self):
+    def __repr__(self) -> str:
         return f"MKappaCurve(cross_section=cross_section)"
 
     @str_start_end
-    def __str__(self):
+    def __str__(self) -> str:
         text = [
             self._print_title(),
             self._print_initialization(),
@@ -459,16 +459,18 @@ class MKappaCurve:
         ]
         self.__sort_m_kappa_by_curvature()
         for point in self.m_kappa_points.points:
-            text.append(
-                "{:13.1f} | {:9.6f} | {:12.2f} | {:8.5f} | {:8.2f} | {}".format(
-                    point.moment,
-                    point.curvature,
-                    point.neutral_axis,
-                    point.strain_position.strain,
-                    point.strain_position.position,
-                    point.strain_position.material,
+            if point.strain_position is not None:
+                text.append(
+                    f"{point.moment:13.1f} | {point.curvature:9.6f} | {point.neutral_axis:12.2f} | "
+                    f"{point.strain_position.strain:8.5f} | {point.strain_position.position:8.2f} | "
+                    f"{point.strain_position.material}"
+                    )
+            else:
+                text.append(
+                    f"{point.moment:13.1f} | {point.curvature:9.6f} | {point.neutral_axis:12.2f} | "
+                    f"{'-'} | {'-'} | {'-'}"
                 )
-            )
+
         text.append(
             "--------------------------------------------------------------------------"
         )
