@@ -30,6 +30,7 @@ class Solver:
         "_minimum_variable",
         "_function",
         "_sorted_data",
+        "_x_n_plus_1",
     )
 
     def __init__(self, data: list, target, variable, target_value: float = 0.0):
@@ -124,6 +125,11 @@ class Solver:
     def x_n(self) -> float:
         """lastly computed variable value"""
         return self._sorted_data[0][self.variable]
+
+    @property
+    def x_n_plus_1(self) -> float:
+        """new computed value"""
+        return self._x_n_plus_1
 
     def compute(self, use_fallback: bool = False) -> float:
         pass
