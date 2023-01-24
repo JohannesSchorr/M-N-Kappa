@@ -61,7 +61,7 @@ def remove_higher_strains(strain: float, position_strains: list[StrainPosition])
     list[:py:class:`~m_n_kappa.general.StrainPosition`]
         strain-position values with strain smaller than ``strain``
     """
-    return list(filter(lambda x: 0.0 < x.strain < strain, position_strains))
+    return list(filter(lambda x: x.strain < strain, position_strains))
 
 
 def remove_smaller_strains(strain: float, position_strains: list[StrainPosition]):
