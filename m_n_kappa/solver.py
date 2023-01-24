@@ -272,7 +272,11 @@ class Bisection(Solver):
 
 
 class Newton(Solver):
-    """Solver using the newton method"""
+    """
+    Solver using the newton method
+
+    .. versionadded:: 0.1.0
+    """
 
     __slots__ = (
         "_data",
@@ -287,15 +291,33 @@ class Newton(Solver):
 
     @property
     def function(self):
+        """function to compute ``x_n_plus_1``"""
         return self._function
 
-    @property
-    def x_n_plus_1(self) -> float:
-        return self._x_n_plus_1
-
     def compute(self, use_fallback: bool = False) -> float:
-        self._x_n_plus_1 = self.solve()
-        if self.is_value_in_range() and self.value_has_changed() and not use_fallback:
+        """
+        compute a new value using the newton algorithm
+
+        In case the newton algorithm does not lead to an optimization of the variable value
+        then bi-section will be used as fallback.
+        Optimization means improvement of variable-value leading to a target-value nearer zero.
+
+        Parameters
+        ----------
+        use_fallback : bool
+            use the fallback algorithm (i.e. :py:class:`~m_n_kappa.solve.Bisection`)
+
+        Returns
+        -------
+        float
+            computed new value leading to target-value nearer zero
+
+        See Also
+        --------
+        Bisection : :py:class:`~m_n_kappa.solver.Solver`-class using bi-sectional approach
+        """
+        self._x_n_plus_1 = self._solve()
+        if self._is_between_nearest_values():
             return self.x_n_plus_1
         else:
             return self.fallback()
@@ -328,19 +350,27 @@ class Newton(Solver):
         bisection = Bisection(self.data, self.target, self.variable)
         return bisection.compute()
 
-    def solve(self) -> float:
-        return self.x_n - (self.solved_function() / self.solved_derivate())
+    def _solve(self) -> float:
+        """
+        solves the equation of the newton algorithm
 
-    def solved_function(self):
+        .. math::
+
+           x_\\mathrm{n+1} = x_\\mathrm{n} - \\frac{f(x_\\mathrm{n})}{f'(x_\\mathrm{n})}
+
+        """
+        return self.x_n - (self._solved_function() / self._solved_derivate())
+
+    def _solved_function(self):
+        """function to find zero crossing computed using :math:`x_\\mathrm{n}` """
         return self.function.function(variable_value=self.x_n)
 
-    def solved_derivate(self):
+    def _solved_derivate(self):
+        """derivate of the function to find zero crossing computed using :math:`x_\\mathrm{n}`"""
         return self.function.derivate(variable_value=self.x_n)
 
     def _prepare(self):
-        self._set_function()
-
-    def _set_function(self):
+        """set the function to be computed"""
         if len(self._sorted_data) > 2:
             self._function = Polynominal(
                 data=self._sorted_data, variable=self.variable, target=self.target
