@@ -28,12 +28,14 @@ class Computation:
     """
     stores the results of an iteration-step during a computation
 
+    .. versionadded:: 0.1.0
+
     Parameters
     ----------
     iteration: int
         iteration-number
-    computed_cross_section: :py:class:`~m_n_kappa.crosssection.Crosssection`
-        computed cross-section that inherits from `~m_n_kappa.crosssection.Crosssection`
+    computed_cross_section: :py:class:`~m_n_kappa.Crosssection`
+        computed cross-section that inherits from `~m_n_kappa.Crosssection`
     curvature: float
         computed curvature
     neutral_axis_value: float
