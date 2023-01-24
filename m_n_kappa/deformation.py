@@ -639,7 +639,7 @@ class Beam:
             width_load = widths.line
         membran = width_load.membran.ratio_beff_to_b(width_position) * slab_width
         bending = width_load.bending.ratio_beff_to_b(width_position) * slab_width
-        print(f"load-distribution-factor={self.load.load_distribution_factor()}, "
+        logger.info(f"load-distribution-factor={self.load.load_distribution_factor():.2f}, "
               f"{position=:5.1f}, {width_position=:5.1f}, "
               f"{membran=:.1f} ({membran / slab_width:.2f}), "
               f"{bending=:.1f} ({bending / slab_width:.2f})")
