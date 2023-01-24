@@ -1,4 +1,4 @@
-from .general import str_start_end
+from .general import str_start_end, print_chapter, print_sections
 from .function import Polynominal, Linear
 
 import logging
@@ -72,19 +72,19 @@ class Solver:
             self._print_initial_value(),
             self._print_result(),
         ]
-        return "\n".join(text)
+        return print_chapter(text)
 
     def _print_title(self) -> str:
-        return "\n".join(
+        return print_sections(
             [f"{self.__class__.__name__}", len(self.__class__.__name__) * "="]
         )
 
     def _print_initialization(self) -> str:
-        return "\n".join(["Initialization", "--------------", self.__repr__()])
+        return print_sections(["Initialization", "--------------", self.__repr__()])
 
     def _print_initial_value(self) -> str:
-        return "\n".join(
-            ["Initial Value", "-------------", "x_n = {:.2f}".format(self.x_n)]
+        return print_sections(
+            ["Initial Value", "-------------", f"x_n = {self.x_n:.2f}"]
         )
 
     def _print_result(self) -> str:
