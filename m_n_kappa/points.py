@@ -584,6 +584,8 @@ class MKappaByConstantCurvature(MKappa):
     """
     computation of one Moment-Curvature-Point by fixed curvature and
     varying the neutral axis
+
+    .. versionadded:: 0.1.0
     """
 
     __slots__ = (
@@ -615,23 +617,23 @@ class MKappaByConstantCurvature(MKappa):
         """
         Parameters
         ----------
-        cross_section : :py:class:`~m_n_kappa.crosssection.Crossection`
-                cross-section to compute
+        cross_section : :py:class:`~m_n_kappa.Crossection`
+            cross-section to compute
         maximum_neutral_axis : float
-                maximum allowed neutral-axis
+            maximum allowed neutral-axis
         minimum_neutral_axis : float
-                minimum allowed neutral-axis
+            minimum allowed neutral-axis
         applied_axial_force : float
-                applied axial force (Default: 0.0)
+            applied axial force (Default: 0.0)
         maximum_iterations : int
-                maximum allowed iterations (Default: 10)
-                In case the given number of iterations before axial force within desired tolerance,
-                the computation is classified as unsuccessful and will be stopped
+            maximum allowed iterations (Default: 10)
+            In case the given number of iterations before axial force within desired tolerance,
+            the computation is classified as not successful and will be stopped
         axial_force_tolerance : float
-                if axial force within this tolerance the computation is terminated and
-                classified as successful (Default: 5.0)
-        solver : solver.Solver
-                used solver (Default: solver.Newton)
+            if axial force within this tolerance the computation is terminated and
+            classified as successful (Default: 5.0)
+        solver : :py:class:`~m_n_kappa.solver.Solver`
+            used solver (Default: :py:class:`~m_n_kappa.solver.Newton`)
         """
         super().__init__(
             cross_section,
