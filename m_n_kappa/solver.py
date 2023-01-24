@@ -162,8 +162,8 @@ class Solver:
         and the two target values smaller zero, if available
         """
         #  self._data.sort(key=lambda x: abs(x[self.target]))
-        gt_zero = list(filter(lambda x: x[self.target] > 0.0, self.data))
-        lt_zero = list(filter(lambda x: x[self.target] < 0.0, self.data))
+        gt_zero = self._target_values_greater_zero()
+        lt_zero = self._target_values_smaller_zero()
         if len(gt_zero) > 2:
             gt_zero.sort(key=lambda x: abs(x[self.target]))
             gt_zero = gt_zero[:2]
@@ -174,10 +174,13 @@ class Solver:
         new_data.sort(key=lambda x: abs(x[self.target]))
         return new_data
 
-    def _set_variable_boundaries(self) -> None:
-        if len(self._data) > 1:
-            self._maximum_variable = self._compute_maximum_variable()
-            self._minimum_variable = self._compute_minimum_variable()
+    def _target_values_greater_zero(self) -> list:
+        """data-values where ``target``-value is greater zero"""
+        return list(filter(lambda x: x[self.target] > 0.0, self.data))
+
+    def _target_values_smaller_zero(self) -> list:
+        """data-values where ``target``-value is smaller zero"""
+        return list(filter(lambda x: x[self.target] < 0.0, self.data))
 
     def _compute_maximum_variable(self) -> float:
         """compute the maximal variable value"""
