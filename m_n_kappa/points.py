@@ -451,6 +451,8 @@ class MKappaByStrainPosition(MKappa):
         solver : :py:class:`~m_n_kappa.solver.Solver`
             used solver (Default: solver.Newton)
         """
+        logger.info(f'----\nInitialize {self.__class__.__name__}('
+                    f'{strain_position=}, {maximum_curvature=}, {minimum_curvature=})')
         super().__init__(
             cross_section,
             applied_axial_force,
@@ -502,13 +504,19 @@ class MKappaByStrainPosition(MKappa):
         return self._strain_position
 
     def initialize_boundary_curvatures(self):
+        logger.debug('Start computing boundary values')
         for index, curvature_value in enumerate(
             [self.minimum_curvature, self.maximum_curvature]
         ):
             self._iteration = index
             self._curvature = curvature_value
             self._neutral_axis = self._compute_neutral_axis()
+            logger.debug(
+                f'Compute {curvature_value=}, '
+                f'neutral-axis: {self._neutral_axis},\n'
+                f'\t{self.strain_position}')
             self.compute()
+        logger.debug('Finished computing boundary values')
 
     def _compute_new_curvature(self):
         return curvature(
