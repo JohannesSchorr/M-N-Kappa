@@ -170,7 +170,7 @@ class MKappaCurvePoints:
         if point not in self.points:
             self._points.append(point)
             self._sort_points_by_curvature()
-            logger.info(f'Added {point} to MKappaCurvePoints')
+            logger.info(f'Added {point} to MKappaCurvePoints\n----')
 
     def curvature(self, by_moment: float) -> float:
         """
