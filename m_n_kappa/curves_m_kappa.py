@@ -358,6 +358,7 @@ class MKappaCurve:
         "_positive",
         "_negative",
         "_m_kappa_points",
+        "_not_successful",
     )
 
     def __init__(
@@ -631,8 +632,14 @@ class MKappaCurve:
                 f"iterations={m_kappa.iteration} ({m_kappa.maximum_iterations})\n"
                 f"{m_kappa._print_iterations()}",
             )
-            #print(m_kappa._print_initialization())
-            #print(m_kappa._print_iterations())
+            if self._not_successful is None:
+                self._not_successful = []
+            self._not_successful.append([m_kappa.strain_position, m_kappa.not_successful_reason])
+
+    @property
+    def not_successful(self) -> list[StrainPosition]:
+        """list :py:class:`~m_n_kappa.StrainPosition` that were not successful"""
+        return self._not_successful
 
     def _insert_zero(self) -> None:
         """insert moment-curvature pair at zero curvature"""
