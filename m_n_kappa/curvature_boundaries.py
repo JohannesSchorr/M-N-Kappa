@@ -129,6 +129,9 @@ class MaximumCurvature:
     maximum_positive_section_strains: list[StrainPosition]
     maximum_negative_section_strains: list[StrainPosition]
 
+    def __post_init__(self):
+        logger.info(f'Created {self.__repr__()}')
+
     @property
     def positive(self) -> list[StrainPosition]:
         return self.maximum_positive_section_strains
@@ -140,9 +143,11 @@ class MaximumCurvature:
     def compute(self, strain_position: StrainPosition) -> float:
         """compute maximum curvature for given strain_value at given position_value"""
         if self.__has_positive_curvature():
-            return self.__compute_positive_curvatures(strain_position)
+            curvature = self.__compute_positive_curvatures(strain_position)
         else:
-            return self.__compute_negative_curvatures(strain_position)
+            curvature = self.__compute_negative_curvatures(strain_position)
+        logger.info(f"Computed maximum curvature for {strain_position}: {curvature}")
+        return curvature
 
     def __has_positive_curvature(self) -> bool:
         if self.curvature > 0.0:
@@ -166,13 +171,23 @@ class MaximumCurvature:
 
     def __compute_negative_curvatures(self, strain_position: StrainPosition) -> float:
         position_strains = self.__get_negative_position_strains(strain_position)
-        curvatures = compute_curvatures(strain_position, position_strains)
-        return max(curvatures)
+        edge_strains = compute_curvatures(strain_position, position_strains)
+        decisive_edge_strain = max(edge_strains, key=lambda x: x.curvature)
+        if decisive_edge_strain.top_edge_strain == strain_position:
+            logger.info(f'Decisive strain-position values: {decisive_edge_strain.bottom_edge_strain}')
+        else:
+            logger.info(f'Decisive strain-position values: {decisive_edge_strain.top_edge_strain}')
+        return decisive_edge_strain.curvature
 
     def __compute_positive_curvatures(self, strain_position: StrainPosition) -> float:
         position_strains = self.__get_positive_position_strains(strain_position)
-        curvatures = compute_curvatures(strain_position, position_strains)
-        return min(curvatures)
+        edge_strains = compute_curvatures(strain_position, position_strains)
+        decisive_edge_strain = min(edge_strains, key=lambda x: x.curvature)
+        if decisive_edge_strain.top_edge_strain == strain_position:
+            logger.info(f'Decisive strain-position values: {decisive_edge_strain.bottom_edge_strain}')
+        else:
+            logger.info(f'Decisive strain-position values: {decisive_edge_strain.top_edge_strain}')
+        return decisive_edge_strain.curvature
 
 
 @dataclass
