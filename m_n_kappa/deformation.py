@@ -399,14 +399,19 @@ class Beam:
     def bending_widths(self) -> list[float]:
         """computed effective bending widths of the concrete slab over the length of beam"""
         if self.consider_widths:
-            return [node.cross_section.slab_effective_width.bending for node in self.nodes]
+            return [min(node.cross_section.slab_effective_width.bending,
+                        0.5 * node.cross_section.concrete_slab_width(),
+                        ) for node in self.nodes]
         else:
             return [node.cross_section.concrete_slab_width() for node in self.nodes]
 
     def membran_widths(self) -> list[float]:
         """computed effective membran widths of the concrete slab over the length of beam"""
         if self.consider_widths:
-            return [node.cross_section.slab_effective_width.membran for node in self.nodes]
+            return [
+                min(node.cross_section.slab_effective_width.membran,
+                    0.5 * node.cross_section.concrete_slab_width()
+                    ) for node in self.nodes]
         else:
             return [node.cross_section.concrete_slab_width() for node in self.nodes]
 
