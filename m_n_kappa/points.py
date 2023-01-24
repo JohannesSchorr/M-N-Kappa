@@ -97,16 +97,20 @@ class MKappa:
         self._computations: list[Computation] = []
         self._solver = solver
         self._successful = False
+        self._not_successful_reason = "-"
         self._iteration = 0
         self._curvature = None
         self._neutral_axis = None
         self._computed_cross_section = None
         self._axial_force = None
         if not issubclass(type(self), MKappa):
-            if logger.level == logging.DEBUG:
-                logger.debug(f'{self.__str__()}')
+            if self.successful:
+                if logger.level == logging.DEBUG:
+                    logger.debug(f'{self.__str__()}')
+                else:
+                    logger.info(f'Created {self.__repr__()}')
             else:
-                logger.info(f'Created {self.__repr__()}')
+                logger.info(f'Not successful {self.__str__()}')
 
     def __repr__(self):
         return (
@@ -156,14 +160,17 @@ class MKappa:
         return print_sections(text)
 
     def _print_results(self) -> str:
-        text = [
-            "Results",
-            "-------",
-            "\t" + "N = {:.2f}".format(self.axial_force),
-            "\t" + "M = {:.2f}".format(self.moment),
-            "\t" + "Kappa = {:.5f}".format(self.curvature),
-        ]
-        return print_sections(text)
+        if self.successful:
+            text = [
+                "Results",
+                "-------",
+                "\t" + f"N = {self.axial_force:.2f}",
+                "\t" + f"M = {self.moment:.2f}",
+                "\t" + f"Kappa = {self.curvature:.5f}",
+            ]
+            return print_sections(text)
+        else:
+            return ''
 
     @property
     def applied_axial_force(self):
@@ -229,6 +236,11 @@ class MKappa:
         return self._solver
 
     @property
+    def not_successful_reason(self) -> str:
+        """In case computation was not successful gives a reason"""
+        return self._not_successful_reason
+
+    @property
     def successful(self) -> bool:
         """
         True:  equilibrium has been found,
@@ -253,8 +265,10 @@ class MKappa:
         elif self._initial_axial_forces_have_different_sign():
             self.iterate()
         else:
-            print("Axial-forces computed with minimum and maximum curvature have same sign.\n"
-                  "Therefore, no equilibrium of Axial-forces possible. --> break")
+            self._not_successful_reason = 'same sign of axial forces at minimum and maximum curvature'
+            logger.info('Axial-forces of minimum and maximum curvature have same sign. '
+                        'No equilibrium of axial-forces possible. '
+                        'Computation will be skipped')
             self.__set_values_none()
 
     def _initial_axial_forces_have_different_sign(self):
@@ -280,6 +294,9 @@ class MKappa:
             if self.__is_axial_force_within_tolerance():
                 self._successful = True
                 break
+        self._not_successful_reason = 'maximum iterations reached'  # maybe using enum?
+        logger.info(f"Maximum number of iterations ({self.maximum_iterations}) reached, "
+                    f"without finding equilibrium of axial forces")
 
     def _axial_force_equilibrium(self):
         return self.axial_force - self.applied_axial_force
