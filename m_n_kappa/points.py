@@ -417,9 +417,10 @@ class MKappaByStrainPosition(MKappa):
     def __init__(
         self,
         cross_section: Crosssection,
-        maximum_curvature: float,
-        minimum_curvature: float,
         strain_position: StrainPosition,
+        maximum_curvature: float = None,
+        minimum_curvature: float = None,
+        positive_curvature: bool = None,
         applied_axial_force: float = 0.0,
         maximum_iterations: int = 10,
         axial_force_tolerance: float = 5.0,
@@ -457,6 +458,14 @@ class MKappaByStrainPosition(MKappa):
             solver,
         )
         self._strain_position = strain_position
+        if maximum_curvature is None and minimum_curvature is None:
+            if isinstance(positive_curvature, bool):
+                maximum_curvature = self._determine_maximum_curvature(positive_curvature)
+                minimum_curvature = self._determine_minimum_curvature(positive_curvature)
+            else:
+                raise ValueError(
+                    f"If 'maximum_curvature=None' and 'minimum_curvature=None', "
+                    f"then 'positive_curvature' must be set to 'True' or 'False'")
         self._maximum_curvature = maximum_curvature
         self._minimum_curvature = minimum_curvature
         self.initialize()
@@ -513,6 +522,52 @@ class MKappaByStrainPosition(MKappa):
             curvature_value=self.curvature,
             position_value=self.strain_position.position,
         )
+
+    def _determine_maximum_curvature(self, for_positive_curvature: bool) -> float:
+        """
+        gets the theoretically maximum curvature of the ``cross_section``
+        considering the input ``strain_position``
+
+        Parameters
+        ----------
+        for_positive_curvature : bool
+            decide if curvature is to be computed for positive (``True``) or negative (``False``)
+            curvatue
+
+        Returns
+        -------
+        float
+            theoretically maximum curvature of the ``cross_section``
+            considering the input ``strain_position``
+        """
+        boundary = self.cross_section.get_boundary_conditions()
+        if for_positive_curvature:
+            return boundary.positive.maximum_curvature.compute(self.strain_position)
+        else:
+            return boundary.negative.maximum_curvature.compute(self.strain_position)
+
+    def _determine_minimum_curvature(self, for_positive_curvature: bool) -> float:
+        """
+        gets the theoretically minimum curvature of the ``cross_section``
+        considering the input ``strain_position``
+
+        Parameters
+        ----------
+        for_positive_curvature : bool
+            decide if curvature is to be computed for positive (``True``) or negative (``False``)
+            curvatue
+
+        Returns
+        -------
+        float
+            theoretically maximum curvature of the ``cross_section``
+            considering the input ``strain_position``
+        """
+        boundary = self.cross_section.get_boundary_conditions()
+        if for_positive_curvature:
+            return boundary.positive.minimum_curvature.compute(self.strain_position)
+        else:
+            return boundary.negative.minimum_curvature.compute(self.strain_position)
 
 
 class MKappaByConstantCurvature(MKappa):
