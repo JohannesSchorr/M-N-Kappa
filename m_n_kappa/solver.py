@@ -205,7 +205,11 @@ class Solver:
 
 class Bisection(Solver):
 
-    """Bisection solver"""
+    """
+    Bisection solver
+
+    .. versionadded:: 0.1.0
+    """
 
     __slots__ = (
         "_data",
@@ -217,6 +221,19 @@ class Bisection(Solver):
     )
 
     def compute(self, use_fallback: bool = False) -> float:
+        """
+        Compute a new variable value that leading to a target-value nearer zero
+
+        Parameters
+        ----------
+        use_fallback : bool
+            has no effect, as bisection is the fallback-function
+
+        Returns
+        -------
+        float
+            new variable-value leading to a target-value nearer zero than the values in ``data``
+        """
         variables = [data_point[self.variable] for data_point in self.data]
         logger.debug(f'{variables=}')
         for factor in [0.5, 0.25, 0.75, 0.1, 0.2, 0.3, 0.4, 0.6, 0.7, 0.8, 0.9]:
@@ -225,7 +242,20 @@ class Bisection(Solver):
                 logger.debug(new_variable)
                 return new_variable
 
-    def _compute_with(self, factor: float = 0.5):
+        Method weights between the variable that has the minimum target-value over zero and
+        the minimum target-value below zero.
+        ``factor`` weights between both values.
+
+        Parameters
+        ----------
+        factor : float
+            weighting-factor, must be greater 0.0 and smaller 1.0 (Default: 0.5)
+
+        Returns
+        -------
+        float
+            computed bisection
+        """
         return factor * (self._min_under_zero_variable() + self._min_over_zero_variable())
 
     def print_values(self) -> str:
