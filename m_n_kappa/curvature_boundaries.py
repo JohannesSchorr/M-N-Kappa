@@ -293,13 +293,12 @@ class MinimumCurvature:
 
     Parameters
     ----------
-    maximum_positive_section_strains : list
+    maximum_positive_section_strains : list[:py:class:`~m_n_kappa.StrainPosition`]
         maximum positive material strains of the sections in the cross_section
-    maximum_negative_section_strains : list
+    maximum_negative_section_strains : list[:py:class:`~m_n_kappa.StrainPosition`]
         maximum negative material strains of the sections in the cross_section
     curvature_is_positive : bool
-        if True than positive curvature is assumed
-        if False than negative curvature is assumed
+        if ``True`` then positive curvature is assumed, else negative curvature is assumed
     """
 
     maximum_positive_section_strains: list[StrainPosition]
@@ -308,16 +307,26 @@ class MinimumCurvature:
 
     @property
     def positive(self) -> list[StrainPosition]:
+        """maximum positive :py:class:`~m_n_kappa.StrainPosition` of all materials and positions"""
         return self.maximum_positive_section_strains
 
     @property
     def negative(self) -> list[StrainPosition]:
+        """maximum negative :py:class:`~m_n_kappa.StrainPosition` of all materials and positions"""
         return self.maximum_negative_section_strains
 
     def compute(self, strain_position: StrainPosition) -> float:
         """
-        compute the minimum possible curvature considering the strain at a position
-        as well as the possible maximum
+        compute the minimum possible curvature considering the strain at a position (``strain_position``)
+
+        Parameters
+        ----------
+        strain_position : :py:class:`~m_n_kappa.StrainPosition`
+            :py:class:`~m_n_kappa.StrainPosition` the minimum curvature is to be computed.
+
+        Returns
+        -------
+
         """
         if self.curvature_is_positive:
             return self.__compute_positive_curvature(strain_position)
