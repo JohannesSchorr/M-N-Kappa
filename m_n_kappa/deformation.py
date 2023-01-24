@@ -266,9 +266,11 @@ class Deformations:
     """
     container for number of deformations
 
+    .. versionadded:: 0.1.0
+
     Parameters
     ----------
-    deformations : list[Deformation]
+    deformations : list[:py:class:`~m_n_kappa.deformation.Deformation`]
         list of deformations
     """
     deformations: list[Deformation]
