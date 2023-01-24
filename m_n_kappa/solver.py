@@ -50,7 +50,9 @@ class Solver:
         self._target = target
         self._variable = variable
         self._target_value = target_value
-        self._set_variable_boundaries()
+        if len(self._data) > 1:
+            self._maximum_variable = self._compute_maximum_variable()
+            self._minimum_variable = self._compute_minimum_variable()
         self._sorted_data = self._sort_data()
         self._prepare()
         if logger.level == logging.DEBUG:
