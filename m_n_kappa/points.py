@@ -1,12 +1,4 @@
 from dataclasses import dataclass
-import logging
-
-logger = logging.getLogger(__name__)
-logger.setLevel(logging.DEBUG)
-
-stream_handler = logging.StreamHandler()
-stream_handler.setLevel(logging.WARN)
-logger.addHandler(stream_handler)
 
 from .general import (
     print_sections,
@@ -18,6 +10,17 @@ from .general import (
 )
 from .crosssection import Crosssection, ComputationCrosssectionCurvature
 from .solver import Solver, Newton
+
+import logging
+import logging.config
+import yaml
+import pathlib
+
+with open(pathlib.Path(__file__).parent.absolute() / "logging-config.yaml", 'r') as f:
+    config = yaml.safe_load(f.read())
+    logging.config.dictConfig(config)
+
+logger = logging.getLogger(__name__)
 
 
 @dataclass
