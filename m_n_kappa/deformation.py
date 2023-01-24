@@ -311,7 +311,6 @@ class Beam:
 
     __slots__ = (
         "_cross_section",
-        "_length",
         "_element_number",
         "_load",
         "_element_standard_length",
@@ -324,7 +323,6 @@ class Beam:
     def __init__(
         self,
         cross_section: Crosssection,
-        length: float,
         element_number: int,
         load: ABCSingleSpan,
         consider_widths: bool = True,
@@ -342,7 +340,6 @@ class Beam:
             consider effective widths (Default: True)
         """
         self._cross_section = cross_section
-        self._length = length
         self._element_number = element_number
         self._load = load
         self._consider_widths = consider_widths
