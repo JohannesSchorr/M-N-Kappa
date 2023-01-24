@@ -134,14 +134,34 @@ class MaximumCurvature:
 
     @property
     def positive(self) -> list[StrainPosition]:
+        """maximum positive :py:class:`~m_n_kappa.StrainPosition` of all materials and positions"""
         return self.maximum_positive_section_strains
 
     @property
     def negative(self) -> list[StrainPosition]:
+        """maximum negative :py:class:`~m_n_kappa.StrainPosition` of all materials and positions"""
         return self.maximum_negative_section_strains
 
     def compute(self, strain_position: StrainPosition) -> float:
-        """compute maximum curvature for given strain_value at given position_value"""
+        """
+        maximum curvature for given strain_value at given position_value
+
+        Accomplished by computing all curvatures from the given ``strain_position`` with the
+        :py:class:`~m_n_kappa.StrainPosition` with maximum positive or negative strains of the cross-sections'
+        material models and comparing these against each other.
+        The maximum positive or negative curvature will be given.
+
+        Parameters
+        ----------
+        strain_position : :py:class:`~m_n_kappa.StrainPosition`
+            :py:class:`~m_n_kappa.StrainPosition` working as basis for the computation
+
+        Returns
+        -------
+        float
+            maximum possible curvature considering the material-models of the :py:class:`~m_n_kappa.Crosssection`
+            and their position
+        """
         if self.__has_positive_curvature():
             curvature = self.__compute_positive_curvatures(strain_position)
         else:
@@ -150,6 +170,7 @@ class MaximumCurvature:
         return curvature
 
     def __has_positive_curvature(self) -> bool:
+        """check due to the curvature if its positive or negative"""
         if self.curvature > 0.0:
             return True
         else:
@@ -158,6 +179,24 @@ class MaximumCurvature:
     def __get_positive_position_strains(
         self, strain_position: StrainPosition
     ) -> list[StrainPosition]:
+        """
+        determine all :py:class:`~m_n_kappa.StrainPosition` that give positive curvature
+        in combination with ``strain_position``
+
+        1. above the given position and have smaller strains than the given one
+        2. below the given position and have higher strains thant the given one
+
+        Parameters
+        ----------
+        strain_position : :py:class:`~m_n_kappa.StrainPosition`
+            :py:class:`~m_n_kappa.StrainPosition` that functions as basis comparing element
+
+        Returns
+        -------
+        list[:py:class:`~m_n_kappa.StrainPosition`]
+            :py:class:`~m_n_kappa.StrainPosition` that give in comparison with the given ``strain_position``
+            a negative curvature
+        """
         position_strains = get_higher_positions(strain_position.position, self.negative)
         position_strains += get_lower_positions(strain_position.position, self.positive)
         return position_strains
@@ -165,11 +204,48 @@ class MaximumCurvature:
     def __get_negative_position_strains(
         self, strain_position: StrainPosition
     ) -> list[StrainPosition]:
+        """
+        determine all :py:class:`~m_n_kappa.StrainPosition` that give negative curvature
+        in combination with ``strain_position``
+
+        1. above the given position and have higher strains than the given one
+        2. below the given position and have smaller strains thant the given one
+
+        Parameters
+        ----------
+        strain_position : :py:class:`~m_n_kappa.StrainPosition`
+            :py:class:`~m_n_kappa.StrainPosition` that functions as basis comparing element
+
+        Returns
+        -------
+        list[:py:class:`~m_n_kappa.StrainPosition`]
+            :py:class:`~m_n_kappa.StrainPosition` that give in comparison with the given ``strain_position``
+            a negative curvature
+        """
         position_strains = get_higher_positions(strain_position.position, self.positive)
         position_strains += get_lower_positions(strain_position.position, self.negative)
         return position_strains
 
     def __compute_negative_curvatures(self, strain_position: StrainPosition) -> float:
+        """
+        compute negative curvatures
+
+        This is accomplished by getting all relevant combinations of :py:class:`~m_n_kappa.StrainPosition`
+        considering ``strain_position`` leading to negative curvatures.
+        The maximum of these curvatures is the desired curvature.
+        Smaller curvatures lead in combination with ``strain_position`` to a failure
+        as the resulting strain-distribution leads to exceeding the stress-strain curve of some materials.
+
+        Parameters
+        ----------
+        strain_position : :py:class:`~m_n_kappa.StrainPosition`
+            basis :py:class:`~m_n_kappa.StrainPosition`
+
+        Returns
+        -------
+        float
+            maximum negative curvature
+        """
         position_strains = self.__get_negative_position_strains(strain_position)
         edge_strains = compute_curvatures(strain_position, position_strains)
         decisive_edge_strain = max(edge_strains, key=lambda x: x.curvature)
@@ -180,6 +256,25 @@ class MaximumCurvature:
         return decisive_edge_strain.curvature
 
     def __compute_positive_curvatures(self, strain_position: StrainPosition) -> float:
+        """
+        compute positive curvatures
+
+        This is accomplished by getting all relevant combinations of :py:class:`~m_n_kappa.StrainPosition`
+        considering ``strain_position`` leading to positive curvatures.
+        The minimum of these curvatures is the desired curvature.
+        Higher curvatures lead in combination with ``strain_position`` to a failure,
+        as the resulting strain-distribution leads to exceeding the  stress-strain curve of some materials.
+
+        Parameters
+        ----------
+        strain_position : :py:class:`~m_n_kappa.StrainPosition`
+            basis :py:class:`~m_n_kappa.StrainPosition`
+
+        Returns
+        -------
+        float
+            maximum negative curvature
+        """
         position_strains = self.__get_positive_position_strains(strain_position)
         edge_strains = compute_curvatures(strain_position, position_strains)
         decisive_edge_strain = min(edge_strains, key=lambda x: x.curvature)
