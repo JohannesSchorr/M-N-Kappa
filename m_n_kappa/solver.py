@@ -15,7 +15,11 @@ logger = logging.getLogger(__name__)
 
 class Solver:
 
-    """Meta Solver-Class"""
+    """
+    Meta Solver-Class
+
+    .. versionadded:: 0.1.0
+    """
 
     __slots__ = (
         "_data",
@@ -88,30 +92,37 @@ class Solver:
 
     @property
     def data(self) -> list:
+        """passed data"""
         return self._data
 
     @property
     def maximum_variable(self) -> float:
+        """maximum variable value given in ``data``"""
         return self._maximum_variable
 
     @property
     def minimum_variable(self) -> float:
+        """minimum variable value given in ``data``"""
         return self._minimum_variable
 
     @property
     def target(self):
+        """key of the target in ``data``"""
         return self._target
 
     @property
     def target_value(self):
+        """value of the target"""
         return self._target_value
 
     @property
     def variable(self):
+        """key of the variable in ``data``"""
         return self._variable
 
     @property
     def x_n(self) -> float:
+        """lastly computed variable value"""
         return self._sorted_data[0][self.variable]
 
     def compute(self, use_fallback: bool = False) -> float:
@@ -121,6 +132,10 @@ class Solver:
         pass
 
     def _sort_data(self) -> list:
+        """
+        sort the data by the target value and get the two target-values greater zero
+        and the two target values smaller zero, if available
+        """
         #  self._data.sort(key=lambda x: abs(x[self.target]))
         gt_zero = list(filter(lambda x: x[self.target] > 0.0, self.data))
         lt_zero = list(filter(lambda x: x[self.target] < 0.0, self.data))
@@ -140,9 +155,11 @@ class Solver:
             self._minimum_variable = self._compute_minimum_variable()
 
     def _compute_maximum_variable(self) -> float:
+        """compute the maximal variable value"""
         return max(self._data, key=lambda x: x[self.variable])[self.variable]
 
     def _compute_minimum_variable(self) -> float:
+        """compute the minimum variable value"""
         return min(self._data, key=lambda x: x[self.variable])[self.variable]
 
 
