@@ -628,6 +628,8 @@ class Beam:
         return nodes
 
     def _cross_section_with_effective_width(self, position: float) -> Crosssection:
+        if len(self.cross_section.slab_sections) == 0:
+            return self.cross_section
         slab_width = 0.5 * self.cross_section.concrete_slab_width()
         width_position = abs(0.5 * self.length - position)
         widths = OneWeb(slab_width, self.length)
