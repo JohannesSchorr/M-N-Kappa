@@ -59,6 +59,8 @@ class MKappa:
     computation of one Moment-Curvature-Point by fixation of
     one point and varying the neutral axis
 
+    .. versionadded:: 0.1.0
+
     works as base-class for :py:class:`MKappaByStrainPosition` and
     :py:class:`MKappaByConstantCurvature`
     """
@@ -74,19 +76,19 @@ class MKappa:
         """
         Parameters
         ----------
-        cross_section : cross_section.Crossection
+        cross_section : :py:class:`~m_n_kappa.Crossection`
             cross-section to compute
         applied_axial_force : float
-                applied axial force (Default: 0.0)
+            applied axial force (Default: 0.0)
         maximum_iterations : int
-                maximum allowed iterations (Default: 10).
-                In case the given number of iterations before axial force within desired tolerance,
-                the computation is classified as unsuccessful and will be stopped
+            maximum allowed iterations (Default: 10).
+            In case the given number of iterations before axial force within desired tolerance,
+            the computation is classified as not successful and will be stopped
         axial_force_tolerance : float
-                if axial force within this tolerance the computation is terminated and
-                classified as successful (Default: 5.0)
-        solver : solver.Solver
-                used solver (Default: solver.Newton)
+            if axial force within this tolerance the computation is terminated and
+            classified as successful (Default: 5.0)
+        solver : :py:class:`~m_n_kappa.solver.Solver`
+            used solver (Default: :py:class:`~m_n_kappa.solver.Newton`)
         """
         self._cross_section = cross_section
         self._applied_axial_force = applied_axial_force
