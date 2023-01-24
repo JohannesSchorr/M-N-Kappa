@@ -218,6 +218,7 @@ class Bisection(Solver):
         "_target_value",
         "_maximum_variable",
         "_minimum_variable",
+        "_x_n_plus_1"
     )
 
     def compute(self, use_fallback: bool = False) -> float:
@@ -236,11 +237,15 @@ class Bisection(Solver):
         """
         variables = [data_point[self.variable] for data_point in self.data]
         logger.debug(f'{variables=}')
-        for factor in [0.5, 0.25, 0.75, 0.1, 0.2, 0.3, 0.4, 0.6, 0.7, 0.8, 0.9]:
-            new_variable = self._compute_with(factor)
-            if new_variable not in variables:
-                logger.debug(new_variable)
-                return new_variable
+        for factor in [0.5, 0.25, 0.75, 0.01, 0.05, 0.1, 0.2, 0.3, 0.4, 0.6, 0.7, 0.8, 0.9, 0.95]:
+            self._x_n_plus_1 = self._compute_with(factor)
+            if self.x_n_plus_1 not in variables:
+                logger.debug(self.__str__())
+                return self.x_n_plus_1
+
+    def _compute_with(self, factor: float = 0.5) -> float:
+        """
+        weighted bisection-procedure
 
         Method weights between the variable that has the minimum target-value over zero and
         the minimum target-value below zero.
