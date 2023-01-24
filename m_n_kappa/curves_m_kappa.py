@@ -570,7 +570,7 @@ class MKappaCurve:
 
     def _compute_positive_curvature_intermediate(self) -> None:
         """compute all moment-curvature pairs between failure and zero under positive curvature"""
-        logger.info('Start computing intermediate values')
+        logger.info('Start computing intermediate values under positive curvature')
         for strain_position in self.positive.get_material_points_inside_curvature():
             logger.info(
                 f'Compute intermediate value by {strain_position} with positive curvature values\n'
