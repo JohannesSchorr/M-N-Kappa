@@ -344,7 +344,11 @@ class MKappaCurveCurvature:
 
 
 class MKappaCurve:
-    """computation of M-Kappa-Curve assuming full interaction"""
+    """
+    computation of Moment-Curvature-Curve assuming full interaction
+
+    .. versionadded:: 0.1.0
+    """
 
     __slots__ = (
         "_cross_section",
@@ -363,16 +367,43 @@ class MKappaCurve:
         include_negative_curvature: bool = False,
     ):
         """
-        Initialization
-
         Parameters
         ----------
-        cross_section : Crosssection
-                cross-section to compute
+        cross_section : :py:class:`~m_n_kappa.crosssection.Crosssection`
+            cross-section to compute
         include_positive_curvature : bool
-                if True than positive curvature values are computed
+            if ``True`` then positive curvature values are computed (Default: ``True``)
         include_negative_curvature : bool
-                if True than negative curvature values are computed
+            if ``True`` then negative curvature values are computed (Default: ``False``)
+
+        Examples
+        --------
+        For each cross-section an individual :math:`M`-:math:`\\kappa`-curve is given.
+        A HEB 200 steel-profile of steel-grade S355 is created as follows.
+
+        >>> from m_n_kappa import Steel, IProfile
+        >>> i_profile = IProfile(top_edge=0.0, b_fo=200, t_fo=15, t_w=9.5, h_w=200-2*15) # Geometry
+        >>> steel = Steel(f_y=355, f_u = 400, failure_strain = 0.15) # Material
+        >>> cross_section = i_profile + steel
+
+        The Moment-Curvature-Curve only with positive values is computed as follows
+
+        >>> from m_n_kappa import MKappaCurve
+        >>> positive_m_kappa = MKappaCurve(cross_section=cross_section)
+
+        The Moment-Curvature-Curve only with negative values is computed as follows
+
+        >>> negative_m_kappa = MKappaCurve(
+        ...     cross_section=cross_section,
+        ...     include_positive_curvature=False,
+        ...     include_negative_curvature=True
+        ... )
+
+        The Moment-Curvature-Curve with positive and negative values is computed as follows
+
+        >>> full_m_kappa = MKappaCurve(cross_section=cross_section, include_negative_curvature=True)
+
+
         """
         self._cross_section = cross_section
         self._include_positive_curvature = include_positive_curvature
@@ -454,35 +485,43 @@ class MKappaCurve:
 
     @property
     def boundaries(self) -> Boundaries:
+        """boundaries to compute"""
         return self._boundaries
 
     @property
     def cross_section(self) -> Crosssection:
+        """cross-section the :math:`M`-:math:`\\kappa`-curve shall be computed"""
         return self._cross_section
 
     @property
     def include_positive_curvature(self) -> bool:
+        """returns if :math:`M`-:math:`\\kappa` under positive bending/curvature is included"""
         return self._include_positive_curvature
 
     @property
     def include_negative_curvature(self) -> bool:
+        """returns if :math:`M`-:math:`\\kappa` under negative bending/curvature is included"""
         return self._include_negative_curvature
 
     @property
     def positive(self) -> MKappaCurveCurvature:
+        """failure under positive bending/curvature"""
         return self._positive
 
     @property
     def negative(self) -> MKappaCurveCurvature:
+        """failure under negative bending/curvature"""
         return self._negative
 
     @property
     def m_kappa_points(self) -> MKappaCurvePoints:
+        """moment-curvature pairs of the curve"""
         return self._m_kappa_points
 
     def _get_m_kappa_curve_curvature(
         self, boundary: BoundaryValues
     ) -> MKappaCurveCurvature:
+        """compute the moment-curvature pair at failure"""
         return MKappaCurveCurvature(
             cross_section=self.cross_section,
             maximum_curvature=boundary.maximum_curvature.curvature,
@@ -493,14 +532,15 @@ class MKappaCurve:
         )
 
     def _get_positive_m_kappa_curve_curvature(self) -> MKappaCurveCurvature:
-        if self.include_positive_curvature:
-            return self._get_m_kappa_curve_curvature(self.boundaries.positive)
+        """compute the moment-curvature pair at failure under positive curvature"""
+        return self._get_m_kappa_curve_curvature(self.boundaries.positive)
 
     def _get_negative_m_kappa_curve_curvature(self) -> MKappaCurveCurvature:
-        if self.include_negative_curvature:
-            return self._get_m_kappa_curve_curvature(self.boundaries.negative)
+        """compute the moment-curvature pair at failure under negative curvature"""
+        return self._get_m_kappa_curve_curvature(self.boundaries.negative)
 
     def _compute_negative_curvature_failure(self) -> None:
+        """save the moment-curvature pair at failure under negative curvature"""
         m_kappa = self.negative.m_kappa_failure
         self._compute_values(m_kappa)
 
@@ -519,6 +559,7 @@ class MKappaCurve:
             self._compute_negative_curvature_intermediate()
 
     def _compute_positive_curvature_failure(self) -> None:
+        """save the moment-curvature pair at failure under positive curvature"""
         m_kappa = self.positive.m_kappa_failure
         self._compute_values(m_kappa)
 
@@ -567,6 +608,7 @@ class MKappaCurve:
             self._compute_positive_curvature_intermediate()
 
     def _compute_values(self, m_kappa: MKappaByStrainPosition) -> None:
+        """save moment-curvature-pair"""
         if m_kappa.successful:
             self._save_values(
                 m_kappa.moment,
@@ -587,6 +629,7 @@ class MKappaCurve:
             #print(m_kappa._print_iterations())
 
     def _insert_zero(self) -> None:
+        """insert moment-curvature pair at zero curvature"""
         self._save_values(0.0, 0.0, 0.0, None, None)
 
     def _m_kappa(
@@ -595,6 +638,7 @@ class MKappaCurve:
         maximum_curvature: float,
         minimum_curvature: float,
     ) -> MKappaByStrainPosition:
+        """compute the moment-curvature-pair with given ``position-strain`` (:py:class:`~m_n_kappa.StrainPosition`)"""
         return MKappaByStrainPosition(
             self.cross_section,
             strain_position=position_strain,
@@ -610,9 +654,11 @@ class MKappaCurve:
         computed_cross_section,
         strain_position: StrainPosition = None,
     ) -> None:
+        """interface to save moment-curvature-pairs to the moment-curvature-curve"""
         self._m_kappa_points.add(
             moment, curvature, neutral_axis, computed_cross_section, strain_position
         )
 
     def __sort_m_kappa_by_curvature(self) -> None:
+        """sort the moment-curvature curve by curvature"""
         self._m_kappa_points._sort_points_by_curvature()
