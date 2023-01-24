@@ -16,40 +16,33 @@ logger = logging.getLogger(__name__)
 
 def compute_curvatures(
     strain_position: StrainPosition, position_strains: list[StrainPosition]
-) -> list[float]:
+) -> list[EdgeStrains]:
     """
     compute curvatures from a position with associated strains
     and a list of strains with its associated positions
 
     Parameters
     ----------
-    strain_position : :py:class:`~m_n_kappa.general.StrainPosition`
+    strain_position : :py:class:`~m_n_kappa.StrainPosition`
         strain-position value that serves as basis
-    position_strains : list[:py:class:`~m_n_kappa.general.StrainPosition`]
+    position_strains : list[:py:class:`~m_n_kappa.StrainPosition`]
         Strain-position values the method iterates over
 
     Returns
     -------
-    list[float]
-        curvatures
-
-    See Also
-    --------
-    curvature_by_points : computes curvatures by two given (Strain | Positions) - values
+    list[:py:class:`~m_n_kappa.general.EdgeStrains`]
+        edge-strains the curvature may be computed from
     """
-    curvatures = []
+    edge_strains = []
     if len(position_strains) > 0:
         for position_strain in position_strains:
             if strain_position.position != position_strain.position:
-                curvatures.append(
-                    curvature_by_points(
-                        top_edge=strain_position.position,
-                        top_strain=strain_position.strain,
-                        bottom_edge=position_strain.position,
-                        bottom_strain=position_strain.strain,
-                    )
-                )
-    return curvatures
+                edge_strains.append(
+                    EdgeStrains(
+                        bottom_edge_strain=strain_position,
+                        top_edge_strain=position_strain,
+                    ))
+    return edge_strains
 
 
 def remove_higher_strains(strain: float, position_strains: list[StrainPosition]):
