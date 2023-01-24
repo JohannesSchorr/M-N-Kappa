@@ -251,7 +251,11 @@ class MKappaCurvePoints:
 
 class MKappaCurveCurvature:
 
-    """Compute moment-curvature (M-Kappa) at failure"""
+    """
+    Compute moment-curvature (:math:`M`-:math:`\\kappa`) at failure
+
+    .. versionadded:: 0.1.0
+    """
 
     __slots__ = (
         "_cross_section",
@@ -268,6 +272,18 @@ class MKappaCurveCurvature:
         minimum_curvature: float,
         start_strain_position: StrainPosition,
     ):
+        """
+        Parameters
+        ----------
+        cross_section : :py:class:`~m_n_kappa.crosssection.Crosssection`
+            cross-section to compute
+        maximum_curvature : float
+            maximum possible curvature of the cross-section (horizontal equilibrium not considered)
+        minimum_curvature : float
+            minimum possible curvature of the cross-section (horizontal equilibrium not considered)
+        start_strain_position : :py:class:´~m_n_kappa.general.StrainPosition`
+            strain-position-point assumed as failure-point
+        """
         self._cross_section = cross_section
         self._maximum_curvature = maximum_curvature
         self._minimum_curvature = minimum_curvature
@@ -277,18 +293,22 @@ class MKappaCurveCurvature:
 
     @property
     def cross_section(self) -> Crosssection:
+        """cross-section to compute"""
         return self._cross_section
 
     @property
     def maximum_curvature(self) -> float:
+        """maximum possible curvature of the cross-section"""
         return self._maximum_curvature
 
     @property
     def minimum_curvature(self) -> float:
+        """minimum possible curvature of the cross-section"""
         return self._minimum_curvature
 
     @property
     def start_strain_position(self) -> StrainPosition:
+        """strain-position-point assumed as failure-point"""
         return self._start_strain_position
 
     @property
