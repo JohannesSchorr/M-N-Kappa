@@ -410,6 +410,7 @@ class MKappaByStrainPosition(MKappa):
         "_computations",
         "_solver",
         "_successful",
+        "_not_successful_reason",
         "_computed_cross_section",
         "_iteration",
     )
