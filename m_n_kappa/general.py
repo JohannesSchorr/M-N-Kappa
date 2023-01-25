@@ -372,6 +372,20 @@ class EffectiveWidths:
         if self.bending is None:
             self.bending = self.membran
 
+    def __eq__(self, other) -> bool:
+        if (
+            self.membran == other.membran and
+            self.bending == other.bending and
+            self.for_section_type == other.for_section_type and
+            self.reinforcement_under_tension_use_membran_width == other.reinforcement_under_tension_use_membran_width and
+            self.reinforcement_under_compression_use_membran_width == other.reinforcement_under_compression_use_membran_width
+            and self.concrete_under_tension_use_membran_width == other.concrete_under_tension_use_membran_width and
+            self.concrete_under_compression_use_membran_width == other.concrete_under_compression_use_membran_width
+        ):
+            return True
+        else:
+            return False
+
     def width(self, material: str, strain_value: float) -> float:
         """width considering the material and the loading"""
         if material == "Reinforcement":
