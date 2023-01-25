@@ -37,7 +37,7 @@ class Node:
 
     node_number: int = 0
 
-    def __init__(self, cross_section: Crosssection, position: float):
+    def __init__(self, cross_section: Crosssection, position: float, m_kappa_curve : MKappaCurvePoints = None):
         """
         Parameters
         ----------
@@ -45,6 +45,8 @@ class Node:
             Cross-section at this node
         position : float
             position of the node along the beam
+        m_kappa_curve : MKappaCurvePoints
+            if moment-curvature-curve has already been computed then this may be passed here
             
         Examples
         --------
@@ -80,9 +82,12 @@ class Node:
         """
         self._cross_section = cross_section
         self._position = position
-        self._m_kappa_curve = MKappaCurve(
-            self.cross_section, include_positive_curvature=True
-        ).m_kappa_points
+        if m_kappa_curve is None:
+            self._m_kappa_curve = MKappaCurve(
+                self.cross_section, include_positive_curvature=True
+            ).m_kappa_points
+        else:
+            self._m_kappa_curve = m_kappa_curve
         Node.node_number += 1
         self._number = Node.node_number
         if logger.level == logging.DEBUG:
