@@ -217,9 +217,10 @@ class Crosssection:
 
     def __eq__(self, other) -> bool:
         """two cross-sections are the same if they have the same sections"""
-        for section in self.sections:
-            if section not in other.sections:
-                return False
+        if self.slab_effective_width == other.slab_effective_width:
+            for section in self.sections:
+                if section not in other.sections:
+                    return False
         return True
 
     def _build_cross_section(self, other):
