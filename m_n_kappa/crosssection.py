@@ -918,6 +918,9 @@ class ComputationCrosssectionCurvature(ComputationCrosssection):
         221.07005829554043
 
         """
+        logger.debug(f'Initialize ComputationCrosssectionCurvature(cross_section'
+                     f'{curvature=}, '
+                     f'{neutral_axis_value=})')
         super().__init__(cross_section, slab_effective_width)
         self._curvature = curvature
         self._neutral_axis = neutral_axis_value
