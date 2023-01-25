@@ -626,6 +626,13 @@ class Beam:
             raise ValueError(f"{position=} is outside the beam")
 
     def _create_nodes(self) -> list[Node]:
+        """
+        create the nodes along the beam and consider effective widths if needed
+
+        In case a similar node has already been computed the computation will be skipped
+        and the m_kappa_curve will be copied from the other node.
+        The ``cross_section`` works as basis for the comparison.
+        """
         nodes = []
         for position in self.positions:
             if self.consider_widths:
@@ -636,6 +643,23 @@ class Beam:
         return nodes
 
     def _cross_section_with_effective_width(self, position: float) -> Crosssection:
+        """
+        add effective width to cross-sections depending on the position of the cross-section
+        along the beam
+
+        In case the cross-section does not consist of Concrete and/or Reinforcement than
+        no adaption is done.
+
+        Parameters
+        ----------
+        position : float
+            position of the node of the cross-section along the beam
+
+        Returns
+        -------
+        :py:class:`~m_n_kappa.Crosssection`
+            Cross-section with :py:class:`~m_n_kappa.EffectiveWidths` added.
+        """
         if len(self.cross_section.slab_sections) == 0:
             return self.cross_section
         slab_width = 0.5 * self.cross_section.concrete_slab_width()
@@ -657,4 +681,5 @@ class Beam:
         )
 
     def _element_length(self, node_index) -> float:
+        """compute the length of the element with nodes with ``node_index`` and ``node_index + 1``"""
         return self.nodes[node_index + 1].position - self.nodes[node_index].position
