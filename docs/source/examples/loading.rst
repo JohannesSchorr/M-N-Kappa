@@ -43,7 +43,7 @@ in a list, together with the ``length`` of the beam.
 >>> load_1 = SingleLoad(position_in_beam=4000, value=10)
 >>> single = SingleSpanSingleLoads(length=8000, loads=[load_1])
 >>> single.maximum_moment
-20000
+20000.0
 
 The transversal shear at the supports is given by
 :py:meth:`~m_n_kappa.SingleSpanSingleLoads.transversal_shear_support_left` for the left support and
@@ -55,12 +55,12 @@ The transversal shear at the supports is given by
 The summarized loading is given by :py:meth:`~m_n_kappa.SingleSpanSingleLoads.loading`.
 
 >>> single.loading
-10.0
+10
 
 Of course, the moment may be computed at every position along the beam.
 
 >>> single.moment(at_position=2000)
-10000
+10000.0
 
 As well as the transversal shear.
 
@@ -78,6 +78,7 @@ This allows to compute the course of the moment over the length of the beam.
    single = SingleSpanSingleLoads(length=8000, loads=[load_1])
 
 .. altair-plot::
+   :alt: Moment along the beam from single load positioned in the middle
 
    import pandas as pd
    import altair as alt
@@ -94,6 +95,7 @@ This allows to compute the course of the moment over the length of the beam.
 As well as the transversal shear over the length of the beam.
 
 .. altair-plot::
+   :alt: Transversal shear over the length of the beam
 
    shear = [single.transversal_shear(at_position=position) for position in positions]
 
@@ -122,7 +124,7 @@ The maximum moment is then given by :py:class:`~m_n_kappa.SingleSpanUniformLoad.
 >>> from m_n_kappa import SingleSpanUniformLoad
 >>> uniform = SingleSpanUniformLoad(length=8000, load=10.0)
 >>> uniform.maximum_moment
-800000000.0
+80000000.0
 
 Transversal shear at the support is given by :py:class:`~m_n_kappa.SingleSpanUniformLoad.transversal_shear_support_left`
 and :py:class:`~m_n_kappa.SingleSpanUniformLoad.transversal_shear_support_right`.
@@ -133,18 +135,18 @@ and :py:class:`~m_n_kappa.SingleSpanUniformLoad.transversal_shear_support_right`
 The summarized loading is given as follows.
 
 >>> uniform.loading
-800000.0
+80000.0
 
 Whereas, the moment is computed by :py:class:`~m_n_kappa.SingleSpanUniformLoad.moment` passing the position
 where the moment needs to be obtained.
 
 >>> uniform.moment(at_position=2000)
-70000000
+60000000.0
 
 Similarly for transversal shear using :py:class:`~m_n_kappa.SingleSpanUniformLoad.transversal_shear`, what applies
 to ``0.0`` in case of uniformly loaded beam.
 
->>> single.transversal_shear(at_position=4000)
+>>> uniform.transversal_shear(at_position=4000)
 0.0
 
 :py:class:`~m_n_kappa.SingleSpanUniformLoad.moment` allows to plot the moment along the beam.
@@ -199,4 +201,4 @@ In each case the ``length`` of the beam must be passed.
 >>> single = SingleSpan(length=8000, loads=[load_1])
 >>> uniform = SingleSpan(length=8000, uniform_load=10)
 >>> single.maximum_moment, uniform.maximum_moment
-(20000.0, 800000000.0)
+(20000.0, 80000000.0)
