@@ -90,5 +90,25 @@ class TestMKappaByStrainPosition(TestCase):
         self.assertLessEqual(self.m_kappa.iteration, 10)
 
 
+class TestMKappabyStrainPositionCompositeBeam(TestCase):
+
+    def setUp(self) -> None:
+        concrete_slab = Rectangle(top_edge=0.0, bottom_edge=100, width=2000)
+        concrete = Concrete(f_cm=30 + 8, )
+        concrete_section = concrete_slab + concrete
+        reinforcement = Reinforcement(f_s=500, f_su=550, failure_strain=0.15)
+        top_layer = RebarLayer(
+            centroid_z=25, width=2000, rebar_horizontal_distance=200, rebar_diameter=10)
+        top_rebar_layer = reinforcement + top_layer
+        bottom_layer = RebarLayer(
+            centroid_z=75, width=2000, rebar_horizontal_distance=100, rebar_diameter=10)
+        bottom_rebar_layer = reinforcement + bottom_layer
+        i_profile = IProfile(
+            top_edge=0.0, b_fo=200, t_fo=15, h_w=200 - 2 * 15, t_w=15, centroid_y=0.0)
+        steel = Steel(f_y=355.0, f_u=400, failure_strain=0.15)
+        steel_section = i_profile + steel
+        self.cross_section = concrete_section + top_rebar_layer + bottom_rebar_layer + steel_section
+
+
 if __name__ == "__main__":
     main()
