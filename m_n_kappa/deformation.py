@@ -639,8 +639,24 @@ class Beam:
                 cross_section = self._cross_section_with_effective_width(position)
             else:
                 cross_section = self._cross_section
-            nodes.append(Node(cross_section, position))
+
+            if self._is_cross_section_in_nodes(cross_section, nodes):
+                for node in nodes:
+                    if cross_section == node.cross_section:
+                        logger.info(f'M-Kappa-Curve of Node {node.number} will be copied.')
+                        computed_node = Node(cross_section, position, m_kappa_curve=node.m_kappa_curve)
+                        break
+            else:
+                computed_node = Node(cross_section, position)
+            nodes.append(computed_node)
         return nodes
+
+    def _is_cross_section_in_nodes(self, cross_section: Crosssection, nodes: list[Node]) -> bool:
+        """check if a node is given in ``nodes`` that has the same ``cross_section``"""
+        for node in nodes:
+            if cross_section == node.cross_section:
+                return True
+        return False
 
     def _cross_section_with_effective_width(self, position: float) -> Crosssection:
         """
