@@ -27,7 +27,10 @@ loading = SingleSpanUniformLoad(beam_length, load)
 
 class TestBeam(TestCase):
     def setUp(self):
-        self.beam = Beam(cs, beam_length, element_number, loading)
+        self.beam = Beam(
+            cross_section=cs,
+            element_number=element_number,
+            load=loading)
 
     def test_deformation(self):
         print(self.beam.deformation(0.5 * beam_length, loading))
