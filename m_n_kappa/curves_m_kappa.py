@@ -284,6 +284,11 @@ class MKappaCurveCurvature:
         start_strain_position : :py:class:´~m_n_kappa.general.StrainPosition`
             strain-position-point assumed as failure-point
         """
+        logger.info(f"Initialize MKappaCurveCurvature("
+                    f"cross_section, "
+                    f"{maximum_curvature=}, "
+                    f"{minimum_curvature=}, "
+                    f"{start_strain_position=}")
         self._cross_section = cross_section
         self._maximum_curvature = maximum_curvature
         self._minimum_curvature = minimum_curvature
