@@ -338,7 +338,7 @@ class MKappa:
             use_fallback = False
         else:
             use_fallback = True
-            # print('Axial force not improved: use fallback') # TODO: Logging
+            logger.info('Axial force not improved: use fallback')
         return solver.compute(use_fallback)
 
     def __is_axial_force_within_tolerance(self):
@@ -357,9 +357,6 @@ class MKappa:
                 axial_force=self.axial_force,
             )
         )
-        # print(self._computations[-1])
-        # print(self.print_iterations())
-        # print(self.computed_cross_section._print_results())
 
     def _target_value_is_improved(self) -> bool:
         self.__sort_computations_by_iteration()
