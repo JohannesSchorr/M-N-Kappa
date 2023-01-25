@@ -95,6 +95,9 @@ class Node:
         else:
             logger.info(f'Created {self.__repr__()}')
 
+    def __repr__(self):
+        return f'Node(cross_section, position={self.position}'
+
     @property
     def cross_section(self) -> Crosssection:
         """:py:class:`Crosssection` at the node"""
