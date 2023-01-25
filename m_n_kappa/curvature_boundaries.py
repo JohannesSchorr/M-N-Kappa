@@ -347,21 +347,24 @@ class MinimumCurvature:
 
         """
         if max(self.negative, key=lambda x: x.strain).strain <= strain_position.strain <= min(self.positive, key=lambda x: x.strain).strain:
+            logger.debug(f'{strain_position} within minimal positive and negative strains')
             position_strains = self.__edge_positions(strain_position)
+            edge_strains = compute_curvatures(strain_position, position_strains)
+            decisive_edge_strain = min(edge_strains, key=lambda x: abs(x.curvature))
         else:
+            logger.debug(f'{strain_position} outside minimal positive and negative strains')
             position_strains = self.__get_position_strains(strain_position)
+            edge_strains = compute_curvatures(strain_position, position_strains)
+            decisive_edge_strain = max(edge_strains, key=lambda x: abs(x.curvature))
         logger.debug(f'{position_strains=}')
-        edge_strains = compute_curvatures(strain_position, position_strains)
-        if self.curvature_is_positive:
-            decisive_edge_strain = min(edge_strains, key=lambda x: x.curvature)
-        else:
-            decisive_edge_strain = max(edge_strains, key=lambda x: x.curvature)
+        logger.debug(f'curvatures: {[edge.curvature for edge in edge_strains]}')
         if decisive_edge_strain.top_edge_strain == strain_position:
             logger.info(
                 f'Decisive strain-position value for {strain_position=}: {decisive_edge_strain.bottom_edge_strain}')
         else:
             logger.info(
                 f'Decisive strain-position value for {strain_position=}: {decisive_edge_strain.top_edge_strain}')
+        logger.info(f'Curvature: {decisive_edge_strain.curvature}')
         return decisive_edge_strain.curvature
 
     def __edge_positions(self, strain_position: StrainPosition, additional_strain: float = 0.0001) -> list[StrainPosition]:
