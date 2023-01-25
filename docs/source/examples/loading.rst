@@ -159,6 +159,7 @@ to ``0.0`` in case of uniformly loaded beam.
    uniform = SingleSpanUniformLoad(length=8000, load=10.0)
 
 .. altair-plot::
+   :alt: Moment along the beam from uniform loading
 
    import pandas as pd
    import altair as alt
@@ -176,6 +177,7 @@ to ``0.0`` in case of uniformly loaded beam.
 And the transversal shear is given as follows.
 
 .. altair-plot::
+   :alt: Transversal shear along the beam from uniform load
 
    shear = [uniform.transversal_shear(at_position=position) for position in positions]
 
