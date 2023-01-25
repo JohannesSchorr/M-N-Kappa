@@ -677,6 +677,7 @@ class Beam:
             Cross-section with :py:class:`~m_n_kappa.EffectiveWidths` added.
         """
         if len(self.cross_section.slab_sections) == 0:
+            logger.info('No concrete-slab available, therefore effective widths do not apply')
             return self.cross_section
         slab_width = 0.5 * self.cross_section.concrete_slab_width()
         width_position = abs(0.5 * self.length - position)
