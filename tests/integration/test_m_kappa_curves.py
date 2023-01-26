@@ -20,6 +20,7 @@ i_profile = IProfile(
 steel = Steel(f_y=355.0, f_u=400, failure_strain=0.15)
 steel_section = i_profile + steel
 
+
 class TestCompositeBeamPositive(TestCase):
 
     def setUp(self) -> None:
