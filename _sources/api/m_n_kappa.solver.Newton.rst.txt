@@ -15,24 +15,6 @@
       
          ~Newton.compute
       
-      
-         ~Newton.fallback
-      
-      
-         ~Newton.is_value_in_range
-      
-      
-         ~Newton.solve
-      
-      
-         ~Newton.solved_derivate
-      
-      
-         ~Newton.solved_function
-      
-      
-         ~Newton.value_has_changed
-      
    
    
 

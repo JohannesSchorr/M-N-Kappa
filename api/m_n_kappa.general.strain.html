@@ -9,7 +9,7 @@
         <title>m_n_kappa.general.strain - M-N-κ</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?digest=91d0f0d1c444bdcb17a68e833c7a53903343c195" />
-    <link rel="stylesheet" type="text/css" href="../_static/plot_directive.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/altair-plot.css" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
     <link rel="stylesheet" type="text/css" href="../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/furo-extensions.css?digest=30d1aed668e5c3a91c3e3bf6a60b675221979f0e" />
@@ -171,11 +171,19 @@
 <li class="toctree-l2"><a class="reference internal" href="../examples/geometry.html">Creating Geometries</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../examples/material.html">Creating materials</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../examples/section.html">Build a section</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../examples/cross_section.html">Build a cross-section</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../examples/moment_curvature.html">Moment-Curvature</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../examples/moment_curvature_curve.html">Moment-Curvature-Curve</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../examples/loading.html">Loading</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../examples/deformation.html">Deformation</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../examples/m_kappa_UPE.html">Single span slim-floor beam with Moment-Curvature-Curves</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../examples/m_n_kappa_UPE.html">Single span slim-floor beam with Moment-Axial force-Curvature-Curves</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../examples/cross_section_templates/index.html">Templates</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" role="switch" type="checkbox"/><label for="toctree-checkbox-2"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="simple">
 </ul>
 </li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="../theory/index.html">Theory guide</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" role="switch" type="checkbox"/><label for="toctree-checkbox-2"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../theory/index.html">Theory guide</a><input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" role="switch" type="checkbox"/><label for="toctree-checkbox-3"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
 <li class="toctree-l2"><a class="reference internal" href="../theory/symbols.html">Symbols</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../theory/coordinates.html">Coordinates</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../theory/units.html">Units</a></li>
@@ -190,13 +198,13 @@
 <li class="toctree-l2"><a class="reference internal" href="../theory/deformations.html">Deformations</a></li>
 </ul>
 </li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="../verification/index.html">Verification</a><input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" role="switch" type="checkbox"/><label for="toctree-checkbox-3"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="simple">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../verification/index.html">Verification</a><input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" role="switch" type="checkbox"/><label for="toctree-checkbox-4"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="simple">
 </ul>
 </li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Development</span></p>
 <ul class="current">
-<li class="toctree-l1 has-children"><a class="reference internal" href="../api.html">API reference</a><input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" role="switch" type="checkbox"/><label for="toctree-checkbox-4"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../api.html">API reference</a><input class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" role="switch" type="checkbox"/><label for="toctree-checkbox-5"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
 <li class="toctree-l2"><a class="reference internal" href="m_n_kappa.Geometry.html">m_n_kappa.Geometry</a></li>
 <li class="toctree-l2"><a class="reference internal" href="m_n_kappa.Rectangle.html">m_n_kappa.Rectangle</a></li>
 <li class="toctree-l2"><a class="reference internal" href="m_n_kappa.Circle.html">m_n_kappa.Circle</a></li>
@@ -224,7 +232,7 @@
 <li class="toctree-l2"><a class="reference internal" href="m_n_kappa.Node.html">m_n_kappa.Node</a></li>
 </ul>
 </li>
-<li class="toctree-l1 current has-children"><a class="reference internal" href="../api_developers.html">API for developers</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" role="switch" type="checkbox"/><label for="toctree-checkbox-5"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="current">
+<li class="toctree-l1 current has-children"><a class="reference internal" href="../api_developers.html">API for developers</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" role="switch" type="checkbox"/><label for="toctree-checkbox-6"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="m_n_kappa.general.StrainPosition.html">m_n_kappa.general.StrainPosition</a></li>
 <li class="toctree-l2"><a class="reference internal" href="m_n_kappa.general.EffectiveWidths.html">m_n_kappa.general.EffectiveWidths</a></li>
 <li class="toctree-l2"><a class="reference internal" href="m_n_kappa.general.curvature.html">m_n_kappa.general.curvature</a></li>
@@ -275,7 +283,7 @@
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../roadmap.html">Roadmap and To Do’s</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../contributing.html">Contributing</a></li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="../whatsnew/index.html">Release Notes</a><input class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" role="switch" type="checkbox"/><label for="toctree-checkbox-6"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../whatsnew/index.html">Release Notes</a><input class="toctree-checkbox" id="toctree-checkbox-7" name="toctree-checkbox-7" role="switch" type="checkbox"/><label for="toctree-checkbox-7"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
 <li class="toctree-l2"><a class="reference internal" href="../whatsnew/v0.1.0.html">What’s new in 0.1.0 (??. January 2023)</a></li>
 </ul>
 </li>
@@ -327,18 +335,43 @@
 <dl class="py function">
 <dt class="sig sig-object py" id="m_n_kappa.general.strain">
 <span class="sig-prename descclassname"><span class="pre">m_n_kappa.general.</span></span><span class="sig-name descname"><span class="pre">strain</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">neutral_axis_value</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">curvature_value</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">position_value</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#m_n_kappa.general.strain" title="Permalink to this definition">#</a></dt>
-<dd><dl class="field-list simple">
+<dd><p>compute the strain from its position, the neutral axis and the curvature value</p>
+<p>This method assumes a linear strain distribution over the height.</p>
+<dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>neutral_axis_value</strong> (<em>float</em>) – </p></li>
-<li><p><strong>curvature_value</strong> (<em>float</em>) – </p></li>
-<li><p><strong>position_value</strong> (<em>float</em>) – </p></li>
+<li><p><strong>neutral_axis_value</strong> (<em>float</em>) – position where strain is zero</p></li>
+<li><p><strong>curvature_value</strong> (<em>float</em>) – value of the curvature</p></li>
+<li><p><strong>position_value</strong> (<em>float</em>) – geometric position of the strain</p></li>
 </ul>
 </dd>
-<dt class="field-even">Return type<span class="colon">:</span></dt>
-<dd class="field-even"><p>float</p>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>strain from its position, neutral axis and curvature value</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>ValueError</strong> – if curvature is zero</p>
 </dd>
 </dl>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<dl class="simple">
+<dt><a class="reference internal" href="m_n_kappa.general.curvature.html#m_n_kappa.general.curvature" title="m_n_kappa.general.curvature"><code class="xref py py-meth docutils literal notranslate"><span class="pre">curvature()</span></code></a></dt><dd><p>compute curvature from strain, its position and neutral axis</p>
+</dd>
+<dt><a class="reference internal" href="m_n_kappa.general.neutral_axis.html#m_n_kappa.general.neutral_axis" title="m_n_kappa.general.neutral_axis"><code class="xref py py-meth docutils literal notranslate"><span class="pre">neutral_axis()</span></code></a></dt><dd><p>compute curvature from strain, its position and curvature</p>
+</dd>
+<dt><a class="reference internal" href="m_n_kappa.general.position.html#m_n_kappa.general.position" title="m_n_kappa.general.position"><code class="xref py py-meth docutils literal notranslate"><span class="pre">position()</span></code></a></dt><dd><p>compute position of strain from neutral-axis and curvature</p>
+</dd>
+</dl>
+</div>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">m_n_kappa.general</span> <span class="kn">import</span> <span class="n">strain</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">strain</span><span class="p">(</span><span class="n">neutral_axis_value</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">curvature_value</span><span class="o">=</span><span class="mf">0.0001</span><span class="p">,</span> <span class="n">position_value</span><span class="o">=</span><span class="mf">0.0</span><span class="p">)</span>
+<span class="go">-0.001</span>
+</pre></div>
+</div>
 </dd></dl>
 
 </section>
@@ -421,6 +454,9 @@
     <script src="../_static/clipboard.min.js"></script>
     <script src="../_static/copybutton.js"></script>
     <script src="../_static/toggleprompt.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vega@5"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vega-lite@4.17.0"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vega-embed@6"></script>
     <script src="../_static/design-tabs.js"></script>
     <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     </body>

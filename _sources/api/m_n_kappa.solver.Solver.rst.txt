@@ -31,5 +31,6 @@
       ~Solver.target_value
       ~Solver.variable
       ~Solver.x_n
+      ~Solver.x_n_plus_1
    
    

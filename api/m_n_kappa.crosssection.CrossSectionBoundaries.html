@@ -9,7 +9,7 @@
         <title>m_n_kappa.crosssection.CrossSectionBoundaries - M-N-κ</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?digest=91d0f0d1c444bdcb17a68e833c7a53903343c195" />
-    <link rel="stylesheet" type="text/css" href="../_static/plot_directive.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/altair-plot.css" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
     <link rel="stylesheet" type="text/css" href="../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/furo-extensions.css?digest=30d1aed668e5c3a91c3e3bf6a60b675221979f0e" />
@@ -171,11 +171,19 @@
 <li class="toctree-l2"><a class="reference internal" href="../examples/geometry.html">Creating Geometries</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../examples/material.html">Creating materials</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../examples/section.html">Build a section</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../examples/cross_section.html">Build a cross-section</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../examples/moment_curvature.html">Moment-Curvature</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../examples/moment_curvature_curve.html">Moment-Curvature-Curve</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../examples/loading.html">Loading</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../examples/deformation.html">Deformation</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../examples/m_kappa_UPE.html">Single span slim-floor beam with Moment-Curvature-Curves</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../examples/m_n_kappa_UPE.html">Single span slim-floor beam with Moment-Axial force-Curvature-Curves</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../examples/cross_section_templates/index.html">Templates</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" role="switch" type="checkbox"/><label for="toctree-checkbox-2"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="simple">
 </ul>
 </li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="../theory/index.html">Theory guide</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" role="switch" type="checkbox"/><label for="toctree-checkbox-2"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../theory/index.html">Theory guide</a><input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" role="switch" type="checkbox"/><label for="toctree-checkbox-3"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
 <li class="toctree-l2"><a class="reference internal" href="../theory/symbols.html">Symbols</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../theory/coordinates.html">Coordinates</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../theory/units.html">Units</a></li>
@@ -190,13 +198,13 @@
 <li class="toctree-l2"><a class="reference internal" href="../theory/deformations.html">Deformations</a></li>
 </ul>
 </li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="../verification/index.html">Verification</a><input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" role="switch" type="checkbox"/><label for="toctree-checkbox-3"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="simple">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../verification/index.html">Verification</a><input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" role="switch" type="checkbox"/><label for="toctree-checkbox-4"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="simple">
 </ul>
 </li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Development</span></p>
 <ul class="current">
-<li class="toctree-l1 has-children"><a class="reference internal" href="../api.html">API reference</a><input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" role="switch" type="checkbox"/><label for="toctree-checkbox-4"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../api.html">API reference</a><input class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" role="switch" type="checkbox"/><label for="toctree-checkbox-5"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
 <li class="toctree-l2"><a class="reference internal" href="m_n_kappa.Geometry.html">m_n_kappa.Geometry</a></li>
 <li class="toctree-l2"><a class="reference internal" href="m_n_kappa.Rectangle.html">m_n_kappa.Rectangle</a></li>
 <li class="toctree-l2"><a class="reference internal" href="m_n_kappa.Circle.html">m_n_kappa.Circle</a></li>
@@ -224,7 +232,7 @@
 <li class="toctree-l2"><a class="reference internal" href="m_n_kappa.Node.html">m_n_kappa.Node</a></li>
 </ul>
 </li>
-<li class="toctree-l1 current has-children"><a class="reference internal" href="../api_developers.html">API for developers</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" role="switch" type="checkbox"/><label for="toctree-checkbox-5"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="current">
+<li class="toctree-l1 current has-children"><a class="reference internal" href="../api_developers.html">API for developers</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" role="switch" type="checkbox"/><label for="toctree-checkbox-6"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="m_n_kappa.general.StrainPosition.html">m_n_kappa.general.StrainPosition</a></li>
 <li class="toctree-l2"><a class="reference internal" href="m_n_kappa.general.EffectiveWidths.html">m_n_kappa.general.EffectiveWidths</a></li>
 <li class="toctree-l2"><a class="reference internal" href="m_n_kappa.general.curvature.html">m_n_kappa.general.curvature</a></li>
@@ -275,7 +283,7 @@
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../roadmap.html">Roadmap and To Do’s</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../contributing.html">Contributing</a></li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="../whatsnew/index.html">Release Notes</a><input class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" role="switch" type="checkbox"/><label for="toctree-checkbox-6"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../whatsnew/index.html">Release Notes</a><input class="toctree-checkbox" id="toctree-checkbox-7" name="toctree-checkbox-7" role="switch" type="checkbox"/><label for="toctree-checkbox-7"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
 <li class="toctree-l2"><a class="reference internal" href="../whatsnew/v0.1.0.html">What’s new in 0.1.0 (??. January 2023)</a></li>
 </ul>
 </li>
@@ -329,13 +337,64 @@
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">m_n_kappa.crosssection.</span></span><span class="sig-name descname"><span class="pre">CrossSectionBoundaries</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">sections</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#m_n_kappa.crosssection.CrossSectionBoundaries" title="Permalink to this definition">#</a></dt>
 <dd><p>Bases: <a class="reference internal" href="m_n_kappa.Crosssection.html#m_n_kappa.Crosssection" title="m_n_kappa.crosssection.Crosssection"><code class="xref py py-class docutils literal notranslate"><span class="pre">Crosssection</span></code></a></p>
 <p>Compute the Boundary-Values for the cross_section</p>
-<p><code class="xref py py-meth docutils literal notranslate"><span class="pre">CrossSectionBoundaries:get_boundaries()</span></code> gives the curvature boundary values
+<div class="versionadded">
+<p><span class="versionmodified added">New in version 0.1.0.</span></p>
+</div>
+<p><a class="reference internal" href="#m_n_kappa.crosssection.CrossSectionBoundaries.get_boundaries" title="m_n_kappa.crosssection.CrossSectionBoundaries.get_boundaries"><code class="xref py py-meth docutils literal notranslate"><span class="pre">get_boundaries()</span></code></a> gives the curvature boundary values
 under positive and negative curvature</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>sections</strong> (<em>list</em><em>[</em><a class="reference internal" href="m_n_kappa.Section.html#m_n_kappa.Section" title="m_n_kappa.Section"><em>Section</em></a><em>]</em>) – sections of the given cross_section</p>
 </dd>
 </dl>
+<p class="rubric">Examples</p>
+<p>First the sections for the cross-section are created.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">m_n_kappa</span> <span class="kn">import</span> <span class="n">Concrete</span><span class="p">,</span> <span class="n">Steel</span><span class="p">,</span> <span class="n">Rectangle</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">concrete</span> <span class="o">=</span> <span class="n">Concrete</span><span class="p">(</span><span class="n">f_cm</span><span class="o">=</span><span class="mf">35.0</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">concrete_geometry_1</span> <span class="o">=</span> <span class="n">Rectangle</span><span class="p">(</span>
+<span class="gp">... </span>    <span class="n">top_edge</span><span class="o">=</span><span class="mf">0.0</span><span class="p">,</span> <span class="n">bottom_edge</span><span class="o">=</span><span class="mf">10.0</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="mf">10.0</span><span class="p">,</span> <span class="n">left_edge</span><span class="o">=-</span><span class="mf">10.0</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">concrete_section_1</span> <span class="o">=</span> <span class="n">concrete</span> <span class="o">+</span> <span class="n">concrete_geometry_1</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">steel</span> <span class="o">=</span> <span class="n">Steel</span><span class="p">(</span><span class="n">f_y</span><span class="o">=</span><span class="mi">355</span><span class="p">,</span> <span class="n">failure_strain</span><span class="o">=</span><span class="mf">0.15</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">steel_geometry</span> <span class="o">=</span> <span class="n">Rectangle</span><span class="p">(</span>
+<span class="gp">... </span>    <span class="n">top_edge</span><span class="o">=</span><span class="mf">10.0</span><span class="p">,</span> <span class="n">bottom_edge</span><span class="o">=</span><span class="mf">20.0</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="mf">10.0</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">steel_section</span> <span class="o">=</span> <span class="n">steel</span> <span class="o">+</span> <span class="n">steel_geometry</span>
+</pre></div>
+</div>
+<p>These sections are passed to <a class="reference internal" href="#m_n_kappa.crosssection.CrossSectionBoundaries" title="m_n_kappa.crosssection.CrossSectionBoundaries"><code class="xref py py-class docutils literal notranslate"><span class="pre">CrossSectionBoundaries</span></code></a> in form of a
+list.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">m_n_kappa.crosssection</span> <span class="kn">import</span> <span class="n">CrossSectionBoundaries</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">cross_section_boundaries</span> <span class="o">=</span> <span class="n">CrossSectionBoundaries</span><span class="p">(</span><span class="n">sections</span><span class="o">=</span><span class="p">[</span><span class="n">concrete_section_1</span><span class="p">,</span> <span class="n">steel_section</span><span class="p">])</span>
+</pre></div>
+</div>
+<p><a class="reference internal" href="#m_n_kappa.crosssection.CrossSectionBoundaries.get_boundaries" title="m_n_kappa.crosssection.CrossSectionBoundaries.get_boundaries"><code class="xref py py-class docutils literal notranslate"><span class="pre">get_boundaries</span></code></a> gives us then a
+<a class="reference internal" href="m_n_kappa.curvature_boundaries.Boundaries.html#m_n_kappa.curvature_boundaries.Boundaries" title="m_n_kappa.curvature_boundaries.Boundaries"><code class="xref py py-class docutils literal notranslate"><span class="pre">Boundaries</span></code></a> class, where a variety of values are saved regarding
+the boundaries of our cross-section.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">boundaries</span> <span class="o">=</span> <span class="n">cross_section_boundaries</span><span class="o">.</span><span class="n">get_boundaries</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>The following values are given for positive and negative curvature.
+In case of values under negative curvature only <code class="docutils literal notranslate"><span class="pre">boundaries.negative</span></code> plus the desired property is to
+be called.
+Hereafter, only examples under positive curvature are given.</p>
+<p>The maximum positive curvature is given as follows:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">boundaries</span><span class="o">.</span><span class="n">positive</span><span class="o">.</span><span class="n">maximum_curvature</span><span class="o">.</span><span class="n">curvature</span>
+<span class="go">0.0076749999999999995</span>
+</pre></div>
+</div>
+<p>The boundary-condition representing the point of failure is given as follows:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">boundaries</span><span class="o">.</span><span class="n">positive</span><span class="o">.</span><span class="n">maximum_curvature</span><span class="o">.</span><span class="n">start</span>
+<span class="go">StrainPosition(strain=-0.0035, position=0.0, material=&#39;Concrete&#39;)</span>
+</pre></div>
+</div>
+<p>Whereas method <code class="docutils literal notranslate"><span class="pre">compute</span></code> gives as the maximum curvature assuming another <code class="xref py py-class docutils literal notranslate"><span class="pre">StrainPosition</span></code>
+points.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">m_n_kappa</span> <span class="kn">import</span> <span class="n">StrainPosition</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">boundaries</span><span class="o">.</span><span class="n">positive</span><span class="o">.</span><span class="n">maximum_curvature</span><span class="o">.</span><span class="n">compute</span><span class="p">(</span><span class="n">StrainPosition</span><span class="p">(</span><span class="o">-</span><span class="mf">0.0035</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="s1">&#39;Concrete&#39;</span><span class="p">))</span>
+<span class="go">0.0076749999999999995</span>
+</pre></div>
+</div>
+<p><code class="xref py py-meth docutils literal notranslate"><span class="pre">get_boundaries()</span></code> implements the above given behaviour and returns the
+boundary values directly without using <a class="reference internal" href="#m_n_kappa.crosssection.CrossSectionBoundaries" title="m_n_kappa.crosssection.CrossSectionBoundaries"><code class="xref py py-class docutils literal notranslate"><span class="pre">CrossSectionBoundaries</span></code></a>.</p>
 <p class="rubric">Methods</p>
 <div class="table-wrapper autosummary longtable docutils container">
 <table class="autosummary longtable docutils align-default">
@@ -390,10 +449,10 @@ under positive and negative curvature</p>
 <td><p>height of the cross-section</p></td>
 </tr>
 <tr class="row-odd"><td><p><a class="reference internal" href="#m_n_kappa.crosssection.CrossSectionBoundaries.maximum_negative_curvature" title="m_n_kappa.crosssection.CrossSectionBoundaries.maximum_negative_curvature"><code class="xref py py-obj docutils literal notranslate"><span class="pre">maximum_negative_curvature</span></code></a></p></td>
-<td><p><a class="reference internal" href="m_n_kappa.crosssection.EdgeStrains.html#m_n_kappa.crosssection.EdgeStrains" title="m_n_kappa.crosssection.EdgeStrains"><code class="xref py py-class docutils literal notranslate"><span class="pre">EdgeStrains</span></code></a> reaching the maximum possible negative curvature</p></td>
+<td><p><a class="reference internal" href="m_n_kappa.crosssection.EdgeStrains.html#m_n_kappa.crosssection.EdgeStrains" title="m_n_kappa.general.EdgeStrains"><code class="xref py py-class docutils literal notranslate"><span class="pre">EdgeStrains</span></code></a> reaching the maximum possible negative curvature</p></td>
 </tr>
 <tr class="row-even"><td><p><a class="reference internal" href="#m_n_kappa.crosssection.CrossSectionBoundaries.maximum_positive_curvature" title="m_n_kappa.crosssection.CrossSectionBoundaries.maximum_positive_curvature"><code class="xref py py-obj docutils literal notranslate"><span class="pre">maximum_positive_curvature</span></code></a></p></td>
-<td><p><a class="reference internal" href="m_n_kappa.crosssection.EdgeStrains.html#m_n_kappa.crosssection.EdgeStrains" title="m_n_kappa.crosssection.EdgeStrains"><code class="xref py py-class docutils literal notranslate"><span class="pre">EdgeStrains</span></code></a> reaching the maximum possible positive curvature</p></td>
+<td><p><a class="reference internal" href="m_n_kappa.crosssection.EdgeStrains.html#m_n_kappa.crosssection.EdgeStrains" title="m_n_kappa.general.EdgeStrains"><code class="xref py py-class docutils literal notranslate"><span class="pre">EdgeStrains</span></code></a> reaching the maximum possible positive curvature</p></td>
 </tr>
 <tr class="row-odd"><td><p><a class="reference internal" href="#m_n_kappa.crosssection.CrossSectionBoundaries.section_type" title="m_n_kappa.crosssection.CrossSectionBoundaries.section_type"><code class="xref py py-obj docutils literal notranslate"><span class="pre">section_type</span></code></a></p></td>
 <td><p>section-type this cross-section is associated with, if it is only one</p></td>
@@ -605,15 +664,15 @@ Possible section-types are:</p>
 
 <dl class="py property">
 <dt class="sig sig-object py" id="m_n_kappa.crosssection.CrossSectionBoundaries.maximum_negative_curvature">
-<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">maximum_negative_curvature</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="m_n_kappa.crosssection.EdgeStrains.html#m_n_kappa.crosssection.EdgeStrains" title="m_n_kappa.crosssection.EdgeStrains"><span class="pre">EdgeStrains</span></a></em><a class="headerlink" href="#m_n_kappa.crosssection.CrossSectionBoundaries.maximum_negative_curvature" title="Permalink to this definition">#</a></dt>
-<dd><p><a class="reference internal" href="m_n_kappa.crosssection.EdgeStrains.html#m_n_kappa.crosssection.EdgeStrains" title="m_n_kappa.crosssection.EdgeStrains"><code class="xref py py-class docutils literal notranslate"><span class="pre">EdgeStrains</span></code></a> reaching the maximum
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">maximum_negative_curvature</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="m_n_kappa.crosssection.EdgeStrains.html#m_n_kappa.crosssection.EdgeStrains" title="m_n_kappa.general.EdgeStrains"><span class="pre">EdgeStrains</span></a></em><a class="headerlink" href="#m_n_kappa.crosssection.CrossSectionBoundaries.maximum_negative_curvature" title="Permalink to this definition">#</a></dt>
+<dd><p><a class="reference internal" href="m_n_kappa.crosssection.EdgeStrains.html#m_n_kappa.crosssection.EdgeStrains" title="m_n_kappa.general.EdgeStrains"><code class="xref py py-class docutils literal notranslate"><span class="pre">EdgeStrains</span></code></a> reaching the maximum
 possible negative curvature</p>
 </dd></dl>
 
 <dl class="py property">
 <dt class="sig sig-object py" id="m_n_kappa.crosssection.CrossSectionBoundaries.maximum_positive_curvature">
-<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">maximum_positive_curvature</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="m_n_kappa.crosssection.EdgeStrains.html#m_n_kappa.crosssection.EdgeStrains" title="m_n_kappa.crosssection.EdgeStrains"><span class="pre">EdgeStrains</span></a></em><a class="headerlink" href="#m_n_kappa.crosssection.CrossSectionBoundaries.maximum_positive_curvature" title="Permalink to this definition">#</a></dt>
-<dd><p><a class="reference internal" href="m_n_kappa.crosssection.EdgeStrains.html#m_n_kappa.crosssection.EdgeStrains" title="m_n_kappa.crosssection.EdgeStrains"><code class="xref py py-class docutils literal notranslate"><span class="pre">EdgeStrains</span></code></a> reaching the maximum possible
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">maximum_positive_curvature</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="m_n_kappa.crosssection.EdgeStrains.html#m_n_kappa.crosssection.EdgeStrains" title="m_n_kappa.general.EdgeStrains"><span class="pre">EdgeStrains</span></a></em><a class="headerlink" href="#m_n_kappa.crosssection.CrossSectionBoundaries.maximum_positive_curvature" title="Permalink to this definition">#</a></dt>
+<dd><p><a class="reference internal" href="m_n_kappa.crosssection.EdgeStrains.html#m_n_kappa.crosssection.EdgeStrains" title="m_n_kappa.general.EdgeStrains"><code class="xref py py-class docutils literal notranslate"><span class="pre">EdgeStrains</span></code></a> reaching the maximum possible
 positive curvature</p>
 </dd></dl>
 
@@ -753,6 +812,9 @@ if it is only one</p>
     <script src="../_static/clipboard.min.js"></script>
     <script src="../_static/copybutton.js"></script>
     <script src="../_static/toggleprompt.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vega@5"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vega-lite@4.17.0"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vega-embed@6"></script>
     <script src="../_static/design-tabs.js"></script>
     <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>

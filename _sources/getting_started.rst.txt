@@ -57,7 +57,6 @@ under a given loading.
 >>> loading = SingleSpanUniformLoad(length=8000, load=1.0)
 >>> beam = Beam(
 ...    cross_section=composite_cross_section,
-...    length=8000,
 ...    element_number=10,
 ...    load=loading
 ... )

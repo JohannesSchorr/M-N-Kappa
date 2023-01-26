@@ -9,7 +9,7 @@
         <title>m_n_kappa.SingleSpanSingleLoads - M-N-κ</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?digest=91d0f0d1c444bdcb17a68e833c7a53903343c195" />
-    <link rel="stylesheet" type="text/css" href="../_static/plot_directive.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/altair-plot.css" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
     <link rel="stylesheet" type="text/css" href="../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/furo-extensions.css?digest=30d1aed668e5c3a91c3e3bf6a60b675221979f0e" />
@@ -171,11 +171,19 @@
 <li class="toctree-l2"><a class="reference internal" href="../examples/geometry.html">Creating Geometries</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../examples/material.html">Creating materials</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../examples/section.html">Build a section</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../examples/cross_section.html">Build a cross-section</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../examples/moment_curvature.html">Moment-Curvature</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../examples/moment_curvature_curve.html">Moment-Curvature-Curve</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../examples/loading.html">Loading</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../examples/deformation.html">Deformation</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../examples/m_kappa_UPE.html">Single span slim-floor beam with Moment-Curvature-Curves</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../examples/m_n_kappa_UPE.html">Single span slim-floor beam with Moment-Axial force-Curvature-Curves</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../examples/cross_section_templates/index.html">Templates</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" role="switch" type="checkbox"/><label for="toctree-checkbox-2"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="simple">
 </ul>
 </li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="../theory/index.html">Theory guide</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" role="switch" type="checkbox"/><label for="toctree-checkbox-2"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../theory/index.html">Theory guide</a><input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" role="switch" type="checkbox"/><label for="toctree-checkbox-3"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
 <li class="toctree-l2"><a class="reference internal" href="../theory/symbols.html">Symbols</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../theory/coordinates.html">Coordinates</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../theory/units.html">Units</a></li>
@@ -190,13 +198,13 @@
 <li class="toctree-l2"><a class="reference internal" href="../theory/deformations.html">Deformations</a></li>
 </ul>
 </li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="../verification/index.html">Verification</a><input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" role="switch" type="checkbox"/><label for="toctree-checkbox-3"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="simple">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../verification/index.html">Verification</a><input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" role="switch" type="checkbox"/><label for="toctree-checkbox-4"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="simple">
 </ul>
 </li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Development</span></p>
 <ul class="current">
-<li class="toctree-l1 current has-children"><a class="reference internal" href="../api.html">API reference</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" role="switch" type="checkbox"/><label for="toctree-checkbox-4"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="current">
+<li class="toctree-l1 current has-children"><a class="reference internal" href="../api.html">API reference</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" role="switch" type="checkbox"/><label for="toctree-checkbox-5"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="m_n_kappa.Geometry.html">m_n_kappa.Geometry</a></li>
 <li class="toctree-l2"><a class="reference internal" href="m_n_kappa.Rectangle.html">m_n_kappa.Rectangle</a></li>
 <li class="toctree-l2"><a class="reference internal" href="m_n_kappa.Circle.html">m_n_kappa.Circle</a></li>
@@ -224,7 +232,7 @@
 <li class="toctree-l2"><a class="reference internal" href="m_n_kappa.Node.html">m_n_kappa.Node</a></li>
 </ul>
 </li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="../api_developers.html">API for developers</a><input class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" role="switch" type="checkbox"/><label for="toctree-checkbox-5"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../api_developers.html">API for developers</a><input class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" role="switch" type="checkbox"/><label for="toctree-checkbox-6"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
 <li class="toctree-l2"><a class="reference internal" href="m_n_kappa.general.StrainPosition.html">m_n_kappa.general.StrainPosition</a></li>
 <li class="toctree-l2"><a class="reference internal" href="m_n_kappa.general.EffectiveWidths.html">m_n_kappa.general.EffectiveWidths</a></li>
 <li class="toctree-l2"><a class="reference internal" href="m_n_kappa.general.curvature.html">m_n_kappa.general.curvature</a></li>
@@ -275,7 +283,7 @@
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../roadmap.html">Roadmap and To Do’s</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../contributing.html">Contributing</a></li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="../whatsnew/index.html">Release Notes</a><input class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" role="switch" type="checkbox"/><label for="toctree-checkbox-6"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../whatsnew/index.html">Release Notes</a><input class="toctree-checkbox" id="toctree-checkbox-7" name="toctree-checkbox-7" role="switch" type="checkbox"/><label for="toctree-checkbox-7"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
 <li class="toctree-l2"><a class="reference internal" href="../whatsnew/v0.1.0.html">What’s new in 0.1.0 (??. January 2023)</a></li>
 </ul>
 </li>
@@ -329,6 +337,9 @@
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">m_n_kappa.</span></span><span class="sig-name descname"><span class="pre">SingleSpanSingleLoads</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">length</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">loads</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#m_n_kappa.SingleSpanSingleLoads" title="Permalink to this definition">#</a></dt>
 <dd><p>Bases: <a class="reference internal" href="m_n_kappa.loading.ABCSingleSpan.html#m_n_kappa.loading.ABCSingleSpan" title="m_n_kappa.loading.ABCSingleSpan"><code class="xref py py-class docutils literal notranslate"><span class="pre">ABCSingleSpan</span></code></a></p>
 <p>single span with single load(s)</p>
+<div class="versionadded">
+<p><span class="versionmodified added">New in version 0.1.0.</span></p>
+</div>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
@@ -337,24 +348,70 @@
 </ul>
 </dd>
 </dl>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<dl class="simple">
+<dt><a class="reference internal" href="m_n_kappa.SingleSpanUniformLoad.html#m_n_kappa.SingleSpanUniformLoad" title="m_n_kappa.SingleSpanUniformLoad"><code class="xref py py-obj docutils literal notranslate"><span class="pre">SingleSpanUniformLoad</span></code></a></dt><dd><p>single-span with uniform loading</p>
+</dd>
+</dl>
+</div>
+<p class="rubric">Examples</p>
+<p>For computation of the internal forces of a single span girder under a single load(s),
+before initializing  <a class="reference internal" href="#m_n_kappa.SingleSpanSingleLoads" title="m_n_kappa.SingleSpanSingleLoads"><code class="xref py py-class docutils literal notranslate"><span class="pre">SingleSpanSingleLoads</span></code></a> at least one
+:py:class`~m_n_kappa.SingleLoad` is needed to define the position and its magnitude.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">m_n_kappa</span> <span class="kn">import</span> <span class="n">SingleSpanSingleLoads</span><span class="p">,</span> <span class="n">SingleLoad</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">single_load_middle</span> <span class="o">=</span> <span class="n">SingleLoad</span><span class="p">(</span><span class="n">position_in_beam</span><span class="o">=</span><span class="mi">4000</span><span class="p">,</span> <span class="n">value</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">single_loading</span> <span class="o">=</span> <span class="n">SingleSpanSingleLoads</span><span class="p">(</span><span class="n">length</span><span class="o">=</span><span class="mi">8000</span><span class="p">,</span> <span class="n">loads</span><span class="o">=</span><span class="p">[</span><span class="n">single_load_middle</span><span class="p">])</span>
+</pre></div>
+</div>
+<p>The total loading from the single loading may be derived as follows.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">single_loading</span><span class="o">.</span><span class="n">loading</span>
+<span class="go">10</span>
+</pre></div>
+</div>
+<p>The maximum moment is returned by attribute <a class="reference internal" href="#m_n_kappa.SingleSpanSingleLoads.maximum_moment" title="m_n_kappa.SingleSpanSingleLoads.maximum_moment"><code class="xref py py-attr docutils literal notranslate"><span class="pre">maximum_moment</span></code></a>.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">single_loading</span><span class="o">.</span><span class="n">maximum_moment</span>
+<span class="go">20000.0</span>
+</pre></div>
+</div>
+<p>Similar moment is computed by using <a class="reference internal" href="#m_n_kappa.SingleSpanSingleLoads.positions_of_maximum_moment" title="m_n_kappa.SingleSpanSingleLoads.positions_of_maximum_moment"><code class="xref py py-meth docutils literal notranslate"><span class="pre">positions_of_maximum_moment()</span></code></a>
+and pass the resulting value <a class="reference internal" href="#m_n_kappa.SingleSpanSingleLoads.moment" title="m_n_kappa.SingleSpanSingleLoads.moment"><code class="xref py py-meth docutils literal notranslate"><span class="pre">moment()</span></code></a>.
+Of course, all positions along the beam may be passed to <a class="reference internal" href="#m_n_kappa.SingleSpanSingleLoads.moment" title="m_n_kappa.SingleSpanSingleLoads.moment"><code class="xref py py-meth docutils literal notranslate"><span class="pre">moment()</span></code></a> to
+compute the corresponding moment.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">max_loading_position</span> <span class="o">=</span> <span class="n">single_loading</span><span class="o">.</span><span class="n">positions_of_maximum_moment</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">single_loading</span><span class="o">.</span><span class="n">moment</span><span class="p">(</span><span class="n">at_positions</span><span class="o">=</span><span class="n">max_loading_position</span><span class="p">)</span>
+<span class="go">20000.0</span>
+</pre></div>
+</div>
+<p>The resulting transversal shear loads at the support are computed as follows.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">single_loading</span><span class="o">.</span><span class="n">transversal_shear_support_left</span><span class="p">,</span> <span class="n">single_loading</span><span class="o">.</span><span class="n">transversal_shear_support_right</span>
+<span class="go">(5.0, -5.0)</span>
+</pre></div>
+</div>
+<p>Using the corresponding <a class="reference internal" href="#m_n_kappa.SingleSpanSingleLoads.transversal_shear" title="m_n_kappa.SingleSpanSingleLoads.transversal_shear"><code class="xref py py-meth docutils literal notranslate"><span class="pre">transversal_shear()</span></code></a>-method gives us at the
+position of maximum moment a value of 0.0, as expected.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">single_loading</span><span class="o">.</span><span class="n">transversal_shear</span><span class="p">(</span><span class="n">at_position</span><span class="o">=</span><span class="n">max_loading_position</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+<span class="go">0.0</span>
+</pre></div>
+</div>
 <p class="rubric">Methods</p>
 <div class="table-wrapper autosummary longtable docutils container">
 <table class="autosummary longtable docutils align-default">
 <tbody>
-<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">load_by</span></code>(moment, at_position)</p></td>
-<td><p></p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#m_n_kappa.SingleSpanSingleLoads.load_by" title="m_n_kappa.SingleSpanSingleLoads.load_by"><code class="xref py py-obj docutils literal notranslate"><span class="pre">load_by</span></code></a>(moment, at_position)</p></td>
+<td><p>load by the given moment at the given position</p></td>
 </tr>
 <tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">load_by_factor</span></code>(moment, at_position)</p></td>
 <td><p></p></td>
 </tr>
 <tr class="row-odd"><td><p><a class="reference internal" href="#m_n_kappa.SingleSpanSingleLoads.load_distribution_factor" title="m_n_kappa.SingleSpanSingleLoads.load_distribution_factor"><code class="xref py py-obj docutils literal notranslate"><span class="pre">load_distribution_factor</span></code></a>()</p></td>
-<td><p>effect of the load on the distribution on bending moment</p></td>
+<td><p>factor showing how the moment is distributed depending on the loads</p></td>
 </tr>
 <tr class="row-even"><td><p><a class="reference internal" href="#m_n_kappa.SingleSpanSingleLoads.moment" title="m_n_kappa.SingleSpanSingleLoads.moment"><code class="xref py py-obj docutils literal notranslate"><span class="pre">moment</span></code></a>(at_position)</p></td>
 <td><p>moment at the given position_value</p></td>
 </tr>
-<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">moment_by</span></code>(load, at_position)</p></td>
-<td><p></p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#m_n_kappa.SingleSpanSingleLoads.moment_by" title="m_n_kappa.SingleSpanSingleLoads.moment_by"><code class="xref py py-obj docutils literal notranslate"><span class="pre">moment_by</span></code></a>(load, at_position)</p></td>
+<td><p>moment at the given position by the given load</p></td>
 </tr>
 <tr class="row-even"><td><p><a class="reference internal" href="#m_n_kappa.SingleSpanSingleLoads.position_of_maximum_deformation" title="m_n_kappa.SingleSpanSingleLoads.position_of_maximum_deformation"><code class="xref py py-obj docutils literal notranslate"><span class="pre">position_of_maximum_deformation</span></code></a>()</p></td>
 <td><p>positions-value of the maximum-deformation</p></td>
@@ -385,36 +442,53 @@
 <table class="autosummary longtable docutils align-default">
 <tbody>
 <tr class="row-odd"><td><p><a class="reference internal" href="#m_n_kappa.SingleSpanSingleLoads.length" title="m_n_kappa.SingleSpanSingleLoads.length"><code class="xref py py-obj docutils literal notranslate"><span class="pre">length</span></code></a></p></td>
-<td><p>length of beam-span</p></td>
+<td><p>length of the beam</p></td>
 </tr>
 <tr class="row-even"><td><p><a class="reference internal" href="#m_n_kappa.SingleSpanSingleLoads.loading" title="m_n_kappa.SingleSpanSingleLoads.loading"><code class="xref py py-obj docutils literal notranslate"><span class="pre">loading</span></code></a></p></td>
-<td><p>sum of vertical loads</p></td>
+<td><p>sum of all loads</p></td>
 </tr>
-<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">loads</span></code></p></td>
-<td><p></p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#m_n_kappa.SingleSpanSingleLoads.loads" title="m_n_kappa.SingleSpanSingleLoads.loads"><code class="xref py py-obj docutils literal notranslate"><span class="pre">loads</span></code></a></p></td>
+<td><p>single loads applied to the beam</p></td>
 </tr>
 <tr class="row-even"><td><p><a class="reference internal" href="#m_n_kappa.SingleSpanSingleLoads.maximum_moment" title="m_n_kappa.SingleSpanSingleLoads.maximum_moment"><code class="xref py py-obj docutils literal notranslate"><span class="pre">maximum_moment</span></code></a></p></td>
-<td><p>maximum moment by the given load</p></td>
+<td><p>maximum moment under the given moment</p></td>
 </tr>
 <tr class="row-odd"><td><p><a class="reference internal" href="#m_n_kappa.SingleSpanSingleLoads.positions" title="m_n_kappa.SingleSpanSingleLoads.positions"><code class="xref py py-obj docutils literal notranslate"><span class="pre">positions</span></code></a></p></td>
-<td><p>positions of load-introduction</p></td>
+<td><p>position of the single loads along the beam</p></td>
 </tr>
 <tr class="row-even"><td><p><a class="reference internal" href="#m_n_kappa.SingleSpanSingleLoads.transversal_shear_support_left" title="m_n_kappa.SingleSpanSingleLoads.transversal_shear_support_left"><code class="xref py py-obj docutils literal notranslate"><span class="pre">transversal_shear_support_left</span></code></a></p></td>
-<td><p>transversal shear value at the left support</p></td>
+<td><p>transversal shear load of the left support</p></td>
 </tr>
 <tr class="row-odd"><td><p><a class="reference internal" href="#m_n_kappa.SingleSpanSingleLoads.transversal_shear_support_right" title="m_n_kappa.SingleSpanSingleLoads.transversal_shear_support_right"><code class="xref py py-obj docutils literal notranslate"><span class="pre">transversal_shear_support_right</span></code></a></p></td>
-<td><p>transversal shear value at the right support</p></td>
+<td><p>transversal shear load of the right support</p></td>
 </tr>
 </tbody>
 </table>
 </div>
 <dl class="py method">
+<dt class="sig sig-object py" id="m_n_kappa.SingleSpanSingleLoads.load_by">
+<span class="sig-name descname"><span class="pre">load_by</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">moment</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">at_position</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#m_n_kappa.SingleSpanSingleLoads.load_by" title="Permalink to this definition">#</a></dt>
+<dd><p>load by the given moment at the given position</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>moment</strong> (<em>float</em>) – moment the load leads to</p></li>
+<li><p><strong>at_position</strong> (<em>float</em>) – position-value of the moment</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>load by the moment at the position</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
 <dt class="sig sig-object py" id="m_n_kappa.SingleSpanSingleLoads.load_distribution_factor">
 <span class="sig-name descname"><span class="pre">load_distribution_factor</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#m_n_kappa.SingleSpanSingleLoads.load_distribution_factor" title="Permalink to this definition">#</a></dt>
-<dd><p>effect of the load on the distribution on bending moment</p>
-<p class="rubric">References</p>
-<p>Eggert, F. (2019) Einfluss der Verdübelung auf das Trag- und Verformungsverhalten von Verbundträgern mit und
-ohne Profilblech, dissertation, University of Stuttgart, Institute of Structural Design, No. 2019-1, p. 182</p>
+<dd><p>factor showing how the moment is distributed depending on the loads</p>
 <dl class="field-list simple">
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>float</p>
@@ -435,6 +509,23 @@ ohne Profilblech, dissertation, University of Stuttgart, Institute of Structural
 </dd>
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="m_n_kappa.SingleSpanSingleLoads.moment_by">
+<span class="sig-name descname"><span class="pre">moment_by</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">load</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">at_position</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#m_n_kappa.SingleSpanSingleLoads.moment_by" title="Permalink to this definition">#</a></dt>
+<dd><p>moment at the given position by the given load</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>load</strong> (<a class="reference internal" href="m_n_kappa.SingleLoad.html#m_n_kappa.SingleLoad" title="m_n_kappa.SingleLoad"><code class="xref py py-class docutils literal notranslate"><span class="pre">SingleLoad</span></code></a>) – load applied to th</p></li>
+<li><p><strong>at_position</strong> (<em>float</em>) – </p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>float</p>
 </dd>
 </dl>
 </dd></dl>
@@ -509,37 +600,43 @@ ohne Profilblech, dissertation, University of Stuttgart, Institute of Structural
 <dl class="py property">
 <dt class="sig sig-object py" id="m_n_kappa.SingleSpanSingleLoads.length">
 <em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">length</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">float</span></em><a class="headerlink" href="#m_n_kappa.SingleSpanSingleLoads.length" title="Permalink to this definition">#</a></dt>
-<dd><p>length of beam-span</p>
+<dd><p>length of the beam</p>
 </dd></dl>
 
 <dl class="py property">
 <dt class="sig sig-object py" id="m_n_kappa.SingleSpanSingleLoads.loading">
 <em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">loading</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">float</span></em><a class="headerlink" href="#m_n_kappa.SingleSpanSingleLoads.loading" title="Permalink to this definition">#</a></dt>
-<dd><p>sum of vertical loads</p>
+<dd><p>sum of all loads</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="m_n_kappa.SingleSpanSingleLoads.loads">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">loads</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">list</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="m_n_kappa.SingleLoad.html#m_n_kappa.SingleLoad" title="m_n_kappa.loading.SingleLoad"><span class="pre">m_n_kappa.loading.SingleLoad</span></a><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#m_n_kappa.SingleSpanSingleLoads.loads" title="Permalink to this definition">#</a></dt>
+<dd><p>single loads applied to the beam</p>
 </dd></dl>
 
 <dl class="py property">
 <dt class="sig sig-object py" id="m_n_kappa.SingleSpanSingleLoads.maximum_moment">
 <em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">maximum_moment</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">float</span></em><a class="headerlink" href="#m_n_kappa.SingleSpanSingleLoads.maximum_moment" title="Permalink to this definition">#</a></dt>
-<dd><p>maximum moment by the given load</p>
+<dd><p>maximum moment under the given moment</p>
 </dd></dl>
 
 <dl class="py property">
 <dt class="sig sig-object py" id="m_n_kappa.SingleSpanSingleLoads.positions">
 <em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">positions</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#m_n_kappa.SingleSpanSingleLoads.positions" title="Permalink to this definition">#</a></dt>
-<dd><p>positions of load-introduction</p>
+<dd><p>position of the single loads along the beam</p>
 </dd></dl>
 
 <dl class="py property">
 <dt class="sig sig-object py" id="m_n_kappa.SingleSpanSingleLoads.transversal_shear_support_left">
 <em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">transversal_shear_support_left</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">float</span></em><a class="headerlink" href="#m_n_kappa.SingleSpanSingleLoads.transversal_shear_support_left" title="Permalink to this definition">#</a></dt>
-<dd><p>transversal shear value at the left support</p>
+<dd><p>transversal shear load of the left support</p>
 </dd></dl>
 
 <dl class="py property">
 <dt class="sig sig-object py" id="m_n_kappa.SingleSpanSingleLoads.transversal_shear_support_right">
 <em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">transversal_shear_support_right</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">float</span></em><a class="headerlink" href="#m_n_kappa.SingleSpanSingleLoads.transversal_shear_support_right" title="Permalink to this definition">#</a></dt>
-<dd><p>transversal shear value at the right support</p>
+<dd><p>transversal shear load of the right support</p>
 </dd></dl>
 
 </dd></dl>
@@ -603,8 +700,10 @@ ohne Profilblech, dissertation, University of Stuttgart, Institute of Structural
             <ul>
 <li><a class="reference internal" href="#">m_n_kappa.SingleSpanSingleLoads</a><ul>
 <li><a class="reference internal" href="#m_n_kappa.SingleSpanSingleLoads"><code class="docutils literal notranslate"><span class="pre">SingleSpanSingleLoads</span></code></a><ul>
+<li><a class="reference internal" href="#m_n_kappa.SingleSpanSingleLoads.load_by"><code class="docutils literal notranslate"><span class="pre">SingleSpanSingleLoads.load_by()</span></code></a></li>
 <li><a class="reference internal" href="#m_n_kappa.SingleSpanSingleLoads.load_distribution_factor"><code class="docutils literal notranslate"><span class="pre">SingleSpanSingleLoads.load_distribution_factor()</span></code></a></li>
 <li><a class="reference internal" href="#m_n_kappa.SingleSpanSingleLoads.moment"><code class="docutils literal notranslate"><span class="pre">SingleSpanSingleLoads.moment()</span></code></a></li>
+<li><a class="reference internal" href="#m_n_kappa.SingleSpanSingleLoads.moment_by"><code class="docutils literal notranslate"><span class="pre">SingleSpanSingleLoads.moment_by()</span></code></a></li>
 <li><a class="reference internal" href="#m_n_kappa.SingleSpanSingleLoads.position_of_maximum_deformation"><code class="docutils literal notranslate"><span class="pre">SingleSpanSingleLoads.position_of_maximum_deformation()</span></code></a></li>
 <li><a class="reference internal" href="#m_n_kappa.SingleSpanSingleLoads.positions_of_maximum_moment"><code class="docutils literal notranslate"><span class="pre">SingleSpanSingleLoads.positions_of_maximum_moment()</span></code></a></li>
 <li><a class="reference internal" href="#m_n_kappa.SingleSpanSingleLoads.single_loads_with_factor"><code class="docutils literal notranslate"><span class="pre">SingleSpanSingleLoads.single_loads_with_factor()</span></code></a></li>
@@ -612,6 +711,7 @@ ohne Profilblech, dissertation, University of Stuttgart, Institute of Structural
 <li><a class="reference internal" href="#m_n_kappa.SingleSpanSingleLoads.transversal_shear"><code class="docutils literal notranslate"><span class="pre">SingleSpanSingleLoads.transversal_shear()</span></code></a></li>
 <li><a class="reference internal" href="#m_n_kappa.SingleSpanSingleLoads.length"><code class="docutils literal notranslate"><span class="pre">SingleSpanSingleLoads.length</span></code></a></li>
 <li><a class="reference internal" href="#m_n_kappa.SingleSpanSingleLoads.loading"><code class="docutils literal notranslate"><span class="pre">SingleSpanSingleLoads.loading</span></code></a></li>
+<li><a class="reference internal" href="#m_n_kappa.SingleSpanSingleLoads.loads"><code class="docutils literal notranslate"><span class="pre">SingleSpanSingleLoads.loads</span></code></a></li>
 <li><a class="reference internal" href="#m_n_kappa.SingleSpanSingleLoads.maximum_moment"><code class="docutils literal notranslate"><span class="pre">SingleSpanSingleLoads.maximum_moment</span></code></a></li>
 <li><a class="reference internal" href="#m_n_kappa.SingleSpanSingleLoads.positions"><code class="docutils literal notranslate"><span class="pre">SingleSpanSingleLoads.positions</span></code></a></li>
 <li><a class="reference internal" href="#m_n_kappa.SingleSpanSingleLoads.transversal_shear_support_left"><code class="docutils literal notranslate"><span class="pre">SingleSpanSingleLoads.transversal_shear_support_left</span></code></a></li>
@@ -639,6 +739,9 @@ ohne Profilblech, dissertation, University of Stuttgart, Institute of Structural
     <script src="../_static/clipboard.min.js"></script>
     <script src="../_static/copybutton.js"></script>
     <script src="../_static/toggleprompt.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vega@5"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vega-lite@4.17.0"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vega-embed@6"></script>
     <script src="../_static/design-tabs.js"></script>
     <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     </body>

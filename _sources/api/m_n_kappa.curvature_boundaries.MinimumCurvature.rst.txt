@@ -24,8 +24,11 @@
 
    .. autosummary::
    
+      ~MinimumCurvature.all
+      ~MinimumCurvature.bottom_edge
       ~MinimumCurvature.negative
       ~MinimumCurvature.positive
+      ~MinimumCurvature.top_edge
       ~MinimumCurvature.maximum_positive_section_strains
       ~MinimumCurvature.maximum_negative_section_strains
       ~MinimumCurvature.curvature_is_positive

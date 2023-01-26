@@ -9,7 +9,7 @@
         <title>m_n_kappa.solver.Solver - M-N-κ</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?digest=91d0f0d1c444bdcb17a68e833c7a53903343c195" />
-    <link rel="stylesheet" type="text/css" href="../_static/plot_directive.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/altair-plot.css" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
     <link rel="stylesheet" type="text/css" href="../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/furo-extensions.css?digest=30d1aed668e5c3a91c3e3bf6a60b675221979f0e" />
@@ -171,11 +171,19 @@
 <li class="toctree-l2"><a class="reference internal" href="../examples/geometry.html">Creating Geometries</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../examples/material.html">Creating materials</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../examples/section.html">Build a section</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../examples/cross_section.html">Build a cross-section</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../examples/moment_curvature.html">Moment-Curvature</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../examples/moment_curvature_curve.html">Moment-Curvature-Curve</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../examples/loading.html">Loading</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../examples/deformation.html">Deformation</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../examples/m_kappa_UPE.html">Single span slim-floor beam with Moment-Curvature-Curves</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../examples/m_n_kappa_UPE.html">Single span slim-floor beam with Moment-Axial force-Curvature-Curves</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../examples/cross_section_templates/index.html">Templates</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" role="switch" type="checkbox"/><label for="toctree-checkbox-2"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="simple">
 </ul>
 </li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="../theory/index.html">Theory guide</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" role="switch" type="checkbox"/><label for="toctree-checkbox-2"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../theory/index.html">Theory guide</a><input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" role="switch" type="checkbox"/><label for="toctree-checkbox-3"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
 <li class="toctree-l2"><a class="reference internal" href="../theory/symbols.html">Symbols</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../theory/coordinates.html">Coordinates</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../theory/units.html">Units</a></li>
@@ -190,13 +198,13 @@
 <li class="toctree-l2"><a class="reference internal" href="../theory/deformations.html">Deformations</a></li>
 </ul>
 </li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="../verification/index.html">Verification</a><input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" role="switch" type="checkbox"/><label for="toctree-checkbox-3"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="simple">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../verification/index.html">Verification</a><input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" role="switch" type="checkbox"/><label for="toctree-checkbox-4"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="simple">
 </ul>
 </li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Development</span></p>
 <ul class="current">
-<li class="toctree-l1 has-children"><a class="reference internal" href="../api.html">API reference</a><input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" role="switch" type="checkbox"/><label for="toctree-checkbox-4"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../api.html">API reference</a><input class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" role="switch" type="checkbox"/><label for="toctree-checkbox-5"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
 <li class="toctree-l2"><a class="reference internal" href="m_n_kappa.Geometry.html">m_n_kappa.Geometry</a></li>
 <li class="toctree-l2"><a class="reference internal" href="m_n_kappa.Rectangle.html">m_n_kappa.Rectangle</a></li>
 <li class="toctree-l2"><a class="reference internal" href="m_n_kappa.Circle.html">m_n_kappa.Circle</a></li>
@@ -224,7 +232,7 @@
 <li class="toctree-l2"><a class="reference internal" href="m_n_kappa.Node.html">m_n_kappa.Node</a></li>
 </ul>
 </li>
-<li class="toctree-l1 current has-children"><a class="reference internal" href="../api_developers.html">API for developers</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" role="switch" type="checkbox"/><label for="toctree-checkbox-5"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="current">
+<li class="toctree-l1 current has-children"><a class="reference internal" href="../api_developers.html">API for developers</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" role="switch" type="checkbox"/><label for="toctree-checkbox-6"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="m_n_kappa.general.StrainPosition.html">m_n_kappa.general.StrainPosition</a></li>
 <li class="toctree-l2"><a class="reference internal" href="m_n_kappa.general.EffectiveWidths.html">m_n_kappa.general.EffectiveWidths</a></li>
 <li class="toctree-l2"><a class="reference internal" href="m_n_kappa.general.curvature.html">m_n_kappa.general.curvature</a></li>
@@ -275,7 +283,7 @@
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../roadmap.html">Roadmap and To Do’s</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../contributing.html">Contributing</a></li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="../whatsnew/index.html">Release Notes</a><input class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" role="switch" type="checkbox"/><label for="toctree-checkbox-6"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../whatsnew/index.html">Release Notes</a><input class="toctree-checkbox" id="toctree-checkbox-7" name="toctree-checkbox-7" role="switch" type="checkbox"/><label for="toctree-checkbox-7"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
 <li class="toctree-l2"><a class="reference internal" href="../whatsnew/v0.1.0.html">What’s new in 0.1.0 (??. January 2023)</a></li>
 </ul>
 </li>
@@ -329,6 +337,9 @@
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">m_n_kappa.solver.</span></span><span class="sig-name descname"><span class="pre">Solver</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">target</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">variable</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">target_value</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.0</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#m_n_kappa.solver.Solver" title="Permalink to this definition">#</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
 <p>Meta Solver-Class</p>
+<div class="versionadded">
+<p><span class="versionmodified added">New in version 0.1.0.</span></p>
+</div>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
@@ -353,30 +364,81 @@
 <div class="table-wrapper autosummary longtable docutils container">
 <table class="autosummary longtable docutils align-default">
 <tbody>
-<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">data</span></code></p></td>
-<td><p></p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#m_n_kappa.solver.Solver.data" title="m_n_kappa.solver.Solver.data"><code class="xref py py-obj docutils literal notranslate"><span class="pre">data</span></code></a></p></td>
+<td><p>passed data</p></td>
 </tr>
-<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">maximum_variable</span></code></p></td>
-<td><p></p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#m_n_kappa.solver.Solver.maximum_variable" title="m_n_kappa.solver.Solver.maximum_variable"><code class="xref py py-obj docutils literal notranslate"><span class="pre">maximum_variable</span></code></a></p></td>
+<td><p>maximum variable value given in <code class="docutils literal notranslate"><span class="pre">data</span></code></p></td>
 </tr>
-<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">minimum_variable</span></code></p></td>
-<td><p></p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#m_n_kappa.solver.Solver.minimum_variable" title="m_n_kappa.solver.Solver.minimum_variable"><code class="xref py py-obj docutils literal notranslate"><span class="pre">minimum_variable</span></code></a></p></td>
+<td><p>minimum variable value given in <code class="docutils literal notranslate"><span class="pre">data</span></code></p></td>
 </tr>
-<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">target</span></code></p></td>
-<td><p></p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#m_n_kappa.solver.Solver.target" title="m_n_kappa.solver.Solver.target"><code class="xref py py-obj docutils literal notranslate"><span class="pre">target</span></code></a></p></td>
+<td><p>key of the target in <code class="docutils literal notranslate"><span class="pre">data</span></code></p></td>
 </tr>
-<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">target_value</span></code></p></td>
-<td><p></p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#m_n_kappa.solver.Solver.target_value" title="m_n_kappa.solver.Solver.target_value"><code class="xref py py-obj docutils literal notranslate"><span class="pre">target_value</span></code></a></p></td>
+<td><p>value of the target</p></td>
 </tr>
-<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">variable</span></code></p></td>
-<td><p></p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#m_n_kappa.solver.Solver.variable" title="m_n_kappa.solver.Solver.variable"><code class="xref py py-obj docutils literal notranslate"><span class="pre">variable</span></code></a></p></td>
+<td><p>key of the variable in <code class="docutils literal notranslate"><span class="pre">data</span></code></p></td>
 </tr>
-<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">x_n</span></code></p></td>
-<td><p></p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#m_n_kappa.solver.Solver.x_n" title="m_n_kappa.solver.Solver.x_n"><code class="xref py py-obj docutils literal notranslate"><span class="pre">x_n</span></code></a></p></td>
+<td><p>lastly computed variable value</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#m_n_kappa.solver.Solver.x_n_plus_1" title="m_n_kappa.solver.Solver.x_n_plus_1"><code class="xref py py-obj docutils literal notranslate"><span class="pre">x_n_plus_1</span></code></a></p></td>
+<td><p>new computed value</p></td>
 </tr>
 </tbody>
 </table>
 </div>
+<dl class="py property">
+<dt class="sig sig-object py" id="m_n_kappa.solver.Solver.data">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">data</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">list</span></em><a class="headerlink" href="#m_n_kappa.solver.Solver.data" title="Permalink to this definition">#</a></dt>
+<dd><p>passed data</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="m_n_kappa.solver.Solver.maximum_variable">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">maximum_variable</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">float</span></em><a class="headerlink" href="#m_n_kappa.solver.Solver.maximum_variable" title="Permalink to this definition">#</a></dt>
+<dd><p>maximum variable value given in <code class="docutils literal notranslate"><span class="pre">data</span></code></p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="m_n_kappa.solver.Solver.minimum_variable">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">minimum_variable</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">float</span></em><a class="headerlink" href="#m_n_kappa.solver.Solver.minimum_variable" title="Permalink to this definition">#</a></dt>
+<dd><p>minimum variable value given in <code class="docutils literal notranslate"><span class="pre">data</span></code></p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="m_n_kappa.solver.Solver.target">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">target</span></span><a class="headerlink" href="#m_n_kappa.solver.Solver.target" title="Permalink to this definition">#</a></dt>
+<dd><p>key of the target in <code class="docutils literal notranslate"><span class="pre">data</span></code></p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="m_n_kappa.solver.Solver.target_value">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">target_value</span></span><a class="headerlink" href="#m_n_kappa.solver.Solver.target_value" title="Permalink to this definition">#</a></dt>
+<dd><p>value of the target</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="m_n_kappa.solver.Solver.variable">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">variable</span></span><a class="headerlink" href="#m_n_kappa.solver.Solver.variable" title="Permalink to this definition">#</a></dt>
+<dd><p>key of the variable in <code class="docutils literal notranslate"><span class="pre">data</span></code></p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="m_n_kappa.solver.Solver.x_n">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">x_n</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">float</span></em><a class="headerlink" href="#m_n_kappa.solver.Solver.x_n" title="Permalink to this definition">#</a></dt>
+<dd><p>lastly computed variable value</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="m_n_kappa.solver.Solver.x_n_plus_1">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">x_n_plus_1</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">float</span></em><a class="headerlink" href="#m_n_kappa.solver.Solver.x_n_plus_1" title="Permalink to this definition">#</a></dt>
+<dd><p>new computed value</p>
+</dd></dl>
+
 </dd></dl>
 
 </section>
@@ -437,7 +499,17 @@
           <div class="toc-tree">
             <ul>
 <li><a class="reference internal" href="#">m_n_kappa.solver.Solver</a><ul>
-<li><a class="reference internal" href="#m_n_kappa.solver.Solver"><code class="docutils literal notranslate"><span class="pre">Solver</span></code></a></li>
+<li><a class="reference internal" href="#m_n_kappa.solver.Solver"><code class="docutils literal notranslate"><span class="pre">Solver</span></code></a><ul>
+<li><a class="reference internal" href="#m_n_kappa.solver.Solver.data"><code class="docutils literal notranslate"><span class="pre">Solver.data</span></code></a></li>
+<li><a class="reference internal" href="#m_n_kappa.solver.Solver.maximum_variable"><code class="docutils literal notranslate"><span class="pre">Solver.maximum_variable</span></code></a></li>
+<li><a class="reference internal" href="#m_n_kappa.solver.Solver.minimum_variable"><code class="docutils literal notranslate"><span class="pre">Solver.minimum_variable</span></code></a></li>
+<li><a class="reference internal" href="#m_n_kappa.solver.Solver.target"><code class="docutils literal notranslate"><span class="pre">Solver.target</span></code></a></li>
+<li><a class="reference internal" href="#m_n_kappa.solver.Solver.target_value"><code class="docutils literal notranslate"><span class="pre">Solver.target_value</span></code></a></li>
+<li><a class="reference internal" href="#m_n_kappa.solver.Solver.variable"><code class="docutils literal notranslate"><span class="pre">Solver.variable</span></code></a></li>
+<li><a class="reference internal" href="#m_n_kappa.solver.Solver.x_n"><code class="docutils literal notranslate"><span class="pre">Solver.x_n</span></code></a></li>
+<li><a class="reference internal" href="#m_n_kappa.solver.Solver.x_n_plus_1"><code class="docutils literal notranslate"><span class="pre">Solver.x_n_plus_1</span></code></a></li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
@@ -459,6 +531,9 @@
     <script src="../_static/clipboard.min.js"></script>
     <script src="../_static/copybutton.js"></script>
     <script src="../_static/toggleprompt.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vega@5"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vega-lite@4.17.0"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vega-embed@6"></script>
     <script src="../_static/design-tabs.js"></script>
     <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     </body>

@@ -9,7 +9,7 @@
         <title>m_n_kappa.MKappaCurve - M-N-κ</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?digest=91d0f0d1c444bdcb17a68e833c7a53903343c195" />
-    <link rel="stylesheet" type="text/css" href="../_static/plot_directive.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/altair-plot.css" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
     <link rel="stylesheet" type="text/css" href="../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/furo-extensions.css?digest=30d1aed668e5c3a91c3e3bf6a60b675221979f0e" />
@@ -171,11 +171,19 @@
 <li class="toctree-l2"><a class="reference internal" href="../examples/geometry.html">Creating Geometries</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../examples/material.html">Creating materials</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../examples/section.html">Build a section</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../examples/cross_section.html">Build a cross-section</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../examples/moment_curvature.html">Moment-Curvature</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../examples/moment_curvature_curve.html">Moment-Curvature-Curve</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../examples/loading.html">Loading</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../examples/deformation.html">Deformation</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../examples/m_kappa_UPE.html">Single span slim-floor beam with Moment-Curvature-Curves</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../examples/m_n_kappa_UPE.html">Single span slim-floor beam with Moment-Axial force-Curvature-Curves</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../examples/cross_section_templates/index.html">Templates</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" role="switch" type="checkbox"/><label for="toctree-checkbox-2"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="simple">
 </ul>
 </li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="../theory/index.html">Theory guide</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" role="switch" type="checkbox"/><label for="toctree-checkbox-2"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../theory/index.html">Theory guide</a><input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" role="switch" type="checkbox"/><label for="toctree-checkbox-3"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
 <li class="toctree-l2"><a class="reference internal" href="../theory/symbols.html">Symbols</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../theory/coordinates.html">Coordinates</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../theory/units.html">Units</a></li>
@@ -190,13 +198,13 @@
 <li class="toctree-l2"><a class="reference internal" href="../theory/deformations.html">Deformations</a></li>
 </ul>
 </li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="../verification/index.html">Verification</a><input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" role="switch" type="checkbox"/><label for="toctree-checkbox-3"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="simple">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../verification/index.html">Verification</a><input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" role="switch" type="checkbox"/><label for="toctree-checkbox-4"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="simple">
 </ul>
 </li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Development</span></p>
 <ul class="current">
-<li class="toctree-l1 current has-children"><a class="reference internal" href="../api.html">API reference</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" role="switch" type="checkbox"/><label for="toctree-checkbox-4"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="current">
+<li class="toctree-l1 current has-children"><a class="reference internal" href="../api.html">API reference</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" role="switch" type="checkbox"/><label for="toctree-checkbox-5"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="m_n_kappa.Geometry.html">m_n_kappa.Geometry</a></li>
 <li class="toctree-l2"><a class="reference internal" href="m_n_kappa.Rectangle.html">m_n_kappa.Rectangle</a></li>
 <li class="toctree-l2"><a class="reference internal" href="m_n_kappa.Circle.html">m_n_kappa.Circle</a></li>
@@ -224,7 +232,7 @@
 <li class="toctree-l2"><a class="reference internal" href="m_n_kappa.Node.html">m_n_kappa.Node</a></li>
 </ul>
 </li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="../api_developers.html">API for developers</a><input class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" role="switch" type="checkbox"/><label for="toctree-checkbox-5"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../api_developers.html">API for developers</a><input class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" role="switch" type="checkbox"/><label for="toctree-checkbox-6"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
 <li class="toctree-l2"><a class="reference internal" href="m_n_kappa.general.StrainPosition.html">m_n_kappa.general.StrainPosition</a></li>
 <li class="toctree-l2"><a class="reference internal" href="m_n_kappa.general.EffectiveWidths.html">m_n_kappa.general.EffectiveWidths</a></li>
 <li class="toctree-l2"><a class="reference internal" href="m_n_kappa.general.curvature.html">m_n_kappa.general.curvature</a></li>
@@ -275,7 +283,7 @@
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../roadmap.html">Roadmap and To Do’s</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../contributing.html">Contributing</a></li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="../whatsnew/index.html">Release Notes</a><input class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" role="switch" type="checkbox"/><label for="toctree-checkbox-6"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../whatsnew/index.html">Release Notes</a><input class="toctree-checkbox" id="toctree-checkbox-7" name="toctree-checkbox-7" role="switch" type="checkbox"/><label for="toctree-checkbox-7"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
 <li class="toctree-l2"><a class="reference internal" href="../whatsnew/v0.1.0.html">What’s new in 0.1.0 (??. January 2023)</a></li>
 </ul>
 </li>
@@ -328,45 +336,124 @@
 <dt class="sig sig-object py" id="m_n_kappa.MKappaCurve">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">m_n_kappa.</span></span><span class="sig-name descname"><span class="pre">MKappaCurve</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">cross_section</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">include_positive_curvature</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">include_negative_curvature</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#m_n_kappa.MKappaCurve" title="Permalink to this definition">#</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
-<p>computation of M-Kappa-Curve assuming full interaction</p>
-<p>Initialization</p>
+<p>computation of Moment-Curvature-Curve assuming full interaction</p>
+<div class="versionadded">
+<p><span class="versionmodified added">New in version 0.1.0.</span></p>
+</div>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>cross_section</strong> (<a class="reference internal" href="m_n_kappa.Crosssection.html#m_n_kappa.Crosssection" title="m_n_kappa.Crosssection"><em>Crosssection</em></a>) – cross-section to compute</p></li>
-<li><p><strong>include_positive_curvature</strong> (<em>bool</em>) – if True than positive curvature values are computed</p></li>
-<li><p><strong>include_negative_curvature</strong> (<em>bool</em>) – if True than negative curvature values are computed</p></li>
+<li><p><strong>cross_section</strong> (<a class="reference internal" href="m_n_kappa.Crosssection.html#m_n_kappa.Crosssection" title="m_n_kappa.crosssection.Crosssection"><code class="xref py py-class docutils literal notranslate"><span class="pre">Crosssection</span></code></a>) – cross-section to compute</p></li>
+<li><p><strong>include_positive_curvature</strong> (<em>bool</em>) – if <code class="docutils literal notranslate"><span class="pre">True</span></code> then positive curvature values are computed (Default: <code class="docutils literal notranslate"><span class="pre">True</span></code>)</p></li>
+<li><p><strong>include_negative_curvature</strong> (<em>bool</em>) – if <code class="docutils literal notranslate"><span class="pre">True</span></code> then negative curvature values are computed (Default: <code class="docutils literal notranslate"><span class="pre">False</span></code>)</p></li>
 </ul>
 </dd>
 </dl>
+<p class="rubric">Examples</p>
+<p>For each cross-section an individual <span class="math notranslate nohighlight">\(M\)</span>-<span class="math notranslate nohighlight">\(\kappa\)</span>-curve is given.
+A HEB 200 steel-profile of steel-grade S355 is created as follows.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">m_n_kappa</span> <span class="kn">import</span> <span class="n">Steel</span><span class="p">,</span> <span class="n">IProfile</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">i_profile</span> <span class="o">=</span> <span class="n">IProfile</span><span class="p">(</span><span class="n">top_edge</span><span class="o">=</span><span class="mf">0.0</span><span class="p">,</span> <span class="n">b_fo</span><span class="o">=</span><span class="mi">200</span><span class="p">,</span> <span class="n">t_fo</span><span class="o">=</span><span class="mi">15</span><span class="p">,</span> <span class="n">t_w</span><span class="o">=</span><span class="mf">9.5</span><span class="p">,</span> <span class="n">h_w</span><span class="o">=</span><span class="mi">200</span><span class="o">-</span><span class="mi">2</span><span class="o">*</span><span class="mi">15</span><span class="p">)</span> <span class="c1"># Geometry</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">steel</span> <span class="o">=</span> <span class="n">Steel</span><span class="p">(</span><span class="n">f_y</span><span class="o">=</span><span class="mi">355</span><span class="p">,</span> <span class="n">f_u</span> <span class="o">=</span> <span class="mi">400</span><span class="p">,</span> <span class="n">failure_strain</span> <span class="o">=</span> <span class="mf">0.15</span><span class="p">)</span> <span class="c1"># Material</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">cross_section</span> <span class="o">=</span> <span class="n">i_profile</span> <span class="o">+</span> <span class="n">steel</span>
+</pre></div>
+</div>
+<p>The Moment-Curvature-Curve only with positive values is computed as follows</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">m_n_kappa</span> <span class="kn">import</span> <span class="n">MKappaCurve</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">positive_m_kappa</span> <span class="o">=</span> <span class="n">MKappaCurve</span><span class="p">(</span><span class="n">cross_section</span><span class="o">=</span><span class="n">cross_section</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>The Moment-Curvature-Curve only with negative values is computed as follows</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">negative_m_kappa</span> <span class="o">=</span> <span class="n">MKappaCurve</span><span class="p">(</span>
+<span class="gp">... </span>    <span class="n">cross_section</span><span class="o">=</span><span class="n">cross_section</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="n">include_positive_curvature</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="n">include_negative_curvature</span><span class="o">=</span><span class="kc">True</span>
+<span class="gp">... </span><span class="p">)</span>
+</pre></div>
+</div>
+<p>The Moment-Curvature-Curve with positive and negative values is computed as follows</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">full_m_kappa</span> <span class="o">=</span> <span class="n">MKappaCurve</span><span class="p">(</span><span class="n">cross_section</span><span class="o">=</span><span class="n">cross_section</span><span class="p">,</span> <span class="n">include_negative_curvature</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
 <p class="rubric">Attributes</p>
 <div class="table-wrapper autosummary longtable docutils container">
 <table class="autosummary longtable docutils align-default">
 <tbody>
-<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">boundaries</span></code></p></td>
-<td><p></p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#m_n_kappa.MKappaCurve.boundaries" title="m_n_kappa.MKappaCurve.boundaries"><code class="xref py py-obj docutils literal notranslate"><span class="pre">boundaries</span></code></a></p></td>
+<td><p>boundaries to compute</p></td>
 </tr>
-<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">cross_section</span></code></p></td>
-<td><p></p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#m_n_kappa.MKappaCurve.cross_section" title="m_n_kappa.MKappaCurve.cross_section"><code class="xref py py-obj docutils literal notranslate"><span class="pre">cross_section</span></code></a></p></td>
+<td><p>cross-section the <span class="math notranslate nohighlight">\(M\)</span>-<span class="math notranslate nohighlight">\(\kappa\)</span>-curve shall be computed</p></td>
 </tr>
-<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">include_negative_curvature</span></code></p></td>
-<td><p></p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#m_n_kappa.MKappaCurve.include_negative_curvature" title="m_n_kappa.MKappaCurve.include_negative_curvature"><code class="xref py py-obj docutils literal notranslate"><span class="pre">include_negative_curvature</span></code></a></p></td>
+<td><p>returns if <span class="math notranslate nohighlight">\(M\)</span>-<span class="math notranslate nohighlight">\(\kappa\)</span> under negative bending/curvature is included</p></td>
 </tr>
-<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">include_positive_curvature</span></code></p></td>
-<td><p></p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#m_n_kappa.MKappaCurve.include_positive_curvature" title="m_n_kappa.MKappaCurve.include_positive_curvature"><code class="xref py py-obj docutils literal notranslate"><span class="pre">include_positive_curvature</span></code></a></p></td>
+<td><p>returns if <span class="math notranslate nohighlight">\(M\)</span>-<span class="math notranslate nohighlight">\(\kappa\)</span> under positive bending/curvature is included</p></td>
 </tr>
-<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">m_kappa_points</span></code></p></td>
-<td><p></p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#m_n_kappa.MKappaCurve.m_kappa_points" title="m_n_kappa.MKappaCurve.m_kappa_points"><code class="xref py py-obj docutils literal notranslate"><span class="pre">m_kappa_points</span></code></a></p></td>
+<td><p>moment-curvature pairs of the curve</p></td>
 </tr>
-<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">negative</span></code></p></td>
-<td><p></p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#m_n_kappa.MKappaCurve.negative" title="m_n_kappa.MKappaCurve.negative"><code class="xref py py-obj docutils literal notranslate"><span class="pre">negative</span></code></a></p></td>
+<td><p>failure under negative bending/curvature</p></td>
 </tr>
-<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">positive</span></code></p></td>
-<td><p></p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#m_n_kappa.MKappaCurve.not_successful" title="m_n_kappa.MKappaCurve.not_successful"><code class="xref py py-obj docutils literal notranslate"><span class="pre">not_successful</span></code></a></p></td>
+<td><p>list <code class="xref py py-class docutils literal notranslate"><span class="pre">StrainPosition</span></code> that were not successful</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#m_n_kappa.MKappaCurve.positive" title="m_n_kappa.MKappaCurve.positive"><code class="xref py py-obj docutils literal notranslate"><span class="pre">positive</span></code></a></p></td>
+<td><p>failure under positive bending/curvature</p></td>
 </tr>
 </tbody>
 </table>
 </div>
+<dl class="py property">
+<dt class="sig sig-object py" id="m_n_kappa.MKappaCurve.boundaries">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">boundaries</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="m_n_kappa.curvature_boundaries.Boundaries.html#m_n_kappa.curvature_boundaries.Boundaries" title="m_n_kappa.curvature_boundaries.Boundaries"><span class="pre">Boundaries</span></a></em><a class="headerlink" href="#m_n_kappa.MKappaCurve.boundaries" title="Permalink to this definition">#</a></dt>
+<dd><p>boundaries to compute</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="m_n_kappa.MKappaCurve.cross_section">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">cross_section</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="m_n_kappa.Crosssection.html#m_n_kappa.Crosssection" title="m_n_kappa.crosssection.Crosssection"><span class="pre">Crosssection</span></a></em><a class="headerlink" href="#m_n_kappa.MKappaCurve.cross_section" title="Permalink to this definition">#</a></dt>
+<dd><p>cross-section the <span class="math notranslate nohighlight">\(M\)</span>-<span class="math notranslate nohighlight">\(\kappa\)</span>-curve shall be computed</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="m_n_kappa.MKappaCurve.include_negative_curvature">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">include_negative_curvature</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">bool</span></em><a class="headerlink" href="#m_n_kappa.MKappaCurve.include_negative_curvature" title="Permalink to this definition">#</a></dt>
+<dd><p>returns if <span class="math notranslate nohighlight">\(M\)</span>-<span class="math notranslate nohighlight">\(\kappa\)</span> under negative bending/curvature is included</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="m_n_kappa.MKappaCurve.include_positive_curvature">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">include_positive_curvature</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">bool</span></em><a class="headerlink" href="#m_n_kappa.MKappaCurve.include_positive_curvature" title="Permalink to this definition">#</a></dt>
+<dd><p>returns if <span class="math notranslate nohighlight">\(M\)</span>-<span class="math notranslate nohighlight">\(\kappa\)</span> under positive bending/curvature is included</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="m_n_kappa.MKappaCurve.m_kappa_points">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">m_kappa_points</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="m_n_kappa.curves_m_kappa.MKappaCurvePoints.html#m_n_kappa.curves_m_kappa.MKappaCurvePoints" title="m_n_kappa.curves_m_kappa.MKappaCurvePoints"><span class="pre">MKappaCurvePoints</span></a></em><a class="headerlink" href="#m_n_kappa.MKappaCurve.m_kappa_points" title="Permalink to this definition">#</a></dt>
+<dd><p>moment-curvature pairs of the curve</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="m_n_kappa.MKappaCurve.negative">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">negative</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">MKappaCurveCurvature</span></em><a class="headerlink" href="#m_n_kappa.MKappaCurve.negative" title="Permalink to this definition">#</a></dt>
+<dd><p>failure under negative bending/curvature</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="m_n_kappa.MKappaCurve.not_successful">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">not_successful</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">list</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="m_n_kappa.general.StrainPosition.html#m_n_kappa.general.StrainPosition" title="m_n_kappa.general.StrainPosition"><span class="pre">m_n_kappa.general.StrainPosition</span></a><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#m_n_kappa.MKappaCurve.not_successful" title="Permalink to this definition">#</a></dt>
+<dd><p>list <code class="xref py py-class docutils literal notranslate"><span class="pre">StrainPosition</span></code> that were not successful</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="m_n_kappa.MKappaCurve.positive">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">positive</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">MKappaCurveCurvature</span></em><a class="headerlink" href="#m_n_kappa.MKappaCurve.positive" title="Permalink to this definition">#</a></dt>
+<dd><p>failure under positive bending/curvature</p>
+</dd></dl>
+
 </dd></dl>
 
 </section>
@@ -427,7 +514,17 @@
           <div class="toc-tree">
             <ul>
 <li><a class="reference internal" href="#">m_n_kappa.MKappaCurve</a><ul>
-<li><a class="reference internal" href="#m_n_kappa.MKappaCurve"><code class="docutils literal notranslate"><span class="pre">MKappaCurve</span></code></a></li>
+<li><a class="reference internal" href="#m_n_kappa.MKappaCurve"><code class="docutils literal notranslate"><span class="pre">MKappaCurve</span></code></a><ul>
+<li><a class="reference internal" href="#m_n_kappa.MKappaCurve.boundaries"><code class="docutils literal notranslate"><span class="pre">MKappaCurve.boundaries</span></code></a></li>
+<li><a class="reference internal" href="#m_n_kappa.MKappaCurve.cross_section"><code class="docutils literal notranslate"><span class="pre">MKappaCurve.cross_section</span></code></a></li>
+<li><a class="reference internal" href="#m_n_kappa.MKappaCurve.include_negative_curvature"><code class="docutils literal notranslate"><span class="pre">MKappaCurve.include_negative_curvature</span></code></a></li>
+<li><a class="reference internal" href="#m_n_kappa.MKappaCurve.include_positive_curvature"><code class="docutils literal notranslate"><span class="pre">MKappaCurve.include_positive_curvature</span></code></a></li>
+<li><a class="reference internal" href="#m_n_kappa.MKappaCurve.m_kappa_points"><code class="docutils literal notranslate"><span class="pre">MKappaCurve.m_kappa_points</span></code></a></li>
+<li><a class="reference internal" href="#m_n_kappa.MKappaCurve.negative"><code class="docutils literal notranslate"><span class="pre">MKappaCurve.negative</span></code></a></li>
+<li><a class="reference internal" href="#m_n_kappa.MKappaCurve.not_successful"><code class="docutils literal notranslate"><span class="pre">MKappaCurve.not_successful</span></code></a></li>
+<li><a class="reference internal" href="#m_n_kappa.MKappaCurve.positive"><code class="docutils literal notranslate"><span class="pre">MKappaCurve.positive</span></code></a></li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
@@ -449,7 +546,12 @@
     <script src="../_static/clipboard.min.js"></script>
     <script src="../_static/copybutton.js"></script>
     <script src="../_static/toggleprompt.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vega@5"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vega-lite@4.17.0"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vega-embed@6"></script>
     <script src="../_static/design-tabs.js"></script>
     <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     </body>
 </html>

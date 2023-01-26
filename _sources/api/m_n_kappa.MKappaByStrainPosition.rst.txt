@@ -46,6 +46,7 @@
       ~MKappaByStrainPosition.minimum_curvature
       ~MKappaByStrainPosition.moment
       ~MKappaByStrainPosition.neutral_axis
+      ~MKappaByStrainPosition.not_successful_reason
       ~MKappaByStrainPosition.solver
       ~MKappaByStrainPosition.strain_position
       ~MKappaByStrainPosition.successful

@@ -1,0 +1,503 @@
+<!doctype html>
+<html class="no-js" lang="en">
+  <head><meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width,initial-scale=1"/>
+    <meta name="color-scheme" content="light dark"><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
+<link rel="index" title="Index" href="../../genindex.html" /><link rel="search" title="Search" href="../../search.html" />
+
+    <!-- Generated with Sphinx 5.3.0 and Furo 2022.12.07 -->
+        <title>Hybrid beam - M-N-κ</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/furo.css?digest=91d0f0d1c444bdcb17a68e833c7a53903343c195" />
+    <link rel="stylesheet" type="text/css" href="../../_static/altair-plot.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/furo-extensions.css?digest=30d1aed668e5c3a91c3e3bf6a60b675221979f0e" />
+    <link rel="stylesheet" type="text/css" href="../../_static/css/custom.css" />
+    
+    
+
+
+<style>
+  body {
+    --color-code-background: #f8f8f8;
+  --color-code-foreground: black;
+  
+  }
+  @media not print {
+    body[data-theme="dark"] {
+      --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  
+    }
+    @media (prefers-color-scheme: dark) {
+      body:not([data-theme="light"]) {
+        --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  
+      }
+    }
+  }
+</style></head>
+  <body>
+    
+    <script>
+      document.body.dataset.theme = localStorage.getItem("theme") || "auto";
+    </script>
+    
+
+<svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+  <symbol id="svg-toc" viewBox="0 0 24 24">
+    <title>Contents</title>
+    <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 1024 1024">
+      <path d="M408 442h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8zm-8 204c0 4.4 3.6 8 8 8h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56zm504-486H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zm0 632H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zM115.4 518.9L271.7 642c5.8 4.6 14.4.5 14.4-6.9V388.9c0-7.4-8.5-11.5-14.4-6.9L115.4 505.1a8.74 8.74 0 0 0 0 13.8z"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-menu" viewBox="0 0 24 24">
+    <title>Menu</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-menu">
+      <line x1="3" y1="12" x2="21" y2="12"></line>
+      <line x1="3" y1="6" x2="21" y2="6"></line>
+      <line x1="3" y1="18" x2="21" y2="18"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-arrow-right" viewBox="0 0 24 24">
+    <title>Expand</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-chevron-right">
+      <polyline points="9 18 15 12 9 6"></polyline>
+    </svg>
+  </symbol>
+  <symbol id="svg-sun" viewBox="0 0 24 24">
+    <title>Light mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="feather-sun">
+      <circle cx="12" cy="12" r="5"></circle>
+      <line x1="12" y1="1" x2="12" y2="3"></line>
+      <line x1="12" y1="21" x2="12" y2="23"></line>
+      <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+      <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+      <line x1="1" y1="12" x2="3" y2="12"></line>
+      <line x1="21" y1="12" x2="23" y2="12"></line>
+      <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+      <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-moon" viewBox="0 0 24 24">
+    <title>Dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-moon">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M12 3c.132 0 .263 0 .393 0a7.5 7.5 0 0 0 7.92 12.446a9 9 0 1 1 -8.313 -12.454z" />
+    </svg>
+  </symbol>
+  <symbol id="svg-sun-half" viewBox="0 0 24 24">
+    <title>Auto light/dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-shadow">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+      <circle cx="12" cy="12" r="9" />
+      <path d="M13 12h5" />
+      <path d="M13 15h4" />
+      <path d="M13 18h1" />
+      <path d="M13 9h4" />
+      <path d="M13 6h1" />
+    </svg>
+  </symbol>
+</svg>
+
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation">
+<input type="checkbox" class="sidebar-toggle" name="__toc" id="__toc">
+<label class="overlay sidebar-overlay" for="__navigation">
+  <div class="visually-hidden">Hide navigation sidebar</div>
+</label>
+<label class="overlay toc-overlay" for="__toc">
+  <div class="visually-hidden">Hide table of contents sidebar</div>
+</label>
+
+<div class="announcement">
+  <aside class="announcement-content">
+     <em>Important</em> This 'm_n_kappa'-package has not yet been published on PyPI! This documentation is also currently under development. Plaese keep that in mind, while reading and testing. Thank you. 
+  </aside>
+</div>
+
+<div class="page">
+  <header class="mobile-header">
+    <div class="header-left">
+      <label class="nav-overlay-icon" for="__navigation">
+        <div class="visually-hidden">Toggle site navigation sidebar</div>
+        <i class="icon"><svg><use href="#svg-menu"></use></svg></i>
+      </label>
+    </div>
+    <div class="header-center">
+      <a href="../../index.html"><div class="brand"><i>M</i>-<i>N</i>-<i>&#954</i></div></a>
+    </div>
+    <div class="header-right">
+      <div class="theme-toggle-container theme-toggle-header">
+        <button class="theme-toggle">
+          <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
+          <svg class="theme-icon-when-auto"><use href="#svg-sun-half"></use></svg>
+          <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+          <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+        </button>
+      </div>
+      <label class="toc-overlay-icon toc-header-icon" for="__toc">
+        <div class="visually-hidden">Toggle table of contents sidebar</div>
+        <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+      </label>
+    </div>
+  </header>
+  <aside class="sidebar-drawer">
+    <div class="sidebar-container">
+      
+      <div class="sidebar-sticky"><a class="sidebar-brand centered" href="../../index.html">
+  
+  <div class="sidebar-logo-container">
+    <img class="sidebar-logo" src="../../_static/m_kappa_logo.png" alt="Logo"/>
+  </div>
+  
+  <span class="sidebar-brand-text"><i>M</i>-<i>N</i>-<i>&#954</i></span>
+  
+</a><form class="sidebar-search-container" method="get" action="../../search.html" role="search">
+  <input class="sidebar-search" placeholder="Search" name="q" aria-label="Search">
+  <input type="hidden" name="check_keywords" value="yes">
+  <input type="hidden" name="area" value="default">
+</form>
+<div id="searchbox"></div><div class="sidebar-scroll"><div class="sidebar-tree">
+  <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../getting_started.html">Getting Started</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../index.html">Examples</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../geometry.html">Creating Geometries</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../material.html">Creating materials</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../section.html">Build a section</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cross_section.html">Build a cross-section</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../moment_curvature.html">Moment-Curvature</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../moment_curvature_curve.html">Moment-Curvature-Curve</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../loading.html">Loading</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../deformation.html">Deformation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../m_kappa_UPE.html">Single span slim-floor beam with Moment-Curvature-Curves</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../m_n_kappa_UPE.html">Single span slim-floor beam with Moment-Axial force-Curvature-Curves</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="index.html">Templates</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" role="switch" type="checkbox"/><label for="toctree-checkbox-2"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="simple">
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../theory/index.html">Theory guide</a><input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" role="switch" type="checkbox"/><label for="toctree-checkbox-3"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../theory/symbols.html">Symbols</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../theory/coordinates.html">Coordinates</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../theory/units.html">Units</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../theory/general.html">General</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../theory/geometries.html">Geometry</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../theory/materials.html">Materials</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../theory/sections.html">Sections and cross-sections</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../theory/strain_based_design.html">Strain based design</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../theory/m_kappa_curve.html"><span class="math notranslate nohighlight">\(M\)</span>-<span class="math notranslate nohighlight">\(\kappa\)</span>-curve</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../theory/effective_widths.html">Effective widths</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../theory/loading.html">Loading</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../theory/deformations.html">Deformations</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../verification/index.html">Verification</a><input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" role="switch" type="checkbox"/><label for="toctree-checkbox-4"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="simple">
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Development</span></p>
+<ul>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../api.html">API reference</a><input class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" role="switch" type="checkbox"/><label for="toctree-checkbox-5"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../api/m_n_kappa.Geometry.html">m_n_kappa.Geometry</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../api/m_n_kappa.Rectangle.html">m_n_kappa.Rectangle</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../api/m_n_kappa.Circle.html">m_n_kappa.Circle</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../api/m_n_kappa.Trapezoid.html">m_n_kappa.Trapezoid</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../api/m_n_kappa.geometry.ComposedGeometry.html">m_n_kappa.geometry.ComposedGeometry</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../api/m_n_kappa.IProfile.html">m_n_kappa.IProfile</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../api/m_n_kappa.UPEProfile.html">m_n_kappa.UPEProfile</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../api/m_n_kappa.RebarLayer.html">m_n_kappa.RebarLayer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../api/m_n_kappa.Material.html">m_n_kappa.Material</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../api/m_n_kappa.Concrete.html">m_n_kappa.Concrete</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../api/m_n_kappa.Steel.html">m_n_kappa.Steel</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../api/m_n_kappa.Reinforcement.html">m_n_kappa.Reinforcement</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../api/m_n_kappa.Section.html">m_n_kappa.Section</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../api/m_n_kappa.Crosssection.html">m_n_kappa.Crosssection</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../api/m_n_kappa.MKappaByStrainPosition.html">m_n_kappa.MKappaByStrainPosition</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../api/m_n_kappa.MKappaByConstantCurvature.html">m_n_kappa.MKappaByConstantCurvature</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../api/m_n_kappa.MKappaCurve.html">m_n_kappa.MKappaCurve</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../api/m_n_kappa.curves_m_kappa.MKappaCurvePoint.html">m_n_kappa.curves_m_kappa.MKappaCurvePoint</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../api/m_n_kappa.curves_m_kappa.MKappaCurvePoints.html">m_n_kappa.curves_m_kappa.MKappaCurvePoints</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../api/m_n_kappa.SingleSpanUniformLoad.html">m_n_kappa.SingleSpanUniformLoad</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../api/m_n_kappa.SingleLoad.html">m_n_kappa.SingleLoad</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../api/m_n_kappa.SingleSpanSingleLoads.html">m_n_kappa.SingleSpanSingleLoads</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../api/m_n_kappa.SingleSpan.html">m_n_kappa.SingleSpan</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../api/m_n_kappa.Beam.html">m_n_kappa.Beam</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../api/m_n_kappa.Node.html">m_n_kappa.Node</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../api_developers.html">API for developers</a><input class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" role="switch" type="checkbox"/><label for="toctree-checkbox-6"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../api/m_n_kappa.general.StrainPosition.html">m_n_kappa.general.StrainPosition</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../api/m_n_kappa.general.EffectiveWidths.html">m_n_kappa.general.EffectiveWidths</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../api/m_n_kappa.general.curvature.html">m_n_kappa.general.curvature</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../api/m_n_kappa.general.curvature_by_points.html">m_n_kappa.general.curvature_by_points</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../api/m_n_kappa.general.strain.html">m_n_kappa.general.strain</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../api/m_n_kappa.general.position.html">m_n_kappa.general.position</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../api/m_n_kappa.general.neutral_axis.html">m_n_kappa.general.neutral_axis</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../api/m_n_kappa.general.remove_duplicates.html">m_n_kappa.general.remove_duplicates</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../api/m_n_kappa.general.positive_sign.html">m_n_kappa.general.positive_sign</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../api/m_n_kappa.general.negative_sign.html">m_n_kappa.general.negative_sign</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../api/m_n_kappa.general.interpolation.html">m_n_kappa.general.interpolation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../api/m_n_kappa.geometry.check_width.html">m_n_kappa.geometry.check_width</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../api/m_n_kappa.material.StressStrain.html">m_n_kappa.material.StressStrain</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../api/m_n_kappa.material.ConcreteCompression.html">m_n_kappa.material.ConcreteCompression</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../api/m_n_kappa.material.ConcreteCompressionNonlinear.html">m_n_kappa.material.ConcreteCompressionNonlinear</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../api/m_n_kappa.material.ConcreteCompressionParabolaRectangle.html">m_n_kappa.material.ConcreteCompressionParabolaRectangle</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../api/m_n_kappa.material.ConcreteCompressionBiLinear.html">m_n_kappa.material.ConcreteCompressionBiLinear</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../api/m_n_kappa.material.ConcreteTension.html">m_n_kappa.material.ConcreteTension</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../api/m_n_kappa.section.ComputationSection.html">m_n_kappa.section.ComputationSection</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../api/m_n_kappa.section.ComputationSectionCurvature.html">m_n_kappa.section.ComputationSectionCurvature</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../api/m_n_kappa.section.ComputationSectionStrain.html">m_n_kappa.section.ComputationSectionStrain</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../api/m_n_kappa.crosssection.ComputationCrosssection.html">m_n_kappa.crosssection.ComputationCrosssection</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../api/m_n_kappa.crosssection.ComputationCrosssectionStrain.html">m_n_kappa.crosssection.ComputationCrosssectionStrain</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../api/m_n_kappa.crosssection.ComputationCrosssectionCurvature.html">m_n_kappa.crosssection.ComputationCrosssectionCurvature</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../api/m_n_kappa.crosssection.ComputationCrosssectionStrainAdd.html">m_n_kappa.crosssection.ComputationCrosssectionStrainAdd</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../api/m_n_kappa.crosssection.EdgeStrains.html">m_n_kappa.crosssection.EdgeStrains</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../api/m_n_kappa.crosssection.CrossSectionBoundaries.html">m_n_kappa.crosssection.CrossSectionBoundaries</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../api/m_n_kappa.crosssection.axial_force.html">m_n_kappa.crosssection.axial_force</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../api/m_n_kappa.crosssection.moment.html">m_n_kappa.crosssection.moment</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../api/m_n_kappa.crosssection.determine_curvatures.html">m_n_kappa.crosssection.determine_curvatures</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../api/m_n_kappa.crosssection.compute_neutral_axis.html">m_n_kappa.crosssection.compute_neutral_axis</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../api/m_n_kappa.curvature_boundaries.MaximumCurvature.html">m_n_kappa.curvature_boundaries.MaximumCurvature</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../api/m_n_kappa.curvature_boundaries.MinimumCurvature.html">m_n_kappa.curvature_boundaries.MinimumCurvature</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../api/m_n_kappa.curvature_boundaries.BoundaryValues.html">m_n_kappa.curvature_boundaries.BoundaryValues</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../api/m_n_kappa.curvature_boundaries.Boundaries.html">m_n_kappa.curvature_boundaries.Boundaries</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../api/m_n_kappa.curvature_boundaries.compute_curvatures.html">m_n_kappa.curvature_boundaries.compute_curvatures</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../api/m_n_kappa.curvature_boundaries.remove_higher_strains.html">m_n_kappa.curvature_boundaries.remove_higher_strains</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../api/m_n_kappa.curvature_boundaries.remove_smaller_strains.html">m_n_kappa.curvature_boundaries.remove_smaller_strains</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../api/m_n_kappa.curvature_boundaries.get_lower_positions.html">m_n_kappa.curvature_boundaries.get_lower_positions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../api/m_n_kappa.curvature_boundaries.get_higher_positions.html">m_n_kappa.curvature_boundaries.get_higher_positions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../api/m_n_kappa.points.Computation.html">m_n_kappa.points.Computation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../api/m_n_kappa.points.MKappa.html">m_n_kappa.points.MKappa</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../api/m_n_kappa.solver.Solver.html">m_n_kappa.solver.Solver</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../api/m_n_kappa.solver.Bisection.html">m_n_kappa.solver.Bisection</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../api/m_n_kappa.solver.Newton.html">m_n_kappa.solver.Newton</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../api/m_n_kappa.loading.ABCSingleSpan.html">m_n_kappa.loading.ABCSingleSpan</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../roadmap.html">Roadmap and To Do’s</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../contributing.html">Contributing</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../whatsnew/index.html">Release Notes</a><input class="toctree-checkbox" id="toctree-checkbox-7" name="toctree-checkbox-7" role="switch" type="checkbox"/><label for="toctree-checkbox-7"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../whatsnew/v0.1.0.html">What’s new in 0.1.0 (??. January 2023)</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../license.html">License</a></li>
+</ul>
+
+</div>
+</div>
+
+      </div>
+      
+    </div>
+  </aside>
+  <div class="main">
+    <div class="content">
+      <div class="article-container">
+        <a href="#" class="back-to-top muted-link">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12z"></path>
+          </svg>
+          <span>Back to top</span>
+        </a>
+        <div class="content-icon-container">
+          <div class="edit-this-page">
+  <a class="muted-link" href="https://github.com/JohannesSchorr/M-N-Kappa/edit/master/docs/source/examples/cross_section_templates/slim_floor_hybrid_beam.rst" title="Edit this page">
+    <svg aria-hidden="true" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+      <path d="M4 20h4l10.5 -10.5a1.5 1.5 0 0 0 -4 -4l-10.5 10.5v4" />
+      <line x1="13.5" y1="6.5" x2="17.5" y2="10.5" />
+    </svg>
+    <span class="visually-hidden">Edit this page</span>
+  </a>
+</div><div class="theme-toggle-container theme-toggle-content">
+            <button class="theme-toggle">
+              <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
+              <svg class="theme-icon-when-auto"><use href="#svg-sun-half"></use></svg>
+              <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+              <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+            </button>
+          </div>
+          <label class="toc-overlay-icon toc-content-icon" for="__toc">
+            <div class="visually-hidden">Toggle table of contents sidebar</div>
+            <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+          </label>
+        </div>
+        <article role="main">
+          <section id="hybrid-beam">
+<span id="cross-section-template-slim-floor-hybrid-beam"></span><h1>Hybrid beam<a class="headerlink" href="#hybrid-beam" title="Permalink to this heading">#</a></h1>
+<div class="admonition-todo admonition" id="id1">
+<p class="admonition-title">Todo</p>
+<p>document examples/cross_section_templates/slim_floor_hybrid_beam</p>
+</div>
+<section id="computation">
+<h2>Computation<a class="headerlink" href="#computation" title="Permalink to this heading">#</a></h2>
+<p>The <code class="docutils literal notranslate"><span class="pre">cross_section</span></code> you created above is the basis to do a variety of computations:</p>
+<div class="sd-tab-set docutils">
+<input checked="checked" id="sd-tab-item-0" name="sd-tab-set-0" type="radio">
+</input><label class="sd-tab-label" for="sd-tab-item-0">
+Curvature</label><div class="sd-tab-content docutils">
+<p>In case you want to compute a single curvature-value from a given strain at a given position, you
+first have to define strain and its position using <code class="xref py py-class docutils literal notranslate"><span class="pre">StrainPosition</span></code>
+<code class="docutils literal notranslate"><span class="pre">strain_position</span></code> is the boundary-condition, that is passed to <a class="reference internal" href="../../api/m_n_kappa.MKappaByStrainPosition.html#m_n_kappa.MKappaByStrainPosition" title="m_n_kappa.MKappaByStrainPosition"><code class="xref py py-class docutils literal notranslate"><span class="pre">MKappaByStrainPosition</span></code></a>
+that is computing the curvature.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">m_n_kappa</span> <span class="kn">import</span> <span class="n">StrainPosition</span><span class="p">,</span> <span class="n">MKappaByStrainPosition</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">strain_position</span> <span class="o">=</span> <span class="n">StrainPosition</span><span class="p">(</span><span class="n">strain</span><span class="o">=-</span><span class="mf">0.01</span><span class="p">,</span> <span class="n">position</span><span class="o">=</span><span class="mf">0.0</span><span class="p">,</span> <span class="n">material</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">computation</span> <span class="o">=</span> <span class="n">MKappaByStrainPosition</span><span class="p">(</span>
+<span class="gp">... </span>    <span class="n">cross_section</span><span class="o">=</span><span class="n">cross_section</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="n">strain_position</span> <span class="o">=</span> <span class="n">strain_position</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="n">positive_curvature</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>After computation you can extract the results as follows:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">computation.successful</span></code>: if <code class="docutils literal notranslate"><span class="pre">True</span></code> equilibrium of horizontal forces has been achieved during computation</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">computation.axial_force</span></code>: computed axial forces that should be near zero as this is what the computation
+is aimed at</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">computation.moment</span></code>: computed moment</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">computation.curvature</span></code>: computed curvature</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">computation.neutral_axis</span></code>: vertical position of the neutral axis (strain <span class="math notranslate nohighlight">\(\varepsilon=0\)</span>)</p></li>
+</ul>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p><a class="reference internal" href="../moment_curvature_curve.html#examples-moment-curvature-curve"><span class="std std-ref">Moment-Curvature-Curve</span></a>: further explanations regarding computation of a single
+moment-curvature-point</p>
+</div>
+</div>
+<input id="sd-tab-item-1" name="sd-tab-set-0" type="radio">
+</input><label class="sd-tab-label" for="sd-tab-item-1">
+M-<span class="math notranslate nohighlight">\(\kappa\)</span>-curve</label><div class="sd-tab-content docutils">
+<p>The <span class="math notranslate nohighlight">\(M\)</span>-<span class="math notranslate nohighlight">\(\kappa\)</span>-curve is easily computed by passing the created <code class="docutils literal notranslate"><span class="pre">cross_section</span></code> to
+<a class="reference internal" href="../../api/m_n_kappa.MKappaCurve.html#m_n_kappa.MKappaCurve" title="m_n_kappa.MKappaCurve"><code class="xref py py-class docutils literal notranslate"><span class="pre">MKappaCurve</span></code></a>.
+You only have to decide if you want only the positive moment-curvature-points,
+the negative moment-curvature-points or both.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">m_n_kappa</span> <span class="kn">import</span> <span class="n">MKappaCurve</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">positive_m_kappa</span> <span class="o">=</span> <span class="n">MKappaCurve</span><span class="p">(</span><span class="n">cross_section</span><span class="o">=</span><span class="n">cross_section</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">negative_m_kappa</span> <span class="o">=</span> <span class="n">MKappaCurve</span><span class="p">(</span>
+<span class="gp">... </span>    <span class="n">cross_section</span><span class="o">=</span><span class="n">cross_section</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="n">include_positive_curvature</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="n">include_negative_curvature</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">full_m_kappa</span> <span class="o">=</span> <span class="n">MKappaCurve</span><span class="p">(</span>
+<span class="gp">... </span>    <span class="n">cross_section</span><span class="o">=</span><span class="n">cross_section</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="n">include_positive_curvature</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="n">include_negative_curvature</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>The computed points are then stored in the attribute <code class="docutils literal notranslate"><span class="pre">m_kappa_points</span></code> that returns
+<a class="reference internal" href="../../api/m_n_kappa.curves_m_kappa.MKappaCurvePoints.html#m_n_kappa.curves_m_kappa.MKappaCurvePoints" title="m_n_kappa.curves_m_kappa.MKappaCurvePoints"><code class="xref py py-class docutils literal notranslate"><span class="pre">MKappaCurvePoints</span></code></a>-object.</p>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p><a class="reference internal" href="../moment_curvature_curve.html#examples-moment-curvature-curve"><span class="std std-ref">Moment-Curvature-Curve</span></a> : further explanation regarding computation of the Moment-
+Curvature-Curve</p>
+</div>
+</div>
+<input id="sd-tab-item-2" name="sd-tab-set-0" type="radio">
+</input><label class="sd-tab-label" for="sd-tab-item-2">
+Beam-Deformation</label><div class="sd-tab-content docutils">
+<p>For computation of the <span class="math notranslate nohighlight">\(M\)</span>-<span class="math notranslate nohighlight">\(\kappa\)</span>-curves in a beam you need the loading-scenario
+beside your <code class="docutils literal notranslate"><span class="pre">cross_section</span></code>.
+And you should decide in how many elements the beam shall be split into (see <code class="docutils literal notranslate"><span class="pre">element_number</span></code>).
+In case you also want to consider the effective widths you may set <code class="docutils literal notranslate"><span class="pre">consider_widths=True</span></code>.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">m_n_kappa</span> <span class="kn">import</span> <span class="n">SingleSpanUniformLoad</span><span class="p">,</span> <span class="n">Beam</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">loading</span> <span class="o">=</span> <span class="n">SingleSpanUniformLoad</span><span class="p">(</span><span class="n">length</span><span class="o">=</span><span class="mi">8000</span><span class="p">,</span> <span class="n">load</span><span class="o">=</span><span class="mf">1.0</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">beam</span> <span class="o">=</span> <span class="n">Beam</span><span class="p">(</span><span class="n">cross_section</span><span class="o">=</span><span class="n">cross_section</span><span class="p">,</span> <span class="n">element_number</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">load</span><span class="o">=</span><span class="n">loading</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">beam_consider_widths</span> <span class="o">=</span> <span class="n">Beam</span><span class="p">(</span>
+<span class="gp">... </span>    <span class="n">cross_section</span><span class="o">=</span><span class="n">cross_section</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="n">element_number</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="n">load</span><span class="o">=</span><span class="n">loading</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="n">consider_widths</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>The computed beams allow you to do a number of analysis, like:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">beam.deformation_over_length(loading)</span></code>: computes the deformation at each node along the beam
+under the given load</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">beam.deformations(at_position)</span></code>: computes the deformation at the given position for the relevant load-steps</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">beam.deformations_at_maximum_deformation_position()</span></code>: same like <code class="docutils literal notranslate"><span class="pre">beam.deformations(at_position)</span></code> but
+at the position of the beam where the maximum deformation occurred under the given <code class="docutils literal notranslate"><span class="pre">loading</span></code>.</p></li>
+</ul>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p><a class="reference internal" href="../loading.html#examples-loading"><span class="std std-ref">Loading</span></a>: further explanation of loading scenarios</p>
+<p><a class="reference internal" href="../deformation.html#examples-deformation"><span class="std std-ref">Deformation</span></a> : further explanation regarding computation of beam-deformation</p>
+</div>
+</div>
+</div>
+</section>
+</section>
+
+        </article>
+      </div>
+      <footer>
+        
+        <div class="related-pages">
+          
+          
+        </div>
+        <div class="bottom-of-page">
+          <div class="left-details">
+            <div class="copyright">
+                Copyright &#169; 2023, Johannes Schorr
+            </div>
+            Made with <a href="https://www.sphinx-doc.org/">Sphinx</a> and <a class="muted-link" href="https://pradyunsg.me">@pradyunsg</a>'s
+            
+            <a href="https://github.com/pradyunsg/furo">Furo</a>
+            
+          </div>
+          <div class="right-details">
+            
+          </div>
+        </div>
+        
+      </footer>
+    </div>
+    <aside class="toc-drawer">
+      
+      
+      <div class="toc-sticky toc-scroll">
+        <div class="toc-title-container">
+          <span class="toc-title">
+            On this page
+          </span>
+        </div>
+        <div class="toc-tree-container">
+          <div class="toc-tree">
+            <ul>
+<li><a class="reference internal" href="#">Hybrid beam</a><ul>
+<li><a class="reference internal" href="#computation">Computation</a></li>
+</ul>
+</li>
+</ul>
+
+          </div>
+        </div>
+      </div>
+      
+      
+    </aside>
+  </div>
+</div><script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/jquery.js"></script>
+    <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/sphinx_highlight.js"></script>
+    <script src="../../_static/scripts/furo.js"></script>
+    <script src="../../_static/clipboard.min.js"></script>
+    <script src="../../_static/copybutton.js"></script>
+    <script src="../../_static/toggleprompt.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vega@5"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vega-lite@4.17.0"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vega-embed@6"></script>
+    <script src="../../_static/design-tabs.js"></script>
+    <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    </body>
+</html>

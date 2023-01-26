@@ -3,13 +3,13 @@
   <head><meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width,initial-scale=1"/>
     <meta name="color-scheme" content="light dark"><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
-<link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" /><link rel="next" title="Single span Slim-Floor Beam with \(M\)-\(N\)-\(\kappa\)-Curve" href="m_n_kappa_UPE.html" /><link rel="prev" title="Build a section" href="section.html" />
+<link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" /><link rel="next" title="Single span Slim-Floor Beam with \(M\)-\(N\)-\(\kappa\)-Curve" href="m_n_kappa_UPE.html" /><link rel="prev" title="Deformation" href="deformation.html" />
 
     <!-- Generated with Sphinx 5.3.0 and Furo 2022.12.07 -->
         <title>Single span slim-floor beam with \(M\)-\(\kappa\)-Curve - M-N-κ</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?digest=91d0f0d1c444bdcb17a68e833c7a53903343c195" />
-    <link rel="stylesheet" type="text/css" href="../_static/plot_directive.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/altair-plot.css" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
     <link rel="stylesheet" type="text/css" href="../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/furo-extensions.css?digest=30d1aed668e5c3a91c3e3bf6a60b675221979f0e" />
@@ -171,11 +171,19 @@
 <li class="toctree-l2"><a class="reference internal" href="geometry.html">Creating Geometries</a></li>
 <li class="toctree-l2"><a class="reference internal" href="material.html">Creating materials</a></li>
 <li class="toctree-l2"><a class="reference internal" href="section.html">Build a section</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cross_section.html">Build a cross-section</a></li>
+<li class="toctree-l2"><a class="reference internal" href="moment_curvature.html">Moment-Curvature</a></li>
+<li class="toctree-l2"><a class="reference internal" href="moment_curvature_curve.html">Moment-Curvature-Curve</a></li>
+<li class="toctree-l2"><a class="reference internal" href="loading.html">Loading</a></li>
+<li class="toctree-l2"><a class="reference internal" href="deformation.html">Deformation</a></li>
 <li class="toctree-l2 current current-page"><a class="current reference internal" href="#">Single span slim-floor beam with Moment-Curvature-Curves</a></li>
 <li class="toctree-l2"><a class="reference internal" href="m_n_kappa_UPE.html">Single span slim-floor beam with Moment-Axial force-Curvature-Curves</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="cross_section_templates/index.html">Templates</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" role="switch" type="checkbox"/><label for="toctree-checkbox-2"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="simple">
 </ul>
 </li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="../theory/index.html">Theory guide</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" role="switch" type="checkbox"/><label for="toctree-checkbox-2"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../theory/index.html">Theory guide</a><input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" role="switch" type="checkbox"/><label for="toctree-checkbox-3"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
 <li class="toctree-l2"><a class="reference internal" href="../theory/symbols.html">Symbols</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../theory/coordinates.html">Coordinates</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../theory/units.html">Units</a></li>
@@ -190,13 +198,13 @@
 <li class="toctree-l2"><a class="reference internal" href="../theory/deformations.html">Deformations</a></li>
 </ul>
 </li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="../verification/index.html">Verification</a><input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" role="switch" type="checkbox"/><label for="toctree-checkbox-3"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="simple">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../verification/index.html">Verification</a><input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" role="switch" type="checkbox"/><label for="toctree-checkbox-4"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="simple">
 </ul>
 </li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Development</span></p>
 <ul>
-<li class="toctree-l1 has-children"><a class="reference internal" href="../api.html">API reference</a><input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" role="switch" type="checkbox"/><label for="toctree-checkbox-4"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../api.html">API reference</a><input class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" role="switch" type="checkbox"/><label for="toctree-checkbox-5"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
 <li class="toctree-l2"><a class="reference internal" href="../api/m_n_kappa.Geometry.html">m_n_kappa.Geometry</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../api/m_n_kappa.Rectangle.html">m_n_kappa.Rectangle</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../api/m_n_kappa.Circle.html">m_n_kappa.Circle</a></li>
@@ -224,7 +232,7 @@
 <li class="toctree-l2"><a class="reference internal" href="../api/m_n_kappa.Node.html">m_n_kappa.Node</a></li>
 </ul>
 </li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="../api_developers.html">API for developers</a><input class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" role="switch" type="checkbox"/><label for="toctree-checkbox-5"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../api_developers.html">API for developers</a><input class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" role="switch" type="checkbox"/><label for="toctree-checkbox-6"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
 <li class="toctree-l2"><a class="reference internal" href="../api/m_n_kappa.general.StrainPosition.html">m_n_kappa.general.StrainPosition</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../api/m_n_kappa.general.EffectiveWidths.html">m_n_kappa.general.EffectiveWidths</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../api/m_n_kappa.general.curvature.html">m_n_kappa.general.curvature</a></li>
@@ -275,7 +283,7 @@
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../roadmap.html">Roadmap and To Do’s</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../contributing.html">Contributing</a></li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="../whatsnew/index.html">Release Notes</a><input class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" role="switch" type="checkbox"/><label for="toctree-checkbox-6"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../whatsnew/index.html">Release Notes</a><input class="toctree-checkbox" id="toctree-checkbox-7" name="toctree-checkbox-7" role="switch" type="checkbox"/><label for="toctree-checkbox-7"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
 <li class="toctree-l2"><a class="reference internal" href="../whatsnew/v0.1.0.html">What’s new in 0.1.0 (??. January 2023)</a></li>
 </ul>
 </li>
@@ -324,6 +332,7 @@
         <article role="main">
           <section id="single-span-slim-floor-beam-with-m-kappa-curve">
 <span id="examples-m-kappa-upe"></span><h1>Single span slim-floor beam with <span class="math notranslate nohighlight">\(M\)</span>-<span class="math notranslate nohighlight">\(\kappa\)</span>-Curve<a class="headerlink" href="#single-span-slim-floor-beam-with-m-kappa-curve" title="Permalink to this heading">#</a></h1>
+<p><em>Units: Millimeter [mm], Newton [N]</em></p>
 <section id="introduction">
 <span id="examples-m-kappa-upe-intro"></span><h2>Introduction<a class="headerlink" href="#introduction" title="Permalink to this heading">#</a></h2>
 <p>The slim-floor beam in this example consists of a <a class="reference internal" href="#examples-m-kappa-upe-input-upe200"><span class="std std-ref">UPE 200</span></a> steel-profile welded onto a
@@ -341,7 +350,7 @@ Geometry- and material-values are defined hereafter and build later on to a
 <p>The bottom-flange is an ordinary rectangle and located at the bottom-edge of the concrete slab.
 It has a thickness <span class="math notranslate nohighlight">\(t_\mathrm{f}\)</span> = 10 mm and a width <span class="math notranslate nohighlight">\(b_\mathrm{f}\)</span> = 400 mm.
 The corresponding geometry is defined as <a class="reference internal" href="../api/m_n_kappa.Rectangle.html#m_n_kappa.Rectangle" title="m_n_kappa.Rectangle"><code class="xref py py-class docutils literal notranslate"><span class="pre">Rectangle</span></code></a>:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">m_n_kappa</span> <span class="kn">import</span> <span class="n">Rectangle</span>
+<div class="highlight-python notranslate" id="m_kappa_UPE-rst-altair-source-1"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">m_n_kappa</span> <span class="kn">import</span> <span class="n">Rectangle</span>
 <span class="n">plate_geometry</span> <span class="o">=</span> <span class="n">Rectangle</span><span class="p">(</span><span class="n">top_edge</span><span class="o">=</span><span class="mf">220.0</span><span class="p">,</span> <span class="n">bottom_edge</span><span class="o">=</span><span class="mf">220.0</span><span class="o">+</span><span class="mf">10.</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="mf">400.0</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -352,7 +361,7 @@ The corresponding geometry is defined as <a class="reference internal" href="../
 <li><p>Tensile-strain:  <span class="math notranslate nohighlight">\(\varepsilon_\mathrm{u}\)</span> = 15 %</p></li>
 </ul>
 <p>Using these values the corresponding material may be defined using <a class="reference internal" href="../api/m_n_kappa.Steel.html#m_n_kappa.Steel" title="m_n_kappa.Steel"><code class="xref py py-class docutils literal notranslate"><span class="pre">Steel</span></code></a>:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">m_n_kappa</span> <span class="kn">import</span> <span class="n">Steel</span>
+<div class="highlight-python notranslate" id="m_kappa_UPE-rst-altair-source-2"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">m_n_kappa</span> <span class="kn">import</span> <span class="n">Steel</span>
 <span class="n">bottom_flange_material</span> <span class="o">=</span> <span class="n">Steel</span><span class="p">(</span><span class="n">f_y</span><span class="o">=</span><span class="mi">313</span><span class="p">,</span> <span class="n">f_u</span><span class="o">=</span><span class="mi">460</span><span class="p">,</span> <span class="n">failure_strain</span><span class="o">=</span><span class="mf">0.15</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -363,7 +372,7 @@ Changes to the modulus of elasticity may be applied by passing the corresponding
 <a class="reference internal" href="../api/m_n_kappa.Steel.html#m_n_kappa.Steel" title="m_n_kappa.Steel"><code class="xref py py-class docutils literal notranslate"><span class="pre">Steel</span></code></a> (<code class="docutils literal notranslate"><span class="pre">E_a</span></code>).</p>
 <p>A <a class="reference internal" href="../api/m_n_kappa.Section.html#m_n_kappa.Section" title="m_n_kappa.Section"><code class="xref py py-class docutils literal notranslate"><span class="pre">Section</span></code></a> of the bottom-flange is created by simply adding
 <code class="docutils literal notranslate"><span class="pre">plate_geometry</span></code> and <code class="docutils literal notranslate"><span class="pre">bottom_flange_material</span></code> to each other:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">bottom_flange</span> <span class="o">=</span> <span class="n">plate_geometry</span> <span class="o">+</span> <span class="n">bottom_flange_material</span>
+<div class="highlight-python notranslate" id="m_kappa_UPE-rst-altair-source-3"><div class="highlight"><pre><span></span><span class="n">bottom_flange</span> <span class="o">=</span> <span class="n">plate_geometry</span> <span class="o">+</span> <span class="n">bottom_flange_material</span>
 </pre></div>
 </div>
 </section>
@@ -371,35 +380,40 @@ Changes to the modulus of elasticity may be applied by passing the corresponding
 <span id="examples-m-kappa-upe-input-upe200"></span><h3>UPE 200<a class="headerlink" href="#upe-200" title="Permalink to this heading">#</a></h3>
 <p>The m-n-kappa-package provides the <a class="reference internal" href="../api/m_n_kappa.UPEProfile.html#m_n_kappa.UPEProfile" title="m_n_kappa.UPEProfile"><code class="xref py py-class docutils literal notranslate"><span class="pre">UPEProfile</span></code></a> to create an UPE 200 profile easily.
 The <code class="docutils literal notranslate"><span class="pre">top_edge</span></code> must be computed accordingly:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">m_n_kappa</span> <span class="kn">import</span> <span class="n">UPEProfile</span>
+<div class="highlight-python notranslate" id="m_kappa_UPE-rst-altair-source-4"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">m_n_kappa</span> <span class="kn">import</span> <span class="n">UPEProfile</span>
 <span class="n">upe200_geometry</span> <span class="o">=</span> <span class="n">UPEProfile</span><span class="p">(</span><span class="n">top_edge</span><span class="o">=</span><span class="mi">144</span><span class="p">,</span> <span class="n">t_f</span><span class="o">=</span><span class="mf">5.2</span><span class="p">,</span> <span class="n">b_f</span><span class="o">=</span><span class="mi">76</span><span class="p">,</span> <span class="n">t_w</span><span class="o">=</span><span class="mf">9.0</span><span class="p">,</span> <span class="n">h</span><span class="o">=</span><span class="mi">200</span><span class="p">)</span>
 </pre></div>
 </div>
 <p><a class="reference internal" href="../api/m_n_kappa.UPEProfile.html#m_n_kappa.UPEProfile" title="m_n_kappa.UPEProfile"><code class="xref py py-class docutils literal notranslate"><span class="pre">UPEProfile</span></code></a> is derived from the <a class="reference internal" href="../api/m_n_kappa.geometry.ComposedGeometry.html#m_n_kappa.geometry.ComposedGeometry" title="m_n_kappa.geometry.ComposedGeometry"><code class="xref py py-class docutils literal notranslate"><span class="pre">ComposedGeometry</span></code></a>.
 Therefore, it consists of a set of basic geometry-instances (e.g. several <a class="reference internal" href="../api/m_n_kappa.Rectangle.html#m_n_kappa.Rectangle" title="m_n_kappa.Rectangle"><code class="xref py py-class docutils literal notranslate"><span class="pre">Rectangle</span></code></a>):</p>
-<p>&gt; upe200_geometry.geometries</p>
+<div class="highlight-python notranslate" id="m_kappa_UPE-rst-altair-source-5"><div class="highlight"><pre><span></span><span class="n">upe200_geometry</span><span class="o">.</span><span class="n">geometries</span>
+</pre></div>
+</div>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>    [Rectangle(top_edge=144.00, bottom_edge=220.00, width=5.20, left_edge=-100.00, right_edge=-94.80), Rectangle(top_edge=144.00, bottom_edge=153.00, width=189.60, left_edge=-94.80, right_edge=94.80), Rectangle(top_edge=144.00, bottom_edge=220.00, width=5.20, left_edge=94.80, right_edge=100.00)]
+</pre></div>
+</div>
 <p>The material of the UPE-profile is also created using <a class="reference internal" href="../api/m_n_kappa.Steel.html#m_n_kappa.Steel" title="m_n_kappa.Steel"><code class="xref py py-class docutils literal notranslate"><span class="pre">Steel</span></code></a> analogous to the creation of the
 material for the <a class="reference internal" href="#examples-m-kappa-upe-input-bottom-flange"><span class="std std-ref">Bottom-flange</span></a>:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">m_n_kappa</span> <span class="kn">import</span> <span class="n">Steel</span>
+<div class="highlight-python notranslate" id="m_kappa_UPE-rst-altair-source-6"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">m_n_kappa</span> <span class="kn">import</span> <span class="n">Steel</span>
 <span class="n">upe200_material</span> <span class="o">=</span> <span class="n">Steel</span><span class="p">(</span><span class="n">f_y</span><span class="o">=</span><span class="mi">293</span><span class="p">,</span> <span class="n">f_u</span><span class="o">=</span><span class="mi">443</span><span class="p">,</span> <span class="n">failure_strain</span><span class="o">=</span><span class="mf">0.15</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>Geometry and material are merged easily to a <a class="reference internal" href="../api/m_n_kappa.Crosssection.html#m_n_kappa.Crosssection" title="m_n_kappa.Crosssection"><code class="xref py py-class docutils literal notranslate"><span class="pre">Crosssection</span></code></a> by addition:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">upe200</span> <span class="o">=</span> <span class="n">upe200_geometry</span> <span class="o">+</span> <span class="n">upe200_material</span>
+<div class="highlight-python notranslate" id="m_kappa_UPE-rst-altair-source-7"><div class="highlight"><pre><span></span><span class="n">upe200</span> <span class="o">=</span> <span class="n">upe200_geometry</span> <span class="o">+</span> <span class="n">upe200_material</span>
 </pre></div>
 </div>
 </section>
 <section id="concrete-slab">
 <span id="examples-m-kappa-upe-input-concrete-slab"></span><h3>Concrete slab<a class="headerlink" href="#concrete-slab" title="Permalink to this heading">#</a></h3>
 <p>The concrete-slab composes of three <a class="reference internal" href="../api/m_n_kappa.Rectangle.html#m_n_kappa.Rectangle" title="m_n_kappa.Rectangle"><code class="xref py py-class docutils literal notranslate"><span class="pre">Rectangle</span></code></a>-instances to consider the integrated steel-profile:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">concrete_left</span> <span class="o">=</span> <span class="n">Rectangle</span><span class="p">(</span><span class="n">top_edge</span><span class="o">=</span><span class="mf">0.00</span><span class="p">,</span> <span class="n">bottom_edge</span><span class="o">=</span><span class="mf">220.00</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="mf">1650.00</span><span class="p">,</span> <span class="n">left_edge</span><span class="o">=-</span><span class="mf">1750.00</span><span class="p">,</span> <span class="n">right_edge</span><span class="o">=-</span><span class="mf">100.00</span><span class="p">)</span>
+<div class="highlight-python notranslate" id="m_kappa_UPE-rst-altair-source-8"><div class="highlight"><pre><span></span><span class="n">concrete_left</span> <span class="o">=</span> <span class="n">Rectangle</span><span class="p">(</span><span class="n">top_edge</span><span class="o">=</span><span class="mf">0.00</span><span class="p">,</span> <span class="n">bottom_edge</span><span class="o">=</span><span class="mf">220.00</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="mf">1650.00</span><span class="p">,</span> <span class="n">left_edge</span><span class="o">=-</span><span class="mf">1750.00</span><span class="p">,</span> <span class="n">right_edge</span><span class="o">=-</span><span class="mf">100.00</span><span class="p">)</span>
 <span class="n">concrete_middle</span> <span class="o">=</span> <span class="n">Rectangle</span><span class="p">(</span><span class="n">top_edge</span><span class="o">=</span><span class="mf">0.00</span><span class="p">,</span> <span class="n">bottom_edge</span><span class="o">=</span><span class="mf">144.00</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="mf">200.00</span><span class="p">,</span> <span class="n">left_edge</span><span class="o">=-</span><span class="mf">100.00</span><span class="p">,</span> <span class="n">right_edge</span><span class="o">=</span><span class="mf">100.00</span><span class="p">)</span>
 <span class="n">concrete_right</span> <span class="o">=</span> <span class="n">Rectangle</span><span class="p">(</span><span class="n">top_edge</span><span class="o">=</span><span class="mf">0.00</span><span class="p">,</span> <span class="n">bottom_edge</span><span class="o">=</span><span class="mf">220.00</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="mf">1650.00</span><span class="p">,</span> <span class="n">left_edge</span><span class="o">=</span><span class="mf">100.00</span><span class="p">,</span> <span class="n">right_edge</span><span class="o">=</span><span class="mf">1750.00</span><span class="p">)</span>
 <span class="n">concrete_geometry</span> <span class="o">=</span> <span class="n">concrete_left</span> <span class="o">+</span> <span class="n">concrete_middle</span> <span class="o">+</span> <span class="n">concrete_right</span>
 </pre></div>
 </div>
 <p>The material-behaviour of the concrete slab is considered by the <a class="reference internal" href="../api/m_n_kappa.Concrete.html#m_n_kappa.Concrete" title="m_n_kappa.Concrete"><code class="xref py py-class docutils literal notranslate"><span class="pre">Concrete</span></code></a>-instance as follows:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">m_n_kappa</span> <span class="kn">import</span> <span class="n">Concrete</span>
+<div class="highlight-python notranslate" id="m_kappa_UPE-rst-altair-source-9"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">m_n_kappa</span> <span class="kn">import</span> <span class="n">Concrete</span>
 <span class="n">concrete_material</span> <span class="o">=</span> <span class="n">Concrete</span><span class="p">(</span>
    <span class="n">f_cm</span><span class="o">=</span><span class="mf">29.5</span><span class="p">,</span>
    <span class="n">f_ctm</span><span class="o">=</span><span class="mf">2.8</span><span class="p">,</span>
@@ -409,7 +423,7 @@ material for the <a class="reference internal" href="#examples-m-kappa-upe-input
 </pre></div>
 </div>
 <p>The full concrete cross-section may be created by adding the material to the created concrete-slab geometries:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">concrete_slab</span> <span class="o">=</span> <span class="n">concrete_geometry</span> <span class="o">+</span> <span class="n">concrete_material</span>
+<div class="highlight-python notranslate" id="m_kappa_UPE-rst-altair-source-10"><div class="highlight"><pre><span></span><span class="n">concrete_slab</span> <span class="o">=</span> <span class="n">concrete_geometry</span> <span class="o">+</span> <span class="n">concrete_material</span>
 </pre></div>
 </div>
 </section>
@@ -418,13 +432,13 @@ material for the <a class="reference internal" href="#examples-m-kappa-upe-input
 <p>Reinforcement-bars may be created by <a class="reference internal" href="../api/m_n_kappa.Circle.html#m_n_kappa.Circle" title="m_n_kappa.Circle"><code class="xref py py-class docutils literal notranslate"><span class="pre">Circle</span></code></a>-class.
 The simplify this process <a class="reference internal" href="../api/m_n_kappa.RebarLayer.html#m_n_kappa.RebarLayer" title="m_n_kappa.RebarLayer"><code class="xref py py-class docutils literal notranslate"><span class="pre">RebarLayer</span></code></a> may be used as follows, creating a set of reinforcement-bar
 cross-sections:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">m_n_kappa</span> <span class="kn">import</span> <span class="n">RebarLayer</span>
-<span class="n">rebar_top_layer_geometry</span> <span class="o">=</span> <span class="n">RebarLayer</span><span class="p">(</span><span class="n">rebar_diameter</span><span class="o">=</span><span class="mf">12.</span><span class="p">,</span> <span class="n">centroid</span><span class="o">=</span><span class="mf">10.0</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="mi">3500</span><span class="p">,</span> <span class="n">rebar_horizontal_distance</span><span class="o">=</span><span class="mf">100.</span><span class="p">)</span>
+<div class="highlight-python notranslate" id="m_kappa_UPE-rst-altair-source-11"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">m_n_kappa</span> <span class="kn">import</span> <span class="n">RebarLayer</span>
+<span class="n">rebar_top_layer_geometry</span> <span class="o">=</span> <span class="n">RebarLayer</span><span class="p">(</span><span class="n">rebar_diameter</span><span class="o">=</span><span class="mf">12.</span><span class="p">,</span> <span class="n">centroid_z</span><span class="o">=</span><span class="mf">10.0</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="mi">3500</span><span class="p">,</span> <span class="n">rebar_horizontal_distance</span><span class="o">=</span><span class="mf">100.</span><span class="p">)</span>
 <span class="n">rebar_bottom_layer_left_geometry</span> <span class="o">=</span> <span class="n">RebarLayer</span><span class="p">(</span>
-        <span class="n">rebar_diameter</span><span class="o">=</span><span class="mf">10.</span><span class="p">,</span> <span class="n">centroid</span><span class="o">=</span><span class="mi">220</span><span class="o">-</span><span class="mi">10</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="mf">1650.0</span><span class="p">,</span> <span class="n">rebar_horizontal_distance</span><span class="o">=</span><span class="mf">100.</span><span class="p">,</span> <span class="n">left_edge</span><span class="o">=-</span><span class="mf">1740.</span><span class="p">,</span>
+        <span class="n">rebar_diameter</span><span class="o">=</span><span class="mf">10.</span><span class="p">,</span> <span class="n">centroid_z</span><span class="o">=</span><span class="mi">220</span><span class="o">-</span><span class="mi">10</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="mf">1650.0</span><span class="p">,</span> <span class="n">rebar_horizontal_distance</span><span class="o">=</span><span class="mf">100.</span><span class="p">,</span> <span class="n">left_edge</span><span class="o">=-</span><span class="mf">1740.</span><span class="p">,</span>
 <span class="p">)</span>
 <span class="n">rebar_bottom_layer_right_geometry</span> <span class="o">=</span> <span class="n">RebarLayer</span><span class="p">(</span>
-        <span class="n">rebar_diameter</span><span class="o">=</span><span class="mf">10.</span><span class="p">,</span> <span class="n">centroid</span><span class="o">=</span><span class="mi">220</span><span class="o">-</span><span class="mi">10</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="mf">1650.0</span><span class="p">,</span> <span class="n">rebar_horizontal_distance</span><span class="o">=</span><span class="mf">100.</span><span class="p">,</span> <span class="n">right_edge</span><span class="o">=</span><span class="mf">1740.</span><span class="p">,</span>
+        <span class="n">rebar_diameter</span><span class="o">=</span><span class="mf">10.</span><span class="p">,</span> <span class="n">centroid_z</span><span class="o">=</span><span class="mi">220</span><span class="o">-</span><span class="mi">10</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="mf">1650.0</span><span class="p">,</span> <span class="n">rebar_horizontal_distance</span><span class="o">=</span><span class="mf">100.</span><span class="p">,</span> <span class="n">right_edge</span><span class="o">=</span><span class="mf">1740.</span><span class="p">,</span>
 <span class="p">)</span>
 </pre></div>
 </div>
@@ -432,15 +446,15 @@ cross-sections:</p>
 UPE-steel profile.</p>
 <p>The material-behaviour of the reinforcement <a class="reference internal" href="../api/m_n_kappa.Reinforcement.html#m_n_kappa.Reinforcement" title="m_n_kappa.Reinforcement"><code class="xref py py-class docutils literal notranslate"><span class="pre">Reinforcement</span></code></a> derives
 from the <a class="reference internal" href="../api/m_n_kappa.Steel.html#m_n_kappa.Steel" title="m_n_kappa.Steel"><code class="xref py py-class docutils literal notranslate"><span class="pre">Steel</span></code></a>-class:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">m_n_kappa</span> <span class="kn">import</span> <span class="n">Reinforcement</span>
-<span class="n">rebar10_material</span> <span class="o">=</span> <span class="n">Reinforcement</span><span class="p">(</span><span class="n">f_s</span><span class="o">=</span><span class="mi">594</span><span class="p">,</span> <span class="n">f_su</span><span class="o">=</span><span class="mi">685</span><span class="p">,</span> <span class="n">epsilon_su</span><span class="o">=</span><span class="mf">0.25</span><span class="p">,</span> <span class="n">E_s</span><span class="o">=</span><span class="mi">200000</span><span class="p">)</span>
-<span class="n">rebar12_material</span> <span class="o">=</span> <span class="n">Reinforcement</span><span class="p">(</span><span class="n">f_s</span><span class="o">=</span><span class="mi">558</span><span class="p">,</span> <span class="n">f_su</span><span class="o">=</span><span class="mi">643</span><span class="p">,</span> <span class="n">epsilon_su</span><span class="o">=</span><span class="mf">0.25</span><span class="p">,</span> <span class="n">E_s</span><span class="o">=</span><span class="mi">200000</span><span class="p">)</span>
+<div class="highlight-python notranslate" id="m_kappa_UPE-rst-altair-source-12"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">m_n_kappa</span> <span class="kn">import</span> <span class="n">Reinforcement</span>
+<span class="n">rebar10_material</span> <span class="o">=</span> <span class="n">Reinforcement</span><span class="p">(</span><span class="n">f_s</span><span class="o">=</span><span class="mi">594</span><span class="p">,</span> <span class="n">f_su</span><span class="o">=</span><span class="mi">685</span><span class="p">,</span> <span class="n">failure_strain</span><span class="o">=</span><span class="mf">0.25</span><span class="p">,</span> <span class="n">E_s</span><span class="o">=</span><span class="mi">200000</span><span class="p">)</span>
+<span class="n">rebar12_material</span> <span class="o">=</span> <span class="n">Reinforcement</span><span class="p">(</span><span class="n">f_s</span><span class="o">=</span><span class="mi">558</span><span class="p">,</span> <span class="n">f_su</span><span class="o">=</span><span class="mi">643</span><span class="p">,</span> <span class="n">failure_strain</span><span class="o">=</span><span class="mf">0.25</span><span class="p">,</span> <span class="n">E_s</span><span class="o">=</span><span class="mi">200000</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>For combination of <code class="docutils literal notranslate"><span class="pre">Geometry</span></code> and <code class="docutils literal notranslate"><span class="pre">Material</span></code> both instance only need to be added to each other.
 By adding the resulting <a class="reference internal" href="../api/m_n_kappa.Section.html#m_n_kappa.Section" title="m_n_kappa.Section"><code class="xref py py-class docutils literal notranslate"><span class="pre">Section</span></code></a> instance to each other a <a class="reference internal" href="../api/m_n_kappa.Crosssection.html#m_n_kappa.Crosssection" title="m_n_kappa.Crosssection"><code class="xref py py-class docutils literal notranslate"><span class="pre">Crosssection</span></code></a>
 of rebars is created:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">rebar_top_layer</span> <span class="o">=</span> <span class="n">rebar_top_layer_geometry</span> <span class="o">+</span> <span class="n">rebar12_material</span>
+<div class="highlight-python notranslate" id="m_kappa_UPE-rst-altair-source-13"><div class="highlight"><pre><span></span><span class="n">rebar_top_layer</span> <span class="o">=</span> <span class="n">rebar_top_layer_geometry</span> <span class="o">+</span> <span class="n">rebar12_material</span>
 <span class="n">rebar_bottom_layer_left</span> <span class="o">=</span> <span class="n">rebar_bottom_layer_left_geometry</span> <span class="o">+</span> <span class="n">rebar10_material</span>
 <span class="n">rebar_bottom_layer_right</span> <span class="o">=</span> <span class="n">rebar_bottom_layer_right_geometry</span> <span class="o">+</span> <span class="n">rebar10_material</span>
 <span class="n">rebar_layer</span> <span class="o">=</span> <span class="n">rebar_top_layer</span> <span class="o">+</span> <span class="n">rebar_bottom_layer_left</span> <span class="o">+</span> <span class="n">rebar_bottom_layer_right</span>
@@ -450,7 +464,7 @@ of rebars is created:</p>
 <section id="building-the-cross-section">
 <span id="examples-m-kappa-upe-input-building-cross-section"></span><h3>Building the cross-section<a class="headerlink" href="#building-the-cross-section" title="Permalink to this heading">#</a></h3>
 <p>The overall <a class="reference internal" href="../api/m_n_kappa.Crosssection.html#m_n_kappa.Crosssection" title="m_n_kappa.Crosssection"><code class="xref py py-class docutils literal notranslate"><span class="pre">Crosssection</span></code></a> is created by adding all parts together:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">cross_section</span> <span class="o">=</span> <span class="n">bottom_flange</span> <span class="o">+</span> <span class="n">upe200</span> <span class="o">+</span> <span class="n">concrete_slab</span> <span class="o">+</span> <span class="n">rebar_layer</span>
+<div class="highlight-python notranslate" id="m_kappa_UPE-rst-altair-source-14"><div class="highlight"><pre><span></span><span class="n">cross_section</span> <span class="o">=</span> <span class="n">bottom_flange</span> <span class="o">+</span> <span class="n">upe200</span> <span class="o">+</span> <span class="n">concrete_slab</span> <span class="o">+</span> <span class="n">rebar_layer</span>
 </pre></div>
 </div>
 </section>
@@ -464,7 +478,7 @@ The <code class="docutils literal notranslate"><span class="pre">uniform_load</s
 length of the girder.
 The <a class="reference internal" href="../api/m_n_kappa.SingleLoad.html#m_n_kappa.SingleLoad" title="m_n_kappa.SingleLoad"><code class="xref py py-class docutils literal notranslate"><span class="pre">SingleLoad</span></code></a>-class represents a single load applied at a specific position along
 the beam:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">m_n_kappa</span> <span class="kn">import</span> <span class="n">SingleLoad</span><span class="p">,</span> <span class="n">SingleSpan</span>
+<div class="highlight-python notranslate" id="m_kappa_UPE-rst-altair-source-15"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">m_n_kappa</span> <span class="kn">import</span> <span class="n">SingleLoad</span><span class="p">,</span> <span class="n">SingleSpan</span>
 <span class="n">single_load_left</span> <span class="o">=</span> <span class="n">SingleLoad</span><span class="p">(</span><span class="n">position_in_beam</span><span class="o">=</span><span class="mf">1375.</span><span class="p">,</span> <span class="n">value</span><span class="o">=</span><span class="mf">1.0</span><span class="p">)</span>
 <span class="n">single_load_right</span> <span class="o">=</span> <span class="n">SingleLoad</span><span class="p">(</span><span class="n">position_in_beam</span><span class="o">=</span><span class="mf">1375.</span> <span class="o">+</span> <span class="mf">1250.</span><span class="p">,</span> <span class="n">value</span><span class="o">=</span><span class="mf">1.0</span><span class="p">)</span>
 <span class="n">loading</span> <span class="o">=</span> <span class="n">SingleSpan</span><span class="p">(</span><span class="n">length</span><span class="o">=</span><span class="mf">4000.0</span><span class="p">,</span> <span class="n">uniform_load</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">loads</span><span class="o">=</span><span class="p">[</span><span class="n">single_load_left</span><span class="p">,</span> <span class="n">single_load_right</span><span class="p">])</span>
@@ -493,10 +507,10 @@ the bending and membran effective widths.</p>
 <span id="examples-m-kappa-upe-geometrical-widths"></span><h3>Considering geometrical widths<a class="headerlink" href="#considering-geometrical-widths" title="Permalink to this heading">#</a></h3>
 <p>Considering geometrical widths and neglecting effective widths are accomplished by setting <code class="docutils literal notranslate"><span class="pre">consider_widths=False</span></code>.
 Geometrical widths are in any case greater than the effective widths.</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">m_n_kappa</span> <span class="kn">import</span> <span class="n">Beam</span>
+<div class="highlight-python notranslate" id="m_kappa_UPE-rst-altair-source-16"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">m_n_kappa</span> <span class="kn">import</span> <span class="n">Beam</span>
+
 <span class="n">beam_geometrical_widths</span> <span class="o">=</span> <span class="n">Beam</span><span class="p">(</span>
    <span class="n">cross_section</span><span class="o">=</span><span class="n">cross_section</span><span class="p">,</span>
-   <span class="n">length</span><span class="o">=</span><span class="mf">4000.</span><span class="p">,</span>
    <span class="n">element_number</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span>
    <span class="n">load</span><span class="o">=</span><span class="n">loading</span><span class="p">,</span>
    <span class="n">consider_widths</span><span class="o">=</span><span class="kc">False</span>
@@ -507,9 +521,8 @@ Geometrical widths are in any case greater than the effective widths.</p>
 <section id="considering-effective-widths">
 <span id="examples-m-kappa-upe-effective-widths"></span><h3>Considering effective widths<a class="headerlink" href="#considering-effective-widths" title="Permalink to this heading">#</a></h3>
 <p>The effective widths of the concrete slab are taken into account during computation by passing <code class="docutils literal notranslate"><span class="pre">consider_widths=True</span></code>.</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">beam_effective_widths</span> <span class="o">=</span> <span class="n">Beam</span><span class="p">(</span>
+<div class="highlight-python notranslate" id="m_kappa_UPE-rst-altair-source-17"><div class="highlight"><pre><span></span><span class="n">beam_effective_widths</span> <span class="o">=</span> <span class="n">Beam</span><span class="p">(</span>
    <span class="n">cross_section</span><span class="o">=</span><span class="n">cross_section</span><span class="p">,</span>
-   <span class="n">length</span><span class="o">=</span><span class="mf">4000.</span><span class="p">,</span>
    <span class="n">element_number</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span>
    <span class="n">load</span><span class="o">=</span><span class="n">loading</span><span class="p">,</span>
    <span class="n">consider_widths</span><span class="o">=</span><span class="kc">True</span>
@@ -517,25 +530,41 @@ Geometrical widths are in any case greater than the effective widths.</p>
 </pre></div>
 </div>
 <p>The following graph shows how the effective widths are considered.</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<div class="highlight-python notranslate" id="m_kappa_UPE-rst-altair-source-18"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">altair</span> <span class="k">as</span> <span class="nn">alt</span>
 
-<span class="n">fig</span><span class="p">,</span><span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mf">8.</span><span class="p">,</span> <span class="mf">3.</span><span class="p">))</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span>
-   <span class="n">beam_effective_widths</span><span class="o">.</span><span class="n">positions</span><span class="p">,</span>
-   <span class="n">beam_effective_widths</span><span class="o">.</span><span class="n">bending_widths</span><span class="p">(),</span>
-   <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;.&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Bending&quot;</span><span class="p">)</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span>
-   <span class="n">beam_effective_widths</span><span class="o">.</span><span class="n">positions</span><span class="p">,</span>
-   <span class="n">beam_effective_widths</span><span class="o">.</span><span class="n">membran_widths</span><span class="p">(),</span>
-   <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;.&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Membran&quot;</span><span class="p">)</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">set_ticks</span><span class="p">(</span><span class="n">position</span><span class="p">)</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;Position along the beam&quot;</span><span class="p">)</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;Effective width&quot;</span><span class="p">)</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">set_ylim</span><span class="p">(</span><span class="mf">0.</span><span class="p">,</span> <span class="mf">0.5</span><span class="o">*</span><span class="n">concrete_slab_width</span><span class="p">)</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">set_xlim</span><span class="p">(</span><span class="mf">0.</span><span class="p">,</span> <span class="n">beam_effective_widths</span><span class="o">.</span><span class="n">length</span><span class="p">)</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span>
+    <span class="s1">&#39;positions&#39;</span><span class="p">:</span> <span class="n">beam_effective_widths</span><span class="o">.</span><span class="n">positions</span><span class="p">,</span>
+    <span class="s1">&#39;bending&#39;</span><span class="p">:</span> <span class="n">beam_effective_widths</span><span class="o">.</span><span class="n">bending_widths</span><span class="p">(),</span>
+    <span class="s1">&#39;membran&#39;</span><span class="p">:</span> <span class="n">beam_effective_widths</span><span class="o">.</span><span class="n">membran_widths</span><span class="p">(),</span>
+<span class="p">})</span>
+
+<span class="n">df_melt</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">melt</span><span class="p">(</span><span class="n">id_vars</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;positions&#39;</span><span class="p">],</span> <span class="n">value_vars</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;bending&#39;</span><span class="p">,</span> <span class="s1">&#39;membran&#39;</span><span class="p">],</span>
+                  <span class="n">var_name</span><span class="o">=</span><span class="s1">&#39;width_type&#39;</span><span class="p">,</span> <span class="n">value_name</span><span class="o">=</span><span class="s1">&#39;width&#39;</span><span class="p">)</span>
+
+<span class="n">alt</span><span class="o">.</span><span class="n">Chart</span><span class="p">(</span><span class="n">df_melt</span><span class="p">,</span> <span class="n">height</span><span class="o">=</span><span class="mf">100.0</span><span class="p">,</span> <span class="n">background</span><span class="o">=</span><span class="s1">&#39;#00000000&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">mark_line</span><span class="p">()</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span>
+   <span class="n">x</span><span class="o">=</span><span class="n">alt</span><span class="o">.</span><span class="n">X</span><span class="p">(</span><span class="s1">&#39;positions&#39;</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="s1">&#39;Position along the beam [mm]&#39;</span><span class="p">),</span>
+   <span class="n">y</span><span class="o">=</span><span class="n">alt</span><span class="o">.</span><span class="n">Y</span><span class="p">(</span><span class="s1">&#39;width&#39;</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="s1">&#39;Width [mm]&#39;</span><span class="p">),</span>
+   <span class="n">color</span><span class="o">=</span><span class="s1">&#39;width_type&#39;</span><span class="p">,</span>
+<span class="p">)</span><span class="o">.</span><span class="n">configure_legend</span><span class="p">(</span><span class="n">labelColor</span><span class="o">=</span><span class="s1">&#39;#979797&#39;</span><span class="p">,</span> <span class="n">titleColor</span><span class="o">=</span><span class="s1">&#39;#979797&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
-</section>
+
+<div id="m_kappa_UPE-rst-altair-plot-18">
+<script>
+  // embed when document is loaded, to ensure vega library is available
+  // this works on all modern browsers, except IE8 and older
+  document.addEventListener("DOMContentLoaded", function(event) {
+      var spec = {"usermeta": {"embedOptions": {"theme": "quartz"}}, "config": {"view": {"continuousWidth": 400, "continuousHeight": 300}, "legend": {"labelColor": "#979797", "titleColor": "#979797"}}, "data": {"name": "data-3f8e2b70e6f8fe6695ee1a42950e3904"}, "mark": "line", "background": "#00000000", "encoding": {"color": {"field": "width_type", "type": "nominal"}, "x": {"field": "positions", "title": "Position along the beam [mm]", "type": "quantitative"}, "y": {"field": "width", "title": "Width [mm]", "type": "quantitative"}}, "height": 100.0, "$schema": "https://vega.github.io/schema/vega-lite/v4.17.0.json", "datasets": {"data-3f8e2b70e6f8fe6695ee1a42950e3904": [{"positions": 0.0, "width_type": "bending", "width": 1364.7550704955406}, {"positions": 400.0, "width_type": "bending", "width": 1603.3118289535628}, {"positions": 800.0, "width_type": "bending", "width": 1726.2387498916173}, {"positions": 1200.0, "width_type": "bending", "width": 1750.0}, {"positions": 1375.0, "width_type": "bending", "width": 1750.0}, {"positions": 1600.0, "width_type": "bending", "width": 1750.0}, {"positions": 2000.0, "width_type": "bending", "width": 1750.0}, {"positions": 2400.0, "width_type": "bending", "width": 1750.0}, {"positions": 2625.0, "width_type": "bending", "width": 1750.0}, {"positions": 2800.0, "width_type": "bending", "width": 1750.0}, {"positions": 3200.0, "width_type": "bending", "width": 1726.2387498916173}, {"positions": 3600.0, "width_type": "bending", "width": 1603.3118289535628}, {"positions": 4000.0, "width_type": "bending", "width": 1364.7550704955406}, {"positions": 0.0, "width_type": "membran", "width": 473.6722951646188}, {"positions": 400.0, "width_type": "membran", "width": 614.2662479047763}, {"positions": 800.0, "width_type": "membran", "width": 718.0185346325712}, {"positions": 1200.0, "width_type": "membran", "width": 778.1131169881243}, {"positions": 1375.0, "width_type": "membran", "width": 797.484070277571}, {"positions": 1600.0, "width_type": "membran", "width": 810.6776466580703}, {"positions": 2000.0, "width_type": "membran", "width": 821.0711743728242}, {"positions": 2400.0, "width_type": "membran", "width": 810.6776466580703}, {"positions": 2625.0, "width_type": "membran", "width": 797.484070277571}, {"positions": 2800.0, "width_type": "membran", "width": 778.1131169881243}, {"positions": 3200.0, "width_type": "membran", "width": 718.0185346325712}, {"positions": 3600.0, "width_type": "membran", "width": 614.2662479047763}, {"positions": 4000.0, "width_type": "membran", "width": 473.6722951646188}]}};
+      var opt = {
+        "mode": "vega-lite",
+        "renderer": "canvas",
+        "actions": {"editor": true, "source": true, "export": true}
+      };
+      vegaEmbed('#m_kappa_UPE-rst-altair-plot-18', spec, opt).catch(console.err);
+  });
+</script>
+</div></section>
 </section>
 <section id="analysis">
 <span id="examples-m-kappa-upe-analysis"></span><h2>Analysis<a class="headerlink" href="#analysis" title="Permalink to this heading">#</a></h2>
@@ -548,33 +577,46 @@ of the computed composite beam.</p>
 <span id="examples-m-kappa-upe-analysis-load-deformation"></span><h3>Load-deformation-curve at point of maximum deformation<a class="headerlink" href="#load-deformation-curve-at-point-of-maximum-deformation" title="Permalink to this heading">#</a></h3>
 <p>The load-bearing behaviour of beams is often characterised by the load-deformation-curve at the point
 of maximum deformation under the given loading.
-<a href="#id3"><span class="problematic" id="id4">:py:method:`m_n_kappa.Beam.deformations_at_maximum_deformation_position`</span></a> returns the deformations for
+<a class="reference internal" href="../api/m_n_kappa.Beam.html#m_n_kappa.Beam.deformations_at_maximum_deformation_position" title="m_n_kappa.Beam.deformations_at_maximum_deformation_position"><code class="xref py py-meth docutils literal notranslate"><span class="pre">deformations_at_maximum_deformation_position()</span></code></a> returns the deformations for
 the decisive load-steps at this point:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">beam_deformations_geometrical_widths</span> <span class="o">=</span> <span class="n">beam_geometrical_widths</span><span class="o">.</span><span class="n">deformations_at_maximum_deformation_position</span><span class="p">()</span>
+<div class="highlight-python notranslate" id="m_kappa_UPE-rst-altair-source-19"><div class="highlight"><pre><span></span><span class="n">beam_deformations_geometrical_widths</span> <span class="o">=</span> <span class="n">beam_geometrical_widths</span><span class="o">.</span><span class="n">deformations_at_maximum_deformation_position</span><span class="p">()</span>
 <span class="n">beam_deformations_effective_widths</span> <span class="o">=</span> <span class="n">beam_effective_widths</span><span class="o">.</span><span class="n">deformations_at_maximum_deformation_position</span><span class="p">()</span>
 </pre></div>
 </div>
-<p>The resulting deformations may be visualized by choosing an appropriate visualization-library,
-e.g. <a class="reference external" href="https://matplotlib.org/">Matplotlib</a>, <a class="reference external" href="https://altair-viz.github.io/">Altair</a> or other.
-The following example uses Matplotlib:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span><span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span>
-   <span class="n">beam_geometrical_widths</span><span class="o">.</span><span class="n">values</span><span class="p">(),</span>
-   <span class="n">beam_geometrical_widths</span><span class="o">.</span><span class="n">loadings</span><span class="p">(),</span>
-   <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;.&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;geometrical widths&#39;</span><span class="p">)</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span>
-   <span class="n">beam_effective_widths</span><span class="o">.</span><span class="n">values</span><span class="p">(),</span>
-   <span class="n">beam_effective_widths</span><span class="o">.</span><span class="n">loadings</span><span class="p">(),</span>
-   <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;.&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;effective widths&#39;</span><span class="p">)</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">set_xlim</span><span class="p">(</span><span class="mi">0</span><span class="p">,)</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">set_ylim</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="p">)</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;Deformation&#39;</span><span class="p">)</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Vertical Force&#39;</span><span class="p">)</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="s1">&#39;major&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+<p>The resulting deformations may be visualized as follows.
+Considering the effective width leads smaller maximum resistance as well as smaller deformation-capacity.</p>
+<div class="highlight-python notranslate" id="m_kappa_UPE-rst-altair-source-20"><div class="highlight"><pre><span></span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span>
+    <span class="s1">&#39;deformation&#39;</span><span class="p">:</span> <span class="p">(</span><span class="n">beam_deformations_geometrical_widths</span><span class="o">.</span><span class="n">values</span><span class="p">()</span> <span class="o">+</span>
+                    <span class="n">beam_deformations_effective_widths</span><span class="o">.</span><span class="n">values</span><span class="p">()),</span>
+    <span class="s1">&#39;loadings&#39;</span><span class="p">:</span> <span class="p">(</span><span class="n">beam_deformations_geometrical_widths</span><span class="o">.</span><span class="n">loadings</span><span class="p">(</span><span class="n">factor</span><span class="o">=</span><span class="mf">0.001</span><span class="p">)</span> <span class="o">+</span>
+                 <span class="n">beam_deformations_effective_widths</span><span class="o">.</span><span class="n">loadings</span><span class="p">(</span><span class="n">factor</span><span class="o">=</span><span class="mf">0.001</span><span class="p">)),</span>
+    <span class="s1">&#39;Width type&#39;</span><span class="p">:</span> <span class="p">([</span><span class="s1">&#39;Geometrical width&#39;</span><span class="p">]</span><span class="o">*</span><span class="nb">len</span><span class="p">(</span><span class="n">beam_deformations_geometrical_widths</span><span class="o">.</span><span class="n">loadings</span><span class="p">())</span> <span class="o">+</span>
+             <span class="p">[</span><span class="s2">&quot;Effective width&quot;</span><span class="p">]</span><span class="o">*</span><span class="nb">len</span><span class="p">(</span><span class="n">beam_deformations_effective_widths</span><span class="o">.</span><span class="n">loadings</span><span class="p">())),</span>
+<span class="p">})</span>
+
+<span class="n">alt</span><span class="o">.</span><span class="n">Chart</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">background</span><span class="o">=</span><span class="s1">&#39;#00000000&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">mark_line</span><span class="p">()</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span>
+    <span class="n">x</span><span class="o">=</span><span class="n">alt</span><span class="o">.</span><span class="n">X</span><span class="p">(</span><span class="s1">&#39;deformation&#39;</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="s1">&#39;Deformation [mm]&#39;</span><span class="p">),</span>
+    <span class="n">y</span><span class="o">=</span><span class="n">alt</span><span class="o">.</span><span class="n">Y</span><span class="p">(</span><span class="s1">&#39;loadings&#39;</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="s1">&#39;Loading [kN]&#39;</span><span class="p">),</span>
+    <span class="n">color</span><span class="o">=</span><span class="s1">&#39;Width type&#39;</span><span class="p">,</span>
+<span class="p">)</span><span class="o">.</span><span class="n">configure_legend</span><span class="p">(</span><span class="n">labelColor</span><span class="o">=</span><span class="s1">&#39;#979797&#39;</span><span class="p">,</span> <span class="n">titleColor</span><span class="o">=</span><span class="s1">&#39;#979797&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
-</section>
+
+<div id="m_kappa_UPE-rst-altair-plot-20">
+<script>
+  // embed when document is loaded, to ensure vega library is available
+  // this works on all modern browsers, except IE8 and older
+  document.addEventListener("DOMContentLoaded", function(event) {
+      var spec = {"usermeta": {"embedOptions": {"theme": "quartz"}}, "config": {"view": {"continuousWidth": 400, "continuousHeight": 300}, "legend": {"labelColor": "#979797", "titleColor": "#979797"}}, "data": {"name": "data-e4b2a99ced177492c4b5f81b31125cc2"}, "mark": "line", "background": "#00000000", "encoding": {"color": {"field": "Width type", "type": "nominal"}, "x": {"field": "deformation", "title": "Deformation [mm]", "type": "quantitative"}, "y": {"field": "loadings", "title": "Loading [kN]", "type": "quantitative"}}, "$schema": "https://vega.github.io/schema/vega-lite/v4.17.0.json", "datasets": {"data-e4b2a99ced177492c4b5f81b31125cc2": [{"deformation": 0.0, "loadings": 0.0, "Width type": "Geometrical width"}, {"deformation": 7.301805223034819, "loadings": 377.8074598695739, "Width type": "Geometrical width"}, {"deformation": 15.913352364349619, "loadings": 642.7396961474067, "Width type": "Geometrical width"}, {"deformation": 34.477839139499395, "loadings": 746.7103101049, "Width type": "Geometrical width"}, {"deformation": 50.40358517457709, "loadings": 779.2018422487237, "Width type": "Geometrical width"}, {"deformation": 80.37436415641795, "loadings": 809.6026024106999, "Width type": "Geometrical width"}, {"deformation": 0.0, "loadings": 0.0, "Width type": "Effective width"}, {"deformation": 2.122895440202198, "loadings": 78.87952901841474, "Width type": "Effective width"}, {"deformation": 4.8719207788478585, "loadings": 167.63231561279983, "Width type": "Effective width"}, {"deformation": 8.319421911397036, "loadings": 251.79735400829952, "Width type": "Effective width"}, {"deformation": 21.933931827001107, "loadings": 510.17635536514905, "Width type": "Effective width"}, {"deformation": 27.921675305882328, "loadings": 561.2073428619271, "Width type": "Effective width"}, {"deformation": 37.495722964168834, "loadings": 591.9877888323549, "Width type": "Effective width"}, {"deformation": 41.29389953513369, "loadings": 598.1069117768778, "Width type": "Effective width"}, {"deformation": 35.080572644411326, "loadings": 584.5195644938979, "Width type": "Effective width"}]}};
+      var opt = {
+        "mode": "vega-lite",
+        "renderer": "canvas",
+        "actions": {"editor": true, "source": true, "export": true}
+      };
+      vegaEmbed('#m_kappa_UPE-rst-altair-plot-20', spec, opt).catch(console.err);
+  });
+</script>
+</div></section>
 </section>
 </section>
 
@@ -592,14 +634,14 @@ The following example uses Matplotlib:</p>
               </div>
               <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
             </a>
-          <a class="prev-page" href="section.html">
+          <a class="prev-page" href="deformation.html">
               <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
               <div class="page-info">
                 <div class="context">
                   <span>Previous</span>
                 </div>
                 
-                <div class="title">Build a section</div>
+                <div class="title">Deformation</div>
                 
               </div>
             </a>
@@ -676,6 +718,9 @@ The following example uses Matplotlib:</p>
     <script src="../_static/clipboard.min.js"></script>
     <script src="../_static/copybutton.js"></script>
     <script src="../_static/toggleprompt.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vega@5"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vega-lite@4.17.0"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vega-embed@6"></script>
     <script src="../_static/design-tabs.js"></script>
     <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>

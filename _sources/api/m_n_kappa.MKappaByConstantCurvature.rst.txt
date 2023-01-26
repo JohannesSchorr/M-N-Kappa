@@ -47,6 +47,7 @@
       ~MKappaByConstantCurvature.minimum_neutral_axis
       ~MKappaByConstantCurvature.moment
       ~MKappaByConstantCurvature.neutral_axis
+      ~MKappaByConstantCurvature.not_successful_reason
       ~MKappaByConstantCurvature.solver
       ~MKappaByConstantCurvature.successful
    

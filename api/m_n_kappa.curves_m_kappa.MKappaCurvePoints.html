@@ -9,7 +9,7 @@
         <title>m_n_kappa.curves_m_kappa.MKappaCurvePoints - M-N-κ</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?digest=91d0f0d1c444bdcb17a68e833c7a53903343c195" />
-    <link rel="stylesheet" type="text/css" href="../_static/plot_directive.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/altair-plot.css" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
     <link rel="stylesheet" type="text/css" href="../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/furo-extensions.css?digest=30d1aed668e5c3a91c3e3bf6a60b675221979f0e" />
@@ -171,11 +171,19 @@
 <li class="toctree-l2"><a class="reference internal" href="../examples/geometry.html">Creating Geometries</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../examples/material.html">Creating materials</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../examples/section.html">Build a section</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../examples/cross_section.html">Build a cross-section</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../examples/moment_curvature.html">Moment-Curvature</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../examples/moment_curvature_curve.html">Moment-Curvature-Curve</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../examples/loading.html">Loading</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../examples/deformation.html">Deformation</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../examples/m_kappa_UPE.html">Single span slim-floor beam with Moment-Curvature-Curves</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../examples/m_n_kappa_UPE.html">Single span slim-floor beam with Moment-Axial force-Curvature-Curves</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../examples/cross_section_templates/index.html">Templates</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" role="switch" type="checkbox"/><label for="toctree-checkbox-2"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="simple">
 </ul>
 </li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="../theory/index.html">Theory guide</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" role="switch" type="checkbox"/><label for="toctree-checkbox-2"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../theory/index.html">Theory guide</a><input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" role="switch" type="checkbox"/><label for="toctree-checkbox-3"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
 <li class="toctree-l2"><a class="reference internal" href="../theory/symbols.html">Symbols</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../theory/coordinates.html">Coordinates</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../theory/units.html">Units</a></li>
@@ -190,13 +198,13 @@
 <li class="toctree-l2"><a class="reference internal" href="../theory/deformations.html">Deformations</a></li>
 </ul>
 </li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="../verification/index.html">Verification</a><input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" role="switch" type="checkbox"/><label for="toctree-checkbox-3"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="simple">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../verification/index.html">Verification</a><input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" role="switch" type="checkbox"/><label for="toctree-checkbox-4"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="simple">
 </ul>
 </li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Development</span></p>
 <ul class="current">
-<li class="toctree-l1 current has-children"><a class="reference internal" href="../api.html">API reference</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" role="switch" type="checkbox"/><label for="toctree-checkbox-4"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="current">
+<li class="toctree-l1 current has-children"><a class="reference internal" href="../api.html">API reference</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" role="switch" type="checkbox"/><label for="toctree-checkbox-5"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="m_n_kappa.Geometry.html">m_n_kappa.Geometry</a></li>
 <li class="toctree-l2"><a class="reference internal" href="m_n_kappa.Rectangle.html">m_n_kappa.Rectangle</a></li>
 <li class="toctree-l2"><a class="reference internal" href="m_n_kappa.Circle.html">m_n_kappa.Circle</a></li>
@@ -224,7 +232,7 @@
 <li class="toctree-l2"><a class="reference internal" href="m_n_kappa.Node.html">m_n_kappa.Node</a></li>
 </ul>
 </li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="../api_developers.html">API for developers</a><input class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" role="switch" type="checkbox"/><label for="toctree-checkbox-5"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../api_developers.html">API for developers</a><input class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" role="switch" type="checkbox"/><label for="toctree-checkbox-6"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
 <li class="toctree-l2"><a class="reference internal" href="m_n_kappa.general.StrainPosition.html">m_n_kappa.general.StrainPosition</a></li>
 <li class="toctree-l2"><a class="reference internal" href="m_n_kappa.general.EffectiveWidths.html">m_n_kappa.general.EffectiveWidths</a></li>
 <li class="toctree-l2"><a class="reference internal" href="m_n_kappa.general.curvature.html">m_n_kappa.general.curvature</a></li>
@@ -275,7 +283,7 @@
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../roadmap.html">Roadmap and To Do’s</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../contributing.html">Contributing</a></li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="../whatsnew/index.html">Release Notes</a><input class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" role="switch" type="checkbox"/><label for="toctree-checkbox-6"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../whatsnew/index.html">Release Notes</a><input class="toctree-checkbox" id="toctree-checkbox-7" name="toctree-checkbox-7" role="switch" type="checkbox"/><label for="toctree-checkbox-7"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
 <li class="toctree-l2"><a class="reference internal" href="../whatsnew/v0.1.0.html">What’s new in 0.1.0 (??. January 2023)</a></li>
 </ul>
 </li>
@@ -328,7 +336,10 @@
 <dt class="sig sig-object py" id="m_n_kappa.curves_m_kappa.MKappaCurvePoints">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">m_n_kappa.curves_m_kappa.</span></span><span class="sig-name descname"><span class="pre">MKappaCurvePoints</span></span><a class="headerlink" href="#m_n_kappa.curves_m_kappa.MKappaCurvePoints" title="Permalink to this definition">#</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
-<p>Container for points on computed M-Kappa-Curve</p>
+<p>Container for points on computed <span class="math notranslate nohighlight">\(M\)</span>-<span class="math notranslate nohighlight">\(\kappa\)</span>-Curve</p>
+<div class="versionadded">
+<p><span class="versionmodified added">New in version 0.1.0.</span></p>
+</div>
 <p class="rubric">Methods</p>
 <div class="table-wrapper autosummary longtable docutils container">
 <table class="autosummary longtable docutils align-default">
@@ -339,8 +350,11 @@
 <tr class="row-even"><td><p><a class="reference internal" href="#m_n_kappa.curves_m_kappa.MKappaCurvePoints.curvature" title="m_n_kappa.curves_m_kappa.MKappaCurvePoints.curvature"><code class="xref py py-obj docutils literal notranslate"><span class="pre">curvature</span></code></a>(by_moment)</p></td>
 <td><p>get curvature at given moment</p></td>
 </tr>
-<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">maximum_moment</span></code>()</p></td>
-<td><p></p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#m_n_kappa.curves_m_kappa.MKappaCurvePoints.maximum_moment" title="m_n_kappa.curves_m_kappa.MKappaCurvePoints.maximum_moment"><code class="xref py py-obj docutils literal notranslate"><span class="pre">maximum_moment</span></code></a>()</p></td>
+<td><p>computes the maximum moment of the curve</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#m_n_kappa.curves_m_kappa.MKappaCurvePoints.results_as_dict" title="m_n_kappa.curves_m_kappa.MKappaCurvePoints.results_as_dict"><code class="xref py py-obj docutils literal notranslate"><span class="pre">results_as_dict</span></code></a>([moment_factor])</p></td>
+<td><p>The moment-curvature points as descriptive Dictionary.</p></td>
 </tr>
 </tbody>
 </table>
@@ -349,11 +363,23 @@
 <div class="table-wrapper autosummary longtable docutils container">
 <table class="autosummary longtable docutils align-default">
 <tbody>
-<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">moments</span></code></p></td>
-<td><p></p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#m_n_kappa.curves_m_kappa.MKappaCurvePoints.curvatures" title="m_n_kappa.curves_m_kappa.MKappaCurvePoints.curvatures"><code class="xref py py-obj docutils literal notranslate"><span class="pre">curvatures</span></code></a></p></td>
+<td><p>computed curvatures of the Moment-Curvature-Curve</p></td>
 </tr>
-<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">points</span></code></p></td>
-<td><p></p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#m_n_kappa.curves_m_kappa.MKappaCurvePoints.materials" title="m_n_kappa.curves_m_kappa.MKappaCurvePoints.materials"><code class="xref py py-obj docutils literal notranslate"><span class="pre">materials</span></code></a></p></td>
+<td><p>materials the strain-position-points is obtained from that lead to moment-curvature pair</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#m_n_kappa.curves_m_kappa.MKappaCurvePoints.moments" title="m_n_kappa.curves_m_kappa.MKappaCurvePoints.moments"><code class="xref py py-obj docutils literal notranslate"><span class="pre">moments</span></code></a></p></td>
+<td><p>computed moments of the Moment-Curvature-Curve</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#m_n_kappa.curves_m_kappa.MKappaCurvePoints.points" title="m_n_kappa.curves_m_kappa.MKappaCurvePoints.points"><code class="xref py py-obj docutils literal notranslate"><span class="pre">points</span></code></a></p></td>
+<td><p><span class="math notranslate nohighlight">\(M\)</span>-<span class="math notranslate nohighlight">\(\kappa\)</span>-curve points</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#m_n_kappa.curves_m_kappa.MKappaCurvePoints.positions" title="m_n_kappa.curves_m_kappa.MKappaCurvePoints.positions"><code class="xref py py-obj docutils literal notranslate"><span class="pre">positions</span></code></a></p></td>
+<td><p>positions that lead to moment-curvature pair</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#m_n_kappa.curves_m_kappa.MKappaCurvePoints.strains" title="m_n_kappa.curves_m_kappa.MKappaCurvePoints.strains"><code class="xref py py-obj docutils literal notranslate"><span class="pre">strains</span></code></a></p></td>
+<td><p>strains that lead to moment-curvature pair</p></td>
 </tr>
 </tbody>
 </table>
@@ -367,11 +393,11 @@
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>moment</strong> (<em>float</em>) – moment of the point</p></li>
-<li><p><strong>curvature</strong> (<em>float</em>) – curvature of the point</p></li>
-<li><p><strong>neutral_axis</strong> (<em>float</em>) – neutral-axis leading to equilibrium (after variation)</p></li>
-<li><p><strong>cross_section</strong> (<a class="reference internal" href="m_n_kappa.MKappaByStrainPosition.html#m_n_kappa.MKappaByStrainPosition" title="m_n_kappa.MKappaByStrainPosition"><em>MKappaByStrainPosition</em></a>) – computed cross-section</p></li>
-<li><p><strong>strain_position</strong> (<a class="reference internal" href="m_n_kappa.general.StrainPosition.html#m_n_kappa.general.StrainPosition" title="m_n_kappa.general.StrainPosition"><em>StrainPosition</em></a>) – strain and its position</p></li>
+<li><p><strong>moment</strong> (<em>float</em>) – computed moment of the point</p></li>
+<li><p><strong>curvature</strong> (<em>float</em>) – computed curvature of the point</p></li>
+<li><p><strong>neutral_axis</strong> (<em>float</em>) – computed neutral-axis leading to equilibrium (after variation)</p></li>
+<li><p><strong>cross_section</strong> (<a class="reference internal" href="m_n_kappa.MKappaByStrainPosition.html#m_n_kappa.MKappaByStrainPosition" title="m_n_kappa.points.MKappaByStrainPosition"><code class="xref py py-class docutils literal notranslate"><span class="pre">MKappaByStrainPosition</span></code></a>) – computed cross-section</p></li>
+<li><p><strong>strain_position</strong> (<a class="reference internal" href="m_n_kappa.general.StrainPosition.html#m_n_kappa.general.StrainPosition" title="m_n_kappa.general.StrainPosition"><code class="xref py py-class docutils literal notranslate"><span class="pre">StrainPosition</span></code></a>) – strain and its position</p></li>
 </ul>
 </dd>
 <dt class="field-even">Return type<span class="colon">:</span></dt>
@@ -386,12 +412,90 @@
 <dd><p>get curvature at given moment</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>by_moment</strong> (<em>float</em>) – </p>
+<dd class="field-odd"><p><strong>by_moment</strong> (<em>float</em>) – moment the curvature is to be computed from</p>
 </dd>
-<dt class="field-even">Return type<span class="colon">:</span></dt>
-<dd class="field-even"><p>float</p>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>curvature <span class="math notranslate nohighlight">\(\kappa\)</span> computed from the given moment</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>ValueError</strong> – in case the moment is outside the computed moment-range</p>
 </dd>
 </dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="m_n_kappa.curves_m_kappa.MKappaCurvePoints.maximum_moment">
+<span class="sig-name descname"><span class="pre">maximum_moment</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#m_n_kappa.curves_m_kappa.MKappaCurvePoints.maximum_moment" title="Permalink to this definition">#</a></dt>
+<dd><p>computes the maximum moment of the curve</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="m_n_kappa.curves_m_kappa.MKappaCurvePoints.results_as_dict">
+<span class="sig-name descname"><span class="pre">results_as_dict</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">moment_factor</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1.0</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#m_n_kappa.curves_m_kappa.MKappaCurvePoints.results_as_dict" title="Permalink to this definition">#</a></dt>
+<dd><p>The moment-curvature points as descriptive Dictionary.</p>
+<p>Following keys are given with the corresponding lists:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">'Moment'</span></code>: computed moments of the moment curvature curve</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">'Curvature'</span></code>: computed curvatures of the moment-curvature curve</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">'Strain'</span></code>: strains that lead to the above given moment-curvature-pair</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">'Position'</span></code>: position that corresponds to the above given strain</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">'Material'</span></code>: material <code class="docutils literal notranslate"><span class="pre">strain</span></code> and <code class="docutils literal notranslate"><span class="pre">position</span></code> are obtained from</p></li>
+</ul>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>moment_factor</strong> (<em>float</em>) – factor to compute the moment (default: 1.0)</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>moment-curvature points</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>dict</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="m_n_kappa.curves_m_kappa.MKappaCurvePoints.curvatures">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">curvatures</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#m_n_kappa.curves_m_kappa.MKappaCurvePoints.curvatures" title="Permalink to this definition">#</a></dt>
+<dd><p>computed curvatures of the Moment-Curvature-Curve</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="m_n_kappa.curves_m_kappa.MKappaCurvePoints.materials">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">materials</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#m_n_kappa.curves_m_kappa.MKappaCurvePoints.materials" title="Permalink to this definition">#</a></dt>
+<dd><p>materials the strain-position-points is obtained from that lead to moment-curvature pair</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="m_n_kappa.curves_m_kappa.MKappaCurvePoints.moments">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">moments</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#m_n_kappa.curves_m_kappa.MKappaCurvePoints.moments" title="Permalink to this definition">#</a></dt>
+<dd><p>computed moments of the Moment-Curvature-Curve</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="m_n_kappa.curves_m_kappa.MKappaCurvePoints.points">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">points</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">list</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="m_n_kappa.curves_m_kappa.MKappaCurvePoint.html#m_n_kappa.curves_m_kappa.MKappaCurvePoint" title="m_n_kappa.curves_m_kappa.MKappaCurvePoint"><span class="pre">m_n_kappa.curves_m_kappa.MKappaCurvePoint</span></a><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#m_n_kappa.curves_m_kappa.MKappaCurvePoints.points" title="Permalink to this definition">#</a></dt>
+<dd><p><span class="math notranslate nohighlight">\(M\)</span>-<span class="math notranslate nohighlight">\(\kappa\)</span>-curve points</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="m_n_kappa.curves_m_kappa.MKappaCurvePoints.positions">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">positions</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#m_n_kappa.curves_m_kappa.MKappaCurvePoints.positions" title="Permalink to this definition">#</a></dt>
+<dd><p>positions that lead to moment-curvature pair</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="m_n_kappa.curves_m_kappa.MKappaCurvePoints.strains">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">strains</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#m_n_kappa.curves_m_kappa.MKappaCurvePoints.strains" title="Permalink to this definition">#</a></dt>
+<dd><p>strains that lead to moment-curvature pair</p>
 </dd></dl>
 
 </dd></dl>
@@ -457,6 +561,14 @@
 <li><a class="reference internal" href="#m_n_kappa.curves_m_kappa.MKappaCurvePoints"><code class="docutils literal notranslate"><span class="pre">MKappaCurvePoints</span></code></a><ul>
 <li><a class="reference internal" href="#m_n_kappa.curves_m_kappa.MKappaCurvePoints.add"><code class="docutils literal notranslate"><span class="pre">MKappaCurvePoints.add()</span></code></a></li>
 <li><a class="reference internal" href="#m_n_kappa.curves_m_kappa.MKappaCurvePoints.curvature"><code class="docutils literal notranslate"><span class="pre">MKappaCurvePoints.curvature()</span></code></a></li>
+<li><a class="reference internal" href="#m_n_kappa.curves_m_kappa.MKappaCurvePoints.maximum_moment"><code class="docutils literal notranslate"><span class="pre">MKappaCurvePoints.maximum_moment()</span></code></a></li>
+<li><a class="reference internal" href="#m_n_kappa.curves_m_kappa.MKappaCurvePoints.results_as_dict"><code class="docutils literal notranslate"><span class="pre">MKappaCurvePoints.results_as_dict()</span></code></a></li>
+<li><a class="reference internal" href="#m_n_kappa.curves_m_kappa.MKappaCurvePoints.curvatures"><code class="docutils literal notranslate"><span class="pre">MKappaCurvePoints.curvatures</span></code></a></li>
+<li><a class="reference internal" href="#m_n_kappa.curves_m_kappa.MKappaCurvePoints.materials"><code class="docutils literal notranslate"><span class="pre">MKappaCurvePoints.materials</span></code></a></li>
+<li><a class="reference internal" href="#m_n_kappa.curves_m_kappa.MKappaCurvePoints.moments"><code class="docutils literal notranslate"><span class="pre">MKappaCurvePoints.moments</span></code></a></li>
+<li><a class="reference internal" href="#m_n_kappa.curves_m_kappa.MKappaCurvePoints.points"><code class="docutils literal notranslate"><span class="pre">MKappaCurvePoints.points</span></code></a></li>
+<li><a class="reference internal" href="#m_n_kappa.curves_m_kappa.MKappaCurvePoints.positions"><code class="docutils literal notranslate"><span class="pre">MKappaCurvePoints.positions</span></code></a></li>
+<li><a class="reference internal" href="#m_n_kappa.curves_m_kappa.MKappaCurvePoints.strains"><code class="docutils literal notranslate"><span class="pre">MKappaCurvePoints.strains</span></code></a></li>
 </ul>
 </li>
 </ul>
@@ -480,7 +592,12 @@
     <script src="../_static/clipboard.min.js"></script>
     <script src="../_static/copybutton.js"></script>
     <script src="../_static/toggleprompt.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vega@5"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vega-lite@4.17.0"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vega-embed@6"></script>
     <script src="../_static/design-tabs.js"></script>
     <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     </body>
 </html>

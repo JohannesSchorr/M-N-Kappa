@@ -1,0 +1,638 @@
+<!doctype html>
+<html class="no-js" lang="en">
+  <head><meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width,initial-scale=1"/>
+    <meta name="color-scheme" content="light dark"><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
+<link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" /><link rel="next" title="Deformation" href="deformation.html" /><link rel="prev" title="Moment-Curvature-Curve" href="moment_curvature_curve.html" />
+
+    <!-- Generated with Sphinx 5.3.0 and Furo 2022.12.07 -->
+        <title>Loading - M-N-κ</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?digest=91d0f0d1c444bdcb17a68e833c7a53903343c195" />
+    <link rel="stylesheet" type="text/css" href="../_static/altair-plot.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/furo-extensions.css?digest=30d1aed668e5c3a91c3e3bf6a60b675221979f0e" />
+    <link rel="stylesheet" type="text/css" href="../_static/css/custom.css" />
+    
+    
+
+
+<style>
+  body {
+    --color-code-background: #f8f8f8;
+  --color-code-foreground: black;
+  
+  }
+  @media not print {
+    body[data-theme="dark"] {
+      --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  
+    }
+    @media (prefers-color-scheme: dark) {
+      body:not([data-theme="light"]) {
+        --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  
+      }
+    }
+  }
+</style></head>
+  <body>
+    
+    <script>
+      document.body.dataset.theme = localStorage.getItem("theme") || "auto";
+    </script>
+    
+
+<svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+  <symbol id="svg-toc" viewBox="0 0 24 24">
+    <title>Contents</title>
+    <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 1024 1024">
+      <path d="M408 442h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8zm-8 204c0 4.4 3.6 8 8 8h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56zm504-486H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zm0 632H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zM115.4 518.9L271.7 642c5.8 4.6 14.4.5 14.4-6.9V388.9c0-7.4-8.5-11.5-14.4-6.9L115.4 505.1a8.74 8.74 0 0 0 0 13.8z"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-menu" viewBox="0 0 24 24">
+    <title>Menu</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-menu">
+      <line x1="3" y1="12" x2="21" y2="12"></line>
+      <line x1="3" y1="6" x2="21" y2="6"></line>
+      <line x1="3" y1="18" x2="21" y2="18"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-arrow-right" viewBox="0 0 24 24">
+    <title>Expand</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-chevron-right">
+      <polyline points="9 18 15 12 9 6"></polyline>
+    </svg>
+  </symbol>
+  <symbol id="svg-sun" viewBox="0 0 24 24">
+    <title>Light mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="feather-sun">
+      <circle cx="12" cy="12" r="5"></circle>
+      <line x1="12" y1="1" x2="12" y2="3"></line>
+      <line x1="12" y1="21" x2="12" y2="23"></line>
+      <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+      <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+      <line x1="1" y1="12" x2="3" y2="12"></line>
+      <line x1="21" y1="12" x2="23" y2="12"></line>
+      <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+      <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-moon" viewBox="0 0 24 24">
+    <title>Dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-moon">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M12 3c.132 0 .263 0 .393 0a7.5 7.5 0 0 0 7.92 12.446a9 9 0 1 1 -8.313 -12.454z" />
+    </svg>
+  </symbol>
+  <symbol id="svg-sun-half" viewBox="0 0 24 24">
+    <title>Auto light/dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-shadow">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+      <circle cx="12" cy="12" r="9" />
+      <path d="M13 12h5" />
+      <path d="M13 15h4" />
+      <path d="M13 18h1" />
+      <path d="M13 9h4" />
+      <path d="M13 6h1" />
+    </svg>
+  </symbol>
+</svg>
+
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation">
+<input type="checkbox" class="sidebar-toggle" name="__toc" id="__toc">
+<label class="overlay sidebar-overlay" for="__navigation">
+  <div class="visually-hidden">Hide navigation sidebar</div>
+</label>
+<label class="overlay toc-overlay" for="__toc">
+  <div class="visually-hidden">Hide table of contents sidebar</div>
+</label>
+
+<div class="announcement">
+  <aside class="announcement-content">
+     <em>Important</em> This 'm_n_kappa'-package has not yet been published on PyPI! This documentation is also currently under development. Plaese keep that in mind, while reading and testing. Thank you. 
+  </aside>
+</div>
+
+<div class="page">
+  <header class="mobile-header">
+    <div class="header-left">
+      <label class="nav-overlay-icon" for="__navigation">
+        <div class="visually-hidden">Toggle site navigation sidebar</div>
+        <i class="icon"><svg><use href="#svg-menu"></use></svg></i>
+      </label>
+    </div>
+    <div class="header-center">
+      <a href="../index.html"><div class="brand"><i>M</i>-<i>N</i>-<i>&#954</i></div></a>
+    </div>
+    <div class="header-right">
+      <div class="theme-toggle-container theme-toggle-header">
+        <button class="theme-toggle">
+          <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
+          <svg class="theme-icon-when-auto"><use href="#svg-sun-half"></use></svg>
+          <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+          <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+        </button>
+      </div>
+      <label class="toc-overlay-icon toc-header-icon" for="__toc">
+        <div class="visually-hidden">Toggle table of contents sidebar</div>
+        <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+      </label>
+    </div>
+  </header>
+  <aside class="sidebar-drawer">
+    <div class="sidebar-container">
+      
+      <div class="sidebar-sticky"><a class="sidebar-brand centered" href="../index.html">
+  
+  <div class="sidebar-logo-container">
+    <img class="sidebar-logo" src="../_static/m_kappa_logo.png" alt="Logo"/>
+  </div>
+  
+  <span class="sidebar-brand-text"><i>M</i>-<i>N</i>-<i>&#954</i></span>
+  
+</a><form class="sidebar-search-container" method="get" action="../search.html" role="search">
+  <input class="sidebar-search" placeholder="Search" name="q" aria-label="Search">
+  <input type="hidden" name="check_keywords" value="yes">
+  <input type="hidden" name="area" value="default">
+</form>
+<div id="searchbox"></div><div class="sidebar-scroll"><div class="sidebar-tree">
+  <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../getting_started.html">Getting Started</a></li>
+<li class="toctree-l1 current has-children"><a class="reference internal" href="index.html">Examples</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="geometry.html">Creating Geometries</a></li>
+<li class="toctree-l2"><a class="reference internal" href="material.html">Creating materials</a></li>
+<li class="toctree-l2"><a class="reference internal" href="section.html">Build a section</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cross_section.html">Build a cross-section</a></li>
+<li class="toctree-l2"><a class="reference internal" href="moment_curvature.html">Moment-Curvature</a></li>
+<li class="toctree-l2"><a class="reference internal" href="moment_curvature_curve.html">Moment-Curvature-Curve</a></li>
+<li class="toctree-l2 current current-page"><a class="current reference internal" href="#">Loading</a></li>
+<li class="toctree-l2"><a class="reference internal" href="deformation.html">Deformation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="m_kappa_UPE.html">Single span slim-floor beam with Moment-Curvature-Curves</a></li>
+<li class="toctree-l2"><a class="reference internal" href="m_n_kappa_UPE.html">Single span slim-floor beam with Moment-Axial force-Curvature-Curves</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="cross_section_templates/index.html">Templates</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" role="switch" type="checkbox"/><label for="toctree-checkbox-2"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="simple">
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../theory/index.html">Theory guide</a><input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" role="switch" type="checkbox"/><label for="toctree-checkbox-3"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../theory/symbols.html">Symbols</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../theory/coordinates.html">Coordinates</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../theory/units.html">Units</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../theory/general.html">General</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../theory/geometries.html">Geometry</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../theory/materials.html">Materials</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../theory/sections.html">Sections and cross-sections</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../theory/strain_based_design.html">Strain based design</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../theory/m_kappa_curve.html"><span class="math notranslate nohighlight">\(M\)</span>-<span class="math notranslate nohighlight">\(\kappa\)</span>-curve</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../theory/effective_widths.html">Effective widths</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../theory/loading.html">Loading</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../theory/deformations.html">Deformations</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../verification/index.html">Verification</a><input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" role="switch" type="checkbox"/><label for="toctree-checkbox-4"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="simple">
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Development</span></p>
+<ul>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../api.html">API reference</a><input class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" role="switch" type="checkbox"/><label for="toctree-checkbox-5"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../api/m_n_kappa.Geometry.html">m_n_kappa.Geometry</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api/m_n_kappa.Rectangle.html">m_n_kappa.Rectangle</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api/m_n_kappa.Circle.html">m_n_kappa.Circle</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api/m_n_kappa.Trapezoid.html">m_n_kappa.Trapezoid</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api/m_n_kappa.geometry.ComposedGeometry.html">m_n_kappa.geometry.ComposedGeometry</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api/m_n_kappa.IProfile.html">m_n_kappa.IProfile</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api/m_n_kappa.UPEProfile.html">m_n_kappa.UPEProfile</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api/m_n_kappa.RebarLayer.html">m_n_kappa.RebarLayer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api/m_n_kappa.Material.html">m_n_kappa.Material</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api/m_n_kappa.Concrete.html">m_n_kappa.Concrete</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api/m_n_kappa.Steel.html">m_n_kappa.Steel</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api/m_n_kappa.Reinforcement.html">m_n_kappa.Reinforcement</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api/m_n_kappa.Section.html">m_n_kappa.Section</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api/m_n_kappa.Crosssection.html">m_n_kappa.Crosssection</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api/m_n_kappa.MKappaByStrainPosition.html">m_n_kappa.MKappaByStrainPosition</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api/m_n_kappa.MKappaByConstantCurvature.html">m_n_kappa.MKappaByConstantCurvature</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api/m_n_kappa.MKappaCurve.html">m_n_kappa.MKappaCurve</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api/m_n_kappa.curves_m_kappa.MKappaCurvePoint.html">m_n_kappa.curves_m_kappa.MKappaCurvePoint</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api/m_n_kappa.curves_m_kappa.MKappaCurvePoints.html">m_n_kappa.curves_m_kappa.MKappaCurvePoints</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api/m_n_kappa.SingleSpanUniformLoad.html">m_n_kappa.SingleSpanUniformLoad</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api/m_n_kappa.SingleLoad.html">m_n_kappa.SingleLoad</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api/m_n_kappa.SingleSpanSingleLoads.html">m_n_kappa.SingleSpanSingleLoads</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api/m_n_kappa.SingleSpan.html">m_n_kappa.SingleSpan</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api/m_n_kappa.Beam.html">m_n_kappa.Beam</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api/m_n_kappa.Node.html">m_n_kappa.Node</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../api_developers.html">API for developers</a><input class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" role="switch" type="checkbox"/><label for="toctree-checkbox-6"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../api/m_n_kappa.general.StrainPosition.html">m_n_kappa.general.StrainPosition</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api/m_n_kappa.general.EffectiveWidths.html">m_n_kappa.general.EffectiveWidths</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api/m_n_kappa.general.curvature.html">m_n_kappa.general.curvature</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api/m_n_kappa.general.curvature_by_points.html">m_n_kappa.general.curvature_by_points</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api/m_n_kappa.general.strain.html">m_n_kappa.general.strain</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api/m_n_kappa.general.position.html">m_n_kappa.general.position</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api/m_n_kappa.general.neutral_axis.html">m_n_kappa.general.neutral_axis</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api/m_n_kappa.general.remove_duplicates.html">m_n_kappa.general.remove_duplicates</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api/m_n_kappa.general.positive_sign.html">m_n_kappa.general.positive_sign</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api/m_n_kappa.general.negative_sign.html">m_n_kappa.general.negative_sign</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api/m_n_kappa.general.interpolation.html">m_n_kappa.general.interpolation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api/m_n_kappa.geometry.check_width.html">m_n_kappa.geometry.check_width</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api/m_n_kappa.material.StressStrain.html">m_n_kappa.material.StressStrain</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api/m_n_kappa.material.ConcreteCompression.html">m_n_kappa.material.ConcreteCompression</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api/m_n_kappa.material.ConcreteCompressionNonlinear.html">m_n_kappa.material.ConcreteCompressionNonlinear</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api/m_n_kappa.material.ConcreteCompressionParabolaRectangle.html">m_n_kappa.material.ConcreteCompressionParabolaRectangle</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api/m_n_kappa.material.ConcreteCompressionBiLinear.html">m_n_kappa.material.ConcreteCompressionBiLinear</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api/m_n_kappa.material.ConcreteTension.html">m_n_kappa.material.ConcreteTension</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api/m_n_kappa.section.ComputationSection.html">m_n_kappa.section.ComputationSection</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api/m_n_kappa.section.ComputationSectionCurvature.html">m_n_kappa.section.ComputationSectionCurvature</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api/m_n_kappa.section.ComputationSectionStrain.html">m_n_kappa.section.ComputationSectionStrain</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api/m_n_kappa.crosssection.ComputationCrosssection.html">m_n_kappa.crosssection.ComputationCrosssection</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api/m_n_kappa.crosssection.ComputationCrosssectionStrain.html">m_n_kappa.crosssection.ComputationCrosssectionStrain</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api/m_n_kappa.crosssection.ComputationCrosssectionCurvature.html">m_n_kappa.crosssection.ComputationCrosssectionCurvature</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api/m_n_kappa.crosssection.ComputationCrosssectionStrainAdd.html">m_n_kappa.crosssection.ComputationCrosssectionStrainAdd</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api/m_n_kappa.crosssection.EdgeStrains.html">m_n_kappa.crosssection.EdgeStrains</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api/m_n_kappa.crosssection.CrossSectionBoundaries.html">m_n_kappa.crosssection.CrossSectionBoundaries</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api/m_n_kappa.crosssection.axial_force.html">m_n_kappa.crosssection.axial_force</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api/m_n_kappa.crosssection.moment.html">m_n_kappa.crosssection.moment</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api/m_n_kappa.crosssection.determine_curvatures.html">m_n_kappa.crosssection.determine_curvatures</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api/m_n_kappa.crosssection.compute_neutral_axis.html">m_n_kappa.crosssection.compute_neutral_axis</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api/m_n_kappa.curvature_boundaries.MaximumCurvature.html">m_n_kappa.curvature_boundaries.MaximumCurvature</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api/m_n_kappa.curvature_boundaries.MinimumCurvature.html">m_n_kappa.curvature_boundaries.MinimumCurvature</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api/m_n_kappa.curvature_boundaries.BoundaryValues.html">m_n_kappa.curvature_boundaries.BoundaryValues</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api/m_n_kappa.curvature_boundaries.Boundaries.html">m_n_kappa.curvature_boundaries.Boundaries</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api/m_n_kappa.curvature_boundaries.compute_curvatures.html">m_n_kappa.curvature_boundaries.compute_curvatures</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api/m_n_kappa.curvature_boundaries.remove_higher_strains.html">m_n_kappa.curvature_boundaries.remove_higher_strains</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api/m_n_kappa.curvature_boundaries.remove_smaller_strains.html">m_n_kappa.curvature_boundaries.remove_smaller_strains</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api/m_n_kappa.curvature_boundaries.get_lower_positions.html">m_n_kappa.curvature_boundaries.get_lower_positions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api/m_n_kappa.curvature_boundaries.get_higher_positions.html">m_n_kappa.curvature_boundaries.get_higher_positions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api/m_n_kappa.points.Computation.html">m_n_kappa.points.Computation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api/m_n_kappa.points.MKappa.html">m_n_kappa.points.MKappa</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api/m_n_kappa.solver.Solver.html">m_n_kappa.solver.Solver</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api/m_n_kappa.solver.Bisection.html">m_n_kappa.solver.Bisection</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api/m_n_kappa.solver.Newton.html">m_n_kappa.solver.Newton</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api/m_n_kappa.loading.ABCSingleSpan.html">m_n_kappa.loading.ABCSingleSpan</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../roadmap.html">Roadmap and To Do’s</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../contributing.html">Contributing</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../whatsnew/index.html">Release Notes</a><input class="toctree-checkbox" id="toctree-checkbox-7" name="toctree-checkbox-7" role="switch" type="checkbox"/><label for="toctree-checkbox-7"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../whatsnew/v0.1.0.html">What’s new in 0.1.0 (??. January 2023)</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../license.html">License</a></li>
+</ul>
+
+</div>
+</div>
+
+      </div>
+      
+    </div>
+  </aside>
+  <div class="main">
+    <div class="content">
+      <div class="article-container">
+        <a href="#" class="back-to-top muted-link">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12z"></path>
+          </svg>
+          <span>Back to top</span>
+        </a>
+        <div class="content-icon-container">
+          <div class="edit-this-page">
+  <a class="muted-link" href="https://github.com/JohannesSchorr/M-N-Kappa/edit/master/docs/source/examples/loading.rst" title="Edit this page">
+    <svg aria-hidden="true" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+      <path d="M4 20h4l10.5 -10.5a1.5 1.5 0 0 0 -4 -4l-10.5 10.5v4" />
+      <line x1="13.5" y1="6.5" x2="17.5" y2="10.5" />
+    </svg>
+    <span class="visually-hidden">Edit this page</span>
+  </a>
+</div><div class="theme-toggle-container theme-toggle-content">
+            <button class="theme-toggle">
+              <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
+              <svg class="theme-icon-when-auto"><use href="#svg-sun-half"></use></svg>
+              <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+              <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+            </button>
+          </div>
+          <label class="toc-overlay-icon toc-content-icon" for="__toc">
+            <div class="visually-hidden">Toggle table of contents sidebar</div>
+            <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+          </label>
+        </div>
+        <article role="main">
+          <section id="loading">
+<span id="examples-loading"></span><h1>Loading<a class="headerlink" href="#loading" title="Permalink to this heading">#</a></h1>
+<p><em>Units: Millimeter [mm], Newton [N]</em></p>
+<section id="introduction">
+<span id="examples-loading-singlespan-intro"></span><h2>Introduction<a class="headerlink" href="#introduction" title="Permalink to this heading">#</a></h2>
+<p>For computing deformations the loading of a beam is crucial.
+Therefore, <code class="xref py py-mod docutils literal notranslate"><span class="pre">m_n_kappa</span></code> provides currently two functions to compute the stress resultants
+of single-span girders.</p>
+</section>
+<section id="single-loads">
+<span id="examples-loading-singlespan-singleloads"></span><h2>Single Loads<a class="headerlink" href="#single-loads" title="Permalink to this heading">#</a></h2>
+<p>For computation of the stress-resultants of a single-span beam first at leas one
+<a class="reference internal" href="../api/m_n_kappa.SingleLoad.html#m_n_kappa.SingleLoad" title="m_n_kappa.SingleLoad"><code class="xref py py-class docutils literal notranslate"><span class="pre">SingleLoad</span></code></a> must be defined.
+This <a class="reference internal" href="../api/m_n_kappa.SingleLoad.html#m_n_kappa.SingleLoad" title="m_n_kappa.SingleLoad"><code class="xref py py-class docutils literal notranslate"><span class="pre">SingleLoad</span></code></a> defines the position of the load along the beam as
+well as its value.
+Here, <a class="reference internal" href="../api/m_n_kappa.SingleLoad.html#m_n_kappa.SingleLoad" title="m_n_kappa.SingleLoad"><code class="xref py py-class docutils literal notranslate"><span class="pre">SingleLoad</span></code></a> is defined at 4000 mm, what applies to the middle of the beam.
+But every other position within the beam-span (0 mm &lt; <span class="math notranslate nohighlight">\(L\)</span> &lt; 8000 mm) is possible.</p>
+<p>This <a class="reference internal" href="../api/m_n_kappa.SingleLoad.html#m_n_kappa.SingleLoad" title="m_n_kappa.SingleLoad"><code class="xref py py-class docutils literal notranslate"><span class="pre">SingleLoad</span></code></a> (i.e. <code class="docutils literal notranslate"><span class="pre">load_1</span></code>) is passed to <a class="reference internal" href="../api/m_n_kappa.SingleSpanSingleLoads.html#m_n_kappa.SingleSpanSingleLoads" title="m_n_kappa.SingleSpanSingleLoads"><code class="xref py py-class docutils literal notranslate"><span class="pre">SingleSpanSingleLoads</span></code></a>
+in a list, together with the <code class="docutils literal notranslate"><span class="pre">length</span></code> of the beam.</p>
+<p><a class="reference internal" href="../api/m_n_kappa.SingleSpanSingleLoads.html#m_n_kappa.SingleSpanSingleLoads.maximum_moment" title="m_n_kappa.SingleSpanSingleLoads.maximum_moment"><code class="xref py py-meth docutils literal notranslate"><span class="pre">maximum_moment()</span></code></a> computes then the maximum Moment.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">m_n_kappa</span> <span class="kn">import</span> <span class="n">SingleSpanSingleLoads</span><span class="p">,</span> <span class="n">SingleLoad</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">load_1</span> <span class="o">=</span> <span class="n">SingleLoad</span><span class="p">(</span><span class="n">position_in_beam</span><span class="o">=</span><span class="mi">4000</span><span class="p">,</span> <span class="n">value</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">single</span> <span class="o">=</span> <span class="n">SingleSpanSingleLoads</span><span class="p">(</span><span class="n">length</span><span class="o">=</span><span class="mi">8000</span><span class="p">,</span> <span class="n">loads</span><span class="o">=</span><span class="p">[</span><span class="n">load_1</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">single</span><span class="o">.</span><span class="n">maximum_moment</span>
+<span class="go">20000.0</span>
+</pre></div>
+</div>
+<p>The transversal shear at the supports is given by
+<a class="reference internal" href="../api/m_n_kappa.SingleSpanSingleLoads.html#m_n_kappa.SingleSpanSingleLoads.transversal_shear_support_left" title="m_n_kappa.SingleSpanSingleLoads.transversal_shear_support_left"><code class="xref py py-meth docutils literal notranslate"><span class="pre">transversal_shear_support_left()</span></code></a> for the left support and
+<a class="reference internal" href="../api/m_n_kappa.SingleSpanSingleLoads.html#m_n_kappa.SingleSpanSingleLoads.transversal_shear_support_right" title="m_n_kappa.SingleSpanSingleLoads.transversal_shear_support_right"><code class="xref py py-meth docutils literal notranslate"><span class="pre">transversal_shear_support_right()</span></code></a> for the right support.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">single</span><span class="o">.</span><span class="n">transversal_shear_support_left</span><span class="p">,</span> <span class="n">single</span><span class="o">.</span><span class="n">transversal_shear_support_right</span>
+<span class="go">(5.0, -5.0)</span>
+</pre></div>
+</div>
+<p>The summarized loading is given by <a class="reference internal" href="../api/m_n_kappa.SingleSpanSingleLoads.html#m_n_kappa.SingleSpanSingleLoads.loading" title="m_n_kappa.SingleSpanSingleLoads.loading"><code class="xref py py-meth docutils literal notranslate"><span class="pre">loading()</span></code></a>.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">single</span><span class="o">.</span><span class="n">loading</span>
+<span class="go">10</span>
+</pre></div>
+</div>
+<p>Of course, the moment may be computed at every position along the beam.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">single</span><span class="o">.</span><span class="n">moment</span><span class="p">(</span><span class="n">at_position</span><span class="o">=</span><span class="mi">2000</span><span class="p">)</span>
+<span class="go">10000.0</span>
+</pre></div>
+</div>
+<p>As well as the transversal shear.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">single</span><span class="o">.</span><span class="n">transversal_shear</span><span class="p">(</span><span class="n">at_position</span><span class="o">=</span><span class="mi">2000</span><span class="p">)</span>
+<span class="go">5.0</span>
+</pre></div>
+</div>
+<p>This allows to compute the course of the moment over the length of the beam.</p>
+<div class="highlight-python notranslate" id="loading-rst-altair-source-2"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">altair</span> <span class="k">as</span> <span class="nn">alt</span>
+
+<span class="n">positions</span> <span class="o">=</span> <span class="p">[</span><span class="n">index</span><span class="o">*</span><span class="mi">100</span> <span class="k">for</span> <span class="n">index</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">81</span><span class="p">,</span> <span class="mi">1</span><span class="p">)]</span>
+<span class="n">moments</span> <span class="o">=</span> <span class="p">[</span><span class="n">single</span><span class="o">.</span><span class="n">moment</span><span class="p">(</span><span class="n">at_position</span><span class="o">=</span><span class="n">position</span><span class="p">)</span> <span class="k">for</span> <span class="n">position</span> <span class="ow">in</span> <span class="n">positions</span><span class="p">]</span>
+
+<span class="n">df_moments</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s1">&#39;moments&#39;</span><span class="p">:</span> <span class="n">moments</span><span class="p">,</span> <span class="s1">&#39;positions&#39;</span><span class="p">:</span> <span class="n">positions</span><span class="p">})</span>
+
+<span class="n">alt</span><span class="o">.</span><span class="n">Chart</span><span class="p">(</span><span class="n">df_moments</span><span class="p">,</span> <span class="n">height</span><span class="o">=</span><span class="mf">100.0</span><span class="p">,</span> <span class="n">background</span><span class="o">=</span><span class="s1">&#39;#00000000&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">mark_line</span><span class="p">()</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span>
+   <span class="n">x</span><span class="o">=</span><span class="n">alt</span><span class="o">.</span><span class="n">X</span><span class="p">(</span><span class="s1">&#39;positions&#39;</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="s1">&#39;Position [mm]&#39;</span><span class="p">),</span>
+   <span class="n">y</span><span class="o">=</span><span class="n">alt</span><span class="o">.</span><span class="n">Y</span><span class="p">(</span><span class="s1">&#39;moments&#39;</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="s1">&#39;Moment [Nmm]&#39;</span><span class="p">,</span> <span class="n">scale</span><span class="o">=</span><span class="n">alt</span><span class="o">.</span><span class="n">Scale</span><span class="p">(</span><span class="n">reverse</span><span class="o">=</span><span class="kc">True</span><span class="p">)))</span>
+</pre></div>
+</div>
+
+<div id="loading-rst-altair-plot-2">
+<script>
+  // embed when document is loaded, to ensure vega library is available
+  // this works on all modern browsers, except IE8 and older
+  document.addEventListener("DOMContentLoaded", function(event) {
+      var spec = {"usermeta": {"embedOptions": {"theme": "quartz"}}, "config": {"view": {"continuousWidth": 400, "continuousHeight": 300}}, "data": {"name": "data-021982fe97a63a6f7ea4154237d81c94"}, "mark": "line", "background": "#00000000", "encoding": {"x": {"field": "positions", "title": "Position [mm]", "type": "quantitative"}, "y": {"field": "moments", "scale": {"reverse": true}, "title": "Moment [Nmm]", "type": "quantitative"}}, "height": 100.0, "$schema": "https://vega.github.io/schema/vega-lite/v4.17.0.json", "datasets": {"data-021982fe97a63a6f7ea4154237d81c94": [{"moments": 0.0, "positions": 0}, {"moments": 500.0, "positions": 100}, {"moments": 1000.0, "positions": 200}, {"moments": 1500.0, "positions": 300}, {"moments": 2000.0, "positions": 400}, {"moments": 2500.0, "positions": 500}, {"moments": 3000.0, "positions": 600}, {"moments": 3500.0, "positions": 700}, {"moments": 4000.0, "positions": 800}, {"moments": 4500.0, "positions": 900}, {"moments": 5000.0, "positions": 1000}, {"moments": 5500.0, "positions": 1100}, {"moments": 6000.0, "positions": 1200}, {"moments": 6500.0, "positions": 1300}, {"moments": 7000.0, "positions": 1400}, {"moments": 7500.0, "positions": 1500}, {"moments": 8000.0, "positions": 1600}, {"moments": 8500.0, "positions": 1700}, {"moments": 9000.0, "positions": 1800}, {"moments": 9500.0, "positions": 1900}, {"moments": 10000.0, "positions": 2000}, {"moments": 10500.0, "positions": 2100}, {"moments": 11000.0, "positions": 2200}, {"moments": 11500.0, "positions": 2300}, {"moments": 12000.0, "positions": 2400}, {"moments": 12500.0, "positions": 2500}, {"moments": 13000.0, "positions": 2600}, {"moments": 13500.0, "positions": 2700}, {"moments": 14000.0, "positions": 2800}, {"moments": 14500.0, "positions": 2900}, {"moments": 15000.0, "positions": 3000}, {"moments": 15500.0, "positions": 3100}, {"moments": 16000.0, "positions": 3200}, {"moments": 16500.0, "positions": 3300}, {"moments": 17000.0, "positions": 3400}, {"moments": 17500.0, "positions": 3500}, {"moments": 18000.0, "positions": 3600}, {"moments": 18500.0, "positions": 3700}, {"moments": 19000.0, "positions": 3800}, {"moments": 19500.0, "positions": 3900}, {"moments": 20000.0, "positions": 4000}, {"moments": 19500.0, "positions": 4100}, {"moments": 19000.0, "positions": 4200}, {"moments": 18500.0, "positions": 4300}, {"moments": 18000.0, "positions": 4400}, {"moments": 17500.0, "positions": 4500}, {"moments": 17000.0, "positions": 4600}, {"moments": 16500.0, "positions": 4700}, {"moments": 16000.0, "positions": 4800}, {"moments": 15500.0, "positions": 4900}, {"moments": 15000.0, "positions": 5000}, {"moments": 14500.0, "positions": 5100}, {"moments": 14000.0, "positions": 5200}, {"moments": 13500.0, "positions": 5300}, {"moments": 13000.0, "positions": 5400}, {"moments": 12500.0, "positions": 5500}, {"moments": 12000.0, "positions": 5600}, {"moments": 11500.0, "positions": 5700}, {"moments": 11000.0, "positions": 5800}, {"moments": 10500.0, "positions": 5900}, {"moments": 10000.0, "positions": 6000}, {"moments": 9500.0, "positions": 6100}, {"moments": 9000.0, "positions": 6200}, {"moments": 8500.0, "positions": 6300}, {"moments": 8000.0, "positions": 6400}, {"moments": 7500.0, "positions": 6500}, {"moments": 7000.0, "positions": 6600}, {"moments": 6500.0, "positions": 6700}, {"moments": 6000.0, "positions": 6800}, {"moments": 5500.0, "positions": 6900}, {"moments": 5000.0, "positions": 7000}, {"moments": 4500.0, "positions": 7100}, {"moments": 4000.0, "positions": 7200}, {"moments": 3500.0, "positions": 7300}, {"moments": 3000.0, "positions": 7400}, {"moments": 2500.0, "positions": 7500}, {"moments": 2000.0, "positions": 7600}, {"moments": 1500.0, "positions": 7700}, {"moments": 1000.0, "positions": 7800}, {"moments": 500.0, "positions": 7900}, {"moments": 0.0, "positions": 8000}]}};
+      var opt = {
+        "mode": "vega-lite",
+        "renderer": "canvas",
+        "actions": {"editor": true, "source": true, "export": true}
+      };
+      vegaEmbed('#loading-rst-altair-plot-2', spec, opt).catch(console.err);
+  });
+</script>
+</div><p>As well as the transversal shear over the length of the beam.</p>
+<div class="highlight-python notranslate" id="loading-rst-altair-source-3"><div class="highlight"><pre><span></span><span class="n">shear</span> <span class="o">=</span> <span class="p">[</span><span class="n">single</span><span class="o">.</span><span class="n">transversal_shear</span><span class="p">(</span><span class="n">at_position</span><span class="o">=</span><span class="n">position</span><span class="p">)</span> <span class="k">for</span> <span class="n">position</span> <span class="ow">in</span> <span class="n">positions</span><span class="p">]</span>
+
+<span class="n">df_shear</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s1">&#39;shear&#39;</span><span class="p">:</span> <span class="n">shear</span><span class="p">,</span> <span class="s1">&#39;positions&#39;</span><span class="p">:</span>  <span class="n">positions</span><span class="p">})</span>
+
+<span class="n">alt</span><span class="o">.</span><span class="n">Chart</span><span class="p">(</span><span class="n">df_shear</span><span class="p">,</span> <span class="n">height</span><span class="o">=</span><span class="mf">100.0</span><span class="p">,</span> <span class="n">background</span><span class="o">=</span><span class="s1">&#39;#00000000&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">mark_line</span><span class="p">()</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span>
+   <span class="n">x</span><span class="o">=</span><span class="n">alt</span><span class="o">.</span><span class="n">X</span><span class="p">(</span><span class="s1">&#39;positions&#39;</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="s1">&#39;Position [mm]&#39;</span><span class="p">),</span>
+   <span class="n">y</span><span class="o">=</span><span class="n">alt</span><span class="o">.</span><span class="n">Y</span><span class="p">(</span><span class="s1">&#39;shear&#39;</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="s1">&#39;Transversal shear [N]&#39;</span><span class="p">))</span>
+</pre></div>
+</div>
+
+<div id="loading-rst-altair-plot-3">
+<script>
+  // embed when document is loaded, to ensure vega library is available
+  // this works on all modern browsers, except IE8 and older
+  document.addEventListener("DOMContentLoaded", function(event) {
+      var spec = {"usermeta": {"embedOptions": {"theme": "quartz"}}, "config": {"view": {"continuousWidth": 400, "continuousHeight": 300}}, "data": {"name": "data-7f4e12e5f7549fb6fb353fd7507b553c"}, "mark": "line", "background": "#00000000", "encoding": {"x": {"field": "positions", "title": "Position [mm]", "type": "quantitative"}, "y": {"field": "shear", "title": "Transversal shear [N]", "type": "quantitative"}}, "height": 100.0, "$schema": "https://vega.github.io/schema/vega-lite/v4.17.0.json", "datasets": {"data-7f4e12e5f7549fb6fb353fd7507b553c": [{"shear": 5.0, "positions": 0}, {"shear": 5.0, "positions": 100}, {"shear": 5.0, "positions": 200}, {"shear": 5.0, "positions": 300}, {"shear": 5.0, "positions": 400}, {"shear": 5.0, "positions": 500}, {"shear": 5.0, "positions": 600}, {"shear": 5.0, "positions": 700}, {"shear": 5.0, "positions": 800}, {"shear": 5.0, "positions": 900}, {"shear": 5.0, "positions": 1000}, {"shear": 5.0, "positions": 1100}, {"shear": 5.0, "positions": 1200}, {"shear": 5.0, "positions": 1300}, {"shear": 5.0, "positions": 1400}, {"shear": 5.0, "positions": 1500}, {"shear": 5.0, "positions": 1600}, {"shear": 5.0, "positions": 1700}, {"shear": 5.0, "positions": 1800}, {"shear": 5.0, "positions": 1900}, {"shear": 5.0, "positions": 2000}, {"shear": 5.0, "positions": 2100}, {"shear": 5.0, "positions": 2200}, {"shear": 5.0, "positions": 2300}, {"shear": 5.0, "positions": 2400}, {"shear": 5.0, "positions": 2500}, {"shear": 5.0, "positions": 2600}, {"shear": 5.0, "positions": 2700}, {"shear": 5.0, "positions": 2800}, {"shear": 5.0, "positions": 2900}, {"shear": 5.0, "positions": 3000}, {"shear": 5.0, "positions": 3100}, {"shear": 5.0, "positions": 3200}, {"shear": 5.0, "positions": 3300}, {"shear": 5.0, "positions": 3400}, {"shear": 5.0, "positions": 3500}, {"shear": 5.0, "positions": 3600}, {"shear": 5.0, "positions": 3700}, {"shear": 5.0, "positions": 3800}, {"shear": 5.0, "positions": 3900}, {"shear": 5.0, "positions": 4000}, {"shear": -5.0, "positions": 4100}, {"shear": -5.0, "positions": 4200}, {"shear": -5.0, "positions": 4300}, {"shear": -5.0, "positions": 4400}, {"shear": -5.0, "positions": 4500}, {"shear": -5.0, "positions": 4600}, {"shear": -5.0, "positions": 4700}, {"shear": -5.0, "positions": 4800}, {"shear": -5.0, "positions": 4900}, {"shear": -5.0, "positions": 5000}, {"shear": -5.0, "positions": 5100}, {"shear": -5.0, "positions": 5200}, {"shear": -5.0, "positions": 5300}, {"shear": -5.0, "positions": 5400}, {"shear": -5.0, "positions": 5500}, {"shear": -5.0, "positions": 5600}, {"shear": -5.0, "positions": 5700}, {"shear": -5.0, "positions": 5800}, {"shear": -5.0, "positions": 5900}, {"shear": -5.0, "positions": 6000}, {"shear": -5.0, "positions": 6100}, {"shear": -5.0, "positions": 6200}, {"shear": -5.0, "positions": 6300}, {"shear": -5.0, "positions": 6400}, {"shear": -5.0, "positions": 6500}, {"shear": -5.0, "positions": 6600}, {"shear": -5.0, "positions": 6700}, {"shear": -5.0, "positions": 6800}, {"shear": -5.0, "positions": 6900}, {"shear": -5.0, "positions": 7000}, {"shear": -5.0, "positions": 7100}, {"shear": -5.0, "positions": 7200}, {"shear": -5.0, "positions": 7300}, {"shear": -5.0, "positions": 7400}, {"shear": -5.0, "positions": 7500}, {"shear": -5.0, "positions": 7600}, {"shear": -5.0, "positions": 7700}, {"shear": -5.0, "positions": 7800}, {"shear": -5.0, "positions": 7900}, {"shear": -5.0, "positions": 8000}]}};
+      var opt = {
+        "mode": "vega-lite",
+        "renderer": "canvas",
+        "actions": {"editor": true, "source": true, "export": true}
+      };
+      vegaEmbed('#loading-rst-altair-plot-3', spec, opt).catch(console.err);
+  });
+</script>
+</div><p><a class="reference internal" href="../api/m_n_kappa.SingleSpanSingleLoads.html#m_n_kappa.SingleSpanSingleLoads" title="m_n_kappa.SingleSpanSingleLoads"><code class="xref py py-class docutils literal notranslate"><span class="pre">SingleSpanSingleLoads</span></code></a> accepts more than one <a class="reference internal" href="../api/m_n_kappa.SingleLoad.html#m_n_kappa.SingleLoad" title="m_n_kappa.SingleLoad"><code class="xref py py-class docutils literal notranslate"><span class="pre">SingleLoad</span></code></a> as
+<code class="docutils literal notranslate"><span class="pre">load</span></code>-argument.
+Therefore, more complicated load-scenarios are possible as only a single load.</p>
+</section>
+<section id="uniform-loading">
+<span id="examples-loading-singlespan-uniformloading"></span><h2>Uniform loading<a class="headerlink" href="#uniform-loading" title="Permalink to this heading">#</a></h2>
+<p>The <a class="reference internal" href="../api/m_n_kappa.SingleSpanUniformLoad.html#m_n_kappa.SingleSpanUniformLoad" title="m_n_kappa.SingleSpanUniformLoad"><code class="xref py py-class docutils literal notranslate"><span class="pre">SingleSpanUniformLoad</span></code></a> class follows a similar procedure as
+<a class="reference internal" href="../api/m_n_kappa.SingleSpanSingleLoads.html#m_n_kappa.SingleSpanSingleLoads" title="m_n_kappa.SingleSpanSingleLoads"><code class="xref py py-class docutils literal notranslate"><span class="pre">SingleSpanSingleLoads</span></code></a>, but no definition of <a class="reference internal" href="../api/m_n_kappa.SingleLoad.html#m_n_kappa.SingleLoad" title="m_n_kappa.SingleLoad"><code class="xref py py-class docutils literal notranslate"><span class="pre">SingleLoad</span></code></a>
+is needed.
+The <code class="docutils literal notranslate"><span class="pre">load</span></code> is passed directly as argument to the class also with the <code class="docutils literal notranslate"><span class="pre">length</span></code> of the beam.</p>
+<p>The maximum moment is then given by <a class="reference internal" href="../api/m_n_kappa.SingleSpanUniformLoad.html#m_n_kappa.SingleSpanUniformLoad.maximum_moment" title="m_n_kappa.SingleSpanUniformLoad.maximum_moment"><code class="xref py py-class docutils literal notranslate"><span class="pre">maximum_moment</span></code></a></p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">m_n_kappa</span> <span class="kn">import</span> <span class="n">SingleSpanUniformLoad</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">uniform</span> <span class="o">=</span> <span class="n">SingleSpanUniformLoad</span><span class="p">(</span><span class="n">length</span><span class="o">=</span><span class="mi">8000</span><span class="p">,</span> <span class="n">load</span><span class="o">=</span><span class="mf">10.0</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">uniform</span><span class="o">.</span><span class="n">maximum_moment</span>
+<span class="go">80000000.0</span>
+</pre></div>
+</div>
+<p>Transversal shear at the support is given by <a class="reference internal" href="../api/m_n_kappa.SingleSpanUniformLoad.html#m_n_kappa.SingleSpanUniformLoad.transversal_shear_support_left" title="m_n_kappa.SingleSpanUniformLoad.transversal_shear_support_left"><code class="xref py py-class docutils literal notranslate"><span class="pre">transversal_shear_support_left</span></code></a>
+and <a class="reference internal" href="../api/m_n_kappa.SingleSpanUniformLoad.html#m_n_kappa.SingleSpanUniformLoad.transversal_shear_support_right" title="m_n_kappa.SingleSpanUniformLoad.transversal_shear_support_right"><code class="xref py py-class docutils literal notranslate"><span class="pre">transversal_shear_support_right</span></code></a>.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">uniform</span><span class="o">.</span><span class="n">transversal_shear_support_left</span><span class="p">,</span> <span class="n">uniform</span><span class="o">.</span><span class="n">transversal_shear_support_right</span>
+<span class="go">(40000.0, -40000.0)</span>
+</pre></div>
+</div>
+<p>The summarized loading is given as follows.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">uniform</span><span class="o">.</span><span class="n">loading</span>
+<span class="go">80000.0</span>
+</pre></div>
+</div>
+<p>Whereas, the moment is computed by <a class="reference internal" href="../api/m_n_kappa.SingleSpanUniformLoad.html#m_n_kappa.SingleSpanUniformLoad.moment" title="m_n_kappa.SingleSpanUniformLoad.moment"><code class="xref py py-class docutils literal notranslate"><span class="pre">moment</span></code></a> passing the position
+where the moment needs to be obtained.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">uniform</span><span class="o">.</span><span class="n">moment</span><span class="p">(</span><span class="n">at_position</span><span class="o">=</span><span class="mi">2000</span><span class="p">)</span>
+<span class="go">60000000.0</span>
+</pre></div>
+</div>
+<p>Similarly for transversal shear using <a class="reference internal" href="../api/m_n_kappa.SingleSpanUniformLoad.html#m_n_kappa.SingleSpanUniformLoad.transversal_shear" title="m_n_kappa.SingleSpanUniformLoad.transversal_shear"><code class="xref py py-class docutils literal notranslate"><span class="pre">transversal_shear</span></code></a>, what applies
+to <code class="docutils literal notranslate"><span class="pre">0.0</span></code> in case of uniformly loaded beam.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">uniform</span><span class="o">.</span><span class="n">transversal_shear</span><span class="p">(</span><span class="n">at_position</span><span class="o">=</span><span class="mi">4000</span><span class="p">)</span>
+<span class="go">0.0</span>
+</pre></div>
+</div>
+<p><a class="reference internal" href="../api/m_n_kappa.SingleSpanUniformLoad.html#m_n_kappa.SingleSpanUniformLoad.moment" title="m_n_kappa.SingleSpanUniformLoad.moment"><code class="xref py py-class docutils literal notranslate"><span class="pre">moment</span></code></a> allows to plot the moment along the beam.</p>
+<div class="highlight-python notranslate" id="loading-rst-altair-source-5"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">altair</span> <span class="k">as</span> <span class="nn">alt</span>
+
+<span class="n">positions</span> <span class="o">=</span> <span class="p">[</span><span class="n">index</span><span class="o">*</span><span class="mi">100</span> <span class="k">for</span> <span class="n">index</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">81</span><span class="p">,</span> <span class="mi">1</span><span class="p">)]</span>
+<span class="n">moments</span> <span class="o">=</span> <span class="p">[</span><span class="n">uniform</span><span class="o">.</span><span class="n">moment</span><span class="p">(</span><span class="n">at_position</span><span class="o">=</span><span class="n">position</span><span class="p">)</span><span class="o">*</span><span class="mf">0.001</span><span class="o">*</span><span class="mf">0.001</span> <span class="k">for</span> <span class="n">position</span> <span class="ow">in</span> <span class="n">positions</span><span class="p">]</span>
+
+<span class="n">df_moments</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s1">&#39;moments&#39;</span><span class="p">:</span> <span class="n">moments</span><span class="p">,</span> <span class="s1">&#39;positions&#39;</span><span class="p">:</span> <span class="n">positions</span><span class="p">})</span>
+
+<span class="n">alt</span><span class="o">.</span><span class="n">Chart</span><span class="p">(</span><span class="n">df_moments</span><span class="p">,</span> <span class="n">height</span><span class="o">=</span><span class="mf">100.0</span><span class="p">,</span> <span class="n">background</span><span class="o">=</span><span class="s1">&#39;#00000000&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">mark_line</span><span class="p">()</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span>
+   <span class="n">x</span><span class="o">=</span><span class="n">alt</span><span class="o">.</span><span class="n">X</span><span class="p">(</span><span class="s1">&#39;positions&#39;</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="s1">&#39;Position [mm]&#39;</span><span class="p">),</span>
+   <span class="n">y</span><span class="o">=</span><span class="n">alt</span><span class="o">.</span><span class="n">Y</span><span class="p">(</span><span class="s1">&#39;moments&#39;</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="s1">&#39;Moment [kNm]&#39;</span><span class="p">,</span> <span class="n">scale</span><span class="o">=</span><span class="n">alt</span><span class="o">.</span><span class="n">Scale</span><span class="p">(</span><span class="n">reverse</span><span class="o">=</span><span class="kc">True</span><span class="p">)))</span>
+</pre></div>
+</div>
+
+<div id="loading-rst-altair-plot-5">
+<script>
+  // embed when document is loaded, to ensure vega library is available
+  // this works on all modern browsers, except IE8 and older
+  document.addEventListener("DOMContentLoaded", function(event) {
+      var spec = {"usermeta": {"embedOptions": {"theme": "quartz"}}, "config": {"view": {"continuousWidth": 400, "continuousHeight": 300}}, "data": {"name": "data-6841150919b6d6b86e8965945f15dda6"}, "mark": "line", "background": "#00000000", "encoding": {"x": {"field": "positions", "title": "Position [mm]", "type": "quantitative"}, "y": {"field": "moments", "scale": {"reverse": true}, "title": "Moment [kNm]", "type": "quantitative"}}, "height": 100.0, "$schema": "https://vega.github.io/schema/vega-lite/v4.17.0.json", "datasets": {"data-6841150919b6d6b86e8965945f15dda6": [{"moments": 0.0, "positions": 0}, {"moments": 3.95, "positions": 100}, {"moments": 7.8, "positions": 200}, {"moments": 11.55, "positions": 300}, {"moments": 15.200000000000001, "positions": 400}, {"moments": 18.75, "positions": 500}, {"moments": 22.2, "positions": 600}, {"moments": 25.55, "positions": 700}, {"moments": 28.8, "positions": 800}, {"moments": 31.95, "positions": 900}, {"moments": 35.0, "positions": 1000}, {"moments": 37.95, "positions": 1100}, {"moments": 40.800000000000004, "positions": 1200}, {"moments": 43.550000000000004, "positions": 1300}, {"moments": 46.2, "positions": 1400}, {"moments": 48.75, "positions": 1500}, {"moments": 51.2, "positions": 1600}, {"moments": 53.550000000000004, "positions": 1700}, {"moments": 55.800000000000004, "positions": 1800}, {"moments": 57.95, "positions": 1900}, {"moments": 60.0, "positions": 2000}, {"moments": 61.95, "positions": 2100}, {"moments": 63.800000000000004, "positions": 2200}, {"moments": 65.55, "positions": 2300}, {"moments": 67.2, "positions": 2400}, {"moments": 68.75, "positions": 2500}, {"moments": 70.2, "positions": 2600}, {"moments": 71.55, "positions": 2700}, {"moments": 72.8, "positions": 2800}, {"moments": 73.95, "positions": 2900}, {"moments": 75.0, "positions": 3000}, {"moments": 75.95, "positions": 3100}, {"moments": 76.8, "positions": 3200}, {"moments": 77.55, "positions": 3300}, {"moments": 78.2, "positions": 3400}, {"moments": 78.75, "positions": 3500}, {"moments": 79.2, "positions": 3600}, {"moments": 79.55, "positions": 3700}, {"moments": 79.8, "positions": 3800}, {"moments": 79.95, "positions": 3900}, {"moments": 80.0, "positions": 4000}, {"moments": 79.95, "positions": 4100}, {"moments": 79.8, "positions": 4200}, {"moments": 79.55, "positions": 4300}, {"moments": 79.2, "positions": 4400}, {"moments": 78.75, "positions": 4500}, {"moments": 78.2, "positions": 4600}, {"moments": 77.55, "positions": 4700}, {"moments": 76.8, "positions": 4800}, {"moments": 75.95, "positions": 4900}, {"moments": 75.0, "positions": 5000}, {"moments": 73.95, "positions": 5100}, {"moments": 72.8, "positions": 5200}, {"moments": 71.55, "positions": 5300}, {"moments": 70.2, "positions": 5400}, {"moments": 68.75, "positions": 5500}, {"moments": 67.2, "positions": 5600}, {"moments": 65.55, "positions": 5700}, {"moments": 63.800000000000004, "positions": 5800}, {"moments": 61.95, "positions": 5900}, {"moments": 60.0, "positions": 6000}, {"moments": 57.95, "positions": 6100}, {"moments": 55.800000000000004, "positions": 6200}, {"moments": 53.550000000000004, "positions": 6300}, {"moments": 51.2, "positions": 6400}, {"moments": 48.75, "positions": 6500}, {"moments": 46.2, "positions": 6600}, {"moments": 43.550000000000004, "positions": 6700}, {"moments": 40.800000000000004, "positions": 6800}, {"moments": 37.95, "positions": 6900}, {"moments": 35.0, "positions": 7000}, {"moments": 31.95, "positions": 7100}, {"moments": 28.8, "positions": 7200}, {"moments": 25.55, "positions": 7300}, {"moments": 22.2, "positions": 7400}, {"moments": 18.75, "positions": 7500}, {"moments": 15.200000000000001, "positions": 7600}, {"moments": 11.55, "positions": 7700}, {"moments": 7.8, "positions": 7800}, {"moments": 3.95, "positions": 7900}, {"moments": 0.0, "positions": 8000}]}};
+      var opt = {
+        "mode": "vega-lite",
+        "renderer": "canvas",
+        "actions": {"editor": true, "source": true, "export": true}
+      };
+      vegaEmbed('#loading-rst-altair-plot-5', spec, opt).catch(console.err);
+  });
+</script>
+</div><p>And the transversal shear is given as follows.</p>
+<div class="highlight-python notranslate" id="loading-rst-altair-source-6"><div class="highlight"><pre><span></span><span class="n">shear</span> <span class="o">=</span> <span class="p">[</span><span class="n">uniform</span><span class="o">.</span><span class="n">transversal_shear</span><span class="p">(</span><span class="n">at_position</span><span class="o">=</span><span class="n">position</span><span class="p">)</span> <span class="k">for</span> <span class="n">position</span> <span class="ow">in</span> <span class="n">positions</span><span class="p">]</span>
+
+<span class="n">df_shear</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s1">&#39;shear&#39;</span><span class="p">:</span> <span class="n">shear</span><span class="p">,</span> <span class="s1">&#39;positions&#39;</span><span class="p">:</span> <span class="n">positions</span><span class="p">})</span>
+
+<span class="n">alt</span><span class="o">.</span><span class="n">Chart</span><span class="p">(</span><span class="n">df_shear</span><span class="p">,</span> <span class="n">height</span><span class="o">=</span><span class="mf">100.0</span><span class="p">,</span> <span class="n">background</span><span class="o">=</span><span class="s1">&#39;#00000000&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">mark_line</span><span class="p">()</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span>
+   <span class="n">x</span><span class="o">=</span><span class="n">alt</span><span class="o">.</span><span class="n">X</span><span class="p">(</span><span class="s1">&#39;positions&#39;</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="s1">&#39;Position [mm]&#39;</span><span class="p">),</span>
+   <span class="n">y</span><span class="o">=</span><span class="n">alt</span><span class="o">.</span><span class="n">Y</span><span class="p">(</span><span class="s1">&#39;shear&#39;</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="s1">&#39;Transversal shear [N]&#39;</span><span class="p">))</span>
+</pre></div>
+</div>
+
+<div id="loading-rst-altair-plot-6">
+<script>
+  // embed when document is loaded, to ensure vega library is available
+  // this works on all modern browsers, except IE8 and older
+  document.addEventListener("DOMContentLoaded", function(event) {
+      var spec = {"usermeta": {"embedOptions": {"theme": "quartz"}}, "config": {"view": {"continuousWidth": 400, "continuousHeight": 300}}, "data": {"name": "data-243e7b8cc3f8c591cc97656ae0374777"}, "mark": "line", "background": "#00000000", "encoding": {"x": {"field": "positions", "title": "Position [mm]", "type": "quantitative"}, "y": {"field": "shear", "title": "Transversal shear [N]", "type": "quantitative"}}, "height": 100.0, "$schema": "https://vega.github.io/schema/vega-lite/v4.17.0.json", "datasets": {"data-243e7b8cc3f8c591cc97656ae0374777": [{"shear": 40000.0, "positions": 0}, {"shear": 39000.0, "positions": 100}, {"shear": 38000.0, "positions": 200}, {"shear": 37000.0, "positions": 300}, {"shear": 36000.0, "positions": 400}, {"shear": 35000.0, "positions": 500}, {"shear": 34000.0, "positions": 600}, {"shear": 33000.0, "positions": 700}, {"shear": 32000.0, "positions": 800}, {"shear": 31000.0, "positions": 900}, {"shear": 30000.0, "positions": 1000}, {"shear": 29000.0, "positions": 1100}, {"shear": 28000.0, "positions": 1200}, {"shear": 27000.0, "positions": 1300}, {"shear": 26000.0, "positions": 1400}, {"shear": 25000.0, "positions": 1500}, {"shear": 24000.0, "positions": 1600}, {"shear": 23000.0, "positions": 1700}, {"shear": 22000.0, "positions": 1800}, {"shear": 21000.0, "positions": 1900}, {"shear": 20000.0, "positions": 2000}, {"shear": 19000.0, "positions": 2100}, {"shear": 18000.0, "positions": 2200}, {"shear": 17000.0, "positions": 2300}, {"shear": 16000.0, "positions": 2400}, {"shear": 15000.0, "positions": 2500}, {"shear": 14000.0, "positions": 2600}, {"shear": 13000.0, "positions": 2700}, {"shear": 12000.0, "positions": 2800}, {"shear": 11000.0, "positions": 2900}, {"shear": 10000.0, "positions": 3000}, {"shear": 9000.0, "positions": 3100}, {"shear": 8000.0, "positions": 3200}, {"shear": 7000.0, "positions": 3300}, {"shear": 6000.0, "positions": 3400}, {"shear": 5000.0, "positions": 3500}, {"shear": 4000.0, "positions": 3600}, {"shear": 3000.0, "positions": 3700}, {"shear": 2000.0, "positions": 3800}, {"shear": 1000.0, "positions": 3900}, {"shear": 0.0, "positions": 4000}, {"shear": -1000.0, "positions": 4100}, {"shear": -2000.0, "positions": 4200}, {"shear": -3000.0, "positions": 4300}, {"shear": -4000.0, "positions": 4400}, {"shear": -5000.0, "positions": 4500}, {"shear": -6000.0, "positions": 4600}, {"shear": -7000.0, "positions": 4700}, {"shear": -8000.0, "positions": 4800}, {"shear": -9000.0, "positions": 4900}, {"shear": -10000.0, "positions": 5000}, {"shear": -11000.0, "positions": 5100}, {"shear": -12000.0, "positions": 5200}, {"shear": -13000.0, "positions": 5300}, {"shear": -14000.0, "positions": 5400}, {"shear": -15000.0, "positions": 5500}, {"shear": -16000.0, "positions": 5600}, {"shear": -17000.0, "positions": 5700}, {"shear": -18000.0, "positions": 5800}, {"shear": -19000.0, "positions": 5900}, {"shear": -20000.0, "positions": 6000}, {"shear": -21000.0, "positions": 6100}, {"shear": -22000.0, "positions": 6200}, {"shear": -23000.0, "positions": 6300}, {"shear": -24000.0, "positions": 6400}, {"shear": -25000.0, "positions": 6500}, {"shear": -26000.0, "positions": 6600}, {"shear": -27000.0, "positions": 6700}, {"shear": -28000.0, "positions": 6800}, {"shear": -29000.0, "positions": 6900}, {"shear": -30000.0, "positions": 7000}, {"shear": -31000.0, "positions": 7100}, {"shear": -32000.0, "positions": 7200}, {"shear": -33000.0, "positions": 7300}, {"shear": -34000.0, "positions": 7400}, {"shear": -35000.0, "positions": 7500}, {"shear": -36000.0, "positions": 7600}, {"shear": -37000.0, "positions": 7700}, {"shear": -38000.0, "positions": 7800}, {"shear": -39000.0, "positions": 7900}, {"shear": -40000.0, "positions": 8000}]}};
+      var opt = {
+        "mode": "vega-lite",
+        "renderer": "canvas",
+        "actions": {"editor": true, "source": true, "export": true}
+      };
+      vegaEmbed('#loading-rst-altair-plot-6', spec, opt).catch(console.err);
+  });
+</script>
+</div><div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p><a class="reference internal" href="../theory/loading.html#theory-loading"><span class="std std-ref">Loading</span></a> : Theory to the given functions</p>
+</div>
+<p>The <a class="reference internal" href="../api/m_n_kappa.SingleSpan.html#m_n_kappa.SingleSpan" title="m_n_kappa.SingleSpan"><code class="xref py py-class docutils literal notranslate"><span class="pre">SingleSpan</span></code></a> class has <a class="reference internal" href="../api/m_n_kappa.SingleSpanSingleLoads.html#m_n_kappa.SingleSpanSingleLoads" title="m_n_kappa.SingleSpanSingleLoads"><code class="xref py py-class docutils literal notranslate"><span class="pre">SingleSpanSingleLoads</span></code></a>
+and <a class="reference internal" href="../api/m_n_kappa.SingleSpanUniformLoad.html#m_n_kappa.SingleSpanUniformLoad" title="m_n_kappa.SingleSpanUniformLoad"><code class="xref py py-class docutils literal notranslate"><span class="pre">SingleSpanUniformLoad</span></code></a> implemented.</p>
+<p>The invoked class depends on the argument that is passed.
+In case <code class="docutils literal notranslate"><span class="pre">loads</span></code> is passed, then <a class="reference internal" href="../api/m_n_kappa.SingleSpanSingleLoads.html#m_n_kappa.SingleSpanSingleLoads" title="m_n_kappa.SingleSpanSingleLoads"><code class="xref py py-class docutils literal notranslate"><span class="pre">SingleSpanSingleLoads</span></code></a> is initialized.
+<a class="reference internal" href="../api/m_n_kappa.SingleSpanUniformLoad.html#m_n_kappa.SingleSpanUniformLoad" title="m_n_kappa.SingleSpanUniformLoad"><code class="xref py py-class docutils literal notranslate"><span class="pre">SingleSpanUniformLoad</span></code></a> is initialized in case <code class="docutils literal notranslate"><span class="pre">uniform_load</span></code> is passed.
+In each case the <code class="docutils literal notranslate"><span class="pre">length</span></code> of the beam must be passed.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">m_n_kappa</span> <span class="kn">import</span> <span class="n">SingleSpan</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">single</span> <span class="o">=</span> <span class="n">SingleSpan</span><span class="p">(</span><span class="n">length</span><span class="o">=</span><span class="mi">8000</span><span class="p">,</span> <span class="n">loads</span><span class="o">=</span><span class="p">[</span><span class="n">load_1</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">uniform</span> <span class="o">=</span> <span class="n">SingleSpan</span><span class="p">(</span><span class="n">length</span><span class="o">=</span><span class="mi">8000</span><span class="p">,</span> <span class="n">uniform_load</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">single</span><span class="o">.</span><span class="n">maximum_moment</span><span class="p">,</span> <span class="n">uniform</span><span class="o">.</span><span class="n">maximum_moment</span>
+<span class="go">(20000.0, 80000000.0)</span>
+</pre></div>
+</div>
+</section>
+</section>
+
+        </article>
+      </div>
+      <footer>
+        
+        <div class="related-pages">
+          <a class="next-page" href="deformation.html">
+              <div class="page-info">
+                <div class="context">
+                  <span>Next</span>
+                </div>
+                <div class="title">Deformation</div>
+              </div>
+              <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
+            </a>
+          <a class="prev-page" href="moment_curvature_curve.html">
+              <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
+              <div class="page-info">
+                <div class="context">
+                  <span>Previous</span>
+                </div>
+                
+                <div class="title">Moment-Curvature-Curve</div>
+                
+              </div>
+            </a>
+        </div>
+        <div class="bottom-of-page">
+          <div class="left-details">
+            <div class="copyright">
+                Copyright &#169; 2023, Johannes Schorr
+            </div>
+            Made with <a href="https://www.sphinx-doc.org/">Sphinx</a> and <a class="muted-link" href="https://pradyunsg.me">@pradyunsg</a>'s
+            
+            <a href="https://github.com/pradyunsg/furo">Furo</a>
+            
+          </div>
+          <div class="right-details">
+            
+          </div>
+        </div>
+        
+      </footer>
+    </div>
+    <aside class="toc-drawer">
+      
+      
+      <div class="toc-sticky toc-scroll">
+        <div class="toc-title-container">
+          <span class="toc-title">
+            On this page
+          </span>
+        </div>
+        <div class="toc-tree-container">
+          <div class="toc-tree">
+            <ul>
+<li><a class="reference internal" href="#">Loading</a><ul>
+<li><a class="reference internal" href="#introduction">Introduction</a></li>
+<li><a class="reference internal" href="#single-loads">Single Loads</a></li>
+<li><a class="reference internal" href="#uniform-loading">Uniform loading</a></li>
+</ul>
+</li>
+</ul>
+
+          </div>
+        </div>
+      </div>
+      
+      
+    </aside>
+  </div>
+</div><script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/sphinx_highlight.js"></script>
+    <script src="../_static/scripts/furo.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script src="../_static/toggleprompt.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vega@5"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vega-lite@4.17.0"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vega-embed@6"></script>
+    <script src="../_static/design-tabs.js"></script>
+    <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    </body>
+</html>

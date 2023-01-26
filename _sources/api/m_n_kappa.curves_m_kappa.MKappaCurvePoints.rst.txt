@@ -21,6 +21,9 @@
       
          ~MKappaCurvePoints.maximum_moment
       
+      
+         ~MKappaCurvePoints.results_as_dict
+      
    
    
 
@@ -30,7 +33,11 @@
 
    .. autosummary::
    
+      ~MKappaCurvePoints.curvatures
+      ~MKappaCurvePoints.materials
       ~MKappaCurvePoints.moments
       ~MKappaCurvePoints.points
+      ~MKappaCurvePoints.positions
+      ~MKappaCurvePoints.strains
    
    
