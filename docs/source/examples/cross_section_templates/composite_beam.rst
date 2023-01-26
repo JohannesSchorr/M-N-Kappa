@@ -15,9 +15,12 @@ This template creates a composite beam with the following parts:
 - and bottom-rebar-layer 10/100, :math:`c_\mathrm{nom}` = 25 mm
 - HEB 200 steel profile of steel-grade S355
 
-The concrete slab is an ordinary rectangle of ``width=2000`` and height=100 mm.
+The concrete slab is an ordinary rectangle of ``width=2000`` and ``height=100`` mm.
 The concrete-material-strength is computed in line with EN 1992-1-1, Tab. 3.1 [1]_
 :math:`f_\mathrm{cm} = f_\mathrm{ck} + 8 = 30 + 8 = 38` N/mm².
+Under compression a non-linear behaviour of the concrete is assumed.
+Under tension the concrete-stress drop to zero after reaching the concrete
+tensile strength :math:`f_\mathrm{ctm}` that is also computed following EN 1992-1-1, Tab. 3.1 [1]_.
 
 The geometry-values of the :ref:`cross_section_template.symmetric_steel_profile` are:
 
