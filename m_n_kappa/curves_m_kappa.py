@@ -707,7 +707,7 @@ class MKappaCurve:
 
     def _insert_zero(self) -> None:
         """insert moment-curvature pair at zero curvature"""
-        self._save_values(0.0, 0.0, 0.0, None, None)
+        self._save_values(0.0, 0.0, 0.0, None, StrainPosition(0, 0, '-'))
 
     def _m_kappa(
         self,
