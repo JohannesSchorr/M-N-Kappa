@@ -693,6 +693,7 @@ class Beam:
               f"{membran=:.1f} ({membran / slab_width:.2f}), "
               f"{bending=:.1f} ({bending / slab_width:.2f})")
         effective_widths = EffectiveWidths(bending=bending, membran=membran)
+        logger.debug('added effective width to cross-section')
         return Crosssection(
             sections=self.cross_section.sections, slab_effective_widths=effective_widths
         )
