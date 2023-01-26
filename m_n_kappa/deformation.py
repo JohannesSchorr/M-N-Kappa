@@ -80,6 +80,7 @@ class Node:
         For computation of the incremental deformation at this node
         :py:meth:`~m_n_kappa.Node.incremental_deformation`.
         """
+        logger.info(f'Initialized node {self.node_number + 1}')
         self._cross_section = cross_section
         self._position = position
         if m_kappa_curve is None:
@@ -90,10 +91,7 @@ class Node:
             self._m_kappa_curve = m_kappa_curve
         Node.node_number += 1
         self._number = Node.node_number
-        if logger.level == logging.DEBUG:
-            logger.debug(f'{self.__str__()}')
-        else:
-            logger.info(f'Created {self.__repr__()}')
+        logger.info(f'Created {self.__repr__()}')
 
     def __repr__(self):
         return f'Node(cross_section, position={self.position}'
