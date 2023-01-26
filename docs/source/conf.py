@@ -62,9 +62,9 @@ autosummary_generate = True
 
 # Matplotlib - matplotlib.sphinxext.plot_directive
 # https://matplotlib.org/stable/api/sphinxext_plot_directive_api.html
-extensions.append('matplotlib.sphinxext.plot_directive')
-plot_html_show_source_link = False
-plot_include_source = True
+#extensions.append('matplotlib.sphinxext.plot_directive')
+#plot_html_show_source_link = False
+#plot_include_source = True
 
 # Altair
 # https://altair-viz.github.io/
