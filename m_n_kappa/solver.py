@@ -237,7 +237,8 @@ class Bisection(Solver):
         """
         variables = [data_point[self.variable] for data_point in self.data]
         logger.debug(f'{variables=}')
-        for factor in [0.5, 0.25, 0.75, 0.01, 0.05, 0.1, 0.2, 0.3, 0.4, 0.6, 0.7, 0.8, 0.9, 0.95]:
+        factors = [0.5, 0.01, 0.99, 0.25, 0.75, 0.05, 0.1, 0.2, 0.3, 0.4, 0.6, 0.7, 0.8, 0.9, 0.95]
+        for factor in factors:
             self._x_n_plus_1 = self._compute_with(factor)
             if self.x_n_plus_1 not in variables:
                 logger.debug(self.__str__())
