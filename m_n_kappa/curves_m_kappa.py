@@ -131,6 +131,51 @@ class MKappaCurvePoints:
         return [point.curvature for point in self.points]
 
     @property
+    def strains(self) -> list[float]:
+        """strains that lead to moment-curvature pair"""
+        return [point.strain_position.strain for point in self.points]
+
+    @property
+    def positions(self) -> list[float]:
+        """positions that lead to moment-curvature pair"""
+        return [point.strain_position.position for point in self.points]
+
+    @property
+    def materials(self) -> list[str]:
+        """materials the strain-position-points is obtained from that lead to moment-curvature pair"""
+        return [point.strain_position.material for point in self.points]
+
+    def results_as_dict(self, moment_factor: float = 1.0) -> dict:
+        """
+        The moment-curvature points as descriptive Dictionary.
+
+        Following keys are given with the corresponding lists:
+
+        - ``'Moment'``: computed moments of the moment curvature curve
+        - ``'Curvature'``: computed curvatures of the moment-curvature curve
+        - ``'Strain'``: strains that lead to the above given moment-curvature-pair
+        - ``'Position'``: position that corresponds to the above given strain
+        - ``'Material'``: material ``strain`` and ``position`` are obtained from
+
+        Parameters
+        ----------
+        moment_factor : float
+            factor to compute the moment (default: 1.0)
+
+        Returns
+        -------
+        dict
+            moment-curvature points
+        """
+        return {
+            'Moment': [moment*moment_factor for moment in self.moments],
+            'Curvature': self.curvatures,
+            'Strain': self.strains,
+            'Position': self.positions,
+            'Material': self.materials,
+        }
+
+    @property
     def points(self) -> list[MKappaCurvePoint]:
         """
         :math:`M`-:math:`\\kappa`-curve points
