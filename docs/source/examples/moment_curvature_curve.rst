@@ -55,36 +55,28 @@ Negative curvature and negative moments are given in :ref:`examples.moment_curva
 
 The following method reduces the process of putting the moment-curvature values into a moment-curvature-curve
 diagram to a minimum.
-The ``moments`` and the ``curvatures`` as well as ``strains``, ``positions`` and the corresponding ``materials``
-must be passed as list of values to this method.
-The ``moments`` are transformed from Newton-Millimeter (Nmm) to Kilo-Newton-Meter (kNm) for clearer understanding.
-``strains``, ``positions`` and ``materials`` will only appear in the tooltip.
+The expected ``results``-dictionary must have the keys ``'Moment'`` and ``'Curvature'`` with the corresponding
+values as lists tied to these keywords.
+Other keys will appear in the tooltip.
 
 .. altair-plot::
    :output: None
 
    import pandas as pd
    import altair as alt
-   def m_kappa_diagram(moments, curvatures, strains, positions, materials):
+   def m_kappa_diagram(results: dict) -> alt.Chart:
        """create moment-curvature diagram by passing moments and curvatures"""
-       values = {
-           'Moment' : [moment*0.001*0.001 for moment in moments],
-           'Curvature' : curvatures,
-           'Strain': strains,
-           'Position': positions,
-           'Material': materials,
-       }
-       df = pd.DataFrame(values)
+       df = pd.DataFrame(results)
 
        line_chart = alt.Chart(df).mark_line().encode(
-           y=alt.Y('Moment'), #, title='Moment [kNm]'),
-           x=alt.X('Curvature'), # , title='Curvature [-]'),
+           y=alt.Y('Moment', title='Moment [kNm]'),
+           x=alt.X('Curvature', title='Curvature [-]'),
        )
 
        circle_chart = alt.Chart(df).mark_point().encode(
            y=alt.Y('Moment'),
            x=alt.X('Curvature'),
-           tooltip=list(values.keys()),
+           tooltip=list(results.keys()),
        )
 
        return alt.layer(line_chart, circle_chart, background='#00000000')
@@ -94,24 +86,24 @@ The ``moments`` are transformed from Newton-Millimeter (Nmm) to Kilo-Newton-Mete
 Moment-Curvature-Curve with positive values
 ===========================================
 
-The moment-curvature curve is computed in :py:mod:`m_n_kappa` using :py:class:`~m_n_kappa.MKappaCurve`
-during its initialization.
+The moment-curvature curve is computed in :py:mod:`m_n_kappa` while
+initializing :py:class:`~m_n_kappa.MKappaCurve`.
 The computation of the positive values is set as the default, therefore only ``cross_section`` must be
 passed to :py:class:`~m_n_kappa.MKappaCurve`.
-After :py:class:`~m_n_kappa.MKappaCurve` is initialized the Moment-Curvature points may be extracted calling
-:py:meth:`~m_n_kappa.MKappaCurve.m_kappa_points`.
+
+The :py:meth:`~m_n_kappa.MKappaCurve.not_successful` returns those :py:class:`~m_n_kappa.StrainPosition` points
+that have not lead to an equilibrium in horizontal forces.
+The :py:class:`~m_n_kappa.StrainPosition` is given with a message that gives us information
+why equilibrium has not been found.
 
 .. altair-plot::
    :output: repr
 
    from m_n_kappa import MKappaCurve
    positive_m_kappa_curve_computation = MKappaCurve(cross_section=cross_section)
-   for point in positive_m_kappa_curve_computation.not_successful:
-       print(point)
+   positive_m_kappa_curve_computation.not_successful
 
-The :py:meth:`~m_n_kappa.MKappaCurve.not_successful` returns those :py:class:`~m_n_kappa.StrainPosition` points
-that have not achieved an equilibrium in horizontal forces together with an message that gives us information
-why equilibrium has not been found.
+The Moment-Curvature points may be extracted calling :py:meth:`~m_n_kappa.MKappaCurve.m_kappa_points`.
 
 .. altair-plot::
    :output: repr
@@ -119,24 +111,15 @@ why equilibrium has not been found.
    positive_m_kappa_curve = positive_m_kappa_curve_computation.m_kappa_points
 
 :py:meth:`~m_n_kappa.MKappaCurve.m_kappa_points` returns an :py:class:`~m_n_kappa.curves_m_kappa.MKappaCurvePoints`
-object that has the attributes :py:class:`~m_n_kappa.curves_m_kappa.MKappaCurvePoints.moments`,
-:py:class:`~m_n_kappa.curves_m_kappa.MKappaCurvePoints.curvatures`,
-:py:class:`~m_n_kappa.curves_m_kappa.MKappaCurvePoints.strains`,
-:py:class:`~m_n_kappa.curves_m_kappa.MKappaCurvePoints.positions` and
-:py:class:`~m_n_kappa.curves_m_kappa.MKappaCurvePoints.materials` that return the corresponding values as
-a list.
+object that has the method :py:meth:`~m_n_kappa.curves_m_kappa.MKappaCurvePoints.results_as_dict`.
+It provides the moment-curvature-curve points as dictionary with keys ``'Moment'``, ``'Curvature'``,
+``'Strain'``, ``'Position'`` and ``'Material'``.
 These allow us to easily create the corresponding Moment-Curvature diagram with descriptive tooltips.
 
 .. altair-plot::
    :alt: Moment-Curvature-Curve with positive values
 
-   m_kappa_diagram(
-       moments=positive_m_kappa_curve.moments,
-       curvatures=positive_m_kappa_curve.curvatures,
-       strains=positive_m_kappa_curve.strains,
-       positions=positive_m_kappa_curve.positions,
-       materials=positive_m_kappa_curve.materials,
-   )
+   m_kappa_diagram(results=positive_m_kappa_curve.results_as_dict(moment_factor=0.001*0.001))
 
 The diagram shows a maximum moment of :math:`M_\mathrm{max} \approx 550` kNm.
 
@@ -176,25 +159,19 @@ The corresponding Moment-Curvature-curve diagram is given hereafter.
 .. altair-plot::
    :alt: Moment-Curvature-Curve with negative values
 
-   m_kappa_diagram(
-       moments=negative_m_kappa_curve.moments,
-       curvatures=negative_m_kappa_curve.curvatures,
-       strains=negative_m_kappa_curve.strains,
-       positions=negative_m_kappa_curve.positions,
-       materials=negative_m_kappa_curve.materials,
-   )
+   m_kappa_diagram(results=negative_m_kappa_curve.results_as_dict(moment_factor=0.001*0.001))
 
 The diagram shows in absolute values a smaller maximum moment than the cross-section under positive curvature.
-But the maximum curvatures are in absolute values much higher, what is traced back to the higher strains the
-reinforcement and the steel-material can bear, that the concrete in compression.
+But the maximum curvatures are in absolute values much higher.
+This is related to the higher strains the reinforcement and the steel-material can bear as the concrete in compression.
+
 
 .. _examples.moment_curvature_curve.full:
-
 
 Full Moment-Curvature-Curve
 ===========================
 
-In case you want to compute all values at once you only hav to pass the ``cross_section`` and
+In case you want to compute all values at once you only have to pass your ``cross_section`` and
 ``include_negative_curvature=True`` to :py:meth:`~m_n_kappa.MKappaCurve`.
 
 .. altair-plot::
@@ -206,13 +183,7 @@ In case you want to compute all values at once you only hav to pass the ``cross_
    )
    full_m_kappa_curve = full_m_kappa_curve_computation.m_kappa_points
 
-   m_kappa_diagram(
-       moments=full_m_kappa_curve.moments,
-       curvatures=full_m_kappa_curve.curvatures,
-       strains=full_m_kappa_curve.strains,
-       positions=full_m_kappa_curve.positions,
-       materials=full_m_kappa_curve.materials,
-   )
+   m_kappa_diagram(results=full_m_kappa_curve.results_as_dict(moment_factor=0.001*0.001))
 
 As shown the moment-curvature curve is easily computed using :py:mod:`m_n_kappa`.
 The classes and methods shown here, are building the basis to compute the deformation of a beam.
