@@ -289,6 +289,10 @@ class MKappa:
         for iter_index in range(self.iteration + 1, self.maximum_iterations+1, 1):
             self._iteration = iter_index
             self._neutral_axis = self._guess_neutral_axis()
+            if self.neutral_axis is None:
+                self._not_successful_reason = 'Iteration not converging'
+                logger.info(self.not_successful_reason)
+                return
             self._curvature = self._compute_new_curvature()
             self.compute()
             if self.__is_axial_force_within_tolerance():
