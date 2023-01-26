@@ -4,4 +4,4 @@ sphinx-design
 sphinx-toggleprompt>=0.3.1
 sphinx-copybutton>=v0.5.1
 nbsphinx>=0.8.11
-altair=4.2.0
+altair==4.2.0
