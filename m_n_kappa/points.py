@@ -520,6 +520,11 @@ class MKappaByStrainPosition(MKappa):
         logger.debug('Finished computing boundary values')
 
     def _compute_new_curvature(self):
+        if self.neutral_axis is None:
+            logger.warning(f'neutral-axis: {self.neutral_axis}\n'
+                           f'position: {self.strain_position.position}, curvature: {self.curvature}, '
+                           f'strain: {self.strain_position.strain}'
+                           f'{self._print_iterations()}')
         return curvature(
             neutral_axis_value=self.neutral_axis,
             position_value=self.strain_position.position,
