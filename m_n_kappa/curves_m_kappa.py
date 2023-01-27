@@ -13,16 +13,12 @@ from .general import (
 from .points import MKappaByStrainPosition
 from .solver import Newton, Bisection
 
-import logging
-import logging.config
-import yaml
-import pathlib
-
-with open(pathlib.Path(__file__).parent.absolute() / "logging-config.yaml", 'r') as f:
-    config = yaml.safe_load(f.read())
-    logging.config.dictConfig(config)
+from .log import log_init, logging, log_return
+from functools import partial
 
 logger = logging.getLogger(__name__)
+logs_init = partial(log_init, logger=logger)
+logs_return = partial(log_return, logger=logger)
 
 
 @dataclass
@@ -310,6 +306,7 @@ class MKappaCurveCurvature:
         "_start_strain_position",
     )
 
+    @logs_init
     def __init__(
         self,
         cross_section: Crosssection,
@@ -329,17 +326,11 @@ class MKappaCurveCurvature:
         start_strain_position : :py:class:´~m_n_kappa.general.StrainPosition`
             strain-position-point assumed as failure-point
         """
-        logger.info(f"Initialize MKappaCurveCurvature("
-                    f"cross_section, "
-                    f"{maximum_curvature=}, "
-                    f"{minimum_curvature=}, "
-                    f"{start_strain_position=}")
         self._cross_section = cross_section
         self._maximum_curvature = maximum_curvature
         self._minimum_curvature = minimum_curvature
         self._start_strain_position = start_strain_position
         self._m_kappa_failure = self._get_m_kappa_failure()
-        logger.info("Computed M-Kappa-Point at failure (MKappaCurveCurvature)")
 
     @property
     def cross_section(self) -> Crosssection:
@@ -411,6 +402,7 @@ class MKappaCurve:
         "_not_successful",
     )
 
+    @logs_init
     def __init__(
         self,
         cross_section: Crosssection,
@@ -473,10 +465,6 @@ class MKappaCurve:
             self._compute_negative_curvature_intermediate()
             logger.info('Computed negative M-Kappa-Curve-Points')
         self._insert_zero()
-        if logger.level == logging.DEBUG:
-            logger.debug(f'{self.__str__()}')
-        else:
-            logger.info(f'Created {self.__repr__()}')
 
     def __repr__(self) -> str:
         return f"MKappaCurve(cross_section=cross_section)"

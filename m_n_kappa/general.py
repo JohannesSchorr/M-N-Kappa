@@ -2,16 +2,12 @@ from dataclasses import dataclass
 from itertools import groupby
 from decimal import Decimal
 
-import logging
-import logging.config
-import yaml
-import pathlib
-
-with open(pathlib.Path(__file__).parent.absolute() / "logging-config.yaml", 'r') as f:
-    config = yaml.safe_load(f.read())
-    logging.config.dictConfig(config)
+from .log import log_init, logging, log_return
+from functools import partial
 
 logger = logging.getLogger(__name__)
+logs_init = partial(log_init, logger=logger)
+logs_return = partial(log_return, logger=logger)
 
 
 def curvature(

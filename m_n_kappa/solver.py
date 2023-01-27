@@ -1,16 +1,12 @@
 from .general import str_start_end, print_chapter, print_sections
 from .function import Polynominal, Linear
 
-import logging
-import logging.config
-import yaml
-import pathlib
-
-with open(pathlib.Path(__file__).parent.absolute() / "logging-config.yaml", 'r') as f:
-    config = yaml.safe_load(f.read())
-    logging.config.dictConfig(config)
+from .log import log_init, logging, log_return
+from functools import partial
 
 logger = logging.getLogger(__name__)
+logs_init = partial(log_init, logger=logger)
+logs_return = partial(log_return, logger=logger)
 
 
 class Solver:
@@ -33,6 +29,7 @@ class Solver:
         "_x_n_plus_1",
     )
 
+    @logs_init
     def __init__(self, data: list, target, variable, target_value: float = 0.0):
         """
         Parameters

@@ -12,16 +12,12 @@ from .material import Material
 from .section import Section
 from .crosssection import Crosssection
 
-import logging
-import logging.config
-import yaml
-import pathlib
-
-with open(pathlib.Path(__file__).parent.absolute() / "logging-config.yaml", 'r') as f:
-    config = yaml.safe_load(f.read())
-    logging.config.dictConfig(config)
+from .log import log_init, logging, log_return
+from functools import partial
 
 logger = logging.getLogger(__name__)
+logs_init = partial(log_init, logger=logger)
+logs_return = partial(log_return, logger=logger)
 
 """
 Geometries
@@ -279,6 +275,7 @@ class Rectangle(Geometry):
     .. versionadded:: 0.1.0
     """
 
+    @logs_init
     def __init__(
         self,
         top_edge: float,
@@ -350,10 +347,6 @@ class Rectangle(Geometry):
         self._width, self._left_edge, self._right_edge = check_width(
             self.width, self.left_edge, self.right_edge
         )
-        if logger.level == logging.DEBUG:
-            logger.debug(self.__str__())
-        else:
-            logger.info(f'Created {self.__repr__()}')
 
     def _check_input_values(self) -> None:
         """rearrange input-values to match the needed arrangement"""
@@ -540,6 +533,7 @@ class Rectangle(Geometry):
 
 class Circle(Geometry):
 
+    @logs_init
     def __init__(self, diameter: float, centroid_y: float, centroid_z: float):
         """
         Circle
@@ -592,10 +586,6 @@ class Circle(Geometry):
         self._diameter = diameter
         self._centroid_y = centroid_y
         self._centroid_z = centroid_z
-        if logger.level == logging.DEBUG:
-            logger.debug(self.__str__())
-        else:
-            logger.info(f'Created {self.__repr__()}')
 
     def __eq__(self, other) -> bool:
         return (
@@ -743,6 +733,7 @@ class Trapezoid(Geometry):
     two horizontal edges that are *not parallel* to each other.
     """
 
+    @logs_init
     def __init__(
         self,
         top_edge: float,
@@ -827,10 +818,6 @@ class Trapezoid(Geometry):
         ) = check_width(
             self.bottom_width, self.bottom_left_edge, self.bottom_right_edge
         )
-        if logger.level == logging.DEBUG:
-            logger.debug(self.__str__())
-        else:
-            logger.info(f'Created {self.__repr__()}')
 
     def _check_input_values(self) -> None:
         """check input-value to match the needed arrangement"""

@@ -8,16 +8,12 @@ from .general import (
     EffectiveWidths,
 )
 
-import logging
-import logging.config
-import yaml
-import pathlib
-
-with open(pathlib.Path(__file__).parent.absolute() / "logging-config.yaml", 'r') as f:
-    config = yaml.safe_load(f.read())
-    logging.config.dictConfig(config)
+from .log import log_init, logging, log_return
+from functools import partial
 
 logger = logging.getLogger(__name__)
+logs_init = partial(log_init, logger=logger)
+logs_return = partial(log_return, logger=logger)
 
 
 class Section:
@@ -28,6 +24,7 @@ class Section:
     .. versionadded:: 0.1.0
     """
 
+    @logs_init
     def __init__(self, geometry, material):
         """
         Parameters
@@ -71,11 +68,6 @@ material=Steel(f_y=355.0, f_u=None, failure_strain=None, E_a=210000.0))
         """
         self._geometry = geometry
         self._material = material
-        if not issubclass(type(self), Section):
-            if logger.level == logging.DEBUG:
-                logger.debug(f'{self.__str__()}')
-            else:
-                logger.info(f'Created {self.__repr__()}')
 
     def __repr__(self):
         return (
@@ -486,6 +478,7 @@ class ComputationSectionStrain(ComputationSection):
         "_axial_force",
     )
 
+    @logs_init
     def __init__(self, section: Section, strain_value: float):
         """
         Parameters
@@ -540,10 +533,6 @@ class ComputationSectionStrain(ComputationSection):
         self._stress_slope = 0.0
         self._stress_interception = self._compute_stress_interception()
         self._axial_force = self._compute_axial_force()
-        if logger.level == logging.DEBUG:
-            logger.debug(f'{self.__str__()}')
-        else:
-            logger.info(f'Created {self.__repr__()}')
 
     def __repr__(self):
         return (
@@ -601,6 +590,7 @@ class ComputationSectionCurvature(ComputationSection):
         "_axial_force",
     )
 
+    @logs_init
     def __init__(
         self,
         section: Section,
@@ -676,10 +666,6 @@ class ComputationSectionCurvature(ComputationSection):
         self._stress_slope = self._compute_stress_slope()
         self._stress_interception = self._compute_stress_interception()
         self._axial_force = self._compute_axial_force()
-        if logger.level == logging.DEBUG:
-            logger.debug(f'{self.__str__()}')
-        else:
-            logger.info(f'Created {self.__repr__()}')
 
     def __repr__(self) -> str:
         return (

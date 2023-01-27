@@ -11,16 +11,12 @@ from .general import (
 from .crosssection import Crosssection, ComputationCrosssectionCurvature
 from .solver import Solver, Newton
 
-import logging
-import logging.config
-import yaml
-import pathlib
-
-with open(pathlib.Path(__file__).parent.absolute() / "logging-config.yaml", 'r') as f:
-    config = yaml.safe_load(f.read())
-    logging.config.dictConfig(config)
+from .log import log_init, logging, log_return
+from functools import partial
 
 logger = logging.getLogger(__name__)
+logs_init = partial(log_init, logger=logger)
+logs_return = partial(log_return, logger=logger)
 
 
 @dataclass
@@ -65,6 +61,7 @@ class MKappa:
     :py:class:`MKappaByConstantCurvature`
     """
 
+    @logs_init
     def __init__(
         self,
         cross_section: Crosssection,
@@ -103,14 +100,6 @@ class MKappa:
         self._neutral_axis = None
         self._computed_cross_section = None
         self._axial_force = None
-        if not issubclass(type(self), MKappa):
-            if self.successful:
-                if logger.level == logging.DEBUG:
-                    logger.debug(f'{self.__str__()}')
-                else:
-                    logger.info(f'Created {self.__repr__()}')
-            else:
-                logger.info(f'Not successful {self.__str__()}')
 
     def __repr__(self):
         return (
@@ -416,6 +405,7 @@ class MKappaByStrainPosition(MKappa):
         "_iteration",
     )
 
+    @logs_init
     def __init__(
         self,
         cross_section: Crosssection,
@@ -473,10 +463,6 @@ class MKappaByStrainPosition(MKappa):
         self._maximum_curvature = maximum_curvature
         self._minimum_curvature = minimum_curvature
         self.initialize()
-        if logger.level == logging.DEBUG:
-            logger.debug(f'{self.__str__()}')
-        else:
-            logger.info(f'Created {self.__repr__()}')
 
     def __repr__(self):
         return (
@@ -609,6 +595,7 @@ class MKappaByConstantCurvature(MKappa):
         "_iteration",
     )
 
+    @logs_init
     def __init__(
         self,
         cross_section: Crosssection,
@@ -652,10 +639,6 @@ class MKappaByConstantCurvature(MKappa):
         self._maximum_neutral_axis = maximum_neutral_axis
         self._minimum_neutral_axis = minimum_neutral_axis
         self.initialize()
-        if logger.level == logging.DEBUG:
-            logger.debug(f'{self.__str__()}')
-        else:
-            logger.info(f'Created {self.__repr__()}')
 
     def __repr__(self):
         return (

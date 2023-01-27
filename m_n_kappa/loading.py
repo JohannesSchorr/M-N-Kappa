@@ -3,16 +3,12 @@ from dataclasses import dataclass
 
 from .general import str_start_end
 
-import logging
-import logging.config
-import yaml
-import pathlib
-
-with open(pathlib.Path(__file__).parent.absolute() / "logging-config.yaml", 'r') as f:
-    config = yaml.safe_load(f.read())
-    logging.config.dictConfig(config)
+from .log import log_init, logging, log_return
+from functools import partial
 
 logger = logging.getLogger(__name__)
+logs_init = partial(log_init, logger=logger)
+logs_return = partial(log_return, logger=logger)
 
 """
 Internal Forces
@@ -167,6 +163,7 @@ class SingleSpan(ABCSingleSpan):
 
     __slots__ = "_length", "_uniform_load", "_loads", "_beam"
 
+    @logs_init
     def __init__(self, length: float, loads: list = None, uniform_load: float = None):
         """
         Parameters
@@ -369,6 +366,7 @@ class SingleSpanSingleLoads(ABCSingleSpan):
 
     __slots__ = "_length", "_loads"
 
+    @logs_init
     def __init__(self, length: float, loads: list[SingleLoad]):
         """
         Parameters
@@ -424,10 +422,6 @@ class SingleSpanSingleLoads(ABCSingleSpan):
         """
         self._length = length
         self._loads = loads
-        if logger.level == logging.DEBUG:
-            logger.debug(self.__str__())
-        else:
-            logger.info(f'Created {self.__repr__()}')
 
     def __repr__(self) -> str:
         return f"SingleSpanSingleLoads(length={self.length}, loads={self.loads})"
@@ -641,6 +635,7 @@ class SingleSpanUniformLoad(ABCSingleSpan):
     .. versionadded:: 0.1.0
     """
 
+    @logs_init
     def __init__(self, length: float, load: float = 1.0):
         """
         Parameters
@@ -692,10 +687,6 @@ class SingleSpanUniformLoad(ABCSingleSpan):
         """
         self._length = length
         self._load = load
-        if logger.level == logging.DEBUG:
-            logger.debug(self.__str__())
-        else:
-            logger.info(f'Created {self.__repr__()}')
 
     def __repr__(self) -> str:
         return f"SingleSpanUniformLoad(length={self.length}, load={self.load})"

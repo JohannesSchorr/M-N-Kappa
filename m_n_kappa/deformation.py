@@ -11,16 +11,12 @@ from .loading import (
 )
 from .width import OneWeb
 
-import logging
-import logging.config
-import yaml
-import pathlib
-
-with open(pathlib.Path(__file__).parent.absolute() / "logging-config.yaml", 'r') as f:
-    config = yaml.safe_load(f.read())
-    logging.config.dictConfig(config)
+from .log import log_init, logging, log_return
+from functools import partial
 
 logger = logging.getLogger(__name__)
+logs_init = partial(log_init, logger=logger)
+logs_return = partial(log_return, logger=logger)
 
 
 class Node:
@@ -37,6 +33,7 @@ class Node:
 
     node_number: int = 0
 
+    @logs_init
     def __init__(self, cross_section: Crosssection, position: float, m_kappa_curve : MKappaCurvePoints = None):
         """
         Parameters
@@ -80,7 +77,6 @@ class Node:
         For computation of the incremental deformation at this node
         :py:meth:`~m_n_kappa.Node.incremental_deformation`.
         """
-        logger.info(f'Initialized node {self.node_number + 1}')
         self._cross_section = cross_section
         self._position = position
         if m_kappa_curve is None:
@@ -91,7 +87,6 @@ class Node:
             self._m_kappa_curve = m_kappa_curve
         Node.node_number += 1
         self._number = Node.node_number
-        logger.info(f'Created {self.__repr__()}')
 
     def __repr__(self):
         return f'Node(cross_section, position={self.position}'
@@ -192,10 +187,7 @@ class Loading:
     def __post_init__(self):
         if self.load is None:
             self.load = SingleSpanUniformLoad(self.beam_length, 1.0)
-        if logger.level == logging.DEBUG:
-            logger.debug(f'{self.__str__()}')
-        else:
-            logger.info(f'Created {self.__repr__()}')
+        logger.info(f'Created {self.__repr__()}')
 
     def maximum_resistance_moments(self) -> list[float]:
         return [node.m_kappa_curve.maximum_moment() for node in self.nodes]
@@ -260,10 +252,7 @@ class Deformation:
     m_kappa_point: MKappaCurvePoint = None
 
     def __post_init__(self):
-        if logger.level == logging.DEBUG:
-            logger.debug(f'{self.__str__()}')
-        else:
-            logger.info(f'Created {self.__repr__()}')
+        logger.info(f'Created {self.__repr__()}')
 
 
 @dataclass
@@ -282,10 +271,7 @@ class Deformations:
     deformations: list[Deformation]
 
     def __post_init__(self):
-        if logger.level == logging.DEBUG:
-            logger.debug(f'{self.__str__()}')
-        else:
-            logger.info(f'Created {self.__repr__()}')
+        logger.info(f'Created {self.__repr__()}')
 
     def __iter__(self):
         self._deformation_iterator = iter(self.deformations)
@@ -326,6 +312,7 @@ class Beam:
         "_consider_widths",
     )
 
+    @logs_init
     def __init__(
         self,
         cross_section: Crosssection,
@@ -353,10 +340,6 @@ class Beam:
         self._positions = self._create_positions()
         self._nodes = self._create_nodes()
         self._load_steps = Loading(self.length, self.nodes, self.load).load_steps()
-        if logger.level == logging.DEBUG:
-            logger.debug(f'{self.__str__()}')
-        else:
-            logger.info(f'Created {self.__repr__()}')
 
     @property
     def consider_widths(self) -> bool:
@@ -457,6 +440,7 @@ class Beam:
         """
         return self.nodes_at(self._decisive_positions())
 
+    @logs_return
     def deformation(self, at_position: float, load: ABCSingleSpan) -> float:
         """compute deformation at given position_value under given load
 
@@ -479,9 +463,9 @@ class Beam:
                 deformation = self._deformation_at_node(at_position, load)
             else:
                 deformation = self._deformation_between_nodes(at_position, load)
-            logger.info(f'Computed deformation at position {at_position} under {load=}')
             return deformation
 
+    @logs_return
     def deformations(self, at_position: float) -> Deformations:
         """computes deformations at given position_value for relevant load-steps"""
         deformations = []
@@ -496,23 +480,23 @@ class Beam:
                 )
             )
         deformations = Deformations(deformations)
-        logger.info(f'Computed deformations at position {at_position}')
         return deformations
 
+    @logs_return
     def deformations_at_maximum_moment_position(self) -> Deformations:
         """computes deformations at the decisive position_value for relevant load-steps"""
         position_of_maximum_moment = self.load.positions_of_maximum_moment()
         deformations = self.deformations(position_of_maximum_moment[0])
-        logger.info('Computed deformations at position of maximum deformation')
         return deformations
 
+    @logs_return
     def deformations_at_maximum_deformation_position(self) -> Deformations:
         """computes deformations at the decisive beam-position for relevant load-steps"""
         position_of_maximum_deformation = self.load.position_of_maximum_deformation()
         deformations = self.deformations(position_of_maximum_deformation)
-        logger.info('Computed deformations at position of maximum deformation')
         return deformations
 
+    @logs_return
     def deformation_over_beam_length(self, load_step: ABCSingleSpan) -> Deformations:
         """
         deformation over the length of the beam
@@ -533,7 +517,6 @@ class Beam:
             load=load_step.loading,
         )
                 for position in self.positions]
-        logger.info('Computed Deformations over beam length')
         return Deformations(deformations)
 
     def _deformation_at_node(self, at_position: float, load: ABCSingleSpan) -> float:

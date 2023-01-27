@@ -2,16 +2,12 @@ from dataclasses import dataclass
 
 from .general import StrainPosition, EdgeStrains
 
-import logging
-import logging.config
-import yaml
-import pathlib
-
-with open(pathlib.Path(__file__).parent.absolute() / "logging-config.yaml", 'r') as f:
-    config = yaml.safe_load(f.read())
-    logging.config.dictConfig(config)
+from .log import log_init, logging, log_return
+from functools import partial
 
 logger = logging.getLogger(__name__)
+logs_init = partial(log_init, logger=logger)
+logs_return = partial(log_return, logger=logger)
 
 
 def compute_curvatures(
@@ -130,7 +126,7 @@ class MaximumCurvature:
     maximum_negative_section_strains: list[StrainPosition]
 
     def __post_init__(self):
-        logger.info(f'Created {self.__repr__()}')
+        logger.info(f'Finished {self.__repr__()}')
 
     @property
     def positive(self) -> list[StrainPosition]:
@@ -142,6 +138,7 @@ class MaximumCurvature:
         """maximum negative :py:class:`~m_n_kappa.StrainPosition` of all materials and positions"""
         return self.maximum_negative_section_strains
 
+    @logs_return
     def compute(self, strain_position: StrainPosition) -> float:
         """
         maximum curvature for given strain_value at given position_value
@@ -166,7 +163,6 @@ class MaximumCurvature:
             curvature = self.__compute_positive_curvatures(strain_position)
         else:
             curvature = self.__compute_negative_curvatures(strain_position)
-        logger.info(f"Computed maximum curvature for {strain_position}: {curvature}")
         return curvature
 
     def __has_positive_curvature(self) -> bool:
@@ -333,6 +329,7 @@ class MinimumCurvature:
     def bottom_edge(self) -> float:
         return self._bottom_edge
 
+    @logs_return
     def compute(self, strain_position: StrainPosition) -> float:
         """
         compute the minimum possible curvature considering the strain at a position (``strain_position``)
@@ -344,7 +341,7 @@ class MinimumCurvature:
 
         Returns
         -------
-
+        float
         """
         if max(self.negative, key=lambda x: x.strain).strain <= strain_position.strain <= min(self.positive, key=lambda x: x.strain).strain:
             logger.debug(f'{strain_position} within minimal positive and negative strains')
@@ -356,17 +353,15 @@ class MinimumCurvature:
             position_strains = self.__get_position_strains(strain_position)
             edge_strains = compute_curvatures(strain_position, position_strains)
             decisive_edge_strain = max(edge_strains, key=lambda x: abs(x.curvature))
-        logger.debug(f'{position_strains=}')
-        logger.debug(f'curvatures: {[edge.curvature for edge in edge_strains]}')
         if decisive_edge_strain.top_edge_strain == strain_position:
             logger.info(
                 f'Decisive strain-position value for {strain_position=}: {decisive_edge_strain.bottom_edge_strain}')
         else:
             logger.info(
                 f'Decisive strain-position value for {strain_position=}: {decisive_edge_strain.top_edge_strain}')
-        logger.info(f'Curvature: {decisive_edge_strain.curvature}')
         return decisive_edge_strain.curvature
 
+    @logs_return
     def __edge_positions(self, strain_position: StrainPosition, additional_strain: float = 0.0001) -> list[StrainPosition]:
         """
         Get edge-positions of the cross-section and apply strain :math:`\\pm` ``additional_strain``
@@ -394,6 +389,7 @@ class MinimumCurvature:
         logger.info(f'Top-Edge: {strain_positions[0]}, Bottom-Edge: {strain_positions[1]}')
         return strain_positions
 
+    @logs_return
     def __get_position_strains(
         self, strain_position: StrainPosition
     ) -> list[StrainPosition]:

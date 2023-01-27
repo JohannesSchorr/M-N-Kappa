@@ -22,16 +22,12 @@ from .curvature_boundaries import (
     BoundaryValues,
 )
 
-import logging
-import logging.config
-import yaml
-import pathlib
-
-with open(pathlib.Path(__file__).parent.absolute() / "logging-config.yaml", 'r') as f:
-    config = yaml.safe_load(f.read())
-    logging.config.dictConfig(config)
+from .log import log_init, logging, log_return
+from functools import partial 
 
 logger = logging.getLogger(__name__)
+logs_init = partial(log_init, logger=logger)
+logs_return = partial(log_return, logger=logger)
 
 
 def axial_force(sections: list[ComputationSection]) -> float:
@@ -106,6 +102,7 @@ class Crosssection:
     .. versionadded:: 0.1.0
     """
 
+    @logs_init
     def __init__(
         self,
         sections: list[Section] = None,
@@ -186,11 +183,6 @@ class Crosssection:
         self._slab_effective_widths = slab_effective_widths
         self._top_edge = self.__compute_top_edge()
         self._bottom_edge = self.__compute_bottom_edge()
-        if not issubclass(type(self), Crosssection):
-            if logger.level == logging.DEBUG:
-                logger.debug(f'{self.__str__()}')
-            else:
-                logger.info(f'Created {self.__repr__()}')
 
     # TODO: check if rebars are within the concrete slab
 
@@ -481,6 +473,7 @@ class ComputationCrosssection(Crosssection):
 
     .. versionadded: 0.1.0
     """
+    @logs_init
     def __init__(
             self, sections: list[Section] | Crosssection = None,
             slab_effective_width: EffectiveWidths = None
@@ -627,6 +620,7 @@ class ComputationCrosssectionStrain(ComputationCrosssection):
 
     __slots__ = "_strain", "_compute_sections", "_bottom_edge", "_top_edge", "_slab_effective_widths"
 
+    @logs_init
     def __init__(
             self, sections: list | Crosssection,
             strain: float,
@@ -683,10 +677,6 @@ class ComputationCrosssectionStrain(ComputationCrosssection):
         super().__init__(sections, slab_effective_widths)
         self._strain = strain
         self._compute_sections = self._create_computation_sections()
-        if logger.level == logging.DEBUG:
-            logger.debug(f'{self.__str__()}')
-        else:
-            logger.info(f'Created {self.__repr__()}')
 
     def __repr__(self) -> str:
         return f"ComputationCrosssectionStrain(sections=sections, strain_value={self.strain})"
@@ -865,6 +855,7 @@ class ComputationCrosssectionCurvature(ComputationCrosssection):
         "_girder_effective_widths",
     )
 
+    @logs_init
     def __init__(
         self,
         cross_section: Crosssection | list[Section],
@@ -919,9 +910,6 @@ class ComputationCrosssectionCurvature(ComputationCrosssection):
         221.07005829554043
 
         """
-        logger.debug(f'Initialize ComputationCrosssectionCurvature(cross_section'
-                     f'{curvature=}, '
-                     f'{neutral_axis_value=})')
         super().__init__(cross_section, slab_effective_width)
         self._curvature = curvature
         self._neutral_axis = neutral_axis_value
@@ -929,10 +917,6 @@ class ComputationCrosssectionCurvature(ComputationCrosssection):
             ComputationSectionCurvature
         ] = self._create_computation_sections()
         self._compute_split_sections = self._create_computation_split_sections()
-        if logger.level == logging.DEBUG:
-            logger.debug(f'{self.__str__()}')
-        else:
-            logger.info(f'Created {self.__repr__()}')
 
     def __repr__(self) -> str:
         return (
@@ -1084,6 +1068,7 @@ class CrossSectionBoundaries(Crosssection):
         "_maximum_negative_curvature",
     )
 
+    @logs_init
     def __init__(self, sections: list):
         """
         Parameters
@@ -1156,9 +1141,6 @@ class CrossSectionBoundaries(Crosssection):
         self._negative_start_bound = self.__get_curvature_start_values(
             self._maximum_negative_curvature
         )
-
-        logger.info(f'Created {self.__repr__()}')
-        logger.debug(self.__str__())
 
     def __repr__(self):
         return "CrossSectionBoundaries(sections=sections)"
@@ -1256,6 +1238,7 @@ class CrossSectionBoundaries(Crosssection):
             negative=self.__get_negative_boundaries(),
         )
 
+    @logs_return
     def _get_maximum_positive_curvature(self) -> EdgeStrains:
         """
         Returns
@@ -1267,9 +1250,9 @@ class CrossSectionBoundaries(Crosssection):
             self._sections_maximum_strains, self._sections_minimum_strains
         )
         edge_strain = min(curvatures, key=lambda x: x.curvature)
-        logger.debug(f'Maximum positive curvature values: {edge_strain}')
         return edge_strain
 
+    @logs_return
     def _get_maximum_negative_curvature(self) -> EdgeStrains:
         """
         Returns
@@ -1281,7 +1264,6 @@ class CrossSectionBoundaries(Crosssection):
             self._sections_minimum_strains, self._sections_maximum_strains
         )
         edge_strains = max(curvatures, key=lambda x: x.curvature)
-        logger.debug(f'Maximum negative curvature: {edge_strains}')
         return edge_strains
 
     def _get_sections_maximum_strain(self) -> list[StrainPosition]:
@@ -1382,10 +1364,6 @@ class CrossSectionBoundaries(Crosssection):
             cross_section_start_with_strain_on_bottom.total_axial_force()
         )
         # --- comparing the maximum change in axial-forces with similar change of curvature
-        logger.debug(f"Axial Forces:"
-                     f"\n\tInitial: {initial_axial_force:.1f},"
-                     f"\n\tStrain on top: {strain_on_top_axial_force:.1f}, -> abs({strain_on_top_axial_force:.1f} - {initial_axial_force:.1f}) = {abs(strain_on_top_axial_force - initial_axial_force):.1f}"
-                     f"\n\tStrain on bottom: {strain_on_bottom_axial_force:.1f}, -> abs({strain_on_bottom_axial_force:.1f} - {initial_axial_force:.1f}) = {abs(strain_on_bottom_axial_force - initial_axial_force):.1f}")
         if abs(strain_on_top_axial_force - initial_axial_force) > abs(
             strain_on_bottom_axial_force - initial_axial_force
         ):
