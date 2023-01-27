@@ -71,7 +71,7 @@ $(document).ready(function() {
             button.data('hidden', 'false');
         }
     });
-    if ('false' === 'true') {
+    if ('true' === 'true') {
         $('.copybutton').click();  // click once to hide
     }
 });
