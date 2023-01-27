@@ -405,9 +405,6 @@ why equilibrium has not been found.</p>
 <span class="n">positive_m_kappa_curve_computation</span><span class="o">.</span><span class="n">not_successful</span>
 </pre></div>
 </div>
-<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>    [[StrainPosition(strain=-0.0035, position=0.0, material=&#39;Concrete&#39;), &#39;maximum iterations reached&#39;], [StrainPosition(strain=-0.0025, position=25, material=&#39;Reinforcement&#39;), &#39;same sign of axial forces at minimum and maximum curvature&#39;], [StrainPosition(strain=-0.0025, position=75, material=&#39;Reinforcement&#39;), &#39;same sign of axial forces at minimum and maximum curvature&#39;], [StrainPosition(strain=-0.0016904761904761904, position=100.0, material=&#39;Steel&#39;), &#39;same sign of axial forces at minimum and maximum curvature&#39;]]
-</pre></div>
-</div>
 <p>The Moment-Curvature points may be extracted calling <a class="reference internal" href="../api/m_n_kappa.MKappaCurve.html#m_n_kappa.MKappaCurve.m_kappa_points" title="m_n_kappa.MKappaCurve.m_kappa_points"><code class="xref py py-meth docutils literal notranslate"><span class="pre">m_kappa_points()</span></code></a>.</p>
 <div class="highlight-python notranslate" id="moment_curvature_curve-rst-altair-source-4"><div class="highlight"><pre><span></span><span class="n">positive_m_kappa_curve</span> <span class="o">=</span> <span class="n">positive_m_kappa_curve_computation</span><span class="o">.</span><span class="n">m_kappa_points</span>
 </pre></div>
@@ -420,22 +417,7 @@ These allow us to easily create the corresponding Moment-Curvature diagram with 
 <div class="highlight-python notranslate" id="moment_curvature_curve-rst-altair-source-5"><div class="highlight"><pre><span></span><span class="n">m_kappa_diagram</span><span class="p">(</span><span class="n">results</span><span class="o">=</span><span class="n">positive_m_kappa_curve</span><span class="o">.</span><span class="n">results_as_dict</span><span class="p">(</span><span class="n">moment_factor</span><span class="o">=</span><span class="mf">0.001</span><span class="o">*</span><span class="mf">0.001</span><span class="p">))</span>
 </pre></div>
 </div>
-
-<div id="moment_curvature_curve-rst-altair-plot-5">
-<script>
-  // embed when document is loaded, to ensure vega library is available
-  // this works on all modern browsers, except IE8 and older
-  document.addEventListener("DOMContentLoaded", function(event) {
-      var spec = {"usermeta": {"embedOptions": {"theme": "quartz"}}, "config": {"view": {"continuousWidth": 400, "continuousHeight": 300}}, "layer": [{"mark": "line", "encoding": {"x": {"field": "Curvature", "title": "Curvature [-]", "type": "quantitative"}, "y": {"field": "Moment", "title": "Moment [kNm]", "type": "quantitative"}}}, {"mark": "point", "encoding": {"tooltip": [{"field": "Moment", "type": "quantitative"}, {"field": "Curvature", "type": "quantitative"}, {"field": "Strain", "type": "quantitative"}, {"field": "Position", "type": "quantitative"}, {"field": "Material", "type": "nominal"}], "x": {"field": "Curvature", "type": "quantitative"}, "y": {"field": "Moment", "type": "quantitative"}}}], "background": "#00000000", "data": {"name": "data-d51356afdfe9ffbb4755ad1020de64c8"}, "$schema": "https://vega.github.io/schema/vega-lite/v4.17.0.json", "datasets": {"data-d51356afdfe9ffbb4755ad1020de64c8": [{"Moment": 0.0, "Curvature": 0.0, "Strain": 0.0, "Position": 0.0, "Material": "-"}, {"Moment": 279.0650907027305, "Curvature": 5.6396116516098715e-06, "Strain": -0.0004628985582627583, "Position": 0.0, "Material": "Concrete"}, {"Moment": 438.75578900432055, "Curvature": 1.1500733417879781e-05, "Strain": -0.0008661758912394188, "Position": 0.0, "Material": "Concrete"}, {"Moment": 516.8183018835432, "Curvature": 2.761011908732979e-05, "Strain": -0.0017323517824788376, "Position": 0.0, "Material": "Concrete"}, {"Moment": 538.683420997121, "Curvature": 3.5835063220899387e-05, "Strain": -0.0021618768697354803, "Position": 0.0, "Material": "Concrete"}, {"Moment": 541.7245377407294, "Curvature": 5.0031448888961696e-05, "Strain": -0.00283093843486774, "Position": 0.0, "Material": "Concrete"}]}};
-      var opt = {
-        "mode": "vega-lite",
-        "renderer": "canvas",
-        "actions": {"editor": true, "source": true, "export": true}
-      };
-      vegaEmbed('#moment_curvature_curve-rst-altair-plot-5', spec, opt).catch(console.err);
-  });
-</script>
-</div><p>The diagram shows a maximum moment of <span class="math notranslate nohighlight">\(M_\mathrm{max} \approx 550\)</span> kNm.</p>
+<p>The diagram shows a maximum moment of <span class="math notranslate nohighlight">\(M_\mathrm{max} \approx 550\)</span> kNm.</p>
 </section>
 <section id="moment-curvature-curve-with-negative-values">
 <span id="examples-moment-curvature-curve-negative"></span><h2>Moment-Curvature-Curve with negative values<a class="headerlink" href="#moment-curvature-curve-with-negative-values" title="Permalink to this heading">#</a></h2>
@@ -454,22 +436,7 @@ must be passed to <a class="reference internal" href="../api/m_n_kappa.MKappaCur
 <div class="highlight-python notranslate" id="moment_curvature_curve-rst-altair-source-7"><div class="highlight"><pre><span></span><span class="n">m_kappa_diagram</span><span class="p">(</span><span class="n">results</span><span class="o">=</span><span class="n">negative_m_kappa_curve</span><span class="o">.</span><span class="n">results_as_dict</span><span class="p">(</span><span class="n">moment_factor</span><span class="o">=</span><span class="mf">0.001</span><span class="o">*</span><span class="mf">0.001</span><span class="p">))</span>
 </pre></div>
 </div>
-
-<div id="moment_curvature_curve-rst-altair-plot-7">
-<script>
-  // embed when document is loaded, to ensure vega library is available
-  // this works on all modern browsers, except IE8 and older
-  document.addEventListener("DOMContentLoaded", function(event) {
-      var spec = {"usermeta": {"embedOptions": {"theme": "quartz"}}, "config": {"view": {"continuousWidth": 400, "continuousHeight": 300}}, "layer": [{"mark": "line", "encoding": {"x": {"field": "Curvature", "title": "Curvature [-]", "type": "quantitative"}, "y": {"field": "Moment", "title": "Moment [kNm]", "type": "quantitative"}}}, {"mark": "point", "encoding": {"tooltip": [{"field": "Moment", "type": "quantitative"}, {"field": "Curvature", "type": "quantitative"}, {"field": "Strain", "type": "quantitative"}, {"field": "Position", "type": "quantitative"}, {"field": "Material", "type": "nominal"}], "x": {"field": "Curvature", "type": "quantitative"}, "y": {"field": "Moment", "type": "quantitative"}}}], "background": "#00000000", "data": {"name": "data-89fd3f447c878cf10af8da9c3aaae27c"}, "$schema": "https://vega.github.io/schema/vega-lite/v4.17.0.json", "datasets": {"data-89fd3f447c878cf10af8da9c3aaae27c": [{"Moment": -442.38366116446423, "Curvature": -0.0008077394867854998, "Strain": -0.15, "Position": 300.0, "Material": "Steel"}, {"Moment": -409.2982653218652, "Curvature": -7.695578624136976e-05, "Strain": 0.0016904761904761904, "Position": 100.0, "Material": "Steel"}, {"Moment": -405.044752007268, "Curvature": -4.6813703672689853e-05, "Strain": 0.0025, "Position": 75.0, "Material": "Reinforcement"}, {"Moment": -349.9780857744969, "Curvature": -1.9052980162533646e-05, "Strain": 0.0025, "Position": 25.0, "Material": "Reinforcement"}, {"Moment": -54.944467314156846, "Curvature": -1.099584484757465e-06, "Strain": 8.92086139773573e-05, "Position": 0.0, "Material": "Concrete"}, {"Moment": -54.71895126913915, "Curvature": -1.0909764663380172e-06, "Strain": 8.82086139773573e-05, "Position": 0.0, "Material": "Concrete"}, {"Moment": 0.0, "Curvature": 0.0, "Strain": 0.0, "Position": 0.0, "Material": "-"}]}};
-      var opt = {
-        "mode": "vega-lite",
-        "renderer": "canvas",
-        "actions": {"editor": true, "source": true, "export": true}
-      };
-      vegaEmbed('#moment_curvature_curve-rst-altair-plot-7', spec, opt).catch(console.err);
-  });
-</script>
-</div><p>The diagram shows in absolute values a smaller maximum moment than the cross-section under positive curvature.
+<p>The diagram shows in absolute values a smaller maximum moment than the cross-section under positive curvature.
 But the maximum curvatures are in absolute values much higher.
 This is related to the higher strains the reinforcement and the steel-material can bear as the concrete in compression.</p>
 </section>
@@ -486,22 +453,7 @@ This is related to the higher strains the reinforcement and the steel-material c
 <span class="n">m_kappa_diagram</span><span class="p">(</span><span class="n">results</span><span class="o">=</span><span class="n">full_m_kappa_curve</span><span class="o">.</span><span class="n">results_as_dict</span><span class="p">(</span><span class="n">moment_factor</span><span class="o">=</span><span class="mf">0.001</span><span class="o">*</span><span class="mf">0.001</span><span class="p">))</span>
 </pre></div>
 </div>
-
-<div id="moment_curvature_curve-rst-altair-plot-8">
-<script>
-  // embed when document is loaded, to ensure vega library is available
-  // this works on all modern browsers, except IE8 and older
-  document.addEventListener("DOMContentLoaded", function(event) {
-      var spec = {"usermeta": {"embedOptions": {"theme": "quartz"}}, "config": {"view": {"continuousWidth": 400, "continuousHeight": 300}}, "layer": [{"mark": "line", "encoding": {"x": {"field": "Curvature", "title": "Curvature [-]", "type": "quantitative"}, "y": {"field": "Moment", "title": "Moment [kNm]", "type": "quantitative"}}}, {"mark": "point", "encoding": {"tooltip": [{"field": "Moment", "type": "quantitative"}, {"field": "Curvature", "type": "quantitative"}, {"field": "Strain", "type": "quantitative"}, {"field": "Position", "type": "quantitative"}, {"field": "Material", "type": "nominal"}], "x": {"field": "Curvature", "type": "quantitative"}, "y": {"field": "Moment", "type": "quantitative"}}}], "background": "#00000000", "data": {"name": "data-cb4fef2ade74fe2dc83e095a0bf0d8ae"}, "$schema": "https://vega.github.io/schema/vega-lite/v4.17.0.json", "datasets": {"data-cb4fef2ade74fe2dc83e095a0bf0d8ae": [{"Moment": -442.38366116446423, "Curvature": -0.0008077394867854998, "Strain": -0.15, "Position": 300.0, "Material": "Steel"}, {"Moment": -409.2982653218652, "Curvature": -7.695578624136976e-05, "Strain": 0.0016904761904761904, "Position": 100.0, "Material": "Steel"}, {"Moment": -405.044752007268, "Curvature": -4.6813703672689853e-05, "Strain": 0.0025, "Position": 75.0, "Material": "Reinforcement"}, {"Moment": -349.9780857744969, "Curvature": -1.9052980162533646e-05, "Strain": 0.0025, "Position": 25.0, "Material": "Reinforcement"}, {"Moment": -54.944467314156846, "Curvature": -1.099584484757465e-06, "Strain": 8.92086139773573e-05, "Position": 0.0, "Material": "Concrete"}, {"Moment": -54.71895126913915, "Curvature": -1.0909764663380172e-06, "Strain": 8.82086139773573e-05, "Position": 0.0, "Material": "Concrete"}, {"Moment": 0.0, "Curvature": 0.0, "Strain": 0.0, "Position": 0.0, "Material": "-"}, {"Moment": 279.0650907027305, "Curvature": 5.6396116516098715e-06, "Strain": -0.0004628985582627583, "Position": 0.0, "Material": "Concrete"}, {"Moment": 438.75578900432055, "Curvature": 1.1500733417879781e-05, "Strain": -0.0008661758912394188, "Position": 0.0, "Material": "Concrete"}, {"Moment": 516.8183018835432, "Curvature": 2.761011908732979e-05, "Strain": -0.0017323517824788376, "Position": 0.0, "Material": "Concrete"}, {"Moment": 538.683420997121, "Curvature": 3.5835063220899387e-05, "Strain": -0.0021618768697354803, "Position": 0.0, "Material": "Concrete"}, {"Moment": 541.7245377407294, "Curvature": 5.0031448888961696e-05, "Strain": -0.00283093843486774, "Position": 0.0, "Material": "Concrete"}]}};
-      var opt = {
-        "mode": "vega-lite",
-        "renderer": "canvas",
-        "actions": {"editor": true, "source": true, "export": true}
-      };
-      vegaEmbed('#moment_curvature_curve-rst-altair-plot-8', spec, opt).catch(console.err);
-  });
-</script>
-</div><p>As shown the moment-curvature curve is easily computed using <code class="xref py py-mod docutils literal notranslate"><span class="pre">m_n_kappa</span></code>.
+<p>As shown the moment-curvature curve is easily computed using <code class="xref py py-mod docutils literal notranslate"><span class="pre">m_n_kappa</span></code>.
 The classes and methods shown here, are building the basis to compute the deformation of a beam.</p>
 </section>
 </section>
