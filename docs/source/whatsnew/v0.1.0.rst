@@ -1,17 +1,118 @@
 .. _whatsnew010:
 
-What's new in 0.1.0 (??. January 2023)
-**************************************
+What's new in 0.1.0 (28th of January 2023)
+******************************************
 
 .. These are the changes in pandas 1.5.2. See Release notes for a full changelog including other versions of pandas.
 
-This is the initial version of :math:`M`-:math:`N`-:math:`\kappa`.
+This is the initial version of :mod:`m_n_kappa`.
 
 .. _whatsnew010.new_features:
 
-.. New Features
-.. ============
+Features
+========
 
+As this is the initial version of :mod:`m_n_kappa` the implemented features are shown hereafter.
+Further version will refer to this in case of changes
+
+Geometries
+----------
+See also :ref:`examples.geometry`
+
+Basic geometries
+^^^^^^^^^^^^^^^^
+- :py:class:`~m_n_kappa.Rectangle`
+- :py:class:`~m_n_kappa.Circle`
+- :py:class:`~m_n_kappa.Trapezoid`
+
+Composed geometries
+^^^^^^^^^^^^^^^^^^^
+- :py:class:`~m_n_kappa.IProfile`
+- :py:class:`~m_n_kappa.UPEProfile`
+- :py:class:`~m_n_kappa.RebarLayer`
+
+Further feature related to geometries
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+- adding two or more geometries leads to creation of a :py:class:`~m_n_kappa.geometry.ComposedGeometry`
+- if basic geometries are developed they must inherit from :py:class:`~m_n_kappa.geometry.Geometry` to
+  all needed functionalities
+
+Materials
+---------
+See also :ref:`examples.material`
+
+- :py:class:`~m_n_kappa.Concrete`
+- :py:class:`~m_n_kappa.Steel`
+- :py:class:`~m_n_kappa.Reinforcement`
+
+Newly created materials must inherit from :py:class:`~m_n_kappa.material.Material`
+
+Section
+-------
+see also :ref:`examples.section`
+
+- combination of material and geometry
+- :py:class:`~m_n_kappa.Section`
+
+Cross-section
+-------------
+see also :ref:`examples.cross_section`
+
+- consists of a number of :py:class:`~m_n_kappa.Section`
+- :py:class:`~m_n_kappa.Crosssection`
+
+Computation of a Moment-Curvature-Point
+---------------------------------------
+Computing a single moment-curvature-point by applying a strain and a vertical position the strain is located.
+See also :ref:`examples.moment_curvature`.
+
+- :py:class:`~m_n_kappa.MKappaByStrainPosition`
+
+Computing a Moment-Curvature-Curve
+----------------------------------
+Computing the moment-curvature-curve of a :py:class:`~m_n_kappa.Crosssection`.
+See also :ref:`examples.moment_curvature_curve`
+
+- :py:class:`~m_n_kappa.MKappaCurve`
+
+Computing deformation of a single span beam
+-------------------------------------------
+See also :ref:`examples.deformation`.
+
+:py:class:`~m_n_kappa.Beam` considers:
+
+- number of elements the beam is split into
+- the effective width for concrete slab distinguishing between bending and membran width
+- two different loading scenarios:
+
+  - single span beam with single loads with :py:class:`~m_n_kappa.SingleSpanSingleLoads` and
+    :py:class:`~m_n_kappa.SingleLoads`
+  - single span beam under uniform loading with :py:class:`~m_n_kappa.SingleSpanUniformLoad`
+
+Computes:
+
+- deformation at a given position along the beam under given load with
+  :py:meth:`~m_n_kappa.Beam.deformation`
+- deformation along the beam at given position with :py:meth:`~m_n_kappa.Beam.deformations`
+- deformations at the position of maximum deformation with
+  :py:meth:`~m_n_kappa.Beam.deformations_at_maximum_deformation_position`
+- deformation over the length of a beam under given load with
+  :py:meth:`~m_n_kappa.Beam.deformation_over_beam_length`
+
+Documentation
+-------------
+Comprehensive documentation  with following main sections:
+
+- :ref:`getting_started`
+- :ref:`examples`
+- :ref:`theory`
+- :ref:`verification`
+
+Also documented are:
+
+- :ref:`api`
+- :ref:`api_developers`
+- :ref:`roadmap`, :ref:`contributing`, :ref:`release`
 
 .. _whatsnew010.bug_fixes:
 
