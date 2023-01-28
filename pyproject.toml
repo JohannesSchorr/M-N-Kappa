@@ -1,0 +1,36 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "m_n_kappa"
+version = "0.0.1"
+authors = [
+  { name="Johannes Schorr", email="johannes.schorr@gmail.com" },
+]
+description = """
+    Open source library for using the strain-based method to compute
+    the stress-distribution of a cross-section considering multi-linear
+    material models
+    """
+readme = "README.md"
+requires-python = ">=3.11"
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.11",
+    "License :: OSI Approved :: BSD License",
+    "Operating System :: OS Independent",
+    "Natural Language :: English",
+    "Topic :: Education",
+    "Topic :: Scientific/Engineering",
+    "Typing :: Typed"
+]
+keywords = [
+    "engineering", "structural-engineering", "strain-based", "moment-curvature",
+    "deformation", 'non-linear material', 'beam', 'multi-linear material'
+]
+
+[project.urls]
+"Homepage" = "https://github.com/JohannesSchorr/M-N-Kappa"
+"Documentation" = "https://johannesschorr.github.io/M-N-Kappa/"
+"Issue tracker" = "https://github.com/JohannesSchorr/M-N-Kappa/issues"
