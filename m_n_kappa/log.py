@@ -4,7 +4,7 @@ import yaml
 import pathlib
 import functools
 
-with open(pathlib.Path(__file__).parent.absolute() / "logging-config.yaml", 'r') as f:
+with open(pathlib.Path(__file__).parent.absolute() / "logging-config.yaml", "r") as f:
     config = yaml.safe_load(f.read())
     logging.config.dictConfig(config)
 
@@ -24,14 +24,28 @@ def log_init(func, logger: logging.Logger):
     -------
     Callable
     """
+
     @functools.wraps(func)
     def wrapper(*args, **kwargs):
-        logger.info(f'Start initialize {args[0].__repr__()}')
+        arguments = [f"{k}={v}" for k, v in kwargs.items()]
+        init_index = func.__qualname__.find(".__init__")
+        is_calling_class = func.__qualname__[:init_index] == args[0].__class__.__name__
+        if is_calling_class:
+            logger.info(
+                f'Start initialize {args[0].__class__.__name__}({", ".join(arguments)})'
+            )
+
         value = func(*args, **kwargs)
-        if logger.level == logging.DEBUG and args[0].__str__() is not object.__str__:
-            logger.debug(f'{args[0].__str__()}')
-        else:
-            logger.info(f'Finished {args[0].__repr__()}')
+
+        if is_calling_class:
+            if (
+                logger.level == logging.DEBUG
+                and args[0].__str__() is not object.__str__
+            ):
+                logger.debug(f"{args[0].__str__()}")
+            else:
+                logger.info(f"Finished {args[0].__repr__()}")
+
         return value
 
     return wrapper
@@ -52,10 +66,11 @@ def log_return(func, logger: logging.Logger):
     -------
     Callable
     """
+
     @functools.wraps(func)
     def wrapper(*args, **kwargs):
         value = func(*args, **kwargs)
-        logger.debug(f'{func.__qualname__}: {value}')
+        logger.debug(f"{func.__qualname__}: {value}")
         return value
 
     return wrapper
