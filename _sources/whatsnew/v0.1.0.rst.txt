@@ -3,8 +3,6 @@
 What's new in 0.1.0 (28th of January 2023)
 ******************************************
 
-.. These are the changes in pandas 1.5.2. See Release notes for a full changelog including other versions of pandas.
-
 This is the initial version of :mod:`m_n_kappa`.
 
 .. _whatsnew010.new_features:
@@ -86,7 +84,7 @@ See also :ref:`examples.deformation`.
 - two different loading scenarios:
 
   - single span beam with single loads with :py:class:`~m_n_kappa.SingleSpanSingleLoads` and
-    :py:class:`~m_n_kappa.SingleLoads`
+    :py:class:`~m_n_kappa.SingleLoad`
   - single span beam under uniform loading with :py:class:`~m_n_kappa.SingleSpanUniformLoad`
 
 Computes:

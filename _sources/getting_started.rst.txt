@@ -1,13 +1,11 @@
 .. _getting_started:
+
 Getting Started
 ***************
 
 .. _getting_started.installation:
 Installation
 ============
-
-.. important::
-   This package has not yet been published on PyPI. Therefore, the following command does not work currently.
 
 The installation via `PyPi <https://pypi.org/>`_ runs as follows.
 
@@ -28,8 +26,8 @@ Introducing example: Computing a steel-concrete composite beam
    import altair as alt
    alt.themes.enable('quartz')
 
-The following example shows how easy and straightforward :py:mod:`m_n_kappa` is applied to
-computing the deformation of a composite beam.
+The following example shows how easy and straightforward :py:mod:`m_n_kappa` is
+applied to computing the deformation of a composite beam.
 
 .. figure:: ./images/getting_started_example-dark.svg
    :class: only-dark
