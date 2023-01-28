@@ -6,7 +6,7 @@
 <link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" /><link rel="next" title="License" href="../license.html" /><link rel="prev" title="Release Notes" href="index.html" />
 
     <!-- Generated with Sphinx 5.3.0 and Furo 2022.12.07 -->
-        <title>What’s new in 0.1.0 (??. January 2023) - M-N-κ</title>
+        <title>What’s new in 0.1.0 (28th of January 2023) - M-N-κ</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?digest=91d0f0d1c444bdcb17a68e833c7a53903343c195" />
     <link rel="stylesheet" type="text/css" href="../_static/altair-plot.css" />
@@ -142,7 +142,7 @@
           <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
         </button>
       </div>
-      <label class="toc-overlay-icon toc-header-icon no-toc" for="__toc">
+      <label class="toc-overlay-icon toc-header-icon" for="__toc">
         <div class="visually-hidden">Toggle table of contents sidebar</div>
         <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
       </label>
@@ -284,7 +284,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../roadmap.html">Roadmap and To Do’s</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../contributing.html">Contributing</a></li>
 <li class="toctree-l1 current has-children"><a class="reference internal" href="index.html">Release Notes</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-7" name="toctree-checkbox-7" role="switch" type="checkbox"/><label for="toctree-checkbox-7"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="current">
-<li class="toctree-l2 current current-page"><a class="current reference internal" href="#">What’s new in 0.1.0 (??. January 2023)</a></li>
+<li class="toctree-l2 current current-page"><a class="current reference internal" href="#">What’s new in 0.1.0 (28th of January 2023)</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../license.html">License</a></li>
@@ -324,16 +324,133 @@
               <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
             </button>
           </div>
-          <label class="toc-overlay-icon toc-content-icon no-toc" for="__toc">
+          <label class="toc-overlay-icon toc-content-icon" for="__toc">
             <div class="visually-hidden">Toggle table of contents sidebar</div>
             <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
           </label>
         </div>
         <article role="main">
-          <section id="what-s-new-in-0-1-0-january-2023">
-<span id="whatsnew010"></span><h1>What’s new in 0.1.0 (??. January 2023)<a class="headerlink" href="#what-s-new-in-0-1-0-january-2023" title="Permalink to this heading">#</a></h1>
-<p>This is the initial version of <span class="math notranslate nohighlight">\(M\)</span>-<span class="math notranslate nohighlight">\(N\)</span>-<span class="math notranslate nohighlight">\(\kappa\)</span>.</p>
-<span class="target" id="whatsnew010-new-features"></span><span class="target" id="whatsnew010-bug-fixes"></span></section>
+          <section id="what-s-new-in-0-1-0-28th-of-january-2023">
+<span id="whatsnew010"></span><h1>What’s new in 0.1.0 (28th of January 2023)<a class="headerlink" href="#what-s-new-in-0-1-0-28th-of-january-2023" title="Permalink to this heading">#</a></h1>
+<p>This is the initial version of <code class="xref py py-mod docutils literal notranslate"><span class="pre">m_n_kappa</span></code>.</p>
+<section id="features">
+<span id="whatsnew010-new-features"></span><h2>Features<a class="headerlink" href="#features" title="Permalink to this heading">#</a></h2>
+<p>As this is the initial version of <code class="xref py py-mod docutils literal notranslate"><span class="pre">m_n_kappa</span></code> the implemented features are shown hereafter.
+Further version will refer to this in case of changes</p>
+<section id="geometries">
+<h3>Geometries<a class="headerlink" href="#geometries" title="Permalink to this heading">#</a></h3>
+<p>See also <a class="reference internal" href="../examples/geometry.html#examples-geometry"><span class="std std-ref">Creating Geometries</span></a></p>
+<section id="basic-geometries">
+<h4>Basic geometries<a class="headerlink" href="#basic-geometries" title="Permalink to this heading">#</a></h4>
+<ul class="simple">
+<li><p><a class="reference internal" href="../api/m_n_kappa.Rectangle.html#m_n_kappa.Rectangle" title="m_n_kappa.Rectangle"><code class="xref py py-class docutils literal notranslate"><span class="pre">Rectangle</span></code></a></p></li>
+<li><p><a class="reference internal" href="../api/m_n_kappa.Circle.html#m_n_kappa.Circle" title="m_n_kappa.Circle"><code class="xref py py-class docutils literal notranslate"><span class="pre">Circle</span></code></a></p></li>
+<li><p><a class="reference internal" href="../api/m_n_kappa.Trapezoid.html#m_n_kappa.Trapezoid" title="m_n_kappa.Trapezoid"><code class="xref py py-class docutils literal notranslate"><span class="pre">Trapezoid</span></code></a></p></li>
+</ul>
+</section>
+<section id="composed-geometries">
+<h4>Composed geometries<a class="headerlink" href="#composed-geometries" title="Permalink to this heading">#</a></h4>
+<ul class="simple">
+<li><p><a class="reference internal" href="../api/m_n_kappa.IProfile.html#m_n_kappa.IProfile" title="m_n_kappa.IProfile"><code class="xref py py-class docutils literal notranslate"><span class="pre">IProfile</span></code></a></p></li>
+<li><p><a class="reference internal" href="../api/m_n_kappa.UPEProfile.html#m_n_kappa.UPEProfile" title="m_n_kappa.UPEProfile"><code class="xref py py-class docutils literal notranslate"><span class="pre">UPEProfile</span></code></a></p></li>
+<li><p><a class="reference internal" href="../api/m_n_kappa.RebarLayer.html#m_n_kappa.RebarLayer" title="m_n_kappa.RebarLayer"><code class="xref py py-class docutils literal notranslate"><span class="pre">RebarLayer</span></code></a></p></li>
+</ul>
+</section>
+<section id="further-feature-related-to-geometries">
+<h4>Further feature related to geometries<a class="headerlink" href="#further-feature-related-to-geometries" title="Permalink to this heading">#</a></h4>
+<ul class="simple">
+<li><p>adding two or more geometries leads to creation of a <a class="reference internal" href="../api/m_n_kappa.geometry.ComposedGeometry.html#m_n_kappa.geometry.ComposedGeometry" title="m_n_kappa.geometry.ComposedGeometry"><code class="xref py py-class docutils literal notranslate"><span class="pre">ComposedGeometry</span></code></a></p></li>
+<li><p>if basic geometries are developed they must inherit from <a class="reference internal" href="../api/m_n_kappa.Geometry.html#m_n_kappa.Geometry" title="m_n_kappa.geometry.Geometry"><code class="xref py py-class docutils literal notranslate"><span class="pre">Geometry</span></code></a> to
+all needed functionalities</p></li>
+</ul>
+</section>
+</section>
+<section id="materials">
+<h3>Materials<a class="headerlink" href="#materials" title="Permalink to this heading">#</a></h3>
+<p>See also <a class="reference internal" href="../examples/material.html#examples-material"><span class="std std-ref">Creating materials</span></a></p>
+<ul class="simple">
+<li><p><a class="reference internal" href="../api/m_n_kappa.Concrete.html#m_n_kappa.Concrete" title="m_n_kappa.Concrete"><code class="xref py py-class docutils literal notranslate"><span class="pre">Concrete</span></code></a></p></li>
+<li><p><a class="reference internal" href="../api/m_n_kappa.Steel.html#m_n_kappa.Steel" title="m_n_kappa.Steel"><code class="xref py py-class docutils literal notranslate"><span class="pre">Steel</span></code></a></p></li>
+<li><p><a class="reference internal" href="../api/m_n_kappa.Reinforcement.html#m_n_kappa.Reinforcement" title="m_n_kappa.Reinforcement"><code class="xref py py-class docutils literal notranslate"><span class="pre">Reinforcement</span></code></a></p></li>
+</ul>
+<p>Newly created materials must inherit from <a class="reference internal" href="../api/m_n_kappa.Material.html#m_n_kappa.Material" title="m_n_kappa.material.Material"><code class="xref py py-class docutils literal notranslate"><span class="pre">Material</span></code></a></p>
+</section>
+<section id="section">
+<h3>Section<a class="headerlink" href="#section" title="Permalink to this heading">#</a></h3>
+<p>see also <a class="reference internal" href="../examples/section.html#examples-section"><span class="std std-ref">Build a section</span></a></p>
+<ul class="simple">
+<li><p>combination of material and geometry</p></li>
+<li><p><a class="reference internal" href="../api/m_n_kappa.Section.html#m_n_kappa.Section" title="m_n_kappa.Section"><code class="xref py py-class docutils literal notranslate"><span class="pre">Section</span></code></a></p></li>
+</ul>
+</section>
+<section id="cross-section">
+<h3>Cross-section<a class="headerlink" href="#cross-section" title="Permalink to this heading">#</a></h3>
+<p>see also <a class="reference internal" href="../examples/cross_section.html#examples-cross-section"><span class="std std-ref">Build a cross-section</span></a></p>
+<ul class="simple">
+<li><p>consists of a number of <a class="reference internal" href="../api/m_n_kappa.Section.html#m_n_kappa.Section" title="m_n_kappa.Section"><code class="xref py py-class docutils literal notranslate"><span class="pre">Section</span></code></a></p></li>
+<li><p><a class="reference internal" href="../api/m_n_kappa.Crosssection.html#m_n_kappa.Crosssection" title="m_n_kappa.Crosssection"><code class="xref py py-class docutils literal notranslate"><span class="pre">Crosssection</span></code></a></p></li>
+</ul>
+</section>
+<section id="computation-of-a-moment-curvature-point">
+<h3>Computation of a Moment-Curvature-Point<a class="headerlink" href="#computation-of-a-moment-curvature-point" title="Permalink to this heading">#</a></h3>
+<p>Computing a single moment-curvature-point by applying a strain and a vertical position the strain is located.
+See also <a class="reference internal" href="../examples/moment_curvature.html#examples-moment-curvature"><span class="std std-ref">Moment-Curvature</span></a>.</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="../api/m_n_kappa.MKappaByStrainPosition.html#m_n_kappa.MKappaByStrainPosition" title="m_n_kappa.MKappaByStrainPosition"><code class="xref py py-class docutils literal notranslate"><span class="pre">MKappaByStrainPosition</span></code></a></p></li>
+</ul>
+</section>
+<section id="computing-a-moment-curvature-curve">
+<h3>Computing a Moment-Curvature-Curve<a class="headerlink" href="#computing-a-moment-curvature-curve" title="Permalink to this heading">#</a></h3>
+<p>Computing the moment-curvature-curve of a <a class="reference internal" href="../api/m_n_kappa.Crosssection.html#m_n_kappa.Crosssection" title="m_n_kappa.Crosssection"><code class="xref py py-class docutils literal notranslate"><span class="pre">Crosssection</span></code></a>.
+See also <a class="reference internal" href="../examples/moment_curvature_curve.html#examples-moment-curvature-curve"><span class="std std-ref">Moment-Curvature-Curve</span></a></p>
+<ul class="simple">
+<li><p><a class="reference internal" href="../api/m_n_kappa.MKappaCurve.html#m_n_kappa.MKappaCurve" title="m_n_kappa.MKappaCurve"><code class="xref py py-class docutils literal notranslate"><span class="pre">MKappaCurve</span></code></a></p></li>
+</ul>
+</section>
+<section id="computing-deformation-of-a-single-span-beam">
+<h3>Computing deformation of a single span beam<a class="headerlink" href="#computing-deformation-of-a-single-span-beam" title="Permalink to this heading">#</a></h3>
+<p>See also <a class="reference internal" href="../examples/deformation.html#examples-deformation"><span class="std std-ref">Deformation</span></a>.</p>
+<p><a class="reference internal" href="../api/m_n_kappa.Beam.html#m_n_kappa.Beam" title="m_n_kappa.Beam"><code class="xref py py-class docutils literal notranslate"><span class="pre">Beam</span></code></a> considers:</p>
+<ul class="simple">
+<li><p>number of elements the beam is split into</p></li>
+<li><p>the effective width for concrete slab distinguishing between bending and membran width</p></li>
+<li><p>two different loading scenarios:</p>
+<ul>
+<li><p>single span beam with single loads with <a class="reference internal" href="../api/m_n_kappa.SingleSpanSingleLoads.html#m_n_kappa.SingleSpanSingleLoads" title="m_n_kappa.SingleSpanSingleLoads"><code class="xref py py-class docutils literal notranslate"><span class="pre">SingleSpanSingleLoads</span></code></a> and
+<code class="xref py py-class docutils literal notranslate"><span class="pre">SingleLoads</span></code></p></li>
+<li><p>single span beam under uniform loading with <a class="reference internal" href="../api/m_n_kappa.SingleSpanUniformLoad.html#m_n_kappa.SingleSpanUniformLoad" title="m_n_kappa.SingleSpanUniformLoad"><code class="xref py py-class docutils literal notranslate"><span class="pre">SingleSpanUniformLoad</span></code></a></p></li>
+</ul>
+</li>
+</ul>
+<p>Computes:</p>
+<ul class="simple">
+<li><p>deformation at a given position along the beam under given load with
+<a class="reference internal" href="../api/m_n_kappa.Beam.html#m_n_kappa.Beam.deformation" title="m_n_kappa.Beam.deformation"><code class="xref py py-meth docutils literal notranslate"><span class="pre">deformation()</span></code></a></p></li>
+<li><p>deformation along the beam at given position with <a class="reference internal" href="../api/m_n_kappa.Beam.html#m_n_kappa.Beam.deformations" title="m_n_kappa.Beam.deformations"><code class="xref py py-meth docutils literal notranslate"><span class="pre">deformations()</span></code></a></p></li>
+<li><p>deformations at the position of maximum deformation with
+<a class="reference internal" href="../api/m_n_kappa.Beam.html#m_n_kappa.Beam.deformations_at_maximum_deformation_position" title="m_n_kappa.Beam.deformations_at_maximum_deformation_position"><code class="xref py py-meth docutils literal notranslate"><span class="pre">deformations_at_maximum_deformation_position()</span></code></a></p></li>
+<li><p>deformation over the length of a beam under given load with
+<a class="reference internal" href="../api/m_n_kappa.Beam.html#m_n_kappa.Beam.deformation_over_beam_length" title="m_n_kappa.Beam.deformation_over_beam_length"><code class="xref py py-meth docutils literal notranslate"><span class="pre">deformation_over_beam_length()</span></code></a></p></li>
+</ul>
+</section>
+<section id="documentation">
+<h3>Documentation<a class="headerlink" href="#documentation" title="Permalink to this heading">#</a></h3>
+<p>Comprehensive documentation  with following main sections:</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="../getting_started.html#getting-started"><span class="std std-ref">Getting Started</span></a></p></li>
+<li><p><a class="reference internal" href="../examples/index.html#examples"><span class="std std-ref">Examples</span></a></p></li>
+<li><p><a class="reference internal" href="../theory/index.html#theory"><span class="std std-ref">Theory guide</span></a></p></li>
+<li><p><a class="reference internal" href="../verification/index.html#verification"><span class="std std-ref">Verification</span></a></p></li>
+</ul>
+<p>Also documented are:</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="../api.html#api"><span class="std std-ref">API reference</span></a></p></li>
+<li><p><a class="reference internal" href="../api_developers.html#api-developers"><span class="std std-ref">API for developers</span></a></p></li>
+<li><p><a class="reference internal" href="../roadmap.html#roadmap"><span class="std std-ref">Roadmap and To Do’s</span></a>, <a class="reference internal" href="../contributing.html#contributing"><span class="std std-ref">Contributing</span></a>, <a class="reference internal" href="index.html#release"><span class="std std-ref">Release Notes</span></a></p></li>
+</ul>
+<span class="target" id="whatsnew010-bug-fixes"></span></section>
+</section>
+</section>
 
         </article>
       </div>
@@ -378,8 +495,42 @@
         
       </footer>
     </div>
-    <aside class="toc-drawer no-toc">
+    <aside class="toc-drawer">
       
+      
+      <div class="toc-sticky toc-scroll">
+        <div class="toc-title-container">
+          <span class="toc-title">
+            On this page
+          </span>
+        </div>
+        <div class="toc-tree-container">
+          <div class="toc-tree">
+            <ul>
+<li><a class="reference internal" href="#">What’s new in 0.1.0 (28th of January 2023)</a><ul>
+<li><a class="reference internal" href="#features">Features</a><ul>
+<li><a class="reference internal" href="#geometries">Geometries</a><ul>
+<li><a class="reference internal" href="#basic-geometries">Basic geometries</a></li>
+<li><a class="reference internal" href="#composed-geometries">Composed geometries</a></li>
+<li><a class="reference internal" href="#further-feature-related-to-geometries">Further feature related to geometries</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#materials">Materials</a></li>
+<li><a class="reference internal" href="#section">Section</a></li>
+<li><a class="reference internal" href="#cross-section">Cross-section</a></li>
+<li><a class="reference internal" href="#computation-of-a-moment-curvature-point">Computation of a Moment-Curvature-Point</a></li>
+<li><a class="reference internal" href="#computing-a-moment-curvature-curve">Computing a Moment-Curvature-Curve</a></li>
+<li><a class="reference internal" href="#computing-deformation-of-a-single-span-beam">Computing deformation of a single span beam</a></li>
+<li><a class="reference internal" href="#documentation">Documentation</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+          </div>
+        </div>
+      </div>
       
       
     </aside>
@@ -399,7 +550,5 @@
     <script src="https://cdn.jsdelivr.net/npm/vega-embed@6"></script>
     <script src="../_static/design-tabs.js"></script>
     <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
-    <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
-    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     </body>
 </html>

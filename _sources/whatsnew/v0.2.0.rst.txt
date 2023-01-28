@@ -1,0 +1,17 @@
+.. _whatsnew020:
+
+What's new in 0.2.0 (?? 2023)
+******************************************
+
+These are the changes in m_n_kappa 0.2.0.
+See :ref:`release` for a full changelog including other versions of pandas.
+
+.. _whatsnew020.features:
+
+Features
+========
+
+.. _whatsnew020.bug_fixes:
+
+Bug Fixes
+=========
