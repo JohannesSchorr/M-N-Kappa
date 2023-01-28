@@ -1,5 +1,9 @@
 # Configuration file for the Sphinx documentation builder.
-#
+
+from datetime import datetime
+import pathlib
+import sys
+
 # For the full list of built-in configuration values, see the documentation:
 # https://www.sphinx-doc.org/en/master/usage/configuration.html
 
@@ -15,8 +19,6 @@ release = '0.1.0'
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#general-configuration
 
 # --- Code execution during build --------------------------------------------
-import pathlib
-import sys
 sys.path.insert(0, pathlib.Path(__file__).parents[2].resolve().as_posix())
 extensions = []
 exclude_patterns = []
