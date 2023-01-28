@@ -389,6 +389,9 @@ Therefore, it consists of a set of basic geometry-instances (e.g. several <a cla
 <div class="highlight-python notranslate" id="m_kappa_UPE-rst-altair-source-5"><div class="highlight"><pre><span></span><span class="n">upe200_geometry</span><span class="o">.</span><span class="n">geometries</span>
 </pre></div>
 </div>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>    [Rectangle(top_edge=144.00, bottom_edge=220.00, width=5.20, left_edge=-100.00, right_edge=-94.80), Rectangle(top_edge=144.00, bottom_edge=153.00, width=189.60, left_edge=-94.80, right_edge=94.80), Rectangle(top_edge=144.00, bottom_edge=220.00, width=5.20, left_edge=94.80, right_edge=100.00)]
+</pre></div>
+</div>
 <p>The material of the UPE-profile is also created using <a class="reference internal" href="../api/m_n_kappa.Steel.html#m_n_kappa.Steel" title="m_n_kappa.Steel"><code class="xref py py-class docutils literal notranslate"><span class="pre">Steel</span></code></a> analogous to the creation of the
 material for the <a class="reference internal" href="#examples-m-kappa-upe-input-bottom-flange"><span class="std std-ref">Bottom-flange</span></a>:</p>
 <div class="highlight-python notranslate" id="m_kappa_UPE-rst-altair-source-6"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">m_n_kappa</span> <span class="kn">import</span> <span class="n">Steel</span>
@@ -546,7 +549,22 @@ Geometrical widths are in any case greater than the effective widths.</p>
 <span class="p">)</span><span class="o">.</span><span class="n">configure_legend</span><span class="p">(</span><span class="n">labelColor</span><span class="o">=</span><span class="s1">&#39;#979797&#39;</span><span class="p">,</span> <span class="n">titleColor</span><span class="o">=</span><span class="s1">&#39;#979797&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
-</section>
+
+<div id="m_kappa_UPE-rst-altair-plot-18">
+<script>
+  // embed when document is loaded, to ensure vega library is available
+  // this works on all modern browsers, except IE8 and older
+  document.addEventListener("DOMContentLoaded", function(event) {
+      var spec = {"usermeta": {"embedOptions": {"theme": "quartz"}}, "config": {"view": {"continuousWidth": 400, "continuousHeight": 300}, "legend": {"labelColor": "#979797", "titleColor": "#979797"}}, "data": {"name": "data-3f8e2b70e6f8fe6695ee1a42950e3904"}, "mark": "line", "background": "#00000000", "encoding": {"color": {"field": "width_type", "type": "nominal"}, "x": {"field": "positions", "title": "Position along the beam [mm]", "type": "quantitative"}, "y": {"field": "width", "title": "Width [mm]", "type": "quantitative"}}, "height": 100.0, "$schema": "https://vega.github.io/schema/vega-lite/v4.17.0.json", "datasets": {"data-3f8e2b70e6f8fe6695ee1a42950e3904": [{"positions": 0.0, "width_type": "bending", "width": 1364.7550704955406}, {"positions": 400.0, "width_type": "bending", "width": 1603.3118289535628}, {"positions": 800.0, "width_type": "bending", "width": 1726.2387498916173}, {"positions": 1200.0, "width_type": "bending", "width": 1750.0}, {"positions": 1375.0, "width_type": "bending", "width": 1750.0}, {"positions": 1600.0, "width_type": "bending", "width": 1750.0}, {"positions": 2000.0, "width_type": "bending", "width": 1750.0}, {"positions": 2400.0, "width_type": "bending", "width": 1750.0}, {"positions": 2625.0, "width_type": "bending", "width": 1750.0}, {"positions": 2800.0, "width_type": "bending", "width": 1750.0}, {"positions": 3200.0, "width_type": "bending", "width": 1726.2387498916173}, {"positions": 3600.0, "width_type": "bending", "width": 1603.3118289535628}, {"positions": 4000.0, "width_type": "bending", "width": 1364.7550704955406}, {"positions": 0.0, "width_type": "membran", "width": 473.6722951646188}, {"positions": 400.0, "width_type": "membran", "width": 614.2662479047763}, {"positions": 800.0, "width_type": "membran", "width": 718.0185346325712}, {"positions": 1200.0, "width_type": "membran", "width": 778.1131169881243}, {"positions": 1375.0, "width_type": "membran", "width": 797.484070277571}, {"positions": 1600.0, "width_type": "membran", "width": 810.6776466580703}, {"positions": 2000.0, "width_type": "membran", "width": 821.0711743728242}, {"positions": 2400.0, "width_type": "membran", "width": 810.6776466580703}, {"positions": 2625.0, "width_type": "membran", "width": 797.484070277571}, {"positions": 2800.0, "width_type": "membran", "width": 778.1131169881243}, {"positions": 3200.0, "width_type": "membran", "width": 718.0185346325712}, {"positions": 3600.0, "width_type": "membran", "width": 614.2662479047763}, {"positions": 4000.0, "width_type": "membran", "width": 473.6722951646188}]}};
+      var opt = {
+        "mode": "vega-lite",
+        "renderer": "canvas",
+        "actions": {"editor": true, "source": true, "export": true}
+      };
+      vegaEmbed('#m_kappa_UPE-rst-altair-plot-18', spec, opt).catch(console.err);
+  });
+</script>
+</div></section>
 </section>
 <section id="analysis">
 <span id="examples-m-kappa-upe-analysis"></span><h2>Analysis<a class="headerlink" href="#analysis" title="Permalink to this heading">#</a></h2>
@@ -583,7 +601,22 @@ Considering the effective width leads smaller maximum resistance as well as smal
 <span class="p">)</span><span class="o">.</span><span class="n">configure_legend</span><span class="p">(</span><span class="n">labelColor</span><span class="o">=</span><span class="s1">&#39;#979797&#39;</span><span class="p">,</span> <span class="n">titleColor</span><span class="o">=</span><span class="s1">&#39;#979797&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
-</section>
+
+<div id="m_kappa_UPE-rst-altair-plot-20">
+<script>
+  // embed when document is loaded, to ensure vega library is available
+  // this works on all modern browsers, except IE8 and older
+  document.addEventListener("DOMContentLoaded", function(event) {
+      var spec = {"usermeta": {"embedOptions": {"theme": "quartz"}}, "config": {"view": {"continuousWidth": 400, "continuousHeight": 300}, "legend": {"labelColor": "#979797", "titleColor": "#979797"}}, "data": {"name": "data-e4b2a99ced177492c4b5f81b31125cc2"}, "mark": "line", "background": "#00000000", "encoding": {"color": {"field": "Width type", "type": "nominal"}, "x": {"field": "deformation", "title": "Deformation [mm]", "type": "quantitative"}, "y": {"field": "loadings", "title": "Loading [kN]", "type": "quantitative"}}, "$schema": "https://vega.github.io/schema/vega-lite/v4.17.0.json", "datasets": {"data-e4b2a99ced177492c4b5f81b31125cc2": [{"deformation": 0.0, "loadings": 0.0, "Width type": "Geometrical width"}, {"deformation": 7.301805223034819, "loadings": 377.8074598695739, "Width type": "Geometrical width"}, {"deformation": 15.913352364349619, "loadings": 642.7396961474067, "Width type": "Geometrical width"}, {"deformation": 34.477839139499395, "loadings": 746.7103101049, "Width type": "Geometrical width"}, {"deformation": 50.40358517457709, "loadings": 779.2018422487237, "Width type": "Geometrical width"}, {"deformation": 80.37436415641795, "loadings": 809.6026024106999, "Width type": "Geometrical width"}, {"deformation": 0.0, "loadings": 0.0, "Width type": "Effective width"}, {"deformation": 2.122895440202198, "loadings": 78.87952901841474, "Width type": "Effective width"}, {"deformation": 4.8719207788478585, "loadings": 167.63231561279983, "Width type": "Effective width"}, {"deformation": 8.319421911397036, "loadings": 251.79735400829952, "Width type": "Effective width"}, {"deformation": 21.933931827001107, "loadings": 510.17635536514905, "Width type": "Effective width"}, {"deformation": 27.921675305882328, "loadings": 561.2073428619271, "Width type": "Effective width"}, {"deformation": 37.495722964168834, "loadings": 591.9877888323549, "Width type": "Effective width"}, {"deformation": 41.29389953513369, "loadings": 598.1069117768778, "Width type": "Effective width"}, {"deformation": 35.080572644411326, "loadings": 584.5195644938979, "Width type": "Effective width"}]}};
+      var opt = {
+        "mode": "vega-lite",
+        "renderer": "canvas",
+        "actions": {"editor": true, "source": true, "export": true}
+      };
+      vegaEmbed('#m_kappa_UPE-rst-altair-plot-20', spec, opt).catch(console.err);
+  });
+</script>
+</div></section>
 </section>
 </section>
 
