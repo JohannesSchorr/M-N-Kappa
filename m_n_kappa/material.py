@@ -1684,6 +1684,8 @@ class Reinforcement(Steel):
     .. versionadded: 0.1.0
     """
 
+    __slots__ = "_f_y", "_f_u", "_failure_strain", "_E_a", "_stress_strain"
+
     @logs_init
     def __init__(
         self,
