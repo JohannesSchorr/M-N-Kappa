@@ -553,6 +553,9 @@ class Rectangle(Geometry):
 
 
 class Circle(Geometry):
+
+    __slots__ = ("_diameter", "_centroid_y", "_centroid_z")
+
     @logs_init
     def __init__(self, diameter: float, centroid_y: float, centroid_z: float):
         """
@@ -752,6 +755,17 @@ class Trapezoid(Geometry):
     The trapezoid has vertical edges parallel to each other and
     two horizontal edges that are *not parallel* to each other.
     """
+
+    __slots__ = (
+        "_top_edge",
+        "_bottom_edge",
+        "_top_width",
+        "_top_left_edge",
+        "_top_right_edge",
+        "_bottom_width",
+        "_bottom_left_edge",
+        "_bottom_right_edge",
+    )
 
     @logs_init
     def __init__(
