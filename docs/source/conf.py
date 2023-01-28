@@ -120,3 +120,10 @@ html_title = f"<i>M</i>-<i>N</i>-<i>&#954</i>"
 html_css_files = [
     'css/custom.css',
 ]
+
+# https://stackoverflow.com/questions/34006784/how-do-i-access-a-variable-in-sphinx-conf-py-from-my-rst-file'
+# https://www.sphinx-doc.org/en/master/usage/configuration.html#confval-rst_epilog
+rst_epilog = f"""
+.. |Versioning| replace:: Latest version: {release} 
+.. |Documentation| replace::  Documentation build: {datetime.today().strftime('%d.%m.%Y')}
+"""
