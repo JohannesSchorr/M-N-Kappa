@@ -37,7 +37,8 @@ def compute_curvatures(
                     EdgeStrains(
                         bottom_edge_strain=strain_position,
                         top_edge_strain=position_strain,
-                    ))
+                    )
+                )
     return edge_strains
 
 
@@ -75,7 +76,7 @@ def remove_smaller_strains(strain: float, position_strains: list[StrainPosition]
     -------
     list[:py:class:`~m_n_kappa.general.StrainPosition`]
         strain-position values with strain smaller than ``strain``
-    """""
+    """ ""
     return list(filter(lambda x: strain < x.strain, position_strains))
 
 
@@ -126,7 +127,7 @@ class MaximumCurvature:
     maximum_negative_section_strains: list[StrainPosition]
 
     def __post_init__(self):
-        logger.info(f'Finished {self.__repr__()}')
+        logger.info(f"Finished {self.__repr__()}")
 
     @property
     def positive(self) -> list[StrainPosition]:
@@ -246,9 +247,13 @@ class MaximumCurvature:
         edge_strains = compute_curvatures(strain_position, position_strains)
         decisive_edge_strain = max(edge_strains, key=lambda x: x.curvature)
         if decisive_edge_strain.top_edge_strain == strain_position:
-            logger.info(f'Decisive strain-position values: {decisive_edge_strain.bottom_edge_strain}')
+            logger.info(
+                f"Decisive strain-position values: {decisive_edge_strain.bottom_edge_strain}"
+            )
         else:
-            logger.info(f'Decisive strain-position values: {decisive_edge_strain.top_edge_strain}')
+            logger.info(
+                f"Decisive strain-position values: {decisive_edge_strain.top_edge_strain}"
+            )
         return decisive_edge_strain.curvature
 
     def __compute_positive_curvatures(self, strain_position: StrainPosition) -> float:
@@ -275,9 +280,13 @@ class MaximumCurvature:
         edge_strains = compute_curvatures(strain_position, position_strains)
         decisive_edge_strain = min(edge_strains, key=lambda x: x.curvature)
         if decisive_edge_strain.top_edge_strain == strain_position:
-            logger.info(f'Decisive strain-position values: {decisive_edge_strain.bottom_edge_strain}')
+            logger.info(
+                f"Decisive strain-position values: {decisive_edge_strain.bottom_edge_strain}"
+            )
         else:
-            logger.info(f'Decisive strain-position values: {decisive_edge_strain.top_edge_strain}')
+            logger.info(
+                f"Decisive strain-position values: {decisive_edge_strain.top_edge_strain}"
+            )
         return decisive_edge_strain.curvature
 
 
@@ -302,9 +311,11 @@ class MinimumCurvature:
     curvature_is_positive: bool
 
     def __post_init__(self):
-        logger.info(f'Created {self.__repr__()}')
-        self._top_edge = min(self.all, key=lambda x: x.position).position   # top-edge
-        self._bottom_edge = max(self.all, key=lambda x: x.position).position  # bottom-edge
+        logger.info(f"Created {self.__repr__()}")
+        self._top_edge = min(self.all, key=lambda x: x.position).position  # top-edge
+        self._bottom_edge = max(
+            self.all, key=lambda x: x.position
+        ).position  # bottom-edge
 
     @property
     def positive(self) -> list[StrainPosition]:
@@ -343,26 +354,38 @@ class MinimumCurvature:
         -------
         float
         """
-        if max(self.negative, key=lambda x: x.strain).strain <= strain_position.strain <= min(self.positive, key=lambda x: x.strain).strain:
-            logger.debug(f'{strain_position} within minimal positive and negative strains')
+        if (
+            max(self.negative, key=lambda x: x.strain).strain
+            <= strain_position.strain
+            <= min(self.positive, key=lambda x: x.strain).strain
+        ):
+            logger.debug(
+                f"{strain_position} within minimal positive and negative strains"
+            )
             position_strains = self.__edge_positions(strain_position)
             edge_strains = compute_curvatures(strain_position, position_strains)
             decisive_edge_strain = min(edge_strains, key=lambda x: abs(x.curvature))
         else:
-            logger.debug(f'{strain_position} outside minimal positive and negative strains')
+            logger.debug(
+                f"{strain_position} outside minimal positive and negative strains"
+            )
             position_strains = self.__get_position_strains(strain_position)
             edge_strains = compute_curvatures(strain_position, position_strains)
             decisive_edge_strain = max(edge_strains, key=lambda x: abs(x.curvature))
         if decisive_edge_strain.top_edge_strain == strain_position:
             logger.info(
-                f'Decisive strain-position value for {strain_position=}: {decisive_edge_strain.bottom_edge_strain}')
+                f"Decisive strain-position value for {strain_position=}: {decisive_edge_strain.bottom_edge_strain}"
+            )
         else:
             logger.info(
-                f'Decisive strain-position value for {strain_position=}: {decisive_edge_strain.top_edge_strain}')
+                f"Decisive strain-position value for {strain_position=}: {decisive_edge_strain.top_edge_strain}"
+            )
         return decisive_edge_strain.curvature
 
     @logs_return
-    def __edge_positions(self, strain_position: StrainPosition, additional_strain: float = 0.0001) -> list[StrainPosition]:
+    def __edge_positions(
+        self, strain_position: StrainPosition, additional_strain: float = 0.0001
+    ) -> list[StrainPosition]:
         """
         Get edge-positions of the cross-section and apply strain :math:`\\pm` ``additional_strain``
 
@@ -378,15 +401,33 @@ class MinimumCurvature:
 
         if self.curvature_is_positive:
             strain_positions = [
-                StrainPosition(strain=strain_position.strain - additional_strain, position=self.top_edge, material="-"),
-                StrainPosition(strain=strain_position.strain + additional_strain, position=self.bottom_edge, material="-")
+                StrainPosition(
+                    strain=strain_position.strain - additional_strain,
+                    position=self.top_edge,
+                    material="-",
+                ),
+                StrainPosition(
+                    strain=strain_position.strain + additional_strain,
+                    position=self.bottom_edge,
+                    material="-",
+                ),
             ]
         else:
             strain_positions = [
-                StrainPosition(strain=strain_position.strain + additional_strain, position=self.top_edge, material="-"),
-                StrainPosition(strain=strain_position.strain - additional_strain, position=self.bottom_edge, material="-")
+                StrainPosition(
+                    strain=strain_position.strain + additional_strain,
+                    position=self.top_edge,
+                    material="-",
+                ),
+                StrainPosition(
+                    strain=strain_position.strain - additional_strain,
+                    position=self.bottom_edge,
+                    material="-",
+                ),
             ]
-        logger.info(f'Top-Edge: {strain_positions[0]}, Bottom-Edge: {strain_positions[1]}')
+        logger.info(
+            f"Top-Edge: {strain_positions[0]}, Bottom-Edge: {strain_positions[1]}"
+        )
         return strain_positions
 
     @logs_return
@@ -410,17 +451,27 @@ class MinimumCurvature:
         """
         if self.curvature_is_positive:
             if strain_position.strain > 0.0:
-                position_strains = self.__positive_curvature_positive_strain(strain_position)
+                position_strains = self.__positive_curvature_positive_strain(
+                    strain_position
+                )
             else:
-                position_strains = self.__positive_curvature_negative_strain(strain_position)
+                position_strains = self.__positive_curvature_negative_strain(
+                    strain_position
+                )
         else:
             if strain_position.strain > 0.0:
-                position_strains = self.__negative_curvature_positive_strain(strain_position)
+                position_strains = self.__negative_curvature_positive_strain(
+                    strain_position
+                )
             else:
-                position_strains = self.__negative_curvature_negative_strain(strain_position)
+                position_strains = self.__negative_curvature_negative_strain(
+                    strain_position
+                )
         return position_strains
 
-    def __positive_curvature_positive_strain(self, strain_position: StrainPosition) -> list[StrainPosition]:
+    def __positive_curvature_positive_strain(
+        self, strain_position: StrainPosition
+    ) -> list[StrainPosition]:
         """
         :py:class:`~m_n_kappa.StrainPosition` values that give with ``strain_position`` positive curvatures
 
@@ -448,7 +499,9 @@ class MinimumCurvature:
         )
         return position_strains
 
-    def __positive_curvature_negative_strain(self, strain_position: StrainPosition) -> list[StrainPosition]:
+    def __positive_curvature_negative_strain(
+        self, strain_position: StrainPosition
+    ) -> list[StrainPosition]:
         """
         :py:class:`~m_n_kappa.StrainPosition` values that give with ``strain_position`` positive curvatures
 
@@ -476,7 +529,9 @@ class MinimumCurvature:
         )
         return position_strains
 
-    def __negative_curvature_positive_strain(self, strain_position: StrainPosition) -> list[StrainPosition]:
+    def __negative_curvature_positive_strain(
+        self, strain_position: StrainPosition
+    ) -> list[StrainPosition]:
         """
         :py:class:`~m_n_kappa.StrainPosition` values that give with ``strain_position`` negative curvatures
 
@@ -504,7 +559,9 @@ class MinimumCurvature:
         )
         return position_strains
 
-    def __negative_curvature_negative_strain(self, strain_position: StrainPosition) -> list[StrainPosition]:
+    def __negative_curvature_negative_strain(
+        self, strain_position: StrainPosition
+    ) -> list[StrainPosition]:
         """
         :py:class:`~m_n_kappa.StrainPosition` values that give with ``strain_position`` negative curvatures
 

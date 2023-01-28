@@ -87,6 +87,7 @@ class ComposedGeometry:
     Crosssection(sections=sections)
 
     """
+
     def __init__(self):
         self._geometries = []
 
@@ -108,18 +109,18 @@ class ComposedGeometry:
                 Section(geometry=geometry, material=other)
                 for geometry in self.geometries
             ]
-            logger.info('Create Crosssection by adding Material')
+            logger.info("Create Crosssection by adding Material")
             return Crosssection(sections)
         elif isinstance(other, Geometry):
             new_geometry = ComposedGeometry()
             new_geometry._geometries = self.geometries
             new_geometry._geometries.append(other)
-            logger.info('Add Geometry-instance')
+            logger.info("Add Geometry-instance")
             return new_geometry
         elif isinstance(other, ComposedGeometry):
             new_geometry = ComposedGeometry()
             new_geometry._geometries = self.geometries + other.geometries
-            logger.info('Add other ComposedGeometry')
+            logger.info("Add other ComposedGeometry")
             return new_geometry
         else:
             raise TypeError(
@@ -156,15 +157,15 @@ class Geometry(ABC):
         if isinstance(other, Geometry):
             new_geometry = ComposedGeometry()
             new_geometry._geometries = [self, other]
-            logger.info('Build ComposedGeometry by adding Geometry-Instance')
+            logger.info("Build ComposedGeometry by adding Geometry-Instance")
             return new_geometry
         elif isinstance(other, ComposedGeometry):
             new_geometry = other
             new_geometry._geometries.append(self)
-            logger.info('Build ComposedGeometry by adding ComposedGeometry-Instance')
+            logger.info("Build ComposedGeometry by adding ComposedGeometry-Instance")
             return new_geometry
         elif isinstance(other, Material):
-            logger.info('Build section by adding material')
+            logger.info("Build section by adding material")
             return Section(geometry=self, material=other)
         else:
             raise TypeError(
@@ -352,14 +353,14 @@ class Rectangle(Geometry):
         """rearrange input-values to match the needed arrangement"""
         if self.bottom_edge < self.top_edge:
             self._top_edge, self._bottom_edge = self.bottom_edge, self.top_edge
-            logger.info(f'{self.__repr__()} switched values: top_edge and bottom_edge')
+            logger.info(f"{self.__repr__()} switched values: top_edge and bottom_edge")
         if (
             self.left_edge is not None
             and self.right_edge is not None
             and self.right_edge < self.left_edge
         ):
             self._left_edge, self._right_edge = self.right_edge, self.left_edge
-            logger.info(f'{self.__repr__()} switched values: left_edge and right_edge')
+            logger.info(f"{self.__repr__()} switched values: left_edge and right_edge")
 
     def __eq__(self, other):
         return (
@@ -477,7 +478,9 @@ class Rectangle(Geometry):
         """
         rectangles = []
         at_points.sort(key=lambda x: x.position)
-        top_edge = StrainPosition(at_points[0].strain, self.top_edge, at_points[0].material)
+        top_edge = StrainPosition(
+            at_points[0].strain, self.top_edge, at_points[0].material
+        )
         for bottom_edge in at_points:
             if self.top_edge < bottom_edge.position < self.bottom_edge:
                 if bottom_edge.strain == 0.0:
@@ -491,15 +494,25 @@ class Rectangle(Geometry):
                         bottom_edge.position,
                         left_edge=left_edge,
                         right_edge=right_edge,
-                    ))
+                    )
+                )
                 top_edge = bottom_edge
         if top_edge.strain == 0.0:
-            edge = StrainPosition(at_points[-1].strain, self.bottom_edge, at_points[-1].material)
+            edge = StrainPosition(
+                at_points[-1].strain, self.bottom_edge, at_points[-1].material
+            )
         else:
             edge = top_edge
         left_edge, right_edge = self.get_horizontal_edges(edge, max_widths)
-        rectangles.append(Rectangle(top_edge.position, self.bottom_edge, left_edge=left_edge, right_edge=right_edge))
-        logger.debug(f'Split {self.__repr__()} into following rectangles: {rectangles}')
+        rectangles.append(
+            Rectangle(
+                top_edge.position,
+                self.bottom_edge,
+                left_edge=left_edge,
+                right_edge=right_edge,
+            )
+        )
+        logger.debug(f"Split {self.__repr__()} into following rectangles: {rectangles}")
         return rectangles
 
     def get_horizontal_edges(
@@ -532,7 +545,6 @@ class Rectangle(Geometry):
 
 
 class Circle(Geometry):
-
     @logs_init
     def __init__(self, diameter: float, centroid_y: float, centroid_z: float):
         """
@@ -716,10 +728,10 @@ class Circle(Geometry):
                     points[0].material,
                     sum([points[point_index].strain, points[point_index + 1].strain]),
                 )
-                logger.info(f'{self.__repr__()} is within effective width')
+                logger.info(f"{self.__repr__()} is within effective width")
                 return -width <= self.centroid_z <= width
             else:
-                logger.info(f'{self.__repr__()} is NOT within effective width')
+                logger.info(f"{self.__repr__()} is NOT within effective width")
                 return False
 
 
@@ -823,7 +835,7 @@ class Trapezoid(Geometry):
         """check input-value to match the needed arrangement"""
         if self.bottom_edge < self.top_edge:
             self._top_edge, self._bottom_edge = self.bottom_edge, self.top_edge
-            logger.info(f'{self.__repr__()} switched: top-edge and bottom-edge')
+            logger.info(f"{self.__repr__()} switched: top-edge and bottom-edge")
         if (
             self.top_left_edge is not None
             and self.top_right_edge is not None
@@ -833,7 +845,7 @@ class Trapezoid(Geometry):
                 self.top_right_edge,
                 self.top_left_edge,
             )
-            logger.info(f'{self.__repr__()} switched: top-left-edge and top-right-edge')
+            logger.info(f"{self.__repr__()} switched: top-left-edge and top-right-edge")
         if (
             self.bottom_left_edge is not None
             and self.bottom_right_edge is not None
@@ -843,7 +855,9 @@ class Trapezoid(Geometry):
                 self.bottom_right_edge,
                 self.bottom_left_edge,
             )
-            logger.info(f'{self.__repr__()} switched: bottom-left-edge and bottom-right-edge')
+            logger.info(
+                f"{self.__repr__()} switched: bottom-left-edge and bottom-right-edge"
+            )
 
     @property
     def top_left_edge(self) -> float:
@@ -960,7 +974,7 @@ class Trapezoid(Geometry):
         )
 
     def width(self, vertical_position: float) -> float:
-        """ width of trapezoid at given vertical position
+        """width of trapezoid at given vertical position
 
         in case ``vertical_position`` is outside of the trapezoid zero is returned
 
@@ -986,7 +1000,7 @@ class Trapezoid(Geometry):
     def left_edge(self, vertical_position: float) -> float:
         """left edge at the given vertical position
 
-        in case ``vertical_position`` is outside of the trapezoid zero is returned
+        in case ``vertical_position`` is outside of the trapezoid, then zero is returned
 
         Parameters
         ----------
@@ -1031,6 +1045,7 @@ class Trapezoid(Geometry):
         else:
             return 0.0
 
+    @logs_return
     def split(
         self, at_points: list[StrainPosition], max_widths: EffectiveWidths = None
     ) -> list[Geometry]:
@@ -1048,11 +1063,11 @@ class Trapezoid(Geometry):
             trapezoid split at the material-points into sub-trapezoids
         """
         top_edge = self.top_edge
-        trapazoids = []
+        trapezoids = []
         at_points.sort(key=lambda x: x.position)
         for point in at_points:
             if self.top_edge < point.position < self.bottom_edge:
-                trapazoids.append(
+                trapezoids.append(
                     Trapezoid(
                         top_edge=top_edge,
                         bottom_edge=point.position,
@@ -1063,7 +1078,7 @@ class Trapezoid(Geometry):
                     )
                 )
                 top_edge = point.position
-        trapazoids.append(
+        trapezoids.append(
             Trapezoid(
                 top_edge=top_edge,
                 bottom_edge=self.bottom_edge,
@@ -1073,8 +1088,7 @@ class Trapezoid(Geometry):
                 bottom_left_edge=self.bottom_left_edge,
             )
         )
-        logger.debug(f'{self.__repr__()} split into following trapezoids: {trapazoids}')
-        return trapazoids
+        return trapezoids
 
     @property
     def width_slope(self) -> float:
@@ -1167,6 +1181,7 @@ Rectangle(top_edge=184.50, bottom_edge=200.00, width=200.00, left_edge=-100.00, 
     Crosssection(sections=sections)
 
     """
+
     top_edge: float
     t_w: float
     h_w: float
@@ -1188,7 +1203,7 @@ Rectangle(top_edge=184.50, bottom_edge=200.00, width=200.00, left_edge=-100.00, 
         self._add_top_flange()
         self._add_web()
         self._add_bottom_flange()
-        logger.info(f'Created {self.__repr__()}')
+        logger.info(f"Created {self.__repr__()}")
 
     def _add_top_flange(self):
         """add top-flange to geometry if wanted and geometric values are given"""
@@ -1310,7 +1325,9 @@ class RebarLayer(ComposedGeometry):
             self.width = float(self.rebar_number - 1) * self.rebar_horizontal_distance
         if self.rebar_horizontal_distance is None:
             self.rebar_horizontal_distance = float(self.width / self.rebar_number)
-        self.width, self.left_edge, self.right_edge = check_width(self.width, self.left_edge, self.right_edge)
+        self.width, self.left_edge, self.right_edge = check_width(
+            self.width, self.left_edge, self.right_edge
+        )
 
         self.geometries = []
         for index in range(self.rebar_number):
@@ -1320,8 +1337,9 @@ class RebarLayer(ComposedGeometry):
                     diameter=self.rebar_diameter,
                     centroid_y=centroid_y,
                     centroid_z=self.centroid_z,
-                ))
-        logger.info(f'Created {self.__repr__()}')
+                )
+            )
+        logger.info(f"Created {self.__repr__()}")
 
 
 @dataclass
@@ -1389,6 +1407,7 @@ Rectangle(top_edge=10.00, bottom_edge=86.00, width=5.20, left_edge=94.80, right_
     Crosssection(sections=sections)
 
     """
+
     top_edge: float
     t_f: float
     b_f: float
@@ -1411,7 +1430,7 @@ Rectangle(top_edge=10.00, bottom_edge=86.00, width=5.20, left_edge=94.80, right_
             self._right_flange(),
         ]
 
-        logger.info(f'Created {self.__repr__()}')
+        logger.info(f"Created {self.__repr__()}")
 
     def _left_flange(self) -> Rectangle:
         return Rectangle(

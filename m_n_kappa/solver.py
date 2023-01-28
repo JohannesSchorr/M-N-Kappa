@@ -52,14 +52,16 @@ class Solver:
             self._minimum_variable = self._compute_minimum_variable()
         self._sorted_data = self._sort_data()
         self._prepare()
-        logger.info(f'Created {self.__repr__()}')
+        logger.info(f"Created {self.__repr__()}")
 
     def __repr__(self) -> str:
-        return f"{self.__class__.__name__}(" \
-               f"data=data, " \
-               f"target={self.target}, " \
-               f"variable={self.variable}, " \
-               f"target_value={self.target_value})"
+        return (
+            f"{self.__class__.__name__}("
+            f"data=data, "
+            f"target={self.target}, "
+            f"variable={self.variable}, "
+            f"target_value={self.target_value})"
+        )
 
     @str_start_end
     def __str__(self) -> str:
@@ -86,24 +88,29 @@ class Solver:
         )
 
     def _print_result(self) -> str:
-        return print_sections([
-            "Result", "------", f"x_n+1 = {self.x_n_plus_1:.2f}",
-            f"min_under_zero: {self._min_under_zero_variable()} | min_over_zero: {self._min_over_zero_variable()}",
-        ])
+        return print_sections(
+            [
+                "Result",
+                "------",
+                f"x_n+1 = {self.x_n_plus_1:.2f}",
+                f"min_under_zero: {self._min_under_zero_variable()} | "
+                f"min_over_zero: {self._min_over_zero_variable()}",
+            ]
+        )
 
     def _print_data(self) -> str:
         """print the data that has been passed"""
-        line = (2*10+5)*'-'
+        line = (2 * 10 + 5) * "-"
         text = [
-            'Data', '----', '',
+            "Data",
+            "----",
+            "",
             line,
-            f'{self.variable} | {self.target}',
+            f"{self.variable} | {self.target}",
             line,
         ]
         for point in self.data:
-            text.append(
-                f'{point[self.variable]:10.2f} | {point[self.target]:10.2f}'
-            )
+            text.append(f"{point[self.variable]:10.2f} | {point[self.target]:10.2f}")
         text.append(line)
         return print_sections(text)
 
@@ -215,7 +222,7 @@ class Bisection(Solver):
         "_target_value",
         "_maximum_variable",
         "_minimum_variable",
-        "_x_n_plus_1"
+        "_x_n_plus_1",
     )
 
     def compute(self, use_fallback: bool = False) -> float:
@@ -233,8 +240,24 @@ class Bisection(Solver):
             new variable-value leading to a target-value nearer zero than the values in ``data``
         """
         variables = [data_point[self.variable] for data_point in self.data]
-        logger.debug(f'{variables=}')
-        factors = [0.5, 0.01, 0.99, 0.25, 0.75, 0.05, 0.1, 0.2, 0.3, 0.4, 0.6, 0.7, 0.8, 0.9, 0.95]
+        logger.debug(f"{variables=}")
+        factors = [
+            0.5,
+            0.01,
+            0.99,
+            0.25,
+            0.75,
+            0.05,
+            0.1,
+            0.2,
+            0.3,
+            0.4,
+            0.6,
+            0.7,
+            0.8,
+            0.9,
+            0.95,
+        ]
         for factor in factors:
             self._x_n_plus_1 = self._compute_with(factor)
             if self.x_n_plus_1 not in variables:
@@ -259,7 +282,9 @@ class Bisection(Solver):
         float
             computed bisection
         """
-        return factor * (self._min_under_zero_variable() + self._min_over_zero_variable())
+        return factor * (
+            self._min_under_zero_variable() + self._min_over_zero_variable()
+        )
 
     def print_values(self) -> str:
         return (
@@ -318,9 +343,11 @@ class Newton(Solver):
         if self._is_between_nearest_values():
             return self.x_n_plus_1
         else:
-            logger.info(f"Newton-algorithm gives {self.x_n_plus_1}. "
-                        f"Not between {self._min_under_zero_variable()} and "
-                        f"{self._min_over_zero_variable()}. Use fallback.")
+            logger.info(
+                f"Newton-algorithm gives {self.x_n_plus_1}. "
+                f"Not between {self._min_under_zero_variable()} and "
+                f"{self._min_over_zero_variable()}. Use fallback."
+            )
             return self._fallback()
 
     def _is_between_nearest_values(self) -> bool:
@@ -349,7 +376,7 @@ class Newton(Solver):
         return self.x_n - (self._solved_function() / self._solved_derivate())
 
     def _solved_function(self):
-        """function to find zero crossing computed using :math:`x_\\mathrm{n}` """
+        """function to find zero crossing computed using :math:`x_\\mathrm{n}`"""
         return self.function.function(variable_value=self.x_n)
 
     def _solved_derivate(self):

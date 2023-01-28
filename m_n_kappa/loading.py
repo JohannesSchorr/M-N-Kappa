@@ -29,7 +29,7 @@ Systems available
 
 class ABCSingleSpan(ABC):
     """
-    Meta class single span loading conditions shall be derived from
+    Metaclass single span loading conditions shall be derived from
 
     .. versionadded:: 0.1.0
     """
@@ -109,7 +109,9 @@ class ABCSingleSpan(ABC):
 
     def position_of_maximum_deformation(self) -> float:
         """positions-value of the maximum-deformation"""
-        return sum(self.positions_of_maximum_moment()) / len(self.positions_of_maximum_moment())
+        return sum(self.positions_of_maximum_moment()) / len(
+            self.positions_of_maximum_moment()
+        )
 
     @abstractmethod
     def load_by(self, moment: float, at_position: float):
@@ -147,7 +149,7 @@ class SingleLoad:
     value: float
 
     def __post_init__(self):
-        logger.info(f'Created {self.__repr__()}')
+        logger.info(f"Created {self.__repr__()}")
 
     def moment(self):
         """moment by the single load (load x position_in_beam)"""
@@ -353,6 +355,7 @@ class Moment:
     value : float
         value of the moment
     """
+
     position_in_beam: float
     value: float
 
@@ -597,14 +600,18 @@ class SingleSpanSingleLoads(ABCSingleSpan):
     def _maximum_moment(self) -> list[Moment]:
         moments = self._moments()
         moments.sort(key=lambda x: x.value, reverse=True)
-        maximum_moments = list(filter(lambda x: round(x.value, 5) == round(moments[0].value, 5), moments))
+        maximum_moments = list(
+            filter(lambda x: round(x.value, 5) == round(moments[0].value, 5), moments)
+        )
         return maximum_moments
 
     def _maximum_moment_value(self) -> float:
         return self._maximum_moment()[0].value
 
     def _maximum_moment_positions(self) -> list[float]:
-        maximum_moment_positions = [moment.position_in_beam for moment in self._maximum_moment()]
+        maximum_moment_positions = [
+            moment.position_in_beam for moment in self._maximum_moment()
+        ]
         maximum_moment_positions.sort()
         return maximum_moment_positions
 
@@ -622,10 +629,16 @@ class SingleSpanSingleLoads(ABCSingleSpan):
         """factor showing how the moment is distributed depending on the loads"""
         if len(self.loads) == 1 and self.loads[0].position_in_beam == 0.5 * self.length:
             return 0.5
-        elif len(self.loads) > 1 and self.length-self.loads[-1].position_in_beam == self.loads[0].position_in_beam:
-            load_distance = abs(self.loads[0].position_in_beam - self.loads[-1].position_in_beam)
-            a = - 0.5 * (load_distance - self.length)
-            return 1. - (a / self.length)
+        elif (
+            len(self.loads) > 1
+            and self.length - self.loads[-1].position_in_beam
+            == self.loads[0].position_in_beam
+        ):
+            load_distance = abs(
+                self.loads[0].position_in_beam - self.loads[-1].position_in_beam
+            )
+            a = -0.5 * (load_distance - self.length)
+            return 1.0 - (a / self.length)
 
 
 class SingleSpanUniformLoad(ABCSingleSpan):
@@ -787,7 +800,7 @@ class SingleSpanUniformLoad(ABCSingleSpan):
         float
             load leading to the given maximum moment
         """
-        return maximum_moment * 8.0 / (self.length ** 2.0)
+        return maximum_moment * 8.0 / (self.length**2.0)
 
     def load_by(self, moment: float, at_position: float) -> ABCSingleSpan:
         """
@@ -805,7 +818,7 @@ class SingleSpanUniformLoad(ABCSingleSpan):
         float
             load by the moment at the position
         """
-        load = moment / (0.5 * (self.length * at_position - at_position ** 2.0))
+        load = moment / (0.5 * (self.length * at_position - at_position**2.0))
         return SingleSpanUniformLoad(self.length, load)
 
     def positions_of_maximum_moment(self) -> list[float]:
@@ -821,15 +834,15 @@ class SingleSpanUniformLoad(ABCSingleSpan):
     def _moment(self, at_position: float):
         return (
             self._support_transversal_shear() * at_position
-            - 0.5 * self.load * at_position ** 2.0
+            - 0.5 * self.load * at_position**2.0
         )
 
     def _maximum_moment(self):
-        return self.load * self.length ** 2.0 / 8.0
+        return self.load * self.length**2.0 / 8.0
 
     def _transversal_shear(self, at_position):
         return self._support_transversal_shear() - self.load * at_position
 
     def load_distribution_factor(self) -> float:
         """factor showing how the moment is distributed"""
-        return 2. / 3.
+        return 2.0 / 3.0

@@ -136,7 +136,7 @@ material=Steel(f_y=355.0, f_u=None, failure_strain=None, E_a=210000.0))
 
     @property
     def geometry(self):
-        """:py:class:`~m_n_kappa.geometry.Geometry` of the section """
+        """:py:class:`~m_n_kappa.geometry.Geometry` of the section"""
         return self._geometry
 
     @property
@@ -213,6 +213,7 @@ class ComputationSection(Section):
     The computation of axial-force :math:`N_i`, lever-arm :math:`r_i` and moment :math:`M_i`
 
     """
+
     def __init_(self):
         self._section = None
         self._edges_strain = None
@@ -694,21 +695,13 @@ class ComputationSectionCurvature(ComputationSection):
         ]
         if len(self.geometry.edges) > 1:
             text += [
-                "top_edge: {:.1f} | bottom_edge: {:.1f}".format(
-                    self.geometry.edges[0], self.geometry.edges[1]
-                ),
-                "width-formula: {:.1f} * position_value + {:.1f}".format(
-                    self.geometry.width_slope, self.geometry.width_interception
-                ),
-                "top_strain: {:.5f} | bottom_strain: {:.5f}".format(
-                    self.edges_strain[0], self.edges_strain[1]
-                ),
+                f"top_edge: {self.geometry.edges[0]:.1f} | bottom_edge: {self.geometry.edges[1]:.1f}",
+                f"width-formula: {self.geometry.width_slope:.1f} * position_value + {self.geometry.width_interception:.1f}",
+                f"top_strain: {self.edges_strain[0]:.5f} | bottom_strain: {self.edges_strain[1]:.5f}",
             ]
         else:
             text += [
-                "area: {:.1f} | centroid: {:.1f}".format(
-                    self.geometry.area, self.geometry.centroid
-                )
+                f"area: {self.geometry.area:.1f} | centroid: {self.geometry.centroid:.1f}",
             ]
         return print_sections(text)
 
@@ -716,24 +709,26 @@ class ComputationSectionCurvature(ComputationSection):
         text = ["Material", "--------"]
         if len(self.geometry.edges) > 1:
             text += [
-                "top_stress {:.1f} N/mm^2 | bottom_stress {:.1f} N/mm^2".format(
-                    self.edges_stress[0], self.edges_stress[1]
-                ),
-                "stress-formula: {:.1f} * position_value + {:.1f}".format(
-                    self.stress_slope, self.stress_interception
-                ),
+                f"top_stress {self.edges_stress[0]:.1f} N/mm^2 | bottom_stress {self.edges_stress[1]:.1f} N/mm^2",
+                f"stress-formula: {self.stress_slope:.1f} * position_value + {self.stress_interception:.1f}",
             ]
         else:
-            text += ["stress {:.1f} N/mm^2".format(self.edges_stress[0])]
+            text += [f"stress {self.edges_stress[0]:.1f} N/mm^2"]
         return print_sections(text)
 
     def _print_result(self) -> str:
         if len(self.edges_strain) == 1:
-            edges_strain = [f'{self.edges_strain[0]:10.6f}', '-']
-            edges_stress = [f'{self.edges_stress[0]:10.6f}', '-']
+            edges_strain = [f"{self.edges_strain[0]:10.6f}", "-"]
+            edges_stress = [f"{self.edges_stress[0]:10.6f}", "-"]
         else:
-            edges_strain = [f'{self.edges_strain[0]:10.6f}', f'{self.edges_strain[1]:10.6f}']
-            edges_stress = [f'{self.edges_stress[0]:10.6f}', f'{self.edges_stress[1]:10.6f}']
+            edges_strain = [
+                f"{self.edges_strain[0]:10.6f}",
+                f"{self.edges_strain[1]:10.6f}",
+            ]
+            edges_stress = [
+                f"{self.edges_stress[0]:10.6f}",
+                f"{self.edges_stress[1]:10.6f}",
+            ]
         return (
             f"{self.geometry.top_edge:10.2f} | "
             f"{edges_strain[0]} | "
@@ -761,7 +756,9 @@ class ComputationSectionCurvature(ComputationSection):
         """difference of stresses between the given edges"""
         return self.edges_stress[1] - self.edges_stress[0]
 
-    def split_section(self, effective_widths: EffectiveWidths = None) -> list[ComputationSection]:
+    def split_section(
+        self, effective_widths: EffectiveWidths = None
+    ) -> list[ComputationSection]:
         """
         split sections considering the material points and the maximum effective widths
 
@@ -775,10 +772,15 @@ class ComputationSectionCurvature(ComputationSection):
         list[:py:class:`~m_n_kappa.section.ComputationSection`]
             the split sections
         """
-        if effective_widths is not None and effective_widths.for_section_type != self.section_type:
+        if (
+            effective_widths is not None
+            and effective_widths.for_section_type != self.section_type
+        ):
             effective_widths = None
         sub_geometries = self.__get_sub_geometries(effective_widths)
-        split_sections = [self.__computation_section(sub_geometry) for sub_geometry in sub_geometries]
+        split_sections = [
+            self.__computation_section(sub_geometry) for sub_geometry in sub_geometries
+        ]
         return split_sections
 
     def material_points_inside_curvature(self) -> list[StrainPosition]:
@@ -851,7 +853,9 @@ class ComputationSectionCurvature(ComputationSection):
         under given curvature and neutral-axis
         """
         material_points = self.__material_points_position()
-        return self.geometry.split(at_points=material_points, max_widths=effective_widths)
+        return self.geometry.split(
+            at_points=material_points, max_widths=effective_widths
+        )
 
     def __sort_material_strains_by_curvature(self) -> None:
         if self.curvature > 0:

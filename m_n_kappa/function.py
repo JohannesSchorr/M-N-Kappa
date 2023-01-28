@@ -39,9 +39,11 @@ class General(Function):
         self._set_constants()
 
     def __repr__(self) -> str:
-        return f"{self.__class__.__name__}(" \
-               f"data=data[[variable, target]], " \
-               f"variable={self.variable}, target={self.target})"
+        return (
+            f"{self.__class__.__name__}("
+            f"data=data[[variable, target]], "
+            f"variable={self.variable}, target={self.target})"
+        )
 
     @str_start_end
     def __str__(self) -> str:
@@ -157,7 +159,7 @@ class Linear(General):
 
     def integration(self, variable_value: float, constant: float = 0.0) -> float:
         return (
-            (1.0 / 2.0) * self.slope * variable_value ** 2.0
+            (1.0 / 2.0) * self.slope * variable_value**2.0
             + self.intersection * variable_value
             + constant
         )
@@ -209,12 +211,12 @@ class Polynominal(General):
         return 2.0 * self.a * variable_value + self.b
 
     def function(self, variable_value: float) -> float:
-        return self.a * variable_value ** 2.0 + self.b * variable_value + self.c
+        return self.a * variable_value**2.0 + self.b * variable_value + self.c
 
     def integration(self, variable_value: float, constant: float = 0.0) -> float:
         return (
-            (1.0 / 3.0) * self.a * variable_value ** 3.0
-            + (1.0 / 2.0) * self.b * variable_value ** 2.0
+            (1.0 / 3.0) * self.a * variable_value**3.0
+            + (1.0 / 2.0) * self.b * variable_value**2.0
             + self.c * variable_value
             + constant
         )

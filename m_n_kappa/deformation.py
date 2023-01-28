@@ -34,7 +34,12 @@ class Node:
     node_number: int = 0
 
     @logs_init
-    def __init__(self, cross_section: Crosssection, position: float, m_kappa_curve : MKappaCurvePoints = None):
+    def __init__(
+        self,
+        cross_section: Crosssection,
+        position: float,
+        m_kappa_curve: MKappaCurvePoints = None,
+    ):
         """
         Parameters
         ----------
@@ -44,11 +49,11 @@ class Node:
             position of the node along the beam
         m_kappa_curve : MKappaCurvePoints
             if moment-curvature-curve has already been computed then this may be passed here
-            
+
         Examples
         --------
-        For computation of a Node, first a :py:class.`~m_n_kappa.Crosssection` is needed. 
-        
+        For computation of a Node, first a :py:class.`~m_n_kappa.Crosssection` is needed.
+
         >>> from m_n_kappa import Concrete, Steel, Rectangle
         >>> concrete = Concrete(f_cm=35.0)
         >>> concrete_geometry_1 = Rectangle(
@@ -61,9 +66,9 @@ class Node:
         >>> cross_section = concrete_section_1 + steel_section
         >>> cross_section
         Crosssection(sections=sections)
-        
-        The node is initialized by: 
-        
+
+        The node is initialized by:
+
         >>> from m_n_kappa import Node
         >>> node = Node(cross_section=cross_section, position=0.0)
 
@@ -89,7 +94,7 @@ class Node:
         self._number = Node.node_number
 
     def __repr__(self):
-        return f'Node(cross_section, position={self.position}'
+        return f"Node(cross_section, position={self.position}"
 
     @property
     def cross_section(self) -> Crosssection:
@@ -156,6 +161,7 @@ class LoadStep:
     point : :py:class:`~m_n_kappa.curves_m_kappa.MKappaCurvePoint`
         Moment-curvature-point the load-step is derived from
     """
+
     load: ABCSingleSpan
     point: MKappaCurvePoint
 
@@ -187,17 +193,21 @@ class Loading:
     def __post_init__(self):
         if self.load is None:
             self.load = SingleSpanUniformLoad(self.beam_length, 1.0)
-        logger.info(f'Created {self.__repr__()}')
+        logger.info(f"Created {self.__repr__()}")
 
     def maximum_resistance_moments(self) -> list[float]:
         return [node.m_kappa_curve.maximum_moment() for node in self.nodes]
 
     def decisive_position(self):
-        decisive_loading = self.load.load_by(self.nodes[1].m_kappa_curve.maximum_moment(), self.nodes[1].position).loading
+        decisive_loading = self.load.load_by(
+            self.nodes[1].m_kappa_curve.maximum_moment(), self.nodes[1].position
+        ).loading
         decisive_node = None
         for node in self.nodes:
             if 0.0 < node.position < self.beam_length:
-                load = self.load.load_by(node.m_kappa_curve.maximum_moment(), node.position)
+                load = self.load.load_by(
+                    node.m_kappa_curve.maximum_moment(), node.position
+                )
                 if decisive_loading > load.loading:
                     decisive_loading = load.loading
                     decisive_node = node
@@ -216,7 +226,8 @@ class Loading:
     def load_steps(self) -> list[LoadStep]:
         return [
             LoadStep(
-                self.load.load_by(point.moment, self._position_maximum_deformation()), point
+                self.load.load_by(point.moment, self._position_maximum_deformation()),
+                point,
             )
             for point in self.decisive_m_kappa_curve().points
         ]
@@ -252,7 +263,7 @@ class Deformation:
     m_kappa_point: MKappaCurvePoint = None
 
     def __post_init__(self):
-        logger.info(f'Created {self.__repr__()}')
+        logger.info(f"Created {self.__repr__()}")
 
 
 @dataclass
@@ -268,10 +279,11 @@ class Deformations:
     deformations : list[:py:class:`~m_n_kappa.deformation.Deformation`]
         list of deformations
     """
+
     deformations: list[Deformation]
 
     def __post_init__(self):
-        logger.info(f'Created {self.__repr__()}')
+        logger.info(f"Created {self.__repr__()}")
 
     def __iter__(self):
         self._deformation_iterator = iter(self.deformations)
@@ -388,9 +400,13 @@ class Beam:
     def bending_widths(self) -> list[float]:
         """computed effective bending widths of the concrete slab over the length of beam"""
         if self.consider_widths:
-            return [min(node.cross_section.slab_effective_width.bending,
-                        0.5 * node.cross_section.concrete_slab_width(),
-                        ) for node in self.nodes]
+            return [
+                min(
+                    node.cross_section.slab_effective_width.bending,
+                    0.5 * node.cross_section.concrete_slab_width(),
+                )
+                for node in self.nodes
+            ]
         else:
             return [node.cross_section.concrete_slab_width() for node in self.nodes]
 
@@ -398,9 +414,12 @@ class Beam:
         """computed effective membran widths of the concrete slab over the length of beam"""
         if self.consider_widths:
             return [
-                min(node.cross_section.slab_effective_width.membran,
-                    0.5 * node.cross_section.concrete_slab_width()
-                    ) for node in self.nodes]
+                min(
+                    node.cross_section.slab_effective_width.membran,
+                    0.5 * node.cross_section.concrete_slab_width(),
+                )
+                for node in self.nodes
+            ]
         else:
             return [node.cross_section.concrete_slab_width() for node in self.nodes]
 
@@ -511,12 +530,14 @@ class Beam:
         :py:class:`~m_n_kappa.beam.Deformations`
             deformations over the length of the beam at the given load-step
         """
-        deformations = [Deformation(
-            position=position,
-            deformation=self.deformation(at_position=position, load=load_step),
-            load=load_step.loading,
-        )
-                for position in self.positions]
+        deformations = [
+            Deformation(
+                position=position,
+                deformation=self.deformation(at_position=position, load=load_step),
+                load=load_step.loading,
+            )
+            for position in self.positions
+        ]
         return Deformations(deformations)
 
     def _deformation_at_node(self, at_position: float, load: ABCSingleSpan) -> float:
@@ -558,7 +579,10 @@ class Beam:
         ]
 
     def _incremental_deformation(
-        self, element_index: int, load: ABCSingleSpan, single_load: SingleSpanSingleLoads
+        self,
+        element_index: int,
+        load: ABCSingleSpan,
+        single_load: SingleSpanSingleLoads,
     ) -> float:
         """
         compute the incremental deformation of
@@ -588,7 +612,9 @@ class Beam:
         node_2_result = self.nodes[element_index + 1].incremental_deformation(
             load, single_load
         )
-        return 0.5 * (node_1_result + node_2_result) * self._element_length(element_index)
+        return (
+            0.5 * (node_1_result + node_2_result) * self._element_length(element_index)
+        )
 
     def _create_positions(self) -> list[float]:
         positions = [
@@ -624,15 +650,21 @@ class Beam:
             if self._is_cross_section_in_nodes(cross_section, nodes):
                 for node in nodes:
                     if cross_section == node.cross_section:
-                        logger.info(f'M-Kappa-Curve of Node {node.number} will be copied.')
-                        computed_node = Node(cross_section, position, m_kappa_curve=node.m_kappa_curve)
+                        logger.info(
+                            f"M-Kappa-Curve of Node {node.number} will be copied."
+                        )
+                        computed_node = Node(
+                            cross_section, position, m_kappa_curve=node.m_kappa_curve
+                        )
                         break
             else:
                 computed_node = Node(cross_section, position)
             nodes.append(computed_node)
         return nodes
 
-    def _is_cross_section_in_nodes(self, cross_section: Crosssection, nodes: list[Node]) -> bool:
+    def _is_cross_section_in_nodes(
+        self, cross_section: Crosssection, nodes: list[Node]
+    ) -> bool:
         """check if a node is given in ``nodes`` that has the same ``cross_section``"""
         for node in nodes:
             if cross_section == node.cross_section:
@@ -658,7 +690,9 @@ class Beam:
             Cross-section with :py:class:`~m_n_kappa.EffectiveWidths` added.
         """
         if len(self.cross_section.slab_sections) == 0:
-            logger.info('No concrete-slab available, therefore effective widths do not apply')
+            logger.info(
+                "No concrete-slab available, therefore effective widths do not apply"
+            )
             return self.cross_section
         slab_width = 0.5 * self.cross_section.concrete_slab_width()
         width_position = abs(0.5 * self.length - position)
@@ -669,12 +703,14 @@ class Beam:
             width_load = widths.line
         membran = width_load.membran.ratio_beff_to_b(width_position) * slab_width
         bending = width_load.bending.ratio_beff_to_b(width_position) * slab_width
-        logger.info(f"load-distribution-factor={self.load.load_distribution_factor():.2f}, "
-              f"{position=:5.1f}, {width_position=:5.1f}, "
-              f"{membran=:.1f} ({membran / slab_width:.2f}), "
-              f"{bending=:.1f} ({bending / slab_width:.2f})")
+        logger.info(
+            f"load-distribution-factor={self.load.load_distribution_factor():.2f}, "
+            f"{position=:5.1f}, {width_position=:5.1f}, "
+            f"{membran=:.1f} ({membran / slab_width:.2f}), "
+            f"{bending=:.1f} ({bending / slab_width:.2f})"
+        )
         effective_widths = EffectiveWidths(bending=bending, membran=membran)
-        logger.debug('added effective width to cross-section')
+        logger.debug("added effective width to cross-section")
         return Crosssection(
             sections=self.cross_section.sections, slab_effective_widths=effective_widths
         )

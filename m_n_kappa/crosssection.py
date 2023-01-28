@@ -23,7 +23,7 @@ from .curvature_boundaries import (
 )
 
 from .log import log_init, logging, log_return
-from functools import partial 
+from functools import partial
 
 logger = logging.getLogger(__name__)
 logs_init = partial(log_init, logger=logger)
@@ -218,11 +218,11 @@ class Crosssection:
     def _build_cross_section(self, other):
         if isinstance(other, Crosssection):
             sections = self.sections + other.sections
-            logger.info('Merged two Crosssection')
+            logger.info("Merged two Crosssection")
             return Crosssection(sections)
         elif isinstance(other, Section):
             self.add_section(other)
-            logger.info(f'Add {other.__repr__()} to Crosssection')
+            logger.info(f"Add {other.__repr__()} to Crosssection")
             return self
         else:
             raise TypeError(
@@ -333,8 +333,9 @@ class Crosssection:
             if ``section`` is not of type :py:class:`~m_n_kappa.Section`
         """
         if not isinstance(section, Section):
-            raise ValueError(f"section is type '{type(Section)}', "
-                             f"must be of type 'Section'")
+            raise ValueError(
+                f"section is type '{type(Section)}', " f"must be of type 'Section'"
+            )
         if self.sections is None:
             self._sections = [section]
         else:
@@ -448,7 +449,9 @@ class Crosssection:
             will fail in case concrete is a trapezoid or a circle
         """
         concrete_sections = self._concrete_sections()
-        return min(concrete_sections, key=lambda x: x.geometry.left_edge).geometry.left_edge
+        return min(
+            concrete_sections, key=lambda x: x.geometry.left_edge
+        ).geometry.left_edge
 
     def right_edge(self) -> float:
         """
@@ -459,7 +462,9 @@ class Crosssection:
             will fail in case concrete is a trapezoid or a circle
         """
         concrete_sections = self._concrete_sections()
-        return max(concrete_sections, key=lambda x: x.geometry.right_edge).geometry.right_edge
+        return max(
+            concrete_sections, key=lambda x: x.geometry.right_edge
+        ).geometry.right_edge
 
     def concrete_slab_width(self) -> float:
         """full width of the concrete slab"""
@@ -473,10 +478,12 @@ class ComputationCrosssection(Crosssection):
 
     .. versionadded: 0.1.0
     """
+
     @logs_init
     def __init__(
-            self, sections: list[Section] | Crosssection = None,
-            slab_effective_width: EffectiveWidths = None
+        self,
+        sections: list[Section] | Crosssection = None,
+        slab_effective_width: EffectiveWidths = None,
     ):
         """
         This class is initialized by the classes that inherit from it.
@@ -618,13 +625,20 @@ class ComputationCrosssectionStrain(ComputationCrosssection):
     .. versionadded:: 0.1.0
     """
 
-    __slots__ = "_strain", "_compute_sections", "_bottom_edge", "_top_edge", "_slab_effective_widths"
+    __slots__ = (
+        "_strain",
+        "_compute_sections",
+        "_bottom_edge",
+        "_top_edge",
+        "_slab_effective_widths",
+    )
 
     @logs_init
     def __init__(
-            self, sections: list | Crosssection,
-            strain: float,
-            slab_effective_widths: EffectiveWidths = None
+        self,
+        sections: list | Crosssection,
+        strain: float,
+        slab_effective_widths: EffectiveWidths = None,
     ):
         """
         Parameters
@@ -729,10 +743,11 @@ class ComputationCrosssectionStrainAdd(ComputationCrosssectionStrain):
     to be looked at independent of each other.
     This class provides the functionality to compute this relative displacement.
     """
+
     def __init__(
         self,
         computed_cross_section_1: ComputationCrosssectionStrain,
-        computed_cross_section_2: ComputationCrosssectionStrain
+        computed_cross_section_2: ComputationCrosssectionStrain,
     ):
         """
         Parameters
@@ -969,13 +984,11 @@ class ComputationCrosssectionCurvature(ComputationCrosssection):
             "--------------------------",
             "",
             "  top edge | top strain | top stress | bot edge | bot strain | bot stress | axi. force | section | material ",
-            "------------------------------------------------------------------------------------------------------------",
+            "-" * 108,
         ]
         for section in self.compute_split_sections:
             text.append(section._print_result())
-        text.append(
-            "------------------------------------------------------------------------------------------------------------"
-        )
+        text.append("-" * 108)
         return print_sections(text)
 
 
@@ -1055,8 +1068,8 @@ class CrossSectionBoundaries(Crosssection):
 
     .. versionadded:: 0.1.0
 
-    :py:meth:`~m_n_kappa.crosssection.CrossSectionBoundaries.get_boundaries` gives the curvature boundary values
-    under positive and negative curvature
+    :py:meth:`~m_n_kappa.crosssection.CrossSectionBoundaries.get_boundaries`
+    gives the curvature boundary values under positive and negative curvature
     """
 
     __slots__ = (
@@ -1133,11 +1146,11 @@ class CrossSectionBoundaries(Crosssection):
         self._sections_minimum_strains = self._get_sections_minimum_strain()
         self._maximum_positive_curvature = self._get_maximum_positive_curvature()
         self._maximum_negative_curvature = self._get_maximum_negative_curvature()
-        logger.info('-------\nPositive_start_bound')
+        logger.info("-------\nPositive_start_bound")
         self._positive_start_bound = self.__get_curvature_start_values(
             self._maximum_positive_curvature
         )
-        logger.info('-------\nNegative_start_bound')
+        logger.info("-------\nNegative_start_bound")
         self._negative_start_bound = self.__get_curvature_start_values(
             self._maximum_negative_curvature
         )
@@ -1315,12 +1328,14 @@ class CrossSectionBoundaries(Crosssection):
             strain_at_position=position_strain.strain,
             position_value=position_strain.position,
         )
-        logger.debug(f'{maximum_curvature},\n\t'
-                     f'Use strain on top: {compute_with_strain_at_top},\n\t'
-                     f'{position_strain},\n\t'
-                     f'curvature: {maximum_curvature.curvature}, with factor {factor_curvature}: '
-                     f'{maximum_curvature.curvature * factor_curvature}\n\t'
-                     f'Neutral axis: {neutral_axis_value:.1f}')
+        logger.debug(
+            f"{maximum_curvature},\n\t"
+            f"Use strain on top: {compute_with_strain_at_top},\n\t"
+            f"{position_strain},\n\t"
+            f"curvature: {maximum_curvature.curvature}, with factor {factor_curvature}: "
+            f"{maximum_curvature.curvature * factor_curvature}\n\t"
+            f"Neutral axis: {neutral_axis_value:.1f}"
+        )
         return ComputationCrosssectionCurvature(
             cross_section=Crosssection(self.sections, self.slab_effective_width),
             curvature=factor_curvature * maximum_curvature.curvature,

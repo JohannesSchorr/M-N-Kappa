@@ -39,6 +39,7 @@ class Computation:
     axial_force: float
         computed axial-force
     """
+
     iteration: int
     computed_cross_section: Crosssection
     curvature: float
@@ -159,7 +160,7 @@ class MKappa:
             ]
             return print_sections(text)
         else:
-            return ''
+            return ""
 
     @property
     def applied_axial_force(self):
@@ -254,10 +255,14 @@ class MKappa:
         elif self._initial_axial_forces_have_different_sign():
             self.iterate()
         else:
-            self._not_successful_reason = 'same sign of axial forces at minimum and maximum curvature'
-            logger.info('Axial-forces of minimum and maximum curvature have same sign. '
-                        'No equilibrium of axial-forces possible. '
-                        'Computation will be skipped')
+            self._not_successful_reason = (
+                "same sign of axial forces at minimum and maximum curvature"
+            )
+            logger.info(
+                "Axial-forces of minimum and maximum curvature have same sign. "
+                "No equilibrium of axial-forces possible. "
+                "Computation will be skipped"
+            )
             self.__set_values_none()
 
     def _initial_axial_forces_have_different_sign(self):
@@ -275,11 +280,11 @@ class MKappa:
         - number of maximum iterations
         - absolute axial force smaller than desired one
         """
-        for iter_index in range(self.iteration + 1, self.maximum_iterations+1, 1):
+        for iter_index in range(self.iteration + 1, self.maximum_iterations + 1, 1):
             self._iteration = iter_index
             self._neutral_axis = self._guess_neutral_axis()
             if self.neutral_axis is None:
-                self._not_successful_reason = 'Iteration not converging'
+                self._not_successful_reason = "Iteration not converging"
                 logger.info(self.not_successful_reason)
                 return
             self._curvature = self._compute_new_curvature()
@@ -287,9 +292,11 @@ class MKappa:
             if self.__is_axial_force_within_tolerance():
                 self._successful = True
                 break
-        self._not_successful_reason = 'maximum iterations reached'  # maybe using enum?
-        logger.info(f"Maximum number of iterations ({self.maximum_iterations}) reached, "
-                    f"without finding equilibrium of axial forces")
+        self._not_successful_reason = "maximum iterations reached"  # maybe using enum?
+        logger.info(
+            f"Maximum number of iterations ({self.maximum_iterations}) reached, "
+            f"without finding equilibrium of axial forces"
+        )
 
     def _axial_force_equilibrium(self):
         return self.axial_force - self.applied_axial_force
@@ -331,7 +338,7 @@ class MKappa:
             use_fallback = False
         else:
             use_fallback = True
-            logger.info('Axial force not improved: use fallback')
+            logger.info("Axial force not improved: use fallback")
         return solver.compute(use_fallback)
 
     def __is_axial_force_within_tolerance(self):
@@ -354,7 +361,13 @@ class MKappa:
     def _target_value_is_improved(self) -> bool:
         self.__sort_computations_by_iteration()
         if len(self._computations) > 1:
-            if abs(self._computations[-1].axial_force - self._computations[-2].axial_force) < 1.0:
+            if (
+                abs(
+                    self._computations[-1].axial_force
+                    - self._computations[-2].axial_force
+                )
+                < 1.0
+            ):
                 return False
         return True
 
@@ -442,8 +455,10 @@ class MKappaByStrainPosition(MKappa):
         solver : :py:class:`~m_n_kappa.solver.Solver`
             used solver (Default: solver.Newton)
         """
-        logger.info(f'----\nInitialize {self.__class__.__name__}('
-                    f'{strain_position=}, {maximum_curvature=}, {minimum_curvature=})')
+        logger.info(
+            f"----\nInitialize {self.__class__.__name__}("
+            f"{strain_position=}, {maximum_curvature=}, {minimum_curvature=})"
+        )
         super().__init__(
             cross_section,
             applied_axial_force,
@@ -454,12 +469,17 @@ class MKappaByStrainPosition(MKappa):
         self._strain_position = strain_position
         if maximum_curvature is None and minimum_curvature is None:
             if isinstance(positive_curvature, bool):
-                maximum_curvature = self._determine_maximum_curvature(positive_curvature)
-                minimum_curvature = self._determine_minimum_curvature(positive_curvature)
+                maximum_curvature = self._determine_maximum_curvature(
+                    positive_curvature
+                )
+                minimum_curvature = self._determine_minimum_curvature(
+                    positive_curvature
+                )
             else:
                 raise ValueError(
                     f"If 'maximum_curvature=None' and 'minimum_curvature=None', "
-                    f"then 'positive_curvature' must be set to 'True' or 'False'")
+                    f"then 'positive_curvature' must be set to 'True' or 'False'"
+                )
         self._maximum_curvature = maximum_curvature
         self._minimum_curvature = minimum_curvature
         self.initialize()
@@ -491,7 +511,7 @@ class MKappaByStrainPosition(MKappa):
         return self._strain_position
 
     def initialize_boundary_curvatures(self):
-        logger.debug('Start computing boundary values')
+        logger.debug("Start computing boundary values")
         for index, curvature_value in enumerate(
             [self.minimum_curvature, self.maximum_curvature]
         ):
@@ -499,18 +519,22 @@ class MKappaByStrainPosition(MKappa):
             self._curvature = curvature_value
             self._neutral_axis = self._compute_neutral_axis()
             logger.debug(
-                f'Compute {curvature_value=}, '
-                f'neutral-axis: {self._neutral_axis},\n'
-                f'\t{self.strain_position}')
+                f"Compute {curvature_value=}, "
+                f"neutral-axis: {self._neutral_axis},\n"
+                f"\t{self.strain_position}"
+            )
             self.compute()
-        logger.debug('Finished computing boundary values')
+        logger.debug("Finished computing boundary values")
 
     def _compute_new_curvature(self):
         if self.neutral_axis is None:
-            logger.warning(f'neutral-axis: {self.neutral_axis}\n'
-                           f'position: {self.strain_position.position}, curvature: {self.curvature}, '
-                           f'strain: {self.strain_position.strain}'
-                           f'{self._print_iterations()}')
+            logger.warning(
+                f"neutral-axis: {self.neutral_axis}\n"
+                f"position: {self.strain_position.position}, "
+                f"curvature: {self.curvature}, "
+                f"strain: {self.strain_position.strain}"
+                f"{self._print_iterations()}"
+            )
         return curvature(
             neutral_axis_value=self.neutral_axis,
             position_value=self.strain_position.position,

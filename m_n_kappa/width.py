@@ -4,7 +4,8 @@ from decimal import Decimal
 """
 References
 ----------
-Kuhlmann, U.; Rieg, A. Mittragende Betongurtbreite niedriger Verbundträger, AiF-Forschungsvorhaben-Nr. 13460 N, 2004
+Kuhlmann, U.; Rieg, A. Mittragende Betongurtbreite niedriger Verbundträger, 
+AiF-Forschungsvorhaben-Nr. 13460 N, 2004
 
 """
 
@@ -382,7 +383,7 @@ class MembranStateLineLoadingOneWeb(StateMetaDecimal):
         """see Eq. 5-59 in Kuhlmann, Rieg (2004)"""
         alpha_k = self._alpha_k(sequence) * self.slab_width
         return (
-            (1 - self.mu) * self.sinh(alpha_k) ** (2) + (1 + self.mu) * alpha_k ** 2
+            (1 - self.mu) * self.sinh(alpha_k) ** (2) + (1 + self.mu) * alpha_k**2
         ) / (alpha_k + self.sinh(alpha_k) * self.cosh(alpha_k))
 
     def _B(self, sequence):

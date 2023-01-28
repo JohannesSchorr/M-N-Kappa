@@ -92,10 +92,15 @@ def curvature_by_points(
     :py:meth:`~m_n_kappa.general.strain` : compute strain from its vertical position, neutral-axis and curvature
 
     """
-    return float((Decimal(top_strain) - Decimal(bottom_strain)) / (Decimal(top_edge) - Decimal(bottom_edge)))
+    return float(
+        (Decimal(top_strain) - Decimal(bottom_strain))
+        / (Decimal(top_edge) - Decimal(bottom_edge))
+    )
 
 
-def strain(neutral_axis_value: float, curvature_value: float, position_value: float) -> float:
+def strain(
+    neutral_axis_value: float, curvature_value: float, position_value: float
+) -> float:
     """
     compute the strain from its position, the neutral axis and the curvature value
 
@@ -139,7 +144,10 @@ def strain(neutral_axis_value: float, curvature_value: float, position_value: fl
     elif curvature_value == 0.0:
         raise ValueError("Curvature must be unequal zero")
     else:
-        return float(Decimal(curvature_value) * (Decimal(position_value) - Decimal(neutral_axis_value)))
+        return float(
+            Decimal(curvature_value)
+            * (Decimal(position_value) - Decimal(neutral_axis_value))
+        )
 
 
 def position(
@@ -370,13 +378,17 @@ class EffectiveWidths:
 
     def __eq__(self, other) -> bool:
         if (
-            self.membran == other.membran and
-            self.bending == other.bending and
-            self.for_section_type == other.for_section_type and
-            self.reinforcement_under_tension_use_membran_width == other.reinforcement_under_tension_use_membran_width and
-            self.reinforcement_under_compression_use_membran_width == other.reinforcement_under_compression_use_membran_width
-            and self.concrete_under_tension_use_membran_width == other.concrete_under_tension_use_membran_width and
-            self.concrete_under_compression_use_membran_width == other.concrete_under_compression_use_membran_width
+            self.membran == other.membran
+            and self.bending == other.bending
+            and self.for_section_type == other.for_section_type
+            and self.reinforcement_under_tension_use_membran_width
+            == other.reinforcement_under_tension_use_membran_width
+            and self.reinforcement_under_compression_use_membran_width
+            == other.reinforcement_under_compression_use_membran_width
+            and self.concrete_under_tension_use_membran_width
+            == other.concrete_under_tension_use_membran_width
+            and self.concrete_under_compression_use_membran_width
+            == other.concrete_under_compression_use_membran_width
         ):
             return True
         else:
@@ -429,12 +441,16 @@ class EdgeStrains:
     top_edge_strain : :py:class:`~m_n_kappa.StrainPosition`
         strain and position at the top-edge
     """
+
     bottom_edge_strain: StrainPosition
     top_edge_strain: StrainPosition
 
     def __post_init_(self):
         if self.top_edge_strain.position > self.bottom_edge_strain.position:
-            self.top_edge_strain, self.bottom_edge_strain = self.bottom_edge_strain, self.top_edge_strain
+            self.top_edge_strain, self.bottom_edge_strain = (
+                self.bottom_edge_strain,
+                self.top_edge_strain,
+            )
             logger.info("EdgeStrains: changed bottom-edge and top-edge")
 
     @property

@@ -43,11 +43,12 @@ class StressStrain:
     strain : float
         strain of the point
     """
+
     stress: float
     strain: float
-    
+
     def __post_init__(self):
-        logger.info(f'Created {self.__repr__()}')
+        logger.info(f"Created {self.__repr__()}")
 
     def pair(self) -> list[float]:
         """stress-strain-point as list"""
@@ -246,10 +247,7 @@ class Material:
         """
         material_index = self._get_material_index(strain)
         if material_index is None:
-            raise ValueError(
-                f"{strain=} -> None,\n"
-                f"{self.__str__()}"
-            )
+            raise ValueError(f"{strain=} -> None,\n" f"{self.__str__()}")
         return self._interpolate_stress(strain, material_index)
 
     def sort_strains(self, reverse: bool = False) -> None:
@@ -274,7 +272,11 @@ class Material:
     def _get_material_index(self, strain_value: float) -> int:
         self.sort_strains_ascending()
         strain_value = self.__round_strain(strain_value)
-        if self.stress_strain[0].strain <= strain_value <= self.stress_strain[-1].strain:
+        if (
+            self.stress_strain[0].strain
+            <= strain_value
+            <= self.stress_strain[-1].strain
+        ):
             if strain_value == self.stress_strain[-1].strain:
                 return len(self.stress_strain) - 2
             for material_index in range(len(self.stress_strain) - 1):
@@ -319,8 +321,10 @@ class Material:
 
     def _interpolate_stress(self, strain: float, material_index: int) -> float:
         if material_index is None:
-            raise TypeError(f"List indices must be integers or slices, not NoneType.\n"
-                            f"Material: {self.__str__()}")
+            raise TypeError(
+                f"List indices must be integers or slices, not NoneType.\n"
+                f"Material: {self.__str__()}"
+            )
         return interpolation(
             position_value=strain,
             first_pair=self.stress_strain[material_index].pair(),
@@ -713,7 +717,7 @@ class ConcreteCompressionParabolaRectangle(ConcreteCompression):
         - :math:`\\varepsilon_\\mathrm{c}`
         - :math:`\\varepsilon_\\mathrm{cu}`
         """
-        return [0.25 * self.c, 0.5 * self.c, 0.75*self.c, self.c, self.cu]
+        return [0.25 * self.c, 0.5 * self.c, 0.75 * self.c, self.c, self.cu]
 
     def stress(self, strain: float) -> float:
         """
@@ -739,10 +743,10 @@ class ConcreteCompressionParabolaRectangle(ConcreteCompression):
 
 class ConcreteCompressionBiLinear(ConcreteCompression):
     """
-        bi-linear behaviour of concrete under compression according to EN 1992-1-1 [1]_
+    bi-linear behaviour of concrete under compression according to EN 1992-1-1 [1]_
 
-        .. versionadded:: 0.1.0
-        """
+    .. versionadded:: 0.1.0
+    """
 
     @logs_init
     def __init__(self, f_cm: float):
@@ -991,7 +995,7 @@ class ConcreteTension:
         """
         if self._f_ctm is None:
             if self.f_ck <= 50.0:
-                return 0.3 * self.f_ck ** (2./3.)
+                return 0.3 * self.f_ck ** (2.0 / 3.0)
             else:
                 return 2.12 * log(1.0 + 0.1 * self.f_cm)
         else:
@@ -1024,7 +1028,7 @@ class ConcreteTension:
         if self.use_tension:
             stress_strain.append([self.f_ctm, self.yield_strain])
             if self.consider_opening_behaviour:
-                stress_strain.append([0.2*self.f_ctm, self.w])
+                stress_strain.append([0.2 * self.f_ctm, self.w])
                 stress_strain.append([0.0, self.wu])
             else:
                 stress_strain.append([0.0, self.yield_strain + 0.000001])
@@ -1049,7 +1053,7 @@ class Concrete(Material):
         "_compression",
         "_tension",
         "_stress_strain",
-        )
+    )
 
     @logs_init
     def __init__(
@@ -1351,9 +1355,7 @@ StressStrain(stress=0.0, strain=10.0)]
         if typ == "NONLINEAR":
             return ConcreteCompressionNonlinear(self.f_cm, self.epsilon_y, self.E_cm)
         elif typ == "PARABOLA":
-            return ConcreteCompressionParabolaRectangle(
-                self.f_cm, self.epsilon_y
-            )
+            return ConcreteCompressionParabolaRectangle(self.f_cm, self.epsilon_y)
         elif typ == "BILINEAR":
             return ConcreteCompressionBiLinear(self.f_cm)
         else:
@@ -1373,7 +1375,7 @@ StressStrain(stress=0.0, strain=10.0)]
                 self.E_cm,
                 self._f_ctm,
                 use_tension=self.use_tension,
-                consider_opening_behaviour=False
+                consider_opening_behaviour=False,
             )
         elif stress_strain_type.upper() == "CONSIDEROPENINGBEHAVIOUR":
             return ConcreteTension(
@@ -1381,7 +1383,7 @@ StressStrain(stress=0.0, strain=10.0)]
                 self.E_cm,
                 self._f_ctm,
                 use_tension=self.use_tension,
-                consider_opening_behaviour=True
+                consider_opening_behaviour=True,
             )
         else:
             raise ValueError(
@@ -1548,9 +1550,7 @@ StressStrain(stress=400.0, strain=0.15)]
             text.append("")
             text.append("Plastic")
             text.append("-------")
-            text.append(
-                f"f_y: {self.f_y:.1f} N/mm^2 | epsilon_y: {self.epsilon_y:.5f}"
-            )
+            text.append(f"f_y: {self.f_y:.1f} N/mm^2 | epsilon_y: {self.epsilon_y:.5f}")
         if self.__is_plastic:
             text.append(
                 f"f_u: {self.f_u:.1f} N/mm^2 | failure_strain: {self.failure_strain:.5f}"
@@ -1582,7 +1582,11 @@ StressStrain(stress=400.0, strain=0.15)]
     @property
     def __is_ideal_plastic(self) -> bool:
         """determines if passed arguments allow a ideal-plastic stress-strain relationship"""
-        if self.f_y is not None and self.failure_strain is not None and self.f_u is None:
+        if (
+            self.f_y is not None
+            and self.failure_strain is not None
+            and self.f_u is None
+        ):
             return True
         else:
             return False
@@ -1590,7 +1594,11 @@ StressStrain(stress=400.0, strain=0.15)]
     @property
     def __is_plastic(self) -> bool:
         """determines if passed arguments allow a plastic stress-strain relationship"""
-        if self.f_y is not None and self.failure_strain is not None and self.f_u is not None:
+        if (
+            self.f_y is not None
+            and self.failure_strain is not None
+            and self.f_u is not None
+        ):
             return True
         else:
             return False
@@ -1675,7 +1683,13 @@ class Reinforcement(Steel):
     """
 
     @logs_init
-    def __init__(self, f_s: float = None, f_su: float = None, failure_strain: float = None, E_s: float = 200000.0):
+    def __init__(
+        self,
+        f_s: float = None,
+        f_su: float = None,
+        failure_strain: float = None,
+        E_s: float = 200000.0,
+    ):
         """
         Parameters
         ----------
