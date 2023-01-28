@@ -276,6 +276,14 @@ class Rectangle(Geometry):
     .. versionadded:: 0.1.0
     """
 
+    __slots__ = (
+        "_top_edge",
+        "_bottom_edge",
+        "_width",
+        "_left_edge",
+        "_right_edge",
+    )
+
     @logs_init
     def __init__(
         self,
