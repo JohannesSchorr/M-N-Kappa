@@ -1,0 +1,12 @@
+.. _whatsnew011:
+
+What's new in 0.1.1 (?? 2023)
+******************************************
+
+These are the changes in m_n_kappa 0.1.1.
+See :ref:`release` for a full changelog including other versions of pandas.
+
+.. _whatsnew011.bug_fixes:
+
+Bug Fixes
+=========
