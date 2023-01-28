@@ -1040,6 +1040,17 @@ class Concrete(Material):
     .. versionadded:: 0.1.0
     """
 
+    __slots__ = (
+        "_f_cm",
+        "_f_ctm",
+        "_use_tension",
+        "_compression_stress_strain_type",
+        "_tension_stress_strain_type",
+        "_compression",
+        "_tension",
+        "_stress_strain",
+        )
+
     @logs_init
     def __init__(
         self,
@@ -1227,11 +1238,11 @@ StressStrain(stress=0.0, strain=10.0)]
 
     def __repr__(self) -> str:
         return (
-            f"Concrete(f_cm={self.f_cm}, "
+            f"Concrete(f_cm={self._f_cm}, "
             f"f_ctm={self._f_ctm}, "
-            f"use_tension={self.use_tension}, "
-            f"compression_stress_strain_type={self.compression_stress_strain_type}), "
-            f"tension_stress_strain_type={self.tension_stress_strain_type})"
+            f"use_tension={self._use_tension}, "
+            f"compression_stress_strain_type={self._compression_stress_strain_type}), "
+            f"tension_stress_strain_type={self._tension_stress_strain_type})"
         )
 
     @str_start_end
