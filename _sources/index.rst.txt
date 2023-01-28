@@ -1,5 +1,31 @@
-Welcome to M-N-Kappa's documentation!
-=====================================
+:hide-toc:
+
+.. image:: ./_static/logo/m_kappa_logo.svg
+
+M-N-Kappa
+*********
+|Versioning| | |Documentation|
+
+Computing beam-deformations considering non-linear materials
+============================================================
+
+:mod:`m_n_kappa` is an open source library for using the strain-based method
+to compute the stress-distribution of a cross-section considering multi-linear
+material models.
+
+The resulting relationship between bending moment *M* and curvature :math:`\kappa`
+empowers to compute the deformation of a beam under a given load considering
+non-linear effects like cracking of concrete, plasticizing of steel, etc.
+
+**Features**
+
+- strain-based method considering multi-linear material models
+- distinction between bending and membran width of the concrete-slab
+
+**Planned**
+
+- consideration of the multi-line shear-connector behaviour
+- computation of for beams with more than one span as well as cantilever beams
 
 .. grid:: 1 2 2 2
    :gutter: 3
@@ -22,7 +48,7 @@ Welcome to M-N-Kappa's documentation!
       **Examples**
       ^^^^^^^^^^^^
 
-      Want to know how to apply :meth:`m_n_kappa`?
+      Want to know how to apply :mod:`m_n_kappa`
       Here a bunch of tutorials are given.
 
    .. grid-item-card::
@@ -33,7 +59,8 @@ Welcome to M-N-Kappa's documentation!
       **Theory Guide**
       ^^^^^^^^^^^^^^^^
 
-      Methodology and theoretical background of the :math:`M`-:math:`\kappa` and the :math:`M`-:math:`N`-:math:`\kappa`-method
+      Methodology and theoretical background of the :math:`M`-:math:`\kappa` and
+      the :math:`M`-:math:`N`-:math:`\kappa`-method
 
    .. grid-item-card::
       :link: verification
@@ -43,7 +70,7 @@ Welcome to M-N-Kappa's documentation!
       **Verification**
       ^^^^^^^^^^^^^^^^
 
-      :meth:`m_n_kappa` is verified using experimental investigations
+      :mod:`m_n_kappa` is verified using experimental investigations
 
 .. toctree::
    :hidden:

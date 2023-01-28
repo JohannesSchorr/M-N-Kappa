@@ -3,7 +3,7 @@
   <head><meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width,initial-scale=1"/>
     <meta name="color-scheme" content="light dark"><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
-<link rel="index" title="Index" href="genindex.html" /><link rel="search" title="Search" href="search.html" /><link rel="next" title="Examples" href="examples/index.html" /><link rel="prev" title="Welcome to M-N-Kappa’s documentation!" href="index.html" />
+<link rel="index" title="Index" href="genindex.html" /><link rel="search" title="Search" href="search.html" /><link rel="next" title="Examples" href="examples/index.html" /><link rel="prev" title="M-N-Kappa" href="index.html" />
 
     <!-- Generated with Sphinx 5.3.0 and Furo 2022.12.07 -->
         <title>Getting Started - M-N-κ</title>
@@ -355,52 +355,99 @@ computing the deformation of a composite beam.</p>
 </figcaption>
 </figure>
 <p>The slab is a rectangle of concrete of type C30/35.</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">m_n_kappa</span> <span class="kn">import</span> <span class="n">Rectangle</span><span class="p">,</span> <span class="n">Concrete</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">slab</span> <span class="o">=</span> <span class="n">Rectangle</span><span class="p">(</span><span class="n">top_edge</span><span class="o">=</span><span class="mf">0.0</span><span class="p">,</span> <span class="n">bottom_edge</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="mi">2000</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">concrete</span> <span class="o">=</span> <span class="n">Concrete</span><span class="p">(</span><span class="n">f_cm</span><span class="o">=</span><span class="mi">38</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">concrete_slab</span> <span class="o">=</span> <span class="n">concrete</span> <span class="o">+</span> <span class="n">slab</span>
+<div class="highlight-python notranslate" id="getting_started-rst-altair-source-1"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">m_n_kappa</span> <span class="kn">import</span> <span class="n">Rectangle</span><span class="p">,</span> <span class="n">Concrete</span>
+<span class="n">slab</span> <span class="o">=</span> <span class="n">Rectangle</span><span class="p">(</span><span class="n">top_edge</span><span class="o">=</span><span class="mf">0.0</span><span class="p">,</span> <span class="n">bottom_edge</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="mi">2000</span><span class="p">)</span>
+<span class="n">concrete</span> <span class="o">=</span> <span class="n">Concrete</span><span class="p">(</span><span class="n">f_cm</span><span class="o">=</span><span class="mi">38</span><span class="p">)</span>
+<span class="n">concrete_slab</span> <span class="o">=</span> <span class="n">concrete</span> <span class="o">+</span> <span class="n">slab</span>
 </pre></div>
 </div>
 <p>The girder is a HEB 200 steel-profile of type S355.</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">m_n_kappa</span> <span class="kn">import</span> <span class="n">IProfile</span><span class="p">,</span> <span class="n">Steel</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">girder</span> <span class="o">=</span> <span class="n">IProfile</span><span class="p">(</span><span class="n">top_edge</span><span class="o">=</span><span class="mf">100.0</span><span class="p">,</span> <span class="n">t_w</span><span class="o">=</span><span class="mf">9.5</span><span class="p">,</span> <span class="n">h_w</span><span class="o">=</span><span class="mi">200</span><span class="o">-</span><span class="mi">2</span><span class="o">*</span><span class="mi">15</span><span class="p">,</span> <span class="n">t_fo</span><span class="o">=</span><span class="mi">15</span><span class="p">,</span> <span class="n">b_fo</span><span class="o">=</span><span class="mi">200</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">steel</span> <span class="o">=</span> <span class="n">Steel</span><span class="p">(</span><span class="n">f_y</span><span class="o">=</span><span class="mi">355</span><span class="p">,</span> <span class="n">failure_strain</span><span class="o">=</span><span class="mf">0.15</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">steel_girder</span> <span class="o">=</span> <span class="n">steel</span> <span class="o">+</span> <span class="n">girder</span>
+<div class="highlight-python notranslate" id="getting_started-rst-altair-source-2"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">m_n_kappa</span> <span class="kn">import</span> <span class="n">IProfile</span><span class="p">,</span> <span class="n">Steel</span>
+<span class="n">girder</span> <span class="o">=</span> <span class="n">IProfile</span><span class="p">(</span><span class="n">top_edge</span><span class="o">=</span><span class="mf">100.0</span><span class="p">,</span> <span class="n">t_w</span><span class="o">=</span><span class="mf">9.5</span><span class="p">,</span> <span class="n">h_w</span><span class="o">=</span><span class="mi">200</span><span class="o">-</span><span class="mi">2</span><span class="o">*</span><span class="mi">15</span><span class="p">,</span> <span class="n">t_fo</span><span class="o">=</span><span class="mi">15</span><span class="p">,</span> <span class="n">b_fo</span><span class="o">=</span><span class="mi">200</span><span class="p">)</span>
+<span class="n">steel</span> <span class="o">=</span> <span class="n">Steel</span><span class="p">(</span><span class="n">f_y</span><span class="o">=</span><span class="mi">355</span><span class="p">,</span> <span class="n">failure_strain</span><span class="o">=</span><span class="mf">0.15</span><span class="p">)</span>
+<span class="n">steel_girder</span> <span class="o">=</span> <span class="n">steel</span> <span class="o">+</span> <span class="n">girder</span>
 </pre></div>
 </div>
 <p>Merging the <code class="docutils literal notranslate"><span class="pre">concrete_slab</span></code> and the <code class="docutils literal notranslate"><span class="pre">steel_girder</span></code> to a composite cross-section
 is accomplished also easily.</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">composite_cross_section</span> <span class="o">=</span> <span class="n">concrete_slab</span> <span class="o">+</span> <span class="n">steel_girder</span>
+<div class="highlight-python notranslate" id="getting_started-rst-altair-source-3"><div class="highlight"><pre><span></span><span class="n">composite_cross_section</span> <span class="o">=</span> <span class="n">concrete_slab</span> <span class="o">+</span> <span class="n">steel_girder</span>
 </pre></div>
 </div>
 <p>This <a class="reference internal" href="api/m_n_kappa.Crosssection.html#m_n_kappa.Crosssection" title="m_n_kappa.Crosssection"><code class="xref py py-class docutils literal notranslate"><span class="pre">Crosssection</span></code></a>-object of a composite beam allows you to do several things like
 computing the curvature <span class="math notranslate nohighlight">\(\kappa\)</span>, the <em>M</em>-<span class="math notranslate nohighlight">\(\kappa\)</span>-curve or the deformation of the beam
 under a given loading.</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">m_n_kappa</span> <span class="kn">import</span> <span class="n">SingleSpanUniformLoad</span><span class="p">,</span> <span class="n">Beam</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">loading</span> <span class="o">=</span> <span class="n">SingleSpanUniformLoad</span><span class="p">(</span><span class="n">length</span><span class="o">=</span><span class="mi">8000</span><span class="p">,</span> <span class="n">load</span><span class="o">=</span><span class="mf">1.0</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">beam</span> <span class="o">=</span> <span class="n">Beam</span><span class="p">(</span>
-<span class="gp">... </span>   <span class="n">cross_section</span><span class="o">=</span><span class="n">composite_cross_section</span><span class="p">,</span>
-<span class="gp">... </span>   <span class="n">element_number</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span>
-<span class="gp">... </span>   <span class="n">load</span><span class="o">=</span><span class="n">loading</span>
-<span class="gp">... </span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">deformation_at_maximum_position</span> <span class="o">=</span> <span class="n">beam</span><span class="o">.</span><span class="n">deformations_at_maximum_deformation_position</span><span class="p">()</span>
+<div class="highlight-python notranslate" id="getting_started-rst-altair-source-4"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">m_n_kappa</span> <span class="kn">import</span> <span class="n">SingleSpanUniformLoad</span><span class="p">,</span> <span class="n">Beam</span>
+<span class="n">loading</span> <span class="o">=</span> <span class="n">SingleSpanUniformLoad</span><span class="p">(</span><span class="n">length</span><span class="o">=</span><span class="mi">8000</span><span class="p">)</span>
+<span class="n">beam</span> <span class="o">=</span> <span class="n">Beam</span><span class="p">(</span>
+    <span class="n">cross_section</span><span class="o">=</span><span class="n">composite_cross_section</span><span class="p">,</span>
+    <span class="n">element_number</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span>
+    <span class="n">load</span><span class="o">=</span><span class="n">loading</span>
+ <span class="p">)</span>
 </pre></div>
 </div>
-<p>The load-deformation pairs are then easily extracted as follows:</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">deformation</span> <span class="ow">in</span> <span class="n">deformation_at_maximum_position</span><span class="p">:</span>
-<span class="gp">... </span>    <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">deformation</span><span class="o">.</span><span class="n">load</span><span class="o">*</span><span class="mf">0.001</span><span class="si">:</span><span class="s2">.1f</span><span class="si">}</span><span class="s2">, </span><span class="si">{</span><span class="n">deformation</span><span class="o">.</span><span class="n">deformation</span><span class="si">:</span><span class="s2">.1f</span><span class="si">}</span><span class="s2">&quot;</span>
-<span class="go">&#39;0.0, 0.0&#39;</span>
-<span class="go">&#39;45.3, 15.6&#39;</span>
-<span class="go">&#39;45.7, 15.7&#39;</span>
-<span class="go">&#39;157.6, 58.7&#39;</span>
-<span class="go">&#39;234.0, 125.7&#39;</span>
-<span class="go">&#39;249.3, 270.9&#39;</span>
-<span class="go">&#39;249.6, 279.3&#39;</span>
-<span class="go">&#39;251.2, 354.5&#39;</span>
-<span class="go">&#39;251.9, 451.9&#39;</span>
+<p>The load-deformation-curve is then created as follows, using the plotting library
+<a class="reference external" href="https://altair-viz.github.io/">Altair</a>.</p>
+<div class="highlight-python notranslate" id="getting_started-rst-altair-source-5"><div class="highlight"><pre><span></span><span class="n">deformation_at_maximum_position</span> <span class="o">=</span> <span class="n">beam</span><span class="o">.</span><span class="n">deformations_at_maximum_deformation_position</span><span class="p">()</span>
+
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span>
+     <span class="p">{</span><span class="s1">&#39;loadings&#39;</span><span class="p">:</span> <span class="n">deformation_at_maximum_position</span><span class="o">.</span><span class="n">loadings</span><span class="p">(</span><span class="n">factor</span><span class="o">=</span><span class="mf">0.001</span><span class="p">),</span>
+      <span class="s1">&#39;deformations&#39;</span><span class="p">:</span> <span class="n">deformation_at_maximum_position</span><span class="o">.</span><span class="n">values</span><span class="p">()})</span>
+
+<span class="kn">import</span> <span class="nn">altair</span> <span class="k">as</span> <span class="nn">alt</span>
+<span class="n">alt</span><span class="o">.</span><span class="n">Chart</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">background</span><span class="o">=</span><span class="s1">&#39;#00000000&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">mark_line</span><span class="p">()</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span>
+   <span class="n">x</span><span class="o">=</span><span class="n">alt</span><span class="o">.</span><span class="n">X</span><span class="p">(</span><span class="s1">&#39;deformations&#39;</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="s1">&#39;Deformation [mm]&#39;</span><span class="p">),</span>
+   <span class="n">y</span><span class="o">=</span><span class="n">alt</span><span class="o">.</span><span class="n">Y</span><span class="p">(</span><span class="s1">&#39;loadings&#39;</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="s1">&#39;Loading [kN]&#39;</span><span class="p">))</span>
 </pre></div>
 </div>
-<p>For more example please refer to <a class="reference internal" href="examples/index.html#examples"><span class="std std-ref">Examples</span></a>.</p>
+
+<div id="getting_started-rst-altair-plot-5">
+<script>
+  // embed when document is loaded, to ensure vega library is available
+  // this works on all modern browsers, except IE8 and older
+  document.addEventListener("DOMContentLoaded", function(event) {
+      var spec = {"usermeta": {"embedOptions": {"theme": "quartz"}}, "config": {"view": {"continuousWidth": 400, "continuousHeight": 300}}, "data": {"name": "data-0cb755ac746c191728c5de6c2e515038"}, "mark": "line", "background": "#00000000", "encoding": {"x": {"field": "deformations", "title": "Deformation [mm]", "type": "quantitative"}, "y": {"field": "loadings", "title": "Loading [kN]", "type": "quantitative"}}, "$schema": "https://vega.github.io/schema/vega-lite/v4.17.0.json", "datasets": {"data-0cb755ac746c191728c5de6c2e515038": [{"loadings": 0.0, "deformations": 0.0}, {"loadings": 209.42837610468922, "deformations": 34.094049814890354}, {"loadings": 357.89153963941595, "deformations": 63.69136121299274}, {"loadings": 423.70149191064553, "deformations": 119.4491377572753}, {"loadings": 442.7410340439689, "deformations": 147.6954499696985}, {"loadings": 458.441567149687, "deformations": 183.66779307201296}]}};
+      var opt = {
+        "mode": "vega-lite",
+        "renderer": "canvas",
+        "actions": {"editor": true, "source": true, "export": true}
+      };
+      vegaEmbed('#getting_started-rst-altair-plot-5', spec, opt).catch(console.err);
+  });
+</script>
+</div><p>The deformation along the beam under a given load is then computed as follows.</p>
+<div class="highlight-python notranslate" id="getting_started-rst-altair-source-6"><div class="highlight"><pre><span></span><span class="n">deformation_load</span> <span class="o">=</span> <span class="n">SingleSpanUniformLoad</span><span class="p">(</span><span class="n">length</span><span class="o">=</span><span class="mi">8000</span><span class="p">,</span> <span class="n">load</span><span class="o">=</span><span class="mf">1.0</span><span class="p">)</span>
+<span class="n">deformations_over_length</span> <span class="o">=</span> <span class="n">beam</span><span class="o">.</span><span class="n">deformation_over_beam_length</span><span class="p">(</span>
+    <span class="n">load_step</span><span class="o">=</span><span class="n">deformation_load</span><span class="p">)</span>
+
+<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span>
+     <span class="p">{</span><span class="s1">&#39;positions&#39;</span><span class="p">:</span> <span class="n">deformations_over_length</span><span class="o">.</span><span class="n">positions</span><span class="p">(),</span>
+      <span class="s1">&#39;deformations&#39;</span><span class="p">:</span> <span class="n">deformations_over_length</span><span class="o">.</span><span class="n">values</span><span class="p">()})</span>
+
+<span class="n">alt</span><span class="o">.</span><span class="n">Chart</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">height</span><span class="o">=</span><span class="mf">100.0</span><span class="p">,</span> <span class="n">background</span><span class="o">=</span><span class="s1">&#39;#00000000&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">mark_line</span><span class="p">()</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span>
+    <span class="n">x</span><span class="o">=</span><span class="n">alt</span><span class="o">.</span><span class="n">X</span><span class="p">(</span><span class="s1">&#39;positions&#39;</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="s1">&#39;Beam position [mm]&#39;</span><span class="p">),</span>
+    <span class="n">y</span><span class="o">=</span><span class="n">alt</span><span class="o">.</span><span class="n">Y</span><span class="p">(</span><span class="s1">&#39;deformations&#39;</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="s1">&#39;Deformation [mm]&#39;</span><span class="p">,</span> <span class="n">scale</span><span class="o">=</span><span class="n">alt</span><span class="o">.</span><span class="n">Scale</span><span class="p">(</span><span class="n">reverse</span><span class="o">=</span><span class="kc">True</span><span class="p">)))</span>
+</pre></div>
+</div>
+
+<div id="getting_started-rst-altair-plot-6">
+<script>
+  // embed when document is loaded, to ensure vega library is available
+  // this works on all modern browsers, except IE8 and older
+  document.addEventListener("DOMContentLoaded", function(event) {
+      var spec = {"usermeta": {"embedOptions": {"theme": "quartz"}}, "config": {"view": {"continuousWidth": 400, "continuousHeight": 300}}, "data": {"name": "data-4e275d606ddb5c6cfe33b34937ccb891"}, "mark": "line", "background": "#00000000", "encoding": {"x": {"field": "positions", "title": "Beam position [mm]", "type": "quantitative"}, "y": {"field": "deformations", "scale": {"reverse": true}, "title": "Deformation [mm]", "type": "quantitative"}}, "height": 100.0, "$schema": "https://vega.github.io/schema/vega-lite/v4.17.0.json", "datasets": {"data-4e275d606ddb5c6cfe33b34937ccb891": [{"positions": 0.0, "deformations": 0.0}, {"positions": 800.0, "deformations": 0.4093150316405712}, {"positions": 1600.0, "deformations": 0.7739775143748983}, {"positions": 2400.0, "deformations": 1.059257687942569}, {"positions": 3200.0, "deformations": 1.2403485807290038}, {"positions": 4000.0, "deformations": 1.302366009765454}, {"positions": 4800.0, "deformations": 1.2403485807290038}, {"positions": 5600.0, "deformations": 1.0592576879425692}, {"positions": 6400.0, "deformations": 0.7739775143748981}, {"positions": 7200.0, "deformations": 0.40931503164057115}, {"positions": 8000.0, "deformations": 0.0}]}};
+      var opt = {
+        "mode": "vega-lite",
+        "renderer": "canvas",
+        "actions": {"editor": true, "source": true, "export": true}
+      };
+      vegaEmbed('#getting_started-rst-altair-plot-6', spec, opt).catch(console.err);
+  });
+</script>
+</div><p><a class="reference internal" href="examples/index.html#examples"><span class="std std-ref">Examples</span></a> gives you detailed instructions how to build a cross-section,
+computing a single <a class="reference internal" href="examples/moment_curvature.html#examples-moment-curvature"><span class="std std-ref">Moment-Curvature</span></a> point,
+a <a class="reference internal" href="examples/moment_curvature_curve.html#examples-moment-curvature-curve"><span class="std std-ref">Moment-Curvature-Curve</span></a> or the <a class="reference internal" href="examples/deformation.html#examples-deformation"><span class="std std-ref">Deformation</span></a> of
+a beam, to name a few.</p>
 </section>
 </section>
 

@@ -142,7 +142,7 @@
           <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
         </button>
       </div>
-      <label class="toc-overlay-icon toc-header-icon" for="__toc">
+      <label class="toc-overlay-icon toc-header-icon no-toc" for="__toc">
         <div class="visually-hidden">Toggle table of contents sidebar</div>
         <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
       </label>
@@ -324,14 +324,33 @@
               <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
             </button>
           </div>
-          <label class="toc-overlay-icon toc-content-icon" for="__toc">
+          <label class="toc-overlay-icon toc-content-icon no-toc" for="__toc">
             <div class="visually-hidden">Toggle table of contents sidebar</div>
             <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
           </label>
         </div>
         <article role="main">
-          <section id="welcome-to-m-n-kappa-s-documentation">
-<h1>Welcome to M-N-Kappa’s documentation!<a class="headerlink" href="#welcome-to-m-n-kappa-s-documentation" title="Permalink to this heading">#</a></h1>
+          <img alt="_images/m_kappa_logo.svg" src="_images/m_kappa_logo.svg" /><section id="m-n-kappa">
+<h1>M-N-Kappa<a class="headerlink" href="#m-n-kappa" title="Permalink to this heading">#</a></h1>
+<p>Latest version: 0.1.0 | Documentation build: 28.01.2023</p>
+<section id="computing-beam-deformations-considering-non-linear-materials">
+<h2>Computing beam-deformations considering non-linear materials<a class="headerlink" href="#computing-beam-deformations-considering-non-linear-materials" title="Permalink to this heading">#</a></h2>
+<p><code class="xref py py-mod docutils literal notranslate"><span class="pre">m_n_kappa</span></code> is an open source library for using the strain-based method
+to compute the stress-distribution of a cross-section considering multi-linear
+material models.</p>
+<p>The resulting relationship between bending moment <em>M</em> and curvature <span class="math notranslate nohighlight">\(\kappa\)</span>
+empowers to compute the deformation of a beam under a given load considering
+non-linear effects like cracking of concrete, plasticizing of steel, etc.</p>
+<p><strong>Features</strong></p>
+<ul class="simple">
+<li><p>strain-based method considering multi-linear material models</p></li>
+<li><p>distinction between bending and membran width of the concrete-slab</p></li>
+</ul>
+<p><strong>Planned</strong></p>
+<ul class="simple">
+<li><p>consideration of the multi-line shear-connector behaviour</p></li>
+<li><p>computation of for beams with more than one span as well as cantilever beams</p></li>
+</ul>
 <div class="sd-container-fluid sd-sphinx-override sd-mb-4 docutils">
 <div class="sd-row sd-row-cols-1 sd-row-cols-xs-1 sd-row-cols-sm-2 sd-row-cols-md-2 sd-row-cols-lg-2 sd-g-3 sd-g-xs-3 sd-g-sm-3 sd-g-md-3 sd-g-lg-3 docutils">
 <div class="sd-col sd-d-flex-row docutils">
@@ -350,7 +369,7 @@
 <p class="sd-card-text"><strong>Examples</strong></p>
 </div>
 <div class="sd-card-body docutils">
-<p class="sd-card-text">Want to know how to apply <code class="xref py py-meth docutils literal notranslate"><span class="pre">m_n_kappa()</span></code>?
+<p class="sd-card-text">Want to know how to apply <code class="xref py py-mod docutils literal notranslate"><span class="pre">m_n_kappa</span></code>
 Here a bunch of tutorials are given.</p>
 </div>
 <a class="sd-stretched-link reference internal" href="examples/index.html#examples"><span class="std std-ref"></span></a></div>
@@ -361,7 +380,8 @@ Here a bunch of tutorials are given.</p>
 <p class="sd-card-text"><strong>Theory Guide</strong></p>
 </div>
 <div class="sd-card-body docutils">
-<p class="sd-card-text">Methodology and theoretical background of the <span class="math notranslate nohighlight">\(M\)</span>-<span class="math notranslate nohighlight">\(\kappa\)</span> and the <span class="math notranslate nohighlight">\(M\)</span>-<span class="math notranslate nohighlight">\(N\)</span>-<span class="math notranslate nohighlight">\(\kappa\)</span>-method</p>
+<p class="sd-card-text">Methodology and theoretical background of the <span class="math notranslate nohighlight">\(M\)</span>-<span class="math notranslate nohighlight">\(\kappa\)</span> and
+the <span class="math notranslate nohighlight">\(M\)</span>-<span class="math notranslate nohighlight">\(N\)</span>-<span class="math notranslate nohighlight">\(\kappa\)</span>-method</p>
 </div>
 <a class="sd-stretched-link reference internal" href="theory/index.html#theory"><span class="std std-ref"></span></a></div>
 </div>
@@ -371,7 +391,7 @@ Here a bunch of tutorials are given.</p>
 <p class="sd-card-text"><strong>Verification</strong></p>
 </div>
 <div class="sd-card-body docutils">
-<p class="sd-card-text"><code class="xref py py-meth docutils literal notranslate"><span class="pre">m_n_kappa()</span></code> is verified using experimental investigations</p>
+<p class="sd-card-text"><code class="xref py py-mod docutils literal notranslate"><span class="pre">m_n_kappa</span></code> is verified using experimental investigations</p>
 </div>
 <a class="sd-stretched-link reference internal" href="verification/index.html#verification"><span class="std std-ref"></span></a></div>
 </div>
@@ -381,6 +401,7 @@ Here a bunch of tutorials are given.</p>
 </div>
 <div class="toctree-wrapper compound">
 </div>
+</section>
 </section>
 
         </article>
@@ -416,26 +437,8 @@ Here a bunch of tutorials are given.</p>
         
       </footer>
     </div>
-    <aside class="toc-drawer">
+    <aside class="toc-drawer no-toc">
       
-      
-      <div class="toc-sticky toc-scroll">
-        <div class="toc-title-container">
-          <span class="toc-title">
-            On this page
-          </span>
-        </div>
-        <div class="toc-tree-container">
-          <div class="toc-tree">
-            <ul>
-<li><a class="reference internal" href="#">Welcome to M-N-Kappa’s documentation!</a><ul>
-</ul>
-</li>
-</ul>
-
-          </div>
-        </div>
-      </div>
       
       
     </aside>
