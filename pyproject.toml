@@ -31,6 +31,6 @@ keywords = [
 ]
 
 [project.urls]
-"Homepage" = "https://github.com/JohannesSchorr/M-N-Kappa"
 "Documentation" = "https://johannesschorr.github.io/M-N-Kappa/"
+"Repository" = "https://github.com/JohannesSchorr/M-N-Kappa"
 "Issue tracker" = "https://github.com/JohannesSchorr/M-N-Kappa/issues"
