@@ -1415,6 +1415,8 @@ class Steel(Material):
     It is assumed that steel has the same behaviour under tension and under compression.
     """
 
+    __slots__ = "_f_y", "_f_u", "_failure_strain", "_E_a", "_stress_strain"
+
     @logs_init
     def __init__(
         self,
