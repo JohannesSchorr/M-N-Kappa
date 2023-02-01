@@ -1,0 +1,19 @@
+# Build a new github-release when release-tag is committed to the repository
+# see https://github.com/marketplace/actions/gh-release
+name: Release new version on github
+
+on:
+  push:
+    tags:
+      - "[0-9]+.[0-9]+.[0-9]+"
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+      - name: Release
+        uses: softprops/action-gh-release@v1
+        with:
+          body: 'See Release Notes at https://johannesschorr.github.io/M-N-Kappa/whatsnew/index.html'
