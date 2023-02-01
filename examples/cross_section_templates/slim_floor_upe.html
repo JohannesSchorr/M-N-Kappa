@@ -328,19 +328,18 @@
         <article role="main">
           <section id="upe-slim-floor-beam">
 <span id="cross-section-template-slim-floor-upe"></span><h1>UPE slim-floor beam<a class="headerlink" href="#upe-slim-floor-beam" title="Permalink to this heading">#</a></h1>
-<div class="admonition-todo admonition" id="id1">
-<p class="admonition-title">Todo</p>
-<p>document examples/cross_section_templates/slim_floor_upe</p>
-</div>
+<p><em>Units: Millimeter [mm], Newton [N]</em></p>
 <section id="geometries-and-materials">
 <h2>Geometries and materials<a class="headerlink" href="#geometries-and-materials" title="Permalink to this heading">#</a></h2>
-<p>This template creates the <code class="docutils literal notranslate"><span class="pre">cross_section</span></code> of a slim-floor beam with the following parts:</p>
+<p>The code below creates the <code class="docutils literal notranslate"><span class="pre">cross_section</span></code> of a slim-floor beam with the following parts:</p>
 <ul class="simple">
 <li><p>UPE 200 steel profile with <span class="math notranslate nohighlight">\(f_\mathrm{y}\)</span> = 293 N/mm² and <span class="math notranslate nohighlight">\(f_\mathrm{u}\)</span> = 443 N/mm²</p></li>
 <li><p>bottom steel flange with 400x10 with <span class="math notranslate nohighlight">\(f_\mathrm{y}\)</span> = 313 N/mm² and <span class="math notranslate nohighlight">\(f_\mathrm{u}\)</span> = 460 N/mm²</p></li>
 <li><p>concrete slab with concrete compressive strength <span class="math notranslate nohighlight">\(f_\mathrm{cm} = 29.5\)</span> N/mm²</p></li>
-<li><p>top-rebar-layer 10/100, <span class="math notranslate nohighlight">\(c_\mathrm{nom}\)</span> = 10 mm</p></li>
-<li><p>bottom-rebar-layer 12/100, <span class="math notranslate nohighlight">\(c_\mathrm{nom}\)</span> = 12 mm</p></li>
+<li><p>top-rebar-layer 10/100, <span class="math notranslate nohighlight">\(c_\mathrm{nom}\)</span> = 10 mm,
+with <span class="math notranslate nohighlight">\(c_\mathrm{nom} = 10\)</span> mm from the top-edge of the concrete-slab</p></li>
+<li><p>bottom-rebar-layer 12/100, <span class="math notranslate nohighlight">\(c_\mathrm{nom}\)</span> = 12 mm,
+with <span class="math notranslate nohighlight">\(c_\mathrm{nom} = 10\)</span> mm from the bottom-edge of the concrete-slab</p></li>
 </ul>
 <p>The UPE 200 profile is positioned on top of the bottom-flange.
 In reality the UPE-profile is welded on top of the bottom-flange steel-plate,
@@ -348,6 +347,52 @@ what is assumed by the <code class="xref py py-mod docutils literal notranslate"
 <p>This steel girder is integrated into the concrete slab.
 Therefore, the concrete slab is situated around the steel-beam, what is done by splitting
 the concrete slab in appropriate pieces.</p>
+<div class="sd-container-fluid sd-sphinx-override sd-mb-4 docutils">
+<div class="sd-row sd-row-cols-1 sd-row-cols-xs-1 sd-row-cols-sm-2 sd-row-cols-md-2 sd-row-cols-lg-2 docutils">
+<div class="sd-col sd-d-flex-column docutils">
+<div class="admonition-todo admonition" id="id1">
+<p class="admonition-title">Todo</p>
+<blockquote>
+<div><p>add figure of the cross-section</p>
+</div></blockquote>
+<p>Geometry: UPE 200 - slim-floor beam</p>
+</div>
+</div>
+<div class="sd-col sd-d-flex-column docutils">
+<figure class="align-default">
+<a class="only-light reference internal image-reference" href="../../_images/material_steel_trilinear-light.svg"><img alt="Defined stress-strain-relationship of structural steel and reinforcement" class="only-light" src="../../_images/material_steel_trilinear-light.svg" width="250" /></a>
+</figure>
+<figure class="align-default" id="id4">
+<a class="only-dark reference internal image-reference" href="../../_images/material_steel_trilinear-dark.svg"><img alt="Defined stress-strain-relationship of structural steel and reinforcement" class="only-dark" src="../../_images/material_steel_trilinear-dark.svg" width="250" /></a>
+<figcaption>
+<p><span class="caption-text">Material: Bi-linear stress-strain-relationship with hardening of steel</span><a class="headerlink" href="#id4" title="Permalink to this image">#</a></p>
+</figcaption>
+</figure>
+</div>
+<div class="sd-col sd-d-flex-column docutils">
+<figure class="align-default">
+<a class="only-light reference internal image-reference" href="../../_images/material_concrete_nonlinear-light.svg"><img alt="Defined non-linear stress-strain-relationship of concrete in compression acc. to EN 1992-1-1" class="only-light" src="../../_images/material_concrete_nonlinear-light.svg" width="250" /></a>
+</figure>
+<figure class="align-default" id="id5">
+<a class="only-dark reference internal image-reference" href="../../_images/material_concrete_nonlinear-dark.svg"><img alt="Defined non-linear stress-strain-relationship of concrete in compression acc. to EN 1992-1-1" class="only-dark" src="../../_images/material_concrete_nonlinear-dark.svg" width="250" /></a>
+<figcaption>
+<p><span class="caption-text">Material: Concrete non-linear stress-strain-relationship in compression acc. EN 1992-1-1 <a class="footnote-reference brackets" href="#id3" id="id2" role="doc-noteref"><span class="fn-bracket">[</span>1<span class="fn-bracket">]</span></a></span><a class="headerlink" href="#id5" title="Permalink to this image">#</a></p>
+</figcaption>
+</figure>
+</div>
+<div class="sd-col sd-d-flex-column docutils">
+<figure class="align-default">
+<a class="only-light reference internal image-reference" href="../../_images/material_concrete_tension_default-light.svg"><img alt="Stress-strain-relationship of concrete in tension" class="only-light" src="../../_images/material_concrete_tension_default-light.svg" width="250" /></a>
+</figure>
+<figure class="align-default" id="id6">
+<a class="only-dark reference internal image-reference" href="../../_images/material_concrete_tension_default-dark.svg"><img alt="Stress-strain-relationship of concrete in tension" class="only-dark" src="../../_images/material_concrete_tension_default-dark.svg" width="250" /></a>
+<figcaption>
+<p><span class="caption-text">Material: Stress-strain-relationship of concrete in tension</span><a class="headerlink" href="#id6" title="Permalink to this image">#</a></p>
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
 </section>
 <section id="slim-floor-cross-section">
 <h2>Slim-Floor cross-section<a class="headerlink" href="#slim-floor-cross-section" title="Permalink to this heading">#</a></h2>
@@ -477,6 +522,16 @@ at the position of the beam where the maximum deformation occurred under the giv
 </div>
 </div>
 </section>
+<section id="references">
+<h2>References<a class="headerlink" href="#references" title="Permalink to this heading">#</a></h2>
+<aside class="footnote-list brackets">
+<aside class="footnote brackets" id="id3" role="note">
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id2">1</a><span class="fn-bracket">]</span></span>
+<p>EN 1992-1-1: Eurocode 2: Design of concrete structures - Part 1-1: General rules and rules
+for buildings, European Committee of Standardization (CEN), 2004</p>
+</aside>
+</aside>
+</section>
 </section>
 
         </article>
@@ -520,6 +575,7 @@ at the position of the beam where the maximum deformation occurred under the giv
 <li><a class="reference internal" href="#geometries-and-materials">Geometries and materials</a></li>
 <li><a class="reference internal" href="#slim-floor-cross-section">Slim-Floor cross-section</a></li>
 <li><a class="reference internal" href="#computation">Computation</a></li>
+<li><a class="reference internal" href="#references">References</a></li>
 </ul>
 </li>
 </ul>

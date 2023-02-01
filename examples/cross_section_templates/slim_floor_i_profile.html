@@ -328,10 +328,100 @@
         <article role="main">
           <section id="i-profile-slim-floor-beam">
 <span id="cross-section-template-slim-floor-i-profile"></span><h1>I-Profile slim-floor beam<a class="headerlink" href="#i-profile-slim-floor-beam" title="Permalink to this heading">#</a></h1>
-<div class="admonition-todo admonition" id="id1">
+<p><em>Units: Millimeter [mm], Newton [N]</em></p>
+<section id="geometry-and-materials">
+<h2>Geometry and materials<a class="headerlink" href="#geometry-and-materials" title="Permalink to this heading">#</a></h2>
+<p>The code below creates a <code class="docutils literal notranslate"><span class="pre">cross_section</span></code> that represents a slim-floor-beam where
+a steel I-profile (HEB 200) is integrated into a slab of concrete of type C30/35.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">concrete_slab</span></code> is split into five parts:</p>
+<ul class="simple">
+<li><p>concrete-slab left and right of the steel-beam</p></li>
+<li><p>concrete within each of the two chambers</p></li>
+<li><p>concrete-cover above the steel-profile</p></li>
+</ul>
+<p>Each of these parts is an individual <a class="reference internal" href="../../api/m_n_kappa.Rectangle.html#m_n_kappa.Rectangle" title="m_n_kappa.Rectangle"><code class="xref py py-class docutils literal notranslate"><span class="pre">Rectangle</span></code></a>.
+The overall bottom-edge of the concrete-slab is similar to the bottom-edge
+of the I-profile.
+The non-linear relationship is used to model the stress-strain-relationship
+of the used <a class="reference internal" href="../../api/m_n_kappa.Concrete.html#m_n_kappa.Concrete" title="m_n_kappa.Concrete"><code class="xref py py-class docutils literal notranslate"><span class="pre">Concrete</span></code></a>.</p>
+<p>Also integrated into the concrete-slab are <a href="#id1"><span class="problematic" id="id2">``</span></a>rebar_layer``s, consisting
+of a number of reinforcement bars.
+The bi-linear stress-strain-relationship with hardening is used for the
+reinforcement-bars as well as for the I-profile (see
+<a class="reference internal" href="../../api/m_n_kappa.Reinforcement.html#m_n_kappa.Reinforcement" title="m_n_kappa.Reinforcement"><code class="xref py py-class docutils literal notranslate"><span class="pre">Reinforcement</span></code></a>, <a class="reference internal" href="../../api/m_n_kappa.Steel.html#m_n_kappa.Steel" title="m_n_kappa.Steel"><code class="xref py py-class docutils literal notranslate"><span class="pre">Steel</span></code></a>).</p>
+<div class="sd-container-fluid sd-sphinx-override sd-mb-4 docutils">
+<div class="sd-row sd-row-cols-1 sd-row-cols-xs-1 sd-row-cols-sm-2 sd-row-cols-md-2 sd-row-cols-lg-2 docutils">
+<div class="sd-col sd-d-flex-column docutils">
+<div class="admonition-todo admonition" id="id3">
 <p class="admonition-title">Todo</p>
-<p>document examples/cross_section_templates/slim_floor_i_profile</p>
+<p>figure of the slim-floor beam with I-profile</p>
+<p>Geometry: Slim-floor beam with I-profile</p>
 </div>
+</div>
+<div class="sd-col sd-d-flex-column docutils">
+<figure class="align-default">
+<a class="only-light reference internal image-reference" href="../../_images/material_steel_trilinear-light.svg"><img alt="Defined stress-strain-relationship of structural steel and reinforcement" class="only-light" src="../../_images/material_steel_trilinear-light.svg" width="250" /></a>
+</figure>
+<figure class="align-default" id="id6">
+<a class="only-dark reference internal image-reference" href="../../_images/material_steel_trilinear-dark.svg"><img alt="Defined stress-strain-relationship of structural steel and reinforcement" class="only-dark" src="../../_images/material_steel_trilinear-dark.svg" width="250" /></a>
+<figcaption>
+<p><span class="caption-text">Material: Bi-linear stress-strain-relationship with hardening of steel</span><a class="headerlink" href="#id6" title="Permalink to this image">#</a></p>
+</figcaption>
+</figure>
+</div>
+<div class="sd-col sd-d-flex-column docutils">
+<figure class="align-default">
+<a class="only-light reference internal image-reference" href="../../_images/material_concrete_nonlinear-light.svg"><img alt="Defined non-linear stress-strain-relationship of concrete in compression acc. to EN 1992-1-1" class="only-light" src="../../_images/material_concrete_nonlinear-light.svg" width="250" /></a>
+</figure>
+<figure class="align-default" id="id7">
+<a class="only-dark reference internal image-reference" href="../../_images/material_concrete_nonlinear-dark.svg"><img alt="Defined non-linear stress-strain-relationship of concrete in compression acc. to EN 1992-1-1" class="only-dark" src="../../_images/material_concrete_nonlinear-dark.svg" width="250" /></a>
+<figcaption>
+<p><span class="caption-text">Material: Concrete non-linear stress-strain-relationship in compression acc. EN 1992-1-1 <a class="footnote-reference brackets" href="#id5" id="id4" role="doc-noteref"><span class="fn-bracket">[</span>1<span class="fn-bracket">]</span></a></span><a class="headerlink" href="#id7" title="Permalink to this image">#</a></p>
+</figcaption>
+</figure>
+</div>
+<div class="sd-col sd-d-flex-column docutils">
+<figure class="align-default">
+<a class="only-light reference internal image-reference" href="../../_images/material_concrete_tension_default-light.svg"><img alt="Stress-strain-relationship of concrete in tension" class="only-light" src="../../_images/material_concrete_tension_default-light.svg" width="250" /></a>
+</figure>
+<figure class="align-default" id="id8">
+<a class="only-dark reference internal image-reference" href="../../_images/material_concrete_tension_default-dark.svg"><img alt="Stress-strain-relationship of concrete in tension" class="only-dark" src="../../_images/material_concrete_tension_default-dark.svg" width="250" /></a>
+<figcaption>
+<p><span class="caption-text">Material: Stress-strain-relationship of concrete in tension</span><a class="headerlink" href="#id8" title="Permalink to this image">#</a></p>
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="slim-floor-beam-with-i-profile-cross-section">
+<h2>Slim-floor beam with I-profile cross-section<a class="headerlink" href="#slim-floor-beam-with-i-profile-cross-section" title="Permalink to this heading">#</a></h2>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">m_n_kappa</span> <span class="kn">import</span> <span class="n">IProfile</span><span class="p">,</span> <span class="n">Steel</span><span class="p">,</span> <span class="n">Rectangle</span><span class="p">,</span> <span class="n">Concrete</span><span class="p">,</span> <span class="n">RebarLayer</span><span class="p">,</span> <span class="n">Reinforcement</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">concrete_slab_left</span> <span class="o">=</span> <span class="n">Rectangle</span><span class="p">(</span><span class="n">top_edge</span><span class="o">=</span><span class="mf">0.0</span><span class="p">,</span> <span class="n">bottom_edge</span><span class="o">=</span><span class="mi">240</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="mf">0.5</span><span class="o">*</span><span class="p">(</span><span class="mi">2000</span><span class="o">-</span><span class="mi">200</span><span class="p">),</span> <span class="n">left_edge</span><span class="o">=-</span><span class="mi">1000</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">concrete_slab_right</span> <span class="o">=</span> <span class="n">Rectangle</span><span class="p">(</span><span class="n">top_edge</span><span class="o">=</span><span class="mf">0.0</span><span class="p">,</span> <span class="n">bottom_edge</span><span class="o">=</span><span class="mi">240</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="mf">0.5</span><span class="o">*</span><span class="p">(</span><span class="mi">2000</span><span class="o">-</span><span class="mi">200</span><span class="p">),</span> <span class="n">right_edge</span><span class="o">=</span><span class="mi">1000</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">concrete_top_cover</span> <span class="o">=</span> <span class="n">Rectangle</span><span class="p">(</span><span class="n">top_edge</span><span class="o">=</span><span class="mf">0.0</span><span class="p">,</span> <span class="n">bottom_edge</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="mi">200</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">concrete_left_chamber</span> <span class="o">=</span> <span class="n">Rectangle</span><span class="p">(</span><span class="n">top_edge</span><span class="o">=</span><span class="mi">50</span><span class="o">+</span><span class="mf">15.4</span><span class="p">,</span> <span class="n">bottom_edge</span><span class="o">=</span><span class="mi">50</span><span class="o">+</span><span class="mi">200</span><span class="o">-</span><span class="mf">15.4</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="p">(</span><span class="mi">200</span><span class="o">-</span><span class="mf">9.5</span><span class="p">)</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span> <span class="n">left_edge</span><span class="o">=-</span><span class="mi">200</span><span class="o">/</span><span class="mi">2</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">concrete_right_chamber</span> <span class="o">=</span> <span class="n">Rectangle</span><span class="p">(</span><span class="n">top_edge</span><span class="o">=</span><span class="mi">50</span><span class="o">+</span><span class="mf">15.4</span><span class="p">,</span> <span class="n">bottom_edge</span><span class="o">=</span><span class="mi">50</span><span class="o">+</span><span class="mi">200</span><span class="o">-</span><span class="mf">15.4</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="p">(</span><span class="mi">200</span><span class="o">-</span><span class="mf">9.5</span><span class="p">)</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span> <span class="n">right_edge</span><span class="o">=</span><span class="mi">200</span><span class="o">/</span><span class="mi">2</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">concrete_slab</span> <span class="o">=</span> <span class="n">concrete_slab_left</span> <span class="o">+</span> <span class="n">concrete_slab_right</span> <span class="o">+</span> <span class="n">concrete_top_cover</span> <span class="o">+</span> <span class="n">concrete_left_chamber</span> <span class="o">+</span> <span class="n">concrete_right_chamber</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">concrete</span> <span class="o">=</span> <span class="n">Concrete</span><span class="p">(</span><span class="n">f_cm</span><span class="o">=</span><span class="mi">30</span><span class="o">+</span><span class="mi">8</span><span class="p">,</span> <span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">concrete_section</span> <span class="o">=</span> <span class="n">concrete_slab</span> <span class="o">+</span> <span class="n">concrete</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">reinforcement</span> <span class="o">=</span> <span class="n">Reinforcement</span><span class="p">(</span><span class="n">f_s</span><span class="o">=</span><span class="mi">500</span><span class="p">,</span> <span class="n">f_su</span><span class="o">=</span><span class="mi">550</span><span class="p">,</span> <span class="n">failure_strain</span><span class="o">=</span><span class="mf">0.15</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">top_layer</span> <span class="o">=</span> <span class="n">RebarLayer</span><span class="p">(</span>
+<span class="gp">... </span>    <span class="n">centroid_z</span><span class="o">=</span><span class="mf">0.5</span><span class="o">*</span><span class="mi">50</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="mi">2000</span><span class="p">,</span> <span class="n">rebar_horizontal_distance</span><span class="o">=</span><span class="mi">200</span><span class="p">,</span> <span class="n">rebar_diameter</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">top_rebar_layer</span> <span class="o">=</span> <span class="n">reinforcement</span> <span class="o">+</span> <span class="n">top_layer</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">bottom_layer_left</span> <span class="o">=</span> <span class="n">RebarLayer</span><span class="p">(</span>
+<span class="gp">... </span>    <span class="n">centroid_z</span><span class="o">=</span><span class="mi">250</span><span class="o">-</span><span class="mi">10</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="mi">2000</span><span class="p">,</span> <span class="n">rebar_horizontal_distance</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">rebar_diameter</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">left_edge</span><span class="o">=-</span><span class="mi">2000</span><span class="o">/</span><span class="mi">2</span><span class="o">+</span><span class="mi">10</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">bottom_layer_right</span> <span class="o">=</span> <span class="n">RebarLayer</span><span class="p">(</span>
+<span class="gp">... </span>    <span class="n">centroid_z</span><span class="o">=</span><span class="mi">250</span><span class="o">-</span><span class="mi">10</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="p">(</span><span class="mi">2000</span><span class="o">-</span><span class="mi">200</span><span class="o">-</span><span class="mi">2</span><span class="o">*</span><span class="mi">10</span><span class="p">)</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span> <span class="n">rebar_horizontal_distance</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">rebar_diameter</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">right_edge</span><span class="o">=</span><span class="mi">2000</span><span class="o">/</span><span class="mi">2</span><span class="o">+</span><span class="mi">10</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">bottom_rebar_layer</span> <span class="o">=</span> <span class="n">reinforcement</span> <span class="o">+</span> <span class="n">bottom_layer_left</span> <span class="o">+</span> <span class="n">bottom_layer_right</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">i_profile</span> <span class="o">=</span> <span class="n">IProfile</span><span class="p">(</span>
+<span class="gp">... </span>    <span class="n">top_edge</span><span class="o">=</span><span class="mf">100.0</span><span class="p">,</span> <span class="n">b_fo</span><span class="o">=</span><span class="mi">200</span><span class="p">,</span> <span class="n">t_fo</span><span class="o">=</span><span class="mi">15</span><span class="p">,</span> <span class="n">h_w</span><span class="o">=</span><span class="mi">200</span><span class="o">-</span><span class="mi">2</span><span class="o">*</span><span class="mi">15</span><span class="p">,</span> <span class="n">t_w</span><span class="o">=</span><span class="mi">15</span><span class="p">,</span> <span class="n">centroid_y</span><span class="o">=</span><span class="mf">0.0</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">steel</span> <span class="o">=</span> <span class="n">Steel</span><span class="p">(</span><span class="n">f_y</span><span class="o">=</span><span class="mf">355.0</span><span class="p">,</span> <span class="n">f_u</span><span class="o">=</span><span class="mi">400</span><span class="p">,</span> <span class="n">failure_strain</span><span class="o">=</span><span class="mf">0.15</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">steel_section</span> <span class="o">=</span> <span class="n">i_profile</span> <span class="o">+</span> <span class="n">steel</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">cross_section</span> <span class="o">=</span> <span class="n">concrete_section</span> <span class="o">+</span> <span class="n">rebar_layer</span> <span class="o">+</span> <span class="n">steel_section</span>
+</pre></div>
+</div>
+</section>
 <section id="computation">
 <h2>Computation<a class="headerlink" href="#computation" title="Permalink to this heading">#</a></h2>
 <p>The <code class="docutils literal notranslate"><span class="pre">cross_section</span></code> you created above is the basis to do a variety of computations:</p>
@@ -426,6 +516,16 @@ at the position of the beam where the maximum deformation occurred under the giv
 </div>
 </div>
 </section>
+<section id="references">
+<h2>References<a class="headerlink" href="#references" title="Permalink to this heading">#</a></h2>
+<aside class="footnote-list brackets">
+<aside class="footnote brackets" id="id5" role="note">
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id4">1</a><span class="fn-bracket">]</span></span>
+<p>EN 1992-1-1: Eurocode 2: Design of concrete structures - Part 1-1: General rules and rules
+for buildings, European Committee of Standardization (CEN), 2004</p>
+</aside>
+</aside>
+</section>
 </section>
 
         </article>
@@ -466,7 +566,10 @@ at the position of the beam where the maximum deformation occurred under the giv
           <div class="toc-tree">
             <ul>
 <li><a class="reference internal" href="#">I-Profile slim-floor beam</a><ul>
+<li><a class="reference internal" href="#geometry-and-materials">Geometry and materials</a></li>
+<li><a class="reference internal" href="#slim-floor-beam-with-i-profile-cross-section">Slim-floor beam with I-profile cross-section</a></li>
 <li><a class="reference internal" href="#computation">Computation</a></li>
+<li><a class="reference internal" href="#references">References</a></li>
 </ul>
 </li>
 </ul>
