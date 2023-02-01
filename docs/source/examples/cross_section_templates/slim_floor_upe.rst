@@ -25,6 +25,55 @@ This steel girder is integrated into the concrete slab.
 Therefore, the concrete slab is situated around the steel-beam, what is done by splitting
 the concrete slab in appropriate pieces.
 
+.. grid:: 1 2 2 2
+
+   .. grid-item::
+
+        .. todo::
+           add figure of the cross-section
+
+         Geometry: UPE 200 - slim-floor beam
+
+   .. grid-item::
+
+      .. figure:: ../../images/material_steel_trilinear-light.svg
+         :class: only-light
+         :alt: Defined stress-strain-relationship of structural steel and reinforcement
+         :width: 250
+      .. figure:: ../../images/material_steel_trilinear-dark.svg
+         :class: only-dark
+         :alt: Defined stress-strain-relationship of structural steel and reinforcement
+         :width: 250
+
+         Material: Bi-linear stress-strain-relationship with hardening of steel
+
+   .. grid-item::
+
+      .. figure:: ../../images/material_concrete_nonlinear-light.svg
+         :class: only-light
+         :alt: Defined non-linear stress-strain-relationship of concrete in compression acc. to EN 1992-1-1
+         :width: 250
+      .. figure:: ../../images/material_concrete_nonlinear-dark.svg
+         :class: only-dark
+         :alt: Defined non-linear stress-strain-relationship of concrete in compression acc. to EN 1992-1-1
+         :width: 250
+
+         Material: Concrete non-linear stress-strain-relationship in compression acc. EN 1992-1-1 [1]_
+
+   .. grid-item::
+
+      .. figure:: ../../images/material_concrete_tension_default-light.svg
+         :class: only-light
+         :alt: Stress-strain-relationship of concrete in tension
+         :width: 250
+      .. figure:: ../../images/material_concrete_tension_default-dark.svg
+         :class: only-dark
+         :alt: Stress-strain-relationship of concrete in tension
+         :width: 250
+
+         Material: Stress-strain-relationship of concrete in tension
+
+
 Slim-Floor cross-section
 ========================
 
