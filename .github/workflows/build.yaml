@@ -1,12 +1,12 @@
 # Build and upload python-package when release-tag is committed to the repository
 # See also: https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-python#publishing-to-package-registries
 
-name: Build and upload Python Package
+name: Build and upload Python Package to PyPI
 
 on:
   push:
     tags:
-      - "v[0-9]+.[0-9]+.[0-9]+"
+      - "[0-9]+.[0-9]+.[0-9]+"
 
 jobs:
   deploy:
