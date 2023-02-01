@@ -110,3 +110,8 @@ Slim-Floor cross-section
 
 
 .. include:: cross_section_computation.rst
+
+References
+==========
+.. [1] EN 1992-1-1: Eurocode 2: Design of concrete structures - Part 1-1: General rules and rules
+   for buildings, European Committee of Standardization (CEN), 2004
