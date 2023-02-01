@@ -3,19 +3,20 @@
 UPE slim-floor beam
 *******************
 
-.. todo::
-   document examples/cross_section_templates/slim_floor_upe
+*Units: Millimeter [mm], Newton [N]*
 
 Geometries and materials
 ========================
 
-This template creates the ``cross_section`` of a slim-floor beam with the following parts:
+The code below creates the ``cross_section`` of a slim-floor beam with the following parts:
 
 - UPE 200 steel profile with :math:`f_\mathrm{y}` = 293 N/mm² and :math:`f_\mathrm{u}` = 443 N/mm²
 - bottom steel flange with 400x10 with :math:`f_\mathrm{y}` = 313 N/mm² and :math:`f_\mathrm{u}` = 460 N/mm²
 - concrete slab with concrete compressive strength :math:`f_\mathrm{cm} = 29.5` N/mm²
-- top-rebar-layer 10/100, :math:`c_\mathrm{nom}` = 10 mm
-- bottom-rebar-layer 12/100, :math:`c_\mathrm{nom}` = 12 mm
+- top-rebar-layer 10/100, :math:`c_\mathrm{nom}` = 10 mm,
+  with :math:`c_\mathrm{nom} = 10` mm from the top-edge of the concrete-slab
+- bottom-rebar-layer 12/100, :math:`c_\mathrm{nom}` = 12 mm,
+  with :math:`c_\mathrm{nom} = 10` mm from the bottom-edge of the concrete-slab
 
 The UPE 200 profile is positioned on top of the bottom-flange.
 In reality the UPE-profile is welded on top of the bottom-flange steel-plate,
