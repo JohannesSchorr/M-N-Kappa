@@ -3,7 +3,10 @@ from .general import (
     print_chapter,
     str_start_end,
     remove_duplicates,
+    StrainPosition,
+    interpolation,
 )
+from .log import log_init, log_return, logging
 from .crosssection import Crosssection, ComputationCrosssectionStrain
 from .solver import Solver, Newton
 
