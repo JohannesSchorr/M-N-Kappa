@@ -3,10 +3,7 @@ from .general import (
     print_chapter,
     str_start_end,
     remove_duplicates,
-    StrainPosition,
-    interpolation,
 )
-from .log import log_init, log_return, logging
 from .crosssection import Crosssection, ComputationCrosssectionStrain
 from .solver import Solver, Newton
 
@@ -93,241 +90,9 @@ class MNKappaCurvePoint:
         return [self.axial_force, self.moment, self.curvature]
 
 
-class MNKappaCurvePoints:
-
-    """
-    Container for points on computed :math:`M`-:math:`N`-:math:`\\kappa`-Curve
-
-    .. versionadded:: 0.2.0
-
-    """
-
-    def __init__(self) -> None:
-        self._points = []
-        logger.info(f"Created MNKappaCurvePoints")
-
-    def __repr__(self) -> str:
-        return """MNKappaCurvePoints()"""
-
-    def __str__(self) -> str:
-        text = [
-            self._print_initialization(),
-            self._print_points(),
-        ]
-        return print_chapter(text)
-
-    def _print_initialization(self) -> str:
-        text = ["Initialization", "------------", self.__repr__()]
-        return print_sections(text)
-
-    def _print_points(self) -> str:
-        points = sorted(self._points, key=lambda x: x.curvature)
-        line = 81 * "-"
-        text = [
-            line,
-            "   Moment   | Curvature  | Neutral A. |   Strain   "
-            "|  Position  |    Material    ",
-            line,
-        ]
-        for point in points:
-            text.append(
-                f"{point.moment:10.1f} | {point.curvature:10.6f} | {point.neutral_axis:10.2f} | "
-                f"{point.strain_position.strain:10.2f} | {point.strain_position.position:10.1f} | "
-                f"{point.strain_position.material}"
-            )
-        text.append(line)
-        return print_sections(text)
-
-    @property
-    def moments(self) -> list[float]:
-        """computed moments of the Moment-Axial Force-Curvature-Curve"""
-        return [point.moment for point in self.points]
-
-    @property
-    def curvatures(self) -> list[float]:
-        """computed curvatures of the Moment-Axial Force-Curvature-Curve"""
-        return [point.curvature for point in self.points]
-
-    @property
-    def axial_forces(self) -> list[float]:
-        """axial forces of the Moment-Axial Force-Curvature-Curve"""
-        return [point.axial_force for point in self.points]
-
-    @property
-    def strain_differences(self) -> list[float]:
-        """strain differences of the Moment-Axial Force-Curvature-Curve"""
-        return [point.strain_difference for point in self.points]
-
-    @property
-    def strains(self) -> list[float]:
-        """strains that lead to moment-curvature pair"""
-        return [point.strain_position.strain for point in self.points]
-
-    @property
-    def positions(self) -> list[float]:
-        """positions that lead to moment-curvature pair"""
-        return [point.strain_position.position for point in self.points]
-
-    @property
-    def materials(self) -> list[str]:
-        """materials the strain-position-points is obtained from that lead to moment-curvature pair"""
-        return [point.strain_position.material for point in self.points]
-
-    def results_as_dict(self, moment_factor: float = 1.0) -> dict:
-        """
-        The moment-curvature points as descriptive Dictionary.
-
-        Following keys are given with the corresponding lists:
-
-        - ``'Moment'``: computed moments of the Moment-Axial-Force-Curvature curve
-        - ``'Curvature'``: computed curvatures of the Moment-Axial-Force-Curvature curve
-        - ``'Axial-Force'``: computed axial-forces of the Moment-Axial-Force-Curvature curve
-        - ``'Strain-Difference'``: Differences between sub-cross-section of the
-          Moment-Axial-Force-Curvature curve
-        - ``'Strain'``: strains that lead to the above given moment-curvature-pair
-        - ``'Position'``: position that corresponds to the above given strain
-        - ``'Material'``: material ``strain`` and ``position`` are obtained from
-
-        Parameters
-        ----------
-        moment_factor : float
-            factor to compute the moment (default: 1.0)
-
-        Returns
-        -------
-        dict
-            moment-curvature points
-        """
-        return {
-            "Moment": [moment * moment_factor for moment in self.moments],
-            "Curvature": self.curvatures,
-            "Axial-Force": self.axial_forces,
-            "Strain-Difference": self.strain_differences,
-            "Strain": self.strains,
-            "Position": self.positions,
-            "Material": self.materials,
-        }
-
-    @property
-    def points(self) -> list[MNKappaCurvePoint]:
-        """
-        :math:`M`-:math:`\\kappa`-curve points
-        """
-        return self._points
-
-    def add(
-        self,
-        moment: float,
-        curvature: float,
-        neutral_axis: float,
-        axial_force: float,
-        strain_difference: float,
-        cross_section,  # TODO: type-hint
-        strain_position: StrainPosition,
-    ) -> None:
-        """add moment-curvature point to list
-
-        Parameters
-        ----------
-        moment : float
-            computed moment of the point
-        curvature : float
-            computed curvature of the point
-        neutral_axis : float
-            computed neutral-axis leading to equilibrium (after variation)
-        axial_force : float
-            axial_force between sub-cross-sections
-        strain_difference : float
-            difference in strain between sub-cross-sections
-        cross_section : :py:class:`~m_n_kappa.points.MKappaByStrainPosition`
-            computed cross-section
-        strain_position : :py:class:`~m_n_kappa.general.StrainPosition`
-            strain and its position
-        """
-        point = MNKappaCurvePoint(
-            moment,
-            curvature,
-            neutral_axis,
-            axial_force,
-            strain_difference,
-            cross_section,
-            strain_position,
-        )
-        if point not in self.points:
-            self._points.append(point)
-            self._sort_points_by_curvature()
-            logger.info(f"Added {point} to MNKappaCurvePoint\n----")
-
-    def curvature(self, by_moment: float, axial_force: float) -> float:
-        """
-        get curvature at given ``moment`` and ``axial_force``
-
-        Parameters
-        ----------
-        by_moment : float
-            moment the curvature is to be computed from
-        axial_force : float
-
-        Returns
-        -------
-        float
-            curvature :math:`\\kappa` computed from the given ``moment``
-            and ``axial_force``
-
-        Raises
-        ------
-        ValueError
-            in case the moment is outside the computed moment-range
-        """
-        pass  # TODO: compute curvature
-
-    def _moment_curvature(self, by_index: int) -> list[float]:
-        """get moment-curvature of curve-point at given index.rst"""
-        return self.points[by_index].moment_curvature()
-
-    def _curvature_moment(self, by_index: int) -> list[float]:
-        """get curvature-moment of curve-point at given index.rst"""
-        return self.points[by_index].curvature_moment()
-
-    def _determine_index(self, moment: float) -> int:
-        """
-        get index of curve-point that has greater or equal moment as given
-
-        Parameters
-        ----------
-        moment : float
-            moment to find the index.rst of the moment-curvature-index.rst
-
-        Returns
-        -------
-        int
-            index of the moment-curvature-point that has smaller or equal moment
-            than the given moment
-
-        Raises
-        ------
-        ValueError
-            in case no moment is found that lies between two moment-curvature-points
-        """
-        for index in range(len(self.points) - 1):
-            if self.points[index].moment <= moment <= self.points[index + 1].moment:
-                return index
-        raise ValueError(f"No index found for {moment=}")
-
-    def _sort_points_by_curvature(self):
-        """sorts the moment-curvature-points ascending by its curvature"""
-        self.points.sort(key=lambda x: x.curvature)
-
-    def maximum_moment(self) -> float:
-        """computes the maximum moment of the curve"""
-        return max(self.moments)
-
-
 class MNZeroCurvature:
     """
     compute moment and axial force at zero curvature
-
-    .. versionadded:: 0.2.0
     """
 
     __slots__ = (
@@ -350,7 +115,6 @@ class MNZeroCurvature:
         "_axial_force",
     )
 
-    @logs_init
     def __init__(
         self,
         cross_section: Crosssection,
@@ -363,21 +127,23 @@ class MNZeroCurvature:
         solver: Solver = Newton,
     ):
         """
-        Parameters
-        ----------
-        cross_section : :py:class:`~m_n_kappa.Crosssection`
-            given cross-section
+        Initialization
+
+        Paramters
+        ---------
+        cross_section : Crosssection
+                given cross-section
         input_section_type : str
-            section where strain_value is applied to
-            possible values are (steel-)'girder' or (concrete-)'slab'
+                section where strain_value is applied to
+                possible values are (steel-)'girder' or (concrete-)'slab'
         input_strain : str
-            strain_value where axial force and moment were calculated
+                strain_value where axial force and moment were calculated
         axial_force_tolerance : float
-            tolerance of axial force to be met
+                tolerance of axial force to be met
         maximum_iterations : int
-            maximum number of iterations
+                maximum number of iterations
         solver : solver.Solver
-            solver to compute the axial force
+                solver to compute the axial force
         """
         self._cross_section = cross_section
         self._input_section_type = input_section_type
@@ -397,12 +163,7 @@ class MNZeroCurvature:
         self.other_sections_initialize()
 
     def __repr__(self):
-        return (
-            f"MNZeroCurvature("
-            f"cross_section=cross_section, "
-            f"input_section_type={self.input_section_type}, "
-            f"input_strain={self.input_strain})"
-        )
+        return f"MNZeroCurvature(cross_section=cross_section, input_section_type={self.input_section_type}, input_strain={self.input_strain})"
 
     def __str__(self):
         text = [
@@ -619,12 +380,10 @@ class MNZeroCurvatureCurve:
     """
     computes the moment and axial-force curve of a cross-section in case of no curvature
 
-    .. versionadded:: 0.2.0
-
     procedure:
-        1. determine strains in the sub-cross-sections (girder and slab)
-        2. compute strain_value at the corresponding counter-sections
-        3. determine moment, axial-force, strain_value-difference, etc.r
+            1. determine strains in the sub-cross-sections (girder and slab)
+            2. compute strain_value at the corresponding counter-sections
+            3. determine moment, axial-force, strain_value-difference, etc.r
     """
 
     __slots__ = (
@@ -634,13 +393,14 @@ class MNZeroCurvatureCurve:
         "_m_n_points",
     )
 
-    @logs_init
     def __init__(self, cross_section: Crosssection):
         """
+        Initialization
+
         Parameters
         ----------
-        cross_section : :py:class:`~m_n_kappa.Crosssection`
-            cross_section to compute
+        cross_section : Crosssection
+                cross_section to compute
         """
         self._cross_section = cross_section
         self._section_results = []
@@ -912,13 +672,8 @@ class MNZeroCurvatureCurve:
 
 
 class MCurvatureCurve:
-    """
+    """ """
 
-    .. versionadded:: 0.2.0
-
-    """
-
-    @logs_init
     def __init__(self, cross_section: Crosssection, axial_force: float):
         self._cross_section = cross_section
         self._axial_force: float
@@ -938,35 +693,30 @@ class MCurvatureCurve:
 class MNCurvatureCurve:
 
     """
-    compute all points of the M-N-Curvature-Curve
-
-    .. versionadded:: 0.2.0
+    compute the M-N-Curvature-Curve
 
     procedure:
-        1.
+            1.
     """
 
-    @logs_init
     def __init__(self, cross_section: Crosssection, m_n_points: list):
         """
+        Initialization
+
         Parameters
         ----------
-        cross_section : :py:class:`~m_n_kappa.Crosssection`
-            cross_section
+        cross_section : Crosssection
+                cross_section
         m_n_points : list
-            computed moment-axial-force-points without curvature
-            serves as starting points
+                list of computed moment-axial-force-points without curvature
+                serves as starting points
         """
         self._cross_section = cross_section
         self._m_n_points = m_n_points
         self._m_n_curvature_points = []
 
     def __repr__(self):
-        return (
-            f"MNCurvatureCurve("
-            f"cross_section={self.cross_section}, "
-            f"m_n_points={self.m_n_points})"
-        )
+        return f"MNCurvatureCurve(cross_section={self.cross_section}, m_n_points={self.m_n_points})"
 
     @str_start_end
     def __str__(self):
@@ -1003,14 +753,11 @@ class MKappaAtAxialForce:
     """
     compute M-Kappa-Curve at given axial force
 
-    .. versionadded:: 0.2.0
-
     procedure:
-        1. get maximum curvature
-        2.
+            1. get maximum curvature
+            2.
     """
 
-    @logs_init
     def __init__(self, cross_section: Crosssection, axial_force: float):
         self._cross_section = cross_section
         self._axial_force = axial_force
