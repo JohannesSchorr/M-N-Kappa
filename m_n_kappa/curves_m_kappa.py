@@ -1,7 +1,7 @@
 from dataclasses import dataclass
 
 from .crosssection import Crosssection
-from .curvature_boundaries import BoundaryValues, Boundaries
+from .boundaries import BoundaryValues, Boundaries
 
 from .general import (
     interpolation,

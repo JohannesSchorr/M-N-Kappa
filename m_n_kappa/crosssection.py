@@ -15,11 +15,12 @@ from .section import (
     ComputationSectionCurvature,
 )
 
-from .curvature_boundaries import (
+from .boundaries import (
     MaximumCurvature,
     MinimumCurvature,
     Boundaries,
     BoundaryValues,
+    DecisiveNeutralAxis,
 )
 
 from .log import LoggerMethods
@@ -391,7 +392,7 @@ class Crosssection:
 
         Returns
         -------
-        :py:class:`~m_n_kappa.curvature_boundaries.Boundaries`
+        :py:class:`~m_n_kappa.boundaries.Boundaries`
             curvature boundary values under positive and negative curvature
 
         See Also
@@ -1240,7 +1241,7 @@ class CrossSectionBoundaries(Crosssection):
 
         Returns
         -------
-        :py:class:`~m_n_kappa.curvature_boundaries.Boundaries`
+        :py:class:`~m_n_kappa.boundaries.Boundaries`
             curvature boundary values under positive and negative curvature
             derived from the given material curves
         """
