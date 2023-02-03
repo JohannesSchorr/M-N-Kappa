@@ -925,9 +925,11 @@ class MKappaAtAxialForce:
     """
     compute M-Kappa-Curve at given axial force
 
+    .. versionadded:: 0.2.0
+
     procedure:
-            1. get maximum curvature
-            2.
+        1. get maximum curvature
+        2.
     """
 
     @logs_init
