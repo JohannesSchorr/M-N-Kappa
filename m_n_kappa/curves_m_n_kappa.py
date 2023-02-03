@@ -272,6 +272,7 @@ class MNZeroCurvature:
         "_axial_force",
     )
 
+    @logs_init
     def __init__(
         self,
         cross_section: Crosssection,
