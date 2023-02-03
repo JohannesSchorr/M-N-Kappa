@@ -946,6 +946,7 @@ class MNCurvatureCurve:
         1.
     """
 
+    @logs_init
     def __init__(self, cross_section: Crosssection, m_n_points: list):
         """
         Parameters
