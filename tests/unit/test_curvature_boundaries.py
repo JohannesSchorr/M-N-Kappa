@@ -9,8 +9,10 @@ from m_n_kappa.boundaries import (
     MaximumCurvature,
     MinimumCurvature,
 )
-from m_n_kappa import StrainPosition, Concrete, Steel, Rectangle, Crosssection
+from m_n_kappa.general import StrainPosition
 from m_n_kappa.crosssection import CrossSectionBoundaries
+from m_n_kappa.material import Concrete, Steel
+from m_n_kappa.geometry import Rectangle
 
 # Concrete section
 f_cm = 30
@@ -164,13 +166,13 @@ class TestMaximumCurvature(TestCase):
 class TestMinimumCurvature(TestCase):
     def setUp(self):
         """
-        Assumes steel-rectangle of S355 material
+        Asssume steel-rectangel of S355 material
         """
         self.top_edge = 0.0
         self.bottom_edge = 10.0
         self.material = "Steel"
-        self.maximum_strain = 0.15
-        self.minimum_strain = -0.15
+        self.maximum_strain = 355.0
+        self.minimum_strain = -355.0
         self.maximum_positive_section_strains = [
             StrainPosition(self.maximum_strain, self.top_edge, self.material),
             StrainPosition(self.maximum_strain, self.bottom_edge, self.material),
@@ -187,10 +189,10 @@ class TestMinimumCurvature(TestCase):
 
     def test_positive_curvature_compute(self):
         position = 0.5 * (self.bottom_edge - self.top_edge)
-        strain_position = StrainPosition(strain=0.01, position=position, material="Steel")
-        self.assertAlmostEqual(
+        strain_position = StrainPosition(0.0, position=position, material="Steel")
+        self.assertEqual(
             self.minimum_curvature.compute(strain_position),
-            0.0001 / (position - self.top_edge),
+            self.maximum_strain - self.maximum_strain,
         )
 
     def test_negative_curvature_compute(self):
@@ -370,10 +372,19 @@ class TestGetBoundariesSteelSection(TestCase):
             + self.i_profile.h_w
             + self.i_profile.t_fu
         )
+        print(
+            self.bottom_edge,
+            self.strain_position.position,
+            self.bottom_edge - self.strain_position.position,
+        )
         self.assertAlmostEqual(
             self.boundaries.positive.minimum_curvature.compute(self.strain_position),
-            0.0001 / (self.strain_position.position - self.i_profile.top_edge)
+            (self.steel.maximum_strain - self.strain_position.strain)
+            / (self.bottom_edge - self.strain_position.position),
         )
+
+
+from m_n_kappa.crosssection import Crosssection
 
 
 class TestGetBoundariesConcreteSection(TestCase):
@@ -456,9 +467,9 @@ class TestGetBoundariesReinforcement(TestCase):
     def test_positive_minimum_curvature(self):
         self.assertAlmostEqual(
             self.boundaries.positive.minimum_curvature.compute(
-                StrainPosition(-0.15, 25, "Reinforcement")
+                StrainPosition(-0.15, 0.25, "Reinforcement")
             ),
-            0.0001 / (50 + 10/2),
+            0.0001 / 45,
         )
 
 
