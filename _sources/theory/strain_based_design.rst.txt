@@ -8,7 +8,8 @@ Strain based design
 Introduction
 ============
 
-:ref:`theory.sections` indicates how axial force and moment are computed for a :ref:`theory.sections.sections` and
+:ref:`theory.sections` indicates how axial force and moment are
+computed for a :ref:`theory.sections.sections` and
 :ref:`theory.sections.cross_section` under a given strain-distribution.
 
 
@@ -17,22 +18,31 @@ Introduction
 Aim
 ===
 
-The aim is to find a distribution of strains over a beam cross-section leading to an equilibrium of the horizontal forces
-:math:`H` (see Formula :math:numref:`eq:theory.strain_based_design.equilibrium`).
-In consequence the summarized axial forces of all sub-sections :math:`N_i` must become zero.
+The aim is to find a distribution of strains over a beam cross-section
+leading to an equilibrium of the horizontal forces :math:`H` (see Formula
+:math:numref:`eq:theory.strain_based_design.equilibrium`).
+In consequence the summarized axial forces of all sub-sections :math:`N_i`
+must become zero.
+This may also consider an applied axial-force :math:`N_\mathrm{applied}`.
 
 .. math::
    :label: eq:theory.strain_based_design.equilibrium
 
-   H = \sum N_i = 0
+   H = \sum N_i - N_\mathrm{applied} = 0
 
-The strain-distribution leading to equilibrium of the axial-forces is found by iteration.
+The strain-distribution leading to equilibrium of the axial-forces is found
+by :ref:`iteration <theory.strain_based_design.equilibrium>`.
 
 
 .. _theory.strain_based_design.boundary_values:
 
 Boundary values
 ===============
+
+.. _theory.strain_based_design.boundary_values.curvature:
+
+Curvature
+---------
 
 .. figure:: ../images/strain_based_design_max_curvature-light.svg
    :class: only-light
@@ -42,9 +52,10 @@ Boundary values
    Computation of maximum possible curvature
 
 Before the iteration is started boundary-values are determined.
-In case the iteration aims to determine the neutral-axis :math:`z_\mathrm{n}`
-and the curvature :math:`\kappa` this means a maximum curvature :math:`\kappa_\mathrm{max}`
-and a minimum curvature  :math:`\kappa_\mathrm{min}`.
+In case the iteration aims to determine the neutral-axis
+:math:`z_\mathrm{n}` and the curvature :math:`\kappa` this means
+a maximum curvature :math:`\kappa_\mathrm{max}` and a minimum
+curvature  :math:`\kappa_\mathrm{min}`.
 
 For the maximum curvature :math:`\kappa_\mathrm{max}` (positive or negative)
 first the maximum and minimum strains at bottom- and top-edge of each
@@ -67,7 +78,7 @@ Finding equilibrium of axial forces
 
 To find the equilibrium of axial forces a Newton-algorithm is used
 as given in formula :math:numref:`eq:theory.strain_based_design_newton`.
-As variable the neutral axis :math:`z_\mathrm{n}` was used.
+The neutral axis :math:`z_\mathrm{n}` is used as variable :math:`x`.
 
 .. math::
    :label: eq:theory.strain_based_design_newton

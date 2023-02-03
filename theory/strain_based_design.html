@@ -330,22 +330,29 @@
 <span id="theory-strain-based-design"></span><h1>Strain based design<a class="headerlink" href="#strain-based-design" title="Permalink to this heading">#</a></h1>
 <section id="introduction">
 <span id="theory-strain-based-design-intro"></span><h2>Introduction<a class="headerlink" href="#introduction" title="Permalink to this heading">#</a></h2>
-<p><a class="reference internal" href="sections.html#theory-sections"><span class="std std-ref">Sections and cross-sections</span></a> indicates how axial force and moment are computed for a <a class="reference internal" href="sections.html#theory-sections-sections"><span class="std std-ref">Sections</span></a> and
+<p><a class="reference internal" href="sections.html#theory-sections"><span class="std std-ref">Sections and cross-sections</span></a> indicates how axial force and moment are
+computed for a <a class="reference internal" href="sections.html#theory-sections-sections"><span class="std std-ref">Sections</span></a> and
 <a class="reference internal" href="sections.html#theory-sections-cross-section"><span class="std std-ref">Cross-section</span></a> under a given strain-distribution.</p>
 </section>
 <section id="aim">
 <span id="theory-strain-based-design-aim"></span><h2>Aim<a class="headerlink" href="#aim" title="Permalink to this heading">#</a></h2>
-<p>The aim is to find a distribution of strains over a beam cross-section leading to an equilibrium of the horizontal forces
-<span class="math notranslate nohighlight">\(H\)</span> (see Formula <a class="reference internal" href="#equation-eq-theory-strain-based-design-equilibrium">(1)</a>).
-In consequence the summarized axial forces of all sub-sections <span class="math notranslate nohighlight">\(N_i\)</span> must become zero.</p>
+<p>The aim is to find a distribution of strains over a beam cross-section
+leading to an equilibrium of the horizontal forces <span class="math notranslate nohighlight">\(H\)</span> (see Formula
+<a class="reference internal" href="#equation-eq-theory-strain-based-design-equilibrium">(1)</a>).
+In consequence the summarized axial forces of all sub-sections <span class="math notranslate nohighlight">\(N_i\)</span>
+must become zero.
+This may also consider an applied axial-force <span class="math notranslate nohighlight">\(N_\mathrm{applied}\)</span>.</p>
 <div class="math-wrapper docutils container" id="equation-eq-theory-strain-based-design-equilibrium">
 <div class="math notranslate nohighlight" id="equation-eq-theory-strain-based-design-equilibrium">
-<span class="eqno">(1)<a class="headerlink" href="#equation-eq-theory-strain-based-design-equilibrium" title="Permalink to this equation">#</a></span>\[H = \sum N_i = 0\]</div>
+<span class="eqno">(1)<a class="headerlink" href="#equation-eq-theory-strain-based-design-equilibrium" title="Permalink to this equation">#</a></span>\[H = \sum N_i - N_\mathrm{applied} = 0\]</div>
 </div>
-<p>The strain-distribution leading to equilibrium of the axial-forces is found by iteration.</p>
+<p>The strain-distribution leading to equilibrium of the axial-forces is found
+by <a class="reference internal" href="#theory-strain-based-design-equilibrium"><span class="std std-ref">iteration</span></a>.</p>
 </section>
 <section id="boundary-values">
 <span id="theory-strain-based-design-boundary-values"></span><h2>Boundary values<a class="headerlink" href="#boundary-values" title="Permalink to this heading">#</a></h2>
+<section id="curvature">
+<span id="theory-strain-based-design-boundary-values-curvature"></span><h3>Curvature<a class="headerlink" href="#curvature" title="Permalink to this heading">#</a></h3>
 <figure class="align-default">
 <img alt="../_images/strain_based_design_max_curvature-light.svg" class="only-light" src="../_images/strain_based_design_max_curvature-light.svg" /></figure>
 <figure class="align-default" id="id1">
@@ -354,9 +361,10 @@ In consequence the summarized axial forces of all sub-sections <span class="math
 </figcaption>
 </figure>
 <p>Before the iteration is started boundary-values are determined.
-In case the iteration aims to determine the neutral-axis <span class="math notranslate nohighlight">\(z_\mathrm{n}\)</span>
-and the curvature <span class="math notranslate nohighlight">\(\kappa\)</span> this means a maximum curvature <span class="math notranslate nohighlight">\(\kappa_\mathrm{max}\)</span>
-and a minimum curvature  <span class="math notranslate nohighlight">\(\kappa_\mathrm{min}\)</span>.</p>
+In case the iteration aims to determine the neutral-axis
+<span class="math notranslate nohighlight">\(z_\mathrm{n}\)</span> and the curvature <span class="math notranslate nohighlight">\(\kappa\)</span> this means
+a maximum curvature <span class="math notranslate nohighlight">\(\kappa_\mathrm{max}\)</span> and a minimum
+curvature  <span class="math notranslate nohighlight">\(\kappa_\mathrm{min}\)</span>.</p>
 <p>For the maximum curvature <span class="math notranslate nohighlight">\(\kappa_\mathrm{max}\)</span> (positive or negative)
 first the maximum and minimum strains at bottom- and top-edge of each
 section are determined.
@@ -369,11 +377,12 @@ In case this zero curvature leads to a strain in the several sections
 that is above the maximum or below the minium strain then the
 minimum curvature is adapted appropriately.</p>
 </section>
+</section>
 <section id="finding-equilibrium-of-axial-forces">
 <span id="theory-strain-based-design-equilibrium"></span><h2>Finding equilibrium of axial forces<a class="headerlink" href="#finding-equilibrium-of-axial-forces" title="Permalink to this heading">#</a></h2>
 <p>To find the equilibrium of axial forces a Newton-algorithm is used
 as given in formula <a class="reference internal" href="#equation-eq-theory-strain-based-design-newton">(2)</a>.
-As variable the neutral axis <span class="math notranslate nohighlight">\(z_\mathrm{n}\)</span> was used.</p>
+The neutral axis <span class="math notranslate nohighlight">\(z_\mathrm{n}\)</span> is used as variable <span class="math notranslate nohighlight">\(x\)</span>.</p>
 <div class="math-wrapper docutils container" id="equation-eq-theory-strain-based-design-newton">
 <div class="math notranslate nohighlight" id="equation-eq-theory-strain-based-design-newton">
 <span class="eqno">(2)<a class="headerlink" href="#equation-eq-theory-strain-based-design-newton" title="Permalink to this equation">#</a></span>\[x_\mathrm{n+1} = x_\mathrm{n} - \frac{f(x_\mathrm{n})}{f'(x_\mathrm{n})}\]</div>
@@ -460,7 +469,10 @@ material models.</p>
 <li><a class="reference internal" href="#">Strain based design</a><ul>
 <li><a class="reference internal" href="#introduction">Introduction</a></li>
 <li><a class="reference internal" href="#aim">Aim</a></li>
-<li><a class="reference internal" href="#boundary-values">Boundary values</a></li>
+<li><a class="reference internal" href="#boundary-values">Boundary values</a><ul>
+<li><a class="reference internal" href="#curvature">Curvature</a></li>
+</ul>
+</li>
 <li><a class="reference internal" href="#finding-equilibrium-of-axial-forces">Finding equilibrium of axial forces</a></li>
 </ul>
 </li>
