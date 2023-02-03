@@ -930,6 +930,7 @@ class MKappaAtAxialForce:
             2.
     """
 
+    @logs_init
     def __init__(self, cross_section: Crosssection, axial_force: float):
         self._cross_section = cross_section
         self._axial_force = axial_force
