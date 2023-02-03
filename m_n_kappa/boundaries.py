@@ -2,9 +2,12 @@ from dataclasses import dataclass
 
 from .general import StrainPosition, EdgeStrains, neutral_axis
 
-from .log import LoggerMethods
+from .log import log_init, logging, log_return
+from functools import partial
 
-log = LoggerMethods(__name__)
+logger = logging.getLogger(__name__)
+logs_init = partial(log_init, logger=logger)
+logs_return = partial(log_return, logger=logger)
 
 
 def compute_curvatures(
@@ -124,7 +127,7 @@ class MaximumCurvature:
     maximum_negative_section_strains: list[StrainPosition]
 
     def __post_init__(self):
-        log.info(f"Finished {self.__repr__()}")
+        logger.info(f"Finished {self.__repr__()}")
 
     @property
     def positive(self) -> list[StrainPosition]:
@@ -136,7 +139,7 @@ class MaximumCurvature:
         """maximum negative :py:class:`~m_n_kappa.StrainPosition` of all materials and positions"""
         return self.maximum_negative_section_strains
 
-    @log.result
+    @logs_return
     def compute(self, strain_position: StrainPosition) -> float:
         """
         maximum curvature for given strain_value at given position_value
@@ -244,11 +247,11 @@ class MaximumCurvature:
         edge_strains = compute_curvatures(strain_position, position_strains)
         decisive_edge_strain = max(edge_strains, key=lambda x: x.curvature)
         if decisive_edge_strain.top_edge_strain == strain_position:
-            log.info(
+            logger.info(
                 f"Decisive strain-position values: {decisive_edge_strain.bottom_edge_strain}"
             )
         else:
-            log.info(
+            logger.info(
                 f"Decisive strain-position values: {decisive_edge_strain.top_edge_strain}"
             )
         return decisive_edge_strain.curvature
@@ -277,11 +280,11 @@ class MaximumCurvature:
         edge_strains = compute_curvatures(strain_position, position_strains)
         decisive_edge_strain = min(edge_strains, key=lambda x: x.curvature)
         if decisive_edge_strain.top_edge_strain == strain_position:
-            log.info(
+            logger.info(
                 f"Decisive strain-position values: {decisive_edge_strain.bottom_edge_strain}"
             )
         else:
-            log.info(
+            logger.info(
                 f"Decisive strain-position values: {decisive_edge_strain.top_edge_strain}"
             )
         return decisive_edge_strain.curvature
@@ -308,7 +311,7 @@ class MinimumCurvature:
     curvature_is_positive: bool
 
     def __post_init__(self):
-        log.info(f"Created {self.__repr__()}")
+        logger.info(f"Created {self.__repr__()}")
         self._top_edge = min(self.all, key=lambda x: x.position).position  # top-edge
         self._bottom_edge = max(
             self.all, key=lambda x: x.position
@@ -337,7 +340,7 @@ class MinimumCurvature:
     def bottom_edge(self) -> float:
         return self._bottom_edge
 
-    @log.result
+    @logs_return
     def compute(self, strain_position: StrainPosition) -> float:
         """
         compute the minimum possible curvature considering the strain at a position (``strain_position``)
@@ -356,30 +359,30 @@ class MinimumCurvature:
             <= strain_position.strain
             <= min(self.positive, key=lambda x: x.strain).strain
         ):
-            log.debug(
+            logger.debug(
                 f"{strain_position} within minimal positive and negative strains"
             )
             position_strains = self.__edge_positions(strain_position)
             edge_strains = compute_curvatures(strain_position, position_strains)
             decisive_edge_strain = min(edge_strains, key=lambda x: abs(x.curvature))
         else:
-            log.debug(
+            logger.debug(
                 f"{strain_position} outside minimal positive and negative strains"
             )
             position_strains = self.__get_position_strains(strain_position)
             edge_strains = compute_curvatures(strain_position, position_strains)
             decisive_edge_strain = max(edge_strains, key=lambda x: abs(x.curvature))
         if decisive_edge_strain.top_edge_strain == strain_position:
-            log.info(
+            logger.info(
                 f"Decisive strain-position value for {strain_position=}: {decisive_edge_strain.bottom_edge_strain}"
             )
         else:
-            log.info(
+            logger.info(
                 f"Decisive strain-position value for {strain_position=}: {decisive_edge_strain.top_edge_strain}"
             )
         return decisive_edge_strain.curvature
 
-    @log.result
+    @logs_return
     def __edge_positions(
         self, strain_position: StrainPosition, additional_strain: float = 0.0001
     ) -> list[StrainPosition]:
@@ -422,12 +425,12 @@ class MinimumCurvature:
                     material="-",
                 ),
             ]
-        log.info(
+        logger.info(
             f"Top-Edge: {strain_positions[0]}, Bottom-Edge: {strain_positions[1]}"
         )
         return strain_positions
 
-    @log.result
+    @logs_return
     def __get_position_strains(
         self, strain_position: StrainPosition
     ) -> list[StrainPosition]:
@@ -606,9 +609,9 @@ class DecisiveNeutralAxis:
     maximum_negative_section_strains: list[StrainPosition]
 
     def __post_init__(self):
-        log.info(f"Finished {self.__repr__()}")
+        logger.info(f"Finished {self.__repr__()}")
 
-    @log.result
+    @logs_return
     def compute(self, curvature: float) -> tuple[float, float]:
         """
         compute the highest and the lowest possible neutral-axis under the given curvature
