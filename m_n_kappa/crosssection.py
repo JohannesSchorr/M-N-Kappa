@@ -1235,6 +1235,10 @@ class CrossSectionBoundaries(Crosssection):
         """
         curvature boundary values under positive and negative curvature
 
+        .. versionadded:: 0.2.0
+               ``neutral_axes`` to compute the highest and lowest position of
+               the neutral axis under a given curvature
+
         The boundary values are derived from the stress-strain-curves
         applied to the sections that are associated with the given
         cross-section
@@ -1248,6 +1252,9 @@ class CrossSectionBoundaries(Crosssection):
         return Boundaries(
             positive=self.__get_positive_boundaries(),
             negative=self.__get_negative_boundaries(),
+            neutral_axes=DecisiveNeutralAxis(
+                self._sections_maximum_strains, self._sections_minimum_strains
+            ),
         )
 
     @log.result

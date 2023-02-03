@@ -1,6 +1,6 @@
 from dataclasses import dataclass
 
-from .general import StrainPosition, EdgeStrains
+from .general import StrainPosition, EdgeStrains, neutral_axis
 
 from .log import LoggerMethods
 
@@ -588,6 +588,96 @@ class MinimumCurvature:
 
 
 @dataclass
+class DecisiveNeutralAxis:
+    """
+    compute decisive neutral axis
+
+    .. versionadded:: 0.2.0
+
+    Parameters
+    ----------
+    maximum_positive_section_strains : list
+        maximum positive material strains of the sections in the cross_section
+    maximum_negative_section_strains : list
+        maximum negative material strains of the sections in the cross_section
+    """
+
+    maximum_positive_section_strains: list[StrainPosition]
+    maximum_negative_section_strains: list[StrainPosition]
+
+    def __post_init__(self):
+        logger.info(f"Finished {self.__repr__()}")
+
+    @logs_return
+    def compute(self, curvature: float) -> tuple[float, float]:
+        """
+        compute the highest and the lowest possible neutral-axis under the given curvature
+
+        The vertical position of the neutral axis under constant ``curvature``
+        indicates the maximum and the minimum axial forces.
+        The computation of the neutral-axis must consider the ``curvature``
+        as well as the ``maximum_positive_section_strains`` and
+        ``maximum_negative_section_strains``.
+        Otherwise, iterating on the axial force may fail due to exceeding
+        the maximum and minimum strains of a material.
+
+        Parameters
+        ----------
+        curvature : float
+            curvature-value working as boundary that needs to be fulfilled
+
+        Returns
+        -------
+        tuple(float, float)
+            highest and the lowest possible neutral-axis under the given curvature
+
+        See Also
+        --------
+        :ref:`theory.strain_based_design.boundary_values.neutral_axis` : Neutral-axis
+           baundary-values in the :ref:`theory`.
+        """
+        if curvature > 0.0:
+            # vertical position of point below neutral axis (in coordinates: position < neutral_axis)
+            max_neutral_axis = max(
+                [
+                    neutral_axis(
+                        strain_position.strain, curvature, strain_position.position
+                    )
+                    for strain_position in self.maximum_positive_section_strains
+                ]
+            )
+            # vertical position of point above neutral axis (position < neutral_axis)
+            min_neutral_axis = min(
+                [
+                    neutral_axis(
+                        strain_position.strain, curvature, strain_position.position
+                    )
+                    for strain_position in self.maximum_negative_section_strains
+                ]
+            )
+        else:
+            # vertical position of point above neutral axis (position < neutral_axis)
+            min_neutral_axis = min(
+                [
+                    neutral_axis(
+                        strain_position.strain, curvature, strain_position.position
+                    )
+                    for strain_position in self.maximum_positive_section_strains
+                ]
+            )
+            # vertical position of point below neutral axis (in coordinates: position < neutral_axis)
+            max_neutral_axis = max(
+                [
+                    neutral_axis(
+                        strain_position.strain, curvature, strain_position.position
+                    )
+                    for strain_position in self.maximum_negative_section_strains
+                ]
+            )
+        return min_neutral_axis, max_neutral_axis
+
+
+@dataclass
 class BoundaryValues:
     """store boundary condition values
 
@@ -607,13 +697,23 @@ class BoundaryValues:
 class Boundaries:
     """store boundary conditions
 
+    .. versionadded:: 0.1.0
+
+    .. versionadded:: 0.2.0
+       ``neutral_axes`` for computation of boundary-values of neutral
+       axis
+
     Parameters
     ----------
     positive : BoundaryValues
         container for the positive boundary condition values
     negative : BoundaryValues
         container for the negative boundary condition values
+    neutral_axes : DecisiveNeutralAxis
+        use to compute the decisive neutral axes (min/max) of
+        the cross-section
     """
 
     positive: BoundaryValues
     negative: BoundaryValues
+    neutral_axes: DecisiveNeutralAxis
