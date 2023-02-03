@@ -248,6 +248,8 @@ class MNKappaCurvePoints:
 class MNZeroCurvature:
     """
     compute moment and axial force at zero curvature
+
+    .. versionadded:: 0.2.0
     """
 
     __slots__ = (
@@ -282,23 +284,21 @@ class MNZeroCurvature:
         solver: Solver = Newton,
     ):
         """
-        Initialization
-
-        Paramters
-        ---------
-        cross_section : Crosssection
-                given cross-section
+        Parameters
+        ----------
+        cross_section : :py:class:`~m_n_kappa.Crosssection`
+            given cross-section
         input_section_type : str
-                section where strain_value is applied to
-                possible values are (steel-)'girder' or (concrete-)'slab'
+            section where strain_value is applied to
+            possible values are (steel-)'girder' or (concrete-)'slab'
         input_strain : str
-                strain_value where axial force and moment were calculated
+            strain_value where axial force and moment were calculated
         axial_force_tolerance : float
-                tolerance of axial force to be met
+            tolerance of axial force to be met
         maximum_iterations : int
-                maximum number of iterations
+            maximum number of iterations
         solver : solver.Solver
-                solver to compute the axial force
+            solver to compute the axial force
         """
         self._cross_section = cross_section
         self._input_section_type = input_section_type
@@ -318,7 +318,12 @@ class MNZeroCurvature:
         self.other_sections_initialize()
 
     def __repr__(self):
-        return f"MNZeroCurvature(cross_section=cross_section, input_section_type={self.input_section_type}, input_strain={self.input_strain})"
+        return (
+            f"MNZeroCurvature("
+            f"cross_section=cross_section, "
+            f"input_section_type={self.input_section_type}, "
+            f"input_strain={self.input_strain})"
+        )
 
     def __str__(self):
         text = [
