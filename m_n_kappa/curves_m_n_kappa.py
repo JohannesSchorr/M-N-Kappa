@@ -938,30 +938,34 @@ class MCurvatureCurve:
 class MNCurvatureCurve:
 
     """
-    compute the M-N-Curvature-Curve
+    compute all points of the M-N-Curvature-Curve
+
+    .. versionadded:: 0.2.0
 
     procedure:
-            1.
+        1.
     """
 
     def __init__(self, cross_section: Crosssection, m_n_points: list):
         """
-        Initialization
-
         Parameters
         ----------
-        cross_section : Crosssection
-                cross_section
+        cross_section : :py:class:`~m_n_kappa.Crosssection`
+            cross_section
         m_n_points : list
-                list of computed moment-axial-force-points without curvature
-                serves as starting points
+            computed moment-axial-force-points without curvature
+            serves as starting points
         """
         self._cross_section = cross_section
         self._m_n_points = m_n_points
         self._m_n_curvature_points = []
 
     def __repr__(self):
-        return f"MNCurvatureCurve(cross_section={self.cross_section}, m_n_points={self.m_n_points})"
+        return (
+            f"MNCurvatureCurve("
+            f"cross_section={self.cross_section}, "
+            f"m_n_points={self.m_n_points})"
+        )
 
     @str_start_end
     def __str__(self):
