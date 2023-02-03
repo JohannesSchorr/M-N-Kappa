@@ -621,6 +621,7 @@ class ComputationCrosssectionStrain(ComputationCrosssection):
 
     """
     computes a cross-section under a constant strain_value
+    assuming zero curvature
 
     .. versionadded:: 0.1.0
     """
