@@ -556,6 +556,7 @@ class MNZeroCurvatureCurve:
         "_m_n_points",
     )
 
+    @logs_init
     def __init__(self, cross_section: Crosssection):
         """
         Parameters
