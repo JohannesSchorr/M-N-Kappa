@@ -912,8 +912,13 @@ class MNZeroCurvatureCurve:
 
 
 class MCurvatureCurve:
-    """ """
+    """
 
+    .. versionadded:: 0.2.0
+
+    """
+
+    @logs_init
     def __init__(self, cross_section: Crosssection, axial_force: float):
         self._cross_section = cross_section
         self._axial_force: float
