@@ -541,10 +541,12 @@ class MNZeroCurvatureCurve:
     """
     computes the moment and axial-force curve of a cross-section in case of no curvature
 
+    .. versionadded:: 0.2.0
+
     procedure:
-            1. determine strains in the sub-cross-sections (girder and slab)
-            2. compute strain_value at the corresponding counter-sections
-            3. determine moment, axial-force, strain_value-difference, etc.r
+        1. determine strains in the sub-cross-sections (girder and slab)
+        2. compute strain_value at the corresponding counter-sections
+        3. determine moment, axial-force, strain_value-difference, etc.r
     """
 
     __slots__ = (
@@ -556,12 +558,10 @@ class MNZeroCurvatureCurve:
 
     def __init__(self, cross_section: Crosssection):
         """
-        Initialization
-
         Parameters
         ----------
-        cross_section : Crosssection
-                cross_section to compute
+        cross_section : :py:class:`~m_n_kappa.Crosssection`
+            cross_section to compute
         """
         self._cross_section = cross_section
         self._section_results = []
