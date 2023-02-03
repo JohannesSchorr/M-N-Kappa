@@ -106,7 +106,7 @@ Cross-sections
 Cross-section boundaries
 ========================
 
-.. currentmodule:: m_n_kappa.curvature_boundaries
+.. currentmodule:: m_n_kappa.boundaries
 
 .. rubric:: Classes
 
