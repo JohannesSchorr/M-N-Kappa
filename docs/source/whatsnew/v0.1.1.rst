@@ -4,7 +4,14 @@ What's new in 0.1.1 (?? 2023)
 ******************************************
 
 These are the changes in m_n_kappa 0.1.1.
-See :ref:`release` for a full changelog including other versions of pandas.
+See :ref:`release` for a full changelog including other versions of m_n_kappa.
+
+Documentation
+=============
+
+Templates
+---------
+- :ref:`cross_section_template.slim_floor_i_profile`
 
 .. _whatsnew011.bug_fixes:
 
