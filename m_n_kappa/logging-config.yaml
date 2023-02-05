@@ -23,6 +23,10 @@ loggers:
     level: WARN
     handlers: [ console ]
     propagate: no
+  m_n_kappa.curves_m_n_kappa:
+    level: WARN
+    handlers: [ console ]
+    propagate: no
   m_n_kappa.deformation:
     level: WARN
     handlers: [ console ]
