@@ -450,10 +450,6 @@ class MKappaByStrainPosition(MKappa):
         solver : :py:class:`~m_n_kappa.solver.Solver`
             used solver (Default: solver.Newton)
         """
-        logger.info(
-            f"----\nInitialize {self.__class__.__name__}("
-            f"{strain_position=}, {maximum_curvature=}, {minimum_curvature=})"
-        )
         super().__init__(
             cross_section,
             applied_axial_force,
