@@ -31,7 +31,6 @@
       ~Bisection.maximum_variable
       ~Bisection.minimum_variable
       ~Bisection.target
-      ~Bisection.target_value
       ~Bisection.variable
       ~Bisection.x_n
       ~Bisection.x_n_plus_1

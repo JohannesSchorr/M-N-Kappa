@@ -29,7 +29,6 @@
       ~Newton.maximum_variable
       ~Newton.minimum_variable
       ~Newton.target
-      ~Newton.target_value
       ~Newton.variable
       ~Newton.x_n
       ~Newton.x_n_plus_1

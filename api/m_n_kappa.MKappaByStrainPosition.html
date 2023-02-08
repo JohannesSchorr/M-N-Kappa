@@ -428,7 +428,7 @@ classified as successful (Default: 5.0)</p></li>
 <td><p>position_value of the given strain_value</p></td>
 </tr>
 <tr class="row-odd"><td><p><a class="reference internal" href="#m_n_kappa.MKappaByStrainPosition.successful" title="m_n_kappa.MKappaByStrainPosition.successful"><code class="xref py py-obj docutils literal notranslate"><span class="pre">successful</span></code></a></p></td>
-<td><p>equilibrium has been found, False: equilibrium has not (yet) been found</p></td>
+<td><p>equilibrium has been found, <code class="docutils literal notranslate"><span class="pre">False</span></code>: equilibrium has not (yet) been found</p></td>
 </tr>
 </tbody>
 </table>
@@ -438,12 +438,22 @@ classified as successful (Default: 5.0)</p></li>
 <span class="sig-name descname"><span class="pre">compute</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#m_n_kappa.MKappaByStrainPosition.compute" title="Permalink to this definition">#</a></dt>
 <dd><p>compute the cross-section with given initial values (curvature and neutral axis)
 and save it</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>None</p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="m_n_kappa.MKappaByStrainPosition.initialize">
 <span class="sig-name descname"><span class="pre">initialize</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#m_n_kappa.MKappaByStrainPosition.initialize" title="Permalink to this definition">#</a></dt>
 <dd><p>initialize computation</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>None</p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="py method">
@@ -452,6 +462,11 @@ and save it</p>
 <dd><p>iterate as long as one of the following criteria are reached:
 - number of maximum iterations
 - absolute axial force smaller than desired one</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>None</p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="py property">
@@ -555,10 +570,10 @@ classified as successful</p>
 <dt class="sig sig-object py" id="m_n_kappa.MKappaByStrainPosition.successful">
 <em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">successful</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">bool</span></em><a class="headerlink" href="#m_n_kappa.MKappaByStrainPosition.successful" title="Permalink to this definition">#</a></dt>
 <dd><p>equilibrium has been found,
-False: equilibrium has not (yet) been found</p>
+<code class="docutils literal notranslate"><span class="pre">False</span></code>: equilibrium has not (yet) been found</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>True</p>
+<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">True</span></code></p>
 </dd>
 </dl>
 </dd></dl>

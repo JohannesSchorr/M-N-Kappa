@@ -330,7 +330,7 @@
 <h1>m_n_kappa.solver.Newton<a class="headerlink" href="#m-n-kappa-solver-newton" title="Permalink to this heading">#</a></h1>
 <dl class="py class">
 <dt class="sig sig-object py" id="m_n_kappa.solver.Newton">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">m_n_kappa.solver.</span></span><span class="sig-name descname"><span class="pre">Newton</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">target</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">variable</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">target_value</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.0</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#m_n_kappa.solver.Newton" title="Permalink to this definition">#</a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">m_n_kappa.solver.</span></span><span class="sig-name descname"><span class="pre">Newton</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">target</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">variable</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#m_n_kappa.solver.Newton" title="Permalink to this definition">#</a></dt>
 <dd><p>Bases: <a class="reference internal" href="m_n_kappa.solver.Solver.html#m_n_kappa.solver.Solver" title="m_n_kappa.solver.Solver"><code class="xref py py-class docutils literal notranslate"><span class="pre">Solver</span></code></a></p>
 <p>Solver using the newton method</p>
 <div class="versionadded">
@@ -339,10 +339,9 @@
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>data</strong> (<em>list</em>) – data containing target and variable keys</p></li>
-<li><p><strong>target</strong> (<em>str</em><em> or </em><em>int</em>) – key of the target (e.g. str for dictionaries or int for lists)</p></li>
-<li><p><strong>variable</strong> (<em>str</em><em> or </em><em>int</em>) – variable of the target (e.g. str for dictionaries or int for lists)</p></li>
-<li><p><strong>target_value</strong> (<em>float</em>) – value to meet by the target</p></li>
+<li><p><strong>data</strong> (<em>list</em><em>[</em><em>dict</em><em>] </em><em>| </em><em>list</em><em>[</em><em>list</em><em>]</em>) – data containing target and variable keys</p></li>
+<li><p><strong>target</strong> (<em>str</em><em> | </em><em>int</em>) – key of the target (e.g. str for dictionaries or int for lists)</p></li>
+<li><p><strong>variable</strong> (<em>str</em><em> | </em><em>int</em>) – variable of the target (e.g. str for dictionaries or int for lists)</p></li>
 </ul>
 </dd>
 </dl>
@@ -375,16 +374,13 @@
 <tr class="row-odd"><td><p><a class="reference internal" href="#m_n_kappa.solver.Newton.target" title="m_n_kappa.solver.Newton.target"><code class="xref py py-obj docutils literal notranslate"><span class="pre">target</span></code></a></p></td>
 <td><p>key of the target in <code class="docutils literal notranslate"><span class="pre">data</span></code></p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#m_n_kappa.solver.Newton.target_value" title="m_n_kappa.solver.Newton.target_value"><code class="xref py py-obj docutils literal notranslate"><span class="pre">target_value</span></code></a></p></td>
-<td><p>value of the target</p></td>
-</tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#m_n_kappa.solver.Newton.variable" title="m_n_kappa.solver.Newton.variable"><code class="xref py py-obj docutils literal notranslate"><span class="pre">variable</span></code></a></p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#m_n_kappa.solver.Newton.variable" title="m_n_kappa.solver.Newton.variable"><code class="xref py py-obj docutils literal notranslate"><span class="pre">variable</span></code></a></p></td>
 <td><p>key of the variable in <code class="docutils literal notranslate"><span class="pre">data</span></code></p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#m_n_kappa.solver.Newton.x_n" title="m_n_kappa.solver.Newton.x_n"><code class="xref py py-obj docutils literal notranslate"><span class="pre">x_n</span></code></a></p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#m_n_kappa.solver.Newton.x_n" title="m_n_kappa.solver.Newton.x_n"><code class="xref py py-obj docutils literal notranslate"><span class="pre">x_n</span></code></a></p></td>
 <td><p>lastly computed variable value</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#m_n_kappa.solver.Newton.x_n_plus_1" title="m_n_kappa.solver.Newton.x_n_plus_1"><code class="xref py py-obj docutils literal notranslate"><span class="pre">x_n_plus_1</span></code></a></p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#m_n_kappa.solver.Newton.x_n_plus_1" title="m_n_kappa.solver.Newton.x_n_plus_1"><code class="xref py py-obj docutils literal notranslate"><span class="pre">x_n_plus_1</span></code></a></p></td>
 <td><p>new computed value</p></td>
 </tr>
 </tbody>
@@ -443,19 +439,13 @@ Optimization means improvement of variable-value leading to a target-value neare
 
 <dl class="py property">
 <dt class="sig sig-object py" id="m_n_kappa.solver.Newton.target">
-<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">target</span></span><a class="headerlink" href="#m_n_kappa.solver.Newton.target" title="Permalink to this definition">#</a></dt>
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">target</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">int</span></em><a class="headerlink" href="#m_n_kappa.solver.Newton.target" title="Permalink to this definition">#</a></dt>
 <dd><p>key of the target in <code class="docutils literal notranslate"><span class="pre">data</span></code></p>
 </dd></dl>
 
 <dl class="py property">
-<dt class="sig sig-object py" id="m_n_kappa.solver.Newton.target_value">
-<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">target_value</span></span><a class="headerlink" href="#m_n_kappa.solver.Newton.target_value" title="Permalink to this definition">#</a></dt>
-<dd><p>value of the target</p>
-</dd></dl>
-
-<dl class="py property">
 <dt class="sig sig-object py" id="m_n_kappa.solver.Newton.variable">
-<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">variable</span></span><a class="headerlink" href="#m_n_kappa.solver.Newton.variable" title="Permalink to this definition">#</a></dt>
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">variable</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">int</span></em><a class="headerlink" href="#m_n_kappa.solver.Newton.variable" title="Permalink to this definition">#</a></dt>
 <dd><p>key of the variable in <code class="docutils literal notranslate"><span class="pre">data</span></code></p>
 </dd></dl>
 
@@ -538,7 +528,6 @@ Optimization means improvement of variable-value leading to a target-value neare
 <li><a class="reference internal" href="#m_n_kappa.solver.Newton.maximum_variable"><code class="docutils literal notranslate"><span class="pre">Newton.maximum_variable</span></code></a></li>
 <li><a class="reference internal" href="#m_n_kappa.solver.Newton.minimum_variable"><code class="docutils literal notranslate"><span class="pre">Newton.minimum_variable</span></code></a></li>
 <li><a class="reference internal" href="#m_n_kappa.solver.Newton.target"><code class="docutils literal notranslate"><span class="pre">Newton.target</span></code></a></li>
-<li><a class="reference internal" href="#m_n_kappa.solver.Newton.target_value"><code class="docutils literal notranslate"><span class="pre">Newton.target_value</span></code></a></li>
 <li><a class="reference internal" href="#m_n_kappa.solver.Newton.variable"><code class="docutils literal notranslate"><span class="pre">Newton.variable</span></code></a></li>
 <li><a class="reference internal" href="#m_n_kappa.solver.Newton.x_n"><code class="docutils literal notranslate"><span class="pre">Newton.x_n</span></code></a></li>
 <li><a class="reference internal" href="#m_n_kappa.solver.Newton.x_n_plus_1"><code class="docutils literal notranslate"><span class="pre">Newton.x_n_plus_1</span></code></a></li>

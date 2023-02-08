@@ -330,7 +330,7 @@
 <h1>m_n_kappa.MKappaByConstantCurvature<a class="headerlink" href="#m-n-kappa-mkappabyconstantcurvature" title="Permalink to this heading">#</a></h1>
 <dl class="py class">
 <dt class="sig sig-object py" id="m_n_kappa.MKappaByConstantCurvature">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">m_n_kappa.</span></span><span class="sig-name descname"><span class="pre">MKappaByConstantCurvature</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">cross_section</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">applied_curvature</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">maximum_neutral_axis</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">minimum_neutral_axis</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">applied_axial_force</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">maximum_iterations=10</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">axial_force_tolerance=5</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">solver=&lt;class</span> <span class="pre">'m_n_kappa.solver.Newton'&gt;</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#m_n_kappa.MKappaByConstantCurvature" title="Permalink to this definition">#</a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">m_n_kappa.</span></span><span class="sig-name descname"><span class="pre">MKappaByConstantCurvature</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">cross_section</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">applied_curvature</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">applied_axial_force</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">maximum_neutral_axis=None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">minimum_neutral_axis=None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">maximum_iterations=10</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">axial_force_tolerance=5</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">solver=&lt;class</span> <span class="pre">'m_n_kappa.solver.Newton'&gt;</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#m_n_kappa.MKappaByConstantCurvature" title="Permalink to this definition">#</a></dt>
 <dd><p>Bases: <a class="reference internal" href="m_n_kappa.points.MKappa.html#m_n_kappa.points.MKappa" title="m_n_kappa.points.MKappa"><code class="xref py py-class docutils literal notranslate"><span class="pre">MKappa</span></code></a></p>
 <p>computation of one Moment-Curvature-Point by fixed curvature and
 varying the neutral axis</p>
@@ -340,10 +340,10 @@ varying the neutral axis</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>cross_section</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">Crossection</span></code>) – cross-section to compute</p></li>
-<li><p><strong>maximum_neutral_axis</strong> (<em>float</em>) – maximum allowed neutral-axis</p></li>
-<li><p><strong>minimum_neutral_axis</strong> (<em>float</em>) – minimum allowed neutral-axis</p></li>
+<li><p><strong>cross_section</strong> (<a class="reference internal" href="m_n_kappa.Crosssection.html#m_n_kappa.Crosssection" title="m_n_kappa.Crosssection"><code class="xref py py-class docutils literal notranslate"><span class="pre">Crosssection</span></code></a>) – cross-section to compute</p></li>
 <li><p><strong>applied_axial_force</strong> (<em>float</em>) – applied axial force (Default: 0.0)</p></li>
+<li><p><strong>maximum_neutral_axis</strong> (<em>float</em>) – maximum possible vertical position of the neutral-axis (Default: None)</p></li>
+<li><p><strong>minimum_neutral_axis</strong> (<em>float</em>) – minimum possible vertical position of the neutral-axis (Default: None)</p></li>
 <li><p><strong>maximum_iterations</strong> (<em>int</em>) – maximum allowed iterations (Default: 10)
 In case the given number of iterations before axial force within desired tolerance,
 the computation is classified as not successful and will be stopped</p></li>
@@ -364,8 +364,8 @@ classified as successful (Default: 5.0)</p></li>
 <tr class="row-even"><td><p><a class="reference internal" href="#m_n_kappa.MKappaByConstantCurvature.initialize" title="m_n_kappa.MKappaByConstantCurvature.initialize"><code class="xref py py-obj docutils literal notranslate"><span class="pre">initialize</span></code></a>()</p></td>
 <td><p>initialize computation</p></td>
 </tr>
-<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">initialize_boundary_curvatures</span></code>()</p></td>
-<td><p></p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#m_n_kappa.MKappaByConstantCurvature.initialize_boundary_curvatures" title="m_n_kappa.MKappaByConstantCurvature.initialize_boundary_curvatures"><code class="xref py py-obj docutils literal notranslate"><span class="pre">initialize_boundary_curvatures</span></code></a>()</p></td>
+<td><p>initialize iteration process by computing the cross-section with boundary values of the neutral-axis (see attributes 'minimum_neutral_axis' and 'maximum_neutral_axis')</p></td>
 </tr>
 <tr class="row-even"><td><p><a class="reference internal" href="#m_n_kappa.MKappaByConstantCurvature.iterate" title="m_n_kappa.MKappaByConstantCurvature.iterate"><code class="xref py py-obj docutils literal notranslate"><span class="pre">iterate</span></code></a>()</p></td>
 <td><p>iterate as long as one of the following criteria are reached: - number of maximum iterations - absolute axial force smaller than desired one</p></td>
@@ -426,7 +426,7 @@ classified as successful (Default: 5.0)</p></li>
 <td><p>used solver to computed equilibrium</p></td>
 </tr>
 <tr class="row-odd"><td><p><a class="reference internal" href="#m_n_kappa.MKappaByConstantCurvature.successful" title="m_n_kappa.MKappaByConstantCurvature.successful"><code class="xref py py-obj docutils literal notranslate"><span class="pre">successful</span></code></a></p></td>
-<td><p>equilibrium has been found, False: equilibrium has not (yet) been found</p></td>
+<td><p>equilibrium has been found, <code class="docutils literal notranslate"><span class="pre">False</span></code>: equilibrium has not (yet) been found</p></td>
 </tr>
 </tbody>
 </table>
@@ -436,12 +436,35 @@ classified as successful (Default: 5.0)</p></li>
 <span class="sig-name descname"><span class="pre">compute</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#m_n_kappa.MKappaByConstantCurvature.compute" title="Permalink to this definition">#</a></dt>
 <dd><p>compute the cross-section with given initial values (curvature and neutral axis)
 and save it</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>None</p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="m_n_kappa.MKappaByConstantCurvature.initialize">
 <span class="sig-name descname"><span class="pre">initialize</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#m_n_kappa.MKappaByConstantCurvature.initialize" title="Permalink to this definition">#</a></dt>
 <dd><p>initialize computation</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="m_n_kappa.MKappaByConstantCurvature.initialize_boundary_curvatures">
+<span class="sig-name descname"><span class="pre">initialize_boundary_curvatures</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#m_n_kappa.MKappaByConstantCurvature.initialize_boundary_curvatures" title="Permalink to this definition">#</a></dt>
+<dd><p>initialize iteration process by computing the cross-section
+with boundary values of the neutral-axis (see attributes
+‘minimum_neutral_axis’ and ‘maximum_neutral_axis’)</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>None</p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="py method">
@@ -450,6 +473,11 @@ and save it</p>
 <dd><p>iterate as long as one of the following criteria are reached:
 - number of maximum iterations
 - absolute axial force smaller than desired one</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>None</p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="py property">
@@ -553,10 +581,10 @@ classified as successful</p>
 <dt class="sig sig-object py" id="m_n_kappa.MKappaByConstantCurvature.successful">
 <em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">successful</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">bool</span></em><a class="headerlink" href="#m_n_kappa.MKappaByConstantCurvature.successful" title="Permalink to this definition">#</a></dt>
 <dd><p>equilibrium has been found,
-False: equilibrium has not (yet) been found</p>
+<code class="docutils literal notranslate"><span class="pre">False</span></code>: equilibrium has not (yet) been found</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>True</p>
+<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">True</span></code></p>
 </dd>
 </dl>
 </dd></dl>
@@ -624,6 +652,7 @@ False: equilibrium has not (yet) been found</p>
 <li><a class="reference internal" href="#m_n_kappa.MKappaByConstantCurvature"><code class="docutils literal notranslate"><span class="pre">MKappaByConstantCurvature</span></code></a><ul>
 <li><a class="reference internal" href="#m_n_kappa.MKappaByConstantCurvature.compute"><code class="docutils literal notranslate"><span class="pre">MKappaByConstantCurvature.compute()</span></code></a></li>
 <li><a class="reference internal" href="#m_n_kappa.MKappaByConstantCurvature.initialize"><code class="docutils literal notranslate"><span class="pre">MKappaByConstantCurvature.initialize()</span></code></a></li>
+<li><a class="reference internal" href="#m_n_kappa.MKappaByConstantCurvature.initialize_boundary_curvatures"><code class="docutils literal notranslate"><span class="pre">MKappaByConstantCurvature.initialize_boundary_curvatures()</span></code></a></li>
 <li><a class="reference internal" href="#m_n_kappa.MKappaByConstantCurvature.iterate"><code class="docutils literal notranslate"><span class="pre">MKappaByConstantCurvature.iterate()</span></code></a></li>
 <li><a class="reference internal" href="#m_n_kappa.MKappaByConstantCurvature.applied_axial_force"><code class="docutils literal notranslate"><span class="pre">MKappaByConstantCurvature.applied_axial_force</span></code></a></li>
 <li><a class="reference internal" href="#m_n_kappa.MKappaByConstantCurvature.applied_curvature"><code class="docutils literal notranslate"><span class="pre">MKappaByConstantCurvature.applied_curvature</span></code></a></li>
