@@ -2,6 +2,10 @@ from abc import ABC, abstractmethod
 
 from .general import print_sections, print_chapter, str_start_end
 
+from .log import LoggerMethods
+
+log = LoggerMethods(__name__)
+
 
 class Function(ABC):
     @abstractmethod
@@ -30,6 +34,8 @@ class Function(ABC):
 
 
 class General(Function):
+
+    @log.init
     def __init__(self, data: list, variable, target):
         self._data = data
         self._variable = variable
@@ -142,6 +148,10 @@ class General(Function):
 class Linear(General):
 
     __slots__ = "_intersection", "_slope", "_data", "_variable", "_target", "_x", "_y"
+
+    @log.init
+    def __init__(self, data: list, variable, target):
+        super().__init__(data, variable, target)
 
     @property
     def intersection(self) -> float:
