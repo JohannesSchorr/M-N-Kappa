@@ -132,21 +132,20 @@ class MKappa:
             "----------",
             f"number: {len(self.computations)}",
             "",
-            "---------------------------------------------",
-            "iter | curvature | neutral-axis | axial-force",
-            "---------------------------------------------",
+            "------------------------------------------------------------",
+            "iter | curvature | neutral-axis | axial-force | equilibrium ",
+            "------------------------------------------------------------",
         ]
-        self.__sort_computations_by_iteration()
+        self.__sort_computations_by("iteration")
         for computation in self.computations:
             text.append(
-                "{:4} | {:9.6f} | {:12.2f} | {:10.2f}".format(
-                    computation.iteration,
-                    computation.curvature,
-                    computation.neutral_axis_value,
-                    computation.axial_force,
-                )
+                f"{computation.iteration:4} | "
+                f"{computation.curvature:9.6f} | "
+                f"{computation.neutral_axis_value:12.2f} | "
+                f"{computation.axial_force:10.2f} | "
+                f"{computation.axial_force - self.applied_axial_force:11.4f}"
             )
-        text.append("---------------------------------------------")
+        text.append("------------------------------------------------------------")
         return print_sections(text)
 
     def _print_results(self) -> str:
