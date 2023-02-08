@@ -32,15 +32,17 @@ class Solver:
     )
 
     @logs_init
-    def __init__(self, data: list, target, variable):
+    def __init__(
+        self, data: list[dict] | list[list], target: str | int, variable: str | int
+    ):
         """
         Parameters
         ----------
-        data : list
+        data : list[dict] | list[list]
             data containing target and variable keys
-        target : str or int
+        target : str | int
             key of the target (e.g. str for dictionaries or int for lists)
-        variable : str or int
+        variable : str | int
             variable of the target (e.g. str for dictionaries or int for lists)
         """
         self._data = data
@@ -128,12 +130,12 @@ class Solver:
         return self._minimum_variable
 
     @property
-    def target(self):
+    def target(self) -> str | int:
         """key of the target in ``data``"""
         return self._target
 
     @property
-    def variable(self):
+    def variable(self) -> str | int:
         """key of the variable in ``data``"""
         return self._variable
 
@@ -150,7 +152,7 @@ class Solver:
     def compute(self, use_fallback: bool = False) -> float:
         pass
 
-    def _prepare(self):
+    def _prepare(self) -> None:
         pass
 
     def _compute_x_n(self):
