@@ -1,3 +1,4 @@
+import operator
 from dataclasses import dataclass
 
 from .general import (
@@ -322,7 +323,7 @@ class MKappa:
         float
             new value of the neutral axis
         """
-        self.__sort_computations_by_axial_forces()
+        self.__sort_computations_by("axial_force")
         temp_computations = [
             {
                 "axial_force": computation.axial_force,
@@ -362,8 +363,8 @@ class MKappa:
         )
 
     def _target_value_is_improved(self) -> bool:
-        self.__sort_computations_by_iteration()
-        if len(self._computations) > 1:
+        self.__sort_computations_by("iteration")
+        if operator.truth(self._computations):
             if (
                 abs(
                     self._computations[-1].axial_force
@@ -380,20 +381,9 @@ class MKappa:
         self._moment = None
         self._neutral_axis = None
 
-    def __sort_computations_by(self, key: str):
-        self._computations.sort(key=lambda x: x[key])
-
-    def __sort_computations_by_curvature(self):
-        self._computations.sort(key=lambda x: x.curvature)
-
-    def __sort_computations_by_neutral_axis(self):
-        self._computations.sort(key=lambda x: x.neutral_axis_value)
-
-    def __sort_computations_by_axial_forces(self):
-        self._computations.sort(key=lambda x: x.axial_force)
-
-    def __sort_computations_by_iteration(self):
-        self._computations.sort(key=lambda x: x.iteration)
+    def __sort_computations_by(self, attribute: str) -> None:
+        """sorts attribute ``computations`` by given attribute-key"""
+        self._computations.sort(key=operator.attrgetter(attribute))
 
 
 class MKappaByStrainPosition(MKappa):
