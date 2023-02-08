@@ -13,12 +13,9 @@ from .general import (
     remove_zeros,
 )
 
-from .log import log_init, logging, log_return
-from functools import partial
+from .log import LoggerMethods
 
-logger = logging.getLogger(__name__)
-logs_init = partial(log_init, logger=logger)
-logs_return = partial(log_return, logger=logger)
+log = LoggerMethods(__name__)
 
 
 def make_float(value):
@@ -48,7 +45,7 @@ class StressStrain:
     strain: float
 
     def __post_init__(self):
-        logger.info(f"Created {self.__repr__()}")
+        log.info(f"Created {self.__repr__()}")
 
     def pair(self) -> list[float]:
         """stress-strain-point as list"""
@@ -65,7 +62,7 @@ class Material:
     In case custom-type materials are created these must inherit from this class.
     """
 
-    @logs_init
+    @log.init
     def __init__(self, section_type: str, stress_strain: list[StressStrain] = None):
         """
         Parameters
@@ -287,7 +284,7 @@ class Material:
                 ):
                     return material_index
         else:
-            logger.critical(
+            log.critical(
                 f"No stress-strain_value-pair found in {self.__class__.__name__} for {strain_value=}\n"
             )
 
@@ -343,7 +340,7 @@ class ConcreteCompression(ABC):
     give them a similar interface.
     """
 
-    @logs_init
+    @log.init
     def __init__(self, f_cm: float, yield_strain: float, E_cm: float):
         """
         Parameters
@@ -436,7 +433,7 @@ class ConcreteCompressionNonlinear(ConcreteCompression):
     .. versionadded:: 0.1.0
     """
 
-    @logs_init
+    @log.init
     def __init__(self, f_cm: float, yield_strain: float, E_cm: float):
         """
         Parameters
@@ -593,7 +590,7 @@ class ConcreteCompressionParabolaRectangle(ConcreteCompression):
     .. versionadded:: 0.1.0
     """
 
-    @logs_init
+    @log.init
     def __init__(self, f_cm: float, E_cm: float):
         """
         Parameters
@@ -748,7 +745,7 @@ class ConcreteCompressionBiLinear(ConcreteCompression):
     .. versionadded:: 0.1.0
     """
 
-    @logs_init
+    @log.init
     def __init__(self, f_cm: float):
         """
         Parameters
@@ -860,7 +857,7 @@ class ConcreteTension:
     .. versionadded:: 0.1.0
     """
 
-    @logs_init
+    @log.init
     def __init__(
         self,
         f_cm: float,
@@ -1055,7 +1052,7 @@ class Concrete(Material):
         "_stress_strain",
     )
 
-    @logs_init
+    @log.init
     def __init__(
         self,
         f_cm: float,
@@ -1417,7 +1414,7 @@ class Steel(Material):
 
     __slots__ = "_f_y", "_f_u", "_failure_strain", "_E_a", "_stress_strain"
 
-    @logs_init
+    @log.init
     def __init__(
         self,
         f_y: float = None,
@@ -1686,7 +1683,7 @@ class Reinforcement(Steel):
 
     __slots__ = "_f_y", "_f_u", "_failure_strain", "_E_a", "_stress_strain"
 
-    @logs_init
+    @log.init
     def __init__(
         self,
         f_s: float = None,

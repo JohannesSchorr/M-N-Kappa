@@ -8,12 +8,9 @@ from .general import (
     EffectiveWidths,
 )
 
-from .log import log_init, logging, log_return
-from functools import partial
+from .log import LoggerMethods
 
-logger = logging.getLogger(__name__)
-logs_init = partial(log_init, logger=logger)
-logs_return = partial(log_return, logger=logger)
+log = LoggerMethods(__name__)
 
 
 class Section:
@@ -24,7 +21,7 @@ class Section:
     .. versionadded:: 0.1.0
     """
 
-    @logs_init
+    @log.init
     def __init__(self, geometry, material):
         """
         Parameters
@@ -479,7 +476,7 @@ class ComputationSectionStrain(ComputationSection):
         "_axial_force",
     )
 
-    @logs_init
+    @log.init
     def __init__(self, section: Section, strain_value: float):
         """
         Parameters
@@ -591,7 +588,7 @@ class ComputationSectionCurvature(ComputationSection):
         "_axial_force",
     )
 
-    @logs_init
+    @log.init
     def __init__(
         self,
         section: Section,

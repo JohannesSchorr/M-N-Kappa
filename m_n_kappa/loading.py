@@ -3,12 +3,9 @@ from dataclasses import dataclass
 
 from .general import str_start_end
 
-from .log import log_init, logging, log_return
-from functools import partial
+from .log import LoggerMethods
 
-logger = logging.getLogger(__name__)
-logs_init = partial(log_init, logger=logger)
-logs_return = partial(log_return, logger=logger)
+log = LoggerMethods(__name__)
 
 """
 Internal Forces
@@ -149,7 +146,7 @@ class SingleLoad:
     value: float
 
     def __post_init__(self):
-        logger.info(f"Created {self.__repr__()}")
+        log.info(f"Created {self.__repr__()}")
 
     def moment(self):
         """moment by the single load (load x position_in_beam)"""
@@ -165,7 +162,7 @@ class SingleSpan(ABCSingleSpan):
 
     __slots__ = "_length", "_uniform_load", "_loads", "_beam"
 
-    @logs_init
+    @log.init
     def __init__(self, length: float, loads: list = None, uniform_load: float = None):
         """
         Parameters
@@ -369,7 +366,7 @@ class SingleSpanSingleLoads(ABCSingleSpan):
 
     __slots__ = "_length", "_loads"
 
-    @logs_init
+    @log.init
     def __init__(self, length: float, loads: list[SingleLoad]):
         """
         Parameters
@@ -648,7 +645,7 @@ class SingleSpanUniformLoad(ABCSingleSpan):
     .. versionadded:: 0.1.0
     """
 
-    @logs_init
+    @log.init
     def __init__(self, length: float, load: float = 1.0):
         """
         Parameters

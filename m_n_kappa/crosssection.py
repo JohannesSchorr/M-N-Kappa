@@ -22,12 +22,9 @@ from .curvature_boundaries import (
     BoundaryValues,
 )
 
-from .log import log_init, logging, log_return
-from functools import partial
+from .log import LoggerMethods
 
-logger = logging.getLogger(__name__)
-logs_init = partial(log_init, logger=logger)
-logs_return = partial(log_return, logger=logger)
+log = LoggerMethods(__name__)
 
 
 def axial_force(sections: list[ComputationSection]) -> float:
@@ -102,7 +99,7 @@ class Crosssection:
     .. versionadded:: 0.1.0
     """
 
-    @logs_init
+    @log.init
     def __init__(
         self,
         sections: list[Section] = None,
@@ -218,11 +215,11 @@ class Crosssection:
     def _build_cross_section(self, other):
         if isinstance(other, Crosssection):
             sections = self.sections + other.sections
-            logger.info("Merged two Crosssection")
+            log.info("Merged two Crosssection")
             return Crosssection(sections)
         elif isinstance(other, Section):
             self.add_section(other)
-            logger.info(f"Add {other.__repr__()} to Crosssection")
+            log.info(f"Add {other.__repr__()} to Crosssection")
             return self
         else:
             raise TypeError(
@@ -479,7 +476,7 @@ class ComputationCrosssection(Crosssection):
     .. versionadded: 0.1.0
     """
 
-    @logs_init
+    @log.init
     def __init__(
         self,
         sections: list[Section] | Crosssection = None,
@@ -634,7 +631,7 @@ class ComputationCrosssectionStrain(ComputationCrosssection):
         "_slab_effective_widths",
     )
 
-    @logs_init
+    @log.init
     def __init__(
         self,
         sections: list | Crosssection,
@@ -871,7 +868,7 @@ class ComputationCrosssectionCurvature(ComputationCrosssection):
         "_girder_effective_widths",
     )
 
-    @logs_init
+    @log.init
     def __init__(
         self,
         cross_section: Crosssection | list[Section],
@@ -1082,7 +1079,7 @@ class CrossSectionBoundaries(Crosssection):
         "_maximum_negative_curvature",
     )
 
-    @logs_init
+    @log.init
     def __init__(self, sections: list):
         """
         Parameters
@@ -1147,11 +1144,11 @@ class CrossSectionBoundaries(Crosssection):
         self._sections_minimum_strains = self._get_sections_minimum_strain()
         self._maximum_positive_curvature = self._get_maximum_positive_curvature()
         self._maximum_negative_curvature = self._get_maximum_negative_curvature()
-        logger.info("-------\nPositive_start_bound")
+        log.info("-------\nPositive_start_bound")
         self._positive_start_bound = self.__get_curvature_start_values(
             self._maximum_positive_curvature
         )
-        logger.info("-------\nNegative_start_bound")
+        log.info("-------\nNegative_start_bound")
         self._negative_start_bound = self.__get_curvature_start_values(
             self._maximum_negative_curvature
         )
@@ -1252,7 +1249,7 @@ class CrossSectionBoundaries(Crosssection):
             negative=self.__get_negative_boundaries(),
         )
 
-    @logs_return
+    @log.result
     def _get_maximum_positive_curvature(self) -> EdgeStrains:
         """
         Returns
@@ -1266,7 +1263,7 @@ class CrossSectionBoundaries(Crosssection):
         edge_strain = min(curvatures, key=lambda x: x.curvature)
         return edge_strain
 
-    @logs_return
+    @log.result
     def _get_maximum_negative_curvature(self) -> EdgeStrains:
         """
         Returns
@@ -1329,7 +1326,7 @@ class CrossSectionBoundaries(Crosssection):
             strain_at_position=position_strain.strain,
             position_value=position_strain.position,
         )
-        logger.debug(
+        log.debug(
             f"{maximum_curvature},\n\t"
             f"Use strain on top: {compute_with_strain_at_top},\n\t"
             f"{position_strain},\n\t"

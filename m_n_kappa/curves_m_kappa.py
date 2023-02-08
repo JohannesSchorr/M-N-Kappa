@@ -13,12 +13,9 @@ from .general import (
 from .points import MKappaByStrainPosition
 from .solver import Newton, Bisection
 
-from .log import log_init, logging, log_return
-from functools import partial
+from .log import LoggerMethods
 
-logger = logging.getLogger(__name__)
-logs_init = partial(log_init, logger=logger)
-logs_return = partial(log_return, logger=logger)
+log = LoggerMethods(__name__)
 
 
 @dataclass
@@ -50,7 +47,7 @@ class MKappaCurvePoint:
     strain_position: StrainPosition
 
     def __post_init__(self):
-        logger.info(f"Created {self.__repr__()}")
+        log.info(f"Created {self.__repr__()}")
 
     def __eq__(self, other) -> bool:
         if not isinstance(other, MKappaCurvePoint):
@@ -84,7 +81,7 @@ class MKappaCurvePoints:
 
     def __init__(self) -> None:
         self._points = []
-        logger.info(f"Created MKappaCurvePoints")
+        log.info(f"Created MKappaCurvePoints")
 
     def __repr__(self) -> str:
         return """MKappaCurvePoints()"""
@@ -213,7 +210,7 @@ class MKappaCurvePoints:
         if point not in self.points:
             self._points.append(point)
             self._sort_points_by_curvature()
-            logger.info(f"Added {point} to MKappaCurvePoints\n----")
+            log.info(f"Added {point} to MKappaCurvePoints\n----")
 
     def curvature(self, by_moment: float) -> float:
         """
@@ -308,7 +305,7 @@ class MKappaCurveCurvature:
         "_start_strain_position",
     )
 
-    @logs_init
+    @log.init
     def __init__(
         self,
         cross_section: Crosssection,
@@ -404,7 +401,7 @@ class MKappaCurve:
         "_not_successful",
     )
 
-    @logs_init
+    @log.init
     def __init__(
         self,
         cross_section: Crosssection,
@@ -460,12 +457,12 @@ class MKappaCurve:
             self._positive = self._get_positive_m_kappa_curve_curvature()
             self._compute_positive_curvature_failure()
             self._compute_positive_curvature_intermediate()
-            logger.info("Computed positive M-Kappa-Curve-Points")
+            log.info("Computed positive M-Kappa-Curve-Points")
         if self.include_negative_curvature:
             self._negative = self._get_negative_m_kappa_curve_curvature()
             self._compute_negative_curvature_failure()
             self._compute_negative_curvature_intermediate()
-            logger.info("Computed negative M-Kappa-Curve-Points")
+            log.info("Computed negative M-Kappa-Curve-Points")
         self._insert_zero()
 
     def __repr__(self) -> str:
@@ -597,7 +594,7 @@ class MKappaCurve:
     def _compute_negative_curvature_intermediate(self) -> None:
         """compute all moment-curvature pairs between failure and zero under negative curvature"""
         for strain_position in self.negative.get_material_points_inside_curvature():
-            logger.info(
+            log.info(
                 f"Compute intermediate value by {strain_position} with negative curvature values\n"
                 f"\tmaximum: {self._maximum_negative_curvature(strain_position)} | "
                 f"minimum: {self._minimum_negative_curvature(strain_position)}"
@@ -608,7 +605,7 @@ class MKappaCurve:
                 minimum_curvature=self._minimum_negative_curvature(strain_position),
             )
             if not m_kappa.successful:
-                logger.info(
+                log.info(
                     f"Computation with Newton algorithm not successful, try Bisection"
                 )
                 m_kappa = MKappaByStrainPosition(
@@ -628,9 +625,9 @@ class MKappaCurve:
 
     def _compute_positive_curvature_intermediate(self) -> None:
         """compute all moment-curvature pairs between failure and zero under positive curvature"""
-        logger.info("Start computing intermediate values under positive curvature")
+        log.info("Start computing intermediate values under positive curvature")
         for strain_position in self.positive.get_material_points_inside_curvature():
-            logger.info(
+            log.info(
                 f"Compute intermediate value by {strain_position} with positive curvature values\n"
                 f"\tmaximum: {self._maximum_positive_curvature(strain_position)} | "
                 f"minimum: {self._minimum_positive_curvature(strain_position)}"
@@ -641,7 +638,7 @@ class MKappaCurve:
                 minimum_curvature=self._minimum_positive_curvature(strain_position),
             )
             if not m_kappa.successful:
-                logger.info(
+                log.info(
                     f"Computation with Newton algorithm not successful, try Bisection"
                 )
                 m_kappa = MKappaByStrainPosition(
@@ -685,7 +682,7 @@ class MKappaCurve:
                 m_kappa.strain_position,
             )
         else:
-            logger.info(
+            log.info(
                 f"============\n"
                 f"not successful:\n"
                 f"position_value={m_kappa.strain_position},\n"

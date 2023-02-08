@@ -3,12 +3,9 @@ import operator
 from .general import str_start_end, print_chapter, print_sections
 from .function import Polynominal, Linear
 
-from .log import log_init, logging, log_return
-from functools import partial
+from .log import LoggerMethods
 
-logger = logging.getLogger(__name__)
-logs_init = partial(log_init, logger=logger)
-logs_return = partial(log_return, logger=logger)
+log = LoggerMethods(__name__)
 
 
 class Solver:
@@ -31,7 +28,7 @@ class Solver:
         "_x_n_plus_1",
     )
 
-    @logs_init
+    @log.init
     def __init__(
         self, data: list[dict] | list[list], target: str | int, variable: str | int
     ):
@@ -263,7 +260,7 @@ class Bisection(Solver):
             new variable-value leading to a target-value nearer zero than the values in ``data``
         """
         variables = [data_point[self.variable] for data_point in self.data]
-        logger.debug(f"{variables=}")
+        log.debug(f"{variables=}")
         factors = [
             0.5,
             0.01,
@@ -284,7 +281,7 @@ class Bisection(Solver):
         for factor in factors:
             self._x_n_plus_1 = self._compute_with(factor)
             if self.x_n_plus_1 not in variables:
-                logger.debug(self.__str__())
+                log.debug(self.__str__())
                 return self.x_n_plus_1
 
     def _compute_with(self, factor: float = 0.5) -> float:
@@ -366,7 +363,7 @@ class Newton(Solver):
         if self._is_between_nearest_values():
             return self.x_n_plus_1
         else:
-            logger.info(
+            log.info(
                 f"Newton-algorithm gives {self.x_n_plus_1}. "
                 f"Not between {self._min_under_zero_variable()} and "
                 f"{self._min_over_zero_variable()}. Use fallback."
@@ -383,7 +380,7 @@ class Newton(Solver):
 
     def _fallback(self) -> float:
         """fallback mechanism"""
-        logger.info("Fallback: Bisection")
+        log.info("Fallback: Bisection")
         bisection = Bisection(self.data, self.target, self.variable)
         return bisection.compute()
 
@@ -412,9 +409,9 @@ class Newton(Solver):
             self._function = Polynominal(
                 data=self._sorted_data, variable=self.variable, target=self.target
             )
-            logger.debug('Set function "Polynominal"')
+            log.debug('Set function "Polynominal"')
         else:
             self._function = Linear(
                 data=self._sorted_data, variable=self.variable, target=self.target
             )
-            logger.debug('Set function "Linear"')
+            log.debug('Set function "Linear"')

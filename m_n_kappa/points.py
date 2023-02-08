@@ -12,12 +12,9 @@ from .general import (
 from .crosssection import Crosssection, ComputationCrosssectionCurvature
 from .solver import Solver, Newton
 
-from .log import log_init, logging, log_return
-from functools import partial
+from .log import LoggerMethods
 
-logger = logging.getLogger(__name__)
-logs_init = partial(log_init, logger=logger)
-logs_return = partial(log_return, logger=logger)
+log = LoggerMethods(__name__)
 
 
 @dataclass
@@ -48,7 +45,7 @@ class Computation:
     axial_force: float
 
     def __post_init__(self):
-        logger.info(f"Created {self.__repr__()}")
+        log.info(f"Created {self.__repr__()}")
 
 
 class MKappa:
@@ -63,7 +60,7 @@ class MKappa:
     :py:class:`MKappaByConstantCurvature`
     """
 
-    @logs_init
+    @log.init
     def __init__(
         self,
         cross_section: Crosssection,
@@ -258,7 +255,7 @@ class MKappa:
             self._not_successful_reason = (
                 "same sign of axial forces at minimum and maximum curvature"
             )
-            logger.info(
+            log.info(
                 "Axial-forces of minimum and maximum curvature have same sign. "
                 "No equilibrium of axial-forces possible. "
                 "Computation will be skipped"
@@ -285,7 +282,7 @@ class MKappa:
             self._neutral_axis = self._guess_neutral_axis()
             if self.neutral_axis is None:
                 self._not_successful_reason = "Iteration not converging"
-                logger.info(self.not_successful_reason)
+                log.info(self.not_successful_reason)
                 return
             self._curvature = self._compute_new_curvature()
             self.compute()
@@ -293,7 +290,7 @@ class MKappa:
                 self._successful = True
                 return
         self._not_successful_reason = "maximum iterations reached"  # maybe using enum?
-        logger.info(
+        log.info(
             f"Maximum number of iterations ({self.maximum_iterations}) reached, "
             f"without finding equilibrium of axial forces"
         )
@@ -311,7 +308,7 @@ class MKappa:
             neutral_axis_value=self.neutral_axis,
         )
 
-    @logs_return
+    @log.result
     def _guess_neutral_axis(self) -> float:
         """
         Guess a new value for the neutral axis
@@ -340,7 +337,7 @@ class MKappa:
             use_fallback = False
         else:
             use_fallback = True
-            logger.info("Axial force not improved: use fallback")
+            log.info("Axial force not improved: use fallback")
         return solver.compute(use_fallback)
 
     def __is_axial_force_within_tolerance(self) -> bool:
@@ -413,7 +410,7 @@ class MKappaByStrainPosition(MKappa):
         "_iteration",
     )
 
-    @logs_init
+    @log.init
     def __init__(
         self,
         cross_section: Crosssection,
@@ -502,24 +499,24 @@ class MKappaByStrainPosition(MKappa):
         return self._strain_position
 
     def initialize_boundary_curvatures(self):
-        logger.debug("Start computing boundary values")
+        log.debug("Start computing boundary values")
         for index, curvature_value in enumerate(
             [self.minimum_curvature, self.maximum_curvature]
         ):
             self._iteration = index
             self._curvature = curvature_value
             self._neutral_axis = self._compute_neutral_axis()
-            logger.debug(
+            log.debug(
                 f"Compute {curvature_value=}, "
                 f"neutral-axis: {self._neutral_axis},\n"
                 f"\t{self.strain_position}"
             )
             self.compute()
-        logger.debug("Finished computing boundary values")
+        log.debug("Finished computing boundary values")
 
     def _compute_new_curvature(self):
         if self.neutral_axis is None:
-            logger.warning(
+            log.warning(
                 f"neutral-axis: {self.neutral_axis}\n"
                 f"position: {self.strain_position.position}, "
                 f"curvature: {self.curvature}, "
@@ -611,7 +608,7 @@ class MKappaByConstantCurvature(MKappa):
         "_iteration",
     )
 
-    @logs_init
+    @log.init
     def __init__(
         self,
         cross_section: Crosssection,

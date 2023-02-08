@@ -12,12 +12,9 @@ from .material import Material
 from .section import Section
 from .crosssection import Crosssection
 
-from .log import log_init, logging, log_return
-from functools import partial
+from .log import LoggerMethods
 
-logger = logging.getLogger(__name__)
-logs_init = partial(log_init, logger=logger)
-logs_return = partial(log_return, logger=logger)
+log = LoggerMethods(__name__)
 
 """
 Geometries
@@ -109,18 +106,18 @@ class ComposedGeometry:
                 Section(geometry=geometry, material=other)
                 for geometry in self.geometries
             ]
-            logger.info("Create Crosssection by adding Material")
+            log.info("Create Crosssection by adding Material")
             return Crosssection(sections)
         elif isinstance(other, Geometry):
             new_geometry = ComposedGeometry()
             new_geometry._geometries = self.geometries
             new_geometry._geometries.append(other)
-            logger.info("Add Geometry-instance")
+            log.info("Add Geometry-instance")
             return new_geometry
         elif isinstance(other, ComposedGeometry):
             new_geometry = ComposedGeometry()
             new_geometry._geometries = self.geometries + other.geometries
-            logger.info("Add other ComposedGeometry")
+            log.info("Add other ComposedGeometry")
             return new_geometry
         else:
             raise TypeError(
@@ -157,15 +154,15 @@ class Geometry(ABC):
         if isinstance(other, Geometry):
             new_geometry = ComposedGeometry()
             new_geometry._geometries = [self, other]
-            logger.info("Build ComposedGeometry by adding Geometry-Instance")
+            log.info("Build ComposedGeometry by adding Geometry-Instance")
             return new_geometry
         elif isinstance(other, ComposedGeometry):
             new_geometry = other
             new_geometry._geometries.append(self)
-            logger.info("Build ComposedGeometry by adding ComposedGeometry-Instance")
+            log.info("Build ComposedGeometry by adding ComposedGeometry-Instance")
             return new_geometry
         elif isinstance(other, Material):
-            logger.info("Build section by adding material")
+            log.info("Build section by adding material")
             return Section(geometry=self, material=other)
         else:
             raise TypeError(
@@ -284,7 +281,7 @@ class Rectangle(Geometry):
         "_right_edge",
     )
 
-    @logs_init
+    @log.init
     def __init__(
         self,
         top_edge: float,
@@ -361,14 +358,14 @@ class Rectangle(Geometry):
         """rearrange input-values to match the needed arrangement"""
         if self.bottom_edge < self.top_edge:
             self._top_edge, self._bottom_edge = self.bottom_edge, self.top_edge
-            logger.info(f"{self.__repr__()} switched values: top_edge and bottom_edge")
+            log.info(f"{self.__repr__()} switched values: top_edge and bottom_edge")
         if (
             self.left_edge is not None
             and self.right_edge is not None
             and self.right_edge < self.left_edge
         ):
             self._left_edge, self._right_edge = self.right_edge, self.left_edge
-            logger.info(f"{self.__repr__()} switched values: left_edge and right_edge")
+            log.info(f"{self.__repr__()} switched values: left_edge and right_edge")
 
     def __eq__(self, other):
         return (
@@ -520,7 +517,7 @@ class Rectangle(Geometry):
                 right_edge=right_edge,
             )
         )
-        logger.debug(f"Split {self.__repr__()} into following rectangles: {rectangles}")
+        log.debug(f"Split {self.__repr__()} into following rectangles: {rectangles}")
         return rectangles
 
     def get_horizontal_edges(
@@ -556,7 +553,7 @@ class Circle(Geometry):
 
     __slots__ = ("_diameter", "_centroid_y", "_centroid_z")
 
-    @logs_init
+    @log.init
     def __init__(self, diameter: float, centroid_y: float, centroid_z: float):
         """
         Circle
@@ -739,10 +736,10 @@ class Circle(Geometry):
                     points[0].material,
                     sum([points[point_index].strain, points[point_index + 1].strain]),
                 )
-                logger.info(f"{self.__repr__()} is within effective width")
+                log.info(f"{self.__repr__()} is within effective width")
                 return -width <= self.centroid_z <= width
             else:
-                logger.info(f"{self.__repr__()} is NOT within effective width")
+                log.info(f"{self.__repr__()} is NOT within effective width")
                 return False
 
 
@@ -767,7 +764,7 @@ class Trapezoid(Geometry):
         "_bottom_right_edge",
     )
 
-    @logs_init
+    @log.init
     def __init__(
         self,
         top_edge: float,
@@ -857,7 +854,7 @@ class Trapezoid(Geometry):
         """check input-value to match the needed arrangement"""
         if self.bottom_edge < self.top_edge:
             self._top_edge, self._bottom_edge = self.bottom_edge, self.top_edge
-            logger.info(f"{self.__repr__()} switched: top-edge and bottom-edge")
+            log.info(f"{self.__repr__()} switched: top-edge and bottom-edge")
         if (
             self.top_left_edge is not None
             and self.top_right_edge is not None
@@ -867,7 +864,7 @@ class Trapezoid(Geometry):
                 self.top_right_edge,
                 self.top_left_edge,
             )
-            logger.info(f"{self.__repr__()} switched: top-left-edge and top-right-edge")
+            log.info(f"{self.__repr__()} switched: top-left-edge and top-right-edge")
         if (
             self.bottom_left_edge is not None
             and self.bottom_right_edge is not None
@@ -877,7 +874,7 @@ class Trapezoid(Geometry):
                 self.bottom_right_edge,
                 self.bottom_left_edge,
             )
-            logger.info(
+            log.info(
                 f"{self.__repr__()} switched: bottom-left-edge and bottom-right-edge"
             )
 
@@ -1067,7 +1064,7 @@ class Trapezoid(Geometry):
         else:
             return 0.0
 
-    @logs_return
+    @log.result
     def split(
         self, at_points: list[StrainPosition], max_widths: EffectiveWidths = None
     ) -> list[Geometry]:
@@ -1225,7 +1222,7 @@ Rectangle(top_edge=184.50, bottom_edge=200.00, width=200.00, left_edge=-100.00, 
         self._add_top_flange()
         self._add_web()
         self._add_bottom_flange()
-        logger.info(f"Created {self.__repr__()}")
+        log.info(f"Created {self.__repr__()}")
 
     def _add_top_flange(self):
         """add top-flange to geometry if wanted and geometric values are given"""
@@ -1361,7 +1358,7 @@ class RebarLayer(ComposedGeometry):
                     centroid_z=self.centroid_z,
                 )
             )
-        logger.info(f"Created {self.__repr__()}")
+        log.info(f"Created {self.__repr__()}")
 
 
 @dataclass
@@ -1452,7 +1449,7 @@ Rectangle(top_edge=10.00, bottom_edge=86.00, width=5.20, left_edge=94.80, right_
             self._right_flange(),
         ]
 
-        logger.info(f"Created {self.__repr__()}")
+        log.info(f"Created {self.__repr__()}")
 
     def _left_flange(self) -> Rectangle:
         return Rectangle(

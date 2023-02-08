@@ -7,6 +7,10 @@ from .general import (
 from .crosssection import Crosssection, ComputationCrosssectionStrain
 from .solver import Solver, Newton
 
+from .log import LoggerMethods
+
+log = LoggerMethods(__name__)
+
 
 class MNZeroCurvature:
     """

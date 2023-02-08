@@ -1,6 +1,10 @@
 from math import sin, sinh, pi, cos, cosh
 from decimal import Decimal
 
+from .log import LoggerMethods
+
+log = LoggerMethods(__name__)
+
 """
 References
 ----------
