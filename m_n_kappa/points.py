@@ -233,8 +233,8 @@ class MKappa:
     @property
     def successful(self) -> bool:
         """
-        True:  equilibrium has been found,
-        False: equilibrium has not (yet) been found
+        ``True``:  equilibrium has been found,
+        ``False``: equilibrium has not (yet) been found
         """
         return self._successful
 
@@ -311,6 +311,7 @@ class MKappa:
             neutral_axis_value=self.neutral_axis,
         )
 
+    @logs_return
     def _guess_neutral_axis(self) -> float:
         """
         Guess a new value for the neutral axis
