@@ -327,7 +327,8 @@ class MKappa:
         self.__sort_computations_by("axial_force")
         temp_computations = [
             {
-                "axial_force": computation.axial_force,
+                # "axial_force": computation.axial_force,
+                "axial_force": computation.axial_force - self.applied_axial_force,
                 "neutral_axis_value": computation.neutral_axis_value,
             }
             for computation in self._computations
