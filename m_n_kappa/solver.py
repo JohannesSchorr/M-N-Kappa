@@ -154,7 +154,6 @@ class Solver:
         sort the data by the target value and get the two target-values greater zero
         and the two target values smaller zero, if available
         """
-        #  self._data.sort(key=lambda x: abs(x[self.target]))
         gt_zero = self._target_values_greater_zero()
         lt_zero = self._target_values_smaller_zero()
         if len(gt_zero) > 2:
