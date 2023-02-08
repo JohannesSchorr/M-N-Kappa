@@ -615,9 +615,9 @@ class MKappaByConstantCurvature(MKappa):
         self,
         cross_section: Crosssection,
         applied_curvature: float,
-        maximum_neutral_axis: float,
-        minimum_neutral_axis: float,
-        applied_axial_force,
+        applied_axial_force: float,
+        maximum_neutral_axis: float = None,
+        minimum_neutral_axis: float = None,
         maximum_iterations=10,
         axial_force_tolerance=5,
         solver=Newton,
@@ -627,12 +627,12 @@ class MKappaByConstantCurvature(MKappa):
         ----------
         cross_section : :py:class:`~m_n_kappa.Crossection`
             cross-section to compute
-        maximum_neutral_axis : float
-            maximum allowed neutral-axis
-        minimum_neutral_axis : float
-            minimum allowed neutral-axis
         applied_axial_force : float
             applied axial force (Default: 0.0)
+        maximum_neutral_axis : float
+            maximum possible vertical position of the neutral-axis (Default: None)
+        minimum_neutral_axis : float
+            minimum possible vertical position of the neutral-axis (Default: None)
         maximum_iterations : int
             maximum allowed iterations (Default: 10)
             In case the given number of iterations before axial force within desired tolerance,
@@ -651,8 +651,14 @@ class MKappaByConstantCurvature(MKappa):
             solver,
         )
         self._applied_curvature = applied_curvature
-        self._maximum_neutral_axis = maximum_neutral_axis
-        self._minimum_neutral_axis = minimum_neutral_axis
+        if maximum_neutral_axis is None or minimum_neutral_axis is None:
+            (
+                self._maximum_neutral_axis,
+                self._minimum_neutral_axis,
+            ) = self._get_neutral_axes_boundary_values()
+        else:
+            self._maximum_neutral_axis = maximum_neutral_axis
+            self._minimum_neutral_axis = minimum_neutral_axis
         self.initialize()
 
     def __repr__(self):
@@ -692,5 +698,23 @@ class MKappaByConstantCurvature(MKappa):
             self._neutral_axis = neutral_axis_value
             self.compute()
 
-    def _compute_new_curvature(self):
+    def _get_neutral_axes_boundary_values(self) -> tuple[float, float]:
+        """
+        Compute the boundary values of the neutral axis
+
+        Returns
+        -------
+        tuple[float, float]
+            maximum and minimum possible neutral axis for the given ``cross_section`` under the given
+            curvature
+        """
+        boundaries = self.cross_section.get_boundary_conditions()
+        neutral_axes = boundaries.neutral_axes.compute(self.applied_curvature)
+        return max(neutral_axes), min(neutral_axes)
+
+    def _compute_new_curvature(self) -> float:
+        """
+        Curvature is kept the same (=``applied_curvature``) during iteration.
+        Equilibrium is found by changing the value of the neutral-axis.
+        """
         return self.applied_curvature
