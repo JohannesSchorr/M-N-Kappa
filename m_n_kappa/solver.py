@@ -48,7 +48,6 @@ class Solver:
             self._minimum_variable = self._compute_minimum_variable()
         self._sorted_data = self._sort_data()
         self._prepare()
-        logger.info(f"Created {self.__repr__()}")
 
     def __repr__(self) -> str:
         return (
