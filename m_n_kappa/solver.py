@@ -21,7 +21,6 @@ class Solver:
         "_data",
         "_target",
         "_variable",
-        "_target_value",
         "_maximum_variable",
         "_minimum_variable",
         "_function",
@@ -30,7 +29,7 @@ class Solver:
     )
 
     @logs_init
-    def __init__(self, data: list, target, variable, target_value: float = 0.0):
+    def __init__(self, data: list, target, variable):
         """
         Parameters
         ----------
@@ -40,13 +39,10 @@ class Solver:
             key of the target (e.g. str for dictionaries or int for lists)
         variable : str or int
             variable of the target (e.g. str for dictionaries or int for lists)
-        target_value : float
-            value to meet by the target
         """
         self._data = data
         self._target = target
         self._variable = variable
-        self._target_value = target_value
         if len(self._data) > 1:
             self._maximum_variable = self._compute_maximum_variable()
             self._minimum_variable = self._compute_minimum_variable()
@@ -59,8 +55,7 @@ class Solver:
             f"{self.__class__.__name__}("
             f"data=data, "
             f"target={self.target}, "
-            f"variable={self.variable}, "
-            f"target_value={self.target_value})"
+            f"variable={self.variable})"
         )
 
     @str_start_end
@@ -133,11 +128,6 @@ class Solver:
     def target(self):
         """key of the target in ``data``"""
         return self._target
-
-    @property
-    def target_value(self):
-        """value of the target"""
-        return self._target_value
 
     @property
     def variable(self):
