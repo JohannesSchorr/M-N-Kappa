@@ -690,7 +690,12 @@ class MKappaByConstantCurvature(MKappa):
         """boundary_condition of the neutral axis"""
         return self._minimum_neutral_axis
 
-    def initialize_boundary_curvatures(self):
+    def initialize_boundary_curvatures(self) -> None:
+        """
+        initialize iteration process by computing the cross-section
+        with boundary values of the neutral-axis (see attributes
+        'minimum_neutral_axis' and 'maximum_neutral_axis')
+        """
         for index, neutral_axis_value in enumerate(
             [self.minimum_neutral_axis, self.maximum_neutral_axis]
         ):
