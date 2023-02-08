@@ -626,7 +626,7 @@ class MKappaByConstantCurvature(MKappa):
         """
         Parameters
         ----------
-        cross_section : :py:class:`~m_n_kappa.Crossection`
+        cross_section : :py:class:`~m_n_kappa.Crosssection`
             cross-section to compute
         applied_axial_force : float
             applied axial force (Default: 0.0)
