@@ -1,3 +1,5 @@
+import operator
+
 from .general import str_start_end, print_chapter, print_sections
 from .function import Polynominal, Linear
 
@@ -25,6 +27,7 @@ class Solver:
         "_minimum_variable",
         "_function",
         "_sorted_data",
+        "_x_n",
         "_x_n_plus_1",
     )
 
@@ -43,6 +46,7 @@ class Solver:
         self._data = data
         self._target = target
         self._variable = variable
+        self._x_n = self._compute_x_n()
         if len(self._data) > 1:
             self._maximum_variable = self._compute_maximum_variable()
             self._minimum_variable = self._compute_minimum_variable()
@@ -136,7 +140,7 @@ class Solver:
     @property
     def x_n(self) -> float:
         """lastly computed variable value"""
-        return self._sorted_data[0][self.variable]
+        return self._x_n
 
     @property
     def x_n_plus_1(self) -> float:
@@ -148,6 +152,13 @@ class Solver:
 
     def _prepare(self):
         pass
+
+    def _compute_x_n(self):
+        """
+        get the variable value that leads to target-value nearest to zero
+        """
+        sorted_data = sorted(self.data, key=lambda x: abs(x[self.target]))
+        return sorted_data[0][self.variable]
 
     def _sort_data(self) -> list:
         """
@@ -176,23 +187,45 @@ class Solver:
 
     def _compute_maximum_variable(self) -> float:
         """compute the maximal variable value"""
-        return max(self._data, key=lambda x: x[self.variable])[self.variable]
+        return max(self._data, key=operator.itemgetter(self.variable))[self.variable]
 
     def _compute_minimum_variable(self) -> float:
         """compute the minimum variable value"""
-        return min(self._data, key=lambda x: x[self.variable])[self.variable]
+        return min(self._data, key=operator.itemgetter(self.variable))[self.variable]
 
     def _min_over_zero_variable(self) -> float:
-        """compute the variable value that has the target value nearest above zero"""
-        return min(self._target_values_greater_zero(), key=lambda x: x[self.target])[
-            self.variable
-        ]
+        """compute the variable value that has the nearest target value  above zero"""
+        data = self._sort_data_by_target_and_variable(
+            self._target_values_greater_zero()
+        )
+        return data[0][self.variable]
 
     def _min_under_zero_variable(self) -> float:
-        """compute the variable value that has the target value nearest below zero"""
-        return max(self._target_values_smaller_zero(), key=lambda x: x[self.target])[
-            self.variable
-        ]
+        """compute the variable value that has the nearest target value below zero"""
+        data = self._sort_data_by_target_and_variable(
+            self._target_values_smaller_zero()
+        )
+        return data[0][self.variable]
+
+    def _sort_data_by_target_and_variable(self, data: list) -> list:
+        """
+        sort the data primarily by ``target`` and secondarily by ``variable``
+
+        Precisely it is not sorted for ``variable``, but for the difference between
+        ``variable`` and ``x_n``
+
+        Parameters
+        ----------
+        data : list[list] | list[data]
+
+        Returns
+        -------
+        list
+            sorted data
+        """
+        return sorted(
+            data, key=lambda x: (abs(x[self.target]), abs(x[self.variable] - self.x_n))
+        )
 
 
 class Bisection(Solver):
@@ -210,6 +243,7 @@ class Bisection(Solver):
         "_maximum_variable",
         "_minimum_variable",
         "_x_n_plus_1",
+        "_x_n",
     )
 
     def compute(self, use_fallback: bool = False) -> float:
@@ -296,6 +330,7 @@ class Newton(Solver):
         "_minimum_variable",
         "_function",
         "_x_n_plus_1",
+        "_x_n",
     )
 
     @property
