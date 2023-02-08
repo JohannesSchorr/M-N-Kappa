@@ -245,6 +245,22 @@ class Bisection(Solver):
         "_x_n",
     )
 
+    @log.init
+    def __init__(
+            self, data: list[dict] | list[list], target: str | int, variable: str | int
+    ):
+        """
+        Parameters
+        ----------
+        data : list[dict] | list[list]
+            data containing target and variable keys
+        target : str | int
+            key of the target (e.g. str for dictionaries or int for lists)
+        variable : str | int
+            variable of the target (e.g. str for dictionaries or int for lists)
+        """
+        super().__init__(data, target, variable)
+
     def compute(self, use_fallback: bool = False) -> float:
         """
         Compute a new variable value that leading to a target-value nearer zero
@@ -331,6 +347,22 @@ class Newton(Solver):
         "_x_n_plus_1",
         "_x_n",
     )
+
+    @log.init
+    def __init__(
+            self, data: list[dict] | list[list], target: str | int, variable: str | int
+    ):
+        """
+        Parameters
+        ----------
+        data : list[dict] | list[list]
+            data containing target and variable keys
+        target : str | int
+            key of the target (e.g. str for dictionaries or int for lists)
+        variable : str | int
+            variable of the target (e.g. str for dictionaries or int for lists)
+        """
+        super().__init__(data, target, variable)
 
     @property
     def function(self):
