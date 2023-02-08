@@ -15,7 +15,7 @@ loggers:
     level: WARN
     handlers: [console]
     propagate: no
-  m_n_kappa.curvature_boundaries:
+  m_n_kappa.boundaries:
     level: WARN
     handlers: [ console ]
     propagate: no
