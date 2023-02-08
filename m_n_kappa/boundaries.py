@@ -606,9 +606,9 @@ class DecisiveNeutralAxis:
     maximum_negative_section_strains: list[StrainPosition]
 
     def __post_init__(self):
-        logger.info(f"Finished {self.__repr__()}")
+        log.info(f"Finished {self.__repr__()}")
 
-    @logs_return
+    @log.result
     def compute(self, curvature: float) -> tuple[float, float]:
         """
         compute the highest and the lowest possible neutral-axis under the given curvature
