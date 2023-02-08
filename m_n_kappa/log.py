@@ -27,12 +27,11 @@ def log_init(func, logger: logging.Logger):
 
     @functools.wraps(func)
     def wrapper(*args, **kwargs):
-        arguments = [f"{k}={v}" for k, v in kwargs.items()]
         init_index = func.__qualname__.find(".__init__")
         is_calling_class = func.__qualname__[:init_index] == args[0].__class__.__name__
         if is_calling_class:
             logger.info(
-                f'Start initialize {args[0].__class__.__name__}({", ".join(arguments)})'
+                f'Start initialize {args[0].__class__.__name__}{get_keyword_arguments(kwargs)}'
             )
 
         value = func(*args, **kwargs)
@@ -70,7 +69,12 @@ def log_return(func, logger: logging.Logger):
     @functools.wraps(func)
     def wrapper(*args, **kwargs):
         value = func(*args, **kwargs)
-        logger.debug(f"{func.__qualname__}: {value}")
+        logger.debug(f"{func.__qualname__}{get_keyword_arguments(kwargs)}: -> {value}")
         return value
 
     return wrapper
+
+
+def get_keyword_arguments(kwargs):
+    arguments = [f"{k}={v}" for k, v in kwargs.items()]
+    return f'({", ".join(arguments)})'
