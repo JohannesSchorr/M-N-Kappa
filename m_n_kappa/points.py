@@ -291,7 +291,7 @@ class MKappa:
             self.compute()
             if self.__is_axial_force_within_tolerance():
                 self._successful = True
-                break
+                return
         self._not_successful_reason = "maximum iterations reached"  # maybe using enum?
         logger.info(
             f"Maximum number of iterations ({self.maximum_iterations}) reached, "
