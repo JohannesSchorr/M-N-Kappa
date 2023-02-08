@@ -662,14 +662,14 @@ class MKappaByConstantCurvature(MKappa):
     def __repr__(self):
         return (
             f"MKappaByConstantCurvature("
-            f"cross_section=cross_section, "
-            f"applied_curvature={self.applied_curvature}, "
-            f"maximum_neutral_axis={self.maximum_neutral_axis}, "
-            f"minimum_neutral_axis={self.minimum_neutral_axis}, "
-            f"applied_axial_force={self.applied_axial_force}, "
-            f"maximum_iterations={self.maximum_iterations}, "
-            f"axial_force_tolerance={self.axial_force_tolerance}, "
-            f"solver={self.solver})"
+            f"\n\tcross_section=cross_section, "
+            f"\n\tapplied_curvature={self.applied_curvature}, "
+            f"\n\tmaximum_neutral_axis={self.maximum_neutral_axis}, "
+            f"\n\tminimum_neutral_axis={self.minimum_neutral_axis}, "
+            f"\n\tapplied_axial_force={self.applied_axial_force}, "
+            f"\n\tmaximum_iterations={self.maximum_iterations}, "
+            f"\n\taxial_force_tolerance={self.axial_force_tolerance}, "
+            f"\n\tsolver={self.solver})"
         )
 
     @property
