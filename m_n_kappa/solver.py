@@ -207,7 +207,6 @@ class Bisection(Solver):
         "_data",
         "_target",
         "_variable",
-        "_target_value",
         "_maximum_variable",
         "_minimum_variable",
         "_x_n_plus_1",
