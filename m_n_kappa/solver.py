@@ -170,10 +170,10 @@ class Solver:
         gt_zero = self._target_values_greater_zero()
         lt_zero = self._target_values_smaller_zero()
         if len(gt_zero) > 2:
-            gt_zero.sort(key=lambda x: abs(x[self.target]))
+            gt_zero = self._sort_data_by_target_and_variable(gt_zero)
             gt_zero = gt_zero[:2]
         if len(lt_zero) > 2:
-            lt_zero.sort(key=lambda x: abs(x[self.target]))
+            lt_zero = self._sort_data_by_target_and_variable(lt_zero)
             lt_zero = lt_zero[:2]
         new_data = gt_zero + lt_zero
         new_data.sort(key=lambda x: abs(x[self.target]))
