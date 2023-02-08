@@ -715,7 +715,7 @@ class MKappaByConstantCurvature(MKappa):
             curvature
         """
         boundaries = self.cross_section.get_boundary_conditions()
-        neutral_axes = boundaries.neutral_axes.compute(self.applied_curvature)
+        neutral_axes = boundaries.neutral_axis.compute(self.applied_curvature)
         return max(neutral_axes), min(neutral_axes)
 
     def _compute_new_curvature(self) -> float:
