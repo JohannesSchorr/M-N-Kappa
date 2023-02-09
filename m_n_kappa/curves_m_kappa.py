@@ -1,3 +1,24 @@
+"""
+curves_m_kappa.py
+
+Aim
+===
+Computation of the moment-curvature-curve (see :py:class:`~m_n_kappa.curves_m_kappa.MKappaCurve`)
+
+Procedure
+=========
+1. determine strain- and position-value that leads to maximum curvature before failure
+   (see :py:class:`~m_n_kappa.crosssection.CrossSectionBoundaries`)
+2. compute moment-curvature-point at failure (see :py:class:`~m_n_kappa.curves_m_kappa.MKappaCurveCurvature`)
+3. determine strain- and position-values that are between the failure-curvature from 2. and no curvature
+   (see :py:class:`~m_n_kappa.curves_m_kappa.MKappaCurve`)
+4. compute moment-curvature-point for each of the strain- and position-value given in 3.
+   (see :py:class:`~m_n_kappa.curves_m_kappa.MKappaCurve`)
+
+:py:class:`~m_n_kappa.curves_m_kappa.MKappaCurve` is exposed to the user to compute a
+moment-curvature-curve directly
+"""
+
 from dataclasses import dataclass
 
 from .crosssection import Crosssection
