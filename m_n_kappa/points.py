@@ -286,7 +286,11 @@ class MKappa:
             log.info(message)
 
     def _initial_axial_forces_have_different_sign(self) -> bool:
-        if self.computations[0].axial_force * self.computations[1].axial_force < 0.0:
+        if (
+            self.computations[0].axial_force_equilibrium
+            * self.computations[1].axial_force_equilibrium
+            < 0.0
+        ):
             return True
         else:
             return False
@@ -317,7 +321,8 @@ class MKappa:
             f"without finding equilibrium of axial forces"
         )
 
-    def _axial_force_equilibrium(self) -> float:
+    def axial_force_equilibrium(self) -> float:
+        """compute the equilibrium of computed and applied axial-force"""
         return self.axial_force - self.applied_axial_force
 
     def _compute_new_curvature(self) -> float:
@@ -347,27 +352,29 @@ class MKappa:
         temp_computations = [
             {
                 # "axial_force": computation.axial_force,
-                "axial_force": computation.axial_force - self.applied_axial_force,
+                "axial_force_equilibrium": computation.axial_force_equilibrium,
                 "neutral_axis_value": computation.neutral_axis_value,
             }
             for computation in self._computations
         ]
         solver = self.solver(
-            data=temp_computations, target="axial_force", variable="neutral_axis_value"
+            data=temp_computations,
+            target="axial_force_equilibrium",
+            variable="neutral_axis_value",
         )
         if self._target_value_is_improved():
             use_fallback = False
         else:
             use_fallback = True
-            log.info("Axial force not improved: use fallback")
+            log.info("Axial force equilibrium not improved: use fallback")
         return solver.compute(use_fallback)
 
     def __is_axial_force_within_tolerance(self) -> bool:
         """
-        check if axial-force is within the given tolerance
+        check if equilibrium of axial-forces is within the given tolerance
         (see attribute :py:attr:`~m_n_kappa.points.MKappa.axial_force_tolerance`)
         """
-        if abs(self._axial_force_equilibrium()) < self.axial_force_tolerance:
+        if abs(self.axial_force_equilibrium()) < self.axial_force_tolerance:
             return True
         else:
             return False
@@ -380,6 +387,7 @@ class MKappa:
                 curvature=self.curvature,
                 neutral_axis_value=self.neutral_axis,
                 axial_force=self.axial_force,
+                axial_force_equilibrium=self.axial_force_equilibrium(),
             )
         )
 
