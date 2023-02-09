@@ -255,24 +255,22 @@ class MKappa:
         self._computed_cross_section = self._get_compute_cross_section()
         self._axial_force = self.computed_cross_section.total_axial_force()
         self.__save()
+        if self.__is_axial_force_within_tolerance():
+            self._successful = True
 
     def initialize(self) -> None:
         """initialize computation"""
         self.initialize_boundary_curvatures()
-        if self.__is_axial_force_within_tolerance():
-            self._successful = True
-        elif self._initial_axial_forces_have_different_sign():
-            self.iterate()
-        else:
-            self._not_successful_reason = (
-                "same sign of axial forces at minimum and maximum curvature"
-            )
-            log.info(
-                "Axial-forces of minimum and maximum curvature have same sign. "
-                "No equilibrium of axial-forces possible. "
-                "Computation will be skipped"
-            )
-            self.__set_values_none()
+        if not self._successful:
+            if self._initial_axial_forces_have_different_sign():
+                self.iterate()
+            else:
+                self._not_successful_reason = (
+                    f"difference of axial forces at minimum and maximum "
+                    f"{self.variable} have same sign"
+                )
+                self._message()
+                self.__set_values_none()
 
     def _initial_axial_forces_have_different_sign(self) -> bool:
         if self.computations[0].axial_force * self.computations[1].axial_force < 0.0:
@@ -298,8 +296,7 @@ class MKappa:
                 return
             self._curvature = self._compute_new_curvature()
             self.compute()
-            if self.__is_axial_force_within_tolerance():
-                self._successful = True
+            if self._successful:
                 return
         self._not_successful_reason = "maximum iterations reached"  # maybe using enum?
         log.info(
