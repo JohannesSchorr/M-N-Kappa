@@ -156,7 +156,7 @@ class MKappa:
                 "\t" + f"N = {self.axial_force:.2f}",
                 "\t" + f"M = {self.moment:.2f}",
                 "\t" + f"Kappa = {self.curvature:.5f}",
-                "\t" + f"z_m = {self.neutral_axis:.2f}"
+                "\t" + f"z_m = {self.neutral_axis:.2f}",
             ]
             return print_sections(text)
         else:
