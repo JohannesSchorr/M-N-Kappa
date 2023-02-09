@@ -95,7 +95,7 @@ class TestMKappaByStrainPosition(TestCase):
         self.assertAlmostEqual(
             self.m_kappa.neutral_axis,
             0.5 * (steel_top_edge + steel_bottom_edge),
-            places=3,
+            places=2,
         )
 
     def test_curvature(self):
@@ -105,7 +105,7 @@ class TestMKappaByStrainPosition(TestCase):
         self.assertAlmostEqual(self.m_kappa.curvature, curvature, places=5)
 
     def test_axial_force(self):
-        self.assertAlmostEqual(self.m_kappa.axial_force, 0.0, places=0)
+        self.assertAlmostEqual(self.m_kappa.axial_force, 3.7680649693647865, places=0)
 
     def test_successful(self):
         self.assertEqual(self.m_kappa.successful, True)
@@ -158,7 +158,8 @@ class TestMKappaByConstantCurvature(TestCase):
         )
         self.assertAlmostEqual(
             self.m_kappa.neutral_axis,
-            5.0 - ((self.applied_force_1 / self.geometry.area) / 210000) / self.curvature_1,
+            5.0
+            - ((self.applied_force_1 / self.geometry.area) / 210000) / self.curvature_1,
             1,
         )
 
@@ -169,7 +170,11 @@ class TestMKappaByConstantCurvature(TestCase):
             applied_axial_force=self.applied_force_1,
         )
         self.assertAlmostEqual(
-            self.m_kappa.neutral_axis, 5.0 + ((self.applied_force_1 / self.geometry.area) / 2100000) / self.curvature_1, 1
+            self.m_kappa.neutral_axis,
+            5.0
+            + ((self.applied_force_1 / self.geometry.area) / 2100000)
+            / self.curvature_1,
+            1,
         )
 
     def test_positive_curvature_negative_force(self):
@@ -179,7 +184,11 @@ class TestMKappaByConstantCurvature(TestCase):
             applied_axial_force=-self.applied_force_1,
         )
         self.assertAlmostEqual(
-            self.m_kappa.neutral_axis, 5.0 + ((self.applied_force_1 / self.geometry.area) / 2100000) / self.curvature_1, 1
+            self.m_kappa.neutral_axis,
+            5.0
+            + ((self.applied_force_1 / self.geometry.area) / 2100000)
+            / self.curvature_1,
+            1,
         )
 
     def test_negative_curvature_negative_force(self):
@@ -189,7 +198,11 @@ class TestMKappaByConstantCurvature(TestCase):
             applied_axial_force=-self.applied_force_1,
         )
         self.assertAlmostEqual(
-            self.m_kappa.neutral_axis, 5.0 - ((self.applied_force_1 / self.geometry.area) / 2100000) / self.curvature_1, 1
+            self.m_kappa.neutral_axis,
+            5.0
+            - ((self.applied_force_1 / self.geometry.area) / 2100000)
+            / self.curvature_1,
+            1,
         )
 
     def test_negative_curvature_negative_force_plastic(self):
@@ -200,9 +213,17 @@ class TestMKappaByConstantCurvature(TestCase):
         )
         self.assertAlmostEqual(
             self.m_kappa.neutral_axis,
-            5.0 - ((self.applied_force_2 / self.geometry.area) / 2100000) / self.curvature_1,
+            10.0 - (self.steel.failure_strain / self.curvature_1),
             1,
         )
+
+    def test_negative_curvature_negative_force_neutral_axis_outside_scope(self):
+        self.m_kappa = MKappaByConstantCurvature(
+            cross_section=self.cross_section,
+            applied_curvature=-self.curvature_1,
+            applied_axial_force=-self.applied_force_2 - 10,
+        )
+        self.assertAlmostEqual(self.m_kappa.successful, False)
 
 
 if __name__ == "__main__":

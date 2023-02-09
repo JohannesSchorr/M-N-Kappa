@@ -148,10 +148,10 @@ class TestStrain(TestCase):
         self.assertGreater(strain(self.neutral_axis_value, self.curvature_value, position_value=15), 0.0)
 
     def test_equals_1(self):
-        self.assertEqual(strain(self.neutral_axis_value, self.curvature_value, position_value=5), -0.0005)
+        self.assertEqual(strain(self.neutral_axis_value, self.curvature_value, position_value=5), -0.005)
 
     def test_equals_2(self):
-        self.assertEqual(strain(self.neutral_axis_value, self.curvature_value, position_value=15), 0.0005)
+        self.assertEqual(strain(self.neutral_axis_value, self.curvature_value, position_value=15), 0.005)
 
     def test_precision(self):
         position_value = 15.
@@ -174,7 +174,7 @@ class TestPosition(TestCase):
                 neutral_axis_value=self.neutral_axis_value,
                 curvature_value=self.curvature_value,
                 strain_at_position=-0.001),
-            5.0,
+            9.5,
         )
 
     def test_equals_2(self):
@@ -183,7 +183,7 @@ class TestPosition(TestCase):
                 neutral_axis_value=self.neutral_axis_value,
                 curvature_value=self.curvature_value,
                 strain_at_position=0.001),
-            15.0,
+            10.5,
         )
 
     def test_precision(self):
@@ -218,13 +218,13 @@ class TestNeutralAxis(TestCase):
     def test_precision(self):
         for factor_index in range(1, 100, 1):
             curvature_value = 0.1 ** factor_index
-            print(curvature_value)
             with self.subTest(curvature_value):
                 neutral_axis_value = Decimal(self.position_value )+ (Decimal(self.strain_at_position) / Decimal(curvature_value))
                 self.assertEqual(
                     neutral_axis(self.strain_at_position, curvature_value, self.position_value),
                     float(neutral_axis_value)
                 )
+
 
 class TestRemoveDuplicates(TestCase):
     def test_equals_1(self):

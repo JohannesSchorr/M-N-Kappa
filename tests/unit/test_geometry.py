@@ -153,7 +153,7 @@ class TestCircle(TestCase):
         self.diameter = 10.0
         self.centroid_y = 25.0
         self.centroid_z = 0.0
-        self.circle = Circle(centroid_y=self.centroid_y, diameter=self.diameter, centroid_z=0.0)
+        self.circle = Circle(centroid_y=self.centroid_y, diameter=self.diameter, centroid_z=self.centroid_z)
         self.membran_width = 2.0
         self.bending_width = 4.0
         self.effective_widths = EffectiveWidths(
@@ -165,7 +165,6 @@ class TestCircle(TestCase):
             concrete_under_compression_use_membran_width=True,
         )
 
-
     def test_area(self):
         self.assertEqual(self.circle.area, self.diameter ** 2.0 * 0.25 * 3.145)
 
@@ -176,8 +175,8 @@ class TestCircle(TestCase):
         self.assertEqual(self.circle.centroid_z, self.centroid_z)
 
     def test_edges(self):
-        edges = [self.centroid_y]
-        self.assertEqual(self.circle.edges, edges)
+        edges = [self.centroid_z]
+        self.assertCountEqual(self.circle.edges, edges)
 
     def test_split_inside_effective_width(self):
         """in case reinforcement bar is inside effective width it is consiered"""
@@ -310,19 +309,19 @@ class TestComposedGeometries(TestCase):
 class TestRebarLayer(TestCase):
 
     def setUp(self) -> None:
-        self.centroid_y = 10.
+        self.centroid_z = 10.
         self.rebar_diameter = 10.
         self.rebar_number = 10
         self.width = 100
         self.layer = RebarLayer(
             self.rebar_diameter,
-            self.centroid_y,
+            self.centroid_z,
             self.rebar_number,
             self.width,
         )
 
     def test_centroid(self):
-        self.assertEqual(self.layer.centroid, self.centroid_y)
+        self.assertEqual(self.layer.centroid_z, self.centroid_z)
 
     def test_rebar_number(self):
         self.assertEqual(self.layer.rebar_number, self.rebar_number)
@@ -343,7 +342,7 @@ class TestRebarLayer(TestCase):
         rebar_horizontal_distance = self.width / self.rebar_number
         circles = []
         for rebar_number in range(self.rebar_number):
-            circles.append(Circle(self.rebar_diameter, self.centroid_y, -0.5*self.width + rebar_number * rebar_horizontal_distance))
+            circles.append(Circle(self.rebar_diameter, -0.5*self.width + rebar_number * rebar_horizontal_distance, self.centroid_z))
         self.assertListEqual(self.layer.geometries, circles)
 
 

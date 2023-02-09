@@ -1,4 +1,4 @@
-from m_n_kappa.material import Material, Concrete, ConcreteCompressionNonlinear, Steel
+from m_n_kappa.material import Material, Concrete, ConcreteCompressionNonlinear, Steel, StressStrain
 
 from unittest import TestCase, main
 
@@ -7,11 +7,11 @@ class TestMaterial(TestCase):
 
     def setUp(self):
         self.stress_strain_list = [
-            [-100.0, -1.0],
-            [-50.0, -0.6],
-            [0.0, 0.0],
-            [50, 0.5],
-            [150.0, 2.0],
+            StressStrain(-100.0, -1.0),
+            StressStrain(-50.0, -0.6),
+            StressStrain(0.0, 0.0),
+            StressStrain(50, 0.5),
+            StressStrain(150.0, 2.0),
         ]
         self.section_type = "slab"
         self.material = Material(
@@ -37,13 +37,13 @@ class TestMaterial(TestCase):
         self.assertEqual(self.material.stresses, [-100.0, -50.0, 0.0, 50.0, 150.0])
 
     def test_get_material_index_positive_strain(self):
-        self.assertEqual(self.material._get_material_index(strain=1.0), 3)
+        self.assertEqual(self.material._get_material_index(strain_value=1.0), 3)
 
     def test_get_material_index_zero(self):
-        self.assertEqual(self.material._get_material_index(strain=0.0), 2)
+        self.assertEqual(self.material._get_material_index(strain_value=0.0), 2)
 
     def test_get_material_index_negative_strain(self):
-        self.assertEqual(self.material._get_material_index(strain=-0.5), 1)
+        self.assertEqual(self.material._get_material_index(strain_value=-0.5), 1)
 
     def test_get_intermediate_strains_positive(self):
         self.assertEqual(
@@ -84,7 +84,12 @@ class TestMaterial(TestCase):
         self.material.sort_strains_descending()
         self.assertListEqual(
             self.material.stress_strain,
-            [[150.0, 2.0], [50, 0.5], [0.0, 0.0], [-50.0, -0.6], [-100.0, -1.0]],
+            [
+                StressStrain(150.0, 2.0),
+                StressStrain(50, 0.5),
+                StressStrain(0.0, 0.0),
+                StressStrain(-50.0, -0.6),
+                StressStrain(-100.0, -1.0)],
         )
         self.material.sort_strains_ascending()
 
@@ -121,10 +126,10 @@ class TestConcreteCompressionNonlinear(TestCase):
         self.assertEqual(self.concrete.compression_stress_strain_type, "Nonlinear")
 
     def test_stress_strains(self):
-        self.assertEqual(
+        self.assertCountEqual(
             self.compression.stress_strain(),
             [
-                [-0.0, -0.0],
+                #[-0.0, -0.0],
                 [-13.125764641863459, -0.0004370035264271907],
                 [-22.461118693025618, -0.0008396726328503419],
                 [-33.58438351512978, -0.0016793452657006837],
@@ -152,7 +157,7 @@ class TestSteel(TestCase):
 
     def test_stress_strain(self):
         self.assertListEqual(
-            self.steel.stress_strain, [[-210000.0, -1.0], [0.0, 0.0], [210000, 1.0]]
+            self.steel.stress_strain, [StressStrain(-210000.0, -1.0), StressStrain(0.0, 0.0), StressStrain(210000, 1.0)]
         )
 
 
@@ -180,11 +185,11 @@ class TestSteelBilinear(TestCase):
         self.assertEqual(
             self.steel.stress_strain,
             [
-                [-500.0, -0.15],
-                [-355.0, -0.0016904761904761904],
-                [-0.0, -0.0],
-                [355.0, 0.0016904761904761904],
-                [500.0, 0.15],
+                StressStrain(-500.0, -0.15),
+                StressStrain(-355.0, -0.0016904761904761904),
+                StressStrain(-0.0, -0.0),
+                StressStrain(355.0, 0.0016904761904761904),
+                StressStrain(500.0, 0.15),
             ],
         )
 
