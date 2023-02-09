@@ -272,6 +272,19 @@ class MKappa:
                 self._message()
                 self.__set_values_none()
 
+    def _message(self) -> None:
+        message = (
+            f"Difference of axial-force and applied axial-force at minimum and maximum {self.variable} "
+            f"have same sign. "
+            f"No equilibrium of axial-forces possible. "
+        )
+        if self._is_called_by_user:
+            message += "Computation will be aborted."
+            log.warning(message)
+        else:
+            message += "Computation will be skipped."
+            log.info(message)
+
     def _initial_axial_forces_have_different_sign(self) -> bool:
         if self.computations[0].axial_force * self.computations[1].axial_force < 0.0:
             return True
