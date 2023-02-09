@@ -160,7 +160,6 @@ class Material:
         text = [
             "Stress-strain_value-relationship",
             "--------------------------",
-            # f"section_type: {self.stress_strain_type.lower()}",
             "   stress  |   strain_value  ",
             "-----------------------",
             self._print_stress_strain_points(),
