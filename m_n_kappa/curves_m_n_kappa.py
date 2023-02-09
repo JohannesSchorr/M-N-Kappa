@@ -406,7 +406,7 @@ class MNZeroCurvature:
     def __str__(self):
         text = [
             self._print_title(),
-            self._print_initalization(),
+            self._print_initialization(),
             self._print_input_sections_result(),
             self._print_other_sections_result(),
             self._print_other_sections_iterations(),
@@ -418,7 +418,7 @@ class MNZeroCurvature:
             [self.__class__.__name__, len(self.__class__.__name__) * "="]
         )
 
-    def _print_initalization(self) -> str:
+    def _print_initialization(self) -> str:
         return print_sections(
             ["Initialization", len("Initialization") * "-"], self.__repr__()
         )
