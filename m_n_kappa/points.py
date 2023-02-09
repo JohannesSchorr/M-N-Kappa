@@ -684,6 +684,64 @@ class MKappaByConstantCurvature(MKappa):
             classified as successful (Default: 5.0)
         solver : :py:class:`~m_n_kappa.solver.Solver`
             used solver (Default: :py:class:`~m_n_kappa.solver.Newton`)
+
+        See Also
+        --------
+        MKappaByStrainPosition : compute curvature and neutral axis by a given :py:class:`~m_n_kappa.StrainPosition`
+
+        Examples
+        --------
+        The ``cross_section`` of type :py:class:`~m_n_kappa.Crosssection` that is defined in the following
+        will be used to demonstrate the functionality of :py:class:`~m_n_kappa.MKappaByConstantCurvature`.
+        For reproducibility ``cross_section`` consist of one rectangular steel section.
+
+        >>> from m_n_kappa import Rectangle, Steel, Crosssection
+        >>> geometry = Rectangle(top_edge=0.0, bottom_edge=10.0, width=10.0)
+        >>> steel = Steel(f_y=355, failure_strain=0.15)
+        >>> section = geometry + steel
+        >>> cross_section = Crosssection(sections=[section])
+
+        :py:class:`~m_n_kappa.MKappaByConstantCurvature` only by passing ``cross_section``
+        an ``applied_curvature`` and an ``applied_axial_force``.
+        Initializing :py:class:`~m_n_kappa.MKappaByConstantCurvature` starts an iterative process to
+        compute equilibrium of ``applied_axial_force`` and the ``axial_force``.
+         ``axial_force`` results from the strain-distribution applied by ``applied_curvature`` and
+         a neutral-axis value.
+
+        >>> from m_n_kappa import MKappaByConstantCurvature
+        >>> computation = MKappaByConstantCurvature(
+        ...     cross_section=cross_section,
+        ...     applied_curvature=0.001,
+        ...     applied_axial_force=100.)
+
+        In case the computation was successful the attribute
+        :py:attr:`~m_n_kappa.MKappaByConstantCurvature.successful` will return ``True``.
+
+        >>> computation.successful
+        True
+
+        :py:attr:`~m_n_kappa.MKappaByConstantCurvature.neutral_axis` is the computed neutral-axis.
+
+        >>> computation.neutral_axis
+
+        In case the ``applied_axial_force`` is higher than maximum positive or negative
+        axial force of the ``cross_section`` the computation will be marked by
+        :py:attr:`~m_n_kappa.MKappaByConstantCurvature.successful` = ``False``.
+
+        >>> computation = MKappaByConstantCurvature(
+        ...     cross_section=cross_section,
+        ...     applied_curvature=0.001,
+        ...     applied_axial_force=36000.)
+        >>> computation.successful
+        False
+
+        The :py:attr:`~m_n_kappa.MKappaByConstantCurvature.not_successful_reason` will than give you
+        a reason why it was not working.
+
+        >>> computation.not_successful_reason
+        difference of axial forces at minimum and maximum neutral-axis have same sign
+
+        In this case you should choose a smaller value for the ``applied_axial_force``.
         """
         super().__init__(
             cross_section,
@@ -758,6 +816,8 @@ class MKappaByConstantCurvature(MKappa):
     def _get_neutral_axes_boundary_values(self) -> tuple[float, float]:
         """
         Compute the boundary values of the neutral axis
+
+        .. versionadded:: 0.2.0
 
         Returns
         -------
