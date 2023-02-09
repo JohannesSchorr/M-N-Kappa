@@ -100,6 +100,7 @@ class MKappa:
         self._neutral_axis = None
         self._computed_cross_section = None
         self._axial_force = None
+        self._is_called_by_user = True
 
     def __repr__(self):
         return (
@@ -410,6 +411,7 @@ class MKappaByStrainPosition(MKappa):
         "_not_successful_reason",
         "_computed_cross_section",
         "_iteration",
+        "_is_called_by_user",
     )
 
     @log.init
@@ -424,6 +426,7 @@ class MKappaByStrainPosition(MKappa):
         maximum_iterations: int = 10,
         axial_force_tolerance: float = 5.0,
         solver: Solver = Newton,
+        is_called_by_user: bool = True,
     ):
         """
         Parameters
@@ -472,6 +475,7 @@ class MKappaByStrainPosition(MKappa):
                 )
         self._maximum_curvature = maximum_curvature
         self._minimum_curvature = minimum_curvature
+        self._is_called_by_user = is_called_by_user
         self.initialize()
 
     def __repr__(self):
@@ -608,6 +612,7 @@ class MKappaByConstantCurvature(MKappa):
         "_not_successful_reason",
         "_computed_cross_section",
         "_iteration",
+        "_is_called_by_user",
     )
 
     @log.init
@@ -621,6 +626,7 @@ class MKappaByConstantCurvature(MKappa):
         maximum_iterations=10,
         axial_force_tolerance=5,
         solver=Newton,
+        is_called_by_user: bool = True,
     ):
         """
         Parameters
@@ -659,6 +665,7 @@ class MKappaByConstantCurvature(MKappa):
         else:
             self._maximum_neutral_axis = maximum_neutral_axis
             self._minimum_neutral_axis = minimum_neutral_axis
+        self._is_called_by_user = is_called_by_user
         self.initialize()
 
     def __repr__(self):
