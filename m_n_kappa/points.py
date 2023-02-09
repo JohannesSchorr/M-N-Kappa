@@ -808,10 +808,11 @@ class MKappaByConstantCurvature(MKappa):
         for index, neutral_axis_value in enumerate(
             [self.minimum_neutral_axis, self.maximum_neutral_axis]
         ):
-            self._iteration = index
-            self._curvature = self.applied_curvature
-            self._neutral_axis = neutral_axis_value
-            self.compute()
+            if not self._successful:
+                self._iteration = index
+                self._curvature = self.applied_curvature
+                self._neutral_axis = neutral_axis_value
+                self.compute()
 
     def _get_neutral_axes_boundary_values(self) -> tuple[float, float]:
         """
