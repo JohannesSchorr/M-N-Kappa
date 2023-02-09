@@ -238,6 +238,15 @@ class MKappa:
         """
         return self._successful
 
+    @property
+    def variable(self):
+        """
+        name variable that is changed to reach equilibrium of axial force
+
+        .. versionadded:: 0.2.0
+        """
+        return ""
+
     def compute(self) -> None:
         """
         compute the cross-section with given initial values (curvature and neutral axis)
@@ -490,6 +499,15 @@ class MKappaByStrainPosition(MKappa):
         )
 
     @property
+    def variable(self):
+        """
+        name variable that is changed to reach equilibrium of axial force
+
+        .. versionadded:: 0.2.0
+        """
+        return "curvature"
+
+    @property
     def maximum_curvature(self) -> float:
         """maximum positive or negative allowed curvature"""
         return self._maximum_curvature
@@ -695,6 +713,15 @@ class MKappaByConstantCurvature(MKappa):
     def minimum_neutral_axis(self) -> float:
         """boundary_condition of the neutral axis"""
         return self._minimum_neutral_axis
+
+    @property
+    def variable(self):
+        """
+        name variable that is changed to reach equilibrium of axial force
+
+        .. versionadded:: 0.2.0
+        """
+        return "neutral-axis"
 
     def initialize_boundary_curvatures(self) -> None:
         """
