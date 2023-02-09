@@ -1,3 +1,26 @@
+"""
+curves_m_n_kappa.py
+
+Aim
+===
+Computation of a curve considering moment, internal axial force and curvature
+
+Procedure
+=========
+1. split cross-section into a girder- and a slab-section
+2. moment-axial-force-points (M-N)
+   - determine maximum positive and negative strain of the sub-cross-sections, that do not lead to failure in
+     case of a uniform distribution of strain
+   - determine all strain-points that lie in between the above given positive and negative strains
+   - compute the moment-axial-force-point under each of these points
+3. moment-axial-force-curvature-points (M-N-Kappa)
+   - the following procedure must be applied to each of the above given M-N-points
+   - determine the strain- and position-values leading to failure under the axial-force of the M-N-point
+   - compute the moment-axial-force-curvature-point at failure
+   - determine strain- and position-values that are between the failure curvature and no curvature
+   - compute moment-curvature-point for each of the strain- and position-values given above
+"""
+
 from .general import (
     print_sections,
     print_chapter,
@@ -466,6 +489,7 @@ class MNZeroCurvature:
 
     @property
     def axial_force(self) -> float:
+        """"""
         return self._axial_force
 
     @property
