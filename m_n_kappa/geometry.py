@@ -349,10 +349,10 @@ class Rectangle(Geometry):
         self._width = width
         self._left_edge = left_edge
         self._right_edge = right_edge
-        self._check_input_values()
         self._width, self._left_edge, self._right_edge = check_width(
             self.width, self.left_edge, self.right_edge
         )
+        self._check_input_values()
 
     def _check_input_values(self) -> None:
         """rearrange input-values to match the needed arrangement"""
