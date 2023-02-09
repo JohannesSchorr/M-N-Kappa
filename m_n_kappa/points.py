@@ -43,6 +43,7 @@ class Computation:
     curvature: float
     neutral_axis_value: float
     axial_force: float
+    axial_force_equilibrium: float
 
     def __post_init__(self):
         log.info(f"Created {self.__repr__()}")
