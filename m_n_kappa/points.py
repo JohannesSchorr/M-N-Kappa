@@ -50,12 +50,16 @@ class Computation:
         iteration-number
     computed_cross_section: :py:class:`~m_n_kappa.Crosssection`
         computed cross-section that inherits from `~m_n_kappa.Crosssection`
+    axial_force_equilibrium : float
+        equilibrium of axial-forces
     curvature: float
-        computed curvature
+        computed curvature (Default: ``None``)
     neutral_axis_value: float
-        computed neutral axis
+        computed neutral axis (Default: ``None``)
     axial_force: float
-        computed axial-force
+        computed axial-force (Default: ``None``)
+    strain : float
+        computed strain (Default: ``None``)
     """
 
     iteration: int
