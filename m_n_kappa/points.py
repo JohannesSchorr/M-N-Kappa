@@ -78,11 +78,250 @@ class Computation:
         log.info(f"Created {self.__repr__()}")
 
 
-class MKappa:
+class Point:
+    """
+    base-class for computing equilibrium of axial-forces
+
+    .. versionadded:: 0.2.0
+    """
+
+    @log.init
+    def __init__(
+            self,
+            cross_section: Crosssection,
+            applied_axial_force: float,
+            maximum_iterations: int = 10,
+            axial_force_tolerance: float = 5.0,
+            solver: Solver = Newton,
+            is_called_by_user: bool = True,
+    ):
+        """
+        Parameters
+        ----------
+        cross_section : :py:class:`~m_n_kappa.Crosssection`
+            cross-section to compute
+        applied_axial_force : float
+            applied axial force (Default: 0.0)
+        maximum_iterations : int
+            maximum allowed iterations (Default: 10).
+            In case the given number of iterations before axial force within desired tolerance,
+            the computation is classified as not successful and will be stopped
+        axial_force_tolerance : float
+            if axial force within this tolerance the computation is terminated and
+            classified as successful (Default: 5.0)
+        solver : :py:class:`~m_n_kappa.solver.Solver`
+            used solver (Default: :py:class:`~m_n_kappa.solver.Newton`)
+        is_called_by_user : bool
+            indicates if the class is initialized by a user (``True``, Default) or by another class (``False``)
+        """
+        self._cross_section = cross_section
+        self._applied_axial_force = applied_axial_force
+        self._maximum_iterations = maximum_iterations
+        self._axial_force_tolerance = axial_force_tolerance
+        self._solver = solver
+        self._is_called_by_user = is_called_by_user
+        self._computations: list[Computation] = []
+        self._iteration = 0
+        self._axial_force = None
+        self._successful = False
+        self._not_successful_reason = "-"
+        self._computed_cross_section = None
+
+    @property
+    def applied_axial_force(self) -> float:
+        """axial-force the strain is to be computed"""
+        return self._applied_axial_force
+
+    @property
+    def axial_force(self) -> float:
+        """latest computed axial-force-value"""
+        return self._computed_cross_section.total_axial_force()
+
+    @property
+    def axial_force_tolerance(self) -> float:
+        """
+        tolerance the :py:meth:`~m_n_kappa.points.MNByStrain.axial_force_equilibrium`
+        must be within for a successful computation
+        """
+        return self._axial_force_tolerance
+
+    @property
+    def computations(self) -> list[Computation]:
+        """conducted computations"""
+        return self._computations
+
+    @property
+    def computed_cross_section(self):
+        """computed cross_section of the current iteration"""
+        return self._computed_cross_section
+
+    @property
+    def cross_section(self) -> Crosssection:
+        """cross-section to be computed"""
+        return self._cross_section
+
+    @property
+    def iteration(self) -> int:
+        """number of iteration"""
+        return self._iteration
+
+    @property
+    def maximum_iterations(self) -> int:
+        """maximum iterations"""
+        return self._maximum_iterations
+
+    @property
+    def moment(self) -> float:
+        """computed moment of the cross_section"""
+        return self._computed_cross_section.total_moment()
+
+    @property
+    def not_successful_reason(self) -> str:
+        """In case computation was not successful gives a reason"""
+        return self._not_successful_reason
+
+    @property
+    def solver(self):
+        """used solver to computed equilibrium"""
+        return self._solver
+
+    @property
+    def successful(self) -> bool:
+        """indicates if strain has been computed successfully"""
+        return self._successful
+
+    @property
+    def variable(self):
+        """
+        name variable that is changed to reach equilibrium of axial force
+        """
+        return ""
+
+    def axial_force_equilibrium(self) -> float:
+        """latest computed axial-force-value"""
+        return self._axial_force - self.applied_axial_force
+
+    def _is_axial_force_equilibrium_within_tolerance(self) -> bool:
+        """check if equilibrium of axial forces is within tolerance"""
+        if abs(self.axial_force_equilibrium()) < self.axial_force_tolerance:
+            return True
+        else:
+            return False
+
+    def _initial_axial_forces_have_different_sign(self) -> bool:
+        """
+        check if the axial forces of the initial axial-forces
+        have different signs
+        """
+        if (
+            self.computations[0].axial_force_equilibrium
+            * self.computations[1].axial_force_equilibrium
+            < 0.0
+        ):
+            return True
+        else:
+            return False
+
+    def _iterate(self) -> None:
+        """iteration process"""
+        pass
+
+    def _iteration_range(self) -> range:
+        """range the iteration shall take place into"""
+        return range(self.iteration + 1, self.maximum_iterations + 1, 1)
+
+    def _message(self) -> None:
+        """logging message depending on if the class is called by user or by another class"""
+        message = (
+            f"Difference of axial-force and applied axial-force at minimum and maximum {self.variable} "
+            f"have same sign. "
+            f"No equilibrium of axial-forces possible. "
+        )
+        if self._is_called_by_user:
+            message += "Computation will be aborted."
+            log.warning(message)
+        else:
+            message += "Computation will be skipped."
+            log.info(message)
+
+    def _set_values_none(self) -> None:
+        """set all important value to ``None``"""
+        pass
+
+    def _sort_computations_by(self, attribute: str) -> None:
+        """sorts attribute ``computations`` by given attribute-key"""
+        self._computations.sort(key=operator.attrgetter(attribute))
+
+    def _start_computation(self) -> None:
+        """
+        start the iteration-process in case the equilibrium of
+        axial-forces has not been reached already
+        """
+        if not self._successful:
+            if self._initial_axial_forces_have_different_sign():
+                self._iterate()
+            else:
+                self._not_successful_reason = (
+                    f"difference of axial forces at minimum and maximum "
+                    f"{self.variable} have same sign"
+                )
+                self._message()
+                self._set_values_none()
+
+    def _target_value_is_improved(self) -> bool:
+        """check if latest computation decreased the difference of axial-forces"""
+        self._sort_computations_by("iteration")
+        if operator.truth(self._computations):
+            if (
+                abs(
+                    self._computations[-1].axial_force_equilibrium
+                    - self._computations[-2].axial_force_equilibrium
+                )
+                < 1.0
+            ):
+                return False
+        return True
+
+    def _use_fallback(self) -> bool:
+        """use fallback in case the target-value has not been improved"""
+        if self._target_value_is_improved():
+            return False
+        else:
+            log.info("Axial force equilibrium not improved: use fallback")
+            return True
+
+    @str_start_end
+    def __str__(self):
+        text = [
+            self._print_title(),
+            self._print_initialization(),
+            self._print_iterations(),
+            self._print_results(),
+        ]
+        return print_chapter(text)
+
+    def _print_title(self) -> str:
+        """print the title (see __str__())"""
+        class_name = self.__class__.__name__
+        return print_sections([class_name, len(class_name) * "="])
+
+    def _print_initialization(self):
+        """print the initialization (see __str__()), i.e. the __repr__()"""
+        return print_sections(["Initialization", "--------------", self.__repr__()])
+
+    def _print_iterations(self) -> str:
+        """print the iterations in tabular form"""
+        pass
+
+    def _print_results(self) -> str:
+        """print the result of the computation"""
+        pass
+
+
+class MKappa(Point):
 
     """
-    computation of one Moment-Curvature-Point by fixation of
-    one point and varying the neutral axis
+    base class for computation of one Moment-Curvature-Point by varying the neutral axis
 
     .. versionadded:: 0.1.0
 
@@ -116,20 +355,18 @@ class MKappa:
         solver : :py:class:`~m_n_kappa.solver.Solver`
             used solver (Default: :py:class:`~m_n_kappa.solver.Newton`)
         """
-        self._cross_section = cross_section
-        self._applied_axial_force = applied_axial_force
-        self._axial_force_tolerance = axial_force_tolerance
-        self._maximum_iterations = maximum_iterations
-        self._computations: list[Computation] = []
-        self._solver = solver
-        self._successful = False
-        self._not_successful_reason = "-"
-        self._iteration = 0
+        super().__init__(
+            cross_section=cross_section,
+            applied_axial_force=applied_axial_force,
+            axial_force_tolerance=axial_force_tolerance,
+            maximum_iterations=maximum_iterations,
+            solver=solver,
+            is_called_by_user=is_called_by_user,
+        )
         self._curvature = None
         self._neutral_axis = None
         self._computed_cross_section = None
         self._axial_force = None
-        self._is_called_by_user = True
 
     def __repr__(self):
         return (
@@ -137,23 +374,6 @@ class MKappa:
             f"applied_axial_force={self.applied_axial_force}, "
             f"maximum_iterations={self.maximum_iterations})"
         )
-
-    @str_start_end
-    def __str__(self):
-        text = [
-            self._print_title(),
-            self._print_initialization(),
-            self._print_iterations(),
-            self._print_results(),
-        ]
-        return print_chapter(text)
-
-    def _print_title(self) -> str:
-        class_name = self.__class__.__name__
-        return print_sections([class_name, len(class_name) * "="])
-
-    def _print_initialization(self):
-        return print_sections(["Initialization", "--------------", self.__repr__()])
 
     def _print_iterations(self):
         text = [
@@ -192,89 +412,14 @@ class MKappa:
             return ""
 
     @property
-    def applied_axial_force(self):
-        """applied axial force"""
-        return self._applied_axial_force
-
-    @property
-    def axial_force(self) -> float:
-        """computed axial force"""
-        return self._axial_force
-
-    @property
-    def axial_force_tolerance(self) -> float:
-        """
-        if axial force within this tolerance the computation is terminated and
-        classified as successful
-        """
-        return self._axial_force_tolerance
-
-    @property
-    def computations(self) -> list[Computation]:
-        """saved computations"""
-        return self._computations
-
-    @property
-    def computed_cross_section(self):
-        """computed cross_section of the current iteration"""
-        return self._computed_cross_section
-
-    @property
-    def cross_section(self):
-        """cross-section to compute"""
-        return self._cross_section
-
-    @property
     def curvature(self) -> float:
-        """applied curvature"""
+        """curvature"""
         return self._curvature
-
-    @property
-    def iteration(self) -> int:
-        """number of current iteration"""
-        return self._iteration
-
-    @property
-    def maximum_iterations(self) -> int:
-        """maximum allowed iterations"""
-        return self._maximum_iterations
-
-    @property
-    def moment(self) -> float:
-        """computed moment of the cross_section"""
-        return self._computed_cross_section.total_moment()
 
     @property
     def neutral_axis(self) -> float:
         """point where strain_value is zero"""
         return self._neutral_axis
-
-    @property
-    def solver(self):
-        """used solver to computed equilibrium"""
-        return self._solver
-
-    @property
-    def not_successful_reason(self) -> str:
-        """In case computation was not successful gives a reason"""
-        return self._not_successful_reason
-
-    @property
-    def successful(self) -> bool:
-        """
-        ``True``:  equilibrium has been found,
-        ``False``: equilibrium has not (yet) been found
-        """
-        return self._successful
-
-    @property
-    def variable(self):
-        """
-        name variable that is changed to reach equilibrium of axial force
-
-        .. versionadded:: 0.2.0
-        """
-        return ""
 
     def compute(self) -> None:
         """
@@ -284,56 +429,19 @@ class MKappa:
         self._computed_cross_section = self._get_compute_cross_section()
         self._axial_force = self.computed_cross_section.total_axial_force()
         self.__save()
-        if self.__is_axial_force_within_tolerance():
+        if self._is_axial_force_equilibrium_within_tolerance():
             self._successful = True
-
-    def initialize(self) -> None:
-        """initialize computation"""
-        self.initialize_boundary_curvatures()
-        if not self._successful:
-            if self._initial_axial_forces_have_different_sign():
-                self.iterate()
-            else:
-                self._not_successful_reason = (
-                    f"difference of axial forces at minimum and maximum "
-                    f"{self.variable} have same sign"
-                )
-                self._message()
-                self.__set_values_none()
-
-    def _message(self) -> None:
-        message = (
-            f"Difference of axial-force and applied axial-force at minimum and maximum {self.variable} "
-            f"have same sign. "
-            f"No equilibrium of axial-forces possible. "
-        )
-        if self._is_called_by_user:
-            message += "Computation will be aborted."
-            log.warning(message)
-        else:
-            message += "Computation will be skipped."
-            log.info(message)
-
-    def _initial_axial_forces_have_different_sign(self) -> bool:
-        if (
-            self.computations[0].axial_force_equilibrium
-            * self.computations[1].axial_force_equilibrium
-            < 0.0
-        ):
-            return True
-        else:
-            return False
 
     def initialize_boundary_curvatures(self):
         pass
 
-    def iterate(self) -> None:
+    def _iterate(self) -> None:
         """
         iterate as long as one of the following criteria are reached:
         - number of maximum iterations
         - absolute axial force smaller than desired one
         """
-        for iter_index in range(self.iteration + 1, self.maximum_iterations + 1, 1):
+        for iter_index in self._iteration_range():
             self._iteration = iter_index
             self._neutral_axis = self._guess_neutral_axis()
             if self.neutral_axis is None:
@@ -349,10 +457,6 @@ class MKappa:
             f"Maximum number of iterations ({self.maximum_iterations}) reached, "
             f"without finding equilibrium of axial forces"
         )
-
-    def axial_force_equilibrium(self) -> float:
-        """compute the equilibrium of computed and applied axial-force"""
-        return self.axial_force - self.applied_axial_force
 
     def _compute_new_curvature(self) -> float:
         pass
@@ -391,22 +495,7 @@ class MKappa:
             target="axial_force_equilibrium",
             variable="neutral_axis_value",
         )
-        if self._target_value_is_improved():
-            use_fallback = False
-        else:
-            use_fallback = True
-            log.info("Axial force equilibrium not improved: use fallback")
-        return solver.compute(use_fallback)
-
-    def __is_axial_force_within_tolerance(self) -> bool:
-        """
-        check if equilibrium of axial-forces is within the given tolerance
-        (see attribute :py:attr:`~m_n_kappa.points.MKappa.axial_force_tolerance`)
-        """
-        if abs(self.axial_force_equilibrium()) < self.axial_force_tolerance:
-            return True
-        else:
-            return False
+        return solver.compute(self._use_fallback())
 
     def __save(self) -> None:
         self._computations.append(
@@ -420,28 +509,11 @@ class MKappa:
             )
         )
 
-    def _target_value_is_improved(self) -> bool:
-        self.__sort_computations_by("iteration")
-        if operator.truth(self._computations):
-            if (
-                abs(
-                    self._computations[-1].axial_force
-                    - self._computations[-2].axial_force
-                )
-                < 1.0
-            ):
-                return False
-        return True
-
-    def __set_values_none(self) -> None:
+    def _set_values_none(self) -> None:
         self._axial_force = None
         self._curvature = None
         self._moment = None
         self._neutral_axis = None
-
-    def __sort_computations_by(self, attribute: str) -> None:
-        """sorts attribute ``computations`` by given attribute-key"""
-        self._computations.sort(key=operator.attrgetter(attribute))
 
 
 class MKappaByStrainPosition(MKappa):
@@ -532,7 +604,8 @@ class MKappaByStrainPosition(MKappa):
         self._maximum_curvature = maximum_curvature
         self._minimum_curvature = minimum_curvature
         self._is_called_by_user = is_called_by_user
-        self.initialize()
+        self.initialize_boundary_curvatures()
+        self._start_computation()
 
     def __repr__(self):
         return (
