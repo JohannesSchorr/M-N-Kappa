@@ -1,3 +1,23 @@
+"""
+points.py
+
+Aim
+===
+provide classes to compute the equilibrium of axial forces
+
+Overview
+========
+Point: base-class for computing equilibrium of axial-forces
+MKappa: base class for computation of one Moment-Curvature-Point by varying the neutral axis
+   (inherits from Point)
+MKappaByStrainPosition: computation of one Moment-Curvature-Point by fixed stress-strain_value-point and
+    varying the neutral axis (inherits from MKappa)
+MKappaByConstantCurvature: computation of one Moment-Curvature-Point by fixed curvature and
+   varying the neutral axis (inherits from MKappa)
+MNByStrain : computation of uniform strain leading to given axial-force
+   (inherits from Point)
+"""
+
 import operator
 from dataclasses import dataclass
 
