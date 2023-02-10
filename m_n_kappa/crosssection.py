@@ -635,7 +635,7 @@ class ComputationCrosssectionStrain(ComputationCrosssection):
     @log.init
     def __init__(
         self,
-        sections: list | Crosssection,
+        sections: list[Section] | Crosssection,
         strain: float,
         slab_effective_widths: EffectiveWidths = None,
     ):
