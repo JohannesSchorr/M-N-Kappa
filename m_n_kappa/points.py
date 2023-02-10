@@ -68,10 +68,11 @@ class Computation:
 
     iteration: int
     computed_cross_section: Crosssection
-    curvature: float
-    neutral_axis_value: float
-    axial_force: float
     axial_force_equilibrium: float
+    curvature: float = None
+    neutral_axis_value: float = None
+    axial_force: float = None
+    strain: float = None
 
     def __post_init__(self):
         log.info(f"Created {self.__repr__()}")
