@@ -862,7 +862,8 @@ class MKappaByConstantCurvature(MKappa):
             self._maximum_neutral_axis = maximum_neutral_axis
             self._minimum_neutral_axis = minimum_neutral_axis
         self._is_called_by_user = is_called_by_user
-        self.initialize()
+        self.initialize_boundary_curvatures()
+        self._start_computation()
 
     def __repr__(self):
         return (
