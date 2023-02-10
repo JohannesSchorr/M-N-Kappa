@@ -29,7 +29,11 @@ from .general import (
     neutral_axis,
     StrainPosition,
 )
-from .crosssection import Crosssection, ComputationCrosssectionCurvature
+from .crosssection import (
+    Crosssection,
+    ComputationCrosssectionCurvature,
+    ComputationCrosssectionStrain,
+)
 from .solver import Solver, Newton
 
 from .log import LoggerMethods
