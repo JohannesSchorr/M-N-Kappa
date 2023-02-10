@@ -337,6 +337,7 @@ class MKappa(Point):
         maximum_iterations: int = 10,
         axial_force_tolerance: float = 5.0,
         solver: Solver = Newton,
+        is_called_by_user: bool = True,
     ):
         """
         Parameters
@@ -385,7 +386,7 @@ class MKappa(Point):
             "iter | curvature | neutral-axis | axial-force | equilibrium ",
             "------------------------------------------------------------",
         ]
-        self.__sort_computations_by("iteration")
+        self._sort_computations_by("iteration")
         for computation in self.computations:
             text.append(
                 f"{computation.iteration:4} | "
@@ -481,10 +482,9 @@ class MKappa(Point):
         float
             new value of the neutral axis
         """
-        self.__sort_computations_by("axial_force")
+        self._sort_computations_by("axial_force")
         temp_computations = [
             {
-                # "axial_force": computation.axial_force,
                 "axial_force_equilibrium": computation.axial_force_equilibrium,
                 "neutral_axis_value": computation.neutral_axis_value,
             }
