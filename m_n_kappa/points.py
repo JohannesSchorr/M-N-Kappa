@@ -939,3 +939,229 @@ class MKappaByConstantCurvature(MKappa):
         Equilibrium is found by changing the value of the neutral-axis.
         """
         return self.applied_curvature
+
+
+class MNByStrain(Point):
+
+    """
+    computation of uniform strain leading to given axial-force
+
+    .. versionadded:: 0.2.0
+    """
+
+    __slots__ = (
+        "_cross_section",
+        "_applied_axial_force",
+        "_axial_force_tolerance",
+        "_maximum_iterations",
+        "_computations",
+        "_solver",
+        "_successful",
+        "_not_successful_reason",
+        "_computed_cross_section",
+        "_iteration",
+        "_is_called_by_user",
+    )
+
+    @log.init
+    def __init__(
+        self,
+        cross_section: Crosssection,
+        applied_axial_force: float,
+        maximum_iterations: int = 10,
+        axial_force_tolerance: float = 5.0,
+        solver: Solver = Newton,
+        is_called_by_user: bool = True,
+    ):
+        """
+        Parameters
+        ----------
+        cross_section : :py:class:`~m_n_kappa.Crosssection`
+            cross-section to compute
+        applied_axial_force : float
+            applied axial force (Default: 0.0)
+        maximum_iterations : int
+            maximum allowed iterations (Default: 10).
+            In case the given number of iterations before axial force within desired tolerance,
+            the computation is classified as not successful and will be stopped
+        axial_force_tolerance : float
+            if axial force within this tolerance the computation is terminated and
+            classified as successful (Default: 5.0)
+        solver : :py:class:`~m_n_kappa.solver.Solver`
+            used solver (Default: :py:class:`~m_n_kappa.solver.Newton`)
+        is_called_by_user : bool
+            indicates if the class is initialized by a user (``True``, Default) or by another class (``False``)
+
+        See Also
+        --------
+        MKappaByStrainPosition :  computation of one Moment-Curvature-Point by fixed stress-strain_value-point and
+           varying the neutral axis
+        MKappaByConstantCurvature : computation of one Moment-Curvature-Point by fixed curvature and
+           varying the neutral axis
+
+        Examples
+        --------
+        :py:class:`~m_n_kappa.MNByStrain` takes a :py:class:`~m_n_kappa.Crosssection` and an
+        ``applied_axial_force`` as argument.
+        The :py:class:`~m_n_kappa.Crosssection` may be a rectangular steel profile for example.
+
+        >>> from m_n_kappa import Steel, Rectangle, Crosssection
+        >>> steel = Steel(f_y=100, failure_strain=0.15)
+        >>> rectangle = Rectangle(top_edge=0.0, bottom_edge=10.0, width=10.0)
+        >>> section = steel + rectangle
+        >>> cross_section = Crosssection([section])
+
+        As indicated :py:class:`~m_n_kappa.MNByStrain` is then easily envoked by passing ``cross_section``
+        and an axial force as argument.
+
+        >>> from m_n_kappa import MNByStrain
+        >>> m_n = MNByStrain(cross_section=cross_section, applied_axial_force=100)
+
+        :py:attr:`~m_n_kappa.MNByStrain.strain` returns then the strain corresponding to the ``applied_axial_force``.
+
+        >>> round(m_n.strain, 5)
+        0.04762
+
+        In case the applied axial force exceeds the maximum axial-force of the section a ``None``-value is
+        returned.
+
+        >>> m_n_none = MNByStrain(cross_section=cross_section, applied_axial_force=rectangle.area * 100 + 10)
+        >>> m_n_none.strain
+        None
+
+        """
+        super().__init__(
+            cross_section=cross_section,
+            applied_axial_force=applied_axial_force,
+            axial_force_tolerance=axial_force_tolerance,
+            maximum_iterations=maximum_iterations,
+            solver=solver,
+            is_called_by_user=is_called_by_user,
+        )
+        self._initialize_boundary_strains()
+        self._start_computation()
+
+    @property
+    def strain(self) -> float:
+        """currently computed strain-value"""
+        return self._strain
+
+    @property
+    def variable(self) -> str:
+        """name variable that is changed to reach equilibrium of axial force"""
+        return 'strain'
+
+    def _compute(self) -> None:
+        """compute the cross-section under :py:attr:`~m_n_kappa.points.MNByStrain.strain`"""
+        self._computed_cross_section = ComputationCrosssectionStrain(
+            sections=self.cross_section, strain=self.strain
+        )
+        self._axial_force = self._computed_cross_section.total_axial_force()
+        self._save()
+        if self._is_axial_force_equilibrium_within_tolerance():
+            self._successful = True
+
+    def _initialize_boundary_strains(self) -> None:
+        """initialize computation of the maximum positive and negative strains"""
+        for iteration, strain in enumerate(
+            [
+                self.cross_section.maximum_negative_strain(),
+                self.cross_section.maximum_positive_strain(),
+            ]
+        ):
+            if not self.successful:
+                self._iteration = iteration
+                self._strain = strain
+                self._compute()
+
+    def _iterate(self) -> None:
+        """
+        iterate as long as one of the following criteria are reached:
+        - number of maximum iterations
+        - absolute axial force smaller than desired one
+        """
+        for iter_index in self._iteration_range():
+            self._iteration = iter_index
+            self._strain = self._guess_strain()
+            if self._strain is None:
+                self._not_successful_reason = "Iteration not converging"
+                log.info(self.not_successful_reason)
+                return
+            self._compute()
+            if self._successful:
+                return
+        self._not_successful_reason = "maximum iterations reached"  # maybe using enum?
+        log.info(
+            f"Maximum number of iterations ({self.maximum_iterations}) reached, "
+            f"without finding equilibrium of axial forces"
+        )
+
+    def _guess_strain(self) -> float:
+        """use ``solver`` to guess a new strain value"""
+        self._sort_computations_by("axial_force")
+        temp_computations = [
+            {
+                "axial_force_equilibrium": computation.axial_force_equilibrium,
+                "strain": computation.strain,
+            }
+            for computation in self._computations
+        ]
+        solver = self.solver(
+            data=temp_computations,
+            target="axial_force_equilibrium",
+            variable="strain",
+        )
+        return solver.compute(self._use_fallback())
+
+    def _save(self) -> None:
+        """saves the latest computation"""
+        self._computations.append(
+            Computation(
+                iteration=self.iteration,
+                computed_cross_section=self._computed_cross_section,
+                axial_force_equilibrium=self.axial_force_equilibrium(),
+                axial_force=self.axial_force,
+                strain=self.strain,
+            )
+        )
+
+    def _set_values_none(self) -> None:
+        """set the computed values to ``None``"""
+        self._strain = None
+        self._axial_force = None
+
+    def _print_results(self) -> str:
+        """print the results"""
+        if self.successful:
+            text = [
+                "Results",
+                "-------",
+                "\t" + f"N = {self.axial_force:.2f}",
+                "\t" + f"M = {self.moment:.2f}",
+                "\t" + f"strain = {self.strain:.5f}",
+            ]
+            return print_sections(text)
+        else:
+            return ""
+
+    def _print_iterations(self) -> str:
+        """print the iterations and its results in tabular form"""
+        text = [
+            "Iterations",
+            "----------",
+            f"number: {len(self.computations)}",
+            "",
+            "---------------------------------------------------------",
+            "iter | strain | neutral-axis | axial-force | equilibrium ",
+            "---------------------------------------------------------",
+        ]
+        self._sort_computations_by("iteration")
+        for computation in self.computations:
+            text.append(
+                f"{computation.iteration:4} | "
+                f"{computation.strain:6.4f}"
+                f"{computation.axial_force:10.2f} | "
+                f"{computation.axial_force - self.applied_axial_force:11.4f}"
+            )
+        text.append("---------------------------------------------------------")
+        return print_sections(text)
