@@ -402,6 +402,20 @@ class Crosssection:
         cross_section_boundaries = CrossSectionBoundaries(self.sections)
         return cross_section_boundaries.get_boundaries()
 
+    def decisive_maximum_positive_strain_position(self) -> StrainPosition:
+        """minimum of all maximum positive strains"""
+        return min(
+            [section.maximum_positive_strain_position() for section in self.sections],
+            key=lambda x: x.strain,
+        )
+
+    def decisive_maximum_negative_strain_position(self) -> StrainPosition:
+        """minimum of all maximum negative strains"""
+        return max(
+            [section.maximum_negative_strain_position() for section in self.sections],
+            key=lambda x: x.strain,
+        )
+
     def maximum_positive_strain(self) -> float:
         """
         determine maximum positive strain of all sections
