@@ -465,3 +465,46 @@ class EdgeStrains:
             top_strain=self.top_edge_strain.strain,
             bottom_strain=self.bottom_edge_strain.strain,
         )
+
+
+@dataclass
+class NotSuccessfulReason:
+
+    """
+    Container for reasons why computation has not been successful
+
+    .. versionadded:: 0.2.0
+
+    Parameters
+    ----------
+    keyword : str
+        keyword is the shortcut to describe the reason why a computation was not successful
+        (Default: None)
+    reason : str
+        custom reason
+    strain_position : StrainPosition
+        strain, its position and the material that led to the not successful computation
+    """
+
+    keyword: str = None
+    reason: str = None
+    strain_position: StrainPosition = None
+
+    def __repr__(self) -> str:
+        return self.reason
+
+    def __post_init__(self):
+        if self.keyword is not None and self.reason is None:
+            if self.keyword in self.keywords.keys():
+                self.reason = self.keywords[self.keyword]
+
+    @property
+    def keywords(self) -> dict:
+        """shortcut to describe reasons why computation was not successful"""
+        return {
+            'iteration': "maximum number of iterations reached, without finding equilibrium of axial-forces",
+            'converge': "Iteration not converging",
+            'same sign strain': "difference of axial forces at minimum and maximum strain have same sign",
+            'same sign neutral axis': "difference of axial forces at minimum and maximum neutral axis have same sign",
+            'same sign curvature': "difference of axial forces at minimum and maximum curvature have same sign"
+        }
