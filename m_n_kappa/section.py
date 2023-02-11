@@ -46,8 +46,8 @@ class Section:
         The first way is by simply adding the ``steel`` (:py:class:`~m_n_kappa.Material` instance)
         and a ``rectangle`` (:py:class:`~m_n_kappa.Geometry` instance).
 
-        >>> section_1 = steel + rectangle
-        >>> section_1
+        >>> section_top = steel + rectangle
+        >>> section_top
         Section(\
 geometry=Rectangle(top_edge=0.00, bottom_edge=10.00, width=10.00, left_edge=-5.00, right_edge=5.00), \
 material=Steel(f_y=355.0, f_u=None, failure_strain=None, E_a=210000.0))
@@ -56,8 +56,8 @@ material=Steel(f_y=355.0, f_u=None, failure_strain=None, E_a=210000.0))
         :py:class:`~m_n_kappa.Section`.
 
         >>> from m_n_kappa import Section
-        >>> section_2 = Section(geometry=rectangle, material=steel)
-        >>> section_2
+        >>> section_bottom = Section(geometry=rectangle, material=steel)
+        >>> section_bottom
         Section(\
 geometry=Rectangle(top_edge=0.00, bottom_edge=10.00, width=10.00, left_edge=-5.00, right_edge=5.00), \
 material=Steel(f_y=355.0, f_u=None, failure_strain=None, E_a=210000.0))
