@@ -131,16 +131,16 @@ class Crosssection:
 
         The above create :py:class:`~m_n_kappa.Section` may be combined to a cross-section like:
 
-        >>> cross_section_1 = steel_section + concrete_section_1
-        >>> cross_section_1
+        >>> cross_section_top = steel_section + concrete_section_1
+        >>> cross_section_top
         Crosssection(sections=sections)
 
         Or alternatively like:
 
         >>> from m_n_kappa import Crosssection
         >>> sections_list = [steel_section, concrete_section_1]
-        >>> cross_section_2 = Crosssection(sections=sections_list)
-        >>> cross_section_2
+        >>> cross_section_bottom = Crosssection(sections=sections_list)
+        >>> cross_section_bottom
         Crosssection(sections=sections)
 
         This is also the only way nn case an :py:class:`~m_n_kappa.EffectiveWidths` is to be applied.
@@ -167,12 +167,12 @@ class Crosssection:
         >>> concrete_geometry_2 = Rectangle(
         ...     top_edge=0.0, bottom_edge=10.0, width=10.0, left_edge=0.0)
         >>> concrete_section_2 = concrete + concrete_geometry_2
-        >>> cross_section_1 = cross_section_1 + concrete_section_2
-        >>> len(cross_section_1.sections)
+        >>> cross_section_top = cross_section_top + concrete_section_2
+        >>> len(cross_section_top.sections)
         3
 
-        >>> cross_section_2.add_section(concrete_section_2)
-        >>> len(cross_section_2.sections)
+        >>> cross_section_bottom.add_section(concrete_section_2)
+        >>> len(cross_section_bottom.sections)
         3
 
         Subsequently, the :py:class:`~m_n_kappa.Crosssection` is needed for all computations.
