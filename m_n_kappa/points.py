@@ -1015,7 +1015,7 @@ class MNByStrain(Point):
         As indicated :py:class:`~m_n_kappa.MNByStrain` is then easily envoked by passing ``cross_section``
         and an axial force as argument.
 
-        >>> from m_n_kappa import MNByStrain
+        >>> from m_n_kappa.points import MNByStrain
         >>> m_n = MNByStrain(cross_section=cross_section, applied_axial_force=100)
 
         :py:attr:`~m_n_kappa.MNByStrain.strain` returns then the strain corresponding to the ``applied_axial_force``.
