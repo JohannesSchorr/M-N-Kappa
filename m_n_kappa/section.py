@@ -172,6 +172,30 @@ material=Steel(f_y=355.0, f_u=None, failure_strain=None, E_a=210000.0))
             material=self.material.__class__.__name__,
         )
 
+    def maximum_positive_strain_position(self) -> StrainPosition:
+        """
+        maximum positive strain from associated material-model
+
+        .. versionadded:: 0.2.0
+        """
+        return StrainPosition(
+            self.material.maximum_strain,
+            self.geometry.edges[0],
+            self.material.__class__.__name__,
+        )
+
+    def maximum_negative_strain_position(self) -> StrainPosition:
+        """
+        maximum negative strain from associated material-model
+
+        .. versionadded:: 0.2.0
+        """
+        return StrainPosition(
+            self.material.minimum_strain,
+            self.geometry.edges[0],
+            self.material.__class__.__name__,
+        )
+
     def maximum_positive_strain(self) -> float:
         """maximum positive strain from associated material-model"""
         return self.material.maximum_strain
