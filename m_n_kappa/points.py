@@ -1050,7 +1050,7 @@ class MNByStrain(Point):
     @property
     def variable(self) -> str:
         """name variable that is changed to reach equilibrium of axial force"""
-        return 'strain'
+        return "strain"
 
     def _compute(self) -> None:
         """compute the cross-section under :py:attr:`~m_n_kappa.points.MNByStrain.strain`"""
@@ -1085,7 +1085,7 @@ class MNByStrain(Point):
             self._iteration = iter_index
             self._strain = self._guess_strain()
             if self._strain is None:
-                self._not_successful_reason = NotSuccessfulReason('converge')
+                self._not_successful_reason = NotSuccessfulReason("converge")
                 log.info(self.not_successful_reason.reason)
                 return
             self._compute()
@@ -1166,3 +1166,178 @@ class MNByStrain(Point):
             )
         text.append("---------------------------------------------------------")
         return print_sections(text)
+
+
+class MomentAxialForce:
+    """
+    compute moment and axial-force at zero curvature
+
+    .. versionadded:: 0.2.0
+    """
+
+    @log.init
+    def __init__(
+        self,
+        cross_sections: list[Crosssection],
+        strain: float = None,
+        axial_force: float = None,
+    ):
+        """
+        Parameters
+        ----------
+        cross_sections : list[:py:class:`~m_n_kappa.Crosssection`]
+            cross-sections that are computed (must be two)
+        strain : float
+            applied strain to the first cross-section given in ``cross_sections``
+        axial_force : float
+            axial-force applied to the first cross-section given in ``cross_sections``
+
+        Raises
+        ------
+        ValueError: If not exactly two cross-sections are given in ``cross_sections``
+        ValueError: If neither ``strain`` nor ``axial_force`` are given
+
+        Examples
+        --------
+        To compute the moment-axial-force you need two (sub)-cross-sections.
+        In the following these are two identical steel rectangles.
+
+        >>> from m_n_kappa import Steel, Rectangle
+        >>> steel = Steel()
+        >>> rectangle_top = Rectangle(top_edge=0.0, bottom_edge=10.0, width=10.0)
+        >>> section_top = steel + rectangle_top
+        >>> cross_section_top = Crosssection([section_top])
+        >>> rectangle_bottom= Rectangle(top_edge=10.0, bottom_edge=20.0, width=10.0)
+        >>> section_bottom= steel + rectangle_bottom
+        >>> cross_section_bottom = Crosssection([section_top])
+        >>> cross_sections = [cross_section_top, cross_section_bottom]
+
+        By initializing :py:class:`~m_n_kappa.MomentAxialForce` the moment-
+        axial-force point is computed under the given strain applied uniformly
+        to the first cross-section.
+
+        >>> from m_n_kappa import MomentAxialForce
+        >>> m_n = MomentAxialForce(cross_sections, 0.0001)
+
+        The axial-force is easily accessed by :py:attr:`~m_n_kappa.MomentAxialForce.axial_force`.
+
+        >>> m_n.axial_force
+        2100
+
+        And the computed moment by is :py:attr:`~m_n_kappa.MomentAxialForce.moment`.
+
+        >>> m_n.moment
+        21000
+
+        The strain-difference between both cross-sections is computed by
+        :py:attr:`~m_n_kappa.MomentAxialForce.strain_difference`.
+
+        >>> m_n.strain_difference
+        0.0002
+        """
+        if not isinstance(cross_sections, list):
+            TypeError(f"cross_sections must be of type list")
+        if len(cross_sections) != 2:
+            ValueError(
+                f"Exactly two sub-cross-sections must be given. Given are {len(cross_sections)}"
+            )
+        self._cross_sections = cross_sections
+        if strain is not None:
+            self._strain = strain
+            self._axial_force = self._compute_axial_force()
+        elif axial_force is not None:
+            self._axial_force = axial_force
+        else:
+            raise ValueError("Either 'strain' or 'axial_force' must be passed.")
+        self._not_successful_reason = []
+        self._successful = True
+        self._computed_sub_cross_sections: list[
+            ComputationCrosssectionStrain
+        ] = self._compute_sub_cross_sections()
+        self._moment = self._compute_moment()
+        self._strain_difference = self._compute_strain_difference()
+
+    @property
+    def axial_force(self) -> float:
+        """axial-force applied to first cross-section"""
+        return self._axial_force
+
+    @property
+    def computed_sub_cross_sections(self) -> list[ComputationCrosssectionStrain]:
+        """computed sub-cross-sections"""
+        return self._computed_sub_cross_sections
+
+    @property
+    def cross_sections(self) -> list[Crosssection]:
+        """cross-sections that are computed"""
+        return self._cross_sections
+
+    @property
+    def curvature(self) -> float:
+        """curvature"""
+        return 0.0
+
+    @property
+    def strain(self) -> float:
+        """applied strain to the first cross-section"""
+        return self._strain
+
+    @property
+    def strain_difference(self) -> float:
+        """difference between the computed sub-cross-sections"""
+        return self._strain_difference
+
+    @property
+    def successful(self) -> bool:
+        """computed successfully"""
+        return self._successful
+
+    @property
+    def not_successful_reason(self) -> list[NotSuccessfulReason]:
+        """if computation was not successful,here the reasons are given"""
+        return self._not_successful_reason
+
+    def moment(self) -> float:
+        """computed moment, ``None`` in case not ``successful``"""
+        return self._moment
+
+    def _compute_sub_cross_sections(self) -> list[ComputationCrosssectionStrain]:
+        """computes the sub-cross-sections under the given axial-forces"""
+        computations = []
+        for index, sub_cross_section in enumerate(self.cross_sections):
+            computations.append(
+                MNByStrain(
+                    cross_section=sub_cross_section,
+                    applied_axial_force=self.axial_force * (-1.0) ** (float(index)),
+                )
+            )
+            if not computations[-1].successful:
+                self._successful = False
+                not_successful_reason = computations[-1].not_successful_reason
+                log.info(f"Cross-section {index}: {not_successful_reason}")
+                self._not_successful_reason.append(not_successful_reason)
+        return [computation.computed_cross_section for computation in computations]
+
+    def _compute_axial_force(self) -> float:
+        """computes the axial-force of the first sub-cross-section under the given strain"""
+        return ComputationCrosssectionStrain(
+            sections=self.cross_sections[0],
+            strain=self.strain,
+        ).total_axial_force()
+
+    def _compute_moment(self) -> float:
+        """computes the sum of the moments of the sub-cross-sections"""
+        if self.successful:
+            return sum(
+                [
+                    sub_cross_section.total_moment()
+                    for sub_cross_section in self._computed_sub_cross_sections
+                ]
+            )
+
+    def _compute_strain_difference(self) -> float:
+        """compute the difference of strain between the computed sub-cross-sections"""
+        return (
+            self.computed_sub_cross_sections[0].strain
+            - self.computed_sub_cross_sections[1].strain
+        )
