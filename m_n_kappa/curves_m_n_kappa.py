@@ -135,7 +135,7 @@ class MNKappaCurvePoints:
     def __str__(self) -> str:
         text = [
             self._print_initialization(),
-            self._print_points(),
+            self.print_points(),
         ]
         return print_chapter(text)
 
@@ -143,20 +143,25 @@ class MNKappaCurvePoints:
         text = ["Initialization", "------------", self.__repr__()]
         return print_sections(text)
 
-    def _print_points(self) -> str:
-        points = sorted(self._points, key=lambda x: x.curvature)
-        line = 81 * "-"
+    def print_points(self) -> str:
+        points = sorted(self._points, key=lambda x: x.axial_force)
+        line = 105 * "-"
         text = [
             line,
-            "   Moment   | Curvature  | Neutral A. |   Strain   "
-            "|  Position  |    Material    ",
+            "   Moment   | Curvature  | Neutral A. | Axial-force  | strain-diff. |   Strain   "
+            "|  Position  | Material    ",
             line,
         ]
         for point in points:
+            neutral_axis = point.neutral_axis
+            if neutral_axis is None:
+                neutral_axis = " Infinity "
+            else:
+                neutral_axis = f"{point.neutral_axis:10.2f} "
             text.append(
-                f"{point.moment:10.1f} | {point.curvature:10.6f} | {point.neutral_axis:10.2f} | "
-                f"{point.strain_position.strain:10.2f} | {point.strain_position.position:10.1f} | "
-                f"{point.strain_position.material}"
+                f"{point.moment:11.1f} | {point.curvature:10.6f} | {neutral_axis} | "
+                f"{point.axial_force:12.2f} | {point.strain_difference:12.6f} | {point.strain_position.strain:10.6f} |"
+                f"{point.strain_position.position:11.1f} | {point.strain_position.material}"
             )
         text.append(line)
         return print_sections(text)
