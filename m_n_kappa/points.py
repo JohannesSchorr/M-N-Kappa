@@ -28,6 +28,7 @@ from .general import (
     curvature,
     neutral_axis,
     StrainPosition,
+    NotSuccessfulReason,
 )
 from .crosssection import (
     Crosssection,
@@ -87,13 +88,13 @@ class Point:
 
     @log.init
     def __init__(
-            self,
-            cross_section: Crosssection,
-            applied_axial_force: float,
-            maximum_iterations: int = 10,
-            axial_force_tolerance: float = 5.0,
-            solver: Solver = Newton,
-            is_called_by_user: bool = True,
+        self,
+        cross_section: Crosssection,
+        applied_axial_force: float,
+        maximum_iterations: int = 10,
+        axial_force_tolerance: float = 5.0,
+        solver: Solver = Newton,
+        is_called_by_user: bool = True,
     ):
         """
         Parameters
@@ -124,7 +125,7 @@ class Point:
         self._iteration = 0
         self._axial_force = None
         self._successful = False
-        self._not_successful_reason = "-"
+        self._not_successful_reason = None
         self._computed_cross_section = None
 
     @property
@@ -176,7 +177,7 @@ class Point:
         return self._computed_cross_section.total_moment()
 
     @property
-    def not_successful_reason(self) -> str:
+    def not_successful_reason(self) -> NotSuccessfulReason:
         """In case computation was not successful gives a reason"""
         return self._not_successful_reason
 
@@ -1084,13 +1085,13 @@ class MNByStrain(Point):
             self._iteration = iter_index
             self._strain = self._guess_strain()
             if self._strain is None:
-                self._not_successful_reason = "Iteration not converging"
-                log.info(self.not_successful_reason)
+                self._not_successful_reason = NotSuccessfulReason('converge')
+                log.info(self.not_successful_reason.reason)
                 return
             self._compute()
             if self._successful:
                 return
-        self._not_successful_reason = "maximum iterations reached"  # maybe using enum?
+        self._not_successful_reason = NotSuccessfulReason("iteration")
         log.info(
             f"Maximum number of iterations ({self.maximum_iterations}) reached, "
             f"without finding equilibrium of axial forces"
