@@ -216,6 +216,35 @@ material=Steel(f_y=355.0, f_u=None, failure_strain=None, E_a=210000.0))
             for strain_value in self.material_strains()
         ]
 
+    def strain_positions(
+        self, strain_1: float, strain_2: float = 0.0
+    ) -> list[StrainPosition]:
+        """
+        collect all strain-positions between ``strain_1`` and ``strain_2``
+
+        .. versionadded:: 0.2.0
+
+        Parameters
+        ----------
+        strain_1 : float
+            first strain border
+        strain_2 : float
+            second strain border
+
+        Returns
+        -------
+        list[StrainPosition]
+            collected :py:class:`~m_n_kappa.StrainPosition
+        """
+        strains = self.material.get_intermediate_strains(strain_1, strain_2)
+        strain_positions = []
+        for edge in self.geometry.edges:
+            strain_positions += [
+                StrainPosition(strain_value, edge, self.material.__class__.__name__)
+                for strain_value in strains
+            ]
+        return strain_positions
+
 
 class ComputationSection(Section):
 
