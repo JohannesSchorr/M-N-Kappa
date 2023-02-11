@@ -29,12 +29,20 @@ from .general import (
     remove_duplicates,
     StrainPosition,
     interpolation,
+    NotSuccessfulReason,
 )
 
 from .crosssection import Crosssection, ComputationCrosssectionStrain
+from .points import (
+    MKappaByConstantCurvature,
+    MKappaByStrainPosition,
+    MNByStrain,
+    MomentAxialForce,
+)
 from .solver import Solver, Newton
 
 from dataclasses import dataclass
+import itertools
 
 from .log import LoggerMethods
 
@@ -351,6 +359,417 @@ class MNKappaCurvePoints:
         return max(self.moments)
 
 
+class MNCurve:
+
+    """
+    compute the moment and axial-force curve of a cross-section in case of no curvature
+
+    .. versionadded:: 0.2.0
+
+    procedure:
+        1. determine strains in the sub-cross-sections (girder and slab)
+        2. compute strain_value at the corresponding counter-sections
+        3. determine moment, axial-force, strain-value-difference, etc.r
+    """
+
+    __slots__ = (
+        "_sub_cross_sections",
+        "_points",
+        "_decisive_strains_cross_sections",
+        "_strain_values",
+        "_strain_positions",
+        "_not_successful_reason",
+    )
+
+    @log.init
+    def __init__(self, sub_cross_sections: list[Crosssection]):
+        """
+        Parameters
+        ----------
+        sub_cross_sections : list[:py:class:`~m_n_kappa.Crosssection`]
+            sub-cross-sections to compute
+
+        Examples
+        --------
+        To compute a moment-axial-force curve you need two sub-cross-
+        sections.
+        In the following two identical cross-sections are defined as
+        our sub-cross-sections.
+
+        >>> from m_n_kappa import Steel, Rectangle
+        >>> steel = Steel()
+        >>> rectangle_top = Rectangle(top_edge=0.0, bottom_edge=10.0, width=10.0)
+        >>> section_top = steel + rectangle_top
+        >>> cross_section_top = Crosssection([section_top])
+        >>> rectangle_bottom= Rectangle(top_edge=10.0, bottom_edge=20.0, width=10.0)
+        >>> section_bottom= steel + rectangle_bottom
+        >>> cross_section_bottom = Crosssection([section_top])
+        >>> cross_sections = [cross_section_top, cross_section_bottom]
+
+        The ``cross_sections`` are passed to :py:class:`~m_n_kappa.MNCurve`.
+        By initializing the moment-axial-force curve is computed.
+
+        >>> from m_n_kappa import MNCurve
+        >>> m_n = MNCurve(cross_sections)
+
+        :py:class:`~m_n_kappa.MNCurve.points` gives us the opportunity
+        access the results.
+        Attribute :py:class:`~m_n_kappa.curves_m_n_kappa.MNKappaCurvePoints.moments`
+        gives us the computed moments.
+
+        >>> m_n.points.moments
+        [400000.0, 355026.8934963956, -355026.8934963956, -400000.0, \
+        400000.0, 355026.8934963956, -355026.8934963956, -400000.0]
+
+        The computed curvatures are by definition zero.
+
+        >>> m_n.points.curvatures
+        [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+
+        Attribute :py:class:`~m_n_kappa.curves_m_n_kappa.MNKappaCurvePoints.axial_forces`
+        gives us the computed axial-forces.
+
+        >>> m_n.points.axial_forces
+        [40000.0, 35500.0, -35500.0, -40000.0, 40000.0, 35500.0, -35500.0, -40000.0]
+        """
+        self._sub_cross_sections = sub_cross_sections
+        self._points = MNKappaCurvePoints()
+        self._decisive_strains_cross_sections = self._determine_maximum_strains()
+        self._strain_positions = self._determine_intermediate_strain_positions()
+        self._not_successful_reason: list[NotSuccessfulReason] = []
+        self._compute()
+
+    def __repr__(self):
+        return "MNCurve(cross_sections=cross_sections)"
+
+    @str_start_end
+    def __str__(self) -> str:
+        text = [
+            self._print_title(),
+            self._print_initialization(),
+            self.points.print_points(),
+        ]
+        return print_chapter(text)
+
+    @property
+    def sub_cross_sections(self) -> list[Crosssection]:
+        """cross-section to be computed"""
+        return self._sub_cross_sections
+
+    @property
+    def points(self) -> MNKappaCurvePoints:
+        """computed points"""
+        return self._points
+
+    @property
+    def strain_positions(self) -> tuple:
+        """strain-positions of the sub-cross-sections"""
+        return self._strain_positions
+
+    @property
+    def not_successful_reason(self) -> list:
+        """"""
+        return self._not_successful_reason
+
+    @log.result
+    def _determine_maximum_strains(self) -> tuple[list, list]:
+        """
+        compute the maximum strains of each sub-cross-section by comparing corresponding axial-forces
+
+        1. determine the maximum positive strain of the 1st sub-cross-section
+        2. determine the maximum negative strain of the 2nd sub-cross-section
+        3. compute the axial-forces by the strains in the corresponding sub-cross-sections
+        4. compare the axial-forces (the minimum in absolute values is decisive)
+        5. compute the strain-value of the not decisive cross-section from the decisive axial-force
+
+        Returns
+        -------
+        tuple[list, list]
+            maximum positive and negative strain of the 1st cross-section (1st list),
+            maximum positive and negative strain of the 1st cross-section (2nd list)
+        """
+        sub_cross_section_1_strains = []
+        sub_cross_section_2_strains = []
+
+        for strain_1, strain_2 in [
+            [
+                self.sub_cross_sections[0].decisive_maximum_positive_strain_position(),
+                self.sub_cross_sections[1].decisive_maximum_negative_strain_position(),
+            ],
+            [
+                self.sub_cross_sections[0].decisive_maximum_negative_strain_position(),
+                self.sub_cross_sections[1].decisive_maximum_positive_strain_position(),
+            ],
+        ]:
+            axial_force_1 = ComputationCrosssectionStrain(
+                self.sub_cross_sections[0], strain_1.strain
+            ).total_axial_force()
+            axial_force_2 = ComputationCrosssectionStrain(
+                self.sub_cross_sections[1], strain_2.strain
+            ).total_axial_force()
+            if abs(axial_force_1) <= abs(axial_force_2):
+                sub_cross_section_1_strains.append(strain_1)
+                strain_2.strain = MNByStrain(
+                    self.sub_cross_sections[1], (-1) * axial_force_1
+                ).strain
+                sub_cross_section_2_strains.append(strain_2)
+            else:
+                strain_1.strain = MNByStrain(
+                    self.sub_cross_sections[0], (-1) * axial_force_2
+                ).strain
+                sub_cross_section_1_strains.append(strain_1)
+                sub_cross_section_2_strains.append(strain_2)
+
+        return sub_cross_section_1_strains, sub_cross_section_2_strains
+
+    @log.result
+    def _determine_intermediate_strain_positions(self) -> tuple:
+        """
+        determine the strain-values of each cross-section between the maximum-strains
+
+        goes into the material of each sub-cross-sections' section and extracts all strain-values
+        between maximum and minimum strain determined by :py:meth:`~m_n_kappa.MNCurve._determine_maximum_strains`
+
+        Returns
+        -------
+        tuple[list[StrainPositions], list[StrainPositions]]
+            strain
+        """
+        strains = []
+        for cross_section_index, sub_cross_section in enumerate(
+            self.sub_cross_sections
+        ):
+            strains.append([])
+            max_strains = self._decisive_strains_cross_sections[cross_section_index]
+            for section in sub_cross_section:
+                strains[cross_section_index] += section.strain_positions(
+                    max_strains[0].strain, max_strains[1].strain
+                )
+            strains[cross_section_index] += max_strains
+        return tuple(strains)
+
+    def _compute(self) -> None:
+        """compute the moment-axial-force points for each strain-position-value"""
+        for cross_section_index in [0, 1]:
+            strain_positions = sorted(
+                self._strain_positions[cross_section_index], key=lambda x: x.strain
+            )
+            strain_positions = [
+                list(strain_position)[0]
+                for _, strain_position in itertools.groupby(
+                    strain_positions, key=lambda x: x.strain
+                )
+            ]
+            sub_cross_sections = self.sub_cross_sections
+            if cross_section_index == 1:
+                sub_cross_sections.reverse()
+            for strain_position in strain_positions:
+                m_n = MomentAxialForce(
+                    cross_sections=sub_cross_sections,
+                    strain=strain_position.strain,
+                )
+                if m_n.successful:
+                    self._save(m_n, strain_position)
+                else:
+                    self._not_successful_reason += m_n.not_successful_reason
+
+    def _save(self, m_n: MomentAxialForce, strain_position: StrainPosition) -> None:
+        """save the computed value to :py:attr:`~m_n_kappa.MNCurve.points"""
+        self.points.add(
+            moment=m_n.moment(),
+            curvature=0.0,
+            neutral_axis=None,
+            axial_force=m_n.axial_force,
+            strain_difference=m_n.strain_difference,
+            cross_section=m_n.computed_sub_cross_sections,
+            strain_position=strain_position,
+        )
+
+    def _print_title(self) -> str:
+        return print_sections(
+            [self.__class__.__name__, len(self.__class__.__name__) * "="]
+        )
+
+    def _print_initialization(self) -> str:
+        return print_sections(
+            ["Initialization", len("Initialization") * "-", self.__repr__()]
+        )
+
+
+class MNKappaCurve:
+    """
+    computation of Moment-Axial-Force-Curvature curve (M-N-Kappa)
+
+    .. versionadded:: 0.2.0
+    """
+
+    @log.init
+    def __init__(
+        self,
+        cross_section: Crosssection,
+        include_positive_curvature: bool = True,
+        include_negative_curvature: bool = False,
+    ):
+        """
+        Parameters
+        ----------
+        cross_section : :py:class:`~m_n_kappa.Crosssection`
+            cross-section to compute the M-N-Kappa-curve
+        include_positive_curvature : bool
+            if ``True`` then positive curvature values are computed (Default: ``True``)
+        include_negative_curvature : bool
+            if ``True`` then negative curvature values are computed (Default: ``False``)
+
+        See Also
+        --------
+        :py:class:`~m_n_kappa.MKappaCurve` : computation of Moment-Curvature-Curve assuming full interaction
+        """
+        self._cross_section = cross_section
+        self._include_positive_curvature = include_positive_curvature
+        self._include_negative_curvature = include_negative_curvature
+        self._not_successful = None
+        self._m_n_curve = MNCurve(self.cross_section)
+        self._m_n_kappa_points = self.m_n_curve.points
+        if self.include_positive_curvature:
+            self._m_n_kappa_points += MNCurvatureCurve(
+                self.cross_section, self.m_n_curve.strain_positions, True
+            ).points
+        if self.include_negative_curvature:
+            self._m_n_kappa_points += MNCurvatureCurve(
+                self.cross_section, self.m_n_curve.strain_positions, False
+            ).points
+
+    @property
+    def cross_section(self) -> Crosssection:
+        """cross-section the :math:`M`-:math:`N`-:math:`\\kappa`-curve shall be computed"""
+        return self._cross_section
+
+    @property
+    def include_positive_curvature(self) -> bool:
+        """returns if :math:`M`-:math:`N`-:math:`\\kappa` under positive bending/curvature is included"""
+        return self._include_positive_curvature
+
+    @property
+    def include_negative_curvature(self) -> bool:
+        """returns if :math:`M`-:math:`N`-:math:`\\kappa` under negative bending/curvature is included"""
+        return self._include_negative_curvature
+
+    @property
+    def m_n_kappa_points(self) -> MNKappaCurvePoints:
+        """moment-axial-force-curvature points of the curve"""
+        return self._m_n_kappa_points
+
+    @property
+    def m_n_curve(self) -> MNCurve:
+        """M-N-curve (without curvature)"""
+        return self._m_n_curve
+
+
+class MCurvatureCurve:
+    """
+
+    .. versionadded:: 0.2.0
+
+    """
+
+    @log.init
+    def __init__(self, cross_section: Crosssection, axial_force: float):
+        self._cross_section = cross_section
+        self._axial_force: float
+
+    @property
+    def cross_section(self) -> Crosssection:
+        return self._cross_section
+
+    @property
+    def axial_force(self) -> float:
+        return self._axial_force
+
+    def compute(self):
+        pass
+
+
+class MNCurvatureCurve:
+
+    """
+    compute all points of the M-N-Curvature-Curve
+
+    .. versionadded:: 0.2.0
+
+    procedure:
+        1.
+    """
+
+    @log.init
+    def __init__(self, cross_section: Crosssection, m_n_points: list):
+        """
+        Parameters
+        ----------
+        cross_section : :py:class:`~m_n_kappa.Crosssection`
+            cross_section
+        m_n_points : list
+            computed moment-axial-force-points without curvature
+            serves as starting points
+        """
+        self._cross_section = cross_section
+        self._m_n_points = m_n_points
+        self._m_n_curvature_points = []
+
+    def __repr__(self):
+        return (
+            f"MNCurvatureCurve("
+            f"cross_section={self.cross_section}, "
+            f"m_n_points={self.m_n_points})"
+        )
+
+    @str_start_end
+    def __str__(self):
+        text = []
+        return print_chapter(text)
+
+    def _print_title(self) -> str:
+        return print_sections(
+            [self.__class__.__name__, len(self.__class__.__name__) * "="]
+        )
+
+    def _print_initialization(self) -> str:
+        return print_sections(["Initialization", "--------------", self.__repr__()])
+
+    @property
+    def cross_section(self) -> Crosssection:
+        return self._cross_section
+
+    @property
+    def m_n_points(self) -> list:
+        return self._m_n_points
+
+    @property
+    def m_n_curvature_points(self) -> list:
+        return self._m_n_curvature_points
+
+    def compute_m_n_curvature_points(self):
+        for m_n_point in self.m_n_points:
+            raise NotImplementedError()
+
+
+class MKappaAtAxialForce:
+
+    """
+    compute M-Kappa-Curve at given axial force
+
+    .. versionadded:: 0.2.0
+
+    procedure:
+        1. get maximum curvature
+        2.
+    """
+
+    @log.init
+    def __init__(self, cross_section: Crosssection, axial_force: float):
+        self._cross_section = cross_section
+        self._axial_force = axial_force
+
+
 class MNZeroCurvature:
     """
     compute moment and axial force at zero curvature
@@ -641,405 +1060,3 @@ class MNZeroCurvature:
 
     def resulting_crosssection(self) -> Crosssection:
         return self.input_cross_section + self.other_cross_section
-
-
-class MNZeroCurvatureCurve:
-
-    """
-    computes the moment and axial-force curve of a cross-section in case of no curvature
-
-    .. versionadded:: 0.2.0
-
-    procedure:
-        1. determine strains in the sub-cross-sections (girder and slab)
-        2. compute strain_value at the corresponding counter-sections
-        3. determine moment, axial-force, strain_value-difference, etc.r
-    """
-
-    __slots__ = (
-        "_cross_section",
-        "_section_results",
-        "_axial_force_starting_points",
-        "_m_n_points",
-    )
-
-    @log.init
-    def __init__(self, cross_section: Crosssection):
-        """
-        Parameters
-        ----------
-        cross_section : :py:class:`~m_n_kappa.Crosssection`
-            cross_section to compute
-        """
-        self._cross_section = cross_section
-        self._section_results = []
-        self._axial_force_starting_points = []
-        self._m_n_points = []
-        self.compute_section_axial_forces()
-        self.collect_axial_force_starting_points()
-        self.compute_m_n_points()
-
-    def __repr__(self):
-        return "MNZeroCurvatureCurve(cross_section=cross_section)"
-
-    @str_start_end
-    def __str__(self) -> str:
-        text = [
-            self._print_title(),
-            self._print_initialization(),
-            self._print_section_results_table(),
-            self._print_axial_force_table(),
-            self._print_m_n_points_table(),
-        ]
-        return print_chapter(text)
-
-    def _print_title(self) -> str:
-        return print_sections(
-            [self.__class__.__name__, len(self.__class__.__name__) * "="]
-        )
-
-    def _print_initialization(self) -> str:
-        return print_sections(
-            ["Initialization", len("Initialization") * "-", self.__repr__()]
-        )
-
-    def _print_results_table(self, title: str, results: str) -> str:
-        text = [
-            title,
-            len(title) * "-",
-            "",
-            "-------------------------------------",
-            "   strain_value   |  ax.-force | sec.-section_type ",
-            "-------------------------------------",
-            results,
-            "-------------------------------------",
-        ]
-        return print_sections(text)
-
-    def _print_section_results_table(self) -> str:
-        return self._print_results_table(
-            "Section Results", self._print_section_results()
-        )
-
-    def _print_section_results(self) -> str:
-        return print_sections(
-            [
-                self._print_section_result(section_result)
-                for section_result in self.section_results
-            ]
-        )
-
-    def _print_section_result(self, section_result: dict) -> str:
-        line = []
-        line.append(" {:10.6f}".format(section_result["strain_value"]))
-        line.append("{:10.2f}".format(section_result["axial-force"]))
-        line.append("{:}".format(section_result["section-section_type"]))
-        return " | ".join(line)
-
-    def _print_axial_force_starting_points(self) -> str:
-        return print_sections(
-            [
-                self._print_section_result(starting_point)
-                for starting_point in self.axial_force_starting_points
-            ]
-        )
-
-    def _print_axial_force_table(self) -> str:
-        return self._print_results_table(
-            "Axial force starting points", self._print_axial_force_starting_points()
-        )
-
-    def _print_m_n_points_table(self) -> str:
-        text = [
-            "M-N-Kappa points",
-            "----------------",
-            "",
-            "-------------------------------------------------------",
-            "    Moment    | Axi.-force |  Curvature | strain_value-diff. ",
-            "-------------------------------------------------------",
-            self._print_m_n_points_table_content(),
-            "-------------------------------------------------------",
-        ]
-        return print_sections(text)
-
-    def _print_m_n_points_table_content(self) -> str:
-        return print_sections(
-            [self._print_m_n_point_row(m_n_point) for m_n_point in self.m_n_points]
-        )
-
-    def _print_m_n_point_row(self, m_n_point) -> str:
-        row = [
-            " {:12.2f}".format(m_n_point["moment"]),
-            "{:10.2f}".format(m_n_point["axial-force"]),
-            "{:10.6f}".format(m_n_point["curvature"]),
-            "{:10.6f}".format(m_n_point["strain_value-difference"]),
-        ]
-        return " | ".join(row)
-
-    @property
-    def cross_section(self):
-        return self._cross_section
-
-    @property
-    def m_n_points(self) -> list:
-        """
-        m-n-points with zero curvature
-
-        each m-n-point has following keys:
-                - moment: computed moment of the cross_section
-                - axial-force: axial force between the slab- and the girder-sections
-                - curvature: curvature of the cross_section (defaults to 0.0)
-                - strain_value-difference: strain_value-difference between the slab- and the girder-sections
-                - cross-section: computed cross_section
-        """
-        return self._m_n_points
-
-    @property
-    def section_results(self):
-        return self._section_results
-
-    @property
-    def axial_force_starting_points(self):
-        return self._axial_force_starting_points
-
-    def _get_section_strains(self) -> list:
-        section_strains = []
-        for section in self.cross_section.sections:
-            section_strains += section.section_strains()
-        return remove_duplicates(section_strains)
-
-    def compute_section_axial_forces(self):
-        for section_strain in self._get_section_strains():
-            self.compute_section_axial_force(
-                strain=section_strain["strain_value"],
-                section_type=section_strain["section-section_type"],
-            )
-
-    def compute_section_axial_force(self, strain: float, section_type: str) -> None:
-        sections = self.cross_section.sections_of_type(section_type)
-        crosssection_by_strain = self._create_crosssection(sections, strain)
-        self.save_section_result(crosssection_by_strain)
-
-    def save_section_result(self, crosssection) -> None:
-        self._section_results.append(
-            {
-                "cross-section": crosssection,
-                "strain_value": crosssection.strain,
-                "axial-force": crosssection.total_axial_force(),
-                "section-section_type": crosssection.section_type,
-            }
-        )
-
-    def results_of_section_type(self, section_type: str) -> list:
-        return [
-            section_result
-            for section_result in self.section_results
-            if section_result["section-section_type"] == section_type
-        ]
-
-    def _maximum_axial_force(self, section_type: str):
-        return max(
-            self.results_of_section_type(section_type), key=lambda x: x["axial-force"]
-        )["axial-force"]
-
-    def _minimum_axial_force(self, section_type: str):
-        return min(
-            self.results_of_section_type(section_type), key=lambda x: x["axial-force"]
-        )["axial-force"]
-
-    def counter_sections(self, section_type):
-        return self.cross_section.sections_of_type(
-            self.counter_section_type(section_type)
-        )
-
-    def find_border_strains(self, axial_force: float, counter_section_type: str):
-        counter_sections = self.results_of_section_type(counter_section_type)
-        for index in range(len(counter_sections) - 1):
-            if (
-                counter_sections[index]["axial-force"]
-                <= axial_force
-                <= counter_sections[index + 1]["axial-force"]
-            ):
-                return (
-                    counter_sections[index]["strain_value"],
-                    counter_sections[index + 1]["strain_value"],
-                )
-
-    def counter_section_type(self, section_type: str):
-        counter_section_types = {"girder": "slab", "slab": "girder"}
-        return counter_section_types[section_type]
-
-    def collect_axial_force_starting_points(self):
-        for index, section_result in enumerate(self.section_results):
-            counter_section_type = self.counter_section_type(
-                section_result["section-section_type"]
-            )
-            if self._is_axial_starting_point(
-                counter_section_type, section_result["axial-force"]
-            ):
-                self._axial_force_starting_points.append(section_result)
-
-    def _is_axial_starting_point(
-        self, counter_section_type: str, axial_force: float
-    ) -> bool:
-        if axial_force == 0.0:
-            return False
-        elif (
-            (-1.0) * self._maximum_axial_force(counter_section_type)
-            < axial_force
-            < (-1.0) * self._minimum_axial_force(counter_section_type)
-        ):
-            return True
-        else:
-            return False
-
-    def _create_crosssection(self, sections, strain):
-        return ComputationCrosssectionStrain(sections, strain)
-
-    def compute_m_n_points(self) -> None:
-        for starting_point in self.axial_force_starting_points:
-            axial_force = starting_point["axial-force"]
-            counter_section_type = self.counter_section_type(
-                starting_point["section-section_type"]
-            )
-            lower_strain, upper_strain = self.find_border_strains(
-                axial_force * (-1.0), counter_section_type
-            )
-            m_n_zero_curvature = self._create_mnzerocurvature(
-                section_type=starting_point["section-section_type"],
-                strain=starting_point["strain_value"],
-                counter_lower_strain=lower_strain,
-                counter_upper_strain=upper_strain,
-            )
-            self._save_m_n_points(m_n_zero_curvature.resulting_crosssection())
-
-    def _create_mnzerocurvature(
-        self,
-        section_type: str,
-        strain: float,
-        counter_lower_strain: float,
-        counter_upper_strain: float,
-    ):
-        return MNZeroCurvature(
-            cross_section=self.cross_section,
-            input_section_type=section_type,
-            input_strain=strain,
-            counter_lower_strain=counter_lower_strain,
-            counter_upper_strain=counter_upper_strain,
-        )
-
-    def _save_m_n_points(self, mnzerocurvature: MNZeroCurvature):
-        self._m_n_points.append(
-            {
-                "moment": mnzerocurvature.total_moment(),
-                "axial-force": mnzerocurvature.axial_force,
-                "curvature": 0.0,
-                "strain_value-difference": mnzerocurvature.strain_difference,
-                "cross-section": mnzerocurvature,
-            }
-        )
-
-
-class MCurvatureCurve:
-    """
-
-    .. versionadded:: 0.2.0
-
-    """
-
-    @log.init
-    def __init__(self, cross_section: Crosssection, axial_force: float):
-        self._cross_section = cross_section
-        self._axial_force: float
-
-    @property
-    def cross_section(self) -> Crosssection:
-        return self._cross_section
-
-    @property
-    def axial_force(self) -> float:
-        return self._axial_force
-
-    def compute(self):
-        pass
-
-
-class MNCurvatureCurve:
-
-    """
-    compute all points of the M-N-Curvature-Curve
-
-    .. versionadded:: 0.2.0
-
-    procedure:
-        1.
-    """
-
-    @log.init
-    def __init__(self, cross_section: Crosssection, m_n_points: list):
-        """
-        Parameters
-        ----------
-        cross_section : :py:class:`~m_n_kappa.Crosssection`
-            cross_section
-        m_n_points : list
-            computed moment-axial-force-points without curvature
-            serves as starting points
-        """
-        self._cross_section = cross_section
-        self._m_n_points = m_n_points
-        self._m_n_curvature_points = []
-
-    def __repr__(self):
-        return (
-            f"MNCurvatureCurve("
-            f"cross_section={self.cross_section}, "
-            f"m_n_points={self.m_n_points})"
-        )
-
-    @str_start_end
-    def __str__(self):
-        text = []
-        return print_chapter(text)
-
-    def _print_title(self) -> str:
-        return print_sections(
-            [self.__class__.__name__, len(self.__class__.__name__) * "="]
-        )
-
-    def _print_initialization(self) -> str:
-        return print_sections(["Initialization", "--------------", self.__repr__()])
-
-    @property
-    def cross_section(self) -> Crosssection:
-        return self._cross_section
-
-    @property
-    def m_n_points(self) -> list:
-        return self._m_n_points
-
-    @property
-    def m_n_curvature_points(self) -> list:
-        return self._m_n_curvature_points
-
-    def compute_m_n_curvature_points(self):
-        for m_n_point in self.m_n_points:
-            raise NotImplementedError()
-
-
-class MKappaAtAxialForce:
-
-    """
-    compute M-Kappa-Curve at given axial force
-
-    .. versionadded:: 0.2.0
-
-    procedure:
-        1. get maximum curvature
-        2.
-    """
-
-    @log.init
-    def __init__(self, cross_section: Crosssection, axial_force: float):
-        self._cross_section = cross_section
-        self._axial_force = axial_force
