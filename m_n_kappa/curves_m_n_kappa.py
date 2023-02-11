@@ -7,18 +7,19 @@ Computation of a curve considering moment, internal axial force and curvature
 
 Procedure
 =========
-1. split cross-section into a girder- and a slab-section
-2. moment-axial-force-points (M-N)
-   - determine maximum positive and negative strain of the sub-cross-sections, that do not lead to failure in
-     case of a uniform distribution of strain
-   - determine all strain-points that lie in between the above given positive and negative strains
-   - compute the moment-axial-force-point under each of these points
-3. moment-axial-force-curvature-points (M-N-Kappa)
-   - the following procedure must be applied to each of the above given M-N-points
-   - determine the strain- and position-values leading to failure under the axial-force of the M-N-point
-   - compute the moment-axial-force-curvature-point at failure
-   - determine strain- and position-values that are between the failure curvature and no curvature
-   - compute moment-curvature-point for each of the strain- and position-values given above
+1. moment-axial-force-points (M-N)
+   1.1 determine maximum positive and negative strain of the sub-cross-sections, that do not lead to failure in
+       case of a uniform distribution of strain
+   1.2 determine all strain-points that lie in between the above given positive and negative strains
+   1.3 compute the moment-axial-force-point under each of these points
+2. moment-axial-force-curvature-points (M-N-Kappa)
+   2.1 the following procedure must be applied to each of the above given M-N-points
+   2.2 determine the strain- and position-values leading to failure under the axial-force of the M-N-point
+   2.3 compute the moment-axial-force-curvature-point at failure
+   2.4 determine strain- and position-values that are between the failure curvature and no curvature
+   2.5 compute moment-curvature-point for each of the strain- and position-values given above
+
+Each of the above given points requires a split of the cross-sections
 """
 
 from .general import (
