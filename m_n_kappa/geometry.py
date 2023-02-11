@@ -60,9 +60,9 @@ class ComposedGeometry:
     Building a :py:class:`~m_n_kappa.geometry.ComposedGeometry` is as easy as adding two basic geometries together:
 
     >>> from m_n_kappa import Rectangle
-    >>> rectangle_1 = Rectangle(top_edge=0.0, bottom_edge = 10.0, width=10.0)
-    >>> rectangle_2 = Rectangle(top_edge=10.0, bottom_edge = 20.0, width=10.0)
-    >>> composed_geometry = rectangle_1 + rectangle_2
+    >>> rectangle_top = Rectangle(top_edge=0.0, bottom_edge = 10.0, width=10.0)
+    >>> rectangle_bottom = Rectangle(top_edge=10.0, bottom_edge = 20.0, width=10.0)
+    >>> composed_geometry = rectangle_top + rectangle_bottom
     >>> composed_geometry
     ComposedGeometry(geometries=[Rectangle(top_edge=0.00, bottom_edge=10.00, width=10.00, left_edge=-5.00, right_edge=5.00), Rectangle(top_edge=10.00, bottom_edge=20.00, width=10.00, left_edge=-5.00, right_edge=5.00)])
 
