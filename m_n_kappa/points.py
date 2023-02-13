@@ -756,7 +756,7 @@ class MKappaByConstantCurvature(MKappa):
         applied_axial_force: float,
         maximum_neutral_axis: float = None,
         minimum_neutral_axis: float = None,
-        maximum_iterations=10,
+        maximum_iterations=20,
         axial_force_tolerance=5,
         solver=Newton,
         is_called_by_user: bool = True,
