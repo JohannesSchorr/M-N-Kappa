@@ -76,48 +76,75 @@ class TestMomentAxialForceElastic(TestCase):
         self.cross_section_bottom = Crosssection([self.section_bottom])
         self.strain = 0.0001
         self.axial_force = self.rectangle_top.area * self.strain * self.steel.E_a
-        self.moment = - self.axial_force * 0.5 * (self.rectangle_top.height + self.rectangle_bottom.height)
+        self.moment = (
+            -self.axial_force
+            * 0.5
+            * (self.rectangle_top.height + self.rectangle_bottom.height)
+        )
         self.cross_sections = [self.cross_section_top, self.cross_section_bottom]
-        self.cross_sections_switched = [self.cross_section_bottom, self.cross_section_top]
+        self.cross_sections_switched = [
+            self.cross_section_bottom,
+            self.cross_section_top,
+        ]
 
     def test_positive_strain_axial_force(self):
-        m_n = MomentAxialForce(cross_sections=self.cross_sections, strain=self.strain)
+        m_n = MomentAxialForce(
+            sub_cross_sections=self.cross_sections, strain=self.strain
+        )
         self.assertEqual(m_n.axial_force, self.axial_force)
 
     def test_negative_strain_axial_force(self):
-        m_n = MomentAxialForce(cross_sections=self.cross_sections, strain=-self.strain)
+        m_n = MomentAxialForce(
+            sub_cross_sections=self.cross_sections, strain=-self.strain
+        )
         self.assertEqual(m_n.axial_force, -self.axial_force)
 
     def test_positive_strain_moment(self):
-        m_n = MomentAxialForce(cross_sections=self.cross_sections, strain=self.strain)
+        m_n = MomentAxialForce(
+            sub_cross_sections=self.cross_sections, strain=self.strain
+        )
         self.assertAlmostEqual(m_n.moment(), self.moment)
 
     def test_negative_strain_moment(self):
-        m_n = MomentAxialForce(cross_sections=self.cross_sections, strain=-self.strain)
+        m_n = MomentAxialForce(
+            sub_cross_sections=self.cross_sections, strain=-self.strain
+        )
         self.assertAlmostEqual(m_n.moment(), -self.moment)
 
     def test_positive_strain_axial_force_switched_cross_sections(self):
-        m_n = MomentAxialForce(cross_sections=self.cross_sections_switched, strain=self.strain)
+        m_n = MomentAxialForce(
+            sub_cross_sections=self.cross_sections_switched, strain=self.strain
+        )
         self.assertEqual(m_n.axial_force, self.axial_force)
 
     def test_negative_strain_axial_force_switched_cross_sections(self):
-        m_n = MomentAxialForce(cross_sections=self.cross_sections_switched, strain=-self.strain)
+        m_n = MomentAxialForce(
+            sub_cross_sections=self.cross_sections_switched, strain=-self.strain
+        )
         self.assertEqual(m_n.axial_force, -self.axial_force)
 
     def test_positive_strain_moment_switched_cross_sections(self):
-        m_n = MomentAxialForce(cross_sections=self.cross_sections_switched, strain=self.strain)
+        m_n = MomentAxialForce(
+            sub_cross_sections=self.cross_sections_switched, strain=self.strain
+        )
         self.assertAlmostEqual(m_n.moment(), -self.moment)
 
     def test_negative_strain_moment_switched_cross_sections(self):
-        m_n = MomentAxialForce(cross_sections=self.cross_sections_switched, strain=-self.strain)
+        m_n = MomentAxialForce(
+            sub_cross_sections=self.cross_sections_switched, strain=-self.strain
+        )
         self.assertAlmostEqual(m_n.moment(), self.moment)
 
     def test_positive_axial_force_moment(self):
-        m_n = MomentAxialForce(cross_sections=self.cross_sections, axial_force=self.axial_force)
+        m_n = MomentAxialForce(
+            sub_cross_sections=self.cross_sections, axial_force=self.axial_force
+        )
         self.assertAlmostEqual(m_n.moment(), self.moment)
 
     def test_negative_axial_force_moment(self):
-        m_n = MomentAxialForce(cross_sections=self.cross_sections, axial_force=-self.axial_force)
+        m_n = MomentAxialForce(
+            sub_cross_sections=self.cross_sections, axial_force=-self.axial_force
+        )
         self.assertAlmostEqual(m_n.moment(), -self.moment)
 
 
@@ -132,48 +159,75 @@ class TestMomentAxialForceYield(TestCase):
         self.cross_section_bottom = Crosssection([self.section_bottom])
         self.strain = self.steel.epsilon_y
         self.axial_force = self.rectangle_top.area * self.strain * self.steel.E_a
-        self.moment = - self.axial_force * 0.5 * (self.rectangle_top.height + self.rectangle_bottom.height)
+        self.moment = (
+            -self.axial_force
+            * 0.5
+            * (self.rectangle_top.height + self.rectangle_bottom.height)
+        )
         self.cross_sections = [self.cross_section_top, self.cross_section_bottom]
-        self.cross_sections_switched = [self.cross_section_bottom, self.cross_section_top]
+        self.cross_sections_switched = [
+            self.cross_section_bottom,
+            self.cross_section_top,
+        ]
 
     def test_positive_strain_axial_force(self):
-        m_n = MomentAxialForce(cross_sections=self.cross_sections, strain=self.strain)
+        m_n = MomentAxialForce(
+            sub_cross_sections=self.cross_sections, strain=self.strain
+        )
         self.assertAlmostEqual(m_n.axial_force, self.axial_force)
 
     def test_negative_strain_axial_force(self):
-        m_n = MomentAxialForce(cross_sections=self.cross_sections, strain=-self.strain)
+        m_n = MomentAxialForce(
+            sub_cross_sections=self.cross_sections, strain=-self.strain
+        )
         self.assertAlmostEqual(m_n.axial_force, -self.axial_force)
 
     def test_positive_strain_moment(self):
-        m_n = MomentAxialForce(cross_sections=self.cross_sections, strain=self.strain)
+        m_n = MomentAxialForce(
+            sub_cross_sections=self.cross_sections, strain=self.strain
+        )
         self.assertAlmostEqual(m_n.moment(), self.moment, -2)
 
     def test_negative_strain_moment(self):
-        m_n = MomentAxialForce(cross_sections=self.cross_sections, strain=-self.strain)
+        m_n = MomentAxialForce(
+            sub_cross_sections=self.cross_sections, strain=-self.strain
+        )
         self.assertAlmostEqual(m_n.moment(), -self.moment, -2)
 
     def test_positive_strain_axial_force_switched_cross_sections(self):
-        m_n = MomentAxialForce(cross_sections=self.cross_sections_switched, strain=self.strain)
+        m_n = MomentAxialForce(
+            sub_cross_sections=self.cross_sections_switched, strain=self.strain
+        )
         self.assertAlmostEqual(m_n.axial_force, self.axial_force)
 
     def test_negative_strain_axial_force_switched_cross_sections(self):
-        m_n = MomentAxialForce(cross_sections=self.cross_sections_switched, strain=-self.strain)
+        m_n = MomentAxialForce(
+            sub_cross_sections=self.cross_sections_switched, strain=-self.strain
+        )
         self.assertAlmostEqual(m_n.axial_force, -self.axial_force)
 
     def test_positive_strain_moment_switched_cross_sections(self):
-        m_n = MomentAxialForce(cross_sections=self.cross_sections_switched, strain=self.strain)
+        m_n = MomentAxialForce(
+            sub_cross_sections=self.cross_sections_switched, strain=self.strain
+        )
         self.assertAlmostEqual(m_n.moment(), -self.moment, -2)
 
     def test_negative_strain_moment_switched_cross_sections(self):
-        m_n = MomentAxialForce(cross_sections=self.cross_sections_switched, strain=-self.strain)
+        m_n = MomentAxialForce(
+            sub_cross_sections=self.cross_sections_switched, strain=-self.strain
+        )
         self.assertAlmostEqual(m_n.moment(), self.moment, -2)
 
     def test_positive_axial_force_moment(self):
-        m_n = MomentAxialForce(cross_sections=self.cross_sections, axial_force=self.axial_force)
+        m_n = MomentAxialForce(
+            sub_cross_sections=self.cross_sections, axial_force=self.axial_force
+        )
         self.assertAlmostEqual(m_n.moment(), self.moment, -2)
 
     def test_negative_axial_force_moment(self):
-        m_n = MomentAxialForce(cross_sections=self.cross_sections, axial_force=-self.axial_force)
+        m_n = MomentAxialForce(
+            sub_cross_sections=self.cross_sections, axial_force=-self.axial_force
+        )
         self.assertAlmostEqual(m_n.moment(), -self.moment, -2)
 
 
