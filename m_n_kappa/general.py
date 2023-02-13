@@ -487,6 +487,7 @@ class NotSuccessfulReason:
     """
 
     keyword: str = None
+    variable : str = None
     reason: str = None
     strain_position: StrainPosition = None
 
@@ -494,9 +495,18 @@ class NotSuccessfulReason:
         return self.reason
 
     def __post_init__(self):
-        if self.keyword is not None and self.reason is None:
-            if self.keyword in self.keywords.keys():
-                self.reason = self.keywords[self.keyword]
+        if self.reason is None:
+            if self.keyword is not None:
+                if self.keyword in self.keywords.keys():
+                    self.reason = self.keywords[self.keyword]
+            elif self.variable is not None:
+                self.same_sign(self.variable)
+
+
+    def same_sign(self, variable: str):
+        key = f'same sign {variable}'
+        if key in list(self.keywords.keys()):
+            self.reason = self.keywords[key]
 
     @property
     def keywords(self) -> dict:
@@ -504,6 +514,7 @@ class NotSuccessfulReason:
         return {
             'iteration': "maximum number of iterations reached, without finding equilibrium of axial-forces",
             'converge': "Iteration not converging",
+            'same sign': "difference of axial forces at the boundary values have same sign",
             'same sign strain': "difference of axial forces at minimum and maximum strain have same sign",
             'same sign neutral axis': "difference of axial forces at minimum and maximum neutral axis have same sign",
             'same sign curvature': "difference of axial forces at minimum and maximum curvature have same sign"
