@@ -1162,7 +1162,90 @@ class MNByStrain(Point):
         return print_sections(text)
 
 
-class MomentAxialForce:
+class AxialForcePoint:
+
+    """
+    base class
+
+    .. versionadded:: 0.2.0
+    """
+
+    @log.init
+    def __init__(self, sub_cross_sections: list[Crosssection], axial_force: float):
+        """
+        Parameters
+        ----------
+        sub_cross_sections list[:py:class:`~m_n_kappa.Crosssection`]
+            cross-sections that are computed (must be two)
+        axial_force : float
+            axial-force applied to the first cross-section given in ``sub_cross_sections``
+        """
+        if not isinstance(sub_cross_sections, list):
+            TypeError(f"cross_sections must be of type list")
+        if len(sub_cross_sections) != 2:
+            ValueError(
+                f"Exactly two sub-cross-sections must be given. Given are {len(sub_cross_sections)}"
+            )
+        self._sub_cross_sections = sub_cross_sections
+        self._axial_force = axial_force
+        self._computed_sub_cross_sections = []
+        self._curvature = None
+        self._strain_difference = None
+        self._moment = None
+        self._successful = True
+        self._not_successful_reason = None
+
+    @property
+    def axial_force(self) -> float:
+        """axial-force applied to first cross-section"""
+        return self._axial_force
+
+    @property
+    def computed_sub_cross_sections(self) -> list[ComputationCrosssectionStrain]:
+        """computed sub-cross-sections"""
+        return self._computed_sub_cross_sections
+
+    @property
+    def curvature(self) -> float:
+        """curvature"""
+        return 0.0
+
+    @property
+    def strain_difference(self) -> float:
+        """difference between the computed sub-cross-sections"""
+        return self._strain_difference
+
+    @property
+    def successful(self) -> bool:
+        """computed successfully"""
+        return self._successful
+
+    @property
+    def not_successful_reason(self) -> list[NotSuccessfulReason]:
+        """if computation was not successful,here the reasons are given"""
+        return self._not_successful_reason
+
+    @property
+    def sub_cross_sections(self) -> list[Crosssection]:
+        """cross-sections that are computed"""
+        return self._sub_cross_sections
+
+    def moment(self) -> float:
+        """computed moment, ``None`` in case not ``successful``"""
+        return self._moment
+
+    def _compute_moment(self) -> float:
+        """computes the sum of the moments of the sub-cross-sections"""
+        if self.successful:
+            return sum(
+                [
+                    sub_cross_section.total_moment()
+                    for sub_cross_section in self._computed_sub_cross_sections
+                ]
+            )
+
+
+class MomentAxialForce(AxialForcePoint):
     """
     compute moment and axial-force at zero curvature
 
