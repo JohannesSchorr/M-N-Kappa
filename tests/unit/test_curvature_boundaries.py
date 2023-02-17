@@ -159,8 +159,44 @@ class TestGetPositions(TestCase):
 
 
 class TestMaximumCurvature(TestCase):
-    # TODO: TestMaximumCurvature
-    pass
+    def setUp(self):
+        """
+        Asssume steel-rectangel of S355 material
+        """
+        self.top_edge = 0.0
+        self.bottom_edge = 10.0
+        self.material = "Steel"
+        self.maximum_strain = 355.0
+        self.minimum_strain = -355.0
+        self.maximum_positive_section_strains = [
+            StrainPosition(self.maximum_strain, self.top_edge, self.material),
+            StrainPosition(self.maximum_strain, self.bottom_edge, self.material),
+        ]
+        self.maximum_negative_section_strains = [
+            StrainPosition(self.minimum_strain, self.top_edge, self.material),
+            StrainPosition(self.minimum_strain, self.bottom_edge, self.material),
+        ]
+        self.curvature = (self.maximum_strain - self.minimum_strain) / (self.bottom_edge - self.top_edge)
+        self.maximum_curvature = MaximumCurvature(
+            curvature=self.curvature,
+            start=self.maximum_positive_section_strains[0],
+            other=self.maximum_positive_section_strains[-1],
+            maximum_positive_section_strains=self.maximum_positive_section_strains,
+            maximum_negative_section_strains=self.maximum_negative_section_strains,
+        )
+
+    def test_input_maximum_strain_other_position(self):
+        position = 0.5 * (self.bottom_edge - self.top_edge)
+        strain_position = StrainPosition(self.maximum_strain, position=position, material="Steel")
+        self.assertEqual(self.maximum_curvature.compute(strain_position), 0.0)
+
+    def test_input_maximum_strain_maximum_position(self):
+        strain_position = StrainPosition(self.maximum_strain, position=self.bottom_edge, material="Steel")
+        self.assertEqual(self.maximum_curvature.compute(strain_position), self.curvature)
+
+    def test_input_minimum_strain_minimum_position(self):
+        strain_position = StrainPosition(self.minimum_strain, position=self.top_edge, material="Steel")
+        self.assertEqual(self.maximum_curvature.compute(strain_position), self.curvature)
 
 
 class TestMinimumCurvature(TestCase):
