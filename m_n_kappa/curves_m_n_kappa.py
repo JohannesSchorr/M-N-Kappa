@@ -637,6 +637,10 @@ class MNCurve:
             axial_force_2 = ComputationCrosssectionStrain(
                 self.sub_cross_sections[1], strain_2.strain
             ).total_axial_force()
+            log.debug(f"{strain_1=}, {strain_2=}")
+            log.debug(
+                f"{axial_force_1=}, {axial_force_2=} -> {min(axial_force_1, axial_force_2)}"
+            )
             if abs(axial_force_1) <= abs(axial_force_2):
                 sub_cross_section_1_strains.append(strain_1)
                 strain_2.strain = MNByStrain(
