@@ -1,3 +1,4 @@
+import operator
 from abc import ABC, abstractmethod
 from dataclasses import dataclass
 
@@ -596,7 +597,7 @@ class SingleSpanSingleLoads(ABCSingleSpan):
 
     def _maximum_moment(self) -> list[Moment]:
         moments = self._moments()
-        moments.sort(key=lambda x: x.value, reverse=True)
+        moments.sort(key=operator.attrgetter('value'), reverse=True)
         maximum_moments = list(
             filter(lambda x: round(x.value, 5) == round(moments[0].value, 5), moments)
         )
