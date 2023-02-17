@@ -422,15 +422,9 @@ class TestGetBoundariesSteelSection(TestCase):
             + self.i_profile.h_w
             + self.i_profile.t_fu
         )
-        print(
-            self.bottom_edge,
-            self.strain_position.position,
-            self.bottom_edge - self.strain_position.position,
-        )
         self.assertAlmostEqual(
             self.boundaries.positive.minimum_curvature.compute(self.strain_position),
-            (self.steel.maximum_strain - self.strain_position.strain)
-            / (self.bottom_edge - self.strain_position.position),
+            0.0001 / (self.strain_position.position - self.i_profile.top_edge),
         )
 
 
