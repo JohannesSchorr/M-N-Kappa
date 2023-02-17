@@ -1115,9 +1115,9 @@ class MNKappaCurve:
         return self._include_negative_curvature
 
     @property
-    def m_n_kappa_points(self) -> MNKappaCurvePoints:
+    def points(self) -> MNKappaCurvePoints:
         """moment-axial-force-curvature points of the curve"""
-        return self._m_n_kappa_points
+        return self._points
 
     @property
     def m_n_curve(self) -> MNCurve:
