@@ -50,6 +50,52 @@ from .log import LoggerMethods
 log = LoggerMethods(__name__)
 
 
+def remove_duplicates(list_with_duplicates: list, sorting_function) -> list:
+    """
+    Remove the duplicates from a list considering ``sorting_function``.
+
+    Make removal of duplicates also possible if elements of list are for example instances of a class with
+    specific attributes.
+
+    Parameters
+    ----------
+    list_with_duplicates : list
+        list with the duplicates
+    sorting_function : function
+        function to identify the duplicates
+
+    Returns
+    -------
+    list
+        duplicate-free list
+
+    Examples
+    --------
+    The ``duplicate_list`` consists of a number of :py:class:`~m_n_kappa.StrainPosition` instances.
+
+    >>> from m_n_kappa import StrainPosition
+    >>> duplicate_list = [
+    ...     StrainPosition(strain=0.1, position=10, material="Steel"),
+    ...     StrainPosition(strain=0.1, position=10, material="Steel"),
+    ...     StrainPosition(strain=0.1, position=10, material="Steel"),
+    ...     StrainPosition(strain=0.1, position=10, material="Steel"),
+    ... ]
+
+    To remove all duplicates from the list we used the Attribute-getter method by the :py:mod:`operator`-module.
+
+    >>> from m_n_kappa.curves_m_n_kappa import remove_duplicates
+    >>> import operator
+    >>> remove_duplicates(list_with_duplicates=duplicate_list, sorting_function=operator.attrgetter('strain'))
+    [StrainPosition(strain=0.1, position=10, material="Steel")]
+    """
+    list_with_duplicates.sort(key=sorting_function)
+    new_list = [
+        list(point)[0]
+        for _, point in itertools.groupby(list_with_duplicates, key=sorting_function)
+    ]
+    return new_list
+
+
 @dataclass
 class MNKappaCurvePoint:
     """
@@ -546,14 +592,19 @@ class MNCurve:
                 strains[cross_section_index] += section.strain_positions(
                     max_strains[0].strain, max_strains[1].strain
                 )
-            strains[cross_section_index] += max_strains
+                strain_positions = remove_duplicates(
+                    strain_positions, operator.attrgetter("strain", "position")
+                )
+                strains[cross_section_index] += strain_positions
+                strains[cross_section_index] += max_strains
         return tuple(strains)
 
     def _compute(self) -> None:
         """compute the moment-axial-force points for each strain-position-value"""
         for cross_section_index in [0, 1]:
-            strain_positions = sorted(
-                self._strain_positions[cross_section_index], key=lambda x: x.strain
+            strain_positions = remove_duplicates(
+                self._strain_positions[cross_section_index],
+                sorting_function=operator.attrgetter("strain"),
             )
             strain_positions = [
                 list(strain_position)[0]
