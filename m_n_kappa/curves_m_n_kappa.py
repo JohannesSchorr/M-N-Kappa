@@ -692,24 +692,20 @@ class MNCurve:
                 self._strain_positions[cross_section_index],
                 sorting_function=operator.attrgetter("strain"),
             )
-            strain_positions = [
-                list(strain_position)[0]
-                for _, strain_position in itertools.groupby(
-                    strain_positions, key=lambda x: x.strain
-                )
-            ]
             sub_cross_sections = self.sub_cross_sections
             if cross_section_index == 1:
-                sub_cross_sections.reverse()
+                sub_cross_sections = tuple(
+                    [sub_cross_sections[1], sub_cross_sections[0]]
+                )
             for strain_position in strain_positions:
                 m_n = MomentAxialForce(
-                    cross_sections=sub_cross_sections,
+                    sub_cross_sections=sub_cross_sections,
                     strain=strain_position.strain,
                 )
                 if m_n.successful:
-                    self._save(m_n, strain_position)
+                    self._save(m_n, strain_position, cross_section_index)
                 else:
-                    self._not_successful_reason += m_n.not_successful_reason
+                    self._not_successful_reason.append(m_n.not_successful_reason)
 
     def _save(
         self,
