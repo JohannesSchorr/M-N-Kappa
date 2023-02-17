@@ -1434,7 +1434,7 @@ class MomentAxialForceCurvature(AxialForcePoint):
     @log.init
     def __init__(
         self,
-        sub_cross_sections: list[Crosssection],
+        sub_cross_sections: list[Crosssection] | tuple[Crosssection, Crosssection],
         axial_force: float,
         strain_position: StrainPosition,
         positive_curvature: bool = True,
@@ -1442,7 +1442,8 @@ class MomentAxialForceCurvature(AxialForcePoint):
         """
         Parameters
         ----------
-        sub_cross_sections : list[:py:class:`~m_n_kappa.Crosssection`]
+        sub_cross_sections : list[:py:class:`~m_n_kappa.Crosssection`] |
+        tuple[:py:class:`~m_n_kappa.Crosssection`, :py:class:`~m_n_kappa.Crosssection`]
             sub-cross-sections the overall cross-section consists of
         axial_force : float
             Axial-force that is applied in sign and magnitude to the first given cross-section.
