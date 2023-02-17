@@ -669,14 +669,13 @@ class MNCurve:
         tuple[list[StrainPositions], list[StrainPositions]]
             strain
         """
-        strains = []
+        strains = [[], []]
         for cross_section_index, sub_cross_section in enumerate(
             self.sub_cross_sections
         ):
-            strains.append([])
             max_strains = self._decisive_strains_cross_sections[cross_section_index]
             for section in sub_cross_section:
-                strains[cross_section_index] += section.strain_positions(
+                strain_positions = section.strain_positions(
                     max_strains[0].strain, max_strains[1].strain
                 )
                 strain_positions = remove_duplicates(
