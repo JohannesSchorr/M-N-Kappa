@@ -138,7 +138,9 @@ class MNKappaCurvePoint:
     axial_force: float
     axial_force_cross_section_number: int
     strain_difference: float
-    cross_section: Crosssection
+    cross_section: tuple[
+        ComputationCrosssectionCurvature, ComputationCrosssectionCurvature
+    ] | tuple[ComputationCrosssectionStrain, ComputationCrosssectionStrain]
     strain_position: StrainPosition
     neutral_axis_1: float = None
     neutral_axis_2: float = None
