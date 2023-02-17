@@ -21,6 +21,7 @@ Procedure
 
 Each of the above given points requires a split of the cross-sections
 """
+import operator
 
 from .general import (
     print_sections,
@@ -352,7 +353,7 @@ class MNKappaCurvePoints:
 
     def _sort_points_by_curvature(self):
         """sorts the moment-curvature-points ascending by its curvature"""
-        self.points.sort(key=lambda x: x.curvature)
+        self.points.sort(key=operator.attrgetter("curvature"))
 
     def maximum_moment(self) -> float:
         """computes the maximum moment of the curve"""
