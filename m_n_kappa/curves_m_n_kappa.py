@@ -597,8 +597,8 @@ class MNCurve:
         return self._strain_positions
 
     @property
-    def not_successful_reason(self) -> list:
-        """"""
+    def not_successful_reason(self) -> list[NotSuccessfulReason]:
+        """for those computations that were not successful, here the reasons are given"""
         return self._not_successful_reason
 
     @log.result
@@ -609,7 +609,7 @@ class MNCurve:
         1. determine the maximum positive strain of the 1st sub-cross-section
         2. determine the maximum negative strain of the 2nd sub-cross-section
         3. compute the axial-forces by the strains in the corresponding sub-cross-sections
-        4. compare the axial-forces (the minimum in absolute values is decisive)
+        4. compare the axial-forces -> the minimum in absolute values is decisive
         5. compute the strain-value of the not decisive cross-section from the decisive axial-force
 
         Returns
