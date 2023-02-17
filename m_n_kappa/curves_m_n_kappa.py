@@ -1051,17 +1051,53 @@ class MNKappaCurve:
             )
         self._include_positive_curvature = include_positive_curvature
         self._include_negative_curvature = include_negative_curvature
-        self._not_successful = None
-        self._m_n_curve = MNCurve(self.cross_section)
-        self._m_n_kappa_points = self.m_n_curve.points
+        self._m_n_curve = MNCurve(self.sub_cross_sections)
+        if include_positive_curvature and not include_negative_curvature:
+            self._points = MNKappaCurvePoints(
+                list(filter(lambda x: x.moment > 0.0, self.m_n_curve.points.points))
+            )
+        elif not include_positive_curvature and include_negative_curvature:
+            self._points = MNKappaCurvePoints(
+                list(filter(lambda x: x.moment < 0.0, self.m_n_curve.points.points))
+            )
+        else:
+            self._points = self.m_n_curve.points
+        self._not_successful_reason = self.m_n_curve.not_successful_reason
         if self.include_positive_curvature:
-            self._m_n_kappa_points += MNCurvatureCurve(
-                self.cross_section, self.m_n_curve.strain_positions, True
-            ).points
+            self._positive_m_n_kappa_curve = MNCurvatureCurve(
+                sub_cross_sections=self.sub_cross_sections,
+                axial_forces=self.m_n_curve.points.cross_section_axial_forces(
+                    positive_moment=True
+                ),
+                strain_positions=self.m_n_curve.strain_positions,
+                positive_curvature=True,
+            )
+            self._points += self._positive_m_n_kappa_curve.points
+            self._not_successful_reason += (
+                self._positive_m_n_kappa_curve.not_successful_reason
+            )
         if self.include_negative_curvature:
-            self._m_n_kappa_points += MNCurvatureCurve(
-                self.cross_section, self.m_n_curve.strain_positions, False
-            ).points
+            self._negative_m_n_kappa_curve = MNCurvatureCurve(
+                sub_cross_sections=self.sub_cross_sections,
+                axial_forces=self.m_n_curve.points.cross_section_axial_forces(
+                    positive_moment=False
+                ),
+                strain_positions=self.m_n_curve.strain_positions,
+                positive_curvature=False,
+            )
+            self._points += self._negative_m_n_kappa_curve.points
+            self._not_successful_reason += (
+                self._negative_m_n_kappa_curve.not_successful_reason
+            )
+
+    def __repr__(self) -> str:
+        return "MNKappaCurve()"
+
+    def __str__(self) -> str:
+        text = [
+            self.points.print_points(),
+        ]
+        return print_chapter(text)
 
     @property
     def sub_cross_sections(self) -> tuple[Crosssection, Crosssection]:
