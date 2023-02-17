@@ -538,6 +538,7 @@ class MKappaByStrainPosition(MKappa):
         "_computed_cross_section",
         "_iteration",
         "_is_called_by_user",
+        "_positive_curvature",
     )
 
     @log.init
@@ -586,6 +587,7 @@ class MKappaByStrainPosition(MKappa):
             solver,
         )
         self._strain_position = strain_position
+        self._positive_curvature = positive_curvature
         if maximum_curvature is None and minimum_curvature is None:
             if isinstance(positive_curvature, bool):
                 maximum_curvature = self._determine_maximum_curvature(
@@ -634,6 +636,11 @@ class MKappaByStrainPosition(MKappa):
     def minimum_curvature(self) -> float:
         """minimum positive or negative allowed curvature"""
         return self._minimum_curvature
+
+    @property
+    def positive_curvature(self) -> bool:
+        """``True`` indicates a positive curvature"""
+        return self._positive_curvature
 
     @property
     def strain_position(self) -> StrainPosition:
