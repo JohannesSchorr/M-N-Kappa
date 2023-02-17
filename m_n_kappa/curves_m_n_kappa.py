@@ -459,6 +459,26 @@ class MNKappaCurvePoints:
         """computes the maximum moment of the curve"""
         return max(self.moments)
 
+    @log.result
+    def cross_section_axial_forces(
+        self, positive_moment: bool
+    ) -> tuple[list[float], list[float]]:
+        """get axial-forces for 1st and 2nd cross-section considering the sign of the moment"""
+        if positive_moment:
+            points = list(filter(lambda x: x.moment > 0.0, self.points))
+        else:
+            points = list(filter(lambda x: x.moment < 0.0, self.points))
+        axial_forces = [[], []]
+        for index in [0, 1]:
+            cross_section_points = list(
+                filter(lambda x: x.axial_force_cross_section_number == index, points)
+            )
+            axial_forces[index] = [
+                cross_section_point.axial_force * (-1) ** index
+                for cross_section_point in cross_section_points
+            ]
+        return tuple(axial_forces)
+
 
 class MNCurve:
 
