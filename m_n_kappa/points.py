@@ -153,7 +153,7 @@ class Point:
         return self._computations
 
     @property
-    def computed_cross_section(self):
+    def computed_cross_section(self) -> ComputationCrosssectionStrain | ComputationCrosssectionCurvature:
         """computed cross_section of the current iteration"""
         return self._computed_cross_section
 
@@ -183,7 +183,7 @@ class Point:
         return self._not_successful_reason
 
     @property
-    def solver(self):
+    def solver(self) -> Solver:
         """used solver to computed equilibrium"""
         return self._solver
 
