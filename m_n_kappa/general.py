@@ -527,6 +527,6 @@ class NotSuccessfulReason:
             'converge': "Iteration not converging",
             'same sign': "difference of axial forces at the boundary values have same sign",
             'same sign strain': "difference of axial forces at minimum and maximum strain have same sign",
-            'same sign neutral axis': "difference of axial forces at minimum and maximum neutral axis have same sign",
+            'same sign neutral-axis': "difference of axial forces at minimum and maximum neutral axis have same sign",
             'same sign curvature': "difference of axial forces at minimum and maximum curvature have same sign"
         }
