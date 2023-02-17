@@ -1544,6 +1544,7 @@ class MomentAxialForceCurvature(AxialForcePoint):
             cross_section=self.sub_cross_sections[1],
             applied_curvature=computed_curvature,
             applied_axial_force=self.axial_force * (-1),
+            is_called_by_user=False,
         )
         if not second_sub_cross_section.successful:
             self._not_successful_reason = second_sub_cross_section.not_successful_reason
