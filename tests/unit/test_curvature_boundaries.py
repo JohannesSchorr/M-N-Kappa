@@ -513,7 +513,7 @@ class TestGetBoundariesReinforcement(TestCase):
             self.boundaries.positive.minimum_curvature.compute(
                 StrainPosition(-0.15, 0.25, "Reinforcement")
             ),
-            0.0001 / 45,
+            0.0001 / 80,
         )
 
 
