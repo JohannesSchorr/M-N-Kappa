@@ -206,6 +206,25 @@ class MNKappaCurvePoints:
         ]
         return print_chapter(text)
 
+    def __add__(self, other):
+        if isinstance(other, MNKappaCurvePoints):
+            m_n_kappa_points = MNKappaCurvePoints(points=self.points + other.points)
+            m_n_kappa_points._remove_duplicate_points()
+            return m_n_kappa_points
+
+    def _remove_duplicate_points(self):
+        sorting_function = operator.attrgetter(
+            "moment", "curvature", "axial_force", "strain_difference"
+        )
+        self._points = remove_duplicates(self.points, sorting_function)
+
+    def __iter__(self):
+        self._point_iterator = iter(self.points)
+        return self
+
+    def __next__(self):
+        return self._point_iterator.__next__()
+
     def _print_initialization(self) -> str:
         text = ["Initialization", "------------", self.__repr__()]
         return print_sections(text)
