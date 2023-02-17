@@ -487,7 +487,7 @@ class NotSuccessfulReason:
     """
 
     keyword: str = None
-    variable : str = None
+    variable: str = None
     reason: str = None
     strain_position: StrainPosition = None
 
