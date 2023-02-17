@@ -508,6 +508,11 @@ class NotSuccessfulReason:
             elif self.variable is not None:
                 self.same_sign(self.variable)
 
+    def __eq__(self, other) -> bool:
+        if isinstance(other, NotSuccessfulReason):
+            if self.reason == other.reason:
+                if self.strain_position == other.strain_position:
+                    return True
 
     def same_sign(self, variable: str):
         key = f'same sign {variable}'
