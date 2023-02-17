@@ -1479,6 +1479,7 @@ class MomentAxialForceCurvature(AxialForcePoint):
         ] = self._compute_sub_cross_sections()
         self._curvature = self._get_curvature()
         self._moment = self._compute_moment()
+        self._neutral_axes = self._get_neutral_axes()
         self._strain_difference = self._compute_strain_difference()
 
     def __repr__(self) -> str:
@@ -1492,6 +1493,11 @@ class MomentAxialForceCurvature(AxialForcePoint):
     def curvature(self) -> float:
         """computed curvature"""
         return self._curvature
+
+    @property
+    def neutral_axes(self) -> tuple[float, float]:
+        """neutral axes of the computed cross-sections"""
+        return self._neutral_axes
 
     @property
     def positive_curvature(self) -> bool:
@@ -1553,12 +1559,12 @@ class MomentAxialForceCurvature(AxialForcePoint):
         """compute the strain-difference betweeen the ``sub_cross_sections``"""
         if self.successful:
             strain_sub_cross_section_1 = strain(
-                neutral_axis_value=self.computed_sub_cross_sections[0].neutral_axis,
+                neutral_axis_value=self.neutral_axes[0],
                 curvature_value=self.curvature,
                 position_value=0.0,
             )
             strain_sub_cross_section_2 = strain(
-                neutral_axis_value=self.computed_sub_cross_sections[1].neutral_axis,
+                neutral_axis_value=self.neutral_axes[1],
                 curvature_value=self.curvature,
                 position_value=0.0,
             )
@@ -1569,3 +1575,11 @@ class MomentAxialForceCurvature(AxialForcePoint):
         """get the curvature from the computed cross-sections"""
         if self.successful:
             return self.computed_sub_cross_sections[0].curvature
+
+    def _get_neutral_axes(self) -> tuple[float, float]:
+        """get the neutral-axes of the computed cross-sections"""
+        if self.successful:
+            return (
+                self.computed_sub_cross_sections[0].neutral_axis,
+                self.computed_sub_cross_sections[1].neutral_axis,
+            )
