@@ -644,12 +644,12 @@ class MNCurve:
             if abs(axial_force_1) <= abs(axial_force_2):
                 sub_cross_section_1_strains.append(strain_1)
                 strain_2.strain = MNByStrain(
-                    self.sub_cross_sections[1], (-1) * axial_force_1
+                    self.sub_cross_sections[1], axial_force_1 * (-1)
                 ).strain
                 sub_cross_section_2_strains.append(strain_2)
             else:
                 strain_1.strain = MNByStrain(
-                    self.sub_cross_sections[0], (-1) * axial_force_2
+                    self.sub_cross_sections[0], axial_force_2 * (-1)
                 ).strain
                 sub_cross_section_1_strains.append(strain_1)
                 sub_cross_section_2_strains.append(strain_2)
