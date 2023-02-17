@@ -171,6 +171,7 @@ class MaximumCurvature:
         else:
             return False
 
+    @log.result
     def __get_positive_position_strains(
         self, strain_position: StrainPosition
     ) -> list[StrainPosition]:
@@ -196,6 +197,7 @@ class MaximumCurvature:
         position_strains += get_lower_positions(strain_position.position, self.positive)
         return position_strains
 
+    @log.result
     def __get_negative_position_strains(
         self, strain_position: StrainPosition
     ) -> list[StrainPosition]:
@@ -359,9 +361,7 @@ class MinimumCurvature:
             <= strain_position.strain
             <= min(self.positive, key=operator.attrgetter("strain")).strain
         ):
-            log.debug(
-                f"{strain_position} within minimal positive and negative strains"
-            )
+            log.debug(f"{strain_position} within minimal positive and negative strains")
             position_strains = self.__edge_positions(strain_position)
             edge_strains = compute_curvatures(strain_position, position_strains)
             decisive_edge_strain = min(edge_strains, key=lambda x: abs(x.curvature))
@@ -425,9 +425,7 @@ class MinimumCurvature:
                     material="-",
                 ),
             ]
-        log.info(
-            f"Top-Edge: {strain_positions[0]}, Bottom-Edge: {strain_positions[1]}"
-        )
+        log.info(f"Top-Edge: {strain_positions[0]}, Bottom-Edge: {strain_positions[1]}")
         return strain_positions
 
     @log.result
