@@ -228,12 +228,26 @@ class TestMinimumCurvature(TestCase):
         strain_position = StrainPosition(0.0, position=position, material="Steel")
         self.assertEqual(
             self.minimum_curvature.compute(strain_position),
-            self.maximum_strain - self.maximum_strain,
+            0.0001 / 5.0,
         )
 
     def test_negative_curvature_compute(self):
         # TODO: TestMinimumCurvature - test_negative_curvature_compute
         pass
+
+    def test_positive_curvature_max_value(self):
+        strain_position = StrainPosition(self.maximum_strain, self.top_edge, self.material)
+        self.assertEqual(
+            self.minimum_curvature.compute(strain_position),
+            0.0
+        )
+
+    def test_negative_curvature_max_value(self):
+        strain_position = StrainPosition(self.minimum_strain, self.bottom_edge - 1.0 , self.material)
+        self.assertEqual(
+            self.minimum_curvature.compute(strain_position),
+            0.0
+        )
 
 
 class TestCrossSectionBoundaries(TestCase):
