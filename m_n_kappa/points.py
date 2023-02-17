@@ -1087,13 +1087,13 @@ class MNByStrain(Point):
         """initialize computation of the maximum positive and negative strains"""
         for iteration, strain in enumerate(
             [
-                self.cross_section.maximum_negative_strain(),
-                self.cross_section.maximum_positive_strain(),
+                self.cross_section.decisive_maximum_negative_strain_position(),
+                self.cross_section.decisive_maximum_positive_strain_position(),
             ]
         ):
             if not self.successful:
                 self._iteration = iteration
-                self._strain = strain
+                self._strain = strain.strain
                 self._compute()
 
     def _iterate(self) -> None:
