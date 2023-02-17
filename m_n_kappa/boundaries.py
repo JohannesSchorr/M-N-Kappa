@@ -1,3 +1,4 @@
+import operator
 from dataclasses import dataclass
 
 from .general import StrainPosition, EdgeStrains, neutral_axis
@@ -242,7 +243,7 @@ class MaximumCurvature:
         """
         position_strains = self.__get_negative_position_strains(strain_position)
         edge_strains = compute_curvatures(strain_position, position_strains)
-        decisive_edge_strain = max(edge_strains, key=lambda x: x.curvature)
+        decisive_edge_strain = max(edge_strains, key=operator.attrgetter("curvature"))
         if decisive_edge_strain.top_edge_strain == strain_position:
             log.info(
                 f"Decisive strain-position values: {decisive_edge_strain.bottom_edge_strain}"
@@ -275,7 +276,7 @@ class MaximumCurvature:
         """
         position_strains = self.__get_positive_position_strains(strain_position)
         edge_strains = compute_curvatures(strain_position, position_strains)
-        decisive_edge_strain = min(edge_strains, key=lambda x: x.curvature)
+        decisive_edge_strain = min(edge_strains, key=operator.attrgetter('curvature'))
         if decisive_edge_strain.top_edge_strain == strain_position:
             log.info(
                 f"Decisive strain-position values: {decisive_edge_strain.bottom_edge_strain}"
@@ -309,9 +310,11 @@ class MinimumCurvature:
 
     def __post_init__(self):
         log.info(f"Created {self.__repr__()}")
-        self._top_edge = min(self.all, key=lambda x: x.position).position  # top-edge
+        self._top_edge = min(
+            self.all, key=operator.attrgetter("position")
+        ).position  # top-edge
         self._bottom_edge = max(
-            self.all, key=lambda x: x.position
+            self.all, key=operator.attrgetter('position')
         ).position  # bottom-edge
 
     @property
@@ -352,9 +355,9 @@ class MinimumCurvature:
         float
         """
         if (
-            max(self.negative, key=lambda x: x.strain).strain
+            max(self.negative, key=operator.attrgetter("strain")).strain
             <= strain_position.strain
-            <= min(self.positive, key=lambda x: x.strain).strain
+            <= min(self.positive, key=operator.attrgetter("strain")).strain
         ):
             log.debug(
                 f"{strain_position} within minimal positive and negative strains"
