@@ -488,6 +488,18 @@ class Crosssection:
         """full width of the concrete slab"""
         return self.right_edge() - self.left_edge()
 
+    def get_sub_cross_sections(self) -> tuple:
+        """get cross-section split into slab- and girder-sections (the sub-cross-sections)"""
+        return tuple(
+            [
+                Crosssection(
+                    sections=self.slab_sections,
+                    slab_effective_widths=self.slab_effective_width,
+                ),
+                Crosssection(sections=self.girder_sections),
+            ]
+        )
+
 
 class ComputationCrosssection(Crosssection):
 
