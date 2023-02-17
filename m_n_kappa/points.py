@@ -1571,7 +1571,7 @@ class MomentAxialForceCurvature(AxialForcePoint):
                 curvature_value=self.curvature,
                 position_value=0.0,
             )
-            return strain_sub_cross_section_1 - strain_sub_cross_section_2
+            return strain_sub_cross_section_2 - strain_sub_cross_section_1
 
     @log.result
     def _get_curvature(self) -> float:
