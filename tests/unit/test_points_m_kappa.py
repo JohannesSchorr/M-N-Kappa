@@ -132,7 +132,7 @@ class TestMKappaByStrainPositionAbortBecauseOfInputStrainPosition(TestCase):
         m_kappa = MKappaByStrainPosition(
             self.cs,
             strain_position=StrainPosition(
-                self.cs.decisive_maximum_negative_strain_position().strain, 100, "Steel"
+                self.cs.decisive_maximum_negative_strain_position().strain, steel_top_edge, "Steel"
             ),
             positive_curvature=True,
         )

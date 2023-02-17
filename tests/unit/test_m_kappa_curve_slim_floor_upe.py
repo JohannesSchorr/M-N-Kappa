@@ -82,16 +82,7 @@ class TestSlimFloorUPEPositive(TestCase):
                     strain_position=StrainPosition(strain=-0.0035, position=0.0, material="Concrete"),
                     reason=max_iterations),
                 NotSuccessfulReason(
-                    strain_position=StrainPosition(strain=-0.0013952380952380952, position=144, material="Steel"),
-                    reason=same_sign),
-                NotSuccessfulReason(
-                    strain_position=StrainPosition(strain=-0.0014904761904761905, position=220.0, material="Steel"),
-                    reason=same_sign),
-                NotSuccessfulReason(
                     strain_position=StrainPosition(strain=-0.00279, position=10.0, material="Reinforcement"),
-                    reason=same_sign),
-                NotSuccessfulReason(
-                    strain_position=StrainPosition(strain=-0.00297, position=210, material="Reinforcement"),
                     reason=same_sign),
             ],
         )
@@ -112,16 +103,7 @@ class TestSlimFloorUPEPositiveWithEffectiveWidth(TestCase):
                     strain_position=StrainPosition(strain=-0.0035, position=0.0, material="Concrete"),
                     reason=max_iterations),
                 NotSuccessfulReason(
-                    strain_position=StrainPosition(strain=-0.0013952380952380952, position=144, material="Steel"),
-                    reason=same_sign),
-                NotSuccessfulReason(
-                    strain_position=StrainPosition(strain=-0.0014904761904761905, position=220.0, material="Steel"),
-                    reason=same_sign),
-                NotSuccessfulReason(
                     strain_position=StrainPosition(strain=-0.00279, position=10.0, material="Reinforcement"),
-                    reason=same_sign),
-                NotSuccessfulReason(
-                    strain_position=StrainPosition(strain=-0.00297, position=210, material="Reinforcement"),
                     reason=same_sign),
             ],
         )

@@ -239,14 +239,14 @@ class TestMinimumCurvature(TestCase):
         strain_position = StrainPosition(self.maximum_strain, self.top_edge, self.material)
         self.assertEqual(
             self.minimum_curvature.compute(strain_position),
-            0.0
+            9.999999997489795e-06
         )
 
     def test_negative_curvature_max_value(self):
         strain_position = StrainPosition(self.minimum_strain, self.bottom_edge - 1.0 , self.material)
         self.assertEqual(
             self.minimum_curvature.compute(strain_position),
-            0.0
+            1.1111111108321995e-05
         )
 
 

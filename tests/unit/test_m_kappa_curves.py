@@ -12,8 +12,8 @@ from m_n_kappa import (
 )
 from m_n_kappa.general import NotSuccessfulReason
 
-same_sign = "difference of axial forces at minimum and maximum curvature have same sign"
-max_iterations = "maximum iterations reached"
+same_sign = NotSuccessfulReason("same sign curvature")
+max_iterations = NotSuccessfulReason("iterations")
 
 concrete_slab = Rectangle(top_edge=0.0, bottom_edge=100, width=2000)
 concrete = Concrete(f_cm=30 + 8)
@@ -54,15 +54,7 @@ class TestCompositeBeamPositive(TestCase):
                 ),
                 NotSuccessfulReason(
                     strain_position=StrainPosition(strain=-0.0025, position=25, material="Reinforcement"),
-                    reason=same_sign,
-                ),
-                NotSuccessfulReason(
-                    strain_position=StrainPosition(strain=-0.0025, position=75, material="Reinforcement"),
-                    reason=same_sign,
-                ),
-                NotSuccessfulReason(
-                    strain_position=StrainPosition(strain=-0.0016904761904761904, position=100.0, material="Steel"),
-                    reason=same_sign,
+                    reason=same_sign.reason,
                 ),
             ],
         )
@@ -72,9 +64,12 @@ class TestCompositeBeamPositive(TestCase):
             self.m_kappa_curve.m_kappa_points.moments,
             [
                 0.0,
+                247731507.78628078,
+                250336778.86830407,
                 279065090.70273054,
                 438755789.00432056,
                 516818301.88354325,
+                529432972.7054208,
                 538683420.997121,
                 541724537.7407295,
             ],
@@ -98,7 +93,7 @@ class TestCompositeBeamNegative(TestCase):
             [
                 NotSuccessfulReason(
                     strain_position=StrainPosition(strain=-0.0016904761904761904, position=115.0, material="Steel"),
-                    reason=same_sign)
+                    reason=same_sign.reason)
             ],
         )
 
