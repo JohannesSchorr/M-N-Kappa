@@ -396,13 +396,14 @@ class MNKappaCurvePoints:
 
     def curvature(self, by_moment: float, axial_force: float) -> float:
         """
-        get curvature at given ``moment`` and ``axial_force``
+        get curvature considering the given ``moment`` and ``axial_force``
 
         Parameters
         ----------
         by_moment : float
             moment the curvature is to be computed from
         axial_force : float
+            axial-force to consider the moment
 
         Returns
         -------
