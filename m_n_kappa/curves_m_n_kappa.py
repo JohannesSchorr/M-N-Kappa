@@ -189,9 +189,12 @@ class MNKappaCurvePoints:
 
     """
 
-    def __init__(self) -> None:
-        self._points = []
-        log.info(f"Created MNKappaCurvePoints")
+    @log.init
+    def __init__(self, points: list[MNKappaCurvePoint] = None) -> None:
+        if points is None:
+            self._points = []
+        elif isinstance(points, list):
+            self._points = points
 
     def __repr__(self) -> str:
         return """MNKappaCurvePoints()"""
