@@ -136,6 +136,7 @@ class MNKappaCurvePoint:
     moment: float
     curvature: float
     axial_force: float
+    axial_force_cross_section_number: int
     strain_difference: float
     cross_section: Crosssection
     strain_position: StrainPosition
@@ -314,6 +315,7 @@ class MNKappaCurvePoints:
         moment: float,
         curvature: float,
         axial_force: float,
+        axial_force_cross_section_number: int,
         strain_difference: float,
         cross_section,  # TODO: type-hint
         strain_position: StrainPosition,
@@ -330,6 +332,8 @@ class MNKappaCurvePoints:
             computed curvature of the point
         axial_force : float
             axial_force between sub-cross-sections
+        axial_force_cross_section_number: int
+
         strain_difference : float
             difference in strain between sub-cross-sections
         cross_section : :py:class:`~m_n_kappa.points.MKappaByStrainPosition`
@@ -351,6 +355,7 @@ class MNKappaCurvePoints:
             moment,
             curvature,
             axial_force,
+            axial_force_cross_section_number,
             strain_difference,
             cross_section,
             strain_position,
@@ -646,14 +651,20 @@ class MNCurve:
                 else:
                     self._not_successful_reason += m_n.not_successful_reason
 
-    def _save(self, m_n: MomentAxialForce, strain_position: StrainPosition) -> None:
+    def _save(
+        self,
+        m_n: MomentAxialForce,
+        strain_position: StrainPosition,
+        axial_force_cross_section_number: int,
+    ) -> None:
         """save the computed value to :py:attr:`~m_n_kappa.MNCurve.points"""
         self.points.add(
             moment=m_n.moment(),
             curvature=0.0,
-            neutral_axis=None,
-            axial_force=m_n.axial_force,
-            strain_difference=m_n.strain_difference,
+            axial_force=m_n.axial_force * (-1) ** axial_force_cross_section_number,
+            axial_force_cross_section_number=axial_force_cross_section_number,
+            strain_difference=m_n.strain_difference
+            * (-1) ** axial_force_cross_section_number,
             cross_section=m_n.computed_sub_cross_sections,
             strain_position=strain_position,
             neutral_axis_1=None,
