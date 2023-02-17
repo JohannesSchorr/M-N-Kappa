@@ -391,6 +391,8 @@ class Newton(Solver):
         --------
         Bisection : :py:class:`~m_n_kappa.solver.Solver`-class using bi-sectional approach
         """
+        if use_fallback:
+            return self._fallback()
         self._x_n_plus_1 = self._solve()
         if self._is_between_nearest_values():
             return self.x_n_plus_1
