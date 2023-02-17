@@ -1306,14 +1306,15 @@ class MomentAxialForce(AxialForcePoint):
     @log.init
     def __init__(
         self,
-        sub_cross_sections: list[Crosssection],
+        sub_cross_sections: list[Crosssection] | tuple[Crosssection, Crosssection],
         strain: float = None,
         axial_force: float = None,
     ):
         """
         Parameters
         ----------
-        sub_cross_sections : list[:py:class:`~m_n_kappa.Crosssection`]
+        sub_cross_sections : list[:py:class:`~m_n_kappa.Crosssection`] |
+        tuple[:py:class:`~m_n_kappa.Crosssection`, :py:class:`~m_n_kappa.Crosssection`]
             cross-sections that are computed (must be two)
         strain : float
             applied strain to the first cross-section given in ``cross_sections``
@@ -1377,8 +1378,8 @@ class MomentAxialForce(AxialForcePoint):
             self._axial_force = axial_force
         else:
             raise ValueError("Either 'strain' or 'axial_force' must be passed.")
-        self._computed_sub_cross_sections: list[
-            ComputationCrosssectionStrain
+        self._computed_sub_cross_sections: tuple[
+            ComputationCrosssectionStrain, ComputationCrosssectionStrain
         ] = self._compute_sub_cross_sections()
         self._moment = self._compute_moment()
         self._strain_difference = self._compute_strain_difference()
@@ -1388,7 +1389,9 @@ class MomentAxialForce(AxialForcePoint):
         """applied strain to the first cross-section"""
         return self._strain
 
-    def _compute_sub_cross_sections(self) -> list[ComputationCrosssectionStrain]:
+    def _compute_sub_cross_sections(
+        self,
+    ) -> tuple[ComputationCrosssectionStrain, ComputationCrosssectionStrain] | None:
         """computes the sub-cross-sections under the given axial-forces"""
         computations = []
         for index, sub_cross_section in enumerate(self.sub_cross_sections):
