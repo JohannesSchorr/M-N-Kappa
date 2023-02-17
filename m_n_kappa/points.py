@@ -263,7 +263,9 @@ class Point:
             if self._initial_axial_forces_have_different_sign():
                 self._iterate()
             else:
-                self._not_successful_reason = NotSuccessfulReason(variable=self.variable)
+                self._not_successful_reason = NotSuccessfulReason(
+                    variable=self.variable
+                )
                 self._message()
                 self._set_values_none()
 
@@ -445,14 +447,14 @@ class MKappa(Point):
             self._iteration = iter_index
             self._neutral_axis = self._guess_neutral_axis()
             if self.neutral_axis is None:
-                self._not_successful_reason = NotSuccessfulReason('converge')
+                self._not_successful_reason = NotSuccessfulReason("converge")
                 log.info(self.not_successful_reason)
                 return
             self._curvature = self._compute_new_curvature()
             self.compute()
             if self._successful:
                 return
-        self._not_successful_reason = NotSuccessfulReason('iteration')
+        self._not_successful_reason = NotSuccessfulReason("iteration")
         log.info(self.not_successful_reason.reason)
 
     def _compute_new_curvature(self) -> float:
