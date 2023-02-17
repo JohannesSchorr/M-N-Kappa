@@ -30,6 +30,7 @@ from .general import (
     print_chapter,
     str_start_end,
     StrainPosition,
+    NotSuccessfulReason,
 )
 from .points import MKappaByStrainPosition
 from .solver import Newton, Bisection
@@ -419,7 +420,7 @@ class MKappaCurve:
         "_positive",
         "_negative",
         "_m_kappa_points",
-        "_not_successful",
+        "_not_successful_reason",
     )
 
     @log.init
@@ -473,7 +474,7 @@ class MKappaCurve:
         self._include_negative_curvature = include_negative_curvature
         self._boundaries = self.cross_section.get_boundary_conditions()
         self._m_kappa_points: MKappaCurvePoints = MKappaCurvePoints()
-        self._not_successful = None
+        self._not_successful_reason = None
         if self.include_positive_curvature:
             self._positive = self._get_positive_m_kappa_curve_curvature()
             self._compute_positive_curvature_failure()
@@ -710,16 +711,16 @@ class MKappaCurve:
                 f"iterations={m_kappa.iteration} ({m_kappa.maximum_iterations})\n"
                 f"{m_kappa._print_iterations()}",
             )
-            if self._not_successful is None:
-                self._not_successful = []
-            self._not_successful.append(
-                [m_kappa.strain_position, m_kappa.not_successful_reason]
-            )
+            if self._not_successful_reason is None:
+                self._not_successful_reason = []
+            not_successful_reason = m_kappa.not_successful_reason
+            not_successful_reason.strain_position = m_kappa.strain_position
+            self._not_successful_reason.append(not_successful_reason)
 
     @property
-    def not_successful(self) -> list[StrainPosition]:
+    def not_successful_reason(self) -> list[NotSuccessfulReason]:
         """list :py:class:`~m_n_kappa.StrainPosition` that were not successful"""
-        return self._not_successful
+        return self._not_successful_reason
 
     def _insert_zero(self) -> None:
         """insert moment-curvature pair at zero curvature"""
