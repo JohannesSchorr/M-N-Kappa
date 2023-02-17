@@ -1006,15 +1006,20 @@ class MNKappaCurve:
     @log.init
     def __init__(
         self,
-        cross_section: Crosssection,
+        sub_cross_sections: Crosssection
+        | list[Crosssection]
+        | tuple[Crosssection, Crosssection],
         include_positive_curvature: bool = True,
         include_negative_curvature: bool = False,
     ):
         """
         Parameters
         ----------
-        cross_section : :py:class:`~m_n_kappa.Crosssection`
-            cross-section to compute the M-N-Kappa-curve
+        sub_cross_sections : :py:class:`~m_n_kappa.Crosssection` | list[:py:class:`~m_n_kappa.Crosssection`] |
+        tuple[:py:class:`~m_n_kappa.Crosssection`, :py:class:`~m_n_kappa.Crosssection`]
+            Sub-cross-sections to compute the M-N-Kappa-curve.
+            In case given as single :py:class:`~m_n_kappa.Crosssection` this cross-section must consist of
+            a slab (Concrete and Reinforcement) and a girder (Steel)
         include_positive_curvature : bool
             if ``True`` then positive curvature values are computed (Default: ``True``)
         include_negative_curvature : bool
@@ -1024,7 +1029,26 @@ class MNKappaCurve:
         --------
         :py:class:`~m_n_kappa.MKappaCurve` : computation of Moment-Curvature-Curve assuming full interaction
         """
-        self._cross_section = cross_section
+        if (
+            isinstance(sub_cross_sections, tuple)
+            and len(sub_cross_sections) == 2
+            and isinstance(sub_cross_sections[0], Crosssection)
+            and isinstance(sub_cross_sections[1], Crosssection)
+        ):
+            self._sub_cross_sections = sub_cross_sections
+        elif (
+            isinstance(sub_cross_sections, list)
+            and len(sub_cross_sections) == 2
+            and isinstance(sub_cross_sections[0], Crosssection)
+            and isinstance(sub_cross_sections[1], Crosssection)
+        ):
+            self._sub_cross_sections = tuple(sub_cross_sections)
+        elif isinstance(sub_cross_sections, Crosssection):
+            self._sub_cross_sections = sub_cross_sections.get_sub_cross_sections()
+        else:
+            raise TypeError(
+                'sub_cross_section must be of type "Crosssection" or of type "tuple[Crosssection, Crosssection]"'
+            )
         self._include_positive_curvature = include_positive_curvature
         self._include_negative_curvature = include_negative_curvature
         self._not_successful = None
@@ -1040,9 +1064,9 @@ class MNKappaCurve:
             ).points
 
     @property
-    def cross_section(self) -> Crosssection:
+    def sub_cross_sections(self) -> tuple[Crosssection, Crosssection]:
         """cross-section the :math:`M`-:math:`N`-:math:`\\kappa`-curve shall be computed"""
-        return self._cross_section
+        return self._sub_cross_sections
 
     @property
     def include_positive_curvature(self) -> bool:
