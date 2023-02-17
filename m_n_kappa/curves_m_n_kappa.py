@@ -109,12 +109,12 @@ class MNKappaCurvePoint:
         the computed moment of the curve-point
     curvature: float
         the computed curvature of the curve-point
-    neutral_axis: float
-        the computed neutral-axis of the computed curve-point
     axial_force : float
         Computed axial force.
         Applied to one sub-cross-section with positive sign and
         to other sub-cross-section with negative sign.
+    axial_force_cross_section_number: int
+        number of the sub-cross-sections (tuple) the axial-force is applied to
     strain_difference: float
         Difference in strain between the two sub-cross-sections
     cross_section: :py:class:`~m_n_kappa.Crosssection`
@@ -122,6 +122,10 @@ class MNKappaCurvePoint:
     strain_position: :py:class:`~m_n_kappa.StrainPosition`
         :py:class:`~m_n_kappa.StrainPosition` leading to the
         resulting moment, curvature and neutral-axis
+    neutral_axis_1: float
+        the computed 1st neutral-axis of the computed curve-point
+    neutral_axis_2: float
+        the computed 2nd neutral-axis of the computed curve-point
 
     See Also
     --------
@@ -131,11 +135,12 @@ class MNKappaCurvePoint:
 
     moment: float
     curvature: float
-    neutral_axis: float
     axial_force: float
     strain_difference: float
     cross_section: Crosssection
     strain_position: StrainPosition
+    neutral_axis_1: float = None
+    neutral_axis_2: float = None
 
     def __post_init__(self):
         log.info(f"Created {self.__repr__()}")
@@ -146,7 +151,8 @@ class MNKappaCurvePoint:
         elif (
             self.moment == other.moment
             and self.curvature == other.curvature
-            and self.neutral_axis == other.neutral_axis
+            and self.neutral_axis_1 == other.neutral_axis_1
+            and self.neutral_axis_2 == other.neutral_axis_2
             and self.axial_force == other.axial_force
             and self.strain_difference == other.strain_difference
         ):
@@ -203,18 +209,23 @@ class MNKappaCurvePoints:
         line = 105 * "-"
         text = [
             line,
-            "   Moment   | Curvature  | Neutral A. | Axial-force  | strain-diff. |   Strain   "
+            "    Moment    | Curvature  | Neutral A.1 | Neutral A.2 | Axial-force | strain-diff. |   Strain   "
             "|  Position  | Material    ",
             line,
         ]
         for point in points:
-            neutral_axis = point.neutral_axis
-            if neutral_axis is None:
-                neutral_axis = " Infinity "
+            neutral_axis_1 = point.neutral_axis_1
+            if neutral_axis_1 is None:
+                neutral_axis_1 = "  Infinity "
             else:
-                neutral_axis = f"{point.neutral_axis:10.2f} "
+                neutral_axis_1 = f"{neutral_axis_1:10.4f} "
+            neutral_axis_2 = point.neutral_axis_2
+            if neutral_axis_2 is None:
+                neutral_axis_2 = "  Infinity "
+            else:
+                neutral_axis_2 = f"{neutral_axis_2:10.4f} "
             text.append(
-                f"{point.moment:11.1f} | {point.curvature:10.6f} | {neutral_axis} | "
+                f"{point.moment:13.1f} | {point.curvature:10.6f} | {neutral_axis_1} | {neutral_axis_2} |"
                 f"{point.axial_force:12.2f} | {point.strain_difference:12.6f} | {point.strain_position.strain:10.6f} |"
                 f"{point.strain_position.position:11.1f} | {point.strain_position.material}"
             )
@@ -302,11 +313,12 @@ class MNKappaCurvePoints:
         self,
         moment: float,
         curvature: float,
-        neutral_axis: float,
         axial_force: float,
         strain_difference: float,
         cross_section,  # TODO: type-hint
         strain_position: StrainPosition,
+        neutral_axis_1: float = None,
+        neutral_axis_2: float = None,
     ) -> None:
         """add moment-curvature point to list
 
@@ -316,8 +328,6 @@ class MNKappaCurvePoints:
             computed moment of the point
         curvature : float
             computed curvature of the point
-        neutral_axis : float
-            computed neutral-axis leading to equilibrium (after variation)
         axial_force : float
             axial_force between sub-cross-sections
         strain_difference : float
@@ -326,15 +336,26 @@ class MNKappaCurvePoints:
             computed cross-section
         strain_position : :py:class:`~m_n_kappa.general.StrainPosition`
             strain and its position
+        neutral_axis_1 : float
+            computed neutral-axis leading to equilibrium (after variation)
+        neutral_axis_2 : float
+            computed neutral-axis leading to equilibrium (after variation)
         """
+        if neutral_axis_1 is not None and neutral_axis_2 is not None:
+            max_neutral_axis = max(neutral_axis_1, neutral_axis_2)
+            min_neutral_axis = min(neutral_axis_1, neutral_axis_2)
+        else:
+            max_neutral_axis = neutral_axis_1
+            min_neutral_axis = neutral_axis_2
         point = MNKappaCurvePoint(
             moment,
             curvature,
-            neutral_axis,
             axial_force,
             strain_difference,
             cross_section,
             strain_position,
+            min_neutral_axis,
+            max_neutral_axis,
         )
         if point not in self.points:
             self._points.append(point)
@@ -635,6 +656,8 @@ class MNCurve:
             strain_difference=m_n.strain_difference,
             cross_section=m_n.computed_sub_cross_sections,
             strain_position=strain_position,
+            neutral_axis_1=None,
+            neutral_axis_2=None,
         )
 
     def _print_title(self) -> str:
