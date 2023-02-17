@@ -1483,11 +1483,13 @@ class MomentAxialForceCurvature(AxialForcePoint):
         self._strain_difference = self._compute_strain_difference()
 
     def __repr__(self) -> str:
-        return f'MomentAxialForceCurvature(' \
-        f'\n\tsub_cross_sections=..., ' \
-        f'\n\taxial_force={self.axial_force}, ' \
-        f'\n\tstrain_position={self.strain_position}, ' \
-        f'\n\tpositive_curvature={self.positive_curvature})'
+        return (
+            f"MomentAxialForceCurvature("
+            f"\n\tsub_cross_sections=..., "
+            f"\n\taxial_force={self.axial_force}, "
+            f"\n\tstrain_position={self.strain_position}, "
+            f"\n\tpositive_curvature={self.positive_curvature})"
+        )
 
     @property
     def curvature(self) -> float:
