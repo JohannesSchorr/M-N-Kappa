@@ -1,3 +1,4 @@
+import operator
 from abc import ABC, abstractmethod
 from dataclasses import dataclass
 
@@ -482,7 +483,7 @@ class Rectangle(Geometry):
             rectangles assembling to the original rectangle
         """
         rectangles = []
-        at_points.sort(key=lambda x: x.position)
+        at_points.sort(key=operator.attrgetter('position'))
         top_edge = StrainPosition(
             at_points[0].strain, self.top_edge, at_points[0].material
         )
@@ -1083,7 +1084,7 @@ class Trapezoid(Geometry):
         """
         top_edge = self.top_edge
         trapezoids = []
-        at_points.sort(key=lambda x: x.position)
+        at_points.sort(key=operator.attrgetter('position'))
         for point in at_points:
             if self.top_edge < point.position < self.bottom_edge:
                 trapezoids.append(
