@@ -278,7 +278,7 @@ class Crosssection:
         return self._bottom_edge
 
     @property
-    def girder_sections(self) -> list:
+    def girder_sections(self) -> list[Section]:
         """:py:class:`~m_n_kappa.Section` belonging to te girder"""
         return self.sections_of_type(section_type="girder")
 
