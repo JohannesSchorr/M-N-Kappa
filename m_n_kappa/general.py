@@ -492,7 +492,13 @@ class NotSuccessfulReason:
     strain_position: StrainPosition = None
 
     def __repr__(self) -> str:
-        return self.reason
+        if self.strain_position is None:
+            return self.reason
+        else:
+            return f'{self.reason} ({self.strain_position})'
+
+    def __str__(self) -> str:
+        return self.__repr__()
 
     def __post_init__(self):
         if self.reason is None:
