@@ -604,8 +604,25 @@ class MKappaByStrainPosition(MKappa):
         self._maximum_curvature = maximum_curvature
         self._minimum_curvature = minimum_curvature
         self._is_called_by_user = is_called_by_user
-        self.initialize_boundary_curvatures()
-        self._start_computation()
+        if self._is_strain_not_outside_boundary():
+            self.initialize_boundary_curvatures()
+            self._start_computation()
+
+    def _is_strain_not_outside_boundary(self) -> bool:
+        """
+        checks if the given ``strain`` in ``strain_position`` is outside boundary
+        and would lead in combination with curvature to exceed of the maximum
+        positive or negative strain within the decisive material model
+        """
+        if self.maximum_curvature == 0.0:
+            self._not_successful_reason = NotSuccessfulReason(
+                reason="strain is outside boundary and allows therefore no curvature",
+                strain_position=self.strain_position,
+            )
+            log.info(self._not_successful_reason.reason)
+            return False
+        else:
+            return True
 
     def __repr__(self):
         return (
