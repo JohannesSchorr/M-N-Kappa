@@ -1,3 +1,4 @@
+import operator
 from abc import ABC, abstractmethod
 from dataclasses import dataclass
 from math import log
@@ -255,7 +256,7 @@ class Material:
             - ``True``: sorts strains descending
             - ``False``: sorts strains ascending (Default)
         """
-        self._stress_strain.sort(key=lambda x: x.strain, reverse=reverse)
+        self._stress_strain.sort(key=operator.attrgetter('strain'), reverse=reverse)
 
     def sort_strains_ascending(self) -> None:
         """sorts stress-strain_value-relationship so strains are ascending"""
@@ -1392,7 +1393,7 @@ StressStrain(stress=0.0, strain=10.0)]
         stress_strains = self.compression.stress_strain() + self.tension.stress_strain()
         stress_strains.append([0.0, 0.0])
         stress_strains = remove_duplicates(stress_strains)
-        stress_strains.sort(key=lambda x: x[1], reverse=False)
+        stress_strains.sort(key=operator.itemgetter(1), reverse=False)
         stress_strains = [
             StressStrain(stress_strain[0], stress_strain[1])
             for stress_strain in stress_strains
