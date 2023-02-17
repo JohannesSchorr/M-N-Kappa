@@ -1173,19 +1173,24 @@ class MNByStrain(Point):
             "----------",
             f"number: {len(self.computations)}",
             "",
-            "---------------------------------------------------------",
-            "iter | strain | neutral-axis | axial-force | equilibrium ",
-            "---------------------------------------------------------",
+            "-------------------------------------------------------------",
+            "iter |  strain  | neutral-axis |  axial-force  | equilibrium ",
+            "-------------------------------------------------------------",
         ]
         self._sort_computations_by("iteration")
         for computation in self.computations:
+            if computation.neutral_axis_value is None:
+                neutral_axis_value = "  Infinite  "
+            else:
+                neutral_axis_value = f"{computation.neutral_axis_value:8.4f}"
             text.append(
                 f"{computation.iteration:4} | "
-                f"{computation.strain:6.4f}"
-                f"{computation.axial_force:10.2f} | "
-                f"{computation.axial_force - self.applied_axial_force:11.4f}"
+                f"{computation.strain:8.4f} | "
+                f"{neutral_axis_value} | "
+                f"{computation.axial_force:13.2f} | "
+                f"{computation.axial_force_equilibrium:11.2f}"
             )
-        text.append("---------------------------------------------------------")
+        text.append("-------------------------------------------------------------")
         return print_sections(text)
 
 
