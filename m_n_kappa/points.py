@@ -990,7 +990,7 @@ class MNByStrain(Point):
         self,
         cross_section: Crosssection,
         applied_axial_force: float,
-        maximum_iterations: int = 10,
+        maximum_iterations: int = 20,
         axial_force_tolerance: float = 5.0,
         solver: Solver = Newton,
         is_called_by_user: bool = True,
