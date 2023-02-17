@@ -114,6 +114,31 @@ class TestMKappaByStrainPosition(TestCase):
         self.assertLessEqual(self.m_kappa.iteration, 10)
 
 
+class TestMKappaByStrainPositionAbortBecauseOfInputStrainPosition(TestCase):
+    def setUp(self) -> None:
+        self.cs = Crosssection([steel_section])
+
+    def test_positive_curvature_not_successful(self):
+        m_kappa = MKappaByStrainPosition(
+            self.cs,
+            strain_position=StrainPosition(
+                self.cs.decisive_maximum_positive_strain_position().strain, 100, "Steel"
+            ),
+            positive_curvature=True,
+        )
+        self.assertEqual(m_kappa.successful, False)
+
+    def test_positive_curvature_successful(self):
+        m_kappa = MKappaByStrainPosition(
+            self.cs,
+            strain_position=StrainPosition(
+                self.cs.decisive_maximum_negative_strain_position().strain, 100, "Steel"
+            ),
+            positive_curvature=True,
+        )
+        self.assertEqual(m_kappa.successful, True)
+
+
 class TestMKappabyStrainPositionCompositeBeam(TestCase):
     def setUp(self) -> None:
         concrete_slab = Rectangle(top_edge=0.0, bottom_edge=100, width=2000)

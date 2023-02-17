@@ -1,9 +1,10 @@
 from unittest import TestCase, main
 
 from m_n_kappa import MKappaCurve, StrainPosition, EffectiveWidths
+from m_n_kappa.general import NotSuccessfulReason
 
-same_sign = "difference of axial forces at minimum and maximum curvature have same sign"
-max_iterations = "maximum iterations reached"
+same_sign = NotSuccessfulReason(variable='curvature').reason
+max_iterations = NotSuccessfulReason('iteration').reason
 
 from m_n_kappa import Rectangle, Steel, UPEProfile, Concrete, RebarLayer, Reinforcement
 
@@ -74,37 +75,24 @@ class TestSlimFloorUPEPositive(TestCase):
 
     def test_not_successful(self):
         self.maxDiff = None
-        self.assertListEqual(
-            self.m_kappa_curve.not_successful,
+        self.assertCountEqual(
+            self.m_kappa_curve.not_successful_reason,
             [
-                [
-                    StrainPosition(strain=-0.0035, position=0.0, material="Concrete"),
-                    max_iterations,
-                ],
-                [
-                    StrainPosition(
-                        strain=-0.0013952380952380952, position=144, material="Steel"
-                    ),
-                    same_sign,
-                ],
-                [
-                    StrainPosition(
-                        strain=-0.0014904761904761905, position=220.0, material="Steel"
-                    ),
-                    same_sign,
-                ],
-                [
-                    StrainPosition(
-                        strain=-0.00279, position=10.0, material="Reinforcement"
-                    ),
-                    same_sign,
-                ],
-                [
-                    StrainPosition(
-                        strain=-0.00297, position=210, material="Reinforcement"
-                    ),
-                    same_sign,
-                ],
+                NotSuccessfulReason(
+                    strain_position=StrainPosition(strain=-0.0035, position=0.0, material="Concrete"),
+                    reason=max_iterations),
+                NotSuccessfulReason(
+                    strain_position=StrainPosition(strain=-0.0013952380952380952, position=144, material="Steel"),
+                    reason=same_sign),
+                NotSuccessfulReason(
+                    strain_position=StrainPosition(strain=-0.0014904761904761905, position=220.0, material="Steel"),
+                    reason=same_sign),
+                NotSuccessfulReason(
+                    strain_position=StrainPosition(strain=-0.00279, position=10.0, material="Reinforcement"),
+                    reason=same_sign),
+                NotSuccessfulReason(
+                    strain_position=StrainPosition(strain=-0.00297, position=210, material="Reinforcement"),
+                    reason=same_sign),
             ],
         )
 
@@ -117,37 +105,24 @@ class TestSlimFloorUPEPositiveWithEffectiveWidth(TestCase):
 
     def test_not_successful(self):
         self.maxDiff = None
-        self.assertListEqual(
-            self.m_kappa_curve.not_successful,
+        self.assertCountEqual(
+            self.m_kappa_curve.not_successful_reason,
             [
-                [
-                    StrainPosition(strain=-0.0035, position=0.0, material="Concrete"),
-                    max_iterations,
-                ],
-                [
-                    StrainPosition(
-                        strain=-0.0013952380952380952, position=144, material="Steel"
-                    ),
-                    same_sign,
-                ],
-                [
-                    StrainPosition(
-                        strain=-0.0014904761904761905, position=220.0, material="Steel"
-                    ),
-                    same_sign,
-                ],
-                [
-                    StrainPosition(
-                        strain=-0.00279, position=10.0, material="Reinforcement"
-                    ),
-                    same_sign,
-                ],
-                [
-                    StrainPosition(
-                        strain=-0.00297, position=210, material="Reinforcement"
-                    ),
-                    same_sign,
-                ],
+                NotSuccessfulReason(
+                    strain_position=StrainPosition(strain=-0.0035, position=0.0, material="Concrete"),
+                    reason=max_iterations),
+                NotSuccessfulReason(
+                    strain_position=StrainPosition(strain=-0.0013952380952380952, position=144, material="Steel"),
+                    reason=same_sign),
+                NotSuccessfulReason(
+                    strain_position=StrainPosition(strain=-0.0014904761904761905, position=220.0, material="Steel"),
+                    reason=same_sign),
+                NotSuccessfulReason(
+                    strain_position=StrainPosition(strain=-0.00279, position=10.0, material="Reinforcement"),
+                    reason=same_sign),
+                NotSuccessfulReason(
+                    strain_position=StrainPosition(strain=-0.00297, position=210, material="Reinforcement"),
+                    reason=same_sign),
             ],
         )
 

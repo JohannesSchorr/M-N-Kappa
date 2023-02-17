@@ -10,6 +10,7 @@ from m_n_kappa import (
     MKappaCurve,
     StrainPosition,
 )
+from m_n_kappa.general import NotSuccessfulReason
 
 same_sign = "difference of axial forces at minimum and maximum curvature have same sign"
 max_iterations = "maximum iterations reached"
@@ -44,31 +45,25 @@ class TestCompositeBeamPositive(TestCase):
         self.assertEqual(self.m_kappa_curve.cross_section, self.cross_section)
 
     def test_not_successful(self):
-        self.assertListEqual(
-            self.m_kappa_curve.not_successful,
+        self.assertCountEqual(
+            self.m_kappa_curve.not_successful_reason,
             [
-                [
-                    StrainPosition(strain=-0.0035, position=0.0, material="Concrete"),
-                    max_iterations,
-                ],
-                [
-                    StrainPosition(
-                        strain=-0.0025, position=25, material="Reinforcement"
-                    ),
-                    same_sign,
-                ],
-                [
-                    StrainPosition(
-                        strain=-0.0025, position=75, material="Reinforcement"
-                    ),
-                    same_sign,
-                ],
-                [
-                    StrainPosition(
-                        strain=-0.0016904761904761904, position=100.0, material="Steel"
-                    ),
-                    same_sign,
-                ],
+                NotSuccessfulReason(
+                    strain_position=StrainPosition(strain=-0.0035, position=0.0, material="Concrete"),
+                    keyword='iteration',
+                ),
+                NotSuccessfulReason(
+                    strain_position=StrainPosition(strain=-0.0025, position=25, material="Reinforcement"),
+                    reason=same_sign,
+                ),
+                NotSuccessfulReason(
+                    strain_position=StrainPosition(strain=-0.0025, position=75, material="Reinforcement"),
+                    reason=same_sign,
+                ),
+                NotSuccessfulReason(
+                    strain_position=StrainPosition(strain=-0.0016904761904761904, position=100.0, material="Steel"),
+                    reason=same_sign,
+                ),
             ],
         )
 
@@ -99,14 +94,11 @@ class TestCompositeBeamNegative(TestCase):
 
     def test_not_successful(self):
         self.assertListEqual(
-            self.m_kappa_curve.not_successful,
+            self.m_kappa_curve.not_successful_reason,
             [
-                [
-                    StrainPosition(
-                        strain=-0.0016904761904761904, position=115.0, material="Steel"
-                    ),
-                    same_sign,
-                ]
+                NotSuccessfulReason(
+                    strain_position=StrainPosition(strain=-0.0016904761904761904, position=115.0, material="Steel"),
+                    reason=same_sign)
             ],
         )
 
