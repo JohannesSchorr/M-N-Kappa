@@ -230,8 +230,8 @@ class MNKappaCurvePoints:
         return print_sections(text)
 
     def print_points(self) -> str:
-        points = sorted(self._points, key=lambda x: x.axial_force)
-        line = 105 * "-"
+        points = sorted(self._points, key=operator.attrgetter("moment"))
+        line = 119 * "-"
         text = [
             line,
             "    Moment    | Curvature  | Neutral A.1 | Neutral A.2 | Axial-force | strain-diff. |   Strain   "
