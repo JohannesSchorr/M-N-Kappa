@@ -43,7 +43,7 @@ from .log import LoggerMethods
 log = LoggerMethods(__name__)
 
 
-@dataclass
+@dataclass(slots=True)
 class Computation:
     """
     stores the results of an iteration-step during a computation
@@ -1303,6 +1303,17 @@ class MomentAxialForce(AxialForcePoint):
     .. versionadded:: 0.2.0
     """
 
+    __slots__ = (
+        "_axial_force",
+        "_computed_sub_cross_sections",
+        "_curvature",
+        "_strain_difference",
+        "_moment",
+        "_successful",
+        "_not_successful_reason",
+        "_strain",
+    )
+
     @log.init
     def __init__(
         self,
@@ -1433,6 +1444,20 @@ class MomentAxialForceCurvature(AxialForcePoint):
     .. versionadded:: 0.2.0
     """
 
+    __slots__ = (
+        "_axial_force",
+        "_computed_sub_cross_sections",
+        "_curvature",
+        "_strain_difference",
+        "_moment",
+        "_successful",
+        "_not_successful_reason",
+        "_strain_position",
+        "_positive_curvature",
+        "_neutral_axes",
+        "_strain_difference",
+    )
+
     @log.init
     def __init__(
         self,
@@ -1513,7 +1538,7 @@ class MomentAxialForceCurvature(AxialForcePoint):
 
     def _compute_sub_cross_sections(
         self,
-    ) -> tuple[ComputationCrosssectionCurvature, ComputationCrosssectionCurvature]:
+    ) -> tuple[ComputationCrosssectionCurvature, ComputationCrosssectionCurvature] | tuple[None, None]:
         """
         compute the sub-cross-sections
 

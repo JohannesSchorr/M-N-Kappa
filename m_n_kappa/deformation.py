@@ -144,7 +144,7 @@ class Node:
         return curvature * single_load_moment
 
 
-@dataclass
+@dataclass(slots=True)
 class LoadStep:
     """
     Load-step re-computed from a :py:class:`~m_n_kappa.curves_m_kappa.MKappaCurvePoint`
@@ -163,7 +163,7 @@ class LoadStep:
     point: MKappaCurvePoint
 
 
-@dataclass
+@dataclass(slots=True)
 class Loading:
 
     """
@@ -235,7 +235,7 @@ class Loading:
         ].m_kappa_curve
 
 
-@dataclass
+@dataclass(slots=True)
 class Deformation:
     """
     container for computed deformations
@@ -263,7 +263,7 @@ class Deformation:
         log.info(f"Created {self.__repr__()}")
 
 
-@dataclass
+@dataclass(slots=True)
 class Deformations:
 
     """

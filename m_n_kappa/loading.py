@@ -128,7 +128,7 @@ class ABCSingleSpan(ABC):
         ...
 
 
-@dataclass
+@dataclass(slots=True)
 class SingleLoad:
     """
     container for single load
@@ -339,7 +339,7 @@ class SingleSpan(ABCSingleSpan):
         return self.beam.load_distribution_factor()
 
 
-@dataclass
+@dataclass(slots=True)
 class Moment:
     """
     container for moment at position_value

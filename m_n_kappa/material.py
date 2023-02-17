@@ -26,7 +26,7 @@ def make_float(value):
         return float(value)
 
 
-@dataclass
+@dataclass(slots=True)
 class StressStrain:
 
     """
@@ -339,6 +339,8 @@ class ConcreteCompression(ABC):
     This class works as basis for implementing these models and
     give them a similar interface.
     """
+
+    __slots__ = '_f_cm', '_yield_strain', '_E_cm'
 
     @log.init
     def __init__(self, f_cm: float, yield_strain: float, E_cm: float):
@@ -856,6 +858,8 @@ class ConcreteTension:
 
     .. versionadded:: 0.1.0
     """
+
+    __slots__ = "_f_cm", "_E_cm", "_f_ctm", "_g_f", "_use_tension", "_consider_opening_behaviour"
 
     @log.init
     def __init__(

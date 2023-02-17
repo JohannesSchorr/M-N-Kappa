@@ -36,6 +36,9 @@ class LoggerMethods:
     :py:meth:`~m_n_kappa.log.LoggerMethods.critical` are implemented to reduce
     the need for further imports.
     """
+
+    __slots__ = "_logger_name", "_logger"
+
     def __init__(self, logger_name):
         """
         Parameters

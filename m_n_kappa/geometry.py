@@ -1121,7 +1121,7 @@ class Trapezoid(Geometry):
         return self.top_width - self.top_edge * self.width_slope
 
 
-@dataclass
+@dataclass(slots=True)
 class IProfile(ComposedGeometry):
 
     """
@@ -1261,7 +1261,7 @@ Rectangle(top_edge=184.50, bottom_edge=200.00, width=200.00, left_edge=-100.00, 
             )
 
 
-@dataclass
+@dataclass(slots=True)
 class RebarLayer(ComposedGeometry):
 
     """
@@ -1362,7 +1362,7 @@ class RebarLayer(ComposedGeometry):
         log.info(f"Created {self.__repr__()}")
 
 
-@dataclass
+@dataclass(slots=True)
 class UPEProfile(ComposedGeometry):
 
     """

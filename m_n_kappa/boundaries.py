@@ -98,7 +98,7 @@ def get_higher_positions(position: float, position_strains: list[StrainPosition]
     return list(filter(lambda x: x.position < position, position_strains))
 
 
-@dataclass
+@dataclass(slots=True)
 class MaximumCurvature:
 
     """store values connected to maximum curvature
@@ -290,7 +290,7 @@ class MaximumCurvature:
         return decisive_edge_strain.curvature
 
 
-@dataclass
+@dataclass(slots=True)
 class MinimumCurvature:
 
     """store maximum positive and negative section strains
@@ -309,15 +309,19 @@ class MinimumCurvature:
     maximum_positive_section_strains: list[StrainPosition]
     maximum_negative_section_strains: list[StrainPosition]
     curvature_is_positive: bool
+    top_edge: float = None
+    bottom_edge: float = None
 
     def __post_init__(self):
         log.info(f"Created {self.__repr__()}")
-        self._top_edge = min(
-            self.all, key=operator.attrgetter("position")
-        ).position  # top-edge
-        self._bottom_edge = max(
-            self.all, key=operator.attrgetter('position')
-        ).position  # bottom-edge
+        if self.top_edge is None:
+            self.top_edge = min(
+                self.all, key=operator.attrgetter("position")
+            ).position  # top-edge
+        if self.bottom_edge is None:
+            self.bottom_edge = max(
+                self.all, key=operator.attrgetter('position')
+            ).position  # bottom-edge
 
     @property
     def positive(self) -> list[StrainPosition]:
@@ -333,14 +337,6 @@ class MinimumCurvature:
     def all(self) -> list[StrainPosition]:
         """maximum positive and negative :py:class:`~m_n_kappa.StrainPosition`"""
         return self.positive + self.negative
-
-    @property
-    def top_edge(self) -> float:
-        return self._top_edge
-
-    @property
-    def bottom_edge(self) -> float:
-        return self._bottom_edge
 
     @log.result
     def compute(self, strain_position: StrainPosition) -> float:
@@ -588,7 +584,7 @@ class MinimumCurvature:
         return position_strains
 
 
-@dataclass
+@dataclass(slots=True)
 class DecisiveNeutralAxis:
     """
     compute decisive neutral axis
@@ -678,7 +674,7 @@ class DecisiveNeutralAxis:
         return min_neutral_axis, max_neutral_axis
 
 
-@dataclass
+@dataclass(slots=True)
 class BoundaryValues:
     """store boundary condition values
 
@@ -694,7 +690,7 @@ class BoundaryValues:
     minimum_curvature: MinimumCurvature
 
 
-@dataclass
+@dataclass(slots=True)
 class Boundaries:
     """store boundary conditions
 

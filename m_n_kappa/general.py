@@ -300,7 +300,7 @@ def remove_zeros(values: list) -> list:
     return list(filter(lambda x: x != 0.0, values))
 
 
-@dataclass
+@dataclass(slots=True)
 class StrainPosition:
 
     """
@@ -329,7 +329,7 @@ class StrainPosition:
             return False
 
 
-@dataclass
+@dataclass(slots=True)
 class EffectiveWidths:
     """
     container holding the effective widths
@@ -424,7 +424,7 @@ class EffectiveWidths:
             return self.bending
 
 
-@dataclass
+@dataclass(slots=True)
 class EdgeStrains:
     """
     store strains at edges and compute curvature from these points
@@ -467,7 +467,7 @@ class EdgeStrains:
         )
 
 
-@dataclass
+@dataclass(slots=True)
 class NotSuccessfulReason:
 
     """

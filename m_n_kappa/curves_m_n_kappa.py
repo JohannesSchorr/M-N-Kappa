@@ -96,7 +96,7 @@ def remove_duplicates(list_with_duplicates: list, sorting_function) -> list:
     return new_list
 
 
-@dataclass
+@dataclass(slots=True)
 class MNKappaCurvePoint:
     """
     Container for single point on Moment-Axial-Force-Curvature-Curve
@@ -745,6 +745,15 @@ class MNCurvatureCurve:
     .. versionadded:: 0.2.0
     """
 
+    __slots__ = (
+        "_sub_cross_sections",
+        "_axial_forces",
+        "_strain_positions",
+        "_positive_curvature",
+        "_not_successful_reason",
+        "_points",
+    )
+
     @log.init
     def __init__(
         self,
@@ -1002,6 +1011,17 @@ class MNKappaCurve:
 
     .. versionadded:: 0.2.0
     """
+
+    __slots__ = (
+        "_sub_cross_sections",
+        "_include_positive_curvature",
+        "_include_negative_curvature",
+        "_not_successful_reason",
+        "_points",
+        "_m_n_curve",
+        "_positive_m_n_kappa_curve",
+        "_negative_m_n_kappa_curve",
+    )
 
     @log.init
     def __init__(

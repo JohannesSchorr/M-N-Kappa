@@ -40,7 +40,7 @@ from .log import LoggerMethods
 log = LoggerMethods(__name__)
 
 
-@dataclass
+@dataclass(slots=True)
 class MKappaCurvePoint:
     """
     Container for single point on Moment-Curvature-Curve
