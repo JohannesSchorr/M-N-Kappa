@@ -1203,22 +1203,37 @@ class AxialForcePoint:
     """
 
     @log.init
-    def __init__(self, sub_cross_sections: list[Crosssection], axial_force: float):
+    def __init__(
+        self,
+        sub_cross_sections: tuple[Crosssection, Crosssection] | list[Crosssection],
+        axial_force: float,
+    ):
         """
         Parameters
         ----------
-        sub_cross_sections list[:py:class:`~m_n_kappa.Crosssection`]
+        sub_cross_sections list[:py:class:`~m_n_kappa.Crosssection`] |
+        tuple[:py:class:`~m_n_kappa.Crosssection`, :py:class:`~m_n_kappa.Crosssection`]
             cross-sections that are computed (must be two)
         axial_force : float
             axial-force applied to the first cross-section given in ``sub_cross_sections``
+
+        Raises
+        ------
+        ValueError : if not two sub-cross-sections are given in ``sub_cross_sections``
         """
-        if not isinstance(sub_cross_sections, list):
-            TypeError(f"cross_sections must be of type list")
-        if len(sub_cross_sections) != 2:
-            ValueError(
-                f"Exactly two sub-cross-sections must be given. Given are {len(sub_cross_sections)}"
+        if isinstance(sub_cross_sections, list) or isinstance(
+            sub_cross_sections, tuple
+        ):
+            if len(sub_cross_sections) == 2:
+                self._sub_cross_sections = tuple(sub_cross_sections)
+            else:
+                ValueError(
+                    f"Exactly two sub-cross-sections must be given. Given are {len(sub_cross_sections)}"
+                )
+        else:
+            TypeError(
+                f"cross_sections must be of type list[Crosssection] or tuple[Crosssection, Crosssection]"
             )
-        self._sub_cross_sections = sub_cross_sections
         self._axial_force = axial_force
         self._computed_sub_cross_sections = []
         self._curvature = None
@@ -1233,7 +1248,11 @@ class AxialForcePoint:
         return self._axial_force
 
     @property
-    def computed_sub_cross_sections(self) -> list[ComputationCrosssectionStrain]:
+    def computed_sub_cross_sections(
+        self,
+    ) -> tuple[
+        ComputationCrosssectionCurvature, ComputationCrosssectionCurvature
+    ] | tuple[ComputationCrosssectionStrain, ComputationCrosssectionStrain]:
         """computed sub-cross-sections"""
         return self._computed_sub_cross_sections
 
@@ -1253,12 +1272,12 @@ class AxialForcePoint:
         return self._successful
 
     @property
-    def not_successful_reason(self) -> list[NotSuccessfulReason]:
+    def not_successful_reason(self) -> NotSuccessfulReason:
         """if computation was not successful,here the reasons are given"""
         return self._not_successful_reason
 
     @property
-    def sub_cross_sections(self) -> list[Crosssection]:
+    def sub_cross_sections(self) -> tuple[Crosssection, Crosssection]:
         """cross-sections that are computed"""
         return self._sub_cross_sections
 
