@@ -27,20 +27,20 @@ from .general import (
     print_sections,
     print_chapter,
     str_start_end,
-    remove_duplicates,
     StrainPosition,
-    interpolation,
     NotSuccessfulReason,
 )
 
-from .crosssection import Crosssection, ComputationCrosssectionStrain
+from .crosssection import (
+    Crosssection,
+    ComputationCrosssectionCurvature,
+    ComputationCrosssectionStrain,
+)
 from .points import (
-    MKappaByConstantCurvature,
-    MKappaByStrainPosition,
     MNByStrain,
     MomentAxialForce,
+    MomentAxialForceCurvature,
 )
-from .solver import Solver, Newton
 
 from dataclasses import dataclass
 import itertools
