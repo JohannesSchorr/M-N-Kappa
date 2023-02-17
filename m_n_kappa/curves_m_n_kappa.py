@@ -1025,6 +1025,11 @@ class MNKappaCurve:
         include_negative_curvature : bool
             if ``True`` then negative curvature values are computed (Default: ``False``)
 
+        Raises
+        ------
+        TypeError : if neither a `~m_n_kappa.Crosssection`, list[`~m_n_kappa.Crosssection`]
+           or tuple[`~m_n_kappa.Crosssection`, `~m_n_kappa.Crosssection`] are passed
+
         See Also
         --------
         :py:class:`~m_n_kappa.MKappaCurve` : computation of Moment-Curvature-Curve assuming full interaction
