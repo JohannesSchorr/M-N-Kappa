@@ -1381,8 +1381,9 @@ class MomentAxialForce(AxialForcePoint):
         self._computed_sub_cross_sections: tuple[
             ComputationCrosssectionStrain, ComputationCrosssectionStrain
         ] = self._compute_sub_cross_sections()
-        self._moment = self._compute_moment()
-        self._strain_difference = self._compute_strain_difference()
+        if self.successful:
+            self._moment = self._compute_moment()
+            self._strain_difference = self._compute_strain_difference()
 
     @property
     def strain(self) -> float:
@@ -1393,20 +1394,21 @@ class MomentAxialForce(AxialForcePoint):
         self,
     ) -> tuple[ComputationCrosssectionStrain, ComputationCrosssectionStrain] | None:
         """computes the sub-cross-sections under the given axial-forces"""
-        computations = []
+        computations = [None, None]
         for index, sub_cross_section in enumerate(self.sub_cross_sections):
-            computations.append(
-                MNByStrain(
-                    cross_section=sub_cross_section,
-                    applied_axial_force=self.axial_force * (-1.0) ** (float(index)),
-                )
+            m_n = MNByStrain(
+                cross_section=sub_cross_section,
+                applied_axial_force=self.axial_force * (-1.0) ** (float(index)),
+                is_called_by_user=False,
             )
-            if not computations[-1].successful:
+            computations[index] = m_n.computed_cross_section
+            if not m_n.successful:
                 self._successful = False
-                not_successful_reason = computations[-1].not_successful_reason
+                not_successful_reason = m_n.not_successful_reason
                 log.info(f"Cross-section {index}: {not_successful_reason}")
-                self._not_successful_reason.append(not_successful_reason)
-        return [computation.computed_cross_section for computation in computations]
+                self._not_successful_reason = not_successful_reason
+                return
+        return tuple(computations)
 
     def _compute_axial_force(self) -> float:
         """computes the axial-force of the first sub-cross-section under the given strain"""
