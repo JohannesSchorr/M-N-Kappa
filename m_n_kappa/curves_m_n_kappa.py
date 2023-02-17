@@ -738,6 +738,264 @@ class MNCurve:
         )
 
 
+class MNCurvatureCurve:
+    """
+    compute moment-axial-force-curvature curve
+
+    .. versionadded:: 0.2.0
+    """
+
+    @log.init
+    def __init__(
+        self,
+        m_n_curve: MNCurve = None,
+        sub_cross_sections: Crosssection
+        | list[Crosssection]
+        | tuple[Crosssection, Crosssection] = None,
+        axial_forces: tuple[list[float], list[float]] = None,
+        strain_positions: tuple[list[StrainPosition], list[StrainPosition]] = None,
+        positive_curvature: bool = True,
+    ):
+        """
+        Parameters
+        ----------
+        m_n_curve : MNCurve
+            computed Moment-Axial-Force curve (Default: None)
+        sub_cross_sections : :py:class:`~m_n_kappa.Crosssection` |
+        list[:py:class:`~m_n_kappa.Crosssection`] |
+        tuple[:py:class:`~m_n_kappa.Crosssection`, :py:class:`~m_n_kappa.Crosssection`]
+            Sub-cross-sections to be computed.
+            In case given as single :py:class:`~m_n_kappa.Crosssection` this cross-section must consist of
+            a slab (Concrete and Reinforcement) and a girder (Steel)
+        axial_forces : tuple[list[float], list[float]]
+        strain_positions : tuple[list[:py:class:`~m_n_kappa.StrainPosition`], list[:py:class:`~m_n_kappa.StrainPosition`]]
+            Strain- and Position-values to be considered.
+            Must be split due to the cross-section they belong to.
+        positive_curvature : bool
+            ``True`` computes positive curvature values.
+            ``False`` computes negative curvature values.
+
+        Raises
+        ------
+        TypeError : if neither a ``MNCurve`` nor ``sub_cross_sections``, ``axial_forces`` and ``strain_positions`` are
+           given
+        """
+        if (
+            m_n_curve is None
+            and sub_cross_sections is not None
+            and axial_forces is not None
+            and strain_positions is not None
+        ):
+            if isinstance(sub_cross_sections, Crosssection):
+                self._sub_cross_sections = sub_cross_sections.get_sub_cross_sections()
+            elif isinstance(sub_cross_sections, list) and len(sub_cross_sections) == 2:
+                self._sub_cross_sections = tuple(sub_cross_sections)
+            elif isinstance(sub_cross_sections, tuple) and len(sub_cross_sections) == 2:
+                self._sub_cross_sections = sub_cross_sections
+            else:
+                raise TypeError("")
+            self._axial_forces = axial_forces
+            self._strain_positions = strain_positions
+        elif m_n_curve is not None:
+            self._sub_cross_sections = m_n_curve.sub_cross_sections
+            self._axial_forces = m_n_curve.points.cross_section_axial_forces(
+                positive_curvature
+            )
+            self._strain_positions = m_n_curve.strain_positions
+        else:
+            raise ValueError("")
+        self._positive_curvature = positive_curvature
+        self._not_successful_reason = []
+        self._points = MNKappaCurvePoints()
+        self._compute_all()
+
+    def __repr__(self) -> str:
+        return (
+            f"MNCurvatureCurve("
+            f"\n\tsub_cross_sections={self.sub_cross_sections}, "
+            f"\n\taxial_forces={self.axial_forces}, "
+            f"\n\tstrain_positions={self.strain_positions}, "
+            f"\n\tpositive_curvature={self.positive_curvature})"
+        )
+
+    @property
+    def axial_forces(self) -> tuple[list[float], list[float]]:
+        """axial forces to be applied to the 1st and the 2nd sub-cross-section"""
+        return self._axial_forces
+
+    @property
+    def not_successful_reason(self) -> list[NotSuccessfulReason]:
+        """for those computations that were not successful, here the reasons are given"""
+        return self._not_successful_reason
+
+    @property
+    def positive_curvature(self) -> bool:
+        """
+        ``True`` computes positive curvature values.
+        ``False`` computes negative curvature values.
+        """
+        return self._positive_curvature
+
+    @property
+    def points(self) -> MNKappaCurvePoints:
+        """computed M-N-Kappa points"""
+        return self._points
+
+    @property
+    def strain_positions(self) -> tuple[list[StrainPosition], list[StrainPosition]]:
+        """Strain- and Position-values to be considered"""
+        return self._strain_positions
+
+    @property
+    def sub_cross_sections(self) -> tuple[Crosssection, Crosssection]:
+        """Sub-cross-sections to be computed"""
+        return self._sub_cross_sections
+
+    def _compute_all(self) -> None:
+        """
+        computes the Moment-Axial-Force curvature points
+
+        Considered are the :py:attr:`~m_n_kappa.curves_m_n_kappa.MNCurvatureCurve.axial_forces`
+        and the :py:attr:`~m_n_kappa.curves_m_n_kappa.MNCurvatureCurve.strain_positions`.
+        Both are split due to the specific 1st sub-cross-section.
+
+        Notes
+        -----
+        For better performance following features are applied:
+        - duplicate strain-position-values are removed
+        - Similar strain-values are first tackled from the lower position.
+          In case the computation is not successful the strain-values are tackled from the higher position.
+          If this is also not successful then position-values in between are neglected.
+        """
+        for cross_section_index in [0, 1]:
+            sub_cross_sections = self.sub_cross_sections
+            if cross_section_index == 1:
+                sub_cross_sections = tuple(
+                    [sub_cross_sections[1], sub_cross_sections[0]]
+                )
+            strain_positions = remove_duplicates(
+                self.strain_positions[cross_section_index],
+                sorting_function=operator.attrgetter("strain", "position"),
+            )
+            strain_position_groups = [
+                list(strain_position_group)
+                for _, strain_position_group in itertools.groupby(
+                    strain_positions, key=operator.attrgetter("strain")
+                )
+            ]
+            for axial_force in self.axial_forces[cross_section_index]:
+                for strain_position_group in strain_position_groups:
+                    for forward_strain_position_index, strain_position in enumerate(
+                        strain_position_group
+                    ):
+                        successful = self._compute(
+                            sub_cross_sections,
+                            cross_section_index,
+                            axial_force,
+                            strain_position,
+                        )
+                        if (
+                            not successful
+                            and len(strain_position_group)
+                            > forward_strain_position_index + 1
+                        ):
+                            break
+                    if len(strain_position_group) > forward_strain_position_index + 1:
+                        for backward_strain_position_index, strain_position in reversed(
+                            list(
+                                enumerate(
+                                    strain_position_group[
+                                        forward_strain_position_index + 1 :
+                                    ]
+                                )
+                            )
+                        ):
+                            successful = self._compute(
+                                sub_cross_sections,
+                                cross_section_index,
+                                axial_force,
+                                strain_position,
+                            )
+                            if not successful:
+                                break
+
+    def _compute(
+        self,
+        sub_cross_sections: tuple[Crosssection, Crosssection],
+        cross_section_index: int,
+        axial_force: float,
+        strain_position: StrainPosition,
+    ) -> bool:
+        """
+        compute a Moment-Axial-Force Curvature Point under a given ``axial_force``
+        and a ``strain_position`` value
+
+        Parameters
+        ----------
+        sub_cross_sections : tuple[:py:class:`~m_n_kappa.Crosssection`, :py:class:`~m_n_kappa.Crosssection`]
+            Sub-cross-sections to be computed.
+            Order is important as the ``axial_force`` is applied to the 1st sub-cross-section (index: 0) and
+            the ``strain_position``-value is also assumed to be within the 1st sub-cross-section.
+        cross_section_index : int
+            sub-cross-section-number of the sub-cross-sections as passed to the class, where the
+            axial-force is applied to.
+            Important for saving and tracability after the computation.
+        axial_force : float
+            axial-force applied "as is" to the 1st cross-section in ``sub_cross_sections`` and with
+            switched sign to the 2nd ``sub_cross_sections``
+        strain_position : :py:class:`~m_n_kappa.StrainPosition`
+            Strain- and position-value leading working together with ``axial_force`` as one
+            boundary-condition for the computation.
+
+        Returns
+        -------
+        bool
+            ``True`` indicates a successful computation.
+            ``False`` means the computation was not successful and the corresponding reason is appended
+            together with the ``strain_position``-value to
+            :py:attr:`~m_n_kappa.curves_m_n_kappa.MNCurvatureCurve.not_successful_reason`.
+        """
+        m_n_kappa_point = MomentAxialForceCurvature(
+            sub_cross_sections=sub_cross_sections,
+            axial_force=axial_force,
+            strain_position=strain_position,
+            positive_curvature=self.positive_curvature,
+        )
+        log.debug(
+            f"MNCurvatureCurve._compute(): "
+            f"{axial_force=}, {strain_position=}, successful={m_n_kappa_point.successful}"
+        )
+        if m_n_kappa_point.successful:
+            self._save(m_n_kappa_point, cross_section_index)
+        else:
+            self._not_successful_reason.append(
+                NotSuccessfulReason(
+                    reason=m_n_kappa_point.not_successful_reason.reason,
+                    strain_position=strain_position,
+                )
+            )
+            log.debug(self._not_successful_reason[-1].reason)
+        return m_n_kappa_point.successful
+
+    def _save(
+        self,
+        m_n_kappa: MomentAxialForceCurvature,
+        axial_force_cross_section_number: int,
+    ) -> None:
+        """save the computed value to :py:attr:`~m_n_kappa.MNCurvatureCurve.points"""
+        self.points.add(
+            moment=m_n_kappa.moment(),
+            curvature=m_n_kappa.curvature,
+            axial_force=m_n_kappa.axial_force,
+            axial_force_cross_section_number=axial_force_cross_section_number,
+            strain_difference=m_n_kappa.strain_difference,
+            cross_section=m_n_kappa.computed_sub_cross_sections,
+            strain_position=m_n_kappa.strain_position,
+            neutral_axis_1=m_n_kappa.neutral_axes[0],
+            neutral_axis_2=m_n_kappa.neutral_axes[1],
+        )
+
+
 class MNKappaCurve:
     """
     computation of Moment-Axial-Force-Curvature curve (M-N-Kappa)
