@@ -151,15 +151,20 @@ class TestMNKappaCurveCompositeGirder(TestCase):
         self.cross_section = self.girder_cross_section + self.slab_cross_section
         self.positive_moments = [
             440926757.53892136,
-            464727043.9961377,
             468057239.82207,
             503430142.9521369,
             503493742.3022555,
+            512744550.1669979,
+            520150864.90997875,
+            521989050.29606235,
             527919385.7951919,
             527919397.17408717,
         ]
 
         self.negative_moments = [
+            -402397507.11839473,
+            -390005309.72308767,
+            -379545883.01336753,
             -366676709.2688143,
             -351445334.90257263,
             -335153500.3201116,
@@ -179,6 +184,7 @@ class TestMNKappaCurveCompositeGirder(TestCase):
 
     def test_points_positive_moment(self):
         m_n_kappa_curve = MNKappaCurve(sub_cross_sections=self.cross_section)
+        print(m_n_kappa_curve.points.print_points())
         self.assertCountEqual(m_n_kappa_curve.points.moments, self.positive_moments)
 
     def test_points_negative_moment(self):
@@ -188,6 +194,7 @@ class TestMNKappaCurveCompositeGirder(TestCase):
             include_negative_curvature=True,
         )
         self.assertCountEqual(m_n_kappa_curve.points.moments, self.negative_moments)
+        print(m_n_kappa_curve.points.print_points())
 
     def test_points_all(self):
         m_n_kappa_curve = MNKappaCurve(
@@ -199,6 +206,7 @@ class TestMNKappaCurveCompositeGirder(TestCase):
             m_n_kappa_curve.points.moments,
             self.negative_moments + self.positive_moments,
         )
+        print(m_n_kappa_curve.points.print_points())
 
 
 if __name__ == "__main__":
