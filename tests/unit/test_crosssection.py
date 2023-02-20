@@ -5,7 +5,7 @@ from m_n_kappa.crosssection import (
 )
 from m_n_kappa.material import Concrete, Steel
 from m_n_kappa.geometry import Rectangle
-from m_n_kappa.general import EffectiveWidths
+from m_n_kappa.general import EffectiveWidths, StrainPosition
 
 from unittest import TestCase, main
 
@@ -85,6 +85,27 @@ class TestCrosssection(TestCase):
 
     def test_concrete_slab_width(self):
         self.assertEqual(self.cs.concrete_slab_width(), concrete_width)
+
+
+class TestCrossSectionStrainPositions(TestCase):
+
+    def setUp(self) -> None:
+        self.cross_section = Crosssection([steel_section])
+
+    def test_strain_positions(self):
+        self.assertCountEqual(
+            self.cross_section.strain_positions(),
+            [
+                StrainPosition(strain=-epsilon_u, position=steel_top_edge, material='Steel'),
+                StrainPosition(strain=-steel.epsilon_y, position=steel_top_edge, material='Steel'),
+                StrainPosition(strain=steel.epsilon_y, position=steel_top_edge, material='Steel'),
+                StrainPosition(strain=epsilon_u, position=steel_top_edge, material='Steel'),
+                StrainPosition(strain=-epsilon_u, position=steel_bottom_edge, material='Steel'),
+                StrainPosition(strain=-steel.epsilon_y, position=steel_bottom_edge, material='Steel'),
+                StrainPosition(strain=steel.epsilon_y, position=steel_bottom_edge, material='Steel'),
+                StrainPosition(strain=epsilon_u, position=steel_bottom_edge, material='Steel'),
+            ]
+        )
 
 
 class TestComputationCrosssectionStrainPositive(TestCase):
