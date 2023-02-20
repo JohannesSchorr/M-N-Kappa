@@ -231,11 +231,11 @@ class MNKappaCurvePoints:
 
     def print_points(self) -> str:
         points = sorted(self._points, key=operator.attrgetter("moment"))
-        line = 119 * "-"
+        line = 130 * "-"
         text = [
             line,
-            "    Moment    | Curvature  | Neutral A.1 | Neutral A.2 | Axial-force | strain-diff. |   Strain   "
-            "|  Position  | Material    ",
+            "     Moment     |  Curvature   | Neutral A.1 | Neutral A.2 |  Axial-force  | strain-diff. |   Strain   "
+            "| Position | Material         ",
             line,
         ]
         for point in points:
@@ -250,9 +250,9 @@ class MNKappaCurvePoints:
             else:
                 neutral_axis_2 = f"{neutral_axis_2:10.4f} "
             text.append(
-                f"{point.moment:13.1f} | {point.curvature:10.6f} | {neutral_axis_1} | {neutral_axis_2} |"
-                f"{point.axial_force:12.2f} | {point.strain_difference:12.6f} | {point.strain_position.strain:10.6f} |"
-                f"{point.strain_position.position:11.1f} | {point.strain_position.material}"
+                f"{point.moment:15.1f} | {point.curvature:12.8f} | {neutral_axis_1} | {neutral_axis_2} |"
+                f"{point.axial_force:14.2f} | {point.strain_difference:12.6f} | {point.strain_position.strain:10.6f} |"
+                f"{point.strain_position.position:9.1f} | {point.strain_position.material}"
             )
         text.append(line)
         return print_sections(text)
