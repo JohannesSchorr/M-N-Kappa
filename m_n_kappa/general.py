@@ -1,4 +1,4 @@
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 from itertools import groupby
 from decimal import Decimal
 
@@ -316,17 +316,9 @@ class StrainPosition:
         material the strain is obtained from
     """
 
-    strain: float
-    position: float
+    strain: float = field(compare=True)
+    position: float = field(compare=True)
     material: str
-
-    def __eq__(self, other) -> bool:
-        if not isinstance(other, StrainPosition):
-            return False
-        elif self.strain == other.strain and self.position == self.position:
-            return True
-        else:
-            return False
 
 
 @dataclass(slots=True)
@@ -361,35 +353,23 @@ class EffectiveWidths:
           - ``False``: bending-width
     """
 
-    membran: float
-    bending: float = None
-    for_section_type: str = "slab"
-    reinforcement_under_tension_use_membran_width: bool = False
-    reinforcement_under_compression_use_membran_width: bool = False
-    concrete_under_tension_use_membran_width: bool = False
-    concrete_under_compression_use_membran_width: bool = True
+    membran: float = field(compare=True)
+    bending: float = field(compare=True, default=None)
+    for_section_type: str = field(compare=True, default="slab")
+    reinforcement_under_tension_use_membran_width: bool = field(
+        compare=True, default=False
+    )
+    reinforcement_under_compression_use_membran_width: bool = field(
+        compare=True, default=False
+    )
+    concrete_under_tension_use_membran_width: bool = field(compare=True, default=False)
+    concrete_under_compression_use_membran_width: bool = field(
+        compare=True, default=True
+    )
 
     def __post_init__(self) -> None:
         if self.bending is None:
             self.bending = self.membran
-
-    def __eq__(self, other) -> bool:
-        if (
-            self.membran == other.membran
-            and self.bending == other.bending
-            and self.for_section_type == other.for_section_type
-            and self.reinforcement_under_tension_use_membran_width
-            == other.reinforcement_under_tension_use_membran_width
-            and self.reinforcement_under_compression_use_membran_width
-            == other.reinforcement_under_compression_use_membran_width
-            and self.concrete_under_tension_use_membran_width
-            == other.concrete_under_tension_use_membran_width
-            and self.concrete_under_compression_use_membran_width
-            == other.concrete_under_compression_use_membran_width
-        ):
-            return True
-        else:
-            return False
 
     def width(self, material: str, strain_value: float) -> float:
         """width considering the material and the loading"""
@@ -495,7 +475,7 @@ class NotSuccessfulReason:
         if self.strain_position is None:
             return self.reason
         else:
-            return f'{self.reason} ({self.strain_position})'
+            return f"{self.reason} ({self.strain_position})"
 
     def __str__(self) -> str:
         return self.__repr__()
@@ -515,7 +495,7 @@ class NotSuccessfulReason:
                     return True
 
     def same_sign(self, variable: str):
-        key = f'same sign {variable}'
+        key = f"same sign {variable}"
         if key in list(self.keywords.keys()):
             self.reason = self.keywords[key]
 
@@ -523,10 +503,10 @@ class NotSuccessfulReason:
     def keywords(self) -> dict:
         """shortcut to describe reasons why computation was not successful"""
         return {
-            'iteration': "maximum number of iterations reached, without finding equilibrium of axial-forces",
-            'converge': "Iteration not converging",
-            'same sign': "difference of axial forces at the boundary values have same sign",
-            'same sign strain': "difference of axial forces at minimum and maximum strain have same sign",
-            'same sign neutral-axis': "difference of axial forces at minimum and maximum neutral axis have same sign",
-            'same sign curvature': "difference of axial forces at minimum and maximum curvature have same sign"
+            "iteration": "maximum number of iterations reached, without finding equilibrium of axial-forces",
+            "converge": "Iteration not converging",
+            "same sign": "difference of axial forces at the boundary values have same sign",
+            "same sign strain": "difference of axial forces at minimum and maximum strain have same sign",
+            "same sign neutral-axis": "difference of axial forces at minimum and maximum neutral axis have same sign",
+            "same sign curvature": "difference of axial forces at minimum and maximum curvature have same sign",
         }

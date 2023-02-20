@@ -42,7 +42,7 @@ from .points import (
     MomentAxialForceCurvature,
 )
 
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 import itertools
 
 from .log import LoggerMethods
@@ -133,35 +133,20 @@ class MNKappaCurvePoint:
     MNKappaCurvePoints : container for Moment-Axial-Force-Curvature-Points
     """
 
-    moment: float
-    curvature: float
-    axial_force: float
+    moment: float = field(compare=True)
+    curvature: float = field(compare=True)
+    axial_force: float = field(compare=True)
     axial_force_cross_section_number: int
-    strain_difference: float
+    strain_difference: float = field(compare=True)
     cross_section: tuple[
         ComputationCrosssectionCurvature, ComputationCrosssectionCurvature
     ] | tuple[ComputationCrosssectionStrain, ComputationCrosssectionStrain]
     strain_position: StrainPosition
-    neutral_axis_1: float = None
-    neutral_axis_2: float = None
+    neutral_axis_1: float = field(compare=True, default=None)
+    neutral_axis_2: float = field(compare=True, default=None)
 
     def __post_init__(self):
         log.info(f"Created {self.__repr__()}")
-
-    def __eq__(self, other) -> bool:
-        if not isinstance(other, MNKappaCurvePoint):
-            return False
-        elif (
-            self.moment == other.moment
-            and self.curvature == other.curvature
-            and self.neutral_axis_1 == other.neutral_axis_1
-            and self.neutral_axis_2 == other.neutral_axis_2
-            and self.axial_force == other.axial_force
-            and self.strain_difference == other.strain_difference
-        ):
-            return True
-        else:
-            return False
 
     def moment_curvature(self) -> list[float]:
         """pair of moment and curvature"""
@@ -674,7 +659,9 @@ class MNCurve:
             self.sub_cross_sections
         ):
             max_strains = self._decisive_strains_cross_sections[cross_section_index]
-            strain_positions = sub_cross_section.strain_positions(max_strains[0].strain, max_strains[1].strain)
+            strain_positions = sub_cross_section.strain_positions(
+                max_strains[0].strain, max_strains[1].strain
+            )
             strains[cross_section_index] = remove_duplicates(
                 strain_positions, operator.attrgetter("strain", "position")
             )
@@ -822,7 +809,9 @@ class MNCurvatureCurve:
             f"\n\tpositive_curvature={self.positive_curvature})"
         )
 
-    def _get_strain_positions(self) -> tuple[list[StrainPosition], list[StrainPosition]]:
+    def _get_strain_positions(
+        self,
+    ) -> tuple[list[StrainPosition], list[StrainPosition]]:
         """
         determine all relevant :py:class:`~m_n_kappa.StrainPosition`-values
         of the sub-cross-sections

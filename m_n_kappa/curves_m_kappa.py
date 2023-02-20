@@ -19,7 +19,7 @@ Procedure
 moment-curvature-curve directly
 """
 
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 
 from .crosssection import Crosssection
 from .boundaries import BoundaryValues, Boundaries
@@ -62,26 +62,14 @@ class MKappaCurvePoint:
         resulting moment, curvature and neutral-axis
     """
 
-    moment: float
-    curvature: float
-    neutral_axis: float
+    moment: float = field(compare=True)
+    curvature: float = field(compare=True)
+    neutral_axis: float = field(compare=True)
     cross_section: Crosssection
     strain_position: StrainPosition
 
     def __post_init__(self):
         log.info(f"Created {self.__repr__()}")
-
-    def __eq__(self, other) -> bool:
-        if not isinstance(other, MKappaCurvePoint):
-            return False
-        elif (
-            self.moment == other.moment
-            and self.curvature == other.curvature
-            and self.neutral_axis == other.neutral_axis
-        ):
-            return True
-        else:
-            return False
 
     def moment_curvature(self) -> list[float]:
         """pair of moment and curvature"""
@@ -103,7 +91,7 @@ class MKappaCurvePoints:
 
     def __init__(self) -> None:
         self._points = []
-        log.info(f"Created MKappaCurvePoints")
+        log.info("Created MKappaCurvePoints")
 
     def __repr__(self) -> str:
         return """MKappaCurvePoints()"""

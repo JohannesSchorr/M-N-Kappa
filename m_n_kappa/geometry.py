@@ -1,6 +1,6 @@
 import operator
 from abc import ABC, abstractmethod
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 
 from .general import (
     print_sections,
@@ -483,7 +483,7 @@ class Rectangle(Geometry):
             rectangles assembling to the original rectangle
         """
         rectangles = []
-        at_points.sort(key=operator.attrgetter('position'))
+        at_points.sort(key=operator.attrgetter("position"))
         top_edge = StrainPosition(
             at_points[0].strain, self.top_edge, at_points[0].material
         )
@@ -1084,7 +1084,7 @@ class Trapezoid(Geometry):
         """
         top_edge = self.top_edge
         trapezoids = []
-        at_points.sort(key=operator.attrgetter('position'))
+        at_points.sort(key=operator.attrgetter("position"))
         for point in at_points:
             if self.top_edge < point.position < self.bottom_edge:
                 trapezoids.append(
@@ -1212,7 +1212,7 @@ Rectangle(top_edge=184.50, bottom_edge=200.00, width=200.00, left_edge=-100.00, 
     has_top_flange: bool = True
     has_bottom_flange: bool = True
     centroid_y: float = 0.0
-    geometries: list = None
+    geometries: list = field(default=None, init=False)
 
     def __post_init__(self):
         self.geometries = []
@@ -1329,7 +1329,7 @@ class RebarLayer(ComposedGeometry):
     left_edge: float = None
     right_edge: float = None
     rebar_horizontal_distance: float = None
-    geometries: list = None
+    geometries: list = field(default=None, init=False)
 
     def __post_init__(self):
         if self.rebar_number is None and (
@@ -1435,7 +1435,7 @@ Rectangle(top_edge=10.00, bottom_edge=86.00, width=5.20, left_edge=94.80, right_
     h_w: float = None
     h: float = None
     centroid_y: float = 0.0
-    geometries: list = None
+    geometries: list = field(default=None, init=False)
 
     def __post_init__(self):
         if self.h_w is None and self.h is None:
