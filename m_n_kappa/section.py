@@ -217,26 +217,33 @@ material=Steel(f_y=355.0, f_u=None, failure_strain=None, E_a=210000.0))
         ]
 
     def strain_positions(
-        self, strain_1: float, strain_2: float = 0.0
+        self, strain_1: float = None, strain_2: float = None, include_strains: bool = False
     ) -> list[StrainPosition]:
         """
-        collect all strain-positions between ``strain_1`` and ``strain_2``
+        collect all strain-positions between ``strain_1`` and ``strain_2`` (if given)
 
         .. versionadded:: 0.2.0
 
         Parameters
         ----------
         strain_1 : float
-            first strain border
+            first strain border  (Default: None)
         strain_2 : float
-            second strain border
+            second strain border  (Default: None)
+        include_strains : bool
+            includes the boundary strain values (Default: False)
 
         Returns
         -------
         list[StrainPosition]
             collected :py:class:`~m_n_kappa.StrainPosition
         """
-        strains = self.material.get_intermediate_strains(strain_1, strain_2)
+        if strain_1 is not None:
+            if strain_2 is None:
+                strain_2 = 0.0
+            strains = self.material.get_intermediate_strains(strain_1, strain_2, include_strains)
+        else:
+            strains = [stress_strain.strain for stress_strain in self.material.stress_strain if stress_strain.strain != 0.0]
         strain_positions = []
         for edge in self.geometry.edges:
             strain_positions += [

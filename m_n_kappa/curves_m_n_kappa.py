@@ -674,15 +674,11 @@ class MNCurve:
             self.sub_cross_sections
         ):
             max_strains = self._decisive_strains_cross_sections[cross_section_index]
-            for section in sub_cross_section:
-                strain_positions = section.strain_positions(
-                    max_strains[0].strain, max_strains[1].strain
-                )
-                strain_positions = remove_duplicates(
-                    strain_positions, operator.attrgetter("strain", "position")
-                )
-                strains[cross_section_index] += strain_positions
-                strains[cross_section_index] += max_strains
+            strain_positions = sub_cross_section.strain_positions(max_strains[0].strain, max_strains[1].strain)
+            strains[cross_section_index] = remove_duplicates(
+                strain_positions, operator.attrgetter("strain", "position")
+            )
+            strains[cross_section_index] += max_strains
         return tuple(strains)
 
     def _compute(self) -> None:
@@ -804,15 +800,14 @@ class MNCurvatureCurve:
             else:
                 raise TypeError("")
             self._axial_forces = axial_forces
-            self._strain_positions = strain_positions
         elif m_n_curve is not None:
             self._sub_cross_sections = m_n_curve.sub_cross_sections
             self._axial_forces = m_n_curve.points.cross_section_axial_forces(
                 positive_curvature
             )
-            self._strain_positions = m_n_curve.strain_positions
         else:
             raise ValueError("")
+        self._strain_positions = self._get_strain_positions()
         self._positive_curvature = positive_curvature
         self._not_successful_reason = []
         self._points = MNKappaCurvePoints()
@@ -826,6 +821,20 @@ class MNCurvatureCurve:
             f"\n\tstrain_positions={self.strain_positions}, "
             f"\n\tpositive_curvature={self.positive_curvature})"
         )
+
+    def _get_strain_positions(self) -> tuple[list[StrainPosition], list[StrainPosition]]:
+        """
+        determine all relevant :py:class:`~m_n_kappa.StrainPosition`-values
+        of the sub-cross-sections
+        """
+        strain_positions = [[], []]
+        for index, cross_section in enumerate(self.sub_cross_sections):
+            strain_positions[index] = cross_section.strain_positions(
+                strain_1=cross_section.decisive_maximum_negative_strain_position().strain,
+                strain_2=cross_section.decisive_maximum_positive_strain_position().strain,
+                include_strains=True,
+            )
+        return tuple(strain_positions)
 
     @property
     def axial_forces(self) -> tuple[list[float], list[float]]:

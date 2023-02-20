@@ -512,6 +512,31 @@ class Crosssection:
             ]
         )
 
+    def strain_positions(self, strain_1: float = None, strain_2: float = None, include_strains : bool = False) -> list[StrainPosition]:
+        """
+        get all :py:class:`~m_n_kappa.StrainPosition`-values between ``strain_1`` and ``strain_2``
+
+        In case ``strain_1=None`` and ``strain_2=None`` all possible values will be given.
+
+        Parameters
+        ----------
+        strain_1 : float
+            first strain-value (Default: None)
+        strain_2 : float
+            second strain-value (Default: None)
+        include_strains : bool
+            includes the boundary strain values (Default: False)
+
+        Returns
+        -------
+        list[:py:class:`m_n_kappa.StrainPosition`]
+            :py:class:`m_n_kappa.StrainPosition`'s with strains between the given strains
+        """
+        strain_positions = []
+        for section in self.sections:
+            strain_positions += section.strain_positions(strain_1, strain_2, include_strains)
+        return strain_positions
+
 
 class ComputationCrosssection(Crosssection):
 

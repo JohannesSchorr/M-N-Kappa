@@ -214,13 +214,34 @@ class Material:
         """stresses from the stress-strain_value-relationship"""
         return [stress_strain.stress for stress_strain in self.stress_strain]
 
-    def get_intermediate_strains(self, strain_1: float, strain_2: float = 0.0) -> list:
-        """determine material points with strains between zero and given strain_value"""
+    def get_intermediate_strains(self, strain_1: float, strain_2: float = 0.0, include_strains: bool = False) -> list:
+        """
+        determine material points with strains between zero and given strain_value
+
+        Parameters
+        ----------
+        strain_1 : float
+            1st strain-value
+        strain_2 : float
+            2nd strain-value (Default: 0.0)
+        include_strains : bool
+            includes the boundary strain values (Default: False)
+
+        Returns
+        -------
+        list[float]
+            determine material points with strains between zero and given strain_value
+        """
         material_index_1 = self._get_material_index(strain_1)
         material_index_2 = self._get_material_index(strain_2)
         min_index, max_index = self._order_material_indexes(
             material_index_2, material_index_1
         )
+        if include_strains:
+            if self.strains[min_index-1] == strain_1:
+                min_index -= 1
+            if self.strains[max_index] == strain_2:
+                max_index += 1
         return self._remove_zero_strain(self.strains[min_index:max_index])
 
     def get_material_stress(self, strain: float) -> float:
