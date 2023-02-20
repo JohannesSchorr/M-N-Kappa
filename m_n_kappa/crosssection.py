@@ -409,14 +409,22 @@ class Crosssection:
         return cross_section_boundaries.get_boundaries()
 
     def decisive_maximum_positive_strain_position(self) -> StrainPosition:
-        """minimum of all maximum positive strains"""
+        """
+        minimum of all maximum positive strains
+
+        .. versionadded:: 0.2.0
+        """
         return min(
             [section.maximum_positive_strain_position() for section in self.sections],
             key=lambda x: x.strain,
         )
 
     def decisive_maximum_negative_strain_position(self) -> StrainPosition:
-        """minimum of all maximum negative strains"""
+        """
+        minimum of all maximum negative strains
+
+        .. versionadded:: 0.2.0
+        """
         return max(
             [section.maximum_negative_strain_position() for section in self.sections],
             key=lambda x: x.strain,
@@ -489,7 +497,11 @@ class Crosssection:
         return self.right_edge() - self.left_edge()
 
     def get_sub_cross_sections(self) -> tuple:
-        """get cross-section split into slab- and girder-sections (the sub-cross-sections)"""
+        """
+        get cross-section split into slab- and girder-sections (the sub-cross-sections)
+
+        .. versionadded:: 0.2.0
+        """
         return tuple(
             [
                 Crosssection(
