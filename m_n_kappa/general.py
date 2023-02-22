@@ -179,7 +179,7 @@ def position(
 
     >>> from m_n_kappa.general import position
     >>> position(strain_at_position=-0.1, curvature_value=0.0001, neutral_axis_value=10)
-    -990
+    -990.0
 
     """
     return neutral_axis_value + (strain_at_position / curvature_value)
