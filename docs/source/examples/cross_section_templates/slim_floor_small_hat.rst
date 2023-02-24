@@ -1,7 +1,7 @@
-.. _cross_section_template.slim_floor_upe:
+.. _cross_section_template.slim_floor_small_hat:
 
-UPE slim-floor beam
-*******************
+Slim-Floor beam with small hat profile
+**************************************
 
 *Units: Millimeter [mm], Newton [N]*
 
@@ -30,8 +30,14 @@ the concrete slab in appropriate pieces.
 
    .. grid-item::
 
-        .. todo::
-           add figure of the cross-section
+      .. figure:: ../../images/template_geometry_slim_floor_small_hat_profile-light.svg
+         :class: only-light
+         :alt: Geometry of UPE 200 - slim-floor beam
+         :width: 300
+      .. figure:: ../../images/template_geometry_slim_floor_small_hat_profile-dark.svg
+         :class: only-dark
+         :alt: Geometry of UPE 200 - slim-floor beam
+         :width: 300
 
          Geometry: UPE 200 - slim-floor beam
 
