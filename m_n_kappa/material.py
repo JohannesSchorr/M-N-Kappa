@@ -1,7 +1,7 @@
 import operator
 from abc import ABC, abstractmethod
 from dataclasses import dataclass
-from math import log
+from bisect import bisect
 
 from .general import (
     print_chapter,
@@ -214,7 +214,9 @@ class Material:
         """stresses from the stress-strain_value-relationship"""
         return [stress_strain.stress for stress_strain in self.stress_strain]
 
-    def get_intermediate_strains(self, strain_1: float, strain_2: float = 0.0, include_strains: bool = False) -> list:
+    def get_intermediate_strains(
+        self, strain_1: float, strain_2: float = 0.0, include_strains: bool = False
+    ) -> list:
         """
         determine material points with strains between zero and given strain_value
 
@@ -238,7 +240,7 @@ class Material:
             material_index_2, material_index_1
         )
         if include_strains:
-            if self.strains[min_index-1] == strain_1:
+            if self.strains[min_index - 1] == strain_1:
                 min_index -= 1
             if self.strains[max_index] == strain_2:
                 max_index += 1
@@ -277,7 +279,7 @@ class Material:
             - ``True``: sorts strains descending
             - ``False``: sorts strains ascending (Default)
         """
-        self._stress_strain.sort(key=operator.attrgetter('strain'), reverse=reverse)
+        self._stress_strain.sort(key=operator.attrgetter("strain"), reverse=reverse)
 
     def sort_strains_ascending(self) -> None:
         """sorts stress-strain_value-relationship so strains are ascending"""
@@ -288,22 +290,32 @@ class Material:
         self.sort_strains(reverse=True)
 
     def _get_material_index(self, strain_value: float) -> int:
+        """
+        Determine the index of the value in the stress-strain-curve that is
+        leftmost smaller than ``strain_value``
+
+        Parameters
+        ----------
+        strain_value : float
+            strain-value the index is looked for
+
+        Returns
+        -------
+        int
+            index of the first-smallest stress-strain-value as the given one
+        """
         self.sort_strains_ascending()
         strain_value = self.__round_strain(strain_value)
         if (
             self.stress_strain[0].strain
-            <= strain_value
-            <= self.stress_strain[-1].strain
+            < strain_value
+            < self.stress_strain[-1].strain
         ):
-            if strain_value == self.stress_strain[-1].strain:
-                return len(self.stress_strain) - 2
-            for material_index in range(len(self.stress_strain) - 1):
-                if (
-                    self.stress_strain[material_index].strain
-                    <= strain_value
-                    < self.stress_strain[material_index + 1].strain
-                ):
-                    return material_index
+            return bisect(self.stress_strain, strain_value, key=operator.attrgetter('strain')) - 1
+        elif strain_value == self.stress_strain[0].strain:
+            return 0
+        elif strain_value == self.stress_strain[-1].strain:
+            return len(self.stress_strain) - 2
         else:
             log.critical(
                 f"No stress-strain_value-pair found in {self.__class__.__name__} for {strain_value=}\n"
@@ -361,7 +373,7 @@ class ConcreteCompression(ABC):
     give them a similar interface.
     """
 
-    __slots__ = '_f_cm', '_yield_strain', '_E_cm'
+    __slots__ = "_f_cm", "_yield_strain", "_E_cm"
 
     @log.init
     def __init__(self, f_cm: float, yield_strain: float, E_cm: float):
@@ -880,7 +892,14 @@ class ConcreteTension:
     .. versionadded:: 0.1.0
     """
 
-    __slots__ = "_f_cm", "_E_cm", "_f_ctm", "_g_f", "_use_tension", "_consider_opening_behaviour"
+    __slots__ = (
+        "_f_cm",
+        "_E_cm",
+        "_f_ctm",
+        "_g_f",
+        "_use_tension",
+        "_consider_opening_behaviour",
+    )
 
     @log.init
     def __init__(
