@@ -2,9 +2,9 @@
 <!-- Created with Inkscape (http://www.inkscape.org/) -->
 
 <svg
-   width="100mm"
-   height="68mm"
-   viewBox="0 0 100 68"
+   width="50mm"
+   height="50mm"
+   viewBox="0 0 50 50"
    version="1.1"
    id="svg50957"
    inkscape:version="1.2.2 (732a01da63, 2022-12-09)"
@@ -29,12 +29,12 @@
      showgrid="false"
      showguides="true"
      inkscape:zoom="1"
-     inkscape:cx="120"
-     inkscape:cy="175.5"
-     inkscape:window-width="1280"
-     inkscape:window-height="668"
-     inkscape:window-x="-6"
-     inkscape:window-y="-6"
+     inkscape:cx="-11.5"
+     inkscape:cy="176"
+     inkscape:window-width="1920"
+     inkscape:window-height="1027"
+     inkscape:window-x="-8"
+     inkscape:window-y="-8"
      inkscape:window-maximized="1"
      inkscape:current-layer="layer1" />
   <defs
@@ -48,20 +48,20 @@
        id="rect51130"
        width="49.504951"
        height="49.504951"
-       x="25.247524"
-       y="8.2475243"
+       x="0.2475245"
+       y="0.2475245"
        rx="4.9504952"
        ry="4.9504952" />
     <text
        xml:space="preserve"
-       style="font-size:50.8px;font-family:'Times New Roman';-inkscape-font-specification:'Times New Roman, ';text-align:center;text-anchor:middle;fill:#0a32be;fill-rule:evenodd;stroke:#0a32be;stroke-width:0.499999"
-       x="49.96756"
-       y="42.598244"
+       style="font-size:50.8px;font-family:'Times New Roman';-inkscape-font-specification:'Times New Roman, ';text-align:center;text-anchor:middle;fill:#0a32be;fill-rule:evenodd;stroke:none;stroke-width:0.499999"
+       x="24.96756"
+       y="34.598244"
        id="text51186"><tspan
          sodipodi:role="line"
          id="tspan51184"
-         style="font-style:italic;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:50.8px;font-family:'Times New Roman';-inkscape-font-specification:'Times New Roman,  Italic';fill:#ffffff;fill-opacity:1;stroke:#ffffff;stroke-width:0.5"
-         x="49.96756"
-         y="42.598244">κ</tspan></text>
+         style="font-style:italic;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:50.8px;font-family:'Times New Roman';-inkscape-font-specification:'Times New Roman,  Italic';fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:0.5"
+         x="24.96756"
+         y="34.598244">κ</tspan></text>
   </g>
 </svg>
