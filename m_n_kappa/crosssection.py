@@ -1,3 +1,5 @@
+import operator
+
 from .general import (
     str_start_end,
     print_chapter,
@@ -416,7 +418,7 @@ class Crosssection:
         """
         return min(
             [section.maximum_positive_strain_position() for section in self.sections],
-            key=lambda x: x.strain,
+            key=operator.attrgetter("strain"),
         )
 
     def decisive_maximum_negative_strain_position(self) -> StrainPosition:
@@ -427,7 +429,7 @@ class Crosssection:
         """
         return max(
             [section.maximum_negative_strain_position() for section in self.sections],
-            key=lambda x: x.strain,
+            key=operator.attrgetter("strain"),
         )
 
     def maximum_positive_strain(self) -> float:
@@ -476,7 +478,7 @@ class Crosssection:
         """
         concrete_sections = self._concrete_sections()
         return min(
-            concrete_sections, key=lambda x: x.geometry.left_edge
+            concrete_sections, key=operator.attrgetter("geometry.left_edge")
         ).geometry.left_edge
 
     def right_edge(self) -> float:
@@ -489,7 +491,7 @@ class Crosssection:
         """
         concrete_sections = self._concrete_sections()
         return max(
-            concrete_sections, key=lambda x: x.geometry.right_edge
+            concrete_sections, key=operator.attrgetter("geometry.right_edge")
         ).geometry.right_edge
 
     def concrete_slab_width(self) -> float:
@@ -1337,7 +1339,7 @@ class CrossSectionBoundaries(Crosssection):
         curvatures = determine_curvatures(
             self._sections_maximum_strains, self._sections_minimum_strains
         )
-        edge_strain = min(curvatures, key=lambda x: x.curvature)
+        edge_strain = min(curvatures, key=operator.attrgetter("curvature"))
         return edge_strain
 
     @log.result
@@ -1351,7 +1353,7 @@ class CrossSectionBoundaries(Crosssection):
         curvatures = determine_curvatures(
             self._sections_minimum_strains, self._sections_maximum_strains
         )
-        edge_strains = max(curvatures, key=lambda x: x.curvature)
+        edge_strains = max(curvatures, key=operator.attrgetter("curvature"))
         return edge_strains
 
     def _get_sections_maximum_strain(self) -> list[StrainPosition]:
@@ -1381,7 +1383,7 @@ class CrossSectionBoundaries(Crosssection):
         for section in self.sections:
             position_strain.append(section.top_edge_minimum_strain)
             position_strain.append(section.bottom_edge_minimum_strain)
-        position_strain.sort(key=lambda x: x.position)
+        position_strain.sort(key=operator.attrgetter("position"))
         return position_strain
 
     def _create_computation_cross_section(
