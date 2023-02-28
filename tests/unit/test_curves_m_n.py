@@ -32,19 +32,19 @@ class TestMNCurveEquivalentCrossSections(TestCase):
     def test_points_moment(self):
         self.assertCountEqual(
             self.m_n.points.moments,
-            [400000.0, 355026.8934963956, -355026.8934963956, -400000.0],
+            [400000.0, 355026.8934963956, -355026.8934963956, -400000.0] * 2,
         )
 
     def test_points_curvature(self):
         self.assertCountEqual(
             self.m_n.points.curvatures,
-            [0.0] * 4,
+            [0.0] * 8,
         )
 
     def test_points_neutral_axis(self):
         self.assertCountEqual(
             self.m_n.points.axial_forces,
-            [40000.0, 35500.0, -35500.0, -40000.0],
+            [40000.0, 35500.0, -35500.0, -40000.0] * 2,
         )
 
     def test_maximum_strain_positions(self):
@@ -131,7 +131,7 @@ class TestMNKappaCurveCompositeGirder(TestCase):
         self.assertCountEqual(
             self.m_n._decisive_strains_cross_sections[1],
             [
-                StrainPosition(0.15, 10.0, "Steel"),
+                StrainPosition(0.15, 100.0, "Steel"),
                 StrainPosition(
                     strain=-0.000722535505430242, position=100.0, material="Steel"
                 ),
