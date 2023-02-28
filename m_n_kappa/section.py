@@ -775,16 +775,16 @@ class ComputationSectionCurvature(ComputationSection):
 
     def _print_result(self) -> str:
         if len(self.edges_strain) == 1:
-            edges_strain = [f"{self.edges_strain[0]:10.6f}", "-"]
-            edges_stress = [f"{self.edges_stress[0]:10.6f}", "-"]
+            edges_strain = [f"{self.edges_strain[0]:10.6f}", "         -"]
+            edges_stress = [f"{self.edges_stress[0]:10.2f}", "         -"]
         else:
             edges_strain = [
                 f"{self.edges_strain[0]:10.6f}",
                 f"{self.edges_strain[1]:10.6f}",
             ]
             edges_stress = [
-                f"{self.edges_stress[0]:10.6f}",
-                f"{self.edges_stress[1]:10.6f}",
+                f"{self.edges_stress[0]:10.2f}",
+                f"{self.edges_stress[1]:10.2f}",
             ]
         return (
             f"{self.geometry.top_edge:10.2f} | "
@@ -793,7 +793,7 @@ class ComputationSectionCurvature(ComputationSection):
             f"{self.geometry.bottom_edge:8.2f} | "
             f"{edges_strain[1]} | "
             f"{edges_stress[1]} | "
-            f"{self.axial_force:10.2f} | "
+            f"{self.axial_force:12.2f} | "
             f"{self.section_type:7} | "
             f"{self.material.__class__.__name__}"
         )
