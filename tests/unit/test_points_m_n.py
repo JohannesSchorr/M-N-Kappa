@@ -8,7 +8,7 @@ from m_n_kappa.points import MNByStrain, MomentAxialForce
 
 from unittest import TestCase, main
 
-same_sign = NotSuccessfulReason('same sign strain')
+same_sign = NotSuccessfulReason(variable="strain")
 
 
 class TestMNByStrainElastic(TestCase):
