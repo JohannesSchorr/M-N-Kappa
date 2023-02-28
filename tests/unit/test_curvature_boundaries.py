@@ -176,7 +176,9 @@ class TestMaximumCurvature(TestCase):
             StrainPosition(self.minimum_strain, self.top_edge, self.material),
             StrainPosition(self.minimum_strain, self.bottom_edge, self.material),
         ]
-        self.curvature = (self.maximum_strain - self.minimum_strain) / (self.bottom_edge - self.top_edge)
+        self.curvature = (self.maximum_strain - self.minimum_strain) / (
+            self.bottom_edge - self.top_edge
+        )
         self.maximum_curvature = MaximumCurvature(
             curvature=self.curvature,
             start=self.maximum_positive_section_strains[0],
@@ -187,16 +189,26 @@ class TestMaximumCurvature(TestCase):
 
     def test_input_maximum_strain_other_position(self):
         position = 0.5 * (self.bottom_edge - self.top_edge)
-        strain_position = StrainPosition(self.maximum_strain, position=position, material="Steel")
+        strain_position = StrainPosition(
+            self.maximum_strain, position=position, material="Steel"
+        )
         self.assertEqual(self.maximum_curvature.compute(strain_position), 0.0)
 
     def test_input_maximum_strain_maximum_position(self):
-        strain_position = StrainPosition(self.maximum_strain, position=self.bottom_edge, material="Steel")
-        self.assertEqual(self.maximum_curvature.compute(strain_position), self.curvature)
+        strain_position = StrainPosition(
+            self.maximum_strain, position=self.bottom_edge, material="Steel"
+        )
+        self.assertEqual(
+            self.maximum_curvature.compute(strain_position), self.curvature
+        )
 
     def test_input_minimum_strain_minimum_position(self):
-        strain_position = StrainPosition(self.minimum_strain, position=self.top_edge, material="Steel")
-        self.assertEqual(self.maximum_curvature.compute(strain_position), self.curvature)
+        strain_position = StrainPosition(
+            self.minimum_strain, position=self.top_edge, material="Steel"
+        )
+        self.assertEqual(
+            self.maximum_curvature.compute(strain_position), self.curvature
+        )
 
 
 class TestMinimumCurvature(TestCase):
@@ -236,17 +248,19 @@ class TestMinimumCurvature(TestCase):
         pass
 
     def test_positive_curvature_max_value(self):
-        strain_position = StrainPosition(self.maximum_strain, self.top_edge, self.material)
+        strain_position = StrainPosition(
+            self.maximum_strain, self.top_edge, self.material
+        )
         self.assertEqual(
-            self.minimum_curvature.compute(strain_position),
-            9.999999997489795e-06
+            self.minimum_curvature.compute(strain_position), 9.999999997489795e-06
         )
 
     def test_negative_curvature_max_value(self):
-        strain_position = StrainPosition(self.minimum_strain, self.bottom_edge - 1.0 , self.material)
+        strain_position = StrainPosition(
+            self.minimum_strain, self.bottom_edge - 1.0, self.material
+        )
         self.assertEqual(
-            self.minimum_curvature.compute(strain_position),
-            1.1111111108321995e-05
+            self.minimum_curvature.compute(strain_position), 1.1111111108321995e-05
         )
 
 
@@ -372,13 +386,13 @@ class TestGetBoundariesSteelSection(TestCase):
 
     def test_negative_maximum_curvature_start(self):
         self.assertIn(
-            self.boundaries.positive.maximum_curvature.other,
+            self.boundaries.positive.maximum_curvature.start,
             [
                 StrainPosition(
                     self.steel.maximum_strain, self.i_profile.top_edge, "Steel"
                 ),
                 StrainPosition(
-                    self.steel.minimum_strain,
+                    self.steel.maximum_strain,
                     (
                         self.i_profile.top_edge
                         + self.i_profile.t_fo
@@ -392,19 +406,14 @@ class TestGetBoundariesSteelSection(TestCase):
 
     def test_negative_maximum_curvature_other(self):
         self.assertIn(
-            self.boundaries.positive.maximum_curvature.start,
+            self.boundaries.positive.maximum_curvature.other,
             [
                 StrainPosition(
                     self.steel.maximum_strain, self.i_profile.top_edge, "Steel"
                 ),
                 StrainPosition(
                     self.steel.minimum_strain,
-                    (
-                        self.i_profile.top_edge
-                        + self.i_profile.t_fo
-                        + self.i_profile.h_w
-                        + self.i_profile.t_fu
-                    ),
+                    (self.i_profile.top_edge),
                     "Steel",
                 ),
             ],
