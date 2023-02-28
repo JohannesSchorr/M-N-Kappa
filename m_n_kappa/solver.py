@@ -396,15 +396,14 @@ class Newton(Solver):
         if use_fallback:
             return self._fallback()
         self._x_n_plus_1 = self._solve()
-        if self._is_between_nearest_values():
-            return self.x_n_plus_1
-        else:
+        if not self._is_between_nearest_values():
             log.info(
                 f"Newton-algorithm gives {self.x_n_plus_1}. "
                 f"Not between {self._min_under_zero_variable()} and "
                 f"{self._min_over_zero_variable()}. Use fallback."
             )
-            return self._fallback()
+            self._x_n_plus_1 = self._fallback()
+        return self.x_n_plus_1
 
     def _is_between_nearest_values(self) -> bool:
         """is the newly computed value between the minimum smaller and greater value"""
