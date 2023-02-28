@@ -89,7 +89,7 @@ class Solver:
             [
                 "Result",
                 "------",
-                f"x_n+1 = {self.x_n_plus_1:.2f}",
+                #f"x_n+1 = {self.x_n_plus_1:.2f}",
                 f"min_under_zero: {self._min_under_zero_variable()} | "
                 f"min_over_zero: {self._min_over_zero_variable()}",
             ]
@@ -319,8 +319,8 @@ class Bisection(Solver):
         float
             computed bisection
         """
-        return factor * (
-            self._min_under_zero_variable() + self._min_over_zero_variable()
+        return self._min_under_zero_variable() + factor * (
+             self._min_over_zero_variable() - self._min_under_zero_variable()
         )
 
     def print_values(self) -> str:
