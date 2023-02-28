@@ -261,6 +261,7 @@ class Bisection(Solver):
         """
         super().__init__(data, target, variable)
 
+    @log.result
     def compute(self, use_fallback: bool = False) -> float:
         """
         Compute a new variable value that leading to a target-value nearer zero
@@ -369,6 +370,7 @@ class Newton(Solver):
         """function to compute ``x_n_plus_1``"""
         return self._function
 
+    @log.result
     def compute(self, use_fallback: bool = False) -> float:
         """
         compute a new value using the newton algorithm
