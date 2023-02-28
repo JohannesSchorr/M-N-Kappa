@@ -29,12 +29,16 @@ class TestMNKappaCurveEquivalentCrossSections(TestCase):
             400000.0,
             355026.8934963956,
             361270.5959888153,
+            372281.89697177755,
             372381.58415482414,
+            406270.59598881786,
         ]
         self.negative_moments = [
+            -406270.5959888176,
             -400000.0,
             -355026.8934963956,
             -361270.5959888153,
+            -372281.89697177755,
             -372381.58415482554,
         ]
 
@@ -128,7 +132,7 @@ class TestMNKappaCurveEquivalentCrossSectionsDifferentMaterial(TestCase):
 class TestMNKappaCurveCompositeGirder(TestCase):
     def setUp(self) -> None:
         self.concrete_slab = Rectangle(top_edge=0.0, bottom_edge=100, width=2000)
-        self.concrete = Concrete(f_cm=30 + 8, compression_stress_strain_type='Parabola')
+        self.concrete = Concrete(f_cm=30 + 8, compression_stress_strain_type="Parabola")
         self.concrete_section = self.concrete_slab + self.concrete
         self.reinforcement = Reinforcement(f_s=500, f_su=550, failure_strain=0.15)
         self.top_layer = RebarLayer(
