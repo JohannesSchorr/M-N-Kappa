@@ -1,12 +1,21 @@
 from unittest import TestCase, main
 
-from m_n_kappa import MKappaCurve, StrainPosition, EffectiveWidths
+from m_n_kappa import (
+    MKappaCurve,
+    StrainPosition,
+    EffectiveWidths,
+    Crosssection,
+    Rectangle,
+    Steel,
+    UPEProfile,
+    Concrete,
+    RebarLayer,
+    Reinforcement,
+)
 from m_n_kappa.general import NotSuccessfulReason
 
-same_sign = NotSuccessfulReason(variable='curvature').reason
-max_iterations = NotSuccessfulReason('iteration').reason
-
-from m_n_kappa import Rectangle, Steel, UPEProfile, Concrete, RebarLayer, Reinforcement
+same_sign = NotSuccessfulReason(variable="curvature").reason
+max_iterations = NotSuccessfulReason("iteration").reason
 
 plate_geometry = Rectangle(top_edge=220.0, bottom_edge=220.0 + 10.0, width=400.0)
 bottom_flange_material = Steel(f_y=313, f_u=460, failure_strain=0.15)
@@ -79,19 +88,46 @@ class TestSlimFloorUPEPositive(TestCase):
             self.m_kappa_curve.not_successful_reason,
             [
                 NotSuccessfulReason(
-                    strain_position=StrainPosition(strain=-0.0035, position=0.0, material="Concrete"),
-                    reason=max_iterations),
+                    variable="curvature",
+                    strain_position=StrainPosition(
+                        strain=-0.00279, position=10.0, material="Reinforcement"
+                    ),
+                ),
                 NotSuccessfulReason(
-                    strain_position=StrainPosition(strain=-0.00279, position=10.0, material="Reinforcement"),
-                    reason=same_sign),
+                    variable="curvature",
+                    strain_position=StrainPosition(
+                        strain=-0.0013952380952380952, position=144, material="Steel"
+                    ),
+                ),
+                NotSuccessfulReason(
+                    variable="curvature",
+                    strain_position=StrainPosition(
+                        strain=-0.0014904761904761905, position=220.0, material="Steel"
+                    ),
+                ),
+                NotSuccessfulReason(
+                    variable="curvature",
+                    strain_position=StrainPosition(
+                        strain=-0.00297, position=210, material="Reinforcement"
+                    ),
+                ),
+                NotSuccessfulReason(
+                    keyword="iteration",
+                    strain_position=StrainPosition(
+                        strain=-0.0035, position=0.0, material="Concrete"
+                    ),
+                ),
             ],
         )
 
 
 class TestSlimFloorUPEPositiveWithEffectiveWidth(TestCase):
     def setUp(self) -> None:
+        self.cross_section = Crosssection(
+            cross_section.sections, EffectiveWidths(membran=473.7, bending=1364.8)
+        )
         self.m_kappa_curve = MKappaCurve(
-            cross_section, EffectiveWidths(membran=473.7, bending=1364.8)
+            self.cross_section,
         )
 
     def test_not_successful(self):
@@ -100,12 +136,13 @@ class TestSlimFloorUPEPositiveWithEffectiveWidth(TestCase):
             self.m_kappa_curve.not_successful_reason,
             [
                 NotSuccessfulReason(
-                    strain_position=StrainPosition(strain=-0.0035, position=0.0, material="Concrete"),
-                    reason=max_iterations),
-                NotSuccessfulReason(
-                    strain_position=StrainPosition(strain=-0.00279, position=10.0, material="Reinforcement"),
-                    reason=same_sign),
-            ],
+                    keyword="converge",
+                    strain_position=StrainPosition(
+                        strain=-0.0007875097747723546, position=0.0, material="Concrete"
+                    ),
+                )
+            ]
+            * 3,
         )
 
 
