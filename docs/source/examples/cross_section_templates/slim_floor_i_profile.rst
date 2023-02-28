@@ -9,7 +9,7 @@ Geometry and materials
 ======================
 
 The code below creates a ``cross_section`` that represents a slim-floor-beam where
-a steel I-profile (HEB 200) is integrated into a slab of concrete of type C30/35.
+a steel I-profile (HEB 200) is integrated into a solid concrete-slab of type C30/35.
 
 The ``concrete_slab`` is split into five parts:
 
@@ -33,10 +33,16 @@ reinforcement-bars as well as for the I-profile (see
 
    .. grid-item::
 
-      .. todo::
-         figure of the slim-floor beam with I-profile
+      .. figure:: ../../images/template_geometry_slim_floor_i_profile_solid_slab-light.svg
+         :class: only-light
+         :alt: Cross-section of slim-floor beam with I-profile and solid slab
+         :width: 250
+      .. figure:: ../../images/template_geometry_slim_floor_i_profile_solid_slab-dark.svg
+         :class: only-dark
+         :alt: Cross-section of slim-floor beam with I-profile and solid slab
+         :width: 250
 
-         Geometry: Slim-floor beam with I-profile
+         Geometry: Cross-section of slim-floor beam with I-profile and solid slab
 
    .. grid-item::
 
@@ -94,10 +100,12 @@ Slim-floor beam with I-profile cross-section
 ...     centroid_z=0.5*50, width=2000, rebar_horizontal_distance=200, rebar_diameter=10)
 >>> top_rebar_layer = reinforcement + top_layer
 >>> bottom_layer_left = RebarLayer(
-...     centroid_z=250-10, width=2000, rebar_horizontal_distance=100, rebar_diameter=10, left_edge=-2000/2+10)
+...     centroid_z=240-10, width=2000, rebar_horizontal_distance=100, rebar_diameter=10, left_edge=-2000/2+10)
 >>> bottom_layer_right = RebarLayer(
-...     centroid_z=250-10, width=(2000-200-2*10)/2, rebar_horizontal_distance=100, rebar_diameter=10, right_edge=2000/2+10)
->>> bottom_rebar_layer = reinforcement + bottom_layer_left + bottom_layer_right
+...     centroid_z=240-10, width=(2000-200-2*10)/2, rebar_horizontal_distance=100, rebar_diameter=10, right_edge=2000/2+10)
+>>> bottom_rebar_layer_left = reinforcement + bottom_layer_left
+>>> bottom_rebar_layer_right = reinforcement + bottom_layer_right
+>>> rebar_layer = top_rebar_layer + bottom_rebar_layer_left + bottom_rebar_layer_right
 >>> i_profile = IProfile(
 ...     top_edge=100.0, b_fo=200, t_fo=15, h_w=200-2*15, t_w=15, centroid_y=0.0)
 >>> steel = Steel(f_y=355.0, f_u=400, failure_strain=0.15)
