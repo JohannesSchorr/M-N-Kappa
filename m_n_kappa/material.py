@@ -1,6 +1,6 @@
 import operator
 from abc import ABC, abstractmethod
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 from bisect import bisect
 
 from .general import (
@@ -42,8 +42,8 @@ class StressStrain:
         strain of the point
     """
 
-    stress: float
-    strain: float
+    stress: float = field(compare=True)
+    strain: float = field(compare=True)
 
     def __post_init__(self):
         log.info(f"Created {self.__repr__()}")
