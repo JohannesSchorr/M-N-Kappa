@@ -307,12 +307,13 @@ class Material:
         """
         self.sort_strains_ascending()
         strain_value = self.__round_strain(strain_value)
-        if (
-            self.stress_strain[0].strain
-            < strain_value
-            < self.stress_strain[-1].strain
-        ):
-            return bisect(self.stress_strain, strain_value, key=operator.attrgetter('strain')) - 1
+        if self.stress_strain[0].strain < strain_value < self.stress_strain[-1].strain:
+            return (
+                bisect(
+                    self.stress_strain, strain_value, key=operator.attrgetter("strain")
+                )
+                - 1
+            )
         elif strain_value == self.stress_strain[0].strain:
             return 0
         elif strain_value == self.stress_strain[-1].strain:
