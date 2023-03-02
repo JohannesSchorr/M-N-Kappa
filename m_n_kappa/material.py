@@ -327,7 +327,7 @@ class Material:
         return self.stress_strain[index].stress
 
     @staticmethod
-    def _order_material_indexes(zero_index: int, strain_index: int) -> tuple:
+    def _order_material_indexes(zero_index: int, strain_index: int) -> tuple[int, int]:
         if strain_index < zero_index:
             if strain_index == 0:
                 return strain_index + 1, zero_index + 1
