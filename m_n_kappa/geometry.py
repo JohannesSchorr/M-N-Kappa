@@ -1216,10 +1216,13 @@ Rectangle(top_edge=184.50, bottom_edge=200.00, width=200.00, left_edge=-100.00, 
 
     def __post_init__(self):
         self.geometries = []
-        if self.has_bottom_flange and self.t_fu is None and self.t_fo is not None:
-            self.t_fu = self.t_fo
-        if self.has_bottom_flange and self.b_fu is None and self.b_fo is not None:
-            self.b_fu = self.b_fo
+        if not self.has_top_flange:
+            self.t_fo = 0.0
+        if self.has_top_flange and self.has_bottom_flange:
+            if self.t_fu is None and self.t_fo is not None:
+                self.t_fu = self.t_fo
+            if self.b_fu is None and self.b_fo is not None:
+                self.b_fu = self.b_fo
         self._add_top_flange()
         self._add_web()
         self._add_bottom_flange()
