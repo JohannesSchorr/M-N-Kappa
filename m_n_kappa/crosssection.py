@@ -1,4 +1,5 @@
 import operator
+from typing import Iterator
 
 from .general import (
     str_start_end,
@@ -514,7 +515,12 @@ class Crosssection:
             ]
         )
 
-    def strain_positions(self, strain_1: float = None, strain_2: float = None, include_strains : bool = False) -> list[StrainPosition]:
+    def strain_positions(
+        self,
+        strain_1: float = None,
+        strain_2: float = None,
+        include_strains: bool = False,
+    ) -> list[StrainPosition]:
         """
         get all :py:class:`~m_n_kappa.StrainPosition`-values between ``strain_1`` and ``strain_2``
 
@@ -536,7 +542,9 @@ class Crosssection:
         """
         strain_positions = []
         for section in self.sections:
-            strain_positions += section.strain_positions(strain_1, strain_2, include_strains)
+            strain_positions += section.strain_positions(
+                strain_1, strain_2, include_strains
+            )
         return strain_positions
 
 
@@ -718,7 +726,7 @@ class ComputationCrosssectionStrain(ComputationCrosssection):
         strain : float
             applied constant strain_value :math:`\\varepsilon`
         slab_effective_widths: :py:class:`~m_n_kappa.EffectiveWidths`
-            effective widths’ for the slab (concrete and reinforcement)
+            effective widths' for the slab (concrete and reinforcement)
 
         See Also
         --------
