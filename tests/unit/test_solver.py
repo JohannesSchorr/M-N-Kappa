@@ -51,11 +51,19 @@ class TestNewtonPolynomial(TestCase):
 class TestNewtonPolynomial2(TestCase):
     def setUp(self):
         self.data = [
-            {'axial_force': 407764.9041884129, 'neutral_axis_value': 0.0},
-            {'axial_force': 882758.2291958473, 'neutral_axis_value': 18.836874779570994},
-            {'axial_force': -4232634.547079985, 'neutral_axis_value': 214.3652445143822}
+            {"axial_force": 407764.9041884129, "neutral_axis_value": 0.0},
+            {
+                "axial_force": 882758.2291958473,
+                "neutral_axis_value": 18.836874779570994,
+            },
+            {
+                "axial_force": -4232634.547079985,
+                "neutral_axis_value": 214.3652445143822,
+            },
         ]
-        self.solver = Newton(data=self.data, variable='neutral_axis_value', target='axial_force')
+        self.solver = Newton(
+            data=self.data, variable="neutral_axis_value", target="axial_force"
+        )
 
     def test_minimum_variable(self):
         self.assertEqual(self.solver.minimum_variable, 0.0)
