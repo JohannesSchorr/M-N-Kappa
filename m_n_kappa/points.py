@@ -850,6 +850,7 @@ class MKappaByConstantCurvature(MKappa):
         :py:attr:`~m_n_kappa.MKappaByConstantCurvature.neutral_axis` is the computed neutral-axis.
 
         >>> computation.neutral_axis
+        4.985348959484763
 
         In case the ``applied_axial_force`` is higher than maximum positive or negative
         axial force of the ``cross_section`` the computation will be marked by
@@ -865,7 +866,7 @@ class MKappaByConstantCurvature(MKappa):
         The :py:attr:`~m_n_kappa.MKappaByConstantCurvature.not_successful_reason` will than give you
         a reason why it was not working.
 
-        >>> computation.not_successful_reason
+        >>> computation.not_successful_reason.reason
         difference of axial forces at minimum and maximum neutral-axis have same sign
 
         In this case you should choose a smaller value for the ``applied_axial_force``.
