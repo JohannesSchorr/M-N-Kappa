@@ -72,5 +72,18 @@ class TestNewtonPolynomial2(TestCase):
         self.assertAlmostEqual(self.solver.compute(), 107.182, places=2)
 
 
+class TestPassingGenerator(TestCase):
+    def setUp(self):
+        self.data_list = [
+            [0, 2],
+            [-5, -3],
+        ]
+        self.data = (point for point in self.data_list)
+        #self.solver = Bisection(data=self.data, target=1, variable=0)
+
+    #def test_compute(self):
+    #    self.assertEqual(self.solver.compute(), -2.5)
+
+
 if __name__ == "__main__":
     main()
