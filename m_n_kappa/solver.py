@@ -247,7 +247,7 @@ class Bisection(Solver):
 
     @log.init
     def __init__(
-            self, data: list[dict] | list[list], target: str | int, variable: str | int
+        self, data: list[dict] | list[list], target: str | int, variable: str | int
     ):
         """
         Parameters
@@ -320,7 +320,7 @@ class Bisection(Solver):
             computed bisection
         """
         return self._min_under_zero_variable() + factor * (
-             self._min_over_zero_variable() - self._min_under_zero_variable()
+            self._min_over_zero_variable() - self._min_under_zero_variable()
         )
 
     def print_values(self) -> str:
@@ -351,7 +351,7 @@ class Newton(Solver):
 
     @log.init
     def __init__(
-            self, data: list[dict] | list[list], target: str | int, variable: str | int
+        self, data: list[dict] | list[list], target: str | int, variable: str | int
     ):
         """
         Parameters
