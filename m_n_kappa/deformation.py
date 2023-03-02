@@ -647,9 +647,7 @@ class Beam:
             if self._is_cross_section_in_nodes(cross_section, nodes):
                 for node in nodes:
                     if cross_section == node.cross_section:
-                        log.info(
-                            f"M-Kappa-Curve of Node {node.number} will be copied."
-                        )
+                        log.info(f"M-Kappa-Curve of Node {node.number} will be copied.")
                         computed_node = Node(
                             cross_section, position, m_kappa_curve=node.m_kappa_curve
                         )
