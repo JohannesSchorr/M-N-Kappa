@@ -89,6 +89,7 @@ the hood of this program.
       :link: theory.strain_based_design
       :link-type: ref
       :text-align: center
+      :img-top: ../images/theory_strain_based_design_icon.svg
 
       **Strain based design**
       ^^^^^^^^^^^^^^^^^^^^^^^
