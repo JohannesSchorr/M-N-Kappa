@@ -132,6 +132,9 @@ class Material:
         """
         self._stress_strain = stress_strain
         self._section_type = section_type
+        self._stress_ascending_strain = sorted(
+            self.stress_strain, key=operator.attrgetter("strain")
+        )
 
     def __repr__(self) -> str:
         return f"""Material(stress_strain={self.stress_strain}, 
@@ -186,14 +189,12 @@ class Material:
     @property
     def maximum_strain(self) -> float:
         """maximum strain_value in the stress-strain_value-relationship"""
-        self.sort_strains_descending()
-        return self.stress_strain[0].strain
+        return self._stress_ascending_strain[-1].strain
 
     @property
     def minimum_strain(self) -> float:
         """minimum strain_value in the stress-strain_value-relationship"""
-        self.sort_strains_ascending()
-        return self.stress_strain[0].strain
+        return self._stress_ascending_strain[0].strain
 
     @property
     def stress_strain(self) -> list[StressStrain]:
@@ -208,12 +209,12 @@ class Material:
     @property
     def strains(self) -> list:
         """strains from the stress-strain_value-relationship"""
-        return [stress_strain.strain for stress_strain in self.stress_strain]
+        return [stress_strain.strain for stress_strain in self._stress_ascending_strain]
 
     @property
     def stresses(self) -> list:
         """stresses from the stress-strain_value-relationship"""
-        return [stress_strain.stress for stress_strain in self.stress_strain]
+        return [stress_strain.stress for stress_strain in self._stress_ascending_strain]
 
     def get_intermediate_strains(
         self, strain_1: float, strain_2: float = 0.0, include_strains: bool = False
@@ -305,19 +306,24 @@ class Material:
         int
             index of the first-smallest stress-strain-value as the given one
         """
-        self.sort_strains_ascending()
         strain_value = self.__round_strain(strain_value)
-        if self.stress_strain[0].strain < strain_value < self.stress_strain[-1].strain:
+        if (
+            self._stress_ascending_strain[0].strain
+            < strain_value
+            < self._stress_ascending_strain[-1].strain
+        ):
             return (
                 bisect(
-                    self.stress_strain, strain_value, key=operator.attrgetter("strain")
+                    self._stress_ascending_strain,
+                    strain_value,
+                    key=operator.attrgetter("strain"),
                 )
                 - 1
             )
-        elif strain_value == self.stress_strain[0].strain:
+        elif strain_value == self._stress_ascending_strain[0].strain:
             return 0
-        elif strain_value == self.stress_strain[-1].strain:
-            return len(self.stress_strain) - 2
+        elif strain_value == self._stress_ascending_strain[-1].strain:
+            return len(self._stress_ascending_strain) - 2
         else:
             log.critical(
                 f"No stress-strain_value-pair found in {self.__class__.__name__} for {strain_value=}\n"
@@ -359,8 +365,8 @@ class Material:
             )
         return interpolation(
             position_value=strain,
-            first_pair=self.stress_strain[material_index].pair(),
-            second_pair=self.stress_strain[material_index + 1].pair(),
+            first_pair=self._stress_ascending_strain[material_index].pair(),
+            second_pair=self._stress_ascending_strain[material_index + 1].pair(),
         )
 
 
@@ -1273,7 +1279,6 @@ StressStrain(stress=0.4710854646323814, strain=0.16735816729459904), \
 StressStrain(stress=0.0, strain=0.8367908364729952), \
 StressStrain(stress=0.0, strain=10.0)]
         """
-        super().__init__(section_type="slab")
         self._f_cm = float(f_cm)
         self._f_ctm = make_float(f_ctm)
         self._use_tension = use_tension
@@ -1281,7 +1286,9 @@ StressStrain(stress=0.0, strain=10.0)]
         self._tension_stress_strain_type = tension_stress_strain_type
         self._compression = self.__set_compression()
         self._tension = self.__set_tension()
-        self._stress_strain = self.__build_stress_strain()
+        super().__init__(
+            section_type="slab", stress_strain=self.__build_stress_strain()
+        )
 
     def __repr__(self) -> str:
         return (
@@ -1560,12 +1567,13 @@ StressStrain(stress=355.0, strain=0.0016904761904761904), \
 StressStrain(stress=400.0, strain=0.15)]
 
         """
-        super().__init__(section_type="girder")
         self._f_y = make_float(f_y)
         self._f_u = make_float(f_u)
         self._failure_strain = make_float(failure_strain)
         self._E_a = make_float(E_a)
-        self._stress_strain = self.__build_stress_strain()
+        super().__init__(
+            section_type="girder", stress_strain=self.__build_stress_strain()
+        )
 
     def __repr__(self):
         return (
