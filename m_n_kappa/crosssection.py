@@ -1,5 +1,4 @@
 import operator
-from typing import Iterator
 
 from .general import (
     str_start_end,
@@ -966,7 +965,7 @@ class ComputationCrosssectionCurvature(ComputationCrosssection):
         neutral_axis_value : float
             position_value where strain_value is zero
         slab_effective_width: :py:class:`~m_n_kappa.EffectiveWidths`
-            effective widths’ for the slab (concrete and reinforcement)
+            effective widths' for the slab (concrete and reinforcement)
 
         See Also
         --------
