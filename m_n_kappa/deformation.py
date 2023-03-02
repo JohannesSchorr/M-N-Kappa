@@ -588,9 +588,9 @@ class Beam:
         ----------
         element_index : int
             index of the element where the incremental deformation is to be computed
-        load : :py:class:´~m_n_kappa.loading.ABCSingleSpan`
+        load : :py:class:`~m_n_kappa.loading.ABCSingleSpan`
             loading of the beam
-        single_load : :py:class:´~m_n_kappa.SingleSpanSingleLoads`
+        single_load : :py:class:`~m_n_kappa.SingleSpanSingleLoads`
             single load that indicates where the deformation is to be computed
 
         Returns
