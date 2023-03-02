@@ -33,7 +33,7 @@ from .general import (
     NotSuccessfulReason,
 )
 from .points import MKappaByStrainPosition
-from .solver import Newton, Bisection
+from .solver import Bisection
 
 from .log import LoggerMethods
 
