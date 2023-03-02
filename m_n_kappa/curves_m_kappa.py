@@ -476,7 +476,7 @@ class MKappaCurve:
         self._insert_zero()
 
     def __repr__(self) -> str:
-        return f"MKappaCurve(cross_section=cross_section)"
+        return "MKappaCurve(cross_section=cross_section)"
 
     @str_start_end
     def __str__(self) -> str:
@@ -616,7 +616,7 @@ class MKappaCurve:
             )
             if not m_kappa.successful:
                 log.info(
-                    f"Computation with Newton algorithm not successful, try Bisection"
+                    "Computation with Newton algorithm not successful, try Bisection"
                 )
                 m_kappa = MKappaByStrainPosition(
                     self.cross_section,
@@ -649,7 +649,7 @@ class MKappaCurve:
             )
             if not m_kappa.successful:
                 log.info(
-                    f"Computation with Newton algorithm not successful, try Bisection"
+                    "Computation with Newton algorithm not successful, try Bisection"
                 )
                 m_kappa = MKappaByStrainPosition(
                     self.cross_section,
