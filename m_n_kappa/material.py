@@ -664,7 +664,7 @@ class ConcreteCompressionParabolaRectangle(ConcreteCompression):
         .. math::
            :label: eq:material.concrete.parabola_rectangle_helper
 
-           \\text{ for } f_\\mathrm{ck} \\leq 50 \\text{ N/mm²}: &
+           \\text{ for } f_\\mathrm{ck} \\leq 50 \\text{ N/mm :sup:`2`}: &
 
            & \\varepsilon_\\mathrm{c}(Permil) = 2.0
 
@@ -672,7 +672,7 @@ class ConcreteCompressionParabolaRectangle(ConcreteCompression):
 
            & n = 2.0
 
-           \\text{for } f_\\mathrm{ck} \\geq 50 \\text{ N/mm²} &
+           \\text{for } f_\\mathrm{ck} \\geq 50 \\text{ N/mm :sup:`2`} &
 
            & \\varepsilon_\\mathrm{c}(Permil) = 2.0 + 0.085 \\cdot (f_\\mathrm{ck} - 50)^{0.53}
 
@@ -1026,7 +1026,7 @@ class ConcreteTension:
         Notes
         -----
         The formula assumes that the mean concrete compressive strength :math:`f_\\mathrm{cm}` is given in
-        N/mm².
+        N/mm :sup:`2`.
         """
         return 0.001 * 73.0 * self.f_cm * 0.18
 
@@ -1483,8 +1483,7 @@ class Steel(Material):
         failure_strain : float
             tensile strain :math:`\\varepsilon_\\mathrm{u}` (Default: None)
         E_a : float
-            modulus of elasticity :math:`E_\\mathrm{a}` (Default: 210000 N/mm²)
-
+            modulus of elasticity :math:`E_\\mathrm{a}` (Default: 210000 N/mm :sup:`2`)
         See Also
         --------
         Concrete : material-behaviour of concrete
@@ -1747,7 +1746,7 @@ class Reinforcement(Steel):
         failure_strain : float
             Tensile strain of the reinforcement :math:`\\varepsilon_\\mathrm{su}` (Default: None)
         E_s  : float
-            Modulus of elasticity of the reinforcement :math:`E_\\mathrm{s}` (Default: 200000 N/mm²)
+            Modulus of elasticity of the reinforcement :math:`E_\\mathrm{s}` (Default: 200000 N/mm :sup:`2`)
 
         See Also
         --------
