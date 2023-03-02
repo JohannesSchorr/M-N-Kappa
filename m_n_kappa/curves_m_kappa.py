@@ -332,7 +332,7 @@ class MKappaCurveCurvature:
             maximum possible curvature of the cross-section (horizontal equilibrium not considered)
         minimum_curvature : float
             minimum possible curvature of the cross-section (horizontal equilibrium not considered)
-        start_strain_position : :py:class:´~m_n_kappa.general.StrainPosition`
+        start_strain_position : :py:class:`~m_n_kappa.general.StrainPosition`
             strain-position-point assumed as failure-point
         """
         self._cross_section = cross_section
