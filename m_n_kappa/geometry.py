@@ -1133,7 +1133,7 @@ class IProfile(ComposedGeometry):
     possible as the following figure shows.
     In case the desired profile has no bottom-flange choose ``has_bottom_flange=False``.
     Similar if no top-flange is needed then use ``has_top_flange=False``.
-    In case top- and bottom flange are similar only passing values to ``t_fo`´ and ``t_fo`` is needed.
+    In case top- and bottom flange are similar only passing values to ``t_fo`` and ``t_fo`` is needed.
 
     Parameters
     ----------
