@@ -1,4 +1,5 @@
 import operator
+import math
 from abc import ABC, abstractmethod
 from dataclasses import dataclass, field
 from bisect import bisect
@@ -1038,7 +1039,7 @@ class ConcreteTension:
             if self.f_ck <= 50.0:
                 return 0.3 * self.f_ck ** (2.0 / 3.0)
             else:
-                return 2.12 * log(1.0 + 0.1 * self.f_cm)
+                return 2.12 * math.log(1.0 + 0.1 * self.f_cm)
         else:
             return self._f_ctm
 
