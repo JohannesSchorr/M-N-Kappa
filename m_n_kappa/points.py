@@ -600,8 +600,8 @@ class MKappaByStrainPosition(MKappa):
                 )
             else:
                 raise ValueError(
-                    f"If 'maximum_curvature=None' and 'minimum_curvature=None', "
-                    f"then 'positive_curvature' must be set to 'True' or 'False'"
+                    "If 'maximum_curvature=None' and 'minimum_curvature=None', "
+                    "then 'positive_curvature' must be set to 'True' or 'False'"
                 )
         self._maximum_curvature = maximum_curvature
         self._minimum_curvature = minimum_curvature
@@ -1234,7 +1234,7 @@ class AxialForcePoint:
                 )
         else:
             TypeError(
-                f"cross_sections must be of type list[Crosssection] or tuple[Crosssection, Crosssection]"
+                "cross_sections must be of type list[Crosssection] or tuple[Crosssection, Crosssection]"
             )
         self._axial_force = axial_force
         self._computed_sub_cross_sections = []
