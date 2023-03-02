@@ -682,6 +682,7 @@ class MKappaByStrainPosition(MKappa):
             self.compute()
         log.debug("Finished computing boundary values")
 
+    @log.result
     def _compute_new_curvature(self):
         if self.neutral_axis is None:
             log.warning(
