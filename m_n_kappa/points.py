@@ -153,7 +153,9 @@ class Point:
         return self._computations
 
     @property
-    def computed_cross_section(self) -> ComputationCrosssectionStrain | ComputationCrosssectionCurvature:
+    def computed_cross_section(
+        self,
+    ) -> ComputationCrosssectionStrain | ComputationCrosssectionCurvature:
         """computed cross_section of the current iteration"""
         return self._computed_cross_section
 
@@ -1538,7 +1540,9 @@ class MomentAxialForceCurvature(AxialForcePoint):
 
     def _compute_sub_cross_sections(
         self,
-    ) -> tuple[ComputationCrosssectionCurvature, ComputationCrosssectionCurvature] | tuple[None, None]:
+    ) -> tuple[
+        ComputationCrosssectionCurvature, ComputationCrosssectionCurvature
+    ] | tuple[None, None]:
         """
         compute the sub-cross-sections
 
