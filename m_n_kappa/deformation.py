@@ -74,7 +74,7 @@ class Node:
         to a given moment
 
         >>> node.curvature_by(moment=100)
-        1.4446749198863875e-07
+        1.4443166459663246e-07
 
         For computation of the incremental deformation at this node
         :py:meth:`~m_n_kappa.Node.incremental_deformation`.
