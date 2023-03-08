@@ -1,6 +1,6 @@
 import operator
 from abc import ABC, abstractmethod
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 
 from .general import str_start_end
 
@@ -143,10 +143,14 @@ class SingleLoad:
         value of the load
     """
 
-    position_in_beam: float
-    value: float
+    position_in_beam: float = field(compare=True)
+    value: float = field(compare=True)
 
     def __post_init__(self):
+        if isinstance(self.position_in_beam, int):
+            self.position_in_beam = float(self.position_in_beam)
+        if isinstance(self.value, int):
+            self.value = float(self.value)
         log.info(f"Created {self.__repr__()}")
 
     def moment(self):
