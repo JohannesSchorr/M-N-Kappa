@@ -225,7 +225,7 @@ class SingleSpan(ABCSingleSpan):
         self._loads = loads
         self._beam = self.__get_beam_class()
 
-    def __str__(self):
+    def __str__(self) -> str:
         return self.beam.__str__()
 
     @property
@@ -580,7 +580,8 @@ class SingleSpanSingleLoads(ABCSingleSpan):
                 moment -= load.value * (at_position - load.position_in_beam)
         return moment
 
-    def moment_by(self, load: SingleLoad, at_position: float) -> float:
+    @staticmethod
+    def moment_by(load: SingleLoad, at_position: float) -> float:
         """
         moment at the given position by the given load
 
@@ -830,22 +831,27 @@ class SingleSpanUniformLoad(ABCSingleSpan):
         """position_value where the moment is the maximum"""
         return [0.5 * self.length]
 
-    def _support_transversal_shear(self):
+    def _support_transversal_shear(self) -> float:
+        """transversal shear at the (left) support"""
         return 0.5 * self.loading
 
-    def _loading(self):
+    def _loading(self) -> float:
+        """total loading of the beam"""
         return self.length * self.load
 
-    def _moment(self, at_position: float):
+    def _moment(self, at_position: float) -> float:
+        """compute moment at the passed position of the beam"""
         return (
             self._support_transversal_shear() * at_position
             - 0.5 * self.load * at_position**2.0
         )
 
-    def _maximum_moment(self):
+    def _maximum_moment(self) -> float:
+        """compute the maximum moment of the beam under the given load"""
         return self.load * self.length**2.0 / 8.0
 
-    def _transversal_shear(self, at_position):
+    def _transversal_shear(self, at_position) -> float:
+        """transversal shear at the right support"""
         return self._support_transversal_shear() - self.load * at_position
 
     def load_distribution_factor(self) -> float:
