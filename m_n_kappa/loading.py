@@ -444,7 +444,8 @@ class SingleSpanSingleLoads(ABCSingleSpan):
             "----------",
             f"length = {self.length}",
             f"loads = {self.loads} | loading = {self.loading:.2f}",
-            f"transversal shear: column left = {self.transversal_shear_support_left:.2f} |"
+            f"transversal shear: "
+            f"column left = {self.transversal_shear_support_left:.2f} |"
             f" column right = {self.transversal_shear_support_right:.2f}",
             f"Maximum Moment = {self.maximum_moment}",
         ]
