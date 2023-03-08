@@ -332,9 +332,9 @@ class SingleSpan(ABCSingleSpan):
 
     def __get_beam_class(self) -> ABCSingleSpan:
         if self._is_uniform_load():
-            return SingleSpanUniformLoad(self.length, self._uniform_load)
+            return SingleSpanUniformLoad(length=self.length, load=self._uniform_load)
         elif self._is_single_loads():
-            return SingleSpanSingleLoads(self.length, self._loads)
+            return SingleSpanSingleLoads(length=self.length, loads=self._loads)
         else:
             raise ValueError()
 
