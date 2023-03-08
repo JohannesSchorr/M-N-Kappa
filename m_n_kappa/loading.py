@@ -569,17 +569,19 @@ class SingleSpanSingleLoads(ABCSingleSpan):
         return (-1.0) * self._load_moments() / self.length
 
     def _load_moments(self) -> float:
-        return sum([load.moment() for load in self.loads])
+        return sum((load.moment() for load in self.loads))
 
     def _loading(self) -> float:
-        return sum(self._single_loads())
+        return sum((load.value for load in self.loads))
 
     def _moment(self, at_position: float) -> float:
-        moment = self.transversal_shear_support_left * at_position
-        for load in self.loads:
-            if load.position_in_beam < at_position:
-                moment -= load.value * (at_position - load.position_in_beam)
-        return moment
+        return self.transversal_shear_support_left * at_position - sum(
+            (
+                load.value * (at_position - load.position_in_beam)
+                for load in self.loads
+                if load.position_in_beam < at_position
+            )
+        )
 
     @staticmethod
     def moment_by(load: SingleLoad, at_position: float) -> float:
@@ -626,11 +628,23 @@ class SingleSpanSingleLoads(ABCSingleSpan):
         return [load.value for load in self.loads]
 
     def _transversal_shear(self, at_position: float) -> float:
-        shear = self.transversal_shear_support_left
-        for load in self.loads:
-            if load.position_in_beam < at_position:
-                shear -= load.value
-        return shear
+        return self.transversal_shear_support_left - sum(
+            (
+                self._transversal_shear_load_factor(load.position_in_beam, at_position)
+                * load.value
+                for load in self.loads
+                if load.position_in_beam <= at_position
+            )
+        )
+
+    @staticmethod
+    def _transversal_shear_load_factor(
+        load_position: float, at_position: float
+    ) -> float:
+        if load_position == at_position:
+            return 0.5
+        else:
+            return 1.0
 
     def load_distribution_factor(self) -> float:
         """factor showing how the moment is distributed depending on the loads"""
