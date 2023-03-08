@@ -122,7 +122,7 @@ class ABCSingleSpan(ABC):
 
         References
         ----------
-        Eggert, F. (2019) Einfluss der Verdübelung auf das Trag- und Verformungsverhalten von Verbundträgern mit und
+        Eggert, F. (2019) Einfluss der Verduebelung auf das Trag- und Verformungsverhalten von Verbundtraegern mit und
         ohne Profilblech, dissertation, University of Stuttgart, Institute of Structural Design, No. 2019-1, p. 182
         """
         ...
@@ -206,7 +206,7 @@ class SingleSpan(ABCSingleSpan):
         pass the resulting value :py:meth:`~m_n_kappa.SingleSpan.moment()`.
 
         >>> uniform_max_loading_position = uniform_loading.positions_of_maximum_moment()
-        >>> uniform_loading.moment(at_positions=uniform_max_loading_position)
+        >>> uniform_loading.moment(at_position=uniform_max_loading_position[0])
         80000000.0
 
         The resulting transversal shear loads at the support are computed as follows.
@@ -217,7 +217,7 @@ class SingleSpan(ABCSingleSpan):
         Using the corresponding :py:meth:`~m_n_kappa.SingleLoad.transversal_shear()`-method gives us at the
         position of maximum moment a value of 0.0, as expected.
 
-        >>> uniform_loading.transversal_shear(at_positions=uniform_max_loading_position)
+        >>> uniform_loading.transversal_shear(at_position=uniform_max_loading_position[0])
         0.0
         """
         self._length = length
@@ -398,7 +398,7 @@ class SingleSpanSingleLoads(ABCSingleSpan):
         The total loading from the single loading may be derived as follows.
 
         >>> single_loading.loading
-        10
+        10.0
 
         The maximum moment is returned by attribute :py:attr:`~m_n_kappa.SingleSpanSingleLoads.maximum_moment`.
 
@@ -411,7 +411,10 @@ class SingleSpanSingleLoads(ABCSingleSpan):
         compute the corresponding moment.
 
         >>> max_loading_position = single_loading.positions_of_maximum_moment()
-        >>> single_loading.moment(at_positions=max_loading_position)
+        >>> max_loading_position
+        [4000.0]
+
+        >>> single_loading.moment(at_position=max_loading_position[0])
         20000.0
 
         The resulting transversal shear loads at the support are computed as follows.
@@ -675,7 +678,7 @@ class SingleSpanUniformLoad(ABCSingleSpan):
         The total loading from the uniform loading may be derived as follows.
 
         >>> uniform_loading.loading
-        80000
+        80000.0
 
         The maximum moment is returned by attribute :py:attr:`~m_n_kappa.SingleSpan.maximum_moment`.
 
