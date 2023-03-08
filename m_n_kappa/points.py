@@ -863,7 +863,7 @@ class MKappaByConstantCurvature(MKappa):
         >>> computation.successful
         False
 
-        The :py:attr:`~m_n_kappa.MKappaByConstantCurvature.not_successful_reason` will than give you
+        The :py:attr:`~m_n_kappa.MKappaByConstantCurvature.not_successful_reason` will give you then
         a reason why it was not working.
 
         >>> computation.not_successful_reason.reason

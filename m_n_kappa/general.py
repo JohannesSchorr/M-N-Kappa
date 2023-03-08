@@ -221,7 +221,7 @@ def neutral_axis(
 
     >>> from m_n_kappa.general import neutral_axis
     >>> neutral_axis(strain_at_position=0.1, curvature_value=0.0001, position_value=10)
-    -990
+    -990.0
 
     """
     return position_value - (strain_at_position / curvature_value)
