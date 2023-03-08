@@ -428,7 +428,7 @@ class SingleSpanSingleLoads(ABCSingleSpan):
         >>> single_loading.transversal_shear(at_position=max_loading_position[0])
         0.0
         """
-        self._length = length
+        self._length = float(length)
         self._loads = loads
 
     def __repr__(self) -> str:
@@ -704,8 +704,8 @@ class SingleSpanUniformLoad(ABCSingleSpan):
         >>> uniform_loading.transversal_shear(at_position=uniform_max_loading_position[0])
         0.0
         """
-        self._length = length
-        self._load = load
+        self._length = float(length)
+        self._load = float(load)
 
     def __repr__(self) -> str:
         return f"SingleSpanUniformLoad(length={self.length}, load={self.load})"
