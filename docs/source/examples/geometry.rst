@@ -164,7 +164,7 @@ If needed only a fraction of these elements is used as the Figure above shows.
 >>> i_profile_1 = IProfile(
 ...     top_edge=0., t_fo=15.5, b_fo=200.0, t_w=9.5, h_w=169.0)
 >>> i_profile_no_topflange = IProfile(
-...     top_edge=0., t_fo=15.5, b_fo=200.0, t_w=9.5, h_w=169.0,
+...     top_edge=0., t_fu=15.5, b_fu=200.0, t_w=9.5, h_w=169.0,
 ...     has_top_flange=False
 ... )
 >>> i_profile_no_bottomflange = IProfile(
@@ -217,5 +217,5 @@ Or if you pass the number and the overall width it computes the horizontal dista
 
 
 .. note::
-   Do you have another idea or need for a predefined composed geometry consider
+   Do you have another idea or need for a predefined composed geometry, then consider
    :ref:`contributing` or open a new issue describing your idea.

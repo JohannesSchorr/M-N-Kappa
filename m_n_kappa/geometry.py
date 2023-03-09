@@ -898,7 +898,17 @@ class Trapezoid(Geometry):
     def bottom_right_edge(self) -> float:
         """right-edge position of the trapezoid at the bottom-edge :math:`y_\\mathrm{bottom-right}`"""
         return self._bottom_right_edge
-
+    
+    @property
+    def right_edge(self) -> float:
+        """outer right-edge of the trapezoid"""
+        return max(self.bottom_right_edge, self.top_right_edge)
+    
+    @property
+    def left_edge(self) -> float:
+        """outer left-edge of the trapezoid"""
+        return min(self.bottom_left_edge, self.top_left_edge)
+    
     def __repr__(self) -> str:
         return (
             f"Trapezoid(top_edge={self.top_edge}, "
@@ -1017,7 +1027,7 @@ class Trapezoid(Geometry):
         else:
             return 0.0
 
-    def left_edge(self, vertical_position: float) -> float:
+    def left_edge_at(self, vertical_position: float) -> float:
         """left edge at the given vertical position
 
         in case ``vertical_position`` is outside of the trapezoid, then zero is returned
@@ -1041,7 +1051,7 @@ class Trapezoid(Geometry):
         else:
             return 0.0
 
-    def right_edge(self, vertical_position: float) -> float:
+    def right_edge_at(self, vertical_position: float) -> float:
         """right edge at the given vertical position
 
         in case ``vertical_position`` is outside of the trapezoid zero is returned
@@ -1092,9 +1102,9 @@ class Trapezoid(Geometry):
                         top_edge=top_edge,
                         bottom_edge=point.position,
                         top_width=self.width(top_edge),
-                        top_left_edge=self.left_edge(top_edge),
+                        top_left_edge=self.left_edge_at(top_edge),
                         bottom_width=self.width(point.position),
-                        bottom_left_edge=self.left_edge(point.position),
+                        bottom_left_edge=self.left_edge_at(point.position),
                     )
                 )
                 top_edge = point.position
@@ -1103,7 +1113,7 @@ class Trapezoid(Geometry):
                 top_edge=top_edge,
                 bottom_edge=self.bottom_edge,
                 top_width=self.width(top_edge),
-                top_left_edge=self.left_edge(top_edge),
+                top_left_edge=self.left_edge_at(top_edge),
                 bottom_width=self.bottom_width,
                 bottom_left_edge=self.bottom_left_edge,
             )
@@ -1220,13 +1230,15 @@ Rectangle(top_edge=184.50, bottom_edge=200.00, width=200.00, left_edge=-100.00, 
         self.geometries = []
         if not self.has_top_flange:
             self.t_fo = 0.0
-        if not self.has_bottom_flange: 
+        if not self.has_bottom_flange:
             self.t_fu = 0.0
         if self.has_top_flange and self.has_bottom_flange:
             if self.t_fu is None and self.t_fo is not None:
                 self.t_fu = self.t_fo
             if self.b_fu is None and self.b_fo is not None:
                 self.b_fu = self.b_fo
+        if self.has_bottom_flange and (self.t_fu is None or self.b_fu is None): 
+            raise ValueError("If 'has_bottom_flange=True' then values for 't_fu' and 'b_fu' must be provided.")
         self._add_top_flange()
         self._add_web()
         self._add_bottom_flange()
