@@ -96,13 +96,13 @@ class TestSlimFloorUPEPositive(TestCase):
                 NotSuccessfulReason(
                     variable="curvature",
                     strain_position=StrainPosition(
-                        strain=-0.0013952380952380952, position=144, material="Steel"
+                        strain=-0.0013952, position=144, material="Steel"
                     ),
                 ),
                 NotSuccessfulReason(
                     variable="curvature",
                     strain_position=StrainPosition(
-                        strain=-0.0014904761904761905, position=220.0, material="Steel"
+                        strain=-0.0014905, position=220.0, material="Steel"
                     ),
                 ),
                 NotSuccessfulReason(
@@ -138,7 +138,7 @@ class TestSlimFloorUPEPositiveWithEffectiveWidth(TestCase):
                 NotSuccessfulReason(
                     keyword="converge",
                     strain_position=StrainPosition(
-                        strain=-0.0007875097747723546, position=0.0, material="Concrete"
+                        strain=-0.0007875, position=0.0, material="Concrete"
                     ),
                 )
             ]

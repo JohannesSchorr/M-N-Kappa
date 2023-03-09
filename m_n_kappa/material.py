@@ -47,6 +47,8 @@ class StressStrain:
     strain: float = field(compare=True)
 
     def __post_init__(self):
+        self.stress = round(self.stress, 7)
+        self.strain = round(self.strain, 7)
         log.info(f"Created {self.__repr__()}")
 
     def pair(self) -> list[float]:
@@ -167,15 +169,15 @@ class Material:
             "--------------------------",
             "   stress  |   strain_value  ",
             "-----------------------",
-            self._print_stress_strain_points(),
+            self._print_stress_strain_points(strain_precision=7),
             "-----------------------",
         ]
         return print_sections(text)
 
-    def _print_stress_strain_points(self) -> str:
+    def _print_stress_strain_points(self, stress_precision: int = 2, strain_precision: int = 5) -> str:
         return print_sections(
             [
-                " {:9.2f} | {:9.5f}".format(point.stress, point.strain)
+                f" {point.stress:9.{stress_precision}f} | {point.strain:9.{strain_precision}f}"
                 for point in self.stress_strain
             ]
         )
@@ -269,7 +271,7 @@ class Material:
         """
         material_index = self._get_material_index(strain)
         if material_index is None:
-            raise ValueError(f"{strain=} -> None,\n" f"{self.__str__()}")
+            raise ValueError(f"No material-index found for {strain=},\n" f"{self.__str__()}")
         return self._interpolate_stress(strain, material_index)
 
     def sort_strains(self, reverse: bool = False) -> None:
@@ -1213,12 +1215,12 @@ class Concrete(Material):
         >>> from m_n_kappa import Concrete
         >>> nonlinear_no_tension = Concrete(f_cm=30.0, use_tension=False)
         >>> nonlinear_no_tension.stress_strain
-        [StressStrain(stress=-16.920291540864202, strain=-0.0035), \
-StressStrain(stress=-26.578327535954056, strain=-0.0027545594265149607), \
-StressStrain(stress=-30.0, strain=-0.0020091188530299217), \
-StressStrain(stress=-28.80506123318835, strain=-0.0015849387565966995), \
-StressStrain(stress=-19.617030289467877, strain=-0.0007924693782983497), \
-StressStrain(stress=-11.128163239693242, strain=-0.00039230350544992604), \
+        [StressStrain(stress=-16.9202915, strain=-0.0035), \
+StressStrain(stress=-26.5783275, strain=-0.0027546), \
+StressStrain(stress=-30.0, strain=-0.0020091), \
+StressStrain(stress=-28.8050612, strain=-0.0015849), \
+StressStrain(stress=-19.6170303, strain=-0.0007925), \
+StressStrain(stress=-11.1281632, strain=-0.0003923), \
 StressStrain(stress=0.0, strain=0.0), \
 StressStrain(stress=0.0, strain=10.0)]
 
@@ -1249,15 +1251,15 @@ StressStrain(stress=0.0, strain=10.0)]
 
         >>> with_tension = Concrete(f_cm=30.0)
         >>> with_tension.stress_strain
-        [StressStrain(stress=-16.920291540864202, strain=-0.0035), \
-StressStrain(stress=-26.578327535954056, strain=-0.0027545594265149607), \
-StressStrain(stress=-30.0, strain=-0.0020091188530299217), \
-StressStrain(stress=-28.80506123318835, strain=-0.0015849387565966995), \
-StressStrain(stress=-19.617030289467877, strain=-0.0007924693782983497), \
-StressStrain(stress=-11.128163239693242, strain=-0.00039230350544992604), \
+        [StressStrain(stress=-16.9202915, strain=-0.0035), \
+StressStrain(stress=-26.5783275, strain=-0.0027546), \
+StressStrain(stress=-30.0, strain=-0.0020091), \
+StressStrain(stress=-28.8050612, strain=-0.0015849), \
+StressStrain(stress=-19.6170303, strain=-0.0007925), \
+StressStrain(stress=-11.1281632, strain=-0.0003923), \
 StressStrain(stress=0.0, strain=0.0), \
-StressStrain(stress=2.3554273231619067, strain=7.700353297574598e-05), \
-StressStrain(stress=0.0, strain=7.800353297574598e-05), \
+StressStrain(stress=2.3554273, strain=7.7e-05), \
+StressStrain(stress=0.0, strain=7.8e-05), \
 StressStrain(stress=0.0, strain=10.0)]
 
         Furthermore, the crack-opening of the conrete and its effect on the tensile behaviour may be considered by
@@ -1267,16 +1269,16 @@ StressStrain(stress=0.0, strain=10.0)]
         >>> with_tension_opening = Concrete(f_cm=30.0,
         ...                        tension_stress_strain_type='consider opening behaviour')
         >>> with_tension_opening.stress_strain
-        [StressStrain(stress=-16.920291540864202, strain=-0.0035), \
-StressStrain(stress=-26.578327535954056, strain=-0.0027545594265149607), \
-StressStrain(stress=-30.0, strain=-0.0020091188530299217), \
-StressStrain(stress=-28.80506123318835, strain=-0.0015849387565966995), \
-StressStrain(stress=-19.617030289467877, strain=-0.0007924693782983497), \
-StressStrain(stress=-11.128163239693242, strain=-0.00039230350544992604), \
+        [StressStrain(stress=-16.9202915, strain=-0.0035), \
+StressStrain(stress=-26.5783275, strain=-0.0027546), \
+StressStrain(stress=-30.0, strain=-0.0020091), \
+StressStrain(stress=-28.8050612, strain=-0.0015849), \
+StressStrain(stress=-19.6170303, strain=-0.0007925), \
+StressStrain(stress=-11.1281632, strain=-0.0003923), \
 StressStrain(stress=0.0, strain=0.0), \
-StressStrain(stress=2.3554273231619067, strain=7.700353297574598e-05), \
-StressStrain(stress=0.4710854646323814, strain=0.16735816729459904), \
-StressStrain(stress=0.0, strain=0.8367908364729952), \
+StressStrain(stress=2.3554273, strain=7.7e-05), \
+StressStrain(stress=0.4710855, strain=0.1673582), \
+StressStrain(stress=0.0, strain=0.8367908), \
 StressStrain(stress=0.0, strain=10.0)]
         """
         self._f_cm = float(f_cm)
@@ -1547,9 +1549,9 @@ StressStrain(stress=210000.0, strain=1.0)]
         >>> bilinear_steel = Steel(f_y=355, failure_strain=0.15)
         >>> bilinear_steel.stress_strain
         [StressStrain(stress=-355.0, strain=-0.15), \
-StressStrain(stress=-355.0, strain=-0.0016904761904761904), \
+StressStrain(stress=-355.0, strain=-0.0016905), \
 StressStrain(stress=-0.0, strain=-0.0), \
-StressStrain(stress=355.0, strain=0.0016904761904761904), \
+StressStrain(stress=355.0, strain=0.0016905), \
 StressStrain(stress=355.0, strain=0.15)]
 
         3. All values are not none:
@@ -1561,9 +1563,9 @@ StressStrain(stress=355.0, strain=0.15)]
         >>> steel = Steel(f_y=355, f_u=400, failure_strain=0.15)
         >>> steel.stress_strain
         [StressStrain(stress=-400.0, strain=-0.15), \
-StressStrain(stress=-355.0, strain=-0.0016904761904761904), \
+StressStrain(stress=-355.0, strain=-0.0016905), \
 StressStrain(stress=-0.0, strain=-0.0), \
-StressStrain(stress=355.0, strain=0.0016904761904761904), \
+StressStrain(stress=355.0, strain=0.0016905), \
 StressStrain(stress=400.0, strain=0.15)]
 
         """

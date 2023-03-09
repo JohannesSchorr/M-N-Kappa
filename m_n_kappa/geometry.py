@@ -1205,13 +1205,15 @@ Rectangle(top_edge=184.50, bottom_edge=200.00, width=200.00, left_edge=-100.00, 
     top_edge: float
     t_w: float
     h_w: float
-    t_fo: float = None
-    b_fo: float = None
-    t_fu: float = None
-    b_fu: float = None
-    has_top_flange: bool = True
-    has_bottom_flange: bool = True
-    centroid_y: float = 0.0
+    t_fo: float = field(default=None)
+    b_fo: float = field(default=None)
+    t_fu: float = field(default=None)
+    b_fu: float = field(default=None)
+    has_top_flange: bool = field(default=True)
+    has_bottom_flange: bool = field(default=True)
+    centroid_y: float = field(default=0.0)
+    height: float = field(default=None, init=False)
+    bottom_edge: float = field(default=None, init=False)
     geometries: list = field(default=None, init=False)
 
     def __post_init__(self):
@@ -1226,6 +1228,8 @@ Rectangle(top_edge=184.50, bottom_edge=200.00, width=200.00, left_edge=-100.00, 
         self._add_top_flange()
         self._add_web()
         self._add_bottom_flange()
+        self.height = self.t_fo + self.h_w + self.t_fu
+        self.bottom_edge = self.top_edge + self.height
         log.info(f"Created {self.__repr__()}")
 
     def _add_top_flange(self):

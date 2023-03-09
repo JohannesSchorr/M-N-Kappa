@@ -1,7 +1,6 @@
 from unittest import TestCase, main
 
 from m_n_kappa.boundaries import (
-    compute_curvatures,
     remove_higher_strains,
     remove_smaller_strains,
     get_lower_positions,
@@ -389,16 +388,11 @@ class TestGetBoundariesSteelSection(TestCase):
             self.boundaries.positive.maximum_curvature.start,
             [
                 StrainPosition(
-                    self.steel.maximum_strain, self.i_profile.top_edge, "Steel"
+                    self.steel.minimum_strain, self.i_profile.top_edge, "Steel"
                 ),
                 StrainPosition(
                     self.steel.maximum_strain,
-                    (
-                        self.i_profile.top_edge
-                        + self.i_profile.t_fo
-                        + self.i_profile.h_w
-                        + self.i_profile.t_fu
-                    ),
+                    self.i_profile.bottom_edge,
                     "Steel",
                 ),
             ],
@@ -413,7 +407,12 @@ class TestGetBoundariesSteelSection(TestCase):
                 ),
                 StrainPosition(
                     self.steel.minimum_strain,
-                    (self.i_profile.top_edge),
+                    self.i_profile.top_edge,
+                    "Steel",
+                ),
+                StrainPosition(
+                    self.steel.maximum_strain,
+                    self.i_profile.bottom_edge,
                     "Steel",
                 ),
             ],

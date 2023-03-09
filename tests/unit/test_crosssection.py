@@ -88,23 +88,47 @@ class TestCrosssection(TestCase):
 
 
 class TestCrossSectionStrainPositions(TestCase):
-
     def setUp(self) -> None:
         self.cross_section = Crosssection([steel_section])
 
     def test_strain_positions(self):
+        self.maxDiff = None
         self.assertCountEqual(
             self.cross_section.strain_positions(),
             [
-                StrainPosition(strain=-epsilon_u, position=steel_top_edge, material='Steel'),
-                StrainPosition(strain=-steel.epsilon_y, position=steel_top_edge, material='Steel'),
-                StrainPosition(strain=steel.epsilon_y, position=steel_top_edge, material='Steel'),
-                StrainPosition(strain=epsilon_u, position=steel_top_edge, material='Steel'),
-                StrainPosition(strain=-epsilon_u, position=steel_bottom_edge, material='Steel'),
-                StrainPosition(strain=-steel.epsilon_y, position=steel_bottom_edge, material='Steel'),
-                StrainPosition(strain=steel.epsilon_y, position=steel_bottom_edge, material='Steel'),
-                StrainPosition(strain=epsilon_u, position=steel_bottom_edge, material='Steel'),
-            ]
+                StrainPosition(
+                    strain=-epsilon_u, position=steel_top_edge, material="Steel"
+                ),
+                StrainPosition(
+                    strain=round(-steel.epsilon_y, 7),
+                    position=steel_top_edge,
+                    material="Steel",
+                ),
+                StrainPosition(
+                    strain=round(steel.epsilon_y, 7),
+                    position=steel_top_edge,
+                    material="Steel",
+                ),
+                StrainPosition(
+                    strain=epsilon_u, position=steel_top_edge, material="Steel"
+                ),
+                StrainPosition(
+                    strain=-epsilon_u, position=steel_bottom_edge, material="Steel"
+                ),
+                StrainPosition(
+                    strain=round(-steel.epsilon_y, 7),
+                    position=steel_bottom_edge,
+                    material="Steel",
+                ),
+                StrainPosition(
+                    strain=round(steel.epsilon_y, 7),
+                    position=steel_bottom_edge,
+                    material="Steel",
+                ),
+                StrainPosition(
+                    strain=epsilon_u, position=steel_bottom_edge, material="Steel"
+                ),
+            ],
         )
 
 
@@ -185,12 +209,12 @@ class TestComputationCrosssectionStrainNegative(TestCase):
         self.assertAlmostEqual(self.cs.girder_sections_axial_force(), self.steel_force)
 
     def test_total_moment(self):
-        self.assertEqual(
+        self.assertAlmostEqual(
             self.cs.total_moment(), self.steel_moment + self.concrete_moment
         )
 
     def test_girder_moment(self):
-        self.assertEqual(self.cs.girder_sections_moment(), self.steel_moment)
+        self.assertAlmostEqual(self.cs.girder_sections_moment(), self.steel_moment)
 
     def test_slab_moment(self):
         self.assertAlmostEqual(self.cs.slab_sections_moment(), self.concrete_moment)

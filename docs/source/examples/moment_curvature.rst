@@ -66,18 +66,18 @@ The computed sum of axial-forces you may control by calling
 ``axial_force``, that is near zero.
 
 >>> m_kappa_point.axial_force
--4.133298293221742
+-4.12702800380066
 
 Moment and curvature are extracted by calling the corresponding
 properties of ``m_kappa_point``.
 
 >>> m_kappa_point.moment, m_kappa_point.curvature
-(532345821.77170306, 3.26619749682544e-05)
+(532343917.20861864, 3.266182702927817e-05)
 
 As well as the vertical position of the ``neutral_axis``.
 
 >>> m_kappa_point.neutral_axis
-61.233284329679606
+61.2335616806492
 
 Further details regarding the computation are described by
 :py:class:`~m_n_kappa.MKappaByStrainPosition`.

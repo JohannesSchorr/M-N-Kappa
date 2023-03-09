@@ -850,7 +850,7 @@ class MKappaByConstantCurvature(MKappa):
         :py:attr:`~m_n_kappa.MKappaByConstantCurvature.neutral_axis` is the computed neutral-axis.
 
         >>> computation.neutral_axis
-        4.985348959484763
+        4.985348948605643
 
         In case the ``applied_axial_force`` is higher than maximum positive or negative
         axial force of the ``cross_section`` the computation will be marked by

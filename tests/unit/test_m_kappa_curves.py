@@ -70,19 +70,19 @@ class TestCompositeBeamPositive(TestCase):
                 NotSuccessfulReason(
                     variable="curvature",
                     strain_position=StrainPosition(
-                        strain=-0.0016904761904761904, position=100.0, material="Steel"
+                        strain=-0.0016905, position=100.0, material="Steel"
                     ),
                 ),
                 NotSuccessfulReason(
                     variable="curvature",
                     strain_position=StrainPosition(
-                        strain=-0.0016904761904761904, position=115.0, material="Steel"
+                        strain=-0.0016905, position=115.0, material="Steel"
                     ),
                 ),
                 NotSuccessfulReason(
                     variable="curvature",
                     strain_position=StrainPosition(
-                        strain=-0.0016904761904761904, position=285.0, material="Steel"
+                        strain=-0.0016905, position=285.0, material="Steel"
                     ),
                 ),
             ],
@@ -93,11 +93,11 @@ class TestCompositeBeamPositive(TestCase):
             self.m_kappa_curve.m_kappa_points.moments,
             [
                 0.0,
-                279065090.70273054,
-                438755789.00432056,
-                516818301.88354325,
-                538683420.997121,
-                541724537.7407295,
+                279064106.6935997,
+                438757586.99726015,
+                516819111.03838825,
+                538682845.0830967,
+                541724583.2808295,
             ],
         )
 
@@ -120,24 +120,25 @@ class TestCompositeBeamNegative(TestCase):
                 NotSuccessfulReason(
                     variable="curvature",
                     strain_position=StrainPosition(
-                        strain=-0.0016904761904761904, position=115.0, material="Steel"
+                        strain=-0.0016905, position=115.0, material="Steel"
                     ),
                 )
             ],
         )
 
     def test_m_kappa_points_moments(self):
+        self.maxDiff = None
         self.assertCountEqual(
             self.m_kappa_curve.m_kappa_points.moments,
             [
-                -442383661.16446424,
-                -409298265.3218652,
-                -405044752.007268,
-                -349978085.7744969,
-                -319574554.1645081,
-                -296103666.48247814,
-                -54944467.314156845,
-                -54718951.26913915,
+                -442383659.8050097,
+                -409298629.82524645,
+                -405044578.8388414,
+                -349978336.3245533,
+                -319575350.2268986,
+                -296104456.0631782,
+                -54941561.964923926,
+                -54716034.825507574,
                 0.0,
             ],
         )
@@ -204,27 +205,29 @@ class TestSlimFloorTProfile(TestCase):
         self.cross_section = self.steel_profile + self.concrete_slab + self.rebar
 
     def test_positive_m_kappa_points_moments(self):
+        self.maxDiff = None
         m_kappa = MKappaCurve(self.cross_section, include_positive_curvature=True)
         self.assertCountEqual(
             m_kappa.m_kappa_points.moments,
             [
                 0.0,
-                71211445.03228515,
-                71374571.33219278,
-                205968550.09273192,
-                285400028.1651079,
-                299068407.68595254,
-                316019720.53199005,
-                344682943.7980188,
-                344715262.62252504,
-                347915715.8045602,
-                353497818.111975,
-                356951836.7731828,
-                356669646.6707282,
+                71208518.13882212,
+                71371648.46965477,
+                205967692.23350403,
+                285399850.8339556,
+                299068176.37613595,
+                316020154.4669411,
+                344682554.3843546,
+                344714873.888593,
+                347915919.3132613,
+                353497685.24627197,
+                356951572.7599163,
+                356669438.3570308,
             ],
         )
 
     def test_negative_m_kappa_points_moments(self):
+        self.maxDiff = None
         m_kappa = MKappaCurve(
             self.cross_section,
             include_positive_curvature=False,
@@ -233,21 +236,21 @@ class TestSlimFloorTProfile(TestCase):
         self.assertCountEqual(
             m_kappa.m_kappa_points.moments,
             [
-                -266658328.88693628,
-                -264608705.54766303,
-                -261745840.47151956,
-                -259654595.5370506,
-                -259444537.56853175,
-                -257605598.7625466,
-                -210575974.4809118,
-                -196199248.54844183,
-                -151260748.11754704,
-                -145421046.21804398,
-                -115656324.44475287,
-                -45136432.612406135,
-                -45546900.487594225,
-                -65836509.07521711,
-                -65807365.76743883,
+                -266658230.39614558,
+                -264608480.209751,
+                -261745867.3986844,
+                -259654749.07364026,
+                -259444570.4178928,
+                -257606797.99770764,
+                -210578142.29300994,
+                -196199553.2497602,
+                -151260403.34364986,
+                -145420317.98855132,
+                -115657247.50515783,
+                -45134906.50600005,
+                -45545393.81453258,
+                -65834585.267866716,
+                -65805433.37520586,
                 0.0,
             ],
         )

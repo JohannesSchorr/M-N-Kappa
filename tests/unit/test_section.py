@@ -82,7 +82,7 @@ class TestComputationSectionStrain(TestCase):
 
 
 class TestComputationSectionCurvature(TestCase):
-    def setUp(self): 
+    def setUp(self):
         self.curvature = 0.00001
         self.neutral_axis = my_section.geometry.bottom_edge
         self.computation_section = ComputationSectionCurvature(
@@ -137,16 +137,16 @@ class TestComputationSectionCurvature(TestCase):
 
 
 class TestMaterialPointsInsideCurvature(TestCase):
-
     def setUp(self):
         self.geometry = Rectangle(0, 10, 10)
         self.material = Steel(355, 400, 0.15)
         self.section = self.geometry + self.material
         self.computed_section = ComputationSectionCurvature(self.section, 0.001, 10)
+
     def test_material_points_inside_curvature(self):
         self.assertListEqual(
             self.computed_section.material_points_inside_curvature(),
-            [StrainPosition(strain=-0.0016904761904761904, position=0, material='Steel')]
+            [StrainPosition(strain=-0.0016905, position=0, material="Steel")],
         )
 
 

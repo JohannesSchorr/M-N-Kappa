@@ -174,13 +174,13 @@ class TestMomentAxialForceYield(TestCase):
         m_n = MomentAxialForce(
             sub_cross_sections=self.cross_sections, strain=self.strain
         )
-        self.assertAlmostEqual(m_n.axial_force, self.axial_force)
+        self.assertAlmostEqual(m_n.axial_force, self.axial_force, 0)
 
     def test_negative_strain_axial_force(self):
         m_n = MomentAxialForce(
             sub_cross_sections=self.cross_sections, strain=-self.strain
         )
-        self.assertAlmostEqual(m_n.axial_force, -self.axial_force)
+        self.assertAlmostEqual(m_n.axial_force, -self.axial_force, 0)
 
     def test_positive_strain_moment(self):
         m_n = MomentAxialForce(
@@ -198,13 +198,13 @@ class TestMomentAxialForceYield(TestCase):
         m_n = MomentAxialForce(
             sub_cross_sections=self.cross_sections_switched, strain=self.strain
         )
-        self.assertAlmostEqual(m_n.axial_force, self.axial_force)
+        self.assertAlmostEqual(m_n.axial_force, self.axial_force, 0)
 
     def test_negative_strain_axial_force_switched_cross_sections(self):
         m_n = MomentAxialForce(
             sub_cross_sections=self.cross_sections_switched, strain=-self.strain
         )
-        self.assertAlmostEqual(m_n.axial_force, -self.axial_force)
+        self.assertAlmostEqual(m_n.axial_force, -self.axial_force, 0)
 
     def test_positive_strain_moment_switched_cross_sections(self):
         m_n = MomentAxialForce(

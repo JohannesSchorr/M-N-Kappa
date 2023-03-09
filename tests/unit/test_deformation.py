@@ -33,7 +33,7 @@ class TestBeam(TestCase):
             load=loading)
 
     def test_deformation(self):
-        self.assertEqual(self.beam.deformation(0.5 * beam_length, loading), 1.0347518506707352e-07)
+        self.assertEqual(self.beam.deformation(0.5 * beam_length, loading), 1.0347489842978671e-07)
 
 
 if __name__ == "__main__":

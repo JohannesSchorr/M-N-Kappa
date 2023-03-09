@@ -993,13 +993,13 @@ class ComputationCrosssectionCurvature(ComputationCrosssection):
         axial-forces are computed.
 
         >>> round(computed_cross_section.total_axial_force(), 7)
-        -0.0
+        0.0
 
         The moment on the other hand is much higher and assuming Newton and Millimeter as input is here
         computed to Kilo-Newton-Meter.
 
         >>> computed_cross_section.total_moment() * 0.001 * 0.001
-        221.07005829554043
+        221.07004924606247
 
         """
         super().__init__(cross_section, slab_effective_width)

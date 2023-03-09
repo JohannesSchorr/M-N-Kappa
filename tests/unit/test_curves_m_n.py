@@ -32,7 +32,7 @@ class TestMNCurveEquivalentCrossSections(TestCase):
     def test_points_moment(self):
         self.assertCountEqual(
             self.m_n.points.moments,
-            [400000.0, 355026.8934963956, -355026.8934963956, -400000.0] * 2,
+            [400000.0, 355026.8934163825, -355026.8934163825, -400000.0] * 2,
         )
 
     def test_points_curvature(self):
@@ -88,12 +88,13 @@ class TestMNKappaCurveCompositeGirder(TestCase):
         self.assertCountEqual(
             self.m_n.points.moments,
             [
-                -259460749.9999999,
-                -124179458.88143954,
-                -259460750.0000002,
+                -259460749.99999994,
+                -124178647.99999991,
+                -259460750.0,
+                -8414269.999999916,
                 527919385.7951919,
-                440926757.53892136,
-                468057239.82207,
+                440926757.5389217,
+                468057239.82187307,
                 527919397.17408717,
             ],
         )
@@ -101,7 +102,7 @@ class TestMNKappaCurveCompositeGirder(TestCase):
     def test_points_curvature(self):
         self.assertCountEqual(
             self.m_n.points.curvatures,
-            [0.0] * 7,
+            [0.0] * 8,
         )
 
     def test_points_neutral_axis(self):
@@ -112,9 +113,10 @@ class TestMNKappaCurveCompositeGirder(TestCase):
                 -3035250.0,
                 -2860875.0,
                 -3420000.0,
-                620906.044407197,
+                620901.989999999,
+                42080.09999999997,
                 1297312.5,
-                1297312.5000000002,
+                1297312.4999999988,
             ],
         )
 
@@ -133,7 +135,7 @@ class TestMNKappaCurveCompositeGirder(TestCase):
             [
                 StrainPosition(0.15, 100.0, "Steel"),
                 StrainPosition(
-                    strain=-0.000722535505430242, position=100.0, material="Steel"
+                    strain=-0.0007225456819866566, position=100.0, material="Steel"
                 ),
             ],
         )
