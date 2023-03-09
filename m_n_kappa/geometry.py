@@ -1184,7 +1184,7 @@ class IProfile(ComposedGeometry):
     >>> heb200_geometry = IProfile(top_edge=0., t_fo=15.5, b_fo=200.0, t_w=9.5, h_w=169.0)
     >>> heb200_geometry
     IProfile(top_edge=0.0, t_w=9.5, h_w=169.0, t_fo=15.5, b_fo=200.0, t_fu=15.5, b_fu=200.0, has_top_flange=True, \
-has_bottom_flange=True, centroid_y=0.0, geometries=[\
+has_bottom_flange=True, centroid_y=0.0, height=200.0, bottom_edge=200.0, geometries=[\
 Rectangle(top_edge=0.00, bottom_edge=15.50, width=200.00, left_edge=-100.00, right_edge=100.00), \
 Rectangle(top_edge=15.50, bottom_edge=184.50, width=9.50, left_edge=-4.75, right_edge=4.75), \
 Rectangle(top_edge=184.50, bottom_edge=200.00, width=200.00, left_edge=-100.00, right_edge=100.00)])
@@ -1220,6 +1220,8 @@ Rectangle(top_edge=184.50, bottom_edge=200.00, width=200.00, left_edge=-100.00, 
         self.geometries = []
         if not self.has_top_flange:
             self.t_fo = 0.0
+        if not self.has_bottom_flange: 
+            self.t_fu = 0.0
         if self.has_top_flange and self.has_bottom_flange:
             if self.t_fu is None and self.t_fo is not None:
                 self.t_fu = self.t_fo
