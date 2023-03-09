@@ -41,6 +41,7 @@ from .points import (
     MomentAxialForce,
     MomentAxialForceCurvature,
 )
+from .curves_m_kappa import MKappaCurve, MKappaCurvePoints
 
 from dataclasses import dataclass, field
 import itertools
@@ -196,6 +197,20 @@ class MNKappaCurvePoints:
             m_n_kappa_points = MNKappaCurvePoints(points=self.points + other.points)
             m_n_kappa_points._remove_duplicate_points()
             return m_n_kappa_points
+        if isinstance(other, MKappaCurvePoints): 
+            for point in other.points: 
+                self.add(
+                    moment=point.moment, 
+                    curvature=point.curvature, 
+                    neutral_axis_1=point.neutral_axis,
+                    neutral_axis_2=point.neutral_axis,
+                    cross_section=point.cross_section, 
+                    strain_position=point.strain_position,
+                    axial_force=0.0,
+                    strain_difference=0.0,
+                    axial_force_cross_section_number=1,
+                )
+            return self
 
     def _remove_duplicate_points(self):
         sorting_function = operator.attrgetter(
@@ -1019,6 +1034,7 @@ class MNKappaCurve:
         "_m_n_curve",
         "_positive_m_n_kappa_curve",
         "_negative_m_n_kappa_curve",
+        "_m_kappa_curve"
     )
 
     @log.init
@@ -1112,6 +1128,13 @@ class MNKappaCurve:
             self._not_successful_reason += (
                 self._negative_m_n_kappa_curve.not_successful_reason
             )
+        # add moment-curvatures with zero axial-forces
+        self._m_kappa_curve = MKappaCurve(
+            cross_section=self.sub_cross_sections[0] + self.sub_cross_sections[1], 
+            include_positive_curvature=self.include_positive_curvature, 
+            include_negative_curvature=self.include_negative_curvature,
+        )
+        self._points += self._m_kappa_curve.m_kappa_points
 
     def __repr__(self) -> str:
         return "MNKappaCurve()"
