@@ -44,6 +44,7 @@ Material
 .. autosummary::
    :toctree: api/
 
+   StressStrain
    Material
    Concrete
    Steel
@@ -75,6 +76,8 @@ Strain-based-design
 
    MKappaByStrainPosition
    MKappaByConstantCurvature
+   MomentAxialForce
+   MomentAxialForceCurvature
 
 .. _api.moment_curvature_curve:
 
@@ -88,6 +91,19 @@ Moment-Curvature-Curve
    MKappaCurve
    curves_m_kappa.MKappaCurvePoint
    curves_m_kappa.MKappaCurvePoints
+
+.. _api.moment_axial_force_curvature_curve:
+
+Moment-Axial-Force-Curvature Curve
+==================================
+
+.. currentmodule:: m_n_kappa
+
+.. autosummary::
+   :toctree: api/
+
+   MNCurve
+   MNKappaCurve
 
 .. _api.loading:
 
