@@ -509,7 +509,8 @@ class MNCurve:
         """
         Parameters
         ----------
-        sub_cross_sections : list[:py:class:`~m_n_kappa.Crosssection`]
+        sub_cross_sections : list[:py:class:`~m_n_kappa.Crosssection`] | 
+        tuple[:py:class:`~m_n_kappa.Crosssection`, :py:class:`~m_n_kappa.Crosssection`]
             sub-cross-sections to compute
 
         Examples
@@ -519,14 +520,14 @@ class MNCurve:
         In the following two identical cross-sections are defined as
         our sub-cross-sections.
 
-        >>> from m_n_kappa import Steel, Rectangle
-        >>> steel = Steel()
+        >>> from m_n_kappa import Steel, Rectangle, Crosssection
+        >>> steel = Steel(f_y=355.0, f_u=400, failure_strain=0.15)
         >>> rectangle_top = Rectangle(top_edge=0.0, bottom_edge=10.0, width=10.0)
         >>> section_top = steel + rectangle_top
         >>> cross_section_top = Crosssection([section_top])
-        >>> rectangle_bottom= Rectangle(top_edge=10.0, bottom_edge=20.0, width=10.0)
-        >>> section_bottom= steel + rectangle_bottom
-        >>> cross_section_bottom = Crosssection([section_top])
+        >>> rectangle_bottom = Rectangle(top_edge=10.0, bottom_edge=20.0, width=10.0)
+        >>> section_bottom = steel + rectangle_bottom
+        >>> cross_section_bottom = Crosssection([section_bottom])
         >>> cross_sections = [cross_section_top, cross_section_bottom]
 
         The ``cross_sections`` are passed to :py:class:`~m_n_kappa.MNCurve`.
@@ -542,7 +543,7 @@ class MNCurve:
 
         >>> m_n.points.moments
         [400000.0, 355026.8934963956, -355026.8934963956, -400000.0, \
-        400000.0, 355026.8934963956, -355026.8934963956, -400000.0]
+400000.0, 355026.8934963956, -355026.8934963956, -400000.0]
 
         The computed curvatures are by definition zero.
 
