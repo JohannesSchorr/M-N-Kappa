@@ -16,6 +16,7 @@ General
 
    StrainPosition
    EffectiveWidths
+   NotSuccessfulReason
 
 .. rubric:: Functions
 
@@ -139,8 +140,25 @@ Strain-based design
 .. autosummary::
    :toctree: api/
 
+   Point
    Computation
    MKappa
+   MNByStrain
+   AxialForcePoint
+
+.. _api_developers.moment_axial_force_curvature_curve:
+
+Moment-Axial-Force-Curvature Curve
+==================================
+
+.. currentmodule:: m_n_kappa.curves_m_n_kappa
+
+.. autosummary::
+   :toctree: api/
+
+   MNKappaCurvePoint
+   MNKappaCurvePoints
+   MNCurvatureCurve
 
 .. _api_developers.solver:
 
