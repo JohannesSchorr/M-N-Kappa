@@ -11,7 +11,7 @@ from .geometry import (
 )
 from .section import Section
 from .crosssection import Crosssection
-from .points import MKappaByStrainPosition, MKappaByConstantCurvature, MomentAxialForce
+from .points import MKappaByStrainPosition, MKappaByConstantCurvature, MomentAxialForce, MomentAxialForceCurvature
 from .curves_m_kappa import MKappaCurve
 from .curves_m_n_kappa import MNCurve, MNKappaCurve
 from .deformation import Beam, Node
