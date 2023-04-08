@@ -1352,7 +1352,7 @@ class MomentAxialForce(AxialForcePoint):
         To compute the moment-axial-force you need two (sub)-cross-sections.
         In the following these are two identical steel rectangles.
 
-        >>> from m_n_kappa import Steel, Rectangle
+        >>> from m_n_kappa import Steel, Rectangle, Crosssection
         >>> steel = Steel()
         >>> rectangle_top = Rectangle(top_edge=0.0, bottom_edge=10.0, width=10.0)
         >>> section_top = steel + rectangle_top
@@ -1372,17 +1372,17 @@ class MomentAxialForce(AxialForcePoint):
         The axial-force is easily accessed by :py:attr:`~m_n_kappa.MomentAxialForce.axial_force`.
 
         >>> m_n.axial_force
-        2100
+        2100.0
 
         And the computed moment by is :py:attr:`~m_n_kappa.MomentAxialForce.moment`.
 
-        >>> m_n.moment
-        21000
+        >>> m_n.moment()
+        21000.0
 
         The strain-difference between both cross-sections is computed by
         :py:attr:`~m_n_kappa.MomentAxialForce.strain_difference`.
 
-        >>> m_n.strain_difference
+        >>> round(m_n.strain_difference, 7)
         0.0002
         """
         super().__init__(sub_cross_sections, axial_force)
