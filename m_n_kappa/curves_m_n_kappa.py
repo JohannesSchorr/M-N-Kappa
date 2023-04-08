@@ -1199,6 +1199,9 @@ class MNKappaCurve:
             include_negative_curvature=self.include_negative_curvature,
         )
         self._points += self._m_kappa_curve.m_kappa_points
+        self._not_successful_reason += (
+            self._m_kappa_curve.not_successful_reason
+        )
 
     def __repr__(self) -> str:
         return "MNKappaCurve()"
