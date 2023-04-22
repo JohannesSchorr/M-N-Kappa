@@ -267,13 +267,12 @@ def interpolation(
     position_value : float
         value the corresponding other value must be interpolated
     first_pair : list[float]
-        first pair.
         1st position applies to the value given by argument 'position_value'.
         2nd position applies to the value that is looked for
-    second_pair
-        first pair.
+    second_pair : list[float]
         1st position applies to the value given by argument 'position_value'.
         2nd position applies to the value that is looked for
+        
     Returns
     -------
     float
