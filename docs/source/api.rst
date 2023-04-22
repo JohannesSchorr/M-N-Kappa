@@ -105,6 +105,20 @@ Moment-Axial-Force-Curvature Curve
    MNCurve
    MNKappaCurve
 
+.. _api.shear_connector:
+
+Shear connector
+===============
+
+.. currentmodule:: m_n_kappa
+
+.. autosummary::
+   :toctree: api/
+
+   LoadSlip
+   ShearConnector
+   HeadedStud
+
 .. _api.loading:
 
 Loading

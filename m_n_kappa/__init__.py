@@ -21,3 +21,4 @@ from .loading import (
     SingleSpanSingleLoads,
     SingleSpan,
 )
+from .shearconnector import LoadSlip, ShearConnector, HeadedStud
