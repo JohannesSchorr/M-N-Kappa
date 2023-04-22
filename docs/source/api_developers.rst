@@ -174,6 +174,29 @@ Solver
    Bisection
    Newton
 
+Fitting
+=======
+
+.. currentmodule:: m_n_kappa.fitting
+
+.. autosummary::
+   :toctree: api/
+
+   GaussNewton
+
+Matrices
+========
+
+.. currentmodule:: m_n_kappa.matrices
+
+.. autosummary::
+   :toctree: api/
+
+   Vector
+   Matrix
+   Jacobian
+   LinearEquationsSystem
+
 .. _api_developers.loading:
 
 Loading
