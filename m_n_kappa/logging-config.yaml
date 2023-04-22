@@ -31,6 +31,10 @@ loggers:
     level: WARN
     handlers: [ console ]
     propagate: no
+  m_n_kappa.fitting:
+    level: WARN
+    handlers: [ console ]
+    propagate: no
   m_n_kappa.function:
     level: WARN
     handlers: [ console ]
@@ -48,6 +52,10 @@ loggers:
     handlers: [ console ]
     propagate: no
   m_n_kappa.material:
+    level: WARN
+    handlers: [ console ]
+    propagate: no
+  m_n_kappa.matrices:
     level: WARN
     handlers: [ console ]
     propagate: no
