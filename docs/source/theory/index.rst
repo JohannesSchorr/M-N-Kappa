@@ -108,6 +108,17 @@ the hood of this program.
       Procedure to compute the moment-curvature-curve
 
    .. grid-item-card::
+      :link: theory.m_n_curvature_epsilon
+      :link-type: ref
+      :text-align: center
+      :img-top: ../images/theory_moment_curvature_icon.svg
+
+      **Moment-Axial Force-Curvature-Strain-Difference-Curve**
+      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+      Procedure to compute the :math:`M`-:math:`N`-:math:`\kappa`-:math:`\epsilon`-curve
+
+   .. grid-item-card::
       :link: theory.effective_widths
       :link-type: ref
       :text-align: center
@@ -128,7 +139,6 @@ the hood of this program.
       ^^^^^^^^^^^^^^^^
 
 
-
    .. grid-item-card::
       :link: theory.deformations
       :link-type: ref
@@ -139,6 +149,17 @@ the hood of this program.
       ^^^^^^^^^^^^^^^^
 
       Computing deformation under given loading using the moment-curvature-curve
+
+   .. grid-item-card::
+      :link: theory.slip
+      :link-type: ref
+      :text-align: center
+      .. :img-top: ../images/theory_slip_icon.svg #TODO
+
+      **Slip**
+      ^^^^^^^^
+
+      Computing the slip / the relative motion between two cross-sectional parts
 
 .. toctree::
    :hidden:
@@ -152,6 +173,8 @@ the hood of this program.
    sections
    strain_based_design
    m_kappa_curve
+   m_n_curvature_epsilon
    effective_widths
    loading
+   slip
    deformations
