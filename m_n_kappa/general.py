@@ -1,6 +1,7 @@
 from dataclasses import dataclass, field
 from itertools import groupby
 from decimal import Decimal
+import operator
 
 from .log import LoggerMethods
 
@@ -267,11 +268,10 @@ def interpolation(
     position_value : float
         value the corresponding other value must be interpolated
     first_pair : list[float]
-        1st position applies to the value given by argument 'position_value'.
-        2nd position applies to the value that is looked for
+        1st position applies to the value that is looked for. 
+        2nd position applies to the value given by argument 'position_value'.
     second_pair : list[float]
-        1st position applies to the value given by argument 'position_value'.
-        2nd position applies to the value that is looked for
+        positioning is the same as in ``first_pair`` 
         
     Returns
     -------
@@ -281,6 +281,96 @@ def interpolation(
     return first_pair[0] + (position_value - first_pair[1]) * (
         second_pair[0] - first_pair[0]
     ) / (second_pair[1] - first_pair[1])
+
+
+def interpolate_in(
+        objects_list: list[object], 
+        searched_attribute_name: str,
+        first_attr_name: str,
+        first_attr_value: float,
+        second_attr_name: str,
+        second_attr_value: float
+):
+    """
+    Interpolate a value in a list of objects between two attributes
+    
+    .. versionadded:: 0.2.0
+    
+    Parameters
+    ----------
+    objects_list : list[object]
+        objects that have attributes with names ``first_attr_name`` and ``second_attr_name``
+    searched_attribute_name : str
+        attribute to search for in points
+    first_attr_name : str
+        name of the first attribute
+    first_attr_value : float 
+        value of the first attribute
+    second_attr_name : str
+        name of the second attribute
+    second_attr_value : float
+        value of the second attribute
+
+    Returns
+    -------
+    float
+        interpolated value 
+    """
+    moment_axial_force = []
+
+    # interpolation of moment depending on strain-difference
+    points_lists = [list(filter(lambda x: getattr(x, first_attr_name) <= first_attr_value, objects_list)),
+                    list(filter(lambda x: getattr(x, first_attr_name) >= first_attr_value, objects_list))]
+
+    for points_list in points_lists:
+        if not points_list:
+            break
+        if len(points_list) == 1:
+            moment_axial_force.append([
+                getattr(points_list[0], first_attr_name), getattr(points_list[0], searched_attribute_name)
+            ])
+            break
+        second_attribute_list = []
+        smaller_strain_difference = list(
+            filter(lambda x: getattr(x, second_attr_name) <= second_attr_value, points_list))
+        if smaller_strain_difference:
+            point = max(smaller_strain_difference, key=operator.attrgetter(second_attr_name))
+            second_attribute_list.append(
+                [getattr(point, first_attr_name), getattr(point, searched_attribute_name),
+                 getattr(point, second_attr_name)]
+            )
+        greater_strain_difference = list(
+            filter(lambda x: getattr(x, second_attr_name) >= second_attr_value, points_list))
+        if greater_strain_difference:
+            point = min(greater_strain_difference, key=operator.attrgetter(second_attr_name))
+            second_attribute_list.append(
+                [getattr(point, first_attr_name), getattr(point, searched_attribute_name),
+                 getattr(point, second_attr_name)]
+            )
+
+        if len(second_attribute_list) == 1 or second_attribute_list[0] == second_attribute_list[1]:
+            moment_axial_force.append(
+                [second_attribute_list[0][1], second_attribute_list[0][0]]
+            )
+        elif len(second_attribute_list) == 2:
+            moment_axial_force.append([
+                interpolation(
+                    second_attr_value,
+                    second_attribute_list[0][1:3],
+                    second_attribute_list[1][1:3]
+                ),
+                second_attribute_list[0][0]
+            ])
+        else:
+            raise ValueError
+
+    # Interpolation of moment depending on axial-force
+    if len(moment_axial_force) == 1 or moment_axial_force[0] == moment_axial_force[1]:
+        return moment_axial_force[0][0]
+    elif len(moment_axial_force) == 2:
+        return interpolation(first_attr_value, moment_axial_force[0], moment_axial_force[1])
+    else:
+        raise ValueError
 
 
 def remove_none(sequence: list) -> list:
