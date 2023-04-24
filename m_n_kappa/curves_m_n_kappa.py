@@ -29,6 +29,7 @@ from .general import (
     str_start_end,
     StrainPosition,
     NotSuccessfulReason,
+    interpolate_in,
 )
 
 from .crosssection import (
@@ -416,7 +417,35 @@ class MNKappaCurvePoints:
         ValueError
             in case the moment is outside the computed moment-range
         """
-        pass  # TODO: compute curvature
+        return interpolate_in(
+            self.points, "curvature", "axial_force", axial_force, "moment", by_moment
+        )
+
+    def moment(self, strain_difference: float, axial_force: float):
+        """
+        get the moment from the curve corresponding with the given ``axial_force`` and
+        ``strain_difference``.
+
+        Parameters
+        ----------
+        strain_difference : float
+           strain-difference between the sub-cross-sections
+        axial_force : float
+           axial-force
+
+        Returns
+        -------
+        float
+            moment
+        """
+        return interpolate_in(
+            self.points,
+            "moment",
+            "axial_force",
+            axial_force,
+            "strain_difference",
+            strain_difference,
+        )
 
     def _moment_curvature(self, by_index: int) -> list[float]:
         """get moment-curvature of curve-point at given index.rst"""

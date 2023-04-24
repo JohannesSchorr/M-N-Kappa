@@ -1,4 +1,4 @@
-from m_n_kappa.curves_m_n_kappa import MNKappaCurve
+from m_n_kappa.curves_m_n_kappa import MNKappaCurve, MNKappaCurvePoints
 from m_n_kappa import (
     IProfile,
     Steel,
@@ -12,6 +12,38 @@ from m_n_kappa import (
 from unittest import TestCase, main
 
 
+class TestMNKappaCurvePoints(TestCase): 
+    
+    def setUp(self):
+        self.curvature = 0.001
+        self.points = MNKappaCurvePoints()
+        self.points.add(moment=100, curvature="", axial_force=100, strain_difference=0.0001, 
+                        cross_section="", axial_force_cross_section_number="", strain_position="")
+        self.points.add(moment=200, curvature="", axial_force=100, strain_difference=0.0002, 
+                        cross_section="", axial_force_cross_section_number="", strain_position="")
+        self.points.add(moment=300, curvature="", axial_force=200, strain_difference=0.0001, 
+                        cross_section="", axial_force_cross_section_number="", strain_position="")
+        self.points.add(moment=400, curvature="", axial_force=200, strain_difference=0.0002, 
+                        cross_section="", axial_force_cross_section_number="", strain_position="")
+        self.points.add(moment=400, curvature="", axial_force=300, strain_difference=0.0003,
+                        cross_section="", axial_force_cross_section_number="", strain_position="")
+
+    def test_moment_in_between(self):
+        self.assertEqual(self.points.moment(axial_force=150.0, strain_difference=0.00015), 250.0)
+        
+    def test_moment_same_axial_force(self):
+        self.assertAlmostEqual(self.points.moment(axial_force=100.0, strain_difference=0.00015), 150.0)
+
+    def test_moment_same_strain_difference(self):
+        self.assertAlmostEqual(self.points.moment(axial_force=150, strain_difference=0.0002), 300.0)
+
+    def test_moment_same_axial_force_and_same_strain_difference(self):
+        self.assertEqual(self.points.moment(axial_force=100.0, strain_difference=0.0001), 100.0)
+    
+    def test_moment_with_three_points(self):
+        self.assertEqual(self.points.moment(axial_force=150.0, strain_difference=0.00025), 300.0)
+        
+        
 class TestMNKappaCurveEquivalentCrossSections(TestCase):
     def setUp(self) -> None:
         self.steel = Steel(f_y=355, f_u=400, failure_strain=0.15)
