@@ -1064,7 +1064,7 @@ class MNKappaCurve:
         "_m_n_curve",
         "_positive_m_n_kappa_curve",
         "_negative_m_n_kappa_curve",
-        "_m_kappa_curve"
+        "_m_kappa_curve",
     )
 
     @log.init
