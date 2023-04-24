@@ -282,6 +282,15 @@ class TestInterpolation(TestCase):
             interpolation(position_value=1.5, first_pair=[0.0, 1.0], second_pair=[1.0, 2.0]),
             0.5,
         )
+        
+    def test_2(self):
+        self.assertEqual(
+            interpolation(
+                0.00015,
+                [300.0, 0.0001],
+                [400.0, 0.0002]
+            ), 350.0
+        )
 
 
 class TestRemoveNone(TestCase):
