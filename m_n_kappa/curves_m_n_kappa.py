@@ -1097,14 +1097,14 @@ class MNKappaCurve:
         See Also
         --------
         :py:class:`~m_n_kappa.MKappaCurve` : computation of Moment-Curvature-Curve assuming full interaction
-        
+
         Examples
         --------
-        This example illustrates the usage of :py:class:`~m_n_kappa.MNKappaCurve`. 
-        First two individual cross-sections may be created. 
-        In the following both cross-sections are :py:class:`~m_n_kappa.Rectangle` 
-        of material :py:class:`~m_n_kappa.Steel`. 
-        
+        This example illustrates the usage of :py:class:`~m_n_kappa.MNKappaCurve`.
+        First two individual cross-sections may be created.
+        In the following both cross-sections are :py:class:`~m_n_kappa.Rectangle`
+        of material :py:class:`~m_n_kappa.Steel`.
+
         >>> from m_n_kappa import Steel, Rectangle, Crosssection
         >>> steel = Steel(f_y=355, f_u=400, failure_strain=0.15)
         >>> rectangle_top = Rectangle(top_edge=0.0, bottom_edge=10.0, width=10.0)
@@ -1114,35 +1114,35 @@ class MNKappaCurve:
         >>> section_bottom = steel + rectangle_bottom
         >>> cross_section_bottom = Crosssection([section_bottom])
         >>> sub_cross_sections = [cross_section_top, cross_section_bottom]
-        
+
         To compute moment-axial-force-curvature points these the list of ``sub_cross_sections``
-        shall be passed to :py:class:`~m_n_kappa.MNKappaCurve`. 
-        In case you want to compute only positive moment-curvature-values you have to 
-        ``include_positive_curvature=True``, what is also the default configuration. 
-        Negative moment-curvature-values are included by ``include_negative_curvature=True``. 
-        
-        The following code computes only positive values: 
-        
+        shall be passed to :py:class:`~m_n_kappa.MNKappaCurve`.
+        In case you want to compute only positive moment-curvature-values you have to
+        ``include_positive_curvature=True``, what is also the default configuration.
+        Negative moment-curvature-values are included by ``include_negative_curvature=True``.
+
+        The following code computes only positive values:
+
         >>> from m_n_kappa import MNKappaCurve
         >>> m_n_kappa_curve = MNKappaCurve(
-        ...     sub_cross_sections=sub_cross_sections, 
+        ...     sub_cross_sections=sub_cross_sections,
         ...     include_positive_curvature=True)
-        
+
         :py:meth:`~m_n_kappa.MNKappaCurve.points`` returns :py:meth:`~m_n_kappa.MNKappaCurvePoints`
         what is a collection of all the successfully computed Moment-Axial force-Curvature points.
-        The attributes :py:attr:`~m_n_kappa.MNKappaCurvePoints.moments`, 
-        :py:attr:`~m_n_kappa.MNKappaCurvePoints.curvatures`, 
-        :py:attr:`~m_n_kappa.MNKappaCurvePoints.axial_forces`, 
-        :py:attr:`~m_n_kappa.MNKappaCurvePoints.strain_differences`, 
+        The attributes :py:attr:`~m_n_kappa.MNKappaCurvePoints.moments`,
+        :py:attr:`~m_n_kappa.MNKappaCurvePoints.curvatures`,
+        :py:attr:`~m_n_kappa.MNKappaCurvePoints.axial_forces`,
+        :py:attr:`~m_n_kappa.MNKappaCurvePoints.strain_differences`,
         gives you a list of the corresponding values.
-        
+
         >>> m_n_kappa_points = m_n_kappa_curve.points
         >>> m_n_kappa_points.moments
         [355026.8934163825, 400000.0, 0.0, 236666.87937886757, 236666.50674824225, 372381.6934067906, 372282.02545773983, 361270.59229865274, 406270.5922986528, 384814.01494666666]
-        
-        :py:meth:`~m_n_kappa.MNKappaCurvePoints.print_points` prints a full table consisting of all 
+
+        :py:meth:`~m_n_kappa.MNKappaCurvePoints.print_points` prints a full table consisting of all
         successfully computed values.
-        
+
         >>> print(m_n_kappa_points.print_points())
         ----------------------------------------------------------------------------------------------------------------------------------
              Moment     |  Curvature   | Neutral A.1 | Neutral A.2 |  Axial-force  | strain-diff. |   Strain   | Position | Material
@@ -1158,8 +1158,8 @@ class MNKappaCurve:
                400000.0 |   0.00000000 |   Infinity  |   Infinity  |     -40000.00 |    -0.300000 |  -0.150000 |      0.0 | Steel
                406270.6 |   0.01483095 |     9.7084  |     9.8860  |      35500.00 |     0.002634 |   0.001690 |     10.0 | Steel
         ----------------------------------------------------------------------------------------------------------------------------------
-        
-        
+
+
         """
         if (
             isinstance(sub_cross_sections, tuple)
