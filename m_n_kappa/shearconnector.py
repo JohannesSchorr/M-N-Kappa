@@ -1,5 +1,6 @@
+import math
 import operator
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 
 from .general import interpolation
 from .material import Concrete
@@ -18,8 +19,8 @@ class LoadSlip:
 
     """
 
-    load: float
-    slip: float
+    load: float = field(compare=True)
+    slip: float = field(compare=True)
 
     def pair(self) -> list[float, float]:
         """given values as slip"""
@@ -36,32 +37,50 @@ class ShearConnector:
     Provide basic functionality for defining a shear-connector in :py:mod:`m_n_kappa`.
     """
 
-    def __init__(self, load_slips: list[LoadSlip]):
+    def __init__(self, load_slips: list[LoadSlip], position: float = None):
         """
         Parameters
         ----------
         load_slips : list[:py:class:`~m_n_kappa.LoadSlip`])
             load-slip-relationship of the shear connector
-            
+        position : float | None
+            position of the shear-connector along the beam
+
         See Also
         --------
         HeadedStud : Headed stud shear connector
         """
         self._load_slips = load_slips
-        self._s_max = max(self.load_slips, key=operator.attrgetter('slip')).slip
-        
+        self._position = position
+        self._s_max = max(self.load_slips, key=operator.attrgetter("slip")).slip
+
     def __repr__(self) -> str:
-        return f"{self.__class__.__name__}(load_slips={self.load_slips})"
+        return f"{self.__class__.__name__}(load_slips={self.load_slips}, position={self.position})"
+
+    def __eq__(self, other) -> bool:
+        if isinstance(other, HeadedStud): 
+            if self.load_slips == other.load_slips and self.position == other.position:
+                return True
+        return False
 
     @property
     def load_slips(self) -> list[LoadSlip]:
         """load-slip-relationship"""
         return self._load_slips
-    
+
     @property
     def s_max(self) -> float:
         """Maximum slip of the shear connector"""
         return self._s_max
+
+    @property
+    def position(self) -> float | None:
+        """position of the shear-connector along the beam"""
+        return self._position
+
+    @position.setter
+    def position(self, value: float):
+        self._position = value
 
     def shear_load(self, slip: float) -> float:
         """
@@ -84,6 +103,21 @@ class ShearConnector:
                 lower_slip.slip < slip <= upper_slip.slip
             ):  # assumes that first slip-value is zero
                 return interpolation(slip, lower_slip.pair(), upper_slip.pair())
+    
+    def new(self, position: float):
+        """
+        Create new shear-connector at the given position
+        
+        Parameters
+        ----------
+        position : float
+            position of the shear-connector along the beam
+
+        Returns
+        -------
+        ShearConnector
+            Shear-Connector at the given position
+        """
 
 
 class HeadedStud(ShearConnector):
@@ -104,6 +138,7 @@ class HeadedStud(ShearConnector):
         h_p: float = None,
         b_o: float = None,
         n_r: int = 1,
+        position: float = None,
     ):
         """
         Parameters
@@ -124,6 +159,8 @@ class HeadedStud(ShearConnector):
            decisive width of a profiled steel sheeting (Default: None)
         n_r : int
            number of headed studs in a row (Default: 1)
+        position : float
+           position of the headed stud along the beam
 
         References
         ----------
@@ -140,7 +177,7 @@ class HeadedStud(ShearConnector):
         self._n_r = n_r
         self._concrete = Concrete(f_cm)
         self._P = self._compute_P()
-        super().__init__(self._define_load_slips())
+        super().__init__(self._define_load_slips(), position)
 
     @property
     def d(self) -> float:
@@ -183,7 +220,7 @@ class HeadedStud(ShearConnector):
         return self._b_o
 
     @property
-    def n_r(self) -> float:
+    def n_r(self) -> int:
         """number of headed studs in a row"""
         return self._n_r
 
@@ -276,3 +313,68 @@ class HeadedStud(ShearConnector):
     def _define_load_slips(self) -> list[LoadSlip]:
         """define the load-slip-relationship of the shear connector"""
         return [LoadSlip(0.0, 0.0), LoadSlip(self.P, 0.5), LoadSlip(self.P, self.s_max)]
+
+    def new(self, position: float):
+        """
+        New shear connector with given position
+
+        Parameters
+        ----------
+        position : float
+            position of the new shear connector
+
+        Returns
+        -------
+        HeadedStud
+            Headed stud at the given position
+        """
+        return HeadedStud(
+            self.d,
+            self.h_sc,
+            self.f_u,
+            self.f_cm,
+            self.s_max,
+            self.h_p,
+            self.b_o,
+            self.n_r,
+            position,
+        )
+
+
+def equal_distanced_shear_connectors(
+    shear_connector: ShearConnector,
+    longitudinal_distance: float,
+    beam_length: float,
+    end_distance: float = 0.0,
+) -> list[ShearConnector]:
+    """
+    Create a number of shear-connectors with equal distance
+
+    .. versionadded:: 0.2.0
+
+    Aims to simplify the creation of a number of shear connectors along the beam
+
+    Parameters
+    ----------
+    shear_connector: ShearConnector
+         shear-connector that is positioned along the beam
+    longitudinal_distance: float
+        longitudinal distance of the shear-connectors
+    beam_length: float
+        length of the beam the shear-connectors are located
+    end_distance: float = 0.0
+        distance between the support of the beam and the first shear-connector (Default: 0.0)
+
+    Returns
+    -------
+    list[ShearConnector]
+        shear-connectors including the positioning along the beam
+    """
+    sc_distance = beam_length - 2.0 * end_distance
+    sc_total_number = int(math.floor(sc_distance / longitudinal_distance))
+    longitudinal_distance = sc_distance / sc_total_number
+    shear_connectors = []
+    for number in range(sc_total_number + 1):
+        new_position = end_distance + number * longitudinal_distance
+        shear_connectors.append(shear_connector.new(new_position))
+    return shear_connectors
