@@ -121,8 +121,19 @@ class Node:
         return self._number
 
     def curvature_by(self, moment: float) -> float:
-        """compute curvature given a moment using the M-Kappa-Curve"""
-        return self.m_kappa_curve.curvature(moment)
+        """
+        compute curvature
+
+        Parameters
+        ----------
+        moment : float
+             moment that is associated with the curvature
+
+        Returns
+        -------
+        float
+        """
+        return self.curve_points.curvature(moment)
 
     def incremental_deformation(
         self, load: ABCSingleSpan, single_load: SingleSpanSingleLoads
