@@ -3,6 +3,7 @@ from dataclasses import dataclass
 from .general import interpolation, EffectiveWidths
 from .crosssection import Crosssection
 from .curves_m_kappa import MKappaCurve, MKappaCurvePoints, MKappaCurvePoint
+from .curves_m_n_kappa import MNKappaCurvePoints, MNKappaCurve
 from .loading import (
     ABCSingleSpan,
     SingleSpanSingleLoads,
@@ -42,7 +43,7 @@ class Node:
         self,
         cross_section: Crosssection,
         position: float,
-        m_kappa_curve: MKappaCurvePoints = None,
+        m_kappa_curve: MKappaCurvePoints | MNKappaCurvePoints = None,
     ):
         """
         Parameters
@@ -51,8 +52,9 @@ class Node:
             Cross-section at this node
         position : float
             position of the node along the beam
-        m_kappa_curve : MKappaCurvePoints
-            if moment-curvature-curve has already been computed then this may be passed here
+        m_kappa_curve : :py:class:`~m_n_kappa.curves_m_kappa.MKappaCurvePoints`
+            if moment-curvature-curve has already been computed,
+            then this may be passed here
 
         Examples
         --------
