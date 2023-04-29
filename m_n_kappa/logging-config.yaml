@@ -59,6 +59,10 @@ loggers:
     level: WARN
     handlers: [ console ]
     propagate: no
+  m_n_kappa.node:
+    level: WARN
+    handlers: [ console ]
+    propagate: no
   m_n_kappa.points:
     level: WARN
     handlers: [ console ]

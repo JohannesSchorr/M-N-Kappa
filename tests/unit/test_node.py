@@ -4,7 +4,7 @@ from m_n_kappa.material import Steel, Concrete
 from m_n_kappa.geometry import Rectangle
 from m_n_kappa.crosssection import Crosssection
 from m_n_kappa.shearconnector import HeadedStud
-from m_n_kappa.deformation import Node, CompositeNode
+from m_n_kappa.node import Node, CompositeNode
 
 
 class TestNodeSingleSection(TestCase):

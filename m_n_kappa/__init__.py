@@ -14,7 +14,8 @@ from .crosssection import Crosssection
 from .points import MKappaByStrainPosition, MKappaByConstantCurvature, MomentAxialForce, MomentAxialForceCurvature
 from .curves_m_kappa import MKappaCurve
 from .curves_m_n_kappa import MNCurve, MNKappaCurve
-from .deformation import Beam, Node
+from .node import Node, CompositeNode
+from .deformation import Beam
 from .loading import (
     SingleSpanUniformLoad,
     SingleLoad,
