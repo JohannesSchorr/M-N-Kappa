@@ -1,5 +1,6 @@
 from dataclasses import dataclass
 
+from .shearconnector import ShearConnector
 from .general import interpolation, EffectiveWidths
 from .crosssection import Crosssection
 from .curves_m_kappa import MKappaCurve, MKappaCurvePoints, MKappaCurvePoint
@@ -162,6 +163,104 @@ class Node:
         curvature = self.curvature_by(moment)
         single_load_moment = single_load.moment(self.position)
         return curvature * single_load_moment
+
+
+class CompositeNode(Node):
+
+    """
+    Beam-Node for Composite sections
+
+    .. versionadded:: 0.2.0
+
+    Composite section means that two parts of the overall cross-section
+    are moving relatively to each other.
+    For example in steel-concrete-composite-cross-sections a steel girder and the
+    concrete slab are moving relatively to each other.
+    """
+
+    def __init__(
+        self,
+        cross_section: Crosssection,
+        position: float,
+        m_n_kappa_curve: MNKappaCurvePoints = None,
+        shear_connectors: ShearConnector | list[ShearConnector] = None,
+    ):
+        """
+        Parameters
+        ----------
+        cross_section : :py:class:`~m_n_kappa.Crosssection`
+            Cross-section at this node
+        position : float
+            position of the node along the beam
+        m_n_kappa_curve : :py:class:`~m_n_kappa.curves_m_n_kappa.MNKappaCurvePoints`
+            if moment-axial-force-curvature-curve has already been computed,
+            then this may be passed here
+        shear_connectors : :py:class:`~m_n_kappa.ShearConnector` | list[:py:class:`~m_n_kappa.ShearConnector`]
+            shear-connectors (Default: ``None``)
+        """
+        if m_n_kappa_curve is None:
+            m_n_kappa_curve = MNKappaCurve(
+                cross_section, include_positive_curvature=True
+            ).points
+        super().__init__(cross_section, position, m_n_kappa_curve)
+        if isinstance(shear_connectors, ShearConnector):
+            self._shear_connectors = [shear_connectors]
+        elif isinstance(shear_connectors, list):
+            self._shear_connectors = shear_connectors
+        elif shear_connectors is None:
+            self._shear_connectors = []
+        else:
+            raise ValueError(
+                'Argument "shear_connectors must be of type ShearConnector or list[ShearConnector],'
+                + f" is of type {type(shear_connectors)}"
+            )
+
+    @property
+    def shear_connectors(self) -> list[ShearConnector]:
+        """shear-connector(s) at this node"""
+        return self._shear_connectors
+
+    def shear_force(self, slip: float) -> float:
+        """
+        compute the shear-force transferred by the shear-connectors at this position
+
+        Parameters
+        ----------
+        slip : float
+            slip at this node
+
+        Returns
+        -------
+        float
+            shear-force transferred by the shear-connectors at this position under
+            the given slip
+        """
+        sign = slip / abs(slip)
+        slip = abs(slip)
+        return sign * sum(
+            (
+                shear_connector.shear_load(slip)
+                for shear_connector in self.shear_connectors
+            )
+        )
+
+    def curvature_by(self, moment: float, axial_force: float) -> float:
+        """
+        compute curvature
+
+        Parameters
+        ----------
+        moment : float
+            moment that is associated with the curvature
+        axial_force : float
+            axial-force that is also associated with the searched curvature
+
+        Returns
+        -------
+        float
+            curvature by the moment and the axial_force
+        """
+        return self.curve_points.curvature(moment, axial_force)
 
 
 @dataclass(slots=True)
