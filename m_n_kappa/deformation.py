@@ -83,7 +83,7 @@ class Node:
         >>> node.curvature_by(moment=100)
         1.4443096916449083e-07
 
-        For computation of the incremental deformation at this node
+        For computation of the incremental deformation at this node use
         :py:meth:`~m_n_kappa.Node.incremental_deformation`.
         """
         self._cross_section = cross_section
@@ -98,7 +98,7 @@ class Node:
         self._number = Node.node_number
 
     def __repr__(self):
-        return f"Node(cross_section, position={self.position}"
+        return f"Node(cross_section, position={self.position})"
 
     @property
     def cross_section(self) -> Crosssection:
