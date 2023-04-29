@@ -26,7 +26,14 @@ class Node:
     stores the cross-section, the position_value in the beam and the computed M-Kappa-Curve
     """
 
-    __slots__ = "_cross_section", "_m_kappa_curve", "_position", "_number"
+    __slots__ = (
+        "_cross_section",
+        "_curve_points",
+        "_position",
+        "_number",
+        "_consider_slip",
+        "_shear_connector",
+    )
 
     node_number: int = 0
 
@@ -82,11 +89,11 @@ class Node:
         self._cross_section = cross_section
         self._position = position
         if m_kappa_curve is None:
-            self._m_kappa_curve = MKappaCurve(
+            self._curve_points = MKappaCurve(
                 self.cross_section, include_positive_curvature=True
             ).m_kappa_points
         else:
-            self._m_kappa_curve = m_kappa_curve
+            self._curve_points = m_kappa_curve
         Node.node_number += 1
         self._number = Node.node_number
 
@@ -99,9 +106,9 @@ class Node:
         return self._cross_section
 
     @property
-    def m_kappa_curve(self) -> MKappaCurvePoints:
+    def curve_points(self) -> MKappaCurvePoints | MNKappaCurvePoints:
         """computed Moment-Curvature-Curve at the node"""
-        return self._m_kappa_curve
+        return self._curve_points
 
     @property
     def position(self) -> float:
@@ -193,17 +200,17 @@ class Loading:
         log.info(f"Created {self.__repr__()}")
 
     def maximum_resistance_moments(self) -> list[float]:
-        return [node.m_kappa_curve.maximum_moment() for node in self.nodes]
+        return [node.curve_points.maximum_moment() for node in self.nodes]
 
     def decisive_position(self):
         decisive_loading = self.load.load_by(
-            self.nodes[1].m_kappa_curve.maximum_moment(), self.nodes[1].position
+            self.nodes[1].curve_points.maximum_moment(), self.nodes[1].position
         ).loading
         decisive_node = None
         for node in self.nodes:
             if 0.0 < node.position < self.beam_length:
                 load = self.load.load_by(
-                    node.m_kappa_curve.maximum_moment(), node.position
+                    node.curve_points.maximum_moment(), node.position
                 )
                 if decisive_loading > load.loading:
                     decisive_loading = load.loading
@@ -232,7 +239,7 @@ class Loading:
     def m_kappa_curve_at(self, position) -> MKappaCurvePoints:
         return list(filter(lambda x: x.position == position, self.nodes))[
             0
-        ].m_kappa_curve
+        ].curve_points
 
 
 @dataclass(slots=True)
@@ -649,7 +656,7 @@ class Beam:
                     if cross_section == node.cross_section:
                         log.info(f"M-Kappa-Curve of Node {node.number} will be copied.")
                         computed_node = Node(
-                            cross_section, position, m_kappa_curve=node.m_kappa_curve
+                            cross_section, position, m_kappa_curve=node.curve_points
                         )
                         break
             else:
