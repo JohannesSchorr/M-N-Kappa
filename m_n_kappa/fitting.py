@@ -34,6 +34,7 @@ class GaussNewton:
         "_successful",
         "_not_successful_reason",
         "_max_line_search_iterations",
+        "_minimum_residuum_change",
     )
 
     @log.init
@@ -44,6 +45,7 @@ class GaussNewton:
         maximum_iterations: int = 20,
         tolerance: float = 0.1,
         max_line_search_iterations: int = 10,
+        minimum_residuum_change: float = 0.000000001,
     ):
         """
         Parameters
@@ -166,13 +168,17 @@ class GaussNewton:
         self._maximum_iterations = maximum_iterations
         self._tolerance = tolerance
         self._max_line_search_iterations = max_line_search_iterations
+        self._minimum_residuum_change = minimum_residuum_change
         self._x_i = [Vector(self._x_0)]
         self._iteration = 0
         self._f_x = [self._substituting(self._x_i[-1])]
-        self._residuum = [self._compute_residuum(self.f_x)]
+        self._residuum = [self.f_x.norm()]
         self._successful = False
         self._not_successful_reason = None
         self._compute()
+
+    def __repr__(self) -> str:
+        return f"GaussNewton(f_i=[{len(self._f_i)} functions given], x_0={self._x_0})"
 
     @property
     def f_i(self) -> list[Callable]:
@@ -203,6 +209,11 @@ class GaussNewton:
     def maximum_iterations(self) -> int:
         """maximum number of iterations"""
         return self._maximum_iterations
+
+    @property
+    def minimum_residuum_change(self) -> float:
+
+        return self._minimum_residuum_change
 
     @property
     def successful(self) -> bool:
@@ -238,10 +249,35 @@ class GaussNewton:
             if self._is_residuum_smaller_tolerance():
                 self._successful = True
                 return
+            elif self._residuum_has_not_changed():
+
+                self._successful = True
+                return
         self._not_successful_reason = NotSuccessfulReason(
             reason="Succeeded the maximum number of iterations"
         )
-        log.info(self.not_successful_reason)
+        log.warning(
+            f"Not Successful: {self.not_successful_reason}, Residuum={self._residuum[-1]}"
+        )
+
+    def _residuum_has_not_changed(self) -> bool:
+        """
+        Control the change of the residuum. 
+        
+        In case the change of the residuum is minimal it is assumed 
+        that the further iterations will not improve the result significantly. 
+        To reduce computation time the iterations will be stopped.
+        
+        For example the case when the more equations than variables are given (over-fitting).
+        """
+        residuum_change = abs(self._residuum[-1] - self._residuum[-2])
+        if residuum_change < self.minimum_residuum_change:
+            log.info(
+                f"Iteration stopped due to minor change of residuum ({residuum_change=})"
+            )
+            return True
+        else:
+            return False
 
     def _iterate(self) -> None:
         """
@@ -289,7 +325,7 @@ class GaussNewton:
         for _ in range(self.max_line_search_iterations):
             x_i_plus_1 = self.x_i - delta_x.multiply_scalar(step_size)
             f_x = self._substituting(x_i_plus_1)
-            residuum = self._compute_residuum(f_x)
+            residuum = f_x.norm()
             if residuum > self._residuum[-1]:
                 step_size = step_size * 0.5
                 log.debug(
@@ -298,8 +334,9 @@ class GaussNewton:
             else:
                 self._x_i.append(x_i_plus_1)
                 self._f_x.append(f_x)
-                log.debug(f"Line-Search: successful with step-size = {step_size}")
-                log.debug(f"{x_i_plus_1=}")
+                self._residuum.append(residuum)
+                log.info(f"Line-Search: successful with step-size = {step_size}")
+                log.info(f"{x_i_plus_1=},\n\t{residuum=}")
                 break
 
     def _is_residuum_smaller_tolerance(self) -> bool:
@@ -313,11 +350,6 @@ class GaussNewton:
     def _residuals(self) -> float:
         """computes the residuals of the current computation"""
         return sum((x**2.0 for x in self.f_x.entries))
-
-    @log.result
-    def _compute_residuum(self, vector: Vector) -> float:
-        """compute the residuum of the given vector"""
-        return vector.norm()
 
     @log.result
     def _substituting(self, x: Vector) -> Vector:

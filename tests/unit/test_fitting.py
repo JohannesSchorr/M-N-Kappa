@@ -20,9 +20,9 @@ class TestGaussNewton(TestCase):
         functions = [f_1, f_2]
         starting_values = [0.0, -0.1]
 
-        gn = GaussNewton(f_i=functions, x_0=starting_values)
+        gn = GaussNewton(f_i=functions, x_0=starting_values, tolerance=0.001)
 
-        self.assertEqual(gn.x_i, Vector([1.0, 1.0]))
+        self.assertEqual(round(gn.x_i, 9), Vector([1.0, 1.0]))
 
     def test_optimization_problem_1(self):
         """https://www.igpm.rwth-aachen.de/Numa/NumaMB/SS13/grUe10.pdf Example 1"""
@@ -57,7 +57,7 @@ class TestGaussNewton(TestCase):
 
         gn = GaussNewton(f_i=functions, x_0=starting_values)
 
-        self.assertEqual(round(gn.x_i, 7), Vector([3.8605284, 0.69519100]))
+        self.assertEqual(round(gn.x_i, 3), Vector([3.861, 0.695]))
 
 
 if __name__ == "__main__":
