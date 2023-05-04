@@ -18,6 +18,9 @@ Procedure
    2.3 compute the moment-axial-force-curvature-point at failure
    2.4 determine strain- and position-values that are between the failure curvature and no curvature
    2.5 compute moment-curvature-point for each of the strain- and position-values given above
+3. Moment-Curvature without axial-forces (M-Kappa)
+   3.1 compute the Moment-Curvature-Curve of each sub-cross-section individually
+   3.2 compare the both curves from 3.1 and add-up the moments at each curvature-point
 
 Each of the above given points requires a split of the cross-sections
 """
@@ -30,6 +33,7 @@ from .general import (
     StrainPosition,
     NotSuccessfulReason,
     interpolate_in,
+    strain_difference,
 )
 
 from .crosssection import (
@@ -38,6 +42,7 @@ from .crosssection import (
     ComputationCrosssectionStrain,
 )
 from .points import (
+    MKappaByConstantCurvature,
     MNByStrain,
     MomentAxialForce,
     MomentAxialForceCurvature,
@@ -1046,6 +1051,148 @@ class MNCurvatureCurve:
             neutral_axis_1=m_n_kappa.neutral_axes[0],
             neutral_axis_2=m_n_kappa.neutral_axes[1],
         )
+
+
+class MCurvatureCurve:
+
+    """
+    computation of the Moment-Curvature curve assuming no
+    connection between the sub-cross-sections
+
+    .. versionadded:: 0.2.0
+
+    The sub-cross-sections deform independently form each other,
+    but the overall answer of the system
+    """
+
+    __slots__ = (
+        "_sub_cross_sections",
+        "_positive_curvature",
+        "_m_kappa_curves",
+        "_curvatures",
+        "_points",
+        "_not_successful_reason",
+    )
+
+    def __init__(
+        self,
+        sub_cross_sections: Crosssection
+        | list[Crosssection]
+        | tuple[Crosssection, Crosssection] = None,
+        positive_curvature: bool = True,
+    ):
+        self._sub_cross_sections = initialize_sub_cross_sections(sub_cross_sections)
+        self._positive_curvature = positive_curvature
+        self._m_kappa_curves = self._compute_m_kappa_points()
+        self._curvatures = self._compute_curvatures()
+        self._points = MNKappaCurvePoints()
+        self._not_successful_reason: list[NotSuccessfulReason] = []
+        self._compute_m_kappa_curve_points()
+
+    @property
+    def curvatures(self) -> list[float]:
+        """all relevant curvatures"""
+        return self._curvatures
+
+    @property
+    def m_kappa_curves(self) -> list[MKappaCurvePoints]:
+        """Moment-Curvature-Curve of the sub-cross-sections"""
+        return self._m_kappa_curves
+
+    @property
+    def negative_curvature(self) -> bool:
+        """indicates if negative curvature is to be computed"""
+        if self.positive_curvature:
+            return False
+        else:
+            return True
+
+    @property
+    def not_successful_reason(self) -> list[NotSuccessfulReason]:
+        """for those computations that were not successful, here the reasons are given"""
+        return self._not_successful_reason
+
+    @property
+    def positive_curvature(self) -> bool:
+        """indicates if positive curvature is to be computed"""
+        return self._positive_curvature
+
+    @property
+    def points(self) -> MNKappaCurvePoints:
+        """computed points of the M-N-Kappa-curve"""
+        return self._points
+
+    @property
+    def sub_cross_sections(self) -> tuple[Crosssection, Crosssection]:
+        """sub-cross-sections to be computed"""
+        return self._sub_cross_sections
+
+    def _compute_m_kappa_points(self) -> list[MKappaCurvePoints]:
+        """compute the M-Kappa-Curve-Points of both sub-cross-sections"""
+        m_kappa_curves = []
+        for cross_section in self.sub_cross_sections:
+            m_kappa_curves.append(
+                MKappaCurve(
+                    cross_section, self.positive_curvature, self.negative_curvature
+                ).m_kappa_points
+            )
+        return m_kappa_curves
+
+    def _compute_curvatures(self) -> list[float]:
+        """compute all curvatures"""
+        curvatures = []
+        min_curvatures = []
+        max_curvatures = []
+        for m_kappa_curve in self.m_kappa_curves:
+            m_kappa_curvatures = m_kappa_curve.curvatures
+            curvatures += m_kappa_curvatures
+            min_curvatures.append(min(m_kappa_curvatures))
+            max_curvatures.append(max(m_kappa_curvatures))
+        min_curvature = max(min_curvatures)
+        max_curvature = min(max_curvatures)
+        curvatures = list(set(curvatures))
+        return list(filter(lambda x: min_curvature <= x <= max_curvature, curvatures))
+
+    def _compute_m_kappa_curve_points(self) -> None:
+        """compute the new M-Kappa-Curve points from the given cross-sections"""
+        for curvature in self.curvatures:
+            if curvature == 0.0:
+                continue
+            moment = 0.0
+            computed_cross_sections = []
+            neutral_axes = []
+            strain_position = None
+            for index, m_kappa_curve in enumerate(self.m_kappa_curves):
+                if curvature in m_kappa_curve.curvatures:
+                    curvature_index = m_kappa_curve.curvatures.index(curvature)
+                    point = m_kappa_curve.points[curvature_index]
+                    computed_cross_sections.append(point.cross_section)
+                    neutral_axes.append(point.neutral_axis)
+                    moment += point.moment
+                    strain_position = point.strain_position
+                else:
+                    m_kappa = MKappaByConstantCurvature(
+                        cross_section=self.sub_cross_sections[index],
+                        applied_curvature=curvature,
+                        applied_axial_force=0.0,
+                    )
+                    computed_cross_sections.append(m_kappa.computed_cross_section)
+                    moment += m_kappa.moment
+                    neutral_axes.append(m_kappa.neutral_axis)
+
+            self._points.add(
+                moment=moment,
+                curvature=curvature,
+                axial_force=0.0,
+                axial_force_cross_section_number=0,
+                strain_position=strain_position,
+                strain_difference=strain_difference(
+                    curvature, neutral_axes[0], neutral_axes[1]
+                ),
+                cross_section=tuple(computed_cross_sections),
+                neutral_axis_1=neutral_axes[0],
+                neutral_axis_2=neutral_axes[1],
+            )
 
 
 class MNKappaCurve:
