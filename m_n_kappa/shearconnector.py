@@ -53,12 +53,13 @@ class ShearConnector:
         self._load_slips = load_slips
         self._position = position
         self._s_max = max(self.load_slips, key=operator.attrgetter("slip")).slip
+        self._P_max = max(self.load_slips, key=operator.attrgetter("load")).load
 
     def __repr__(self) -> str:
         return f"{self.__class__.__name__}(load_slips={self.load_slips}, position={self.position})"
 
     def __eq__(self, other) -> bool:
-        if isinstance(other, HeadedStud): 
+        if isinstance(other, HeadedStud):
             if self.load_slips == other.load_slips and self.position == other.position:
                 return True
         return False
@@ -67,6 +68,11 @@ class ShearConnector:
     def load_slips(self) -> list[LoadSlip]:
         """load-slip-relationship"""
         return self._load_slips
+
+    @property
+    def P_max(self) -> float:
+        """Maximum shear-load"""
+        return self._P_max
 
     @property
     def s_max(self) -> float:
@@ -103,11 +109,11 @@ class ShearConnector:
                 lower_slip.slip < slip <= upper_slip.slip
             ):  # assumes that first slip-value is zero
                 return interpolation(slip, lower_slip.pair(), upper_slip.pair())
-    
+
     def new(self, position: float):
         """
         Create new shear-connector at the given position
-        
+
         Parameters
         ----------
         position : float
@@ -118,6 +124,36 @@ class ShearConnector:
         ShearConnector
             Shear-Connector at the given position
         """
+        return ShearConnector(self.load_slips, position)
+
+    def slip(self, shear_load: float):
+        """
+        get the slip associated with the given shear-load
+
+        begins searching at the end of the load-slip curve
+
+        Parameters
+        ----------
+        shear_load : float
+            shear-load the corresponding slip is looked for
+
+        Returns
+        -------
+        float
+            slip corresponding with given shear-load
+        """
+        for index in range(len(self.load_slips) - 2, -1, -1):
+            lower = self.load_slips[index]
+            upper = self.load_slips[index + 1]
+            if (
+                lower.load < shear_load <= upper.load
+                or upper.load < shear_load <= lower.load
+            ):
+                return interpolation(shear_load, lower.pair()[::-1], upper.pair()[::-1])
+
+    def slips(self) -> list[float]:
+        """slips from the load-slip-curves"""
+        return [load_slip.slip for load_slip in self.load_slips]
 
 
 class HeadedStud(ShearConnector):
