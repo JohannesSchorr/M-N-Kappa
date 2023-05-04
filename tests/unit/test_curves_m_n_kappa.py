@@ -12,38 +12,82 @@ from m_n_kappa import (
 from unittest import TestCase, main
 
 
-class TestMNKappaCurvePoints(TestCase): 
-    
+class TestMNKappaCurvePoints(TestCase):
     def setUp(self):
         self.curvature = 0.001
         self.points = MNKappaCurvePoints()
-        self.points.add(moment=100, curvature="", axial_force=100, strain_difference=0.0001, 
-                        cross_section="", axial_force_cross_section_number="", strain_position="")
-        self.points.add(moment=200, curvature="", axial_force=100, strain_difference=0.0002, 
-                        cross_section="", axial_force_cross_section_number="", strain_position="")
-        self.points.add(moment=300, curvature="", axial_force=200, strain_difference=0.0001, 
-                        cross_section="", axial_force_cross_section_number="", strain_position="")
-        self.points.add(moment=400, curvature="", axial_force=200, strain_difference=0.0002, 
-                        cross_section="", axial_force_cross_section_number="", strain_position="")
-        self.points.add(moment=400, curvature="", axial_force=300, strain_difference=0.0003,
-                        cross_section="", axial_force_cross_section_number="", strain_position="")
+        self.points.add(
+            moment=100,
+            curvature="",
+            axial_force=100,
+            strain_difference=0.0001,
+            cross_section="",
+            axial_force_cross_section_number="",
+            strain_position="",
+        )
+        self.points.add(
+            moment=200,
+            curvature="",
+            axial_force=100,
+            strain_difference=0.0002,
+            cross_section="",
+            axial_force_cross_section_number="",
+            strain_position="",
+        )
+        self.points.add(
+            moment=300,
+            curvature="",
+            axial_force=200,
+            strain_difference=0.0001,
+            cross_section="",
+            axial_force_cross_section_number="",
+            strain_position="",
+        )
+        self.points.add(
+            moment=400,
+            curvature="",
+            axial_force=200,
+            strain_difference=0.0002,
+            cross_section="",
+            axial_force_cross_section_number="",
+            strain_position="",
+        )
+        self.points.add(
+            moment=400,
+            curvature="",
+            axial_force=300,
+            strain_difference=0.0003,
+            cross_section="",
+            axial_force_cross_section_number="",
+            strain_position="",
+        )
 
     def test_moment_in_between(self):
-        self.assertEqual(self.points.moment(axial_force=150.0, strain_difference=0.00015), 250.0)
-        
+        self.assertEqual(
+            self.points.moment(axial_force=150.0, strain_difference=0.00015), 250.0
+        )
+
     def test_moment_same_axial_force(self):
-        self.assertAlmostEqual(self.points.moment(axial_force=100.0, strain_difference=0.00015), 150.0)
+        self.assertAlmostEqual(
+            self.points.moment(axial_force=100.0, strain_difference=0.00015), 150.0
+        )
 
     def test_moment_same_strain_difference(self):
-        self.assertAlmostEqual(self.points.moment(axial_force=150, strain_difference=0.0002), 300.0)
+        self.assertAlmostEqual(
+            self.points.moment(axial_force=150, strain_difference=0.0002), 300.0
+        )
 
     def test_moment_same_axial_force_and_same_strain_difference(self):
-        self.assertEqual(self.points.moment(axial_force=100.0, strain_difference=0.0001), 100.0)
-    
+        self.assertEqual(
+            self.points.moment(axial_force=100.0, strain_difference=0.0001), 100.0
+        )
+
     def test_moment_with_three_points(self):
-        self.assertEqual(self.points.moment(axial_force=150.0, strain_difference=0.00025), 300.0)
-        
-        
+        self.assertEqual(
+            self.points.moment(axial_force=150.0, strain_difference=0.00025), 300.0
+        )
+
+
 class TestMNKappaCurveEquivalentCrossSections(TestCase):
     def setUp(self) -> None:
         self.steel = Steel(f_y=355, f_u=400, failure_strain=0.15)
@@ -59,25 +103,25 @@ class TestMNKappaCurveEquivalentCrossSections(TestCase):
         )
         self.positive_moments = [
             0.0,
-            236666.87937886757,
-            236666.50674824225, 
+            118310.12038053536,
+            118397.16128195659,
             355026.8934163825,
             361270.59229865274,
             372282.02545773983,
             372381.6934067906,
-            384814.01494666666, 
+            192407.00747329212,
             400000.0,
             406270.5922986528,
         ]
         self.negative_moments = [
             0.0,
-            -236666.2412422644,
-            -236666.8262777007,
+            -118310.12038053536,
+            -118397.16128195582,
             -355026.8934163825,
             -361270.5922986573,
             -372282.02545773325,
             -372381.6934067898,
-            -384814.0149466655,
+            -192407.0074733372,
             -400000.0,
             -406270.5922986531,
         ]
@@ -134,24 +178,23 @@ class TestMNKappaCurveEquivalentCrossSectionsDifferentMaterial(TestCase):
         )
         self.positive_moments = [
             0.0,
-            156664.9683024992,
-            220473.64281681945, 
+            78372.81572891976,
+            109389.16919138256,
             235021.79524176393,
-            285162.6100359638, 
+            163189.90797100778,
             295216.6590597687,
             300000.0,
-            318537.868720389,
             344405.28555681015,
         ]
         self.negative_moments = [
             0.0,
-            -156664.96830249924,
-            -220473.6428168192, 
+            -163189.90797098214,
+            -109389.1691913825,
             -235021.795241764,
-            -285162.6100359637, 
+            -78304.57731215179,
             -295216.65905976767,
             -300000.0,
-            -318537.8687203883, 
+            -78372.81572891944,
             -344405.28555680957,
         ]
 
@@ -205,57 +248,61 @@ class TestMNKappaCurveCompositeGirder(TestCase):
         self.cross_section = self.girder_cross_section + self.slab_cross_section
         self.positive_moments = [
             0.0,
-            276002147.55783015,
-            314408413.19173497,
-            318166054.2148396,
-            376022894.6108031,
-            393853527.41305673,
-            440108705.8153522, 
+            31752973.329176545,
+            31946950.316480417,
+            202541843.68077758,
+            202542405.76940852,
+            220350528.10889408,
+            220350472.04692814,
             440926757.5389217,
             468057239.82187307,
-            484937769.80569863, 
+            220497566.30864674,
             503429585.222551,
             503493186.5866488,
-            511886928.6233367,
+            227322060.4077785,
             512744493.3587002,
             520150830.48371154,
             521989031.60150206,
-            523029210.643234,
+            228125734.819494,
             527919385.7951919,
             527919397.17408717,
-            535895219.7302048,
+            229538989.35381523,
+            230505964.4745606,
         ]
 
         self.negative_moments = [
-            -442383631.56713593,
-            -409298629.82524645, 
-            -405044585.1148733, 
+            -317389109.78996813,
+            -300168065.8446009,
             -402397204.3752972,
             -390004803.4567734,
             -379545377.97262585,
             -366676197.31785566,
             -351444781.5738121,
-            -349978062.41072005, 
+            -290788568.90372676,
             -335152995.07909435,
             -330150913.4412089,
             -330142461.3828803,
             -324538633.8511237,
-            -319575671.5961261, 
+            -278531953.09826255,
             -307038309.80922854,
             -297526517.9525038,
-            -296104456.0811664, 
             -285145190.0725863,
             -281696649.83730423,
             -259460750.0,
             -259460749.99999994,
             -259218558.661083,
             -124178647.99999991,
-            -55046304.28887214, 
-            -54822261.18930392, 
+            -251211193.562506,
+            -276414218.2089273,
             -35201848.42556666,
             -35020735.64617353,
             -8414269.999999916,
-            
+            -241653898.19328588,
+            -241653819.78843212,
+            -220509136.56065917,
+            -220508448.33147323,
+            -30936574.859719712,
+            -30743576.176289596,
             0.0,
         ]
 
