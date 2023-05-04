@@ -1,6 +1,10 @@
 from unittest import TestCase, main
 
-from m_n_kappa.shearconnector import HeadedStud, equal_distanced_shear_connectors, LoadSlip
+from m_n_kappa.shearconnector import (
+    HeadedStud,
+    equal_distanced_shear_connectors,
+    LoadSlip,
+)
 
 
 class TestShearConnector(TestCase):
@@ -34,12 +38,14 @@ class TestHeadedStud(TestCase):
     def test_get_shear_load_2(self):
         self.assertEqual(self.concrete_stud.shear_load(0.4), 79071.6800399552)
 
+    def test_slip_1(self):
+        self.assertEqual(self.concrete_stud.slip(1000.0), 0.0050587011658014425)
 
-class TestLoadSlips(TestCase): 
-    
+
+class TestLoadSlips(TestCase):
     def test_equality(self):
         self.assertEqual(LoadSlip(1.0, 1.0), LoadSlip(1.0, 1.0))
-        
+
     def test_equality_in_list(self):
         self.assertCountEqual(
             [LoadSlip(1.0, 1.0), LoadSlip(2.0, 2.0)],
