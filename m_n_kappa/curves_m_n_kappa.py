@@ -103,6 +103,39 @@ def remove_duplicates(list_with_duplicates: list, sorting_function) -> list:
     return new_list
 
 
+def initialize_sub_cross_sections(
+    sub_cross_sections: Crosssection
+    | list[Crosssection]
+    | tuple[Crosssection, Crosssection]
+) -> tuple[Crosssection, Crosssection]:
+    if (
+        isinstance(sub_cross_sections, tuple)
+        and len(sub_cross_sections) == 2
+        and isinstance(sub_cross_sections[0], Crosssection)
+        and isinstance(sub_cross_sections[1], Crosssection)
+    ):
+        return sub_cross_sections
+    elif (
+        isinstance(sub_cross_sections, list)
+        and len(sub_cross_sections) == 2
+        and isinstance(sub_cross_sections[0], Crosssection)
+        and isinstance(sub_cross_sections[1], Crosssection)
+    ):
+        return tuple(sub_cross_sections)
+    elif isinstance(sub_cross_sections, Crosssection):
+        cross_sections = sub_cross_sections.get_sub_cross_sections()
+        if len(cross_sections) != 2:
+            raise ValueError(
+                "Cross-section must be passed to sub_cross_sections that consists of steel and concrete"
+            )
+        else:
+            return sub_cross_sections.get_sub_cross_sections()
+    else:
+        raise TypeError(
+            'sub_cross_section must be of type "Crosssection" or of type "tuple[Crosssection, Crosssection]"'
+        )
+
+
 @dataclass(slots=True)
 class MNKappaCurvePoint:
     """
@@ -863,14 +896,7 @@ class MNCurvatureCurve:
             and axial_forces is not None
             and strain_positions is not None
         ):
-            if isinstance(sub_cross_sections, Crosssection):
-                self._sub_cross_sections = sub_cross_sections.get_sub_cross_sections()
-            elif isinstance(sub_cross_sections, list) and len(sub_cross_sections) == 2:
-                self._sub_cross_sections = tuple(sub_cross_sections)
-            elif isinstance(sub_cross_sections, tuple) and len(sub_cross_sections) == 2:
-                self._sub_cross_sections = sub_cross_sections
-            else:
-                raise TypeError("")
+            self._sub_cross_sections = initialize_sub_cross_sections(sub_cross_sections)
             self._axial_forces = axial_forces
         elif m_n_curve is not None:
             self._sub_cross_sections = m_n_curve.sub_cross_sections
@@ -1343,26 +1369,7 @@ class MNKappaCurve:
 
 
         """
-        if (
-            isinstance(sub_cross_sections, tuple)
-            and len(sub_cross_sections) == 2
-            and isinstance(sub_cross_sections[0], Crosssection)
-            and isinstance(sub_cross_sections[1], Crosssection)
-        ):
-            self._sub_cross_sections = sub_cross_sections
-        elif (
-            isinstance(sub_cross_sections, list)
-            and len(sub_cross_sections) == 2
-            and isinstance(sub_cross_sections[0], Crosssection)
-            and isinstance(sub_cross_sections[1], Crosssection)
-        ):
-            self._sub_cross_sections = tuple(sub_cross_sections)
-        elif isinstance(sub_cross_sections, Crosssection):
-            self._sub_cross_sections = sub_cross_sections.get_sub_cross_sections()
-        else:
-            raise TypeError(
-                'sub_cross_section must be of type "Crosssection" or of type "tuple[Crosssection, Crosssection]"'
-            )
+        self._sub_cross_sections = initialize_sub_cross_sections(sub_cross_sections)
         self._include_positive_curvature = include_positive_curvature
         self._include_negative_curvature = include_negative_curvature
         self._m_n_curve = MNCurve(self.sub_cross_sections)
