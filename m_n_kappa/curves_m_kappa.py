@@ -20,6 +20,7 @@ moment-curvature-curve directly
 """
 
 from dataclasses import dataclass, field
+from bisect import bisect
 
 from .crosssection import Crosssection
 from .boundaries import BoundaryValues, Boundaries
@@ -264,6 +265,30 @@ class MKappaCurvePoints:
             self._curvature_moment(point_index + 1),
         )
 
+    def moment(self, curvature: float) -> float:
+        """
+        determine the moment from the moment-curvature associated
+        with the given ``curvature`` value
+
+        Parameters
+        ----------
+        curvature : float
+            curvature-value a moment is looked for
+
+        Returns
+        -------
+        float
+            moment associated with the given curvature-value
+        """
+        if curvature < min(self.curvatures) or max(self.curvatures) < curvature:
+            raise ValueError(
+                f"Given {curvature=} is outside the scope of this Moment-Curvature-Curve"
+            )
+        index = bisect(self.curvatures, curvature)
+        return interpolation(
+            curvature, self._moment_curvature(index - 1), self._moment_curvature(index)
+        )
+
     def _moment_curvature(self, by_index: int) -> list[float]:
         """get moment-curvature of curve-point at given index.rst"""
         return self.points[by_index].moment_curvature()
@@ -303,7 +328,7 @@ class MKappaCurvePoints:
     def maximum_moment(self) -> float:
         """computes the maximum moment of the curve"""
         return max(self.moments)
-
+    
 
 class MKappaCurveCurvature:
 
