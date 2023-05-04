@@ -103,6 +103,12 @@ class MKappaCurvePoints:
         ]
         return print_chapter(text)
 
+    def __iter__(self):
+        self._point_iterator = iter(self.points)
+
+    def __next__(self):
+        return self._point_iterator.__next__()
+
     def _print_initialization(self) -> str:
         text = ["Initialization", "------------", self.__repr__()]
         return print_sections(text)
