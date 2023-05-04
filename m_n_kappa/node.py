@@ -95,6 +95,15 @@ class Node:
     def __repr__(self):
         return f"Node(cross_section, position={self.position})"
 
+    def __eq__(self, other) -> bool:
+        if isinstance(other, Node):
+            if (
+                self.cross_section == other.cross_section
+                and self.curve_points == self.curve_points
+            ):
+                return True
+        return False
+
     @property
     def cross_section(self) -> Crosssection:
         """:py:class:`Crosssection` at the node"""
