@@ -668,14 +668,7 @@ class MNCurve:
         >>> m_n.points.axial_forces
         [40000.0, 35500.0, -35500.0, -40000.0, 40000.0, 35500.0, -35500.0, -40000.0]
         """
-        if isinstance(sub_cross_sections, Crosssection):
-            self._sub_cross_sections = sub_cross_sections.get_sub_cross_sections()
-        elif isinstance(sub_cross_sections, list) or isinstance(
-            sub_cross_sections, tuple
-        ):
-            self._sub_cross_sections = tuple(sub_cross_sections)
-        else:
-            raise TypeError("")
+        self._sub_cross_sections = initialize_sub_cross_sections(sub_cross_sections)
         self._points = MNKappaCurvePoints()
         self._decisive_strains_cross_sections = self._determine_maximum_strains()
         self._strain_positions = self._determine_intermediate_strain_positions()
