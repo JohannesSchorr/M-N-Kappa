@@ -200,6 +200,17 @@ class Geometry(ABC):
         """horizontal edges"""
         ...
 
+    @property
+    @abstractmethod
+    def top_edge(self) -> float:
+        """top-edge"""
+        ...
+
+    @property
+    @abstractmethod
+    def bottom_edge(self) -> float:
+        """bottom-edge"""
+        ...
 
 def check_width(
     width: float = None, left_edge: float = None, right_edge: float = None
