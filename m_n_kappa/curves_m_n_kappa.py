@@ -591,6 +591,14 @@ class MNKappaCurvePoints:
             ]
         return tuple(axial_forces)
 
+    def max(self, attribute: str) -> float:
+        """determine maximum value of the given attribute in the points list"""
+        return getattr(max(self.points, key=operator.attrgetter(attribute)), attribute)
+
+    def min(self, attribute: str) -> float:
+        """determine minimum value of the given attribute in the points list"""
+        return getattr(min(self.points, key=operator.attrgetter(attribute)), attribute)
+
 
 class MNCurve:
 
