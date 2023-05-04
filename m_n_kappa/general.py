@@ -344,18 +344,18 @@ def interpolation(
 
 
 def interpolate_in(
-        objects_list: list[object], 
-        searched_attribute_name: str,
-        first_attr_name: str,
-        first_attr_value: float,
-        second_attr_name: str,
-        second_attr_value: float
+    objects_list: list[object],
+    searched_attribute_name: str,
+    first_attr_name: str,
+    first_attr_value: float,
+    second_attr_name: str,
+    second_attr_value: float,
 ):
     """
     Interpolate a value in a list of objects between two attributes
-    
+
     .. versionadded:: 0.2.0
-    
+
     Parameters
     ----------
     objects_list : list[object]
@@ -364,7 +364,7 @@ def interpolate_in(
         attribute to search for in points
     first_attr_name : str
         name of the first attribute
-    first_attr_value : float 
+    first_attr_value : float
         value of the first attribute
     second_attr_name : str
         name of the second attribute
@@ -374,53 +374,87 @@ def interpolate_in(
     Returns
     -------
     float
-        interpolated value 
+        interpolated value
     """
     moment_axial_force = []
 
     # interpolation of moment depending on strain-difference
-    points_lists = [list(filter(lambda x: getattr(x, first_attr_name) <= first_attr_value, objects_list)),
-                    list(filter(lambda x: getattr(x, first_attr_name) >= first_attr_value, objects_list))]
+    points_lists = [
+        list(
+            filter(
+                lambda x: getattr(x, first_attr_name) <= first_attr_value, objects_list
+            )
+        ),
+        list(
+            filter(
+                lambda x: getattr(x, first_attr_name) >= first_attr_value, objects_list
+            )
+        ),
+    ]
 
     for points_list in points_lists:
         if not points_list:
             break
         if len(points_list) == 1:
-            moment_axial_force.append([
-                getattr(points_list[0], first_attr_name), getattr(points_list[0], searched_attribute_name)
-            ])
+            moment_axial_force.append(
+                [
+                    getattr(points_list[0], first_attr_name),
+                    getattr(points_list[0], searched_attribute_name),
+                ]
+            )
             break
         second_attribute_list = []
         smaller_strain_difference = list(
-            filter(lambda x: getattr(x, second_attr_name) <= second_attr_value, points_list))
+            filter(
+                lambda x: getattr(x, second_attr_name) <= second_attr_value, points_list
+            )
+        )
         if smaller_strain_difference:
-            point = max(smaller_strain_difference, key=operator.attrgetter(second_attr_name))
+            point = max(
+                smaller_strain_difference, key=operator.attrgetter(second_attr_name)
+            )
             second_attribute_list.append(
-                [getattr(point, first_attr_name), getattr(point, searched_attribute_name),
-                 getattr(point, second_attr_name)]
+                [
+                    getattr(point, first_attr_name),
+                    getattr(point, searched_attribute_name),
+                    getattr(point, second_attr_name),
+                ]
             )
         greater_strain_difference = list(
-            filter(lambda x: getattr(x, second_attr_name) >= second_attr_value, points_list))
+            filter(
+                lambda x: getattr(x, second_attr_name) >= second_attr_value, points_list
+            )
+        )
         if greater_strain_difference:
-            point = min(greater_strain_difference, key=operator.attrgetter(second_attr_name))
+            point = min(
+                greater_strain_difference, key=operator.attrgetter(second_attr_name)
+            )
             second_attribute_list.append(
-                [getattr(point, first_attr_name), getattr(point, searched_attribute_name),
-                 getattr(point, second_attr_name)]
+                [
+                    getattr(point, first_attr_name),
+                    getattr(point, searched_attribute_name),
+                    getattr(point, second_attr_name),
+                ]
             )
 
-        if len(second_attribute_list) == 1 or second_attribute_list[0] == second_attribute_list[1]:
+        if (
+            len(second_attribute_list) == 1
+            or second_attribute_list[0] == second_attribute_list[1]
+        ):
             moment_axial_force.append(
                 [second_attribute_list[0][1], second_attribute_list[0][0]]
             )
         elif len(second_attribute_list) == 2:
-            moment_axial_force.append([
-                interpolation(
-                    second_attr_value,
-                    second_attribute_list[0][1:3],
-                    second_attribute_list[1][1:3]
-                ),
-                second_attribute_list[0][0]
-            ])
+            moment_axial_force.append(
+                [
+                    interpolation(
+                        second_attr_value,
+                        second_attribute_list[0][1:3],
+                        second_attribute_list[1][1:3],
+                    ),
+                    second_attribute_list[0][0],
+                ]
+            )
         else:
             raise ValueError
 
@@ -428,7 +462,9 @@ def interpolate_in(
     if len(moment_axial_force) == 1 or moment_axial_force[0] == moment_axial_force[1]:
         return moment_axial_force[0][0]
     elif len(moment_axial_force) == 2:
-        return interpolation(first_attr_value, moment_axial_force[0], moment_axial_force[1])
+        return interpolation(
+            first_attr_value, moment_axial_force[0], moment_axial_force[1]
+        )
     else:
         raise ValueError
 
