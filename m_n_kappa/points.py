@@ -29,7 +29,7 @@ from .general import (
     neutral_axis,
     StrainPosition,
     NotSuccessfulReason,
-    strain,
+    strain_difference,
 )
 from .crosssection import (
     Crosssection,
@@ -1592,17 +1592,9 @@ class MomentAxialForceCurvature(AxialForcePoint):
     def _compute_strain_difference(self) -> float:
         """compute the strain-difference betweeen the ``sub_cross_sections``"""
         if self.successful:
-            strain_sub_cross_section_1 = strain(
-                neutral_axis_value=self.neutral_axes[0],
-                curvature_value=self.curvature,
-                position_value=0.0,
+            return strain_difference(
+                self.curvature, self.neutral_axes[0], self.neutral_axes[1]
             )
-            strain_sub_cross_section_2 = strain(
-                neutral_axis_value=self.neutral_axes[1],
-                curvature_value=self.curvature,
-                position_value=0.0,
-            )
-            return strain_sub_cross_section_2 - strain_sub_cross_section_1
 
     @log.result
     def _get_curvature(self) -> float:

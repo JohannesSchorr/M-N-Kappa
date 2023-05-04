@@ -148,6 +148,66 @@ def strain(
         )
 
 
+def strain_difference(
+    curvature_value: float, neutral_axis_1: float, neutral_axis_2: float
+) -> float:
+    """
+    compute the strain-difference considering the neutral-axis and
+    a constant curvature
+
+    Parameters
+    ----------
+    curvature_value : float
+        curvature under which the strain-difference is to be computed
+    neutral_axis_1 : float
+        neutral-axis of the first cross-section
+    neutral_axis_2 : float
+        neutral-axis of the second cross-section
+
+    Returns
+    -------
+    float
+        strain-difference between two cross-sections under similar curvature
+
+    Note
+    ----
+    For computation first the strain at an arbitrary vertical position for
+    both cross-sections is computed :math:`\\varepsilon_1`, :math:`\\varepsilon_2`.
+    In both cases the vertical position must be the same (here: ``0``).
+
+    .. math::
+
+       \\varepsilon_1 = \\kappa \\cdot (- z_\\mathrm{n,1})
+
+       \\varepsilon_2 = \\kappa \\cdot (- z_\\mathrm{n,2})
+
+    where :math:`\\kappa`` is the curvature and :math:`z_\\mathrm{n,1}` and
+    :math:`z_\\mathrm{n,2}` are the neutral-axes.
+
+    The difference between both strains is the ``strain-difference``
+    :math:`\\varepsilon_\\mathrm{\\Delta}`.
+
+    .. math::
+
+       \\varepsilon_\\mathrm{\\Delta} =  \\varepsilon_2 - \\varepsilon_1
+
+
+    Examples
+    --------
+
+    >>> from m_n_kappa.general import strain_difference
+    >>> strain_difference(
+    ...    curvature_value=0.00001,
+    ...    neutral_axis_1=10.0,
+    ...    neutral_axis_2=20.0)
+    -0.0001
+
+    """
+    return strain(neutral_axis_2, curvature_value, 0.0) - strain(
+        neutral_axis_1, curvature_value, 0.0
+    )
+
+
 def position(
     strain_at_position: float, neutral_axis_value: float, curvature_value: float
 ) -> float:
