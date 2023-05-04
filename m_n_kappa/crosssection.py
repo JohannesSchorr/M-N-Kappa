@@ -1375,7 +1375,7 @@ class CrossSectionBoundaries(Crosssection):
         for section in self.sections:
             position_strain.append(section.top_edge_maximum_strain)
             position_strain.append(section.bottom_edge_maximum_strain)
-        position_strain.sort(key=lambda x: x.position)
+        position_strain.sort(key=operator.attrgetter("position"))
         return position_strain
 
     def _get_sections_minimum_strain(self) -> list[StrainPosition]:
