@@ -183,9 +183,27 @@ class MNKappaCurvePoints:
 
     @log.init
     def __init__(self, points: list[MNKappaCurvePoint] = None) -> None:
+        """
+        Parameters
+        ----------
+        points : list[:py:class:`~m_n_kappa.curves_m_n_kappa.MNKappaCurvePoint`]
+            M-N-Kappa-Curve-Points are already available
+
+        Raises
+        ------
+        TypeError
+            In case the points are not of type :py:class:`~m_n_kappa.curves_m_n_kappa.MNKappaCurvePoint`
+        """
         if points is None:
             self._points = []
+        elif isinstance(points, MNKappaCurvePoint):
+            self._points = [points]
         elif isinstance(points, list):
+            for point in points:
+                if not isinstance(point, MNKappaCurvePoint):
+                    raise TypeError(
+                        f"entry in points must be of type MNKappaCurvePoint. It is of type {type(point)}."
+                    )
             self._points = points
 
     def __repr__(self) -> str:
@@ -217,6 +235,10 @@ class MNKappaCurvePoints:
                     axial_force_cross_section_number=1,
                 )
             return self
+        raise TypeError(
+            f'Can not add "{type(self)}" and "{type(other)}". '
+            f'Must be of type "MNKappaCurvePoints" or "MKappaCurvePoints"'
+        )
 
     def _remove_duplicate_points(self):
         sorting_function = operator.attrgetter(
@@ -426,7 +448,13 @@ class MNKappaCurvePoints:
             self.points, "curvature", "axial_force", axial_force, "moment", by_moment
         )
 
-    def moment(self, strain_difference: float, axial_force: float):
+    @log.result
+    def moment(
+        self,
+        strain_difference: float,
+        axial_force: float,
+        moment_is_positive: bool = True,
+    ):
         """
         get the moment from the curve corresponding with the given ``axial_force`` and
         ``strain_difference``.
@@ -437,18 +465,25 @@ class MNKappaCurvePoints:
            strain-difference between the sub-cross-sections
         axial_force : float
            axial-force
+        moment_is_positive : float
+           checks only positive moments
 
         Returns
         -------
         float
             moment
         """
+        if moment_is_positive:
+            points = list(filter(lambda x: x.moment >= 0, self.points))
+        else:
+            points = list(filter(lambda x: x.moment <= 0, self.points))
+
         return interpolate_in(
-            self.points,
+            points,
             "moment",
-            "axial_force",
+            "absolute_axial_force",
             axial_force,
-            "strain_difference",
+            "absolute_strain_difference",
             strain_difference,
         )
 
