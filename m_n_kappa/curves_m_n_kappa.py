@@ -188,6 +188,16 @@ class MNKappaCurvePoint:
     def __post_init__(self):
         log.info(f"Created {self.__repr__()}")
 
+    @property
+    def absolute_axial_force(self) -> float:
+        """absolute axial-force"""
+        return abs(self.axial_force)
+
+    @property
+    def absolute_strain_difference(self) -> float:
+        """absolute strain-difference"""
+        return abs(self.strain_difference)
+
     def moment_curvature(self) -> list[float]:
         """pair of moment and curvature"""
         return [self.moment, self.curvature]
