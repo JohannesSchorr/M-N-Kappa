@@ -1275,7 +1275,6 @@ class MNKappaCurve:
         "_m_n_curve",
         "_positive_m_n_kappa_curve",
         "_negative_m_n_kappa_curve",
-        "_m_kappa_curve",
     )
 
     @log.init
@@ -1376,51 +1375,10 @@ class MNKappaCurve:
         self._include_positive_curvature = include_positive_curvature
         self._include_negative_curvature = include_negative_curvature
         self._m_n_curve = MNCurve(self.sub_cross_sections)
-        if include_positive_curvature and not include_negative_curvature:
-            self._points = MNKappaCurvePoints(
-                list(filter(lambda x: x.moment > 0.0, self.m_n_curve.points.points))
-            )
-        elif not include_positive_curvature and include_negative_curvature:
-            self._points = MNKappaCurvePoints(
-                list(filter(lambda x: x.moment < 0.0, self.m_n_curve.points.points))
-            )
-        else:
-            self._points = self.m_n_curve.points
-        self._not_successful_reason = self.m_n_curve.not_successful_reason
-        if self.include_positive_curvature:
-            self._positive_m_n_kappa_curve = MNCurvatureCurve(
-                sub_cross_sections=self.sub_cross_sections,
-                axial_forces=self.m_n_curve.points.cross_section_axial_forces(
-                    positive_moment=True
-                ),
-                strain_positions=self.m_n_curve.strain_positions,
-                positive_curvature=True,
-            )
-            self._points += self._positive_m_n_kappa_curve.points
-            self._not_successful_reason += (
-                self._positive_m_n_kappa_curve.not_successful_reason
-            )
-        if self.include_negative_curvature:
-            self._negative_m_n_kappa_curve = MNCurvatureCurve(
-                sub_cross_sections=self.sub_cross_sections,
-                axial_forces=self.m_n_curve.points.cross_section_axial_forces(
-                    positive_moment=False
-                ),
-                strain_positions=self.m_n_curve.strain_positions,
-                positive_curvature=False,
-            )
-            self._points += self._negative_m_n_kappa_curve.points
-            self._not_successful_reason += (
-                self._negative_m_n_kappa_curve.not_successful_reason
-            )
-        # add moment-curvatures with zero axial-forces
-        self._m_kappa_curve = MKappaCurve(
-            cross_section=self.sub_cross_sections[0] + self.sub_cross_sections[1],
-            include_positive_curvature=self.include_positive_curvature,
-            include_negative_curvature=self.include_negative_curvature,
-        )
-        self._points += self._m_kappa_curve.m_kappa_points
-        self._not_successful_reason += self._m_kappa_curve.not_successful_reason
+        self._add_m_n_curve_points()
+        self._compute_m_n_kappa_curve_points()
+        self._compute_m_kappa_curve_points()
+        self._add_zero_point()
 
     def __repr__(self) -> str:
         return "MNKappaCurve()"
@@ -1460,3 +1418,87 @@ class MNKappaCurve:
     def not_successful_reason(self) -> list[NotSuccessfulReason]:
         """for those computations that were not successful, here the reasons are given"""
         return self._not_successful_reason
+
+    def _add_m_n_curve_points(self) -> None:
+        """
+        add ``points`` and ``not_successful_reason`` of the computed
+        :py:attr:`~m_n_kappa.MNKappaCurve.m_n_curve`
+        to the corresponding attributes :py:attr:`~m_n_kappa.MNKappaCurve.points` and
+        :py:attr:`~m_n_kappa.MNKappaCurve.not_successful_reason`
+        """
+        if self.include_positive_curvature and not self.include_negative_curvature:
+            self._points = MNKappaCurvePoints(
+                list(filter(lambda x: x.moment > 0.0, self.m_n_curve.points.points))
+            )
+        elif not self.include_positive_curvature and self.include_negative_curvature:
+            self._points = MNKappaCurvePoints(
+                list(filter(lambda x: x.moment < 0.0, self.m_n_curve.points.points))
+            )
+        else:
+            self._points = self.m_n_curve.points
+        self._not_successful_reason = self.m_n_curve.not_successful_reason
+
+    def _compute_m_n_kappa_curve_points(self) -> None:
+        """
+        compute the M-N-Kappa-Curve points
+        """
+        if self.include_positive_curvature:
+            self._positive_m_n_kappa_curve = MNCurvatureCurve(
+                sub_cross_sections=self.sub_cross_sections,
+                axial_forces=self.m_n_curve.points.cross_section_axial_forces(
+                    positive_moment=True
+                ),
+                strain_positions=self.m_n_curve.strain_positions,
+                positive_curvature=True,
+            )
+            self._points += self._positive_m_n_kappa_curve.points
+            self._not_successful_reason += (
+                self._positive_m_n_kappa_curve.not_successful_reason
+            )
+        if self.include_negative_curvature:
+            self._negative_m_n_kappa_curve = MNCurvatureCurve(
+                sub_cross_sections=self.sub_cross_sections,
+                axial_forces=self.m_n_curve.points.cross_section_axial_forces(
+                    positive_moment=False
+                ),
+                strain_positions=self.m_n_curve.strain_positions,
+                positive_curvature=False,
+            )
+            self._points += self._negative_m_n_kappa_curve.points
+            self._not_successful_reason += (
+                self._negative_m_n_kappa_curve.not_successful_reason
+            )
+
+    def _compute_m_kappa_curve_points(self) -> None:
+        """
+        compute the M-Kappa-Curve points (no axial-fore) and add it to
+        :py:attr:`~m_n_kappa.MNKappaCurve.points`
+        """
+        if self.include_positive_curvature:
+            m_kappa_curve = MCurvatureCurve(
+                sub_cross_sections=self.sub_cross_sections,
+                positive_curvature=True,
+            )
+            self._points += m_kappa_curve.points
+            self._not_successful_reason += m_kappa_curve.not_successful_reason
+        if self.include_negative_curvature:
+            m_kappa_curve = MCurvatureCurve(
+                sub_cross_sections=self.sub_cross_sections,
+                positive_curvature=False,
+            )
+            self._points += m_kappa_curve.points
+            self._not_successful_reason += m_kappa_curve.not_successful_reason
+
+    def _add_zero_point(self) -> None:
+        """
+        add the zero-point to :py:attr:`~m_n_kappa.MNKappaCurve.points`
+        """
+        self._points.add(
+            moment=0.0,
+            curvature=0.0,
+            axial_force=0.0,
+            axial_force_cross_section_number=0,
+            strain_position=StrainPosition(0.0, 0.0, ""),
+            strain_difference=0.0,
+            cross_section=None,
+        )
