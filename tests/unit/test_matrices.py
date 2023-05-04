@@ -43,6 +43,8 @@ class TestMatrix(TestCase):
         self.matrix_6 = Matrix([[3, 2], [1, 2], [2, 2]])
         self.vector_1 = Vector([1, 2])
         self.matrix_7 = Matrix([[12, -51, 4], [6, 167, -68], [-4, 24, -41]])
+        self.matrix_8 = Matrix([[3, 5], [0, 2], [0, 0], [4, 5]])
+        self.matrix_9 = Matrix([[6, 5, 0], [5, 1, 4], [0, 4, 3]])
 
     def test_transpose(self):
         self.assertEqual(self.matrix_1.transpose(), Matrix([[0, 3], [1, 4], [2, 5]]))
@@ -126,6 +128,38 @@ class TestMatrix(TestCase):
                 10,
             ),
         )
+        
+    def test_givens_2(self):
+        """see https://de.wikipedia.org/wiki/Givens-Rotation#QR-Zerlegung-mittels-Givens-Rotationen"""
+        q, r = self.matrix_8._givens()
+        self.assertEqual(
+            q, 
+            Matrix([[3/5, 4/(5*5**0.5), 0, -8/(5*5**0.5)], 
+                    [0, 2/(5**0.5), 0, 1/(5**0.5)], 
+                    [0, 0, 1, 0], 
+                    [4/5, -3/(5*5**0.5), 0, 6/(5*5**0.5)]])
+        )
+        self.assertEqual(
+            round(r, 15), 
+            Matrix(
+                [[5, 7], [0, 5**0.5], [0, 0], [0, 0]]
+            )
+        )
+    
+    def test_givens_3(self):
+        """see https://en.wikipedia.org/wiki/Givens_rotation#Triangulization"""
+        q, r = self.matrix_9._givens()
+        self.assertEqual(
+            round(r, 4),
+            Matrix([[7.8102, 4.4813, 2.5607], [0, 4.6817, 0.9664], [0, 0, -4.1843]])
+        )
+        self.assertEqual(
+            round(q, 4), 
+            Matrix([[0.7682, 0.3327, 0.5470], 
+                    [0.6402, -0.3992, -0.6564], 
+                    [0.0, 0.8544, -0.5196]])
+        )
+        
 
 
 class TestLinearEquationSystem(TestCase):
@@ -146,7 +180,6 @@ class TestLinearEquationSystem(TestCase):
         self.constants_3 = Vector([15, 15, 26])
         lgs = LinearEquationsSystem(self.matrix_3, self.constants_3)
         self.assertEqual(round(lgs.solve(), 12), Vector([2, -1, 5]))
-
 
 class TestJacobian(TestCase): 
     
