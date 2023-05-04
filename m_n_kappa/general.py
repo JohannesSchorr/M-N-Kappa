@@ -328,11 +328,11 @@ def interpolation(
     position_value : float
         value the corresponding other value must be interpolated
     first_pair : list[float]
-        1st position applies to the value that is looked for. 
+        1st position applies to the value that is looked for.
         2nd position applies to the value given by argument 'position_value'.
     second_pair : list[float]
-        positioning is the same as in ``first_pair`` 
-        
+        positioning is the same as in ``first_pair``
+
     Returns
     -------
     float
