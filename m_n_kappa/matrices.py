@@ -22,7 +22,7 @@ class Vector:
     """
 
     __slots__ = "_entries", "_entry_iterator"
-    
+
     @log.init
     def __init__(self, entries: list):
         """
@@ -30,94 +30,94 @@ class Vector:
         ----------
         entries : list
             entries of the vector
-        
+
         See Also
         --------
         Matrix : matrix with basic functionality of matrices-computation
-        
+
         Examples
         --------
-        An instance of :py:class:`~m_n_kappa.matrices.Vector` is easily 
-        initialized by passing a list of ``float`` 
-        
+        An instance of :py:class:`~m_n_kappa.matrices.Vector` is easily
+        initialized by passing a list of ``float``
+
         >>> from m_n_kappa.matrices import Vector
         >>> x = Vector([0, 1])
         >>> x
         Vector([0.0, 1.0])
-        
-        Adding another :py:class:`~m_n_kappa.matrices.Vector` is done by using the 
+
+        Adding another :py:class:`~m_n_kappa.matrices.Vector` is done by using the
         plus (``+``) operator.
         Please be aware that both vectors need to be of the same length.
-        
+
         >>> y = Vector([2, 3])
-        >>> x + y 
+        >>> x + y
         Vector([2.0, 4.0])
-        
-        Alternatively you may use the :py:meth:`~m_n_kappa.matrices.Vector.add`-method. 
-        
+
+        Alternatively you may use the :py:meth:`~m_n_kappa.matrices.Vector.add`-method.
+
         >>> x.add(y)
         Vector([2.0, 4.0])
-        
-        Subtracting an :py:class:`~m_n_kappa.matrices.Vector` is also done like in two ways. 
-        By the Minus-Operator (``-``). 
-        
+
+        Subtracting an :py:class:`~m_n_kappa.matrices.Vector` is also done like in two ways.
+        By the Minus-Operator (``-``).
+
         >>> x - y
         Vector([-2.0, -2.0])
-        
-        Or by using the :py:meth:`~m_n_kappa.matrices.Vector.subtract`-method. 
-        
+
+        Or by using the :py:meth:`~m_n_kappa.matrices.Vector.subtract`-method.
+
         >>> x.subtract(y)
         Vector([-2.0, -2.0])
-        
-        If you want to compute the `scalar-product <https://en.wikipedia.org/wiki/Dot_product>`_ 
-        (also called dot-product, :math:`x^{T} y`) you may use the 
-        :py:meth:`~m_n_kappa.matrices.Vector.scalar_product`-method. 
-        
+
+        If you want to compute the `scalar-product <https://en.wikipedia.org/wiki/Dot_product>`_
+        (also called dot-product, :math:`x^{T} y`) you may use the
+        :py:meth:`~m_n_kappa.matrices.Vector.scalar_product`-method.
+
         >>> x.scalar_product(y)
         3.0
-        
+
         Multiplying a scalar is done using the :py:meth:`~m_n_kappa.matrices.Vector.multiply_scalar`-method.
-        
+
         >>> x.multiply_scalar(2.0)
         Vector([0.0, 2.0])
-        
-        The :py:meth:`~m_n_kappa.matrices.Vector.tensor_product`-method therefore creates a 
-        :py:class:`~m_n_kappa.matrices.Matrix`. 
-        
+
+        The :py:meth:`~m_n_kappa.matrices.Vector.tensor_product`-method therefore creates a
+        :py:class:`~m_n_kappa.matrices.Matrix`.
+
         >>> x.tensor_product(y)
         Matrix([[0.0, 0.0], [2.0, 3.0]])
-        
-        If you want to modify a value of your Vector you may use the 
+
+        If you want to modify a value of your Vector you may use the
         :py:meth:`~m_n_kappa.matrices.Vector.replace`-method ``inplace``.
-        
+
         >>> x.replace(number=0, value=2.0, inplace=True)
         >>> x
         Vector([2.0, 2.0])
-        
+
         Or not ``inplace`` getting another :py:class:`~m_n_kappa.matrices.Vector`
-        in return. 
-        
+        in return.
+
         >>> x.replace(number=0, value=2.0)
         Vector([2.0, 2.0])
-        
-        Using a :py:class:`~m_n_kappa.matrices.Vector` in a ``for``-loop is easily done 
+
+        Using a :py:class:`~m_n_kappa.matrices.Vector` in a ``for``-loop is easily done
         as follows.
-        
-        >>> for entry in x: 
+
+        >>> for entry in x:
         ...     print(entry)
         0
         2
-        
-        Comparing two vectors is also easy. 
-        
+
+        Comparing two vectors is also easy.
+
         >>> x == y
         False
-        
-        Whereas 
-        
+
+        Whereas
+
         >>> x == x
         True
-        
+
         """
         self._entries = entries
 
@@ -170,18 +170,18 @@ class Vector:
         value : float
             replace-value
         inplace : bool
-            If ``True`` changes value in place and does not return a value. 
-            If ``False`` returns this Vector with ``value`` at the desired position 
+            If ``True`` changes value in place and does not return a value.
+            If ``False`` returns this Vector with ``value`` at the desired position
             (``number``, Default: ``False``).
 
         Returns
         -------
         None | Vector
         """
-        if inplace: 
+        if inplace:
             self._entries[number] = float(value)
             return
-        else: 
+        else:
             new_vector = Vector(self.entries[:])
             new_vector._entries[number] = float(value)
             return new_vector
@@ -277,14 +277,15 @@ class Vector:
         """
         return Vector([scalar * entry for entry in self.entries])
 
+    @log.result
     def norm(self) -> float:
         """
         Euclidian norm of the vector
         """
-        return (sum((entry * entry for entry in self._entries))) ** (1.0 / 2.0)
+        return (sum((entry * entry for entry in self._entries))) ** 0.5
 
     @staticmethod
-    def _check_is_vector(self, vector):
+    def _check_is_vector(vector):
         """check if argument is a vector"""
         if not isinstance(vector, Vector):
             TypeError(f"Vector is not of type 'Vector'. Is of type {type(vector)}.")
@@ -344,7 +345,7 @@ class Matrix:
     """
 
     __slots__ = "_matrix"
-    
+
     @log.init
     def __init__(self, matrix: list[list]):
         """
@@ -354,95 +355,95 @@ class Matrix:
             Representation of the matrix.
             Each entry of the first outer list represents a row.
             Each entry of the inner list represents the value.
-        
+
         See Also
         --------
         Vector : class for vector-operations
-        
+
         Examples
         --------
         A :py:class:`~m_n_kappa.matrices.Matrix` is initialized by passing
-        a list of lists. 
+        a list of lists.
         The inner list represents a row, wheras the outer list represents the hole matrix.
-        
+
         >>> from m_n_kappa.matrices import Matrix
         >>> A = Matrix([[0, 1, 2], [3, 4, 5]])
         >>> A
         Matrix([[0.0, 1.0, 2.0], [3.0, 4.0, 5.0]])
-        
+
         You can transpose the matrix ``A`` by using the :py:meth:`~m_n_kappa.matrices.Matrix.transpose`-
         method.
-        
+
         >>> A.transpose()
         Matrix([[0.0, 3.0], [1.0, 4.0], [2.0, 5.0]])
-        
+
         Several multiplication-operations are given using :py:meth:`~m_n_kappa.matrices.Matrix.multiply_by`.
-        For example multiplying a ``float``. 
-        
+        For example multiplying a ``float``.
+
         >>> A.multiply_by(5)
         Matrix([[0.0, 5.0, 10.0], [15.0, 20.0, 25.0]])
-        
+
         A :py:class:`~m_n_kappa.matrices.Vector`, what itself leads to a new Vector.
-        
+
         >>> A.multiply_by(Vector([1, 2, 3]))
         Vector([8.0, 26.0])
-        
+
         Or another :py:class:`~m_n_kappa.matrices.Matrix`:
-        
+
         >>> B = Matrix([[1, 2], [0, 1], [4, 0]])
         >>> A.multiply_by(B)
         Matrix([[9.0, 1.0], [23.0, 10.0]])
-        
-        Adding and subtracting are done by using the corresponding methods 
-        :py:meth:`~m_n_kappa.matrices.Matrix.add` and :py:meth:`~m_n_kappa.matrices.Matrix.subtract`. 
-        
+
+        Adding and subtracting are done by using the corresponding methods
+        :py:meth:`~m_n_kappa.matrices.Matrix.add` and :py:meth:`~m_n_kappa.matrices.Matrix.subtract`.
+
         >>> A.add(Matrix([6, 7, 8], [9, 10, 11]))
         Matrix([[6.0, 8.0, 10.0], [12.0, 14.0, 16.0]])
-        
+
         >>> A.subtract(Matrix([6, 7, 8], [9, 10, 11]))
         Matrix([[-6.0, -6.0, -6.0], [-6.0, -6.0, -6.0]])
-        
-        As an alternative you may of course use the corresponding operators (``+`` and ``-``). 
-        
+
+        As an alternative you may of course use the corresponding operators (``+`` and ``-``).
+
         >>> A + Matrix([6, 7, 8], [9, 10, 11])
         Matrix([[6.0, 8.0, 10.0], [12.0, 14.0, 16.0]])
-        
+
         >>> A - Matrix([6, 7, 8], [9, 10, 11])
         Matrix([[-6.0, -6.0, -6.0], [-6.0, -6.0, -6.0]])
-        
+
         In case you want a specific row or a specific column given as a :py:class:`~m_n_kappa.matrices.Vector`
-        you only have to use the :py:meth:`~m_n_kappa.matrices.Matrix.row_vector`- or the 
-        :py:meth:`~m_n_kappa.matrices.Matrix.column_vector`-method. 
-        The number passed to the method describes the wanted row or column. 
-        
+        you only have to use the :py:meth:`~m_n_kappa.matrices.Matrix.row_vector`- or the
+        :py:meth:`~m_n_kappa.matrices.Matrix.column_vector`-method.
+        The number passed to the method describes the wanted row or column.
+
         >>> A.column_vector(1)
         Vector([1.0, 4.0]]
-        
+
         >>> A.row_vector(1)
         Vector([3.0, 4.0, 5.0])
-        
+
         .. note::
-           
+
            Please be aware that python starts counting at zero (``0``).
-           Therefore, if you want the first row of A (``=[0, 1, 2]``) you need to pass 0 
-           to :py:meth:`~m_n_kappa.matrices.Matrix.row_vector`. 
+           Therefore, if you want the first row of A (``=[0, 1, 2]``) you need to pass 0
+           to :py:meth:`~m_n_kappa.matrices.Matrix.row_vector`.
            Same applies to :py:meth:`~m_n_kappa.matrices.Matrix.column_vector`.
-           
-        Furthermore, :py:class:`~m_n_kappa.matrices.Matrix` supports 
-        `QR decomposition <https://en.wikipedia.org/wiki/QR_decomposition>`, that 
+
+        Furthermore, :py:class:`~m_n_kappa.matrices.Matrix` supports
+        `QR decomposition <https://en.wikipedia.org/wiki/QR_decomposition>`, that
         determines from the given matrix an orthonormalized matrix and an upper
         triangular matrix using the :py:meth:`~m_n_kappa.matrices.Matrixorthonormal_triangular`-
         method.
-        
+
         >>> QR =  Matrix([[12, -51, 4], [6, 167, -68], [-4, 24, -41]])
         >>> q, t = QR.orthonormal_triangular(algorithm='Modified Gram-Schmidt')
-        
-        In this example ``q`` is the orthonormalized matrix. 
-        
+
+        In this example ``q`` is the orthonormalized matrix.
+
         >>> q
         Matrix([[6 / 7, -69 / 175, -58 / 175],[3 / 7, 158 / 175, 6 / 175],[-2 / 7, 6 / 35, -33 / 35]])
-        
-        and ``t`` the triangular matrix. 
+
+        and ``t`` the triangular matrix.
         >>> t
         Matrix([[14, 21, -14], [0, 175, -70], [0, 0, 35]])
         """
@@ -459,7 +460,7 @@ class Matrix:
 
     def __add__(self, other):
         return self.add(other)
-    
+
     def __sub__(self, other):
         return self.subtract(other)
 
@@ -827,18 +828,19 @@ class Matrix:
             new_matrix.append([scalar * entry for entry in row])
         return Matrix(new_matrix)
 
-    def orthonormal_triangular(self, algorithm="Modified Gram-Schmidt"):
+    def orthonormal_triangular(self, algorithm="Givens-rotation"):
         """
         Determine orthogonal Matrix :math:`Q` and (upper) triangular Matrix :math:`R` of this matrix
 
         Parameters
         ----------
         algorithm : str
-           Algorithm for computation of :math:`Q` and :math:`R`. 
-           Currently following algorithms are supported: 
-           
-           - ``'Gram-Schmidt'`` :  ``Gram-Schmidt <https://en.wikipedia.org/wiki/Gram%E2%80%93Schmidt_process>``
+           Algorithm for computation of :math:`Q` and :math:`R`.
+           Currently following algorithms are supported:
+
+           - ``'Gram-Schmidt'`` :  `Gram-Schmidt <https://en.wikipedia.org/wiki/Gram%E2%80%93Schmidt_process>`_
            - ``'Modified Gram-Schmidt'`` : Modified Gram-Schmidt
+           - ``'Givens-rotation'``: `Givens rotation <https://en.wikipedia.org/wiki/Givens_rotation>`_
 
         Returns
         -------
@@ -850,12 +852,17 @@ class Matrix:
             return self._gram_schmidt()
         elif algorithm.upper() == "MODIFIED GRAM-SCHMIDT":
             return self._gram_schmidt_modified()
+        elif algorithm.upper() == "GIVENS-ROTATION": 
+            return self._givens()
         else:
             raise ValueError(
                 f"Algorithm {algorithm} is not available."
                 f"Possible algorithms are 'Gram-Schmidt' and 'Modified Gram-Schmidt'"
             )
-
+    
+    def replace(self, row:int, column:int, value:float) -> None:
+        self._matrix[row][column] = value
+        
     def _gram_schmidt(self) -> tuple:
         """
         Gram-Schmidt process to determine orthogonal and triangular matrix
@@ -907,12 +914,59 @@ class Matrix:
                 r_j.replace(number=row, value=r_ij, inplace=True)
                 q_j = q_j - q.column_vector(row).multiply_scalar(r_ij)
             r_j.replace(column, q_j.norm(), inplace=True)
+            if r_j.entries[column] == 0.0: 
+                log.critical(f'float division by zero: {column=}, {r_j=}')
             q_j = q_j.multiply_scalar(1.0 / r_j.entries[column])
             q = q.append(q_j)
             r = r.append(r_j)
         return q, r
 
-
+    def _givens(self):
+        """
+        QR-decomposition utilizing Givens rotation. 
+        
+        
+        Returns
+        -------
+        tuple[Matrix, Matrix]
+            Orthogonal Matrix :math:`Q` and triangular Matrix :math:`R`
+        """
+        r = Matrix(self.matrix)
+        rotation_matrices = []
+        for column in range(self.column_number):
+            for row in range(self.row_number): 
+                if column >= row: 
+                    continue
+                if r.entry(row, column) == 0.0: 
+                    continue
+                diagonal_value = r.entry(column, column)
+                position_value = r.entry(row, column)
+                rho = (diagonal_value**2.0 + position_value**2.0)**0.5
+                rotation_matrix = self._identity()
+                rotation_matrix.replace(row, row, diagonal_value / rho)
+                rotation_matrix.replace(column, column, diagonal_value / rho)
+                rotation_matrix.replace(row, column, (-1.0) * position_value / rho)
+                rotation_matrix.replace(column, row, position_value / rho)
+                
+                r = rotation_matrix.multiply_by(r)
+                rotation_matrices.append(rotation_matrix)
+        if len(rotation_matrices) == 0.0: 
+            return r, r
+        for index, matrix in enumerate(rotation_matrices): 
+            if index == 0: 
+                q = matrix
+            else: 
+                q = q.transpose()
+                q = q.multiply_by(matrix.transpose())
+        return q, r
+        
+    def _identity(self):
+        matrix = Matrix([[0] * self.row_number] * self.row_number)
+        for index in range(self.row_number): 
+            matrix.replace(row=index, column=index, value=1.0)
+        return matrix
+    
+    
 class Jacobian(Matrix):
 
     """
@@ -920,19 +974,19 @@ class Jacobian(Matrix):
 
     .. versionadded:: 0.2.0
 
-    computes numerically and stores the partial derivates of the system of functions
+    computes numerically and stores the partial derivatives of the system of functions
     """
 
-    __slots__ = "_f_i", "_x_i", "_f_xi", "_matrix", '_h', '_differentiation_type'
-    
+    __slots__ = "_f_i", "_x_i", "_f_xi", "_matrix", "_h", "_differentiation_type"
+
     @log.init
     def __init__(
-            self, 
-            f_i: list[Callable], 
-            x_i: Vector | list[float], 
-            f_xi: Vector = None, 
-            h: float = 0.00000001,
-            differentiation_type: str = 'forward'
+        self,
+        f_i: list[Callable],
+        x_i: Vector | list[float],
+        f_xi: Vector = None,
+        h: float = 0.00000001,
+        differentiation_type: str = "forward",
     ):
         """
         Parameters
@@ -992,10 +1046,10 @@ class Jacobian(Matrix):
         is rounded to the maximum precision of 7 places. 
         """
         self._f_i = f_i
-        if isinstance(x_i, list): 
+        if isinstance(x_i, list):
             x_i = Vector(x_i)
         self._x_i = x_i
-        if f_xi is None: 
+        if f_xi is None:
             f_xi = Vector([f(self.x_i.entries) for f in self._f_i])
         self._f_xi = f_xi
         self._h = h
@@ -1016,14 +1070,14 @@ class Jacobian(Matrix):
     def f_xi(self) -> Vector:
         """results-vector at :math:`x_{i}`"""
         return self._f_xi
-    
+
     @property
     def h(self) -> float:
         """interval-length for the numerical differentiation"""
         return self._h
-    
+
     @property
-    def differentiation_type(self) -> str: 
+    def differentiation_type(self) -> str:
         """type of differentiation"""
         return self._differentiation_type
 
@@ -1031,23 +1085,32 @@ class Jacobian(Matrix):
         """build the Jacobian matrix from the scalar and the method"""
         matrix = []
         x_i_range = range(len(self.x_i))
-        if self.differentiation_type.upper() in ['FORWARD', 'FWD', 'F']: 
-            for f_index in range(len(self.f_i)): 
-                matrix.append([
-                    self.forward_difference_quotient(f_index, index) for index in x_i_range
-                ])
-        elif self.differentiation_type.upper() in ['BACKWARD', 'BWD', 'B']:
+        if self.differentiation_type.upper() in ["FORWARD", "FWD", "F"]:
             for f_index in range(len(self.f_i)):
-                matrix.append([
-                    self.backward_difference_quotient(f_index, index) for index in x_i_range
-                ])
-        elif self.differentiation_type.upper() in ['CENTER', 'C']:
+                matrix.append(
+                    [
+                        self.forward_difference_quotient(f_index, index)
+                        for index in x_i_range
+                    ]
+                )
+        elif self.differentiation_type.upper() in ["BACKWARD", "BWD", "B"]:
             for f_index in range(len(self.f_i)):
-                matrix.append([
-                    self.center_difference_quotient(f_index, index) for index in x_i_range
-                ])
+                matrix.append(
+                    [
+                        self.backward_difference_quotient(f_index, index)
+                        for index in x_i_range
+                    ]
+                )
+        elif self.differentiation_type.upper() in ["CENTER", "C"]:
+            for f_index in range(len(self.f_i)):
+                matrix.append(
+                    [
+                        self.center_difference_quotient(f_index, index)
+                        for index in x_i_range
+                    ]
+                )
         return matrix
-    
+
     @log.result
     def forward_difference_quotient(
         self, function_index: int, point_index: int
@@ -1107,7 +1170,7 @@ class Jacobian(Matrix):
         computation of the backward difference quotient for the given
         functions :py:attr:`~m_n_kappa.matrices.Jacobian.f_i` at the point
         :py:attr:`~m_n_kappa.matrices.Jacobian.x_i`
-        
+
 
         Parameters
         ----------
@@ -1151,7 +1214,7 @@ class Jacobian(Matrix):
         f_xi_minus_h = self.f_i[function_index](x_i_modified)
         difference_quotient = (f_xi - f_xi_minus_h) / self.h
         return difference_quotient
-   
+
     def center_difference_quotient(
         self, function_index: int, point_index: int
     ) -> float:
@@ -1194,9 +1257,9 @@ class Jacobian(Matrix):
 
         See Also
         --------
-        :py:meth:`m_n_kappa.matrices.Jacobian.forward_difference_quotient` : similar, but only 
+        :py:meth:`m_n_kappa.matrices.Jacobian.forward_difference_quotient` : similar, but only
             with a step forward
-        :py:meth:`m_n_kappa.matrices.Jacobian.forward_difference_quotient` : similar, but only 
+        :py:meth:`m_n_kappa.matrices.Jacobian.forward_difference_quotient` : similar, but only
             with a step backward
         """
         x_i_forward = self.x_i.entries[:]
@@ -1206,10 +1269,10 @@ class Jacobian(Matrix):
         x_i_backward = self.x_i.entries[:]
         x_i_backward[point_index] = self.x_i.entries[point_index] - self.h
         f_xi_minus_h = self.f_i[function_index](x_i_backward)
-        
+
         difference_quotient = (f_xi_plus_h - f_xi_minus_h) / (2.0 * self.h)
         return difference_quotient
-    
+
 
 class LinearEquationsSystem:
 
@@ -1220,7 +1283,7 @@ class LinearEquationsSystem:
     """
 
     __slots__ = "_coefficients", "_constants"
-    
+
     @log.init
     def __init__(self, coefficients: Matrix, constants: Vector):
         """
@@ -1262,6 +1325,13 @@ class LinearEquationsSystem:
         self._coefficients = coefficients
         self._constants = constants
 
+    def __repr__(self) -> str:
+        return (
+            f"LinearEquationsSystem(\n"
+            f"\tcoefficients={self.coefficients},\n"
+            f"\tconstants={self.constants})"
+        )
+
     @property
     def coefficients(self) -> Matrix:
         """coefficients-matrix"""
@@ -1280,7 +1350,7 @@ class LinearEquationsSystem:
             raise ValueError(
                 f'Solver {solver} is not available. Possible value is "QR-Decomposition"'
             )
-    
+
     @log.result
     def qr_decomposition(self) -> Vector:
         """
