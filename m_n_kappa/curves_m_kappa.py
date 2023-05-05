@@ -329,6 +329,14 @@ class MKappaCurvePoints:
         """computes the maximum moment of the curve"""
         return max(self.moments)
     
+    def maximum_neutral_axis(self) -> float:
+        """determine maximum neutral-axis"""
+        return max((point.neutral_axis for point in self.points))
+    
+    def minimum_neutral_axis(self) -> float:
+        """determine minimum neutral axis"""
+        return min((point.neutral_axis for point in self.points))
+    
 
 class MKappaCurveCurvature:
 
