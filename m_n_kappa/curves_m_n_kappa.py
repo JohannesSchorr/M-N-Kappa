@@ -1234,6 +1234,8 @@ class MCurvatureCurve:
             computed_cross_sections = []
             neutral_axes = []
             strain_position = None
+            m_kappa_curve_index = 1
+            successful = True
             for index, m_kappa_curve in enumerate(self.m_kappa_curves):
                 if curvature in m_kappa_curve.curvatures:
                     curvature_index = m_kappa_curve.curvatures.index(curvature)
@@ -1242,29 +1244,34 @@ class MCurvatureCurve:
                     neutral_axes.append(point.neutral_axis)
                     moment += point.moment
                     strain_position = point.strain_position
+                    m_kappa_curve_index -= 1
                 else:
                     m_kappa = MKappaByConstantCurvature(
                         cross_section=self.sub_cross_sections[index],
                         applied_curvature=curvature,
                         applied_axial_force=0.0,
+                        is_called_by_user=False,
                     )
+                    if not m_kappa.successful:
+                        successful = False
                     computed_cross_sections.append(m_kappa.computed_cross_section)
                     moment += m_kappa.moment
                     neutral_axes.append(m_kappa.neutral_axis)
-
-            self._points.add(
-                moment=moment,
-                curvature=curvature,
-                axial_force=0.0,
-                axial_force_cross_section_number=0,
-                strain_position=strain_position,
-                strain_difference=strain_difference(
-                    curvature, neutral_axes[0], neutral_axes[1]
-                ),
-                cross_section=tuple(computed_cross_sections),
-                neutral_axis_1=neutral_axes[0],
-                neutral_axis_2=neutral_axes[1],
-            )
+                    
+            if successful: 
+                self._points.add(
+                    moment=moment,
+                    curvature=curvature,
+                    axial_force=0.0,
+                    axial_force_cross_section_number=0,
+                    strain_position=strain_position,
+                    strain_difference=strain_difference(
+                        curvature, neutral_axes[0], neutral_axes[1]
+                    ),
+                    cross_section=tuple(computed_cross_sections),
+                    neutral_axis_1=neutral_axes[0],
+                    neutral_axis_2=neutral_axes[1],
+                )
 
 
 class MNKappaCurve:

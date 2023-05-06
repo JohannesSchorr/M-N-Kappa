@@ -3,12 +3,13 @@ from unittest import TestCase, main
 from m_n_kappa.curves_m_n_kappa import MCurvatureCurve
 from m_n_kappa import (
     Steel,
+    Concrete,
     Rectangle,
     Crosssection,
 )
 
 
-class TestMKappaCurve(TestCase): 
+class TestMKappaCurve1(TestCase): 
     
     def setUp(self) -> None:
         self.steel_top = Steel(f_y=355, f_u=400, failure_strain=0.15)
@@ -41,6 +42,25 @@ class TestMKappaCurve(TestCase):
         m_kappa_curve = MCurvatureCurve(self.cross_sections, positive_curvature=False)
         self.assertCountEqual(m_kappa_curve.curvatures, self.negative_curvatures)
 
+
+class TestMKappaCurve2(TestCase): 
+    
+    def setUp(self) -> None:
+        # Concrete section
+        self.concrete = Concrete(f_cm=30)
+        self.concrete_rectangle = Rectangle(top_edge=0.0, bottom_edge=20, width=10)
+        self.concrete_section = self.concrete + self.concrete_rectangle
+        # Steel section
+        self.steel = Steel(f_y=355, f_u=400, failure_strain=0.2)
+        self.steel_rectangle = Rectangle(top_edge=20, bottom_edge=30, width=10)
+        self.steel_section = self.steel + self.steel_rectangle
+        # cross-section
+        self.cs = self.concrete_section + self.steel_section
+
+    def test_points_positive_curvature(self):
+        m_kappa_curve = MCurvatureCurve(self.cs, positive_curvature=True)
+        self.assertCountEqual(m_kappa_curve.points.curvatures, [7.862797763747156e-06, 7.945896733157896e-06])
+        
 
 if __name__ == "__main__":
     main()
