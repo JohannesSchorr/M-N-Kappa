@@ -1,7 +1,7 @@
 from unittest import TestCase, main
 import math
 
-from m_n_kappa.matrices import Matrix, Vector, LinearEquationsSystem, Jacobian
+from m_n_kappa.matrices import Matrix, Vector, LinearEquationsSystem, Jacobian, Identity
 
 
 class TestVector(TestCase):
@@ -14,7 +14,7 @@ class TestVector(TestCase):
 
     def test_add(self):
         self.assertEqual(self.vector_1 + self.vector_2, Vector([2, 4]))
-        
+
     def test_subtract(self):
         self.assertEqual(self.vector_1 - self.vector_2, Vector([-2, -2]))
 
@@ -26,12 +26,12 @@ class TestVector(TestCase):
 
     def test_multiply_scalar(self):
         self.assertEqual(self.vector_1.multiply_scalar(2.0), Vector([0.0, 2.0]))
-    
+
     def test_tensor_product(self):
         self.assertEqual(
-            self.vector_1.tensor_product(self.vector_2), 
-            Matrix([[0, 0], [2, 3]])
+            self.vector_1.tensor_product(self.vector_2), Matrix([[0, 0], [2, 3]])
         )
+
 
 class TestMatrix(TestCase):
     def setUp(self):
@@ -128,38 +128,40 @@ class TestMatrix(TestCase):
                 10,
             ),
         )
-        
+
     def test_givens_2(self):
         """see https://de.wikipedia.org/wiki/Givens-Rotation#QR-Zerlegung-mittels-Givens-Rotationen"""
         q, r = self.matrix_8._givens()
         self.assertEqual(
-            q, 
-            Matrix([[3/5, 4/(5*5**0.5), 0, -8/(5*5**0.5)], 
-                    [0, 2/(5**0.5), 0, 1/(5**0.5)], 
-                    [0, 0, 1, 0], 
-                    [4/5, -3/(5*5**0.5), 0, 6/(5*5**0.5)]])
-        )
-        self.assertEqual(
-            round(r, 15), 
+            q,
             Matrix(
-                [[5, 7], [0, 5**0.5], [0, 0], [0, 0]]
-            )
+                [
+                    [3 / 5, 4 / (5 * 5**0.5), 0, -8 / (5 * 5**0.5)],
+                    [0, 2 / (5**0.5), 0, 1 / (5**0.5)],
+                    [0, 0, 1, 0],
+                    [4 / 5, -3 / (5 * 5**0.5), 0, 6 / (5 * 5**0.5)],
+                ]
+            ),
         )
-    
+        self.assertEqual(round(r, 15), Matrix([[5, 7], [0, 5**0.5], [0, 0], [0, 0]]))
+
     def test_givens_3(self):
         """see https://en.wikipedia.org/wiki/Givens_rotation#Triangulization"""
         q, r = self.matrix_9._givens()
         self.assertEqual(
             round(r, 4),
-            Matrix([[7.8102, 4.4813, 2.5607], [0, 4.6817, 0.9664], [0, 0, -4.1843]])
+            Matrix([[7.8102, 4.4813, 2.5607], [0, 4.6817, 0.9664], [0, 0, -4.1843]]),
         )
         self.assertEqual(
-            round(q, 4), 
-            Matrix([[0.7682, 0.3327, 0.5470], 
-                    [0.6402, -0.3992, -0.6564], 
-                    [0.0, 0.8544, -0.5196]])
+            round(q, 4),
+            Matrix(
+                [
+                    [0.7682, 0.3327, 0.5470],
+                    [0.6402, -0.3992, -0.6564],
+                    [0.0, 0.8544, -0.5196],
+                ]
+            ),
         )
-        
 
 
 class TestLinearEquationSystem(TestCase):
@@ -181,41 +183,122 @@ class TestLinearEquationSystem(TestCase):
         lgs = LinearEquationsSystem(self.matrix_3, self.constants_3)
         self.assertEqual(round(lgs.solve(), 12), Vector([2, -1, 5]))
 
-class TestJacobian(TestCase): 
-    
+
+class TestJacobian(TestCase):
     def setUp(self) -> None:
-        def f_1(variables : list): 
+        def f_1(variables: list):
             x, y, z = variables
             return x**2 + y**2 + z * math.sin(x)
-        
+
         def f_2(variables: list):
             x, y, z = variables
             return z**2 + z * math.sin(y)
-        
+
         self.functions = [f_1, f_2]
         self.variables_1 = Vector([1, 1, 1])
-        
+
     def test_jacobian_build_forward(self):
         rounding_value = 7  # -> 8 leads to error
         self.assertEqual(
-            round(Jacobian(self.functions, self.variables_1), rounding_value), 
-            round(Matrix([[2.5403023058681398, 2, 0.8414709848078965], [0, 0.5403023058681398, 2.8414709848078965]]), rounding_value)
+            round(Jacobian(self.functions, self.variables_1), rounding_value),
+            round(
+                Matrix(
+                    [
+                        [2.5403023058681398, 2, 0.8414709848078965],
+                        [0, 0.5403023058681398, 2.8414709848078965],
+                    ]
+                ),
+                rounding_value,
+            ),
         )
-        
+
     def test_jacobian_build_backward(self):
         rounding_value = 7  # -> 8 leads to error
         self.assertEqual(
-            round(Jacobian(self.functions, self.variables_1, differentiation_type='b'), rounding_value), 
-            round(Matrix([[2.5403023058681398, 2, 0.8414709848078965], [0, 0.5403023058681398, 2.8414709848078965]]), rounding_value)
+            round(
+                Jacobian(self.functions, self.variables_1, differentiation_type="b"),
+                rounding_value,
+            ),
+            round(
+                Matrix(
+                    [
+                        [2.5403023058681398, 2, 0.8414709848078965],
+                        [0, 0.5403023058681398, 2.8414709848078965],
+                    ]
+                ),
+                rounding_value,
+            ),
         )
-    
+
     def test_jacobian_build_center(self):
         rounding_value = 7  # -> 8 leads to error
         self.assertEqual(
-            round(Jacobian(self.functions, self.variables_1, differentiation_type='c'), rounding_value), 
-            round(Matrix([[2.5403023058681398, 2, 0.8414709848078965], [0, 0.5403023058681398, 2.8414709848078965]]), rounding_value)
+            round(
+                Jacobian(self.functions, self.variables_1, differentiation_type="c"),
+                rounding_value,
+            ),
+            round(
+                Matrix(
+                    [
+                        [2.5403023058681398, 2, 0.8414709848078965],
+                        [0, 0.5403023058681398, 2.8414709848078965],
+                    ]
+                ),
+                rounding_value,
+            ),
         )
-    
+
+
+class TestIdentity(TestCase):
+    def test_adding_to_zero_matrix(self):
+        column_rows = 5
+        zero_matrix = Matrix([[0] * column_rows] * column_rows)
+        identity_matrix = Identity(column_rows, 1.0)
+        self.assertEqual(
+            zero_matrix + identity_matrix,
+            Matrix(
+                [
+                    [1.0, 0.0, 0.0, 0.0, 0.0],
+                    [0.0, 1.0, 0.0, 0.0, 0.0],
+                    [0.0, 0.0, 1.0, 0.0, 0.0],
+                    [0.0, 0.0, 0.0, 1.0, 0.0],
+                    [0.0, 0.0, 0.0, 0.0, 1.0],
+                ]
+            ),
+        )
+
+    def test_adding_two_identity_matrix(self):
+        column_rows = 5
+        first_matrix = Identity(column_rows)
+        second_matrix = Identity(column_rows)
+        self.assertEqual(
+            first_matrix + second_matrix,
+            Matrix(
+                [
+                    [2.0, 0.0, 0.0, 0.0, 0.0],
+                    [0.0, 2.0, 0.0, 0.0, 0.0],
+                    [0.0, 0.0, 2.0, 0.0, 0.0],
+                    [0.0, 0.0, 0.0, 2.0, 0.0],
+                    [0.0, 0.0, 0.0, 0.0, 2.0],
+                ]
+            ),
+        )
+
+    def test_value(self):
+        column_rows = 5
+        self.assertEqual(
+            Identity(column_rows, 5.0),
+            Matrix(
+                [
+                    [5.0, 0.0, 0.0, 0.0, 0.0],
+                    [0.0, 5.0, 0.0, 0.0, 0.0],
+                    [0.0, 0.0, 5.0, 0.0, 0.0],
+                    [0.0, 0.0, 0.0, 5.0, 0.0],
+                    [0.0, 0.0, 0.0, 0.0, 5.0],
+                ]
+            ),
+        )
+
 
 if __name__ == "__main__":
     main()

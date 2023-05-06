@@ -965,8 +965,37 @@ class Matrix:
         for index in range(self.row_number):
             matrix.replace(row=index, column=index, value=1.0)
         return matrix
-    
-    
+
+
+class Identity(Matrix):
+
+    """
+    Identity Matrix
+
+    .. versionadded:: 0.2.0
+
+    Where the diagonal values have a given value
+    and all other values are zero.
+    """
+
+    def __init__(self, row_column_number: int, diagonal_value: float = 1.0):
+        """
+        Parameters
+        ----------
+        row_column_number : int
+            number of rows and columns of the matrix
+        diagonal_value : float
+            value along the diagonal (Default: 1.0)
+        """
+        super().__init__(matrix=[[0] * row_column_number] * row_column_number)
+        self._add_diagonal(diagonal_value)
+
+    def _add_diagonal(self, value=1.0):
+        """add the diagonal to the given matrix"""
+        for index in range(self.row_number):
+            self.replace(row=index, column=index, value=value)
+
+
 class Jacobian(Matrix):
 
     """
