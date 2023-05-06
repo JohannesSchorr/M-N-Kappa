@@ -143,7 +143,7 @@ class MKappaCurvePoints:
         for point in points:
             text.append(
                 f"{point.moment:10.1f} | {point.curvature:10.6f} | {point.neutral_axis:10.2f} | "
-                f"{point.strain_position.strain:10.2f} | {point.strain_position.position:10.1f} | "
+                f"{point.strain_position.strain:10.6f} | {point.strain_position.position:10.1f} | "
                 f"{point.strain_position.material}"
             )
         text.append(line)
