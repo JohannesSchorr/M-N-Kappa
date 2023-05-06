@@ -475,13 +475,14 @@ class Beam:
 
     def _incremental_deformations(
         self, for_position: float, load: ABCSingleSpan
-    ) -> list[float]:
+    ) -> Iterator[float]:
+        """computed the incremental deformations for each node along the beam"""
         single_load = SingleLoad(for_position, 1.0)
         single_span_single_load = SingleSpanSingleLoads(self.length, [single_load])
-        return [
+        return (
             self._incremental_deformation(element_index, load, single_span_single_load)
             for element_index in range(len(self.nodes) - 1)
-        ]
+        )
 
     def _incremental_deformation(
         self,
