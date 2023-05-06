@@ -68,9 +68,26 @@ class MKappaCurvePoint:
     neutral_axis: float = field(compare=True)
     cross_section: Crosssection
     strain_position: StrainPosition
+    checks: bool = field(init=False, default=False)
 
     def __post_init__(self):
         log.info(f"Created {self.__repr__()}")
+        self.checks = self._have_moment_and_curvature_same_sign()
+        
+    def _have_moment_and_curvature_same_sign(self) -> bool:
+        """
+        check for same sign of moment and curvature
+        
+        .. versionadded:: 0.2.0
+        """
+        if self.moment == 0.0 and self.curvature == 0.0: 
+            return True
+        sign_moment = int(self.moment / abs(self.moment))
+        sign_curvature = int(self.curvature / abs(self.curvature))
+        if sign_moment == sign_curvature: 
+            return True
+        else: 
+            return False
 
     def moment_curvature(self) -> list[float]:
         """pair of moment and curvature"""
@@ -224,7 +241,7 @@ class MKappaCurvePoints:
             cross_section,
             strain_position,
         )
-        if point not in self.points:
+        if point not in self.points and point.checks:
             self._points.append(point)
             self._sort_points_by_curvature()
             log.info(f"Added {point} to MKappaCurvePoints\n----")
