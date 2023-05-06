@@ -234,11 +234,12 @@ class Beam:
 
     @property
     def consider_widths(self) -> bool:
-        """"""
+        """indicates if effective widths are considered during computation"""
         return self._consider_widths
 
     @property
     def cross_section(self) -> Crosssection:
+        """cross-section to be computed"""
         return self._cross_section
 
     @property
@@ -420,9 +421,11 @@ class Beam:
         return Deformations(deformations)
 
     def _deformation_at_node(self, at_position: float, load: ABCSingleSpan) -> float:
+        """compute the deformation of a node at the given position under the given load"""
         return sum(self._incremental_deformations(at_position, load))
 
     def _decisive_positions(self) -> list[float]:
+        """determine the decisive positions along the beam"""
         positions = self.load.positions_of_maximum_moment()
         positions.append(self.load.position_of_maximum_deformation())
         positions += self.load.positions
@@ -433,7 +436,22 @@ class Beam:
     def _deformation_between_nodes(
         self, at_position: float, load: ABCSingleSpan
     ) -> float:
-        smaller_position = max(list(filter(lambda x: x < at_position, self.positions)))
+        """
+        compute the deformation at the given position between two nodes
+
+        Parameters
+        ----------
+        at_position : float
+            position where the deformation is to be computed
+        load : :py:class:`~m_n_kappa.loading.ABCSingleSpan`
+            load under which deformation is to be computed
+
+        Returns
+        -------
+        float
+            deformation at the given position
+        """
+        smaller_position, higher_position = self._neighboring_positions(at_position)
         deformation_at_smaller_position = self._deformation_at_node(
             smaller_position, load
         )
@@ -496,6 +514,7 @@ class Beam:
         )
 
     def _create_positions(self) -> list[float]:
+        """create the positions where M-Kappa is to be computed"""
         positions = [
             number * self.element_standard_length
             for number in range(0, self.element_number + 1)
