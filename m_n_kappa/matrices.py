@@ -1413,6 +1413,11 @@ class LinearEquationsSystem:
         x = Vector([0.0] * last_row)  # Variables
         for row in range(last_row - 1, -1, -1):
             subtractor = triangle.row_vector(row).scalar_product(x)
-            x_i = (constants.entries[row] - subtractor) / triangle.entry(row, row)
+            numerator = constants.entries[row] - subtractor
+            denominator = triangle.entry(row, row)
+            if numerator == 0.0 and denominator == 0.0:
+                x_i = 0.0
+            else:
+                x_i = numerator / denominator
             x.replace(row, x_i, inplace=True)
         return x
