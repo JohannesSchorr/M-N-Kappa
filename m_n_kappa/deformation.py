@@ -455,7 +455,6 @@ class Beam:
         deformation_at_smaller_position = self._deformation_at_node(
             smaller_position, load
         )
-        higher_position = min(list(filter(lambda x: x > at_position, self.positions)))
         deformation_at_higher_position = self._deformation_at_node(
             higher_position, load
         )
@@ -464,6 +463,12 @@ class Beam:
             first_pair=[smaller_position, deformation_at_smaller_position],
             second_pair=[higher_position, deformation_at_higher_position],
         )
+
+    def _neighboring_positions(self, at_position: float) -> tuple[float, float]:
+        """determine neighboring positions to a given position"""
+        smaller_position = max(list(filter(lambda x: x < at_position, self.positions)))
+        higher_position = min(list(filter(lambda x: x > at_position, self.positions)))
+        return smaller_position, higher_position
 
     def _incremental_deformations(
         self, for_position: float, load: ABCSingleSpan
