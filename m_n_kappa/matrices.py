@@ -852,17 +852,17 @@ class Matrix:
             return self._gram_schmidt()
         elif algorithm.upper() == "MODIFIED GRAM-SCHMIDT":
             return self._gram_schmidt_modified()
-        elif algorithm.upper() == "GIVENS-ROTATION": 
+        elif algorithm.upper() == "GIVENS-ROTATION":
             return self._givens()
         else:
             raise ValueError(
                 f"Algorithm {algorithm} is not available."
                 f"Possible algorithms are 'Gram-Schmidt' and 'Modified Gram-Schmidt'"
             )
-    
-    def replace(self, row:int, column:int, value:float) -> None:
+
+    def replace(self, row: int, column: int, value: float) -> None:
         self._matrix[row][column] = value
-        
+
     def _gram_schmidt(self) -> tuple:
         """
         Gram-Schmidt process to determine orthogonal and triangular matrix
@@ -914,8 +914,8 @@ class Matrix:
                 r_j.replace(number=row, value=r_ij, inplace=True)
                 q_j = q_j - q.column_vector(row).multiply_scalar(r_ij)
             r_j.replace(column, q_j.norm(), inplace=True)
-            if r_j.entries[column] == 0.0: 
-                log.critical(f'float division by zero: {column=}, {r_j=}')
+            if r_j.entries[column] == 0.0:
+                log.critical(f"float division by zero: {column=}, {r_j=}")
             q_j = q_j.multiply_scalar(1.0 / r_j.entries[column])
             q = q.append(q_j)
             r = r.append(r_j)
@@ -923,9 +923,9 @@ class Matrix:
 
     def _givens(self):
         """
-        QR-decomposition utilizing Givens rotation. 
-        
-        
+        QR-decomposition utilizing Givens rotation.
+
+
         Returns
         -------
         tuple[Matrix, Matrix]
@@ -934,35 +934,35 @@ class Matrix:
         r = Matrix(self.matrix)
         rotation_matrices = []
         for column in range(self.column_number):
-            for row in range(self.row_number): 
-                if column >= row: 
+            for row in range(self.row_number):
+                if column >= row:
                     continue
-                if r.entry(row, column) == 0.0: 
+                if r.entry(row, column) == 0.0:
                     continue
                 diagonal_value = r.entry(column, column)
                 position_value = r.entry(row, column)
-                rho = (diagonal_value**2.0 + position_value**2.0)**0.5
+                rho = (diagonal_value**2.0 + position_value**2.0) ** 0.5
                 rotation_matrix = self._identity()
                 rotation_matrix.replace(row, row, diagonal_value / rho)
                 rotation_matrix.replace(column, column, diagonal_value / rho)
                 rotation_matrix.replace(row, column, (-1.0) * position_value / rho)
                 rotation_matrix.replace(column, row, position_value / rho)
-                
+
                 r = rotation_matrix.multiply_by(r)
                 rotation_matrices.append(rotation_matrix)
-        if len(rotation_matrices) == 0.0: 
+        if len(rotation_matrices) == 0.0:
             return r, r
-        for index, matrix in enumerate(rotation_matrices): 
-            if index == 0: 
+        for index, matrix in enumerate(rotation_matrices):
+            if index == 0:
                 q = matrix
-            else: 
+            else:
                 q = q.transpose()
                 q = q.multiply_by(matrix.transpose())
         return q, r
-        
+
     def _identity(self):
         matrix = Matrix([[0] * self.row_number] * self.row_number)
-        for index in range(self.row_number): 
+        for index in range(self.row_number):
             matrix.replace(row=index, column=index, value=1.0)
         return matrix
     
