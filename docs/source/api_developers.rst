@@ -183,6 +183,7 @@ Fitting
    :toctree: api/
 
    GaussNewton
+   LevenbergMarquardt
 
 Matrices
 ========
