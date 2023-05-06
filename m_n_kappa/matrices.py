@@ -942,7 +942,7 @@ class Matrix:
                 diagonal_value = r.entry(column, column)
                 position_value = r.entry(row, column)
                 rho = (diagonal_value**2.0 + position_value**2.0) ** 0.5
-                rotation_matrix = self._identity()
+                rotation_matrix = Identity(self.row_number)
                 rotation_matrix.replace(row, row, diagonal_value / rho)
                 rotation_matrix.replace(column, column, diagonal_value / rho)
                 rotation_matrix.replace(row, column, (-1.0) * position_value / rho)
@@ -959,12 +959,6 @@ class Matrix:
                 q = q.transpose()
                 q = q.multiply_by(matrix.transpose())
         return q, r
-
-    def _identity(self):
-        matrix = Matrix([[0] * self.row_number] * self.row_number)
-        for index in range(self.row_number):
-            matrix.replace(row=index, column=index, value=1.0)
-        return matrix
     
     def diagonal(self):
         """
