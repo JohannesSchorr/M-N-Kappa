@@ -109,6 +109,9 @@ class ShearConnector:
                 lower_slip.slip < slip <= upper_slip.slip
             ):  # assumes that first slip-value is zero
                 return interpolation(slip, lower_slip.pair(), upper_slip.pair())
+        raise ShearConnectorExceedsMaxSlipError(
+            f'Given {slip=} exceeds the maximum slip s_max={self.s_max}'
+        )
 
     def new(self, position: float):
         """
@@ -156,6 +159,16 @@ class ShearConnector:
         return [load_slip.slip for load_slip in self.load_slips]
 
 
+class ShearConnectorExceedsMaxSlipError(Exception): 
+    
+    """
+    Raised when the shear-connector exceeds the maximum slip
+    
+    .. versionadded:: 0.2.0
+    """
+    pass
+    
+    
 class HeadedStud(ShearConnector):
 
     """
