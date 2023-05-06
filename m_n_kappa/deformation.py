@@ -227,6 +227,9 @@ class Beam:
         self._element_number = element_number
         self._load = load
         self._consider_widths = consider_widths
+        self.__post_init__()
+
+    def __post_init__(self):
         self._element_standard_length = self.length / self.element_number
         self._positions = self._create_positions()
         self._nodes = self._create_nodes()
