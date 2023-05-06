@@ -196,6 +196,7 @@ Matrices
    Vector
    Matrix
    Jacobian
+   Identity
    LinearEquationsSystem
 
 .. _api_developers.loading:
