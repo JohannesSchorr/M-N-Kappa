@@ -965,6 +965,19 @@ class Matrix:
         for index in range(self.row_number):
             matrix.replace(row=index, column=index, value=1.0)
         return matrix
+    
+    def diagonal(self):
+        """
+        build new matrix inheriting the diagonal from this matrix
+        and put all other places to zero
+        """
+        matrix = Matrix([[0] * self.row_number] * self.row_number)
+        for index in range(self.row_number):
+            matrix.replace(
+                row=index, column=index, 
+                value=self.entry(row_number=index, column_number=index)
+            )
+        return matrix
 
 
 class Identity(Matrix):
