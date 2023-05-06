@@ -487,7 +487,7 @@ class Beam:
         single_load: SingleSpanSingleLoads,
     ) -> float:
         """
-        compute the incremental deformation of
+        compute the incremental deformation under the given load
 
         Parameters
         ----------
