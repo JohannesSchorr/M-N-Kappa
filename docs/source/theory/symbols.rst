@@ -86,9 +86,13 @@ Latin letters
    * - :math:`M_\mathrm{cs}`
      - moment of a cross-section under a given strain-distribution
      - Formula :math:numref:`eq:theory_crosssection_moment` in :ref:`theory.sections.cross_section`
+   * - :math:`M_\mathrm{E}`
+     - external moment occuring by loading of the beam
+     -
    * - :math:`M_i`
      - moment of a sub-section under a given strain-distribution
      - Formula :math:numref:`eq:theory_section_moment` in :ref:`theory.sections.sections.moment`
+     -
    * - :math:`M_\mathrm{R}`
      - resistance moment
      -
@@ -107,9 +111,15 @@ Latin letters
    * - :math:`N_i`
      - axial force of a sub-section under a given strain-distribution
      - Formulas :math:numref:`eq:theory_section_axial_force_rectangle` and :math:numref:`eq:theory_section_axial_force_circle` in :ref:`theory.sections.sections.axial_force`
+   * - :math:`P`
+     - Transferred shear force by a shear connector
+     -
    * - :math:`r_i`
      - lever arm of axial force :math:`N_i` of a sub-section under a given strain-distribution
      - Formulas :math:numref:`eq:theory_section_lever_arm_rectangle` and :math:numref:`eq:theory_section_lever_arm_circle` in :ref:`theory.sections.sections.lever_arm`
+   * - :math:`s`
+     - slip between two parts of a cross-section
+     - see :ref:`theory.slip`
    * - :math:`x`
      - point along the beam (X-Axis)
      -

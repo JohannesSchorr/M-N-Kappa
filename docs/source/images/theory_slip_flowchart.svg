@@ -1,0 +1,558 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="225mm"
+   height="330mm"
+   viewBox="0 0 225 330"
+   version="1.1"
+   id="svg5"
+   inkscape:version="1.2.2 (732a01da63, 2022-12-09)"
+   sodipodi:docname="theory_slip_flowchart.svg"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:xlink="http://www.w3.org/1999/xlink"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview7"
+     pagecolor="#505050"
+     bordercolor="#eeeeee"
+     borderopacity="1"
+     inkscape:showpageshadow="0"
+     inkscape:pageopacity="0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#505050"
+     inkscape:document-units="mm"
+     showgrid="false"
+     inkscape:zoom="0.53354918"
+     inkscape:cx="132.13402"
+     inkscape:cy="596.00879"
+     inkscape:window-width="1920"
+     inkscape:window-height="1027"
+     inkscape:window-x="1912"
+     inkscape:window-y="484"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="layer1"
+     inkscape:connector-spacing="3" />
+  <defs
+     id="defs2">
+    <symbol
+       id="AuxillaryOp">
+      <title
+         id="title208">Auxiliary Operation</title>
+      <desc
+         id="desc210">Offline operation.</desc>
+      <rect
+         x="35"
+         y="35"
+         width="80"
+         height="80"
+         style="stroke-width:2"
+         id="rect212" />
+    </symbol>
+    <symbol
+       id="Decision">
+      <title
+         id="title185">Decision</title>
+      <desc
+         id="desc187">A decision or switching type operation.</desc>
+      <path
+         d="M 15,75 75,35 135,75 75,115 Z"
+         style="stroke-width:2"
+         id="path189" />
+    </symbol>
+  </defs>
+  <g
+     inkscape:label="Ebene 1"
+     inkscape:groupmode="layer"
+     id="layer1">
+    <g
+       id="g1048"
+       transform="translate(-12.170835,-1.2086932)">
+      <use
+         xlink:href="#AuxillaryOp"
+         style="fill:none;stroke:#808080"
+         id="use656"
+         transform="matrix(1.023859,0,0,0.35613546,28.210577,-2.8999124)" />
+      <text
+         xml:space="preserve"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:7.05556px;font-family:'Times New Roman';-inkscape-font-specification:'Times New Roman, ';fill:#808080;fill-rule:evenodd;stroke:none;stroke-width:0.499999;stroke-linejoin:round;stroke-miterlimit:2.1"
+         x="105.60909"
+         y="16.831169"
+         id="text945"><tspan
+           sodipodi:role="line"
+           style="text-align:center;text-anchor:middle;fill:#808080;stroke-width:0.5"
+           x="105.60909"
+           y="16.831169"
+           id="tspan947">Definitions</tspan><tspan
+           sodipodi:role="line"
+           style="font-size:5.64444px;text-align:center;text-anchor:middle;fill:#808080;stroke-width:0.5"
+           x="105.60909"
+           y="25.65062"
+           id="tspan951">cross-section, shear-connector(s), </tspan><tspan
+           sodipodi:role="line"
+           style="font-size:5.64444px;text-align:center;text-anchor:middle;fill:#808080;stroke-width:0.5"
+           x="105.60909"
+           y="34.47007"
+           id="tspan953">beam-length, loading, positioning</tspan></text>
+    </g>
+    <g
+       id="g1056"
+       transform="translate(-12.00507,-7.5203816)">
+      <use
+         xlink:href="#AuxillaryOp"
+         style="fill:none;stroke:#808080"
+         id="use656-9"
+         transform="matrix(1.0263553,0,0,0.24648509,27.755241,43.726373)" />
+      <text
+         xml:space="preserve"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:7.05556px;font-family:'Times New Roman';-inkscape-font-specification:'Times New Roman, ';text-align:center;text-anchor:middle;fill:#808080;fill-rule:evenodd;stroke:none;stroke-width:0.499999;stroke-linejoin:round;stroke-miterlimit:2.1"
+         x="105.48637"
+         y="59.437729"
+         id="text984"><tspan
+           sodipodi:role="line"
+           style="font-size:7.05556px;fill:#808080;stroke-width:0.5"
+           x="105.48637"
+           y="59.437729"
+           id="tspan994">Compute <tspan
+   style="font-style:italic;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:7.05556px;font-family:'Times New Roman';-inkscape-font-specification:'Times New Roman,  Italic';fill:#808080"
+   id="tspan990">M-N-κ-ε</tspan><tspan
+   style="font-size:7.05556px;baseline-shift:sub;fill:#808080"
+   id="tspan988">Δ</tspan>-curves </tspan><tspan
+           sodipodi:role="line"
+           style="font-size:7.05556px;fill:#808080;stroke-width:0.5"
+           x="105.48637"
+           y="68.257179"
+           id="tspan1004">at each position</tspan></text>
+    </g>
+    <g
+       id="g1113"
+       transform="translate(-12.00507,-7.1697323)">
+      <use
+         xlink:href="#AuxillaryOp"
+         style="fill:none;stroke:#808080"
+         id="use656-9-0"
+         transform="matrix(1.0263553,0,0,0.24648509,27.755241,72.3318)" />
+      <text
+         xml:space="preserve"
+         style="font-style:italic;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:7.05556px;font-family:'Times New Roman';-inkscape-font-specification:'Times New Roman,  Italic';text-align:center;text-anchor:middle;fill:#808080;fill-rule:evenodd;stroke:none;stroke-width:0.499999;stroke-linejoin:round;stroke-miterlimit:2.1"
+         x="105.48637"
+         y="88.095657"
+         id="text1035"><tspan
+           sodipodi:role="line"
+           id="tspan1033"
+           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:'Times New Roman';-inkscape-font-specification:'Times New Roman, ';fill:#808080;stroke-width:0.5"
+           x="105.48637"
+           y="88.095657">Compute the moment <tspan
+   style="font-style:italic;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:'Times New Roman';-inkscape-font-specification:'Times New Roman,  Italic';fill:#808080"
+   id="tspan1039">M</tspan><tspan
+   style="font-size:65%;baseline-shift:sub;fill:#808080"
+   id="tspan1037">E</tspan> </tspan><tspan
+           sodipodi:role="line"
+           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:'Times New Roman';-inkscape-font-specification:'Times New Roman, ';fill:#808080;stroke-width:0.5"
+           x="105.48637"
+           y="96.916908"
+           id="tspan1041">by the applied load</tspan></text>
+    </g>
+    <g
+       id="g1262"
+       transform="translate(-5.8164677,-2.2951838)"
+       inkscape:connector-avoid="true">
+      <use
+         xlink:href="#AuxillaryOp"
+         style="fill:none;stroke:#000000"
+         id="use656-9-0-0-3"
+         transform="matrix(1.0263553,0,0,0.24648509,-22.976647,139.00476)" />
+      <g
+         id="g1253">
+        <text
+           xml:space="preserve"
+           style="font-style:italic;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:7.05556px;font-family:'Times New Roman';-inkscape-font-specification:'Times New Roman,  Italic';text-align:center;text-anchor:middle;white-space:pre;inline-size:85.3682;display:inline;fill:#000000;fill-rule:evenodd;stroke:none;stroke-width:0.499999;stroke-linejoin:round;stroke-miterlimit:2.1"
+           x="20.337662"
+           y="152.18181"
+           id="text1171"
+           transform="translate(33.767187,2.6121732)"><tspan
+             x="20.337662"
+             y="152.18181"
+             id="tspan1066"><tspan
+               style="font-style:normal;-inkscape-font-specification:'Times New Roman, '"
+               id="tspan1064">Determine strain-difference
+</tspan></tspan><tspan
+             x="20.337662"
+             y="161.00305"
+             id="tspan1078"><tspan
+   style="font-style:normal;-inkscape-font-specification:'Times New Roman, '"
+   id="tspan1068">at each position</tspan><tspan
+   style="stroke-width:0.5"
+   id="tspan1070"> </tspan><tspan
+   style="stroke-width:0.5"
+   id="tspan1072">ε</tspan><tspan
+   style="font-style:normal;font-size:65%;-inkscape-font-specification:'Times New Roman, ';baseline-shift:sub"
+   id="tspan1074">Δ,</tspan><tspan
+   style="font-size:65%;baseline-shift:sub"
+   id="tspan1076">i</tspan><tspan
+   y="161.00305"
+   id="tspan1080"> </tspan></tspan></text>
+      </g>
+    </g>
+    <g
+       id="g1270"
+       transform="translate(-18.0892,-13.380002)"
+       inkscape:connector-avoid="true">
+      <use
+         xlink:href="#AuxillaryOp"
+         style="fill:none;stroke:#000000"
+         id="use656-9-0-0-3-1"
+         transform="matrix(1.0263553,0,0,0.24648509,84.382216,137.4662)" />
+      <text
+         xml:space="preserve"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:7.05556px;font-family:'Times New Roman';-inkscape-font-specification:'Times New Roman, ';text-align:center;text-anchor:middle;fill:#000000;fill-rule:evenodd;stroke:none;stroke-width:0.499999;stroke-linejoin:round;stroke-miterlimit:2.1"
+         x="162.15813"
+         y="153.23096"
+         id="text1191"><tspan
+           sodipodi:role="line"
+           id="tspan1189"
+           style="stroke-width:0.5"
+           x="162.15813"
+           y="153.23096">Determine transferred shear </tspan><tspan
+           sodipodi:role="line"
+           style="stroke-width:0.5"
+           x="162.15813"
+           y="162.0522"
+           id="tspan1195">load by shear connectors <tspan
+   style="font-style:italic;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:'Times New Roman';-inkscape-font-specification:'Times New Roman,  Italic'"
+   id="tspan1202">P</tspan><tspan
+   style="font-style:italic;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:65%;font-family:'Times New Roman';-inkscape-font-specification:'Times New Roman,  Italic';baseline-shift:sub"
+   id="tspan1193">i</tspan></tspan></text>
+    </g>
+    <g
+       id="g1270-1"
+       transform="translate(119.51126,22.839877)"
+       inkscape:connector-avoid="true">
+      <g
+         id="g10246"
+         transform="translate(-74.403651,-3.1722785)">
+        <use
+           xlink:href="#AuxillaryOp"
+           style="fill:none;stroke:#000000"
+           id="use656-9-0-0-3-1-0"
+           transform="matrix(0,-1.4325953,0.2442048,0,143.0435,263.51781)" />
+        <text
+           xml:space="preserve"
+           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:7.05556px;font-family:'Times New Roman';-inkscape-font-specification:'Times New Roman, ';text-align:center;text-anchor:middle;fill:#000000;fill-rule:evenodd;stroke:none;stroke-width:0.499999;stroke-linejoin:round;stroke-miterlimit:2.1"
+           x="-156.0611"
+           y="158.57695"
+           id="text1191-8"
+           transform="rotate(-90)"><tspan
+             sodipodi:role="line"
+             style="stroke-width:0.5"
+             x="-156.0611"
+             y="158.57695"
+             id="tspan1195-7">Guessing new distribution of slip </tspan><tspan
+             sodipodi:role="line"
+             style="stroke-width:0.5"
+             x="-156.0611"
+             y="167.39639"
+             id="tspan10190">using Levenberg-Marquardt Algorithm</tspan></text>
+      </g>
+    </g>
+    <g
+       id="g1734"
+       inkscape:connector-avoid="true"
+       transform="translate(-12.170835,-1.2086932)">
+      <use
+         xlink:href="#AuxillaryOp"
+         style="fill:none;stroke:#000000"
+         id="use656-9-0-0-3-1-5"
+         transform="matrix(1.0263553,0,0,0.24648509,78.463855,150.72014)" />
+      <text
+         xml:space="preserve"
+         style="font-style:italic;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:7.05556px;font-family:'Times New Roman';-inkscape-font-specification:'Times New Roman,  Italic';text-align:center;text-anchor:middle;fill:#000000;fill-rule:evenodd;stroke:none;stroke-width:0.499999;stroke-linejoin:round;stroke-miterlimit:2.1"
+         x="156.08473"
+         y="166.48489"
+         id="text1233"><tspan
+           sodipodi:role="line"
+           id="tspan1231"
+           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:'Times New Roman';-inkscape-font-specification:'Times New Roman, ';stroke-width:0.5"
+           x="156.08473"
+           y="166.48489">Compute axial-force </tspan><tspan
+           sodipodi:role="line"
+           style="stroke-width:0.5"
+           x="156.08473"
+           y="175.30614"
+           id="tspan1235"><tspan
+   style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:'Times New Roman';-inkscape-font-specification:'Times New Roman, '"
+   id="tspan1237">along the beam</tspan> N<tspan
+   style="font-size:65%;baseline-shift:sub"
+   id="tspan1239">i</tspan></tspan></text>
+    </g>
+    <g
+       id="g1756"
+       transform="translate(-12.170835,-1.2086932)">
+      <g
+         id="g2850">
+        <use
+           xlink:href="#AuxillaryOp"
+           style="fill:none;stroke:#000000"
+           id="use656-9-0-0-3-1-5-9"
+           transform="matrix(1.8706635,0,0,0.24319208,-32.551031,181.83851)" />
+        <text
+           xml:space="preserve"
+           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:7.05556px;font-family:'Times New Roman';-inkscape-font-specification:'Times New Roman, ';text-align:center;text-anchor:middle;fill:#000000;fill-rule:evenodd;stroke:none;stroke-width:0.499999;stroke-linejoin:round;stroke-miterlimit:2.1"
+           x="108.55023"
+           y="197.35539"
+           id="text1301"><tspan
+             sodipodi:role="line"
+             style="stroke-width:0.5"
+             x="108.55023"
+             y="197.35539"
+             id="tspan1303">Determine resisting moment <tspan
+   style="font-style:italic;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:'Times New Roman';-inkscape-font-specification:'Times New Roman,  Italic'"
+   id="tspan1305">M</tspan><tspan
+   style="font-size:65%;baseline-shift:sub"
+   id="tspan1307">R</tspan> along the beam </tspan><tspan
+             sodipodi:role="line"
+             style="stroke-width:0.5"
+             x="109.43217"
+             y="206.17664"
+             id="tspan2838">using the <tspan
+   style="font-style:italic;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:'Times New Roman';-inkscape-font-specification:'Times New Roman,  Italic'"
+   id="tspan1309">M-N-κ-ε</tspan><tspan
+   style="font-size:65%;baseline-shift:sub"
+   id="tspan1311">Δ</tspan>-curves </tspan></text>
+      </g>
+    </g>
+    <use
+       xlink:href="#AuxillaryOp"
+       style="fill:none;stroke:#666666"
+       id="use656-9-0-0-3-1-5-3-4"
+       transform="matrix(1.0263553,0,0,0.24648509,18.466767,265.96946)" />
+    <text
+       xml:space="preserve"
+       style="font-style:italic;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:7.05556px;font-family:'Times New Roman';-inkscape-font-specification:'Times New Roman,  Italic';text-align:center;text-anchor:middle;fill:#808080;fill-rule:evenodd;stroke:none;stroke-width:0.499999;stroke-linejoin:round;stroke-miterlimit:2.1"
+       x="96.197899"
+       y="282.24573"
+       id="text1352-3"><tspan
+         sodipodi:role="line"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:'Times New Roman';-inkscape-font-specification:'Times New Roman, ';fill:#808080;stroke-width:0.5"
+         x="96.197899"
+         y="282.24573"
+         id="tspan1380-3">Determine curvature along </tspan><tspan
+         sodipodi:role="line"
+         style="fill:#808080;stroke-width:0.5"
+         x="97.079842"
+         y="291.06699"
+         id="tspan1590"><tspan
+   style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:'Times New Roman';-inkscape-font-specification:'Times New Roman, ';fill:#808080"
+   id="tspan1606">the beam</tspan> κ<tspan
+   style="font-size:65%;baseline-shift:sub;fill:#808080"
+   id="tspan1604">i</tspan> (M-N-κ-ε<tspan
+   style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:65%;font-family:'Times New Roman';-inkscape-font-specification:'Times New Roman, ';baseline-shift:sub;fill:#808080"
+   id="tspan1598">Δ</tspan>) </tspan></text>
+    <g
+       id="g1503"
+       transform="translate(-20.586425,-26.833443)">
+      <use
+         xlink:href="#Decision"
+         style="fill:none;stroke:#000000"
+         id="use1396"
+         transform="matrix(0.43915708,0,0,0.58001534,83.10608,223.99953)" />
+      <text
+         xml:space="preserve"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:7.05556px;font-family:'Times New Roman';-inkscape-font-specification:'Times New Roman, ';text-align:center;text-anchor:middle;fill:#000000;fill-rule:evenodd;stroke:none;stroke-width:0.499999;stroke-linejoin:round;stroke-miterlimit:2.1"
+         x="116.28402"
+         y="259.05621"
+         id="text1474"><tspan
+           sodipodi:role="line"
+           id="tspan1472"
+           style="fill:#000000;stroke-width:0.5"
+           x="116.28402"
+           y="259.05621">Is <tspan
+   style="font-style:italic;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:'Times New Roman';-inkscape-font-specification:'Times New Roman,  Italic'"
+   id="tspan1482" /></tspan><tspan
+           sodipodi:role="line"
+           style="fill:#000000;stroke-width:0.5"
+           x="116.28402"
+           y="267.87747"
+           id="tspan1484"><tspan
+   style="font-style:italic;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:'Times New Roman';-inkscape-font-specification:'Times New Roman,  Italic'"
+   id="tspan1486">M</tspan><tspan
+   style="font-size:65%;baseline-shift:sub"
+   id="tspan1480">R</tspan> - <tspan
+   style="font-style:italic;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:'Times New Roman';-inkscape-font-specification:'Times New Roman,  Italic'"
+   id="tspan1478">M</tspan><tspan
+   style="font-size:65%;baseline-shift:sub"
+   id="tspan1476">E</tspan> ≈ 0</tspan><tspan
+           sodipodi:role="line"
+           style="fill:#000000;stroke-width:0.5"
+           x="116.28402"
+           y="276.6969"
+           id="tspan1491">?</tspan></text>
+    </g>
+    <text
+       xml:space="preserve"
+       style="font-style:italic;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:7.05556px;font-family:'Times New Roman';-inkscape-font-specification:'Times New Roman,  Italic';text-align:center;text-anchor:middle;fill:#000000;fill-rule:evenodd;stroke:none;stroke-width:0.499999;stroke-linejoin:round;stroke-miterlimit:2.1"
+       x="126.21035"
+       y="236.72272"
+       id="text1507"><tspan
+         sodipodi:role="line"
+         id="tspan1505"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:'Times New Roman';-inkscape-font-specification:'Times New Roman, ';stroke-width:0.5"
+         x="126.21035"
+         y="236.72272">No</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:7.05556px;font-family:'Times New Roman';-inkscape-font-specification:'Times New Roman, ';text-align:center;text-anchor:middle;fill:#000000;fill-rule:evenodd;stroke:none;stroke-width:0.499999;stroke-linejoin:round;stroke-miterlimit:2.1"
+       x="87.944008"
+       y="269.23605"
+       id="text1511"><tspan
+         sodipodi:role="line"
+         id="tspan1509"
+         style="stroke-width:0.5"
+         x="87.944008"
+         y="269.23605">Yes</tspan></text>
+    <g
+       id="g1714"
+       transform="translate(-13.293135,-27.667039)">
+      <use
+         xlink:href="#AuxillaryOp"
+         style="fill:none;stroke:#666666"
+         id="use656-9-0-0-3-1-5-3-4-8"
+         transform="matrix(1.0263553,0,0,0.24648509,31.759907,320.59154)" />
+      <text
+         xml:space="preserve"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:7.05556px;font-family:'Times New Roman';-inkscape-font-specification:'Times New Roman, ';text-align:center;text-anchor:middle;fill:#808080;fill-rule:evenodd;stroke:none;stroke-width:0.499999;stroke-linejoin:round;stroke-miterlimit:2.1"
+         x="109.49103"
+         y="336.35629"
+         id="text1637"><tspan
+           sodipodi:role="line"
+           id="tspan1635"
+           style="fill:#808080;stroke-width:0.5"
+           x="109.49103"
+           y="336.35629">Compute deformation </tspan><tspan
+           sodipodi:role="line"
+           style="fill:#808080;stroke-width:0.5"
+           x="109.49103"
+           y="345.17575"
+           id="tspan1639">along the beam</tspan></text>
+    </g>
+    <path
+       style="fill:none;fill-rule:evenodd;stroke:#808080;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;stroke-dasharray:none;stroke-opacity:1"
+       d="m 92.829132,36.846971 -0.10235,7.985997"
+       id="path1686"
+       inkscape:connector-type="polyline"
+       inkscape:connector-curvature="0" />
+    <path
+       style="fill:none;fill-rule:evenodd;stroke:#808080;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;stroke-dasharray:none;stroke-opacity:1"
+       d="m 92.790382,64.79826 v 8.990784"
+       id="path1688"
+       inkscape:connector-type="polyline"
+       inkscape:connector-curvature="0" />
+    <path
+       style="fill:none;fill-rule:evenodd;stroke:#808080;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;stroke-dasharray:none;stroke-opacity:1"
+       d="M 92.672432,93.754336 V 104.14771"
+       id="path1690"
+       inkscape:connector-type="polyline"
+       inkscape:connector-curvature="0" />
+    <path
+       style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;stroke-dasharray:none;stroke-opacity:1"
+       d="m 120.5,152.67845 v 5.21347"
+       id="path1698"
+       inkscape:connector-type="orthogonal"
+       inkscape:connector-curvature="0" />
+    <path
+       style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;stroke-dasharray:none;stroke-opacity:1"
+       d="m 120.5,177.99624 v 10.90209"
+       id="path1698-6"
+       inkscape:connector-type="orthogonal"
+       inkscape:connector-curvature="0" />
+    <path
+       style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;stroke-dasharray:none;stroke-opacity:1"
+       d="m 63.5,165.059 v 23.83933"
+       id="path1698-6-1"
+       inkscape:connector-type="orthogonal"
+       inkscape:connector-curvature="0" />
+    <path
+       style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:0.73673;stroke-linecap:butt;stroke-linejoin:miter;stroke-dasharray:none;stroke-opacity:1"
+       d="m 206.40619,113.49467 v 6.27554"
+       id="path1698-6-1-5"
+       inkscape:connector-type="orthogonal"
+       inkscape:connector-curvature="0" />
+    <path
+       style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:0.637192;stroke-linecap:butt;stroke-linejoin:miter;stroke-dasharray:none;stroke-opacity:1"
+       d="m 206.47292,231.68027 v 9.52765"
+       id="path1698-6-1-5-2"
+       inkscape:connector-type="orthogonal"
+       inkscape:connector-curvature="0" />
+    <path
+       style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:1.0817;stroke-linecap:butt;stroke-linejoin:miter;stroke-dasharray:none;stroke-opacity:1"
+       d="M 206.79152,240.66707 H 121.80579"
+       id="path1698-6-1-5-1"
+       inkscape:connector-type="orthogonal"
+       inkscape:connector-curvature="0" />
+    <path
+       style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:1.10364;stroke-linecap:butt;stroke-linejoin:miter;stroke-dasharray:none;stroke-opacity:1"
+       d="m 206.79152,114.00711 h -72.5712"
+       id="path1698-6-1-5-1-3"
+       inkscape:connector-type="orthogonal"
+       inkscape:connector-curvature="0" />
+    <path
+       style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;stroke-dasharray:none;stroke-opacity:1"
+       d="m 63.5,124.113 v 20.97705"
+       id="path1698-6-1-9"
+       inkscape:connector-type="orthogonal"
+       inkscape:connector-curvature="0" />
+    <path
+       style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;stroke-dasharray:none;stroke-opacity:1"
+       d="m 120.5,124.113 v 8.35368"
+       id="path1698-6-1-9-6"
+       inkscape:connector-type="orthogonal"
+       inkscape:connector-curvature="0" />
+    <path
+       style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:1.01578;stroke-linecap:butt;stroke-linejoin:miter;stroke-dasharray:none;stroke-opacity:1"
+       d="m 95.379837,208.67079 v 8.23767 h -0.0048"
+       id="path1702"
+       inkscape:connector-type="orthogonal"
+       inkscape:connector-curvature="0" />
+    <path
+       style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;stroke-dasharray:none;stroke-opacity:1"
+       d="m 95.327347,263.8084 h 0.1762 v 10.5404"
+       id="path1706"
+       inkscape:connector-type="orthogonal"
+       inkscape:connector-curvature="0" />
+    <path
+       style="fill:none;fill-rule:evenodd;stroke:#808080;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;stroke-dasharray:none;stroke-opacity:1"
+       d="m 94.91126,294.56173 v 6.98958"
+       id="path1708"
+       inkscape:connector-type="orthogonal"
+       inkscape:connector-curvature="0" />
+    <g
+       id="g1246"
+       transform="translate(-12.055023,-6.1177842)">
+      <use
+         xlink:href="#AuxillaryOp"
+         style="fill:none;stroke:#000000"
+         id="use656-9-0-0"
+         transform="matrix(1.0263553,0,0,0.24648509,27.805194,101.63853)" />
+      <text
+         xml:space="preserve"
+         style="font-style:italic;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:7.05556px;font-family:'Times New Roman';-inkscape-font-specification:'Times New Roman,  Italic';text-align:center;text-anchor:middle;fill:#000000;fill-rule:evenodd;stroke:none;stroke-width:0.499999;stroke-linejoin:round;stroke-miterlimit:2.1"
+         x="105.63623"
+         y="117.40239"
+         id="text1101"><tspan
+           sodipodi:role="line"
+           id="tspan1099"
+           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:'Times New Roman';-inkscape-font-specification:'Times New Roman, ';stroke-width:0.5"
+           x="105.63623"
+           y="117.40239">Assume distribution of slip </tspan><tspan
+           sodipodi:role="line"
+           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:'Times New Roman';-inkscape-font-specification:'Times New Roman, ';stroke-width:0.5"
+           x="105.63623"
+           y="126.22364"
+           id="tspan1103">along the beam <tspan
+   style="font-style:italic;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:'Times New Roman';-inkscape-font-specification:'Times New Roman,  Italic'"
+   id="tspan1105">s</tspan></tspan></text>
+    </g>
+  </g>
+</svg>
