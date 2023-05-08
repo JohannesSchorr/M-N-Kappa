@@ -1,6 +1,6 @@
 :hide-toc:
 
-.. image:: ./_static/logo/m_kappa_logo.svg
+.. image:: ./_static/logo/m_n_kappa_logo.svg
 
 M-N-Kappa
 *********
