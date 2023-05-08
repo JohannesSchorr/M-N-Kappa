@@ -111,9 +111,9 @@ the hood of this program.
       :link: theory.m_n_curvature_epsilon
       :link-type: ref
       :text-align: center
-      :img-top: ../images/theory_moment_curvature_icon.svg
+      :img-top: ../images/theory_moment_axial_force_curvature_icon.svg
 
-      **Moment-Axial Force-Curvature-Strain-Difference-Curve**
+      **Moment-Shear Force-Curvature-Strain-Difference-Curve**
       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
       Procedure to compute the :math:`M`-:math:`N`-:math:`\kappa`-:math:`\epsilon`-curve
@@ -138,6 +138,28 @@ the hood of this program.
       **Loading**
       ^^^^^^^^^^^^^^^^
 
+   .. grid-item-card::
+      :link: theory.shear_connectors
+      :link-type: ref
+      :text-align: center
+      :img-top: ../images/theory_shear_connector_icon.svg
+
+      **Shear-Connectors**
+      ^^^^^^^^^^^^^^^^^^^^
+
+      How shear-connectors are considered within the beam
+
+   .. grid-item-card::
+      :link: theory.slip
+      :link-type: ref
+      :text-align: center
+      :img-top: ../images/theory_slip_icon.svg
+
+      **Slip**
+      ^^^^^^^^
+
+      Computing the slip / the relative motion between two cross-sectional parts
+
 
    .. grid-item-card::
       :link: theory.deformations
@@ -149,17 +171,6 @@ the hood of this program.
       ^^^^^^^^^^^^^^^^
 
       Computing deformation under given loading using the moment-curvature-curve
-
-   .. grid-item-card::
-      :link: theory.slip
-      :link-type: ref
-      :text-align: center
-      .. :img-top: ../images/theory_slip_icon.svg #TODO
-
-      **Slip**
-      ^^^^^^^^
-
-      Computing the slip / the relative motion between two cross-sectional parts
 
 .. toctree::
    :hidden:
@@ -176,5 +187,6 @@ the hood of this program.
    m_n_curvature_epsilon
    effective_widths
    loading
+   shear_connectors
    slip
    deformations
