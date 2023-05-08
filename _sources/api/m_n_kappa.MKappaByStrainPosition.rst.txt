@@ -13,16 +13,13 @@
    
       
       
+         ~MKappaByStrainPosition.axial_force_equilibrium
+      
+      
          ~MKappaByStrainPosition.compute
       
       
-         ~MKappaByStrainPosition.initialize
-      
-      
          ~MKappaByStrainPosition.initialize_boundary_curvatures
-      
-      
-         ~MKappaByStrainPosition.iterate
       
    
    
@@ -47,8 +44,10 @@
       ~MKappaByStrainPosition.moment
       ~MKappaByStrainPosition.neutral_axis
       ~MKappaByStrainPosition.not_successful_reason
+      ~MKappaByStrainPosition.positive_curvature
       ~MKappaByStrainPosition.solver
       ~MKappaByStrainPosition.strain_position
       ~MKappaByStrainPosition.successful
+      ~MKappaByStrainPosition.variable
    
    

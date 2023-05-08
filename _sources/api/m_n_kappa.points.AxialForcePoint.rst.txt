@@ -1,0 +1,35 @@
+﻿m\_n\_kappa.points.AxialForcePoint
+==================================
+
+.. currentmodule:: m_n_kappa.points
+
+.. autoclass:: AxialForcePoint
+
+   
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      
+      
+         ~AxialForcePoint.moment
+      
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+   
+      ~AxialForcePoint.axial_force
+      ~AxialForcePoint.computed_sub_cross_sections
+      ~AxialForcePoint.curvature
+      ~AxialForcePoint.not_successful_reason
+      ~AxialForcePoint.strain_difference
+      ~AxialForcePoint.sub_cross_sections
+      ~AxialForcePoint.successful
+   
+   

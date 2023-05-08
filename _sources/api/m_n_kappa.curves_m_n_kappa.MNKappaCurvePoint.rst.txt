@@ -1,0 +1,48 @@
+﻿m\_n\_kappa.curves\_m\_n\_kappa.MNKappaCurvePoint
+=================================================
+
+.. currentmodule:: m_n_kappa.curves_m_n_kappa
+
+.. autoclass:: MNKappaCurvePoint
+
+   
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      
+      
+         ~MNKappaCurvePoint.curvature_moment
+      
+      
+         ~MNKappaCurvePoint.m_n_kappa
+      
+      
+         ~MNKappaCurvePoint.moment_curvature
+      
+      
+         ~MNKappaCurvePoint.n_m_kappa
+      
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+   
+      ~MNKappaCurvePoint.moment
+      ~MNKappaCurvePoint.curvature
+      ~MNKappaCurvePoint.axial_force
+      ~MNKappaCurvePoint.axial_force_cross_section_number
+      ~MNKappaCurvePoint.strain_difference
+      ~MNKappaCurvePoint.cross_section
+      ~MNKappaCurvePoint.strain_position
+      ~MNKappaCurvePoint.neutral_axis_1
+      ~MNKappaCurvePoint.neutral_axis_2
+      ~MNKappaCurvePoint.absolute_axial_force
+      ~MNKappaCurvePoint.absolute_strain_difference
+   
+   

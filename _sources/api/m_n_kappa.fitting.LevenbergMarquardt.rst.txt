@@ -1,0 +1,41 @@
+﻿m\_n\_kappa.fitting.LevenbergMarquardt
+======================================
+
+.. currentmodule:: m_n_kappa.fitting
+
+.. autoclass:: LevenbergMarquardt
+
+   
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      
+      
+         ~LevenbergMarquardt.info
+      
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+   
+      ~LevenbergMarquardt.damping_factor
+      ~LevenbergMarquardt.f_i
+      ~LevenbergMarquardt.f_x
+      ~LevenbergMarquardt.iteration
+      ~LevenbergMarquardt.line_search_step_size
+      ~LevenbergMarquardt.max_line_search_iterations
+      ~LevenbergMarquardt.maximum_iterations
+      ~LevenbergMarquardt.minimum_residuum_change
+      ~LevenbergMarquardt.not_successful_reason
+      ~LevenbergMarquardt.successful
+      ~LevenbergMarquardt.tolerance
+      ~LevenbergMarquardt.x_0
+      ~LevenbergMarquardt.x_i
+   
+   

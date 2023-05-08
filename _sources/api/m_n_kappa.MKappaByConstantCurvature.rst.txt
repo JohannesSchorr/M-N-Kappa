@@ -13,16 +13,13 @@
    
       
       
+         ~MKappaByConstantCurvature.axial_force_equilibrium
+      
+      
          ~MKappaByConstantCurvature.compute
       
       
-         ~MKappaByConstantCurvature.initialize
-      
-      
          ~MKappaByConstantCurvature.initialize_boundary_curvatures
-      
-      
-         ~MKappaByConstantCurvature.iterate
       
    
    
@@ -50,5 +47,6 @@
       ~MKappaByConstantCurvature.not_successful_reason
       ~MKappaByConstantCurvature.solver
       ~MKappaByConstantCurvature.successful
+      ~MKappaByConstantCurvature.variable
    
    

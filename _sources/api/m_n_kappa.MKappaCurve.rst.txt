@@ -21,7 +21,7 @@
       ~MKappaCurve.include_positive_curvature
       ~MKappaCurve.m_kappa_points
       ~MKappaCurve.negative
-      ~MKappaCurve.not_successful
+      ~MKappaCurve.not_successful_reason
       ~MKappaCurve.positive
    
    

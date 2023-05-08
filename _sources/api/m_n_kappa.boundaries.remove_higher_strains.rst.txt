@@ -1,0 +1,6 @@
+﻿m\_n\_kappa.boundaries.remove\_higher\_strains
+==============================================
+
+.. currentmodule:: m_n_kappa.boundaries
+
+.. autofunction:: remove_higher_strains

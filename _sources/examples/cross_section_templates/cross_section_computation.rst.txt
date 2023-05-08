@@ -13,7 +13,7 @@ The ``cross_section`` you created above is the basis to do a variety of computat
       that is computing the curvature.
 
       >>> from m_n_kappa import StrainPosition, MKappaByStrainPosition
-      >>> strain_position = StrainPosition(strain=-0.01, position=0.0, material="")
+      >>> strain_position = StrainPosition(strain=-0.002, position=0.0, material="")
       >>> computation = MKappaByStrainPosition(
       ...     cross_section=cross_section,
       ...     strain_position = strain_position,
@@ -22,12 +22,13 @@ The ``cross_section`` you created above is the basis to do a variety of computat
 
       After computation you can extract the results as follows:
 
-      - ``computation.successful``: if ``True`` equilibrium of horizontal forces has been achieved during computation
-      - ``computation.axial_force``: computed axial forces that should be near zero as this is what the computation
+      - :py:attr:`m_n_kappa.MKappaByStrainPosition.successful`: if ``True`` equilibrium of horizontal forces
+        has been achieved during computation
+      - :py:attr:`m_n_kappa.MKappaByStrainPosition.axial_force`: computed axial forces that should be near zero as this is what the computation
         is aimed at
-      - ``computation.moment``: computed moment
-      - ``computation.curvature``: computed curvature
-      - ``computation.neutral_axis``: vertical position of the neutral axis (strain :math:`\varepsilon=0`)
+      - :py:attr:`m_n_kappa.MKappaByStrainPosition.moment`: computed moment
+      - :py:attr:`m_n_kappa.MKappaByStrainPosition.curvature`: computed curvature
+      - :py:attr:`m_n_kappa.MKappaByStrainPosition.neutral_axis`: vertical position of the neutral axis (strain :math:`\varepsilon=0`)
 
       .. seealso::
          :ref:`examples.moment_curvature_curve`: further explanations regarding computation of a single
@@ -52,7 +53,7 @@ The ``cross_section`` you created above is the basis to do a variety of computat
       ...     include_negative_curvature=True)
 
 
-      The computed points are then stored in the attribute ``m_kappa_points`` that returns
+      The computed points are then stored in the attribute :py:attr:`~m_n_kappa.MKappaCurve.m_kappa_points` that returns
       :py:class:`~m_n_kappa.curves_m_kappa.MKappaCurvePoints`-object.
 
       .. seealso::
@@ -78,11 +79,12 @@ The ``cross_section`` you created above is the basis to do a variety of computat
 
       The computed beams allow you to do a number of analysis, like:
 
-      - ``beam.deformation_over_length(loading)``: computes the deformation at each node along the beam
+      - :py:meth:`m_n_kappa.Beam.deformation_over_beam_length`: computes the deformation at each node along the beam
         under the given load
-      - ``beam.deformations(at_position)``: computes the deformation at the given position for the relevant load-steps
-      - ``beam.deformations_at_maximum_deformation_position()``: same like ``beam.deformations(at_position)`` but
-        at the position of the beam where the maximum deformation occurred under the given ``loading``.
+      - :py:meth:`m_n_kappa.Beam.deformations()`: computes the deformation at the given position for the relevant load-steps
+      - :py:meth:`m_n_kappa.Beam.deformations_at_maximum_deformation_position()`: same like
+        :py:meth:`m_n_kappa.Beam.deformations()` but at the position of the beam where the maximum
+        deformation occurred under the given ``loading``.
 
       .. seealso::
          :ref:`examples.loading`: further explanation of loading scenarios

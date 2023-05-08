@@ -70,6 +70,45 @@ In case this zero curvature leads to a strain in the several sections
 that is above the maximum or below the minium strain then the
 minimum curvature is adapted appropriately.
 
+.. _theory.strain_based_design.boundary_values.neutral_axis:
+
+Position of neutral axis
+------------------------
+
+Nevertheless if the curvature :math:`\kappa` is given, a prevention from
+exceeding maximum positive and negative strains is needed.
+This is the case if the overall cross-section consists of two subsidiary
+cross-sections, i.e. concrete-slab and steel-girder, and one cross-
+section has already been computed and therefore a curvature is available.
+
+For this case another boundary function is implemented that considers the
+maximum and minimum positive and negative strains.
+Taking into account a given **positive** curvature the boundary neutral axes are:
+
+- the lower position of the neutral axis from the curvature and maximum
+  **positive** strains
+- the higher position of the neutral from the curvature and the maximum
+  **negative** strains
+
+.. figure:: ../images/theory_boundaries_neutral_axis-light.svg
+   :class: only-light
+.. figure:: ../images/theory_boundaries_neutral_axis-dark.svg
+   :class: only-dark
+
+   Boundary values for the neutral axis :math:`z_\mathrm{m}` under positive
+   curvature
+
+In case the given curvature is negative it is vice versa and the boundary neutral
+axes are:
+
+- the lower position of the neutral axis from the curvature and maximum
+  **negative** strains
+- the higher position of the neutral from the curvature and the maximum
+  **positive** strains
+
+The resulting neutral axis must lie between these computed boundary neutral
+axes.
+Otherwise, no equilibrium of forces may be found.
 
 .. _theory.strain_based_design.equilibrium:
 

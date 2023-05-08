@@ -1,0 +1,60 @@
+﻿m\_n\_kappa.curves\_m\_n\_kappa.MNKappaCurvePoints
+==================================================
+
+.. currentmodule:: m_n_kappa.curves_m_n_kappa
+
+.. autoclass:: MNKappaCurvePoints
+
+   
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      
+      
+         ~MNKappaCurvePoints.add
+      
+      
+         ~MNKappaCurvePoints.cross_section_axial_forces
+      
+      
+         ~MNKappaCurvePoints.curvature
+      
+      
+         ~MNKappaCurvePoints.max
+      
+      
+         ~MNKappaCurvePoints.maximum_moment
+      
+      
+         ~MNKappaCurvePoints.min
+      
+      
+         ~MNKappaCurvePoints.moment
+      
+      
+         ~MNKappaCurvePoints.print_points
+      
+      
+         ~MNKappaCurvePoints.results_as_dict
+      
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+   
+      ~MNKappaCurvePoints.axial_forces
+      ~MNKappaCurvePoints.curvatures
+      ~MNKappaCurvePoints.materials
+      ~MNKappaCurvePoints.moments
+      ~MNKappaCurvePoints.points
+      ~MNKappaCurvePoints.positions
+      ~MNKappaCurvePoints.strain_differences
+      ~MNKappaCurvePoints.strains
+   
+   

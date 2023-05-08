@@ -55,7 +55,7 @@ The transversal shear at the supports is given by
 The summarized loading is given by :py:meth:`~m_n_kappa.SingleSpanSingleLoads.loading`.
 
 >>> single.loading
-10
+10.0
 
 Of course, the moment may be computed at every position along the beam.
 

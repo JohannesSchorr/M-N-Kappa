@@ -1,0 +1,38 @@
+﻿m\_n\_kappa.MomentAxialForceCurvature
+=====================================
+
+.. currentmodule:: m_n_kappa
+
+.. autoclass:: MomentAxialForceCurvature
+
+   
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      
+      
+         ~MomentAxialForceCurvature.moment
+      
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+   
+      ~MomentAxialForceCurvature.axial_force
+      ~MomentAxialForceCurvature.computed_sub_cross_sections
+      ~MomentAxialForceCurvature.curvature
+      ~MomentAxialForceCurvature.neutral_axes
+      ~MomentAxialForceCurvature.not_successful_reason
+      ~MomentAxialForceCurvature.positive_curvature
+      ~MomentAxialForceCurvature.strain_difference
+      ~MomentAxialForceCurvature.strain_position
+      ~MomentAxialForceCurvature.sub_cross_sections
+      ~MomentAxialForceCurvature.successful
+   
+   

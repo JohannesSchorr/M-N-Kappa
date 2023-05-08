@@ -19,10 +19,19 @@
          ~Section.maximum_negative_strain
       
       
+         ~Section.maximum_negative_strain_position
+      
+      
          ~Section.maximum_positive_strain
       
       
+         ~Section.maximum_positive_strain_position
+      
+      
          ~Section.section_strains
+      
+      
+         ~Section.strain_positions
       
    
    

@@ -24,12 +24,12 @@
 
    .. autosummary::
    
-      ~EffectiveWidths.bending
-      ~EffectiveWidths.concrete_under_compression_use_membran_width
-      ~EffectiveWidths.concrete_under_tension_use_membran_width
-      ~EffectiveWidths.for_section_type
-      ~EffectiveWidths.reinforcement_under_compression_use_membran_width
-      ~EffectiveWidths.reinforcement_under_tension_use_membran_width
       ~EffectiveWidths.membran
+      ~EffectiveWidths.bending
+      ~EffectiveWidths.for_section_type
+      ~EffectiveWidths.reinforcement_under_tension_use_membran_width
+      ~EffectiveWidths.reinforcement_under_compression_use_membran_width
+      ~EffectiveWidths.concrete_under_tension_use_membran_width
+      ~EffectiveWidths.concrete_under_compression_use_membran_width
    
    

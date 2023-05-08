@@ -25,7 +25,13 @@
          ~ComputationSectionCurvature.maximum_negative_strain
       
       
+         ~ComputationSectionCurvature.maximum_negative_strain_position
+      
+      
          ~ComputationSectionCurvature.maximum_positive_strain
+      
+      
+         ~ComputationSectionCurvature.maximum_positive_strain_position
       
       
          ~ComputationSectionCurvature.moment
@@ -35,6 +41,9 @@
       
       
          ~ComputationSectionCurvature.split_section
+      
+      
+         ~ComputationSectionCurvature.strain_positions
       
    
    

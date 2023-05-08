@@ -1,0 +1,33 @@
+﻿m\_n\_kappa.general.NotSuccessfulReason
+=======================================
+
+.. currentmodule:: m_n_kappa.general
+
+.. autoclass:: NotSuccessfulReason
+
+   
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      
+      
+         ~NotSuccessfulReason.same_sign
+      
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+   
+      ~NotSuccessfulReason.keyword
+      ~NotSuccessfulReason.variable
+      ~NotSuccessfulReason.reason
+      ~NotSuccessfulReason.strain_position
+      ~NotSuccessfulReason.keywords
+   
+   

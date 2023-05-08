@@ -11,7 +11,7 @@
     <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?digest=91d0f0d1c444bdcb17a68e833c7a53903343c195" />
     <link rel="stylesheet" type="text/css" href="../_static/altair-plot.css" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/design-style.1e8bd061cd6da7fc9cf755528e8ffc24.min.css" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/furo-extensions.css?digest=30d1aed668e5c3a91c3e3bf6a60b675221979f0e" />
     <link rel="stylesheet" type="text/css" href="../_static/css/custom.css" />
     
@@ -150,7 +150,7 @@
       <div class="sidebar-sticky"><a class="sidebar-brand centered" href="../index.html">
   
   <div class="sidebar-logo-container">
-    <img class="sidebar-logo" src="../_static/m_kappa_logo.png" alt="Logo"/>
+    <img class="sidebar-logo" src="../_static/m_n_kappa_logo.png" alt="Logo"/>
   </div>
   
   <span class="sidebar-brand-text"><i>M</i>-<i>N</i>-<i>&#954</i></span>
@@ -189,8 +189,10 @@
 <li class="toctree-l2"><a class="reference internal" href="sections.html">Sections and cross-sections</a></li>
 <li class="toctree-l2 current current-page"><a class="current reference internal" href="#">Strain based design</a></li>
 <li class="toctree-l2"><a class="reference internal" href="m_kappa_curve.html"><span class="math notranslate nohighlight">\(M\)</span>-<span class="math notranslate nohighlight">\(\kappa\)</span>-curve</a></li>
+<li class="toctree-l2"><a class="reference internal" href="m_n_curvature_epsilon.html"><span class="math notranslate nohighlight">\(M\)</span>-<span class="math notranslate nohighlight">\(N\)</span>-<span class="math notranslate nohighlight">\(\kappa\)</span>-<span class="math notranslate nohighlight">\(\varepsilon_\mathrm{\Delta}\)</span>-curve</a></li>
 <li class="toctree-l2"><a class="reference internal" href="effective_widths.html">Effective widths</a></li>
 <li class="toctree-l2"><a class="reference internal" href="loading.html">Loading</a></li>
+<li class="toctree-l2"><a class="reference internal" href="slip.html">Slip</a></li>
 <li class="toctree-l2"><a class="reference internal" href="deformations.html">Deformations</a></li>
 </ul>
 </li>
@@ -217,9 +219,16 @@
 <li class="toctree-l2"><a class="reference internal" href="../api/m_n_kappa.Crosssection.html">m_n_kappa.Crosssection</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../api/m_n_kappa.MKappaByStrainPosition.html">m_n_kappa.MKappaByStrainPosition</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../api/m_n_kappa.MKappaByConstantCurvature.html">m_n_kappa.MKappaByConstantCurvature</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api/m_n_kappa.MomentAxialForce.html">m_n_kappa.MomentAxialForce</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api/m_n_kappa.MomentAxialForceCurvature.html">m_n_kappa.MomentAxialForceCurvature</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../api/m_n_kappa.MKappaCurve.html">m_n_kappa.MKappaCurve</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../api/m_n_kappa.curves_m_kappa.MKappaCurvePoint.html">m_n_kappa.curves_m_kappa.MKappaCurvePoint</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../api/m_n_kappa.curves_m_kappa.MKappaCurvePoints.html">m_n_kappa.curves_m_kappa.MKappaCurvePoints</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api/m_n_kappa.MNCurve.html">m_n_kappa.MNCurve</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api/m_n_kappa.MNKappaCurve.html">m_n_kappa.MNKappaCurve</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api/m_n_kappa.LoadSlip.html">m_n_kappa.LoadSlip</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api/m_n_kappa.ShearConnector.html">m_n_kappa.ShearConnector</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api/m_n_kappa.HeadedStud.html">m_n_kappa.HeadedStud</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../api/m_n_kappa.SingleSpanUniformLoad.html">m_n_kappa.SingleSpanUniformLoad</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../api/m_n_kappa.SingleLoad.html">m_n_kappa.SingleLoad</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../api/m_n_kappa.SingleSpanSingleLoads.html">m_n_kappa.SingleSpanSingleLoads</a></li>
@@ -231,6 +240,7 @@
 <li class="toctree-l1 has-children"><a class="reference internal" href="../api_developers.html">API for developers</a><input class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" role="switch" type="checkbox"/><label for="toctree-checkbox-6"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
 <li class="toctree-l2"><a class="reference internal" href="../api/m_n_kappa.general.StrainPosition.html">m_n_kappa.general.StrainPosition</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../api/m_n_kappa.general.EffectiveWidths.html">m_n_kappa.general.EffectiveWidths</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api/m_n_kappa.general.NotSuccessfulReason.html">m_n_kappa.general.NotSuccessfulReason</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../api/m_n_kappa.general.curvature.html">m_n_kappa.general.curvature</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../api/m_n_kappa.general.curvature_by_points.html">m_n_kappa.general.curvature_by_points</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../api/m_n_kappa.general.strain.html">m_n_kappa.general.strain</a></li>
@@ -260,20 +270,33 @@
 <li class="toctree-l2"><a class="reference internal" href="../api/m_n_kappa.crosssection.moment.html">m_n_kappa.crosssection.moment</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../api/m_n_kappa.crosssection.determine_curvatures.html">m_n_kappa.crosssection.determine_curvatures</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../api/m_n_kappa.crosssection.compute_neutral_axis.html">m_n_kappa.crosssection.compute_neutral_axis</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../api/m_n_kappa.curvature_boundaries.MaximumCurvature.html">m_n_kappa.curvature_boundaries.MaximumCurvature</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../api/m_n_kappa.curvature_boundaries.MinimumCurvature.html">m_n_kappa.curvature_boundaries.MinimumCurvature</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../api/m_n_kappa.curvature_boundaries.BoundaryValues.html">m_n_kappa.curvature_boundaries.BoundaryValues</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../api/m_n_kappa.curvature_boundaries.Boundaries.html">m_n_kappa.curvature_boundaries.Boundaries</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../api/m_n_kappa.curvature_boundaries.compute_curvatures.html">m_n_kappa.curvature_boundaries.compute_curvatures</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../api/m_n_kappa.curvature_boundaries.remove_higher_strains.html">m_n_kappa.curvature_boundaries.remove_higher_strains</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../api/m_n_kappa.curvature_boundaries.remove_smaller_strains.html">m_n_kappa.curvature_boundaries.remove_smaller_strains</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../api/m_n_kappa.curvature_boundaries.get_lower_positions.html">m_n_kappa.curvature_boundaries.get_lower_positions</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../api/m_n_kappa.curvature_boundaries.get_higher_positions.html">m_n_kappa.curvature_boundaries.get_higher_positions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api/m_n_kappa.boundaries.MaximumCurvature.html">m_n_kappa.boundaries.MaximumCurvature</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api/m_n_kappa.boundaries.MinimumCurvature.html">m_n_kappa.boundaries.MinimumCurvature</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api/m_n_kappa.boundaries.BoundaryValues.html">m_n_kappa.boundaries.BoundaryValues</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api/m_n_kappa.boundaries.Boundaries.html">m_n_kappa.boundaries.Boundaries</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api/m_n_kappa.boundaries.compute_curvatures.html">m_n_kappa.boundaries.compute_curvatures</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api/m_n_kappa.boundaries.remove_higher_strains.html">m_n_kappa.boundaries.remove_higher_strains</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api/m_n_kappa.boundaries.remove_smaller_strains.html">m_n_kappa.boundaries.remove_smaller_strains</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api/m_n_kappa.boundaries.get_lower_positions.html">m_n_kappa.boundaries.get_lower_positions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api/m_n_kappa.boundaries.get_higher_positions.html">m_n_kappa.boundaries.get_higher_positions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api/m_n_kappa.points.Point.html">m_n_kappa.points.Point</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../api/m_n_kappa.points.Computation.html">m_n_kappa.points.Computation</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../api/m_n_kappa.points.MKappa.html">m_n_kappa.points.MKappa</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api/m_n_kappa.points.MNByStrain.html">m_n_kappa.points.MNByStrain</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api/m_n_kappa.points.AxialForcePoint.html">m_n_kappa.points.AxialForcePoint</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api/m_n_kappa.curves_m_n_kappa.MNKappaCurvePoint.html">m_n_kappa.curves_m_n_kappa.MNKappaCurvePoint</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api/m_n_kappa.curves_m_n_kappa.MNKappaCurvePoints.html">m_n_kappa.curves_m_n_kappa.MNKappaCurvePoints</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api/m_n_kappa.curves_m_n_kappa.MNCurvatureCurve.html">m_n_kappa.curves_m_n_kappa.MNCurvatureCurve</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../api/m_n_kappa.solver.Solver.html">m_n_kappa.solver.Solver</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../api/m_n_kappa.solver.Bisection.html">m_n_kappa.solver.Bisection</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../api/m_n_kappa.solver.Newton.html">m_n_kappa.solver.Newton</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api/m_n_kappa.fitting.GaussNewton.html">m_n_kappa.fitting.GaussNewton</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api/m_n_kappa.fitting.LevenbergMarquardt.html">m_n_kappa.fitting.LevenbergMarquardt</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api/m_n_kappa.matrices.Vector.html">m_n_kappa.matrices.Vector</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api/m_n_kappa.matrices.Matrix.html">m_n_kappa.matrices.Matrix</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api/m_n_kappa.matrices.Jacobian.html">m_n_kappa.matrices.Jacobian</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api/m_n_kappa.matrices.Identity.html">m_n_kappa.matrices.Identity</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api/m_n_kappa.matrices.LinearEquationsSystem.html">m_n_kappa.matrices.LinearEquationsSystem</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../api/m_n_kappa.loading.ABCSingleSpan.html">m_n_kappa.loading.ABCSingleSpan</a></li>
 </ul>
 </li>
@@ -377,6 +400,42 @@ In case this zero curvature leads to a strain in the several sections
 that is above the maximum or below the minium strain then the
 minimum curvature is adapted appropriately.</p>
 </section>
+<section id="position-of-neutral-axis">
+<span id="theory-strain-based-design-boundary-values-neutral-axis"></span><h3>Position of neutral axis<a class="headerlink" href="#position-of-neutral-axis" title="Permalink to this heading">#</a></h3>
+<p>Nevertheless if the curvature <span class="math notranslate nohighlight">\(\kappa\)</span> is given, a prevention from
+exceeding maximum positive and negative strains is needed.
+This is the case if the overall cross-section consists of two subsidiary
+cross-sections, i.e. concrete-slab and steel-girder, and one cross-
+section has already been computed and therefore a curvature is available.</p>
+<p>For this case another boundary function is implemented that considers the
+maximum and minimum positive and negative strains.
+Taking into account a given <strong>positive</strong> curvature the boundary neutral axes are:</p>
+<ul class="simple">
+<li><p>the lower position of the neutral axis from the curvature and maximum
+<strong>positive</strong> strains</p></li>
+<li><p>the higher position of the neutral from the curvature and the maximum
+<strong>negative</strong> strains</p></li>
+</ul>
+<figure class="align-default">
+<img alt="../_images/theory_boundaries_neutral_axis-light.svg" class="only-light" src="../_images/theory_boundaries_neutral_axis-light.svg" /></figure>
+<figure class="align-default" id="id2">
+<img alt="../_images/theory_boundaries_neutral_axis-dark.svg" class="only-dark" src="../_images/theory_boundaries_neutral_axis-dark.svg" /><figcaption>
+<p><span class="caption-text">Boundary values for the neutral axis <span class="math notranslate nohighlight">\(z_\mathrm{m}\)</span> under positive
+curvature</span><a class="headerlink" href="#id2" title="Permalink to this image">#</a></p>
+</figcaption>
+</figure>
+<p>In case the given curvature is negative it is vice versa and the boundary neutral
+axes are:</p>
+<ul class="simple">
+<li><p>the lower position of the neutral axis from the curvature and maximum
+<strong>negative</strong> strains</p></li>
+<li><p>the higher position of the neutral from the curvature and the maximum
+<strong>positive</strong> strains</p></li>
+</ul>
+<p>The resulting neutral axis must lie between these computed boundary neutral
+axes.
+Otherwise, no equilibrium of forces may be found.</p>
+</section>
 </section>
 <section id="finding-equilibrium-of-axial-forces">
 <span id="theory-strain-based-design-equilibrium"></span><h2>Finding equilibrium of axial forces<a class="headerlink" href="#finding-equilibrium-of-axial-forces" title="Permalink to this heading">#</a></h2>
@@ -448,7 +507,14 @@ material models.</p>
             
           </div>
           <div class="right-details">
-            
+            <div class="icons">
+              <a class="muted-link " href="https://github.com/JohannesSchorr/M-N-Kappa" aria-label="GitHub">
+                <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 16 16">
+                    <path fill-rule="evenodd" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0 0 16 8c0-4.42-3.58-8-8-8z"></path>
+                </svg>
+            </a>
+              
+            </div>
           </div>
         </div>
         
@@ -471,6 +537,7 @@ material models.</p>
 <li><a class="reference internal" href="#aim">Aim</a></li>
 <li><a class="reference internal" href="#boundary-values">Boundary values</a><ul>
 <li><a class="reference internal" href="#curvature">Curvature</a></li>
+<li><a class="reference internal" href="#position-of-neutral-axis">Position of neutral axis</a></li>
 </ul>
 </li>
 <li><a class="reference internal" href="#finding-equilibrium-of-axial-forces">Finding equilibrium of axial forces</a></li>

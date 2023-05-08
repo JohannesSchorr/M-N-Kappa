@@ -1,0 +1,81 @@
+﻿m\_n\_kappa.matrices.Jacobian
+=============================
+
+.. currentmodule:: m_n_kappa.matrices
+
+.. autoclass:: Jacobian
+
+   
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      
+      
+         ~Jacobian.add
+      
+      
+         ~Jacobian.append
+      
+      
+         ~Jacobian.backward_difference_quotient
+      
+      
+         ~Jacobian.center_difference_quotient
+      
+      
+         ~Jacobian.column
+      
+      
+         ~Jacobian.column_vector
+      
+      
+         ~Jacobian.diagonal
+      
+      
+         ~Jacobian.entry
+      
+      
+         ~Jacobian.forward_difference_quotient
+      
+      
+         ~Jacobian.multiply_by
+      
+      
+         ~Jacobian.orthonormal_triangular
+      
+      
+         ~Jacobian.replace
+      
+      
+         ~Jacobian.row
+      
+      
+         ~Jacobian.row_vector
+      
+      
+         ~Jacobian.subtract
+      
+      
+         ~Jacobian.transpose
+      
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+   
+      ~Jacobian.column_number
+      ~Jacobian.differentiation_type
+      ~Jacobian.f_i
+      ~Jacobian.f_xi
+      ~Jacobian.h
+      ~Jacobian.matrix
+      ~Jacobian.row_number
+      ~Jacobian.x_i
+   
+   

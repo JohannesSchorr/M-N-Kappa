@@ -13,10 +13,10 @@
    
       
       
-         ~Trapezoid.left_edge
+         ~Trapezoid.left_edge_at
       
       
-         ~Trapezoid.right_edge
+         ~Trapezoid.right_edge_at
       
       
          ~Trapezoid.split
@@ -41,6 +41,8 @@
       ~Trapezoid.centroid
       ~Trapezoid.edges
       ~Trapezoid.height
+      ~Trapezoid.left_edge
+      ~Trapezoid.right_edge
       ~Trapezoid.sides
       ~Trapezoid.top_edge
       ~Trapezoid.top_left_edge

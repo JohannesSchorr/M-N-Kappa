@@ -15,16 +15,18 @@
 
    .. autosummary::
    
-      ~IProfile.b_fo
-      ~IProfile.b_fu
-      ~IProfile.centroid_y
-      ~IProfile.geometries
-      ~IProfile.has_bottom_flange
-      ~IProfile.has_top_flange
-      ~IProfile.t_fo
-      ~IProfile.t_fu
       ~IProfile.top_edge
       ~IProfile.t_w
       ~IProfile.h_w
+      ~IProfile.t_fo
+      ~IProfile.b_fo
+      ~IProfile.t_fu
+      ~IProfile.b_fu
+      ~IProfile.has_top_flange
+      ~IProfile.has_bottom_flange
+      ~IProfile.centroid_y
+      ~IProfile.height
+      ~IProfile.bottom_edge
+      ~IProfile.geometries
    
    

@@ -28,7 +28,7 @@
    .. autosummary::
    
       ~Node.cross_section
-      ~Node.m_kappa_curve
+      ~Node.curve_points
       ~Node.node_number
       ~Node.number
       ~Node.position

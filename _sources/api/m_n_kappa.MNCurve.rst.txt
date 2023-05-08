@@ -1,0 +1,23 @@
+﻿m\_n\_kappa.MNCurve
+===================
+
+.. currentmodule:: m_n_kappa
+
+.. autoclass:: MNCurve
+
+   
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+   
+      ~MNCurve.not_successful_reason
+      ~MNCurve.points
+      ~MNCurve.strain_positions
+      ~MNCurve.sub_cross_sections
+   
+   

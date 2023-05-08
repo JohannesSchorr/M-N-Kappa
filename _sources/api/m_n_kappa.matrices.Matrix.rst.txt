@@ -1,0 +1,67 @@
+﻿m\_n\_kappa.matrices.Matrix
+===========================
+
+.. currentmodule:: m_n_kappa.matrices
+
+.. autoclass:: Matrix
+
+   
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      
+      
+         ~Matrix.add
+      
+      
+         ~Matrix.append
+      
+      
+         ~Matrix.column
+      
+      
+         ~Matrix.column_vector
+      
+      
+         ~Matrix.diagonal
+      
+      
+         ~Matrix.entry
+      
+      
+         ~Matrix.multiply_by
+      
+      
+         ~Matrix.orthonormal_triangular
+      
+      
+         ~Matrix.replace
+      
+      
+         ~Matrix.row
+      
+      
+         ~Matrix.row_vector
+      
+      
+         ~Matrix.subtract
+      
+      
+         ~Matrix.transpose
+      
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+   
+      ~Matrix.column_number
+      ~Matrix.matrix
+      ~Matrix.row_number
+   
+   

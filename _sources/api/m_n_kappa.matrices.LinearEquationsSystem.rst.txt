@@ -1,0 +1,36 @@
+﻿m\_n\_kappa.matrices.LinearEquationsSystem
+==========================================
+
+.. currentmodule:: m_n_kappa.matrices
+
+.. autoclass:: LinearEquationsSystem
+
+   
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      
+      
+         ~LinearEquationsSystem.back_substitution
+      
+      
+         ~LinearEquationsSystem.qr_decomposition
+      
+      
+         ~LinearEquationsSystem.solve
+      
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+   
+      ~LinearEquationsSystem.coefficients
+      ~LinearEquationsSystem.constants
+   
+   

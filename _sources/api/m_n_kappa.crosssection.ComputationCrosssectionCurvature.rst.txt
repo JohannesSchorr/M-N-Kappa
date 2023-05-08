@@ -19,10 +19,19 @@
          ~ComputationCrosssectionCurvature.concrete_slab_width
       
       
+         ~ComputationCrosssectionCurvature.decisive_maximum_negative_strain_position
+      
+      
+         ~ComputationCrosssectionCurvature.decisive_maximum_positive_strain_position
+      
+      
          ~ComputationCrosssectionCurvature.get_boundary_conditions
       
       
          ~ComputationCrosssectionCurvature.get_material_points_inside_curvature
+      
+      
+         ~ComputationCrosssectionCurvature.get_sub_cross_sections
       
       
          ~ComputationCrosssectionCurvature.girder_sections_axial_force
@@ -53,6 +62,9 @@
       
       
          ~ComputationCrosssectionCurvature.slab_sections_moment
+      
+      
+         ~ComputationCrosssectionCurvature.strain_positions
       
       
          ~ComputationCrosssectionCurvature.total_axial_force

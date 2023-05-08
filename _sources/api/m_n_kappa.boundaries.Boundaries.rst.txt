@@ -1,0 +1,22 @@
+﻿m\_n\_kappa.boundaries.Boundaries
+=================================
+
+.. currentmodule:: m_n_kappa.boundaries
+
+.. autoclass:: Boundaries
+
+   
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+   
+      ~Boundaries.positive
+      ~Boundaries.negative
+      ~Boundaries.neutral_axes
+   
+   

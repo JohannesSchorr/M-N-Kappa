@@ -22,6 +22,8 @@ Ideas
 These are rough ideas where the procedure is not yet clear.
 Furthermore, it is unclear if these ideas are going to be applied at all.
 
+- computation of the moment-curvature-relationship in two directions perpendicular to each other
+  (interesting for
 - computation of columns using the :math:`M`-:math:`N`-:math:`\kappa`-method
 - considering loading-history
 - consider creep and shrinkage

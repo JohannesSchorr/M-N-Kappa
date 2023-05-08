@@ -11,7 +11,7 @@
     <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?digest=91d0f0d1c444bdcb17a68e833c7a53903343c195" />
     <link rel="stylesheet" type="text/css" href="../_static/altair-plot.css" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/design-style.1e8bd061cd6da7fc9cf755528e8ffc24.min.css" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/furo-extensions.css?digest=30d1aed668e5c3a91c3e3bf6a60b675221979f0e" />
     <link rel="stylesheet" type="text/css" href="../_static/css/custom.css" />
     
@@ -150,7 +150,7 @@
       <div class="sidebar-sticky"><a class="sidebar-brand centered" href="../index.html">
   
   <div class="sidebar-logo-container">
-    <img class="sidebar-logo" src="../_static/m_kappa_logo.png" alt="Logo"/>
+    <img class="sidebar-logo" src="../_static/m_n_kappa_logo.png" alt="Logo"/>
   </div>
   
   <span class="sidebar-brand-text"><i>M</i>-<i>N</i>-<i>&#954</i></span>
@@ -189,8 +189,10 @@
 <li class="toctree-l2"><a class="reference internal" href="../theory/sections.html">Sections and cross-sections</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../theory/strain_based_design.html">Strain based design</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../theory/m_kappa_curve.html"><span class="math notranslate nohighlight">\(M\)</span>-<span class="math notranslate nohighlight">\(\kappa\)</span>-curve</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../theory/m_n_curvature_epsilon.html"><span class="math notranslate nohighlight">\(M\)</span>-<span class="math notranslate nohighlight">\(N\)</span>-<span class="math notranslate nohighlight">\(\kappa\)</span>-<span class="math notranslate nohighlight">\(\varepsilon_\mathrm{\Delta}\)</span>-curve</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../theory/effective_widths.html">Effective widths</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../theory/loading.html">Loading</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../theory/slip.html">Slip</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../theory/deformations.html">Deformations</a></li>
 </ul>
 </li>
@@ -217,9 +219,16 @@
 <li class="toctree-l2"><a class="reference internal" href="../api/m_n_kappa.Crosssection.html">m_n_kappa.Crosssection</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../api/m_n_kappa.MKappaByStrainPosition.html">m_n_kappa.MKappaByStrainPosition</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../api/m_n_kappa.MKappaByConstantCurvature.html">m_n_kappa.MKappaByConstantCurvature</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api/m_n_kappa.MomentAxialForce.html">m_n_kappa.MomentAxialForce</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api/m_n_kappa.MomentAxialForceCurvature.html">m_n_kappa.MomentAxialForceCurvature</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../api/m_n_kappa.MKappaCurve.html">m_n_kappa.MKappaCurve</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../api/m_n_kappa.curves_m_kappa.MKappaCurvePoint.html">m_n_kappa.curves_m_kappa.MKappaCurvePoint</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../api/m_n_kappa.curves_m_kappa.MKappaCurvePoints.html">m_n_kappa.curves_m_kappa.MKappaCurvePoints</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api/m_n_kappa.MNCurve.html">m_n_kappa.MNCurve</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api/m_n_kappa.MNKappaCurve.html">m_n_kappa.MNKappaCurve</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api/m_n_kappa.LoadSlip.html">m_n_kappa.LoadSlip</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api/m_n_kappa.ShearConnector.html">m_n_kappa.ShearConnector</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api/m_n_kappa.HeadedStud.html">m_n_kappa.HeadedStud</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../api/m_n_kappa.SingleSpanUniformLoad.html">m_n_kappa.SingleSpanUniformLoad</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../api/m_n_kappa.SingleLoad.html">m_n_kappa.SingleLoad</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../api/m_n_kappa.SingleSpanSingleLoads.html">m_n_kappa.SingleSpanSingleLoads</a></li>
@@ -231,6 +240,7 @@
 <li class="toctree-l1 has-children"><a class="reference internal" href="../api_developers.html">API for developers</a><input class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" role="switch" type="checkbox"/><label for="toctree-checkbox-6"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
 <li class="toctree-l2"><a class="reference internal" href="../api/m_n_kappa.general.StrainPosition.html">m_n_kappa.general.StrainPosition</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../api/m_n_kappa.general.EffectiveWidths.html">m_n_kappa.general.EffectiveWidths</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api/m_n_kappa.general.NotSuccessfulReason.html">m_n_kappa.general.NotSuccessfulReason</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../api/m_n_kappa.general.curvature.html">m_n_kappa.general.curvature</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../api/m_n_kappa.general.curvature_by_points.html">m_n_kappa.general.curvature_by_points</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../api/m_n_kappa.general.strain.html">m_n_kappa.general.strain</a></li>
@@ -260,20 +270,33 @@
 <li class="toctree-l2"><a class="reference internal" href="../api/m_n_kappa.crosssection.moment.html">m_n_kappa.crosssection.moment</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../api/m_n_kappa.crosssection.determine_curvatures.html">m_n_kappa.crosssection.determine_curvatures</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../api/m_n_kappa.crosssection.compute_neutral_axis.html">m_n_kappa.crosssection.compute_neutral_axis</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../api/m_n_kappa.curvature_boundaries.MaximumCurvature.html">m_n_kappa.curvature_boundaries.MaximumCurvature</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../api/m_n_kappa.curvature_boundaries.MinimumCurvature.html">m_n_kappa.curvature_boundaries.MinimumCurvature</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../api/m_n_kappa.curvature_boundaries.BoundaryValues.html">m_n_kappa.curvature_boundaries.BoundaryValues</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../api/m_n_kappa.curvature_boundaries.Boundaries.html">m_n_kappa.curvature_boundaries.Boundaries</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../api/m_n_kappa.curvature_boundaries.compute_curvatures.html">m_n_kappa.curvature_boundaries.compute_curvatures</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../api/m_n_kappa.curvature_boundaries.remove_higher_strains.html">m_n_kappa.curvature_boundaries.remove_higher_strains</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../api/m_n_kappa.curvature_boundaries.remove_smaller_strains.html">m_n_kappa.curvature_boundaries.remove_smaller_strains</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../api/m_n_kappa.curvature_boundaries.get_lower_positions.html">m_n_kappa.curvature_boundaries.get_lower_positions</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../api/m_n_kappa.curvature_boundaries.get_higher_positions.html">m_n_kappa.curvature_boundaries.get_higher_positions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api/m_n_kappa.boundaries.MaximumCurvature.html">m_n_kappa.boundaries.MaximumCurvature</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api/m_n_kappa.boundaries.MinimumCurvature.html">m_n_kappa.boundaries.MinimumCurvature</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api/m_n_kappa.boundaries.BoundaryValues.html">m_n_kappa.boundaries.BoundaryValues</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api/m_n_kappa.boundaries.Boundaries.html">m_n_kappa.boundaries.Boundaries</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api/m_n_kappa.boundaries.compute_curvatures.html">m_n_kappa.boundaries.compute_curvatures</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api/m_n_kappa.boundaries.remove_higher_strains.html">m_n_kappa.boundaries.remove_higher_strains</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api/m_n_kappa.boundaries.remove_smaller_strains.html">m_n_kappa.boundaries.remove_smaller_strains</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api/m_n_kappa.boundaries.get_lower_positions.html">m_n_kappa.boundaries.get_lower_positions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api/m_n_kappa.boundaries.get_higher_positions.html">m_n_kappa.boundaries.get_higher_positions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api/m_n_kappa.points.Point.html">m_n_kappa.points.Point</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../api/m_n_kappa.points.Computation.html">m_n_kappa.points.Computation</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../api/m_n_kappa.points.MKappa.html">m_n_kappa.points.MKappa</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api/m_n_kappa.points.MNByStrain.html">m_n_kappa.points.MNByStrain</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api/m_n_kappa.points.AxialForcePoint.html">m_n_kappa.points.AxialForcePoint</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api/m_n_kappa.curves_m_n_kappa.MNKappaCurvePoint.html">m_n_kappa.curves_m_n_kappa.MNKappaCurvePoint</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api/m_n_kappa.curves_m_n_kappa.MNKappaCurvePoints.html">m_n_kappa.curves_m_n_kappa.MNKappaCurvePoints</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api/m_n_kappa.curves_m_n_kappa.MNCurvatureCurve.html">m_n_kappa.curves_m_n_kappa.MNCurvatureCurve</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../api/m_n_kappa.solver.Solver.html">m_n_kappa.solver.Solver</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../api/m_n_kappa.solver.Bisection.html">m_n_kappa.solver.Bisection</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../api/m_n_kappa.solver.Newton.html">m_n_kappa.solver.Newton</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api/m_n_kappa.fitting.GaussNewton.html">m_n_kappa.fitting.GaussNewton</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api/m_n_kappa.fitting.LevenbergMarquardt.html">m_n_kappa.fitting.LevenbergMarquardt</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api/m_n_kappa.matrices.Vector.html">m_n_kappa.matrices.Vector</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api/m_n_kappa.matrices.Matrix.html">m_n_kappa.matrices.Matrix</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api/m_n_kappa.matrices.Jacobian.html">m_n_kappa.matrices.Jacobian</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api/m_n_kappa.matrices.Identity.html">m_n_kappa.matrices.Identity</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api/m_n_kappa.matrices.LinearEquationsSystem.html">m_n_kappa.matrices.LinearEquationsSystem</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../api/m_n_kappa.loading.ABCSingleSpan.html">m_n_kappa.loading.ABCSingleSpan</a></li>
 </ul>
 </li>
@@ -392,16 +415,13 @@ Other keys will appear in the tooltip.</p>
 initializing <a class="reference internal" href="../api/m_n_kappa.MKappaCurve.html#m_n_kappa.MKappaCurve" title="m_n_kappa.MKappaCurve"><code class="xref py py-class docutils literal notranslate"><span class="pre">MKappaCurve</span></code></a>.
 The computation of the positive values is set as the default, therefore only <code class="docutils literal notranslate"><span class="pre">cross_section</span></code> must be
 passed to <a class="reference internal" href="../api/m_n_kappa.MKappaCurve.html#m_n_kappa.MKappaCurve" title="m_n_kappa.MKappaCurve"><code class="xref py py-class docutils literal notranslate"><span class="pre">MKappaCurve</span></code></a>.</p>
-<p>The <a class="reference internal" href="../api/m_n_kappa.MKappaCurve.html#m_n_kappa.MKappaCurve.not_successful" title="m_n_kappa.MKappaCurve.not_successful"><code class="xref py py-meth docutils literal notranslate"><span class="pre">not_successful()</span></code></a> returns those <code class="xref py py-class docutils literal notranslate"><span class="pre">StrainPosition</span></code> points
+<p>The <code class="xref py py-meth docutils literal notranslate"><span class="pre">not_successful()</span></code> returns those <code class="xref py py-class docutils literal notranslate"><span class="pre">StrainPosition</span></code> points
 that have not lead to an equilibrium in horizontal forces.
 The <code class="xref py py-class docutils literal notranslate"><span class="pre">StrainPosition</span></code> is given with a message that gives us information
 why equilibrium has not been found.</p>
 <div class="highlight-python notranslate" id="moment_curvature_curve-rst-altair-source-3"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">m_n_kappa</span> <span class="kn">import</span> <span class="n">MKappaCurve</span>
 <span class="n">positive_m_kappa_curve_computation</span> <span class="o">=</span> <span class="n">MKappaCurve</span><span class="p">(</span><span class="n">cross_section</span><span class="o">=</span><span class="n">cross_section</span><span class="p">)</span>
 <span class="n">positive_m_kappa_curve_computation</span><span class="o">.</span><span class="n">not_successful</span>
-</pre></div>
-</div>
-<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>    [[StrainPosition(strain=-0.0035, position=0.0, material=&#39;Concrete&#39;), &#39;maximum iterations reached&#39;], [StrainPosition(strain=-0.0025, position=25, material=&#39;Reinforcement&#39;), &#39;same sign of axial forces at minimum and maximum curvature&#39;], [StrainPosition(strain=-0.0025, position=75, material=&#39;Reinforcement&#39;), &#39;same sign of axial forces at minimum and maximum curvature&#39;], [StrainPosition(strain=-0.0016904761904761904, position=100.0, material=&#39;Steel&#39;), &#39;same sign of axial forces at minimum and maximum curvature&#39;]]
 </pre></div>
 </div>
 <p>The Moment-Curvature points may be extracted calling <a class="reference internal" href="../api/m_n_kappa.MKappaCurve.html#m_n_kappa.MKappaCurve.m_kappa_points" title="m_n_kappa.MKappaCurve.m_kappa_points"><code class="xref py py-meth docutils literal notranslate"><span class="pre">m_kappa_points()</span></code></a>.</p>
@@ -422,7 +442,7 @@ These allow us to easily create the corresponding Moment-Curvature diagram with 
   // embed when document is loaded, to ensure vega library is available
   // this works on all modern browsers, except IE8 and older
   document.addEventListener("DOMContentLoaded", function(event) {
-      var spec = {"usermeta": {"embedOptions": {"theme": "quartz"}}, "config": {"view": {"continuousWidth": 400, "continuousHeight": 300}}, "layer": [{"mark": "line", "encoding": {"x": {"field": "Curvature", "title": "Curvature [-]", "type": "quantitative"}, "y": {"field": "Moment", "title": "Moment [kNm]", "type": "quantitative"}}}, {"mark": "point", "encoding": {"tooltip": [{"field": "Moment", "type": "quantitative"}, {"field": "Curvature", "type": "quantitative"}, {"field": "Strain", "type": "quantitative"}, {"field": "Position", "type": "quantitative"}, {"field": "Material", "type": "nominal"}], "x": {"field": "Curvature", "type": "quantitative"}, "y": {"field": "Moment", "type": "quantitative"}}}], "background": "#00000000", "data": {"name": "data-d51356afdfe9ffbb4755ad1020de64c8"}, "$schema": "https://vega.github.io/schema/vega-lite/v4.17.0.json", "datasets": {"data-d51356afdfe9ffbb4755ad1020de64c8": [{"Moment": 0.0, "Curvature": 0.0, "Strain": 0.0, "Position": 0.0, "Material": "-"}, {"Moment": 279.0650907027305, "Curvature": 5.6396116516098715e-06, "Strain": -0.0004628985582627583, "Position": 0.0, "Material": "Concrete"}, {"Moment": 438.75578900432055, "Curvature": 1.1500733417879781e-05, "Strain": -0.0008661758912394188, "Position": 0.0, "Material": "Concrete"}, {"Moment": 516.8183018835432, "Curvature": 2.761011908732979e-05, "Strain": -0.0017323517824788376, "Position": 0.0, "Material": "Concrete"}, {"Moment": 538.683420997121, "Curvature": 3.5835063220899387e-05, "Strain": -0.0021618768697354803, "Position": 0.0, "Material": "Concrete"}, {"Moment": 541.7245377407294, "Curvature": 5.0031448888961696e-05, "Strain": -0.00283093843486774, "Position": 0.0, "Material": "Concrete"}]}};
+      var spec = {"usermeta": {"embedOptions": {"theme": "quartz"}}, "config": {"view": {"continuousWidth": 400, "continuousHeight": 300}}, "layer": [{"mark": "line", "encoding": {"x": {"field": "Curvature", "title": "Curvature [-]", "type": "quantitative"}, "y": {"field": "Moment", "title": "Moment [kNm]", "type": "quantitative"}}}, {"mark": "point", "encoding": {"tooltip": [{"field": "Moment", "type": "quantitative"}, {"field": "Curvature", "type": "quantitative"}, {"field": "Strain", "type": "quantitative"}, {"field": "Position", "type": "quantitative"}, {"field": "Material", "type": "nominal"}], "x": {"field": "Curvature", "type": "quantitative"}, "y": {"field": "Moment", "type": "quantitative"}}}], "background": "#00000000", "data": {"name": "data-43c860c632cb56e6af69ce3384a1ebba"}, "$schema": "https://vega.github.io/schema/vega-lite/v4.17.0.json", "datasets": {"data-43c860c632cb56e6af69ce3384a1ebba": [{"Moment": 0.0, "Curvature": 0.0, "Strain": 0.0, "Position": 0.0, "Material": "-"}, {"Moment": 279.0641066935997, "Curvature": 5.6396596429445725e-06, "Strain": -0.0004629, "Position": 0.0, "Material": "Concrete"}, {"Moment": 438.75758699726015, "Curvature": 1.1501119942356301e-05, "Strain": -0.0008662, "Position": 0.0, "Material": "Concrete"}, {"Moment": 516.8191110383882, "Curvature": 2.7610893930862315e-05, "Strain": -0.0017324, "Position": 0.0, "Material": "Concrete"}, {"Moment": 538.6828450830967, "Curvature": 3.583533814416534e-05, "Strain": -0.0021619, "Position": 0.0, "Material": "Concrete"}, {"Moment": 541.7245832808295, "Curvature": 5.003037143113553e-05, "Strain": -0.0028309, "Position": 0.0, "Material": "Concrete"}]}};
       var opt = {
         "mode": "vega-lite",
         "renderer": "canvas",
@@ -456,7 +476,7 @@ must be passed to <a class="reference internal" href="../api/m_n_kappa.MKappaCur
   // embed when document is loaded, to ensure vega library is available
   // this works on all modern browsers, except IE8 and older
   document.addEventListener("DOMContentLoaded", function(event) {
-      var spec = {"usermeta": {"embedOptions": {"theme": "quartz"}}, "config": {"view": {"continuousWidth": 400, "continuousHeight": 300}}, "layer": [{"mark": "line", "encoding": {"x": {"field": "Curvature", "title": "Curvature [-]", "type": "quantitative"}, "y": {"field": "Moment", "title": "Moment [kNm]", "type": "quantitative"}}}, {"mark": "point", "encoding": {"tooltip": [{"field": "Moment", "type": "quantitative"}, {"field": "Curvature", "type": "quantitative"}, {"field": "Strain", "type": "quantitative"}, {"field": "Position", "type": "quantitative"}, {"field": "Material", "type": "nominal"}], "x": {"field": "Curvature", "type": "quantitative"}, "y": {"field": "Moment", "type": "quantitative"}}}], "background": "#00000000", "data": {"name": "data-89fd3f447c878cf10af8da9c3aaae27c"}, "$schema": "https://vega.github.io/schema/vega-lite/v4.17.0.json", "datasets": {"data-89fd3f447c878cf10af8da9c3aaae27c": [{"Moment": -442.38366116446423, "Curvature": -0.0008077394867854998, "Strain": -0.15, "Position": 300.0, "Material": "Steel"}, {"Moment": -409.2982653218652, "Curvature": -7.695578624136976e-05, "Strain": 0.0016904761904761904, "Position": 100.0, "Material": "Steel"}, {"Moment": -405.044752007268, "Curvature": -4.6813703672689853e-05, "Strain": 0.0025, "Position": 75.0, "Material": "Reinforcement"}, {"Moment": -349.9780857744969, "Curvature": -1.9052980162533646e-05, "Strain": 0.0025, "Position": 25.0, "Material": "Reinforcement"}, {"Moment": -54.944467314156846, "Curvature": -1.099584484757465e-06, "Strain": 8.92086139773573e-05, "Position": 0.0, "Material": "Concrete"}, {"Moment": -54.71895126913915, "Curvature": -1.0909764663380172e-06, "Strain": 8.82086139773573e-05, "Position": 0.0, "Material": "Concrete"}, {"Moment": 0.0, "Curvature": 0.0, "Strain": 0.0, "Position": 0.0, "Material": "-"}]}};
+      var spec = {"usermeta": {"embedOptions": {"theme": "quartz"}}, "config": {"view": {"continuousWidth": 400, "continuousHeight": 300}}, "layer": [{"mark": "line", "encoding": {"x": {"field": "Curvature", "title": "Curvature [-]", "type": "quantitative"}, "y": {"field": "Moment", "title": "Moment [kNm]", "type": "quantitative"}}}, {"mark": "point", "encoding": {"tooltip": [{"field": "Moment", "type": "quantitative"}, {"field": "Curvature", "type": "quantitative"}, {"field": "Strain", "type": "quantitative"}, {"field": "Position", "type": "quantitative"}, {"field": "Material", "type": "nominal"}], "x": {"field": "Curvature", "type": "quantitative"}, "y": {"field": "Moment", "type": "quantitative"}}}], "background": "#00000000", "data": {"name": "data-cb6cd14b0393624b61fd792a1fa57b35"}, "$schema": "https://vega.github.io/schema/vega-lite/v4.17.0.json", "datasets": {"data-cb6cd14b0393624b61fd792a1fa57b35": [{"Moment": -442.3836598050097, "Curvature": -0.0008077395241984864, "Strain": -0.15, "Position": 300.0, "Material": "Steel"}, {"Moment": -409.29862982524645, "Curvature": -7.695719851575309e-05, "Strain": 0.0016905, "Position": 100.0, "Material": "Steel"}, {"Moment": -405.04457883884135, "Curvature": -4.681346109065432e-05, "Strain": 0.0025, "Position": 75.0, "Material": "Reinforcement"}, {"Moment": -349.9783363245533, "Curvature": -1.9052980162533646e-05, "Strain": 0.0025, "Position": 25.0, "Material": "Reinforcement"}, {"Moment": -319.5753502268986, "Curvature": -1.4503509882743718e-05, "Strain": -0.0016905, "Position": 285.0, "Material": "Steel"}, {"Moment": -296.1044560631782, "Curvature": -1.3056361063383864e-05, "Strain": -0.0016905, "Position": 300.0, "Material": "Steel"}, {"Moment": -54.94156196492392, "Curvature": -1.0995151786974793e-06, "Strain": 8.92e-05, "Position": 0.0, "Material": "Concrete"}, {"Moment": -54.71603482550757, "Curvature": -1.090906903243154e-06, "Strain": 8.82e-05, "Position": 0.0, "Material": "Concrete"}, {"Moment": 0.0, "Curvature": 0.0, "Strain": 0.0, "Position": 0.0, "Material": "-"}]}};
       var opt = {
         "mode": "vega-lite",
         "renderer": "canvas",
@@ -488,7 +508,7 @@ This is related to the higher strains the reinforcement and the steel-material c
   // embed when document is loaded, to ensure vega library is available
   // this works on all modern browsers, except IE8 and older
   document.addEventListener("DOMContentLoaded", function(event) {
-      var spec = {"usermeta": {"embedOptions": {"theme": "quartz"}}, "config": {"view": {"continuousWidth": 400, "continuousHeight": 300}}, "layer": [{"mark": "line", "encoding": {"x": {"field": "Curvature", "title": "Curvature [-]", "type": "quantitative"}, "y": {"field": "Moment", "title": "Moment [kNm]", "type": "quantitative"}}}, {"mark": "point", "encoding": {"tooltip": [{"field": "Moment", "type": "quantitative"}, {"field": "Curvature", "type": "quantitative"}, {"field": "Strain", "type": "quantitative"}, {"field": "Position", "type": "quantitative"}, {"field": "Material", "type": "nominal"}], "x": {"field": "Curvature", "type": "quantitative"}, "y": {"field": "Moment", "type": "quantitative"}}}], "background": "#00000000", "data": {"name": "data-cb4fef2ade74fe2dc83e095a0bf0d8ae"}, "$schema": "https://vega.github.io/schema/vega-lite/v4.17.0.json", "datasets": {"data-cb4fef2ade74fe2dc83e095a0bf0d8ae": [{"Moment": -442.38366116446423, "Curvature": -0.0008077394867854998, "Strain": -0.15, "Position": 300.0, "Material": "Steel"}, {"Moment": -409.2982653218652, "Curvature": -7.695578624136976e-05, "Strain": 0.0016904761904761904, "Position": 100.0, "Material": "Steel"}, {"Moment": -405.044752007268, "Curvature": -4.6813703672689853e-05, "Strain": 0.0025, "Position": 75.0, "Material": "Reinforcement"}, {"Moment": -349.9780857744969, "Curvature": -1.9052980162533646e-05, "Strain": 0.0025, "Position": 25.0, "Material": "Reinforcement"}, {"Moment": -54.944467314156846, "Curvature": -1.099584484757465e-06, "Strain": 8.92086139773573e-05, "Position": 0.0, "Material": "Concrete"}, {"Moment": -54.71895126913915, "Curvature": -1.0909764663380172e-06, "Strain": 8.82086139773573e-05, "Position": 0.0, "Material": "Concrete"}, {"Moment": 0.0, "Curvature": 0.0, "Strain": 0.0, "Position": 0.0, "Material": "-"}, {"Moment": 279.0650907027305, "Curvature": 5.6396116516098715e-06, "Strain": -0.0004628985582627583, "Position": 0.0, "Material": "Concrete"}, {"Moment": 438.75578900432055, "Curvature": 1.1500733417879781e-05, "Strain": -0.0008661758912394188, "Position": 0.0, "Material": "Concrete"}, {"Moment": 516.8183018835432, "Curvature": 2.761011908732979e-05, "Strain": -0.0017323517824788376, "Position": 0.0, "Material": "Concrete"}, {"Moment": 538.683420997121, "Curvature": 3.5835063220899387e-05, "Strain": -0.0021618768697354803, "Position": 0.0, "Material": "Concrete"}, {"Moment": 541.7245377407294, "Curvature": 5.0031448888961696e-05, "Strain": -0.00283093843486774, "Position": 0.0, "Material": "Concrete"}]}};
+      var spec = {"usermeta": {"embedOptions": {"theme": "quartz"}}, "config": {"view": {"continuousWidth": 400, "continuousHeight": 300}}, "layer": [{"mark": "line", "encoding": {"x": {"field": "Curvature", "title": "Curvature [-]", "type": "quantitative"}, "y": {"field": "Moment", "title": "Moment [kNm]", "type": "quantitative"}}}, {"mark": "point", "encoding": {"tooltip": [{"field": "Moment", "type": "quantitative"}, {"field": "Curvature", "type": "quantitative"}, {"field": "Strain", "type": "quantitative"}, {"field": "Position", "type": "quantitative"}, {"field": "Material", "type": "nominal"}], "x": {"field": "Curvature", "type": "quantitative"}, "y": {"field": "Moment", "type": "quantitative"}}}], "background": "#00000000", "data": {"name": "data-346e2ce659973941e3ccfa97dd58812f"}, "$schema": "https://vega.github.io/schema/vega-lite/v4.17.0.json", "datasets": {"data-346e2ce659973941e3ccfa97dd58812f": [{"Moment": -442.3836598050097, "Curvature": -0.0008077395241984864, "Strain": -0.15, "Position": 300.0, "Material": "Steel"}, {"Moment": -409.29862982524645, "Curvature": -7.695719851575309e-05, "Strain": 0.0016905, "Position": 100.0, "Material": "Steel"}, {"Moment": -405.04457883884135, "Curvature": -4.681346109065432e-05, "Strain": 0.0025, "Position": 75.0, "Material": "Reinforcement"}, {"Moment": -349.9783363245533, "Curvature": -1.9052980162533646e-05, "Strain": 0.0025, "Position": 25.0, "Material": "Reinforcement"}, {"Moment": -319.5753502268986, "Curvature": -1.4503509882743718e-05, "Strain": -0.0016905, "Position": 285.0, "Material": "Steel"}, {"Moment": -296.1044560631782, "Curvature": -1.3056361063383864e-05, "Strain": -0.0016905, "Position": 300.0, "Material": "Steel"}, {"Moment": -54.94156196492392, "Curvature": -1.0995151786974793e-06, "Strain": 8.92e-05, "Position": 0.0, "Material": "Concrete"}, {"Moment": -54.71603482550757, "Curvature": -1.090906903243154e-06, "Strain": 8.82e-05, "Position": 0.0, "Material": "Concrete"}, {"Moment": 0.0, "Curvature": 0.0, "Strain": 0.0, "Position": 0.0, "Material": "-"}, {"Moment": 279.0641066935997, "Curvature": 5.6396596429445725e-06, "Strain": -0.0004629, "Position": 0.0, "Material": "Concrete"}, {"Moment": 438.75758699726015, "Curvature": 1.1501119942356301e-05, "Strain": -0.0008662, "Position": 0.0, "Material": "Concrete"}, {"Moment": 516.8191110383882, "Curvature": 2.7610893930862315e-05, "Strain": -0.0017324, "Position": 0.0, "Material": "Concrete"}, {"Moment": 538.6828450830967, "Curvature": 3.583533814416534e-05, "Strain": -0.0021619, "Position": 0.0, "Material": "Concrete"}, {"Moment": 541.7245832808295, "Curvature": 5.003037143113553e-05, "Strain": -0.0028309, "Position": 0.0, "Material": "Concrete"}]}};
       var opt = {
         "mode": "vega-lite",
         "renderer": "canvas",
@@ -539,7 +559,14 @@ The classes and methods shown here, are building the basis to compute the deform
             
           </div>
           <div class="right-details">
-            
+            <div class="icons">
+              <a class="muted-link " href="https://github.com/JohannesSchorr/M-N-Kappa" aria-label="GitHub">
+                <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 16 16">
+                    <path fill-rule="evenodd" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0 0 16 8c0-4.42-3.58-8-8-8z"></path>
+                </svg>
+            </a>
+              
+            </div>
           </div>
         </div>
         

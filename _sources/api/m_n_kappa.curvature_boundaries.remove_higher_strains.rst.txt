@@ -1,6 +1,0 @@
-﻿m\_n\_kappa.curvature\_boundaries.remove\_higher\_strains
-=========================================================
-
-.. currentmodule:: m_n_kappa.curvature_boundaries
-
-.. autofunction:: remove_higher_strains

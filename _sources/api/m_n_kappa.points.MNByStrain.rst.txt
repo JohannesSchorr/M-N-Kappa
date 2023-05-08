@@ -1,0 +1,42 @@
+﻿m\_n\_kappa.points.MNByStrain
+=============================
+
+.. currentmodule:: m_n_kappa.points
+
+.. autoclass:: MNByStrain
+
+   
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      
+      
+         ~MNByStrain.axial_force_equilibrium
+      
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+   
+      ~MNByStrain.applied_axial_force
+      ~MNByStrain.axial_force
+      ~MNByStrain.axial_force_tolerance
+      ~MNByStrain.computations
+      ~MNByStrain.computed_cross_section
+      ~MNByStrain.cross_section
+      ~MNByStrain.iteration
+      ~MNByStrain.maximum_iterations
+      ~MNByStrain.moment
+      ~MNByStrain.not_successful_reason
+      ~MNByStrain.solver
+      ~MNByStrain.strain
+      ~MNByStrain.successful
+      ~MNByStrain.variable
+   
+   

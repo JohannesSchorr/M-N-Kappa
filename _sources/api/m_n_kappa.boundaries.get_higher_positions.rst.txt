@@ -1,0 +1,6 @@
+﻿m\_n\_kappa.boundaries.get\_higher\_positions
+=============================================
+
+.. currentmodule:: m_n_kappa.boundaries
+
+.. autofunction:: get_higher_positions

@@ -16,6 +16,7 @@ General
 
    StrainPosition
    EffectiveWidths
+   NotSuccessfulReason
 
 .. rubric:: Functions
 
@@ -106,7 +107,7 @@ Cross-sections
 Cross-section boundaries
 ========================
 
-.. currentmodule:: m_n_kappa.curvature_boundaries
+.. currentmodule:: m_n_kappa.boundaries
 
 .. rubric:: Classes
 
@@ -139,8 +140,25 @@ Strain-based design
 .. autosummary::
    :toctree: api/
 
+   Point
    Computation
    MKappa
+   MNByStrain
+   AxialForcePoint
+
+.. _api_developers.moment_axial_force_curvature_curve:
+
+Moment-Axial-Force-Curvature Curve
+==================================
+
+.. currentmodule:: m_n_kappa.curves_m_n_kappa
+
+.. autosummary::
+   :toctree: api/
+
+   MNKappaCurvePoint
+   MNKappaCurvePoints
+   MNCurvatureCurve
 
 .. _api_developers.solver:
 
@@ -155,6 +173,31 @@ Solver
    Solver
    Bisection
    Newton
+
+Fitting
+=======
+
+.. currentmodule:: m_n_kappa.fitting
+
+.. autosummary::
+   :toctree: api/
+
+   GaussNewton
+   LevenbergMarquardt
+
+Matrices
+========
+
+.. currentmodule:: m_n_kappa.matrices
+
+.. autosummary::
+   :toctree: api/
+
+   Vector
+   Matrix
+   Jacobian
+   Identity
+   LinearEquationsSystem
 
 .. _api_developers.loading:
 

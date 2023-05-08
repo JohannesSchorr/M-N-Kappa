@@ -15,13 +15,13 @@
 
    .. autosummary::
    
-      ~RebarLayer.geometries
-      ~RebarLayer.left_edge
-      ~RebarLayer.rebar_horizontal_distance
-      ~RebarLayer.rebar_number
-      ~RebarLayer.right_edge
-      ~RebarLayer.width
       ~RebarLayer.rebar_diameter
       ~RebarLayer.centroid_z
+      ~RebarLayer.rebar_number
+      ~RebarLayer.width
+      ~RebarLayer.left_edge
+      ~RebarLayer.right_edge
+      ~RebarLayer.rebar_horizontal_distance
+      ~RebarLayer.geometries
    
    

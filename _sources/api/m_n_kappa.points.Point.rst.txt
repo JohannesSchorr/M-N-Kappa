@@ -1,0 +1,41 @@
+﻿m\_n\_kappa.points.Point
+========================
+
+.. currentmodule:: m_n_kappa.points
+
+.. autoclass:: Point
+
+   
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      
+      
+         ~Point.axial_force_equilibrium
+      
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+   
+      ~Point.applied_axial_force
+      ~Point.axial_force
+      ~Point.axial_force_tolerance
+      ~Point.computations
+      ~Point.computed_cross_section
+      ~Point.cross_section
+      ~Point.iteration
+      ~Point.maximum_iterations
+      ~Point.moment
+      ~Point.not_successful_reason
+      ~Point.solver
+      ~Point.successful
+      ~Point.variable
+   
+   

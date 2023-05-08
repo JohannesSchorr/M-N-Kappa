@@ -17,8 +17,10 @@
    
       ~Computation.iteration
       ~Computation.computed_cross_section
+      ~Computation.axial_force_equilibrium
       ~Computation.curvature
       ~Computation.neutral_axis_value
       ~Computation.axial_force
+      ~Computation.strain
    
    

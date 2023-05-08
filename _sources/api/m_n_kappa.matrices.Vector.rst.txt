@@ -1,0 +1,53 @@
+﻿m\_n\_kappa.matrices.Vector
+===========================
+
+.. currentmodule:: m_n_kappa.matrices
+
+.. autoclass:: Vector
+
+   
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      
+      
+         ~Vector.add
+      
+      
+         ~Vector.append
+      
+      
+         ~Vector.length
+      
+      
+         ~Vector.multiply_scalar
+      
+      
+         ~Vector.norm
+      
+      
+         ~Vector.replace
+      
+      
+         ~Vector.scalar_product
+      
+      
+         ~Vector.subtract
+      
+      
+         ~Vector.tensor_product
+      
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+   
+      ~Vector.entries
+   
+   

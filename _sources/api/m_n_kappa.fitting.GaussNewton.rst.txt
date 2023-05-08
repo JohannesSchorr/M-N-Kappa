@@ -1,0 +1,31 @@
+﻿m\_n\_kappa.fitting.GaussNewton
+===============================
+
+.. currentmodule:: m_n_kappa.fitting
+
+.. autoclass:: GaussNewton
+
+   
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+   
+      ~GaussNewton.f_i
+      ~GaussNewton.f_x
+      ~GaussNewton.iteration
+      ~GaussNewton.line_search_step_size
+      ~GaussNewton.max_line_search_iterations
+      ~GaussNewton.maximum_iterations
+      ~GaussNewton.minimum_residuum_change
+      ~GaussNewton.not_successful_reason
+      ~GaussNewton.successful
+      ~GaussNewton.tolerance
+      ~GaussNewton.x_0
+      ~GaussNewton.x_i
+   
+   

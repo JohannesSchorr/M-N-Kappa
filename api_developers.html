@@ -11,7 +11,7 @@
     <link rel="stylesheet" type="text/css" href="_static/styles/furo.css?digest=91d0f0d1c444bdcb17a68e833c7a53903343c195" />
     <link rel="stylesheet" type="text/css" href="_static/altair-plot.css" />
     <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
-    <link rel="stylesheet" type="text/css" href="_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+    <link rel="stylesheet" type="text/css" href="_static/design-style.1e8bd061cd6da7fc9cf755528e8ffc24.min.css" />
     <link rel="stylesheet" type="text/css" href="_static/styles/furo-extensions.css?digest=30d1aed668e5c3a91c3e3bf6a60b675221979f0e" />
     <link rel="stylesheet" type="text/css" href="_static/css/custom.css" />
     
@@ -150,7 +150,7 @@
       <div class="sidebar-sticky"><a class="sidebar-brand centered" href="index.html">
   
   <div class="sidebar-logo-container">
-    <img class="sidebar-logo" src="_static/m_kappa_logo.png" alt="Logo"/>
+    <img class="sidebar-logo" src="_static/m_n_kappa_logo.png" alt="Logo"/>
   </div>
   
   <span class="sidebar-brand-text"><i>M</i>-<i>N</i>-<i>&#954</i></span>
@@ -189,8 +189,10 @@
 <li class="toctree-l2"><a class="reference internal" href="theory/sections.html">Sections and cross-sections</a></li>
 <li class="toctree-l2"><a class="reference internal" href="theory/strain_based_design.html">Strain based design</a></li>
 <li class="toctree-l2"><a class="reference internal" href="theory/m_kappa_curve.html"><span class="math notranslate nohighlight">\(M\)</span>-<span class="math notranslate nohighlight">\(\kappa\)</span>-curve</a></li>
+<li class="toctree-l2"><a class="reference internal" href="theory/m_n_curvature_epsilon.html"><span class="math notranslate nohighlight">\(M\)</span>-<span class="math notranslate nohighlight">\(N\)</span>-<span class="math notranslate nohighlight">\(\kappa\)</span>-<span class="math notranslate nohighlight">\(\varepsilon_\mathrm{\Delta}\)</span>-curve</a></li>
 <li class="toctree-l2"><a class="reference internal" href="theory/effective_widths.html">Effective widths</a></li>
 <li class="toctree-l2"><a class="reference internal" href="theory/loading.html">Loading</a></li>
+<li class="toctree-l2"><a class="reference internal" href="theory/slip.html">Slip</a></li>
 <li class="toctree-l2"><a class="reference internal" href="theory/deformations.html">Deformations</a></li>
 </ul>
 </li>
@@ -217,9 +219,16 @@
 <li class="toctree-l2"><a class="reference internal" href="api/m_n_kappa.Crosssection.html">m_n_kappa.Crosssection</a></li>
 <li class="toctree-l2"><a class="reference internal" href="api/m_n_kappa.MKappaByStrainPosition.html">m_n_kappa.MKappaByStrainPosition</a></li>
 <li class="toctree-l2"><a class="reference internal" href="api/m_n_kappa.MKappaByConstantCurvature.html">m_n_kappa.MKappaByConstantCurvature</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/m_n_kappa.MomentAxialForce.html">m_n_kappa.MomentAxialForce</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/m_n_kappa.MomentAxialForceCurvature.html">m_n_kappa.MomentAxialForceCurvature</a></li>
 <li class="toctree-l2"><a class="reference internal" href="api/m_n_kappa.MKappaCurve.html">m_n_kappa.MKappaCurve</a></li>
 <li class="toctree-l2"><a class="reference internal" href="api/m_n_kappa.curves_m_kappa.MKappaCurvePoint.html">m_n_kappa.curves_m_kappa.MKappaCurvePoint</a></li>
 <li class="toctree-l2"><a class="reference internal" href="api/m_n_kappa.curves_m_kappa.MKappaCurvePoints.html">m_n_kappa.curves_m_kappa.MKappaCurvePoints</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/m_n_kappa.MNCurve.html">m_n_kappa.MNCurve</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/m_n_kappa.MNKappaCurve.html">m_n_kappa.MNKappaCurve</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/m_n_kappa.LoadSlip.html">m_n_kappa.LoadSlip</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/m_n_kappa.ShearConnector.html">m_n_kappa.ShearConnector</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/m_n_kappa.HeadedStud.html">m_n_kappa.HeadedStud</a></li>
 <li class="toctree-l2"><a class="reference internal" href="api/m_n_kappa.SingleSpanUniformLoad.html">m_n_kappa.SingleSpanUniformLoad</a></li>
 <li class="toctree-l2"><a class="reference internal" href="api/m_n_kappa.SingleLoad.html">m_n_kappa.SingleLoad</a></li>
 <li class="toctree-l2"><a class="reference internal" href="api/m_n_kappa.SingleSpanSingleLoads.html">m_n_kappa.SingleSpanSingleLoads</a></li>
@@ -231,6 +240,7 @@
 <li class="toctree-l1 current has-children current-page"><a class="current reference internal" href="#">API for developers</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" role="switch" type="checkbox"/><label for="toctree-checkbox-6"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
 <li class="toctree-l2"><a class="reference internal" href="api/m_n_kappa.general.StrainPosition.html">m_n_kappa.general.StrainPosition</a></li>
 <li class="toctree-l2"><a class="reference internal" href="api/m_n_kappa.general.EffectiveWidths.html">m_n_kappa.general.EffectiveWidths</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/m_n_kappa.general.NotSuccessfulReason.html">m_n_kappa.general.NotSuccessfulReason</a></li>
 <li class="toctree-l2"><a class="reference internal" href="api/m_n_kappa.general.curvature.html">m_n_kappa.general.curvature</a></li>
 <li class="toctree-l2"><a class="reference internal" href="api/m_n_kappa.general.curvature_by_points.html">m_n_kappa.general.curvature_by_points</a></li>
 <li class="toctree-l2"><a class="reference internal" href="api/m_n_kappa.general.strain.html">m_n_kappa.general.strain</a></li>
@@ -260,20 +270,33 @@
 <li class="toctree-l2"><a class="reference internal" href="api/m_n_kappa.crosssection.moment.html">m_n_kappa.crosssection.moment</a></li>
 <li class="toctree-l2"><a class="reference internal" href="api/m_n_kappa.crosssection.determine_curvatures.html">m_n_kappa.crosssection.determine_curvatures</a></li>
 <li class="toctree-l2"><a class="reference internal" href="api/m_n_kappa.crosssection.compute_neutral_axis.html">m_n_kappa.crosssection.compute_neutral_axis</a></li>
-<li class="toctree-l2"><a class="reference internal" href="api/m_n_kappa.curvature_boundaries.MaximumCurvature.html">m_n_kappa.curvature_boundaries.MaximumCurvature</a></li>
-<li class="toctree-l2"><a class="reference internal" href="api/m_n_kappa.curvature_boundaries.MinimumCurvature.html">m_n_kappa.curvature_boundaries.MinimumCurvature</a></li>
-<li class="toctree-l2"><a class="reference internal" href="api/m_n_kappa.curvature_boundaries.BoundaryValues.html">m_n_kappa.curvature_boundaries.BoundaryValues</a></li>
-<li class="toctree-l2"><a class="reference internal" href="api/m_n_kappa.curvature_boundaries.Boundaries.html">m_n_kappa.curvature_boundaries.Boundaries</a></li>
-<li class="toctree-l2"><a class="reference internal" href="api/m_n_kappa.curvature_boundaries.compute_curvatures.html">m_n_kappa.curvature_boundaries.compute_curvatures</a></li>
-<li class="toctree-l2"><a class="reference internal" href="api/m_n_kappa.curvature_boundaries.remove_higher_strains.html">m_n_kappa.curvature_boundaries.remove_higher_strains</a></li>
-<li class="toctree-l2"><a class="reference internal" href="api/m_n_kappa.curvature_boundaries.remove_smaller_strains.html">m_n_kappa.curvature_boundaries.remove_smaller_strains</a></li>
-<li class="toctree-l2"><a class="reference internal" href="api/m_n_kappa.curvature_boundaries.get_lower_positions.html">m_n_kappa.curvature_boundaries.get_lower_positions</a></li>
-<li class="toctree-l2"><a class="reference internal" href="api/m_n_kappa.curvature_boundaries.get_higher_positions.html">m_n_kappa.curvature_boundaries.get_higher_positions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/m_n_kappa.boundaries.MaximumCurvature.html">m_n_kappa.boundaries.MaximumCurvature</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/m_n_kappa.boundaries.MinimumCurvature.html">m_n_kappa.boundaries.MinimumCurvature</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/m_n_kappa.boundaries.BoundaryValues.html">m_n_kappa.boundaries.BoundaryValues</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/m_n_kappa.boundaries.Boundaries.html">m_n_kappa.boundaries.Boundaries</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/m_n_kappa.boundaries.compute_curvatures.html">m_n_kappa.boundaries.compute_curvatures</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/m_n_kappa.boundaries.remove_higher_strains.html">m_n_kappa.boundaries.remove_higher_strains</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/m_n_kappa.boundaries.remove_smaller_strains.html">m_n_kappa.boundaries.remove_smaller_strains</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/m_n_kappa.boundaries.get_lower_positions.html">m_n_kappa.boundaries.get_lower_positions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/m_n_kappa.boundaries.get_higher_positions.html">m_n_kappa.boundaries.get_higher_positions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/m_n_kappa.points.Point.html">m_n_kappa.points.Point</a></li>
 <li class="toctree-l2"><a class="reference internal" href="api/m_n_kappa.points.Computation.html">m_n_kappa.points.Computation</a></li>
 <li class="toctree-l2"><a class="reference internal" href="api/m_n_kappa.points.MKappa.html">m_n_kappa.points.MKappa</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/m_n_kappa.points.MNByStrain.html">m_n_kappa.points.MNByStrain</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/m_n_kappa.points.AxialForcePoint.html">m_n_kappa.points.AxialForcePoint</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/m_n_kappa.curves_m_n_kappa.MNKappaCurvePoint.html">m_n_kappa.curves_m_n_kappa.MNKappaCurvePoint</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/m_n_kappa.curves_m_n_kappa.MNKappaCurvePoints.html">m_n_kappa.curves_m_n_kappa.MNKappaCurvePoints</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/m_n_kappa.curves_m_n_kappa.MNCurvatureCurve.html">m_n_kappa.curves_m_n_kappa.MNCurvatureCurve</a></li>
 <li class="toctree-l2"><a class="reference internal" href="api/m_n_kappa.solver.Solver.html">m_n_kappa.solver.Solver</a></li>
 <li class="toctree-l2"><a class="reference internal" href="api/m_n_kappa.solver.Bisection.html">m_n_kappa.solver.Bisection</a></li>
 <li class="toctree-l2"><a class="reference internal" href="api/m_n_kappa.solver.Newton.html">m_n_kappa.solver.Newton</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/m_n_kappa.fitting.GaussNewton.html">m_n_kappa.fitting.GaussNewton</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/m_n_kappa.fitting.LevenbergMarquardt.html">m_n_kappa.fitting.LevenbergMarquardt</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/m_n_kappa.matrices.Vector.html">m_n_kappa.matrices.Vector</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/m_n_kappa.matrices.Matrix.html">m_n_kappa.matrices.Matrix</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/m_n_kappa.matrices.Jacobian.html">m_n_kappa.matrices.Jacobian</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/m_n_kappa.matrices.Identity.html">m_n_kappa.matrices.Identity</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/m_n_kappa.matrices.LinearEquationsSystem.html">m_n_kappa.matrices.LinearEquationsSystem</a></li>
 <li class="toctree-l2"><a class="reference internal" href="api/m_n_kappa.loading.ABCSingleSpan.html">m_n_kappa.loading.ABCSingleSpan</a></li>
 </ul>
 </li>
@@ -340,6 +363,9 @@
 <tr class="row-even"><td><p><a class="reference internal" href="api/m_n_kappa.general.EffectiveWidths.html#m_n_kappa.general.EffectiveWidths" title="m_n_kappa.general.EffectiveWidths"><code class="xref py py-obj docutils literal notranslate"><span class="pre">EffectiveWidths</span></code></a>(membran[, bending, ...])</p></td>
 <td><p>container holding the effective widths</p></td>
 </tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/m_n_kappa.general.NotSuccessfulReason.html#m_n_kappa.general.NotSuccessfulReason" title="m_n_kappa.general.NotSuccessfulReason"><code class="xref py py-obj docutils literal notranslate"><span class="pre">NotSuccessfulReason</span></code></a>([keyword, variable, ...])</p></td>
+<td><p>Container for reasons why computation has not been successful</p></td>
+</tr>
 </tbody>
 </table>
 </div>
@@ -402,13 +428,13 @@
 <td><p>Meta-class for concrete under compression</p></td>
 </tr>
 <tr class="row-odd"><td><p><a class="reference internal" href="api/m_n_kappa.material.ConcreteCompressionNonlinear.html#m_n_kappa.material.ConcreteCompressionNonlinear" title="m_n_kappa.material.ConcreteCompressionNonlinear"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ConcreteCompressionNonlinear</span></code></a>(f_cm, ...)</p></td>
-<td><p>non-linear concrete behaviour according to EN 1992-1-1 <a href="#id4"><span class="problematic" id="id1">[1]_</span></a></p></td>
+<td><p>non-linear concrete behaviour according to EN 1992-1-1 <a href="#id6"><span class="problematic" id="id1">[1]_</span></a></p></td>
 </tr>
 <tr class="row-even"><td><p><a class="reference internal" href="api/m_n_kappa.material.ConcreteCompressionParabolaRectangle.html#m_n_kappa.material.ConcreteCompressionParabolaRectangle" title="m_n_kappa.material.ConcreteCompressionParabolaRectangle"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ConcreteCompressionParabolaRectangle</span></code></a>(f_cm, E_cm)</p></td>
-<td><p>parabola-rectangle behaviour of concrete under compression according to EN 1992-1-1 <a href="#id5"><span class="problematic" id="id2">[1]_</span></a></p></td>
+<td><p>parabola-rectangle behaviour of concrete under compression according to EN 1992-1-1 <a href="#id7"><span class="problematic" id="id2">[1]_</span></a></p></td>
 </tr>
 <tr class="row-odd"><td><p><a class="reference internal" href="api/m_n_kappa.material.ConcreteCompressionBiLinear.html#m_n_kappa.material.ConcreteCompressionBiLinear" title="m_n_kappa.material.ConcreteCompressionBiLinear"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ConcreteCompressionBiLinear</span></code></a>(f_cm)</p></td>
-<td><p>bi-linear behaviour of concrete under compression according to EN 1992-1-1 <a href="#id6"><span class="problematic" id="id3">[1]_</span></a></p></td>
+<td><p>bi-linear behaviour of concrete under compression according to EN 1992-1-1 <a href="#id8"><span class="problematic" id="id3">[1]_</span></a></p></td>
 </tr>
 <tr class="row-even"><td><p><a class="reference internal" href="api/m_n_kappa.material.ConcreteTension.html#m_n_kappa.material.ConcreteTension" title="m_n_kappa.material.ConcreteTension"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ConcreteTension</span></code></a>(f_cm, E_cm[, f_ctm, g_f, ...])</p></td>
 <td><p>define concrete tensile behaviour</p></td>
@@ -488,16 +514,16 @@
 <div class="table-wrapper autosummary longtable docutils container">
 <table class="autosummary longtable docutils align-default">
 <tbody>
-<tr class="row-odd"><td><p><a class="reference internal" href="api/m_n_kappa.curvature_boundaries.MaximumCurvature.html#m_n_kappa.curvature_boundaries.MaximumCurvature" title="m_n_kappa.curvature_boundaries.MaximumCurvature"><code class="xref py py-obj docutils literal notranslate"><span class="pre">MaximumCurvature</span></code></a>(curvature, start, other, ...)</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/m_n_kappa.boundaries.MaximumCurvature.html#m_n_kappa.boundaries.MaximumCurvature" title="m_n_kappa.boundaries.MaximumCurvature"><code class="xref py py-obj docutils literal notranslate"><span class="pre">MaximumCurvature</span></code></a>(curvature, start, other, ...)</p></td>
 <td><p>store values connected to maximum curvature</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="api/m_n_kappa.curvature_boundaries.MinimumCurvature.html#m_n_kappa.curvature_boundaries.MinimumCurvature" title="m_n_kappa.curvature_boundaries.MinimumCurvature"><code class="xref py py-obj docutils literal notranslate"><span class="pre">MinimumCurvature</span></code></a>(...)</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="api/m_n_kappa.boundaries.MinimumCurvature.html#m_n_kappa.boundaries.MinimumCurvature" title="m_n_kappa.boundaries.MinimumCurvature"><code class="xref py py-obj docutils literal notranslate"><span class="pre">MinimumCurvature</span></code></a>(...[, top_edge, bottom_edge])</p></td>
 <td><p>store maximum positive and negative section strains for determination of minimum curvature</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="api/m_n_kappa.curvature_boundaries.BoundaryValues.html#m_n_kappa.curvature_boundaries.BoundaryValues" title="m_n_kappa.curvature_boundaries.BoundaryValues"><code class="xref py py-obj docutils literal notranslate"><span class="pre">BoundaryValues</span></code></a>(maximum_curvature, ...)</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/m_n_kappa.boundaries.BoundaryValues.html#m_n_kappa.boundaries.BoundaryValues" title="m_n_kappa.boundaries.BoundaryValues"><code class="xref py py-obj docutils literal notranslate"><span class="pre">BoundaryValues</span></code></a>(maximum_curvature, ...)</p></td>
 <td><p>store boundary condition values</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="api/m_n_kappa.curvature_boundaries.Boundaries.html#m_n_kappa.curvature_boundaries.Boundaries" title="m_n_kappa.curvature_boundaries.Boundaries"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Boundaries</span></code></a>(positive, negative)</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="api/m_n_kappa.boundaries.Boundaries.html#m_n_kappa.boundaries.Boundaries" title="m_n_kappa.boundaries.Boundaries"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Boundaries</span></code></a>(positive, negative, neutral_axes)</p></td>
 <td><p>store boundary conditions</p></td>
 </tr>
 </tbody>
@@ -507,19 +533,19 @@
 <div class="table-wrapper autosummary longtable docutils container">
 <table class="autosummary longtable docutils align-default">
 <tbody>
-<tr class="row-odd"><td><p><a class="reference internal" href="api/m_n_kappa.curvature_boundaries.compute_curvatures.html#m_n_kappa.curvature_boundaries.compute_curvatures" title="m_n_kappa.curvature_boundaries.compute_curvatures"><code class="xref py py-obj docutils literal notranslate"><span class="pre">compute_curvatures</span></code></a>(strain_position, ...)</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/m_n_kappa.boundaries.compute_curvatures.html#m_n_kappa.boundaries.compute_curvatures" title="m_n_kappa.boundaries.compute_curvatures"><code class="xref py py-obj docutils literal notranslate"><span class="pre">compute_curvatures</span></code></a>(strain_position, ...)</p></td>
 <td><p>compute curvatures from a position with associated strains and a list of strains with its associated positions</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="api/m_n_kappa.curvature_boundaries.remove_higher_strains.html#m_n_kappa.curvature_boundaries.remove_higher_strains" title="m_n_kappa.curvature_boundaries.remove_higher_strains"><code class="xref py py-obj docutils literal notranslate"><span class="pre">remove_higher_strains</span></code></a>(strain, position_strains)</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="api/m_n_kappa.boundaries.remove_higher_strains.html#m_n_kappa.boundaries.remove_higher_strains" title="m_n_kappa.boundaries.remove_higher_strains"><code class="xref py py-obj docutils literal notranslate"><span class="pre">remove_higher_strains</span></code></a>(strain, position_strains)</p></td>
 <td><p>Return strain-position values where <code class="docutils literal notranslate"><span class="pre">strain</span></code>-attribute is smaller <code class="docutils literal notranslate"><span class="pre">strain</span></code></p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="api/m_n_kappa.curvature_boundaries.remove_smaller_strains.html#m_n_kappa.curvature_boundaries.remove_smaller_strains" title="m_n_kappa.curvature_boundaries.remove_smaller_strains"><code class="xref py py-obj docutils literal notranslate"><span class="pre">remove_smaller_strains</span></code></a>(strain, position_strains)</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/m_n_kappa.boundaries.remove_smaller_strains.html#m_n_kappa.boundaries.remove_smaller_strains" title="m_n_kappa.boundaries.remove_smaller_strains"><code class="xref py py-obj docutils literal notranslate"><span class="pre">remove_smaller_strains</span></code></a>(strain, position_strains)</p></td>
 <td><p>Return strain-position values where <code class="docutils literal notranslate"><span class="pre">strain</span></code>-attribute is greater <code class="docutils literal notranslate"><span class="pre">strain</span></code></p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="api/m_n_kappa.curvature_boundaries.get_lower_positions.html#m_n_kappa.curvature_boundaries.get_lower_positions" title="m_n_kappa.curvature_boundaries.get_lower_positions"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_lower_positions</span></code></a>(position, position_strains)</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="api/m_n_kappa.boundaries.get_lower_positions.html#m_n_kappa.boundaries.get_lower_positions" title="m_n_kappa.boundaries.get_lower_positions"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_lower_positions</span></code></a>(position, position_strains)</p></td>
 <td><p>get all positions in 'position_strains', that are lower than the given position_value</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="api/m_n_kappa.curvature_boundaries.get_higher_positions.html#m_n_kappa.curvature_boundaries.get_higher_positions" title="m_n_kappa.curvature_boundaries.get_higher_positions"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_higher_positions</span></code></a>(position, position_strains)</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/m_n_kappa.boundaries.get_higher_positions.html#m_n_kappa.boundaries.get_higher_positions" title="m_n_kappa.boundaries.get_higher_positions"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_higher_positions</span></code></a>(position, position_strains)</p></td>
 <td><p>get all positions in 'position_strains', that are higher than the given position_value</p></td>
 </tr>
 </tbody>
@@ -531,11 +557,38 @@
 <div class="table-wrapper autosummary longtable docutils container">
 <table class="autosummary longtable docutils align-default">
 <tbody>
-<tr class="row-odd"><td><p><a class="reference internal" href="api/m_n_kappa.points.Computation.html#m_n_kappa.points.Computation" title="m_n_kappa.points.Computation"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Computation</span></code></a>(iteration, ...)</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/m_n_kappa.points.Point.html#m_n_kappa.points.Point" title="m_n_kappa.points.Point"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Point</span></code></a>(cross_section, applied_axial_force[, ...])</p></td>
+<td><p>base-class for computing equilibrium of axial-forces</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/m_n_kappa.points.Computation.html#m_n_kappa.points.Computation" title="m_n_kappa.points.Computation"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Computation</span></code></a>(iteration, ...[, curvature, ...])</p></td>
 <td><p>stores the results of an iteration-step during a computation</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="api/m_n_kappa.points.MKappa.html#m_n_kappa.points.MKappa" title="m_n_kappa.points.MKappa"><code class="xref py py-obj docutils literal notranslate"><span class="pre">MKappa</span></code></a>(cross_section[, applied_axial_force, ...])</p></td>
-<td><p>computation of one Moment-Curvature-Point by fixation of one point and varying the neutral axis</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/m_n_kappa.points.MKappa.html#m_n_kappa.points.MKappa" title="m_n_kappa.points.MKappa"><code class="xref py py-obj docutils literal notranslate"><span class="pre">MKappa</span></code></a>(cross_section[, applied_axial_force, ...])</p></td>
+<td><p>base class for computation of one Moment-Curvature-Point by varying the neutral axis</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/m_n_kappa.points.MNByStrain.html#m_n_kappa.points.MNByStrain" title="m_n_kappa.points.MNByStrain"><code class="xref py py-obj docutils literal notranslate"><span class="pre">MNByStrain</span></code></a>(cross_section, applied_axial_force)</p></td>
+<td><p>computation of uniform strain leading to given axial-force</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/m_n_kappa.points.AxialForcePoint.html#m_n_kappa.points.AxialForcePoint" title="m_n_kappa.points.AxialForcePoint"><code class="xref py py-obj docutils literal notranslate"><span class="pre">AxialForcePoint</span></code></a>(sub_cross_sections, axial_force)</p></td>
+<td><p>base class</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="moment-axial-force-curvature-curve">
+<span id="api-developers-moment-axial-force-curvature-curve"></span><h2>Moment-Axial-Force-Curvature Curve<a class="headerlink" href="#moment-axial-force-curvature-curve" title="Permalink to this heading">#</a></h2>
+<div class="table-wrapper autosummary longtable docutils container">
+<table class="autosummary longtable docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/m_n_kappa.curves_m_n_kappa.MNKappaCurvePoint.html#m_n_kappa.curves_m_n_kappa.MNKappaCurvePoint" title="m_n_kappa.curves_m_n_kappa.MNKappaCurvePoint"><code class="xref py py-obj docutils literal notranslate"><span class="pre">MNKappaCurvePoint</span></code></a>(moment, curvature, ...[, ...])</p></td>
+<td><p>Container for single point on Moment-Axial-Force-Curvature-Curve</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/m_n_kappa.curves_m_n_kappa.MNKappaCurvePoints.html#m_n_kappa.curves_m_n_kappa.MNKappaCurvePoints" title="m_n_kappa.curves_m_n_kappa.MNKappaCurvePoints"><code class="xref py py-obj docutils literal notranslate"><span class="pre">MNKappaCurvePoints</span></code></a>([points])</p></td>
+<td><p>Container for points on computed <span class="math notranslate nohighlight">\(M\)</span>-<span class="math notranslate nohighlight">\(N\)</span>-<span class="math notranslate nohighlight">\(\kappa\)</span>-Curve</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/m_n_kappa.curves_m_n_kappa.MNCurvatureCurve.html#m_n_kappa.curves_m_n_kappa.MNCurvatureCurve" title="m_n_kappa.curves_m_n_kappa.MNCurvatureCurve"><code class="xref py py-obj docutils literal notranslate"><span class="pre">MNCurvatureCurve</span></code></a>([m_n_curve, ...])</p></td>
+<td><p>compute moment-axial-force-curvature curve</p></td>
 </tr>
 </tbody>
 </table>
@@ -554,6 +607,51 @@
 </tr>
 <tr class="row-odd"><td><p><a class="reference internal" href="api/m_n_kappa.solver.Newton.html#m_n_kappa.solver.Newton" title="m_n_kappa.solver.Newton"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Newton</span></code></a>(data, target, variable)</p></td>
 <td><p>Solver using the newton method</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="fitting">
+<h2>Fitting<a class="headerlink" href="#fitting" title="Permalink to this heading">#</a></h2>
+<div class="table-wrapper autosummary longtable docutils container">
+<table class="autosummary longtable docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/m_n_kappa.fitting.GaussNewton.html#m_n_kappa.fitting.GaussNewton" title="m_n_kappa.fitting.GaussNewton"><code class="xref py py-obj docutils literal notranslate"><span class="pre">GaussNewton</span></code></a>(f_i, x_0[, maximum_iterations, ...])</p></td>
+<td><p>Gauss-Newton Solver for finding zero in a system of equations</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/m_n_kappa.fitting.LevenbergMarquardt.html#m_n_kappa.fitting.LevenbergMarquardt" title="m_n_kappa.fitting.LevenbergMarquardt"><code class="xref py py-obj docutils literal notranslate"><span class="pre">LevenbergMarquardt</span></code></a>(f_i, x_0[, ...])</p></td>
+<td><p>Levenberg-Marquardt algorithm</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="matrices">
+<h2>Matrices<a class="headerlink" href="#matrices" title="Permalink to this heading">#</a></h2>
+<div class="table-wrapper autosummary longtable docutils container">
+<table class="autosummary longtable docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/m_n_kappa.matrices.Vector.html#m_n_kappa.matrices.Vector" title="m_n_kappa.matrices.Vector"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Vector</span></code></a>(entries)</p></td>
+<td><p><div class="versionadded">
+<p><span class="versionmodified added">New in version 0.2.0.</span></p>
+</div>
+</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/m_n_kappa.matrices.Matrix.html#m_n_kappa.matrices.Matrix" title="m_n_kappa.matrices.Matrix"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Matrix</span></code></a>(matrix)</p></td>
+<td><p><div class="versionadded">
+<p><span class="versionmodified added">New in version 0.2.0.</span></p>
+</div>
+</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/m_n_kappa.matrices.Jacobian.html#m_n_kappa.matrices.Jacobian" title="m_n_kappa.matrices.Jacobian"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Jacobian</span></code></a>(f_i, x_i[, f_xi, h, ...])</p></td>
+<td><p>Jacobian Matrix</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/m_n_kappa.matrices.Identity.html#m_n_kappa.matrices.Identity" title="m_n_kappa.matrices.Identity"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Identity</span></code></a>(row_column_number[, diagonal_value])</p></td>
+<td><p>Identity Matrix</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/m_n_kappa.matrices.LinearEquationsSystem.html#m_n_kappa.matrices.LinearEquationsSystem" title="m_n_kappa.matrices.LinearEquationsSystem"><code class="xref py py-obj docutils literal notranslate"><span class="pre">LinearEquationsSystem</span></code></a>(coefficients, constants)</p></td>
+<td><p>Solve System of linear equations of type :math:<a href="#id4"><span class="problematic" id="id5">`</span></a>mathbf{A} vec{x} =</p></td>
 </tr>
 </tbody>
 </table>
@@ -610,7 +708,14 @@
             
           </div>
           <div class="right-details">
-            
+            <div class="icons">
+              <a class="muted-link " href="https://github.com/JohannesSchorr/M-N-Kappa" aria-label="GitHub">
+                <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 16 16">
+                    <path fill-rule="evenodd" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0 0 16 8c0-4.42-3.58-8-8-8z"></path>
+                </svg>
+            </a>
+              
+            </div>
           </div>
         </div>
         
@@ -642,7 +747,10 @@
 </ul>
 </li>
 <li><a class="reference internal" href="#strain-based-design">Strain-based design</a></li>
+<li><a class="reference internal" href="#moment-axial-force-curvature-curve">Moment-Axial-Force-Curvature Curve</a></li>
 <li><a class="reference internal" href="#solver">Solver</a></li>
+<li><a class="reference internal" href="#fitting">Fitting</a></li>
+<li><a class="reference internal" href="#matrices">Matrices</a></li>
 <li><a class="reference internal" href="#loading">Loading</a></li>
 </ul>
 </li>
@@ -670,5 +778,7 @@
     <script src="https://cdn.jsdelivr.net/npm/vega-embed@6"></script>
     <script src="_static/design-tabs.js"></script>
     <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     </body>
 </html>

@@ -22,6 +22,15 @@
          ~MKappaCurvePoints.maximum_moment
       
       
+         ~MKappaCurvePoints.maximum_neutral_axis
+      
+      
+         ~MKappaCurvePoints.minimum_neutral_axis
+      
+      
+         ~MKappaCurvePoints.moment
+      
+      
          ~MKappaCurvePoints.results_as_dict
       
    

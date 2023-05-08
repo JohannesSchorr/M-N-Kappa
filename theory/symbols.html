@@ -11,7 +11,7 @@
     <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?digest=91d0f0d1c444bdcb17a68e833c7a53903343c195" />
     <link rel="stylesheet" type="text/css" href="../_static/altair-plot.css" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/design-style.1e8bd061cd6da7fc9cf755528e8ffc24.min.css" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/furo-extensions.css?digest=30d1aed668e5c3a91c3e3bf6a60b675221979f0e" />
     <link rel="stylesheet" type="text/css" href="../_static/css/custom.css" />
     
@@ -150,7 +150,7 @@
       <div class="sidebar-sticky"><a class="sidebar-brand centered" href="../index.html">
   
   <div class="sidebar-logo-container">
-    <img class="sidebar-logo" src="../_static/m_kappa_logo.png" alt="Logo"/>
+    <img class="sidebar-logo" src="../_static/m_n_kappa_logo.png" alt="Logo"/>
   </div>
   
   <span class="sidebar-brand-text"><i>M</i>-<i>N</i>-<i>&#954</i></span>
@@ -189,8 +189,10 @@
 <li class="toctree-l2"><a class="reference internal" href="sections.html">Sections and cross-sections</a></li>
 <li class="toctree-l2"><a class="reference internal" href="strain_based_design.html">Strain based design</a></li>
 <li class="toctree-l2"><a class="reference internal" href="m_kappa_curve.html"><span class="math notranslate nohighlight">\(M\)</span>-<span class="math notranslate nohighlight">\(\kappa\)</span>-curve</a></li>
+<li class="toctree-l2"><a class="reference internal" href="m_n_curvature_epsilon.html"><span class="math notranslate nohighlight">\(M\)</span>-<span class="math notranslate nohighlight">\(N\)</span>-<span class="math notranslate nohighlight">\(\kappa\)</span>-<span class="math notranslate nohighlight">\(\varepsilon_\mathrm{\Delta}\)</span>-curve</a></li>
 <li class="toctree-l2"><a class="reference internal" href="effective_widths.html">Effective widths</a></li>
 <li class="toctree-l2"><a class="reference internal" href="loading.html">Loading</a></li>
+<li class="toctree-l2"><a class="reference internal" href="slip.html">Slip</a></li>
 <li class="toctree-l2"><a class="reference internal" href="deformations.html">Deformations</a></li>
 </ul>
 </li>
@@ -217,9 +219,16 @@
 <li class="toctree-l2"><a class="reference internal" href="../api/m_n_kappa.Crosssection.html">m_n_kappa.Crosssection</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../api/m_n_kappa.MKappaByStrainPosition.html">m_n_kappa.MKappaByStrainPosition</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../api/m_n_kappa.MKappaByConstantCurvature.html">m_n_kappa.MKappaByConstantCurvature</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api/m_n_kappa.MomentAxialForce.html">m_n_kappa.MomentAxialForce</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api/m_n_kappa.MomentAxialForceCurvature.html">m_n_kappa.MomentAxialForceCurvature</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../api/m_n_kappa.MKappaCurve.html">m_n_kappa.MKappaCurve</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../api/m_n_kappa.curves_m_kappa.MKappaCurvePoint.html">m_n_kappa.curves_m_kappa.MKappaCurvePoint</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../api/m_n_kappa.curves_m_kappa.MKappaCurvePoints.html">m_n_kappa.curves_m_kappa.MKappaCurvePoints</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api/m_n_kappa.MNCurve.html">m_n_kappa.MNCurve</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api/m_n_kappa.MNKappaCurve.html">m_n_kappa.MNKappaCurve</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api/m_n_kappa.LoadSlip.html">m_n_kappa.LoadSlip</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api/m_n_kappa.ShearConnector.html">m_n_kappa.ShearConnector</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api/m_n_kappa.HeadedStud.html">m_n_kappa.HeadedStud</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../api/m_n_kappa.SingleSpanUniformLoad.html">m_n_kappa.SingleSpanUniformLoad</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../api/m_n_kappa.SingleLoad.html">m_n_kappa.SingleLoad</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../api/m_n_kappa.SingleSpanSingleLoads.html">m_n_kappa.SingleSpanSingleLoads</a></li>
@@ -231,6 +240,7 @@
 <li class="toctree-l1 has-children"><a class="reference internal" href="../api_developers.html">API for developers</a><input class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" role="switch" type="checkbox"/><label for="toctree-checkbox-6"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
 <li class="toctree-l2"><a class="reference internal" href="../api/m_n_kappa.general.StrainPosition.html">m_n_kappa.general.StrainPosition</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../api/m_n_kappa.general.EffectiveWidths.html">m_n_kappa.general.EffectiveWidths</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api/m_n_kappa.general.NotSuccessfulReason.html">m_n_kappa.general.NotSuccessfulReason</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../api/m_n_kappa.general.curvature.html">m_n_kappa.general.curvature</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../api/m_n_kappa.general.curvature_by_points.html">m_n_kappa.general.curvature_by_points</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../api/m_n_kappa.general.strain.html">m_n_kappa.general.strain</a></li>
@@ -260,20 +270,33 @@
 <li class="toctree-l2"><a class="reference internal" href="../api/m_n_kappa.crosssection.moment.html">m_n_kappa.crosssection.moment</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../api/m_n_kappa.crosssection.determine_curvatures.html">m_n_kappa.crosssection.determine_curvatures</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../api/m_n_kappa.crosssection.compute_neutral_axis.html">m_n_kappa.crosssection.compute_neutral_axis</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../api/m_n_kappa.curvature_boundaries.MaximumCurvature.html">m_n_kappa.curvature_boundaries.MaximumCurvature</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../api/m_n_kappa.curvature_boundaries.MinimumCurvature.html">m_n_kappa.curvature_boundaries.MinimumCurvature</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../api/m_n_kappa.curvature_boundaries.BoundaryValues.html">m_n_kappa.curvature_boundaries.BoundaryValues</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../api/m_n_kappa.curvature_boundaries.Boundaries.html">m_n_kappa.curvature_boundaries.Boundaries</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../api/m_n_kappa.curvature_boundaries.compute_curvatures.html">m_n_kappa.curvature_boundaries.compute_curvatures</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../api/m_n_kappa.curvature_boundaries.remove_higher_strains.html">m_n_kappa.curvature_boundaries.remove_higher_strains</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../api/m_n_kappa.curvature_boundaries.remove_smaller_strains.html">m_n_kappa.curvature_boundaries.remove_smaller_strains</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../api/m_n_kappa.curvature_boundaries.get_lower_positions.html">m_n_kappa.curvature_boundaries.get_lower_positions</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../api/m_n_kappa.curvature_boundaries.get_higher_positions.html">m_n_kappa.curvature_boundaries.get_higher_positions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api/m_n_kappa.boundaries.MaximumCurvature.html">m_n_kappa.boundaries.MaximumCurvature</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api/m_n_kappa.boundaries.MinimumCurvature.html">m_n_kappa.boundaries.MinimumCurvature</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api/m_n_kappa.boundaries.BoundaryValues.html">m_n_kappa.boundaries.BoundaryValues</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api/m_n_kappa.boundaries.Boundaries.html">m_n_kappa.boundaries.Boundaries</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api/m_n_kappa.boundaries.compute_curvatures.html">m_n_kappa.boundaries.compute_curvatures</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api/m_n_kappa.boundaries.remove_higher_strains.html">m_n_kappa.boundaries.remove_higher_strains</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api/m_n_kappa.boundaries.remove_smaller_strains.html">m_n_kappa.boundaries.remove_smaller_strains</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api/m_n_kappa.boundaries.get_lower_positions.html">m_n_kappa.boundaries.get_lower_positions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api/m_n_kappa.boundaries.get_higher_positions.html">m_n_kappa.boundaries.get_higher_positions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api/m_n_kappa.points.Point.html">m_n_kappa.points.Point</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../api/m_n_kappa.points.Computation.html">m_n_kappa.points.Computation</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../api/m_n_kappa.points.MKappa.html">m_n_kappa.points.MKappa</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api/m_n_kappa.points.MNByStrain.html">m_n_kappa.points.MNByStrain</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api/m_n_kappa.points.AxialForcePoint.html">m_n_kappa.points.AxialForcePoint</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api/m_n_kappa.curves_m_n_kappa.MNKappaCurvePoint.html">m_n_kappa.curves_m_n_kappa.MNKappaCurvePoint</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api/m_n_kappa.curves_m_n_kappa.MNKappaCurvePoints.html">m_n_kappa.curves_m_n_kappa.MNKappaCurvePoints</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api/m_n_kappa.curves_m_n_kappa.MNCurvatureCurve.html">m_n_kappa.curves_m_n_kappa.MNCurvatureCurve</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../api/m_n_kappa.solver.Solver.html">m_n_kappa.solver.Solver</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../api/m_n_kappa.solver.Bisection.html">m_n_kappa.solver.Bisection</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../api/m_n_kappa.solver.Newton.html">m_n_kappa.solver.Newton</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api/m_n_kappa.fitting.GaussNewton.html">m_n_kappa.fitting.GaussNewton</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api/m_n_kappa.fitting.LevenbergMarquardt.html">m_n_kappa.fitting.LevenbergMarquardt</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api/m_n_kappa.matrices.Vector.html">m_n_kappa.matrices.Vector</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api/m_n_kappa.matrices.Matrix.html">m_n_kappa.matrices.Matrix</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api/m_n_kappa.matrices.Jacobian.html">m_n_kappa.matrices.Jacobian</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api/m_n_kappa.matrices.Identity.html">m_n_kappa.matrices.Identity</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api/m_n_kappa.matrices.LinearEquationsSystem.html">m_n_kappa.matrices.LinearEquationsSystem</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../api/m_n_kappa.loading.ABCSingleSpan.html">m_n_kappa.loading.ABCSingleSpan</a></li>
 </ul>
 </li>
@@ -330,177 +353,6 @@
 <span id="theory-symbols"></span><h1>Symbols<a class="headerlink" href="#symbols" title="Permalink to this heading">#</a></h1>
 <section id="latin-letters">
 <h2>Latin letters<a class="headerlink" href="#latin-letters" title="Permalink to this heading">#</a></h2>
-<div class="table-wrapper colwidths-given docutils container">
-<table class="docutils align-default">
-<colgroup>
-<col style="width: 20.0%" />
-<col style="width: 40.0%" />
-<col style="width: 40.0%" />
-</colgroup>
-<tbody>
-<tr class="row-odd"><td><p><span class="math notranslate nohighlight">\(A\)</span></p></td>
-<td><p>cross-sectional area</p></td>
-<td><p><span class="math notranslate nohighlight">\(A_\mathrm{circle} = \frac{\pi \cdot d}{4}\)</span> or <span class="math notranslate nohighlight">\(A_\mathrm{rectangle} = h \cdot b\)</span></p></td>
-</tr>
-<tr class="row-even"><td><p><span class="math notranslate nohighlight">\(b\)</span></p></td>
-<td><p>width</p></td>
-<td></td>
-</tr>
-<tr class="row-odd"><td><p><span class="math notranslate nohighlight">\(b(z)\)</span></p></td>
-<td><p>width at a vertical position <span class="math notranslate nohighlight">\(z\)</span></p></td>
-<td><p>Formula <a class="reference internal" href="geometries.html#equation-eq-rectangle-width">(1)</a> in <a class="reference internal" href="geometries.html#theory-geometries"><span class="std std-ref">Geometry</span></a></p></td>
-</tr>
-<tr class="row-even"><td><p><span class="math notranslate nohighlight">\(b_\mathrm{top}\)</span></p></td>
-<td><p>width at the top edge of a rectangle or trapezoid</p></td>
-<td></td>
-</tr>
-<tr class="row-odd"><td><p><span class="math notranslate nohighlight">\(b_\mathrm{bottom}\)</span></p></td>
-<td><p>width at the bottom edge of a rectangle or trapezoid</p></td>
-<td></td>
-</tr>
-<tr class="row-even"><td><p><span class="math notranslate nohighlight">\(c_\mathrm{b}\)</span></p></td>
-<td><p>interception of the width of a rectangle or trapezoid</p></td>
-<td><p>Formula <a class="reference internal" href="geometries.html#equation-eq-rectangle-width-interception">(3)</a> in <a class="reference internal" href="geometries.html#theory-geometries"><span class="std std-ref">Geometry</span></a></p></td>
-</tr>
-<tr class="row-odd"><td><p><span class="math notranslate nohighlight">\(c_\mathrm{\sigma}\)</span></p></td>
-<td><p>interception of stress of linear relationship between two material points</p></td>
-<td><p>Formula <a class="reference internal" href="sections.html#equation-eq-theory-section-stress-interception">(3)</a> in <a class="reference internal" href="sections.html#theory-sections-sections-stress-distribution"><span class="std std-ref">Linear stress-distribution over height</span></a></p></td>
-</tr>
-<tr class="row-even"><td><p><span class="math notranslate nohighlight">\(d\)</span></p></td>
-<td><p>diameter of a reinforcement bar</p></td>
-<td></td>
-</tr>
-<tr class="row-odd"><td><p><span class="math notranslate nohighlight">\(E\)</span></p></td>
-<td><p>modulus of elasticity</p></td>
-<td></td>
-</tr>
-<tr class="row-even"><td><p><span class="math notranslate nohighlight">\(E_\mathrm{a}\)</span></p></td>
-<td><p>modulus of elasticity of structural steel</p></td>
-<td></td>
-</tr>
-<tr class="row-odd"><td><p><span class="math notranslate nohighlight">\(E_\mathrm{cm}\)</span></p></td>
-<td><p>mean modulus of elasticity of concrete</p></td>
-<td><p>Formula <code class="xref math math-numref docutils literal notranslate"><span class="pre">eq:theory_materials_E_cm</span></code> in <a class="reference internal" href="materials.html#theory-materials-concrete"><span class="std std-ref">Concrete</span></a></p></td>
-</tr>
-<tr class="row-even"><td><p><span class="math notranslate nohighlight">\(E_\mathrm{s}\)</span></p></td>
-<td><p>modulus of elasticity of reinforcement steel</p></td>
-<td></td>
-</tr>
-<tr class="row-odd"><td><p><span class="math notranslate nohighlight">\(f_\mathrm{cm}\)</span></p></td>
-<td><p>mean concrete cylinder compressive strength</p></td>
-<td><p>Formula <code class="xref math math-numref docutils literal notranslate"><span class="pre">eq:theory_materials_f_cm</span></code> in <a class="reference internal" href="materials.html#theory-materials-concrete"><span class="std std-ref">Concrete</span></a></p></td>
-</tr>
-<tr class="row-even"><td><p><span class="math notranslate nohighlight">\(f_\mathrm{ck}\)</span></p></td>
-<td><p>characteristic concrete cylinder compressive strength</p></td>
-<td></td>
-</tr>
-<tr class="row-odd"><td><p><span class="math notranslate nohighlight">\(f_\mathrm{ctm}\)</span></p></td>
-<td><p>mean concrete tensile strength</p></td>
-<td><p>Formula <a class="reference internal" href="materials.html#equation-eq-theory-materials-concrete-f-ctm">(6)</a> in <a class="reference internal" href="materials.html#theory-materials-concrete"><span class="std std-ref">Concrete</span></a></p></td>
-</tr>
-<tr class="row-even"><td><p><span class="math notranslate nohighlight">\(f_\mathrm{s}\)</span></p></td>
-<td><p>reinforcement yield strength</p></td>
-<td></td>
-</tr>
-<tr class="row-odd"><td><p><span class="math notranslate nohighlight">\(f_\mathrm{su}\)</span></p></td>
-<td><p>reinforcement tensile strength</p></td>
-<td></td>
-</tr>
-<tr class="row-even"><td><p><span class="math notranslate nohighlight">\(f_\mathrm{y}\)</span></p></td>
-<td><p>steel yield strength</p></td>
-<td></td>
-</tr>
-<tr class="row-odd"><td><p><span class="math notranslate nohighlight">\(f_\mathrm{u}\)</span></p></td>
-<td><p>steel tensile strength</p></td>
-<td></td>
-</tr>
-<tr class="row-even"><td><p><span class="math notranslate nohighlight">\(G_\mathrm{F}\)</span></p></td>
-<td><p>concrete fracture energy</p></td>
-<td><p>Formula <a class="reference internal" href="materials.html#equation-eq-theory-materials-concrete-fracture-energy">(10)</a> in <a class="reference internal" href="materials.html#theory-materials-concrete"><span class="std std-ref">Concrete</span></a></p></td>
-</tr>
-<tr class="row-odd"><td><p><span class="math notranslate nohighlight">\(I_\mathrm{y}\)</span></p></td>
-<td><p>second moment of area around the Y-Axis</p></td>
-<td><p><span class="math notranslate nohighlight">\(I_\mathrm{y} = \frac{b \cdot h^{3}}{12}\)</span> for a rectangle of size <span class="math notranslate nohighlight">\(b \cdot h\)</span></p></td>
-</tr>
-<tr class="row-even"><td><p><span class="math notranslate nohighlight">\(I_\mathrm{z}\)</span></p></td>
-<td><p>second moment of area around the Z-Axis</p></td>
-<td><p><span class="math notranslate nohighlight">\(I_\mathrm{z} = \frac{b^{3} \cdot h}{12}\)</span> for a rectangle of size <span class="math notranslate nohighlight">\(b \cdot h\)</span></p></td>
-</tr>
-<tr class="row-odd"><td><p><span class="math notranslate nohighlight">\(M\)</span></p></td>
-<td><p>moment</p></td>
-<td><p><span class="math notranslate nohighlight">\(M = N \cdot z\)</span></p></td>
-</tr>
-<tr class="row-even"><td><p><span class="math notranslate nohighlight">\(M_\mathrm{E}\)</span></p></td>
-<td><p>external moment</p></td>
-<td></td>
-</tr>
-<tr class="row-odd"><td><p><span class="math notranslate nohighlight">\(M_\mathrm{cs}\)</span></p></td>
-<td><p>moment of a cross-section under a given strain-distribution</p></td>
-<td><p>Formula <a class="reference internal" href="sections.html#equation-eq-theory-crosssection-moment">(10)</a> in <a class="reference internal" href="sections.html#theory-sections-cross-section"><span class="std std-ref">Cross-section</span></a></p></td>
-</tr>
-<tr class="row-even"><td><p><span class="math notranslate nohighlight">\(M_i\)</span></p></td>
-<td><p>moment of a sub-section under a given strain-distribution</p></td>
-<td><p>Formula <a class="reference internal" href="sections.html#equation-eq-theory-section-moment">(8)</a> in <a class="reference internal" href="sections.html#theory-sections-sections-moment"><span class="std std-ref">Moment</span></a></p></td>
-</tr>
-<tr class="row-odd"><td><p><span class="math notranslate nohighlight">\(M_\mathrm{R}\)</span></p></td>
-<td><p>resistance moment</p></td>
-<td></td>
-</tr>
-<tr class="row-even"><td><p><span class="math notranslate nohighlight">\(m_\mathrm{b}\)</span></p></td>
-<td><p>slope of the width of a rectangle or trapezoid</p></td>
-<td><p>Formula <a class="reference internal" href="geometries.html#equation-eq-rectangle-width-slope">(2)</a> in <a class="reference internal" href="geometries.html#theory-geometries"><span class="std std-ref">Geometry</span></a></p></td>
-</tr>
-<tr class="row-odd"><td><p><span class="math notranslate nohighlight">\(m_\mathrm{\sigma}\)</span></p></td>
-<td><p>slope of stress from linear relationship between two points of stress-strain-curve</p></td>
-<td><p>Formula <a class="reference internal" href="sections.html#equation-eq-theory-section-stress-slope">(2)</a> in <a class="reference internal" href="sections.html#theory-sections-sections-stress-distribution"><span class="std std-ref">Linear stress-distribution over height</span></a></p></td>
-</tr>
-<tr class="row-even"><td><p><span class="math notranslate nohighlight">\(N\)</span></p></td>
-<td><p>axial force</p></td>
-<td></td>
-</tr>
-<tr class="row-odd"><td><p><span class="math notranslate nohighlight">\(N_\mathrm{cs}\)</span></p></td>
-<td><p>axial force of a cross-section under a given strain-distribution</p></td>
-<td><p>Formula <a class="reference internal" href="sections.html#equation-eq-theory-crosssection-axial-force">(9)</a> in <a class="reference internal" href="sections.html#theory-sections-cross-section"><span class="std std-ref">Cross-section</span></a></p></td>
-</tr>
-<tr class="row-even"><td><p><span class="math notranslate nohighlight">\(N_i\)</span></p></td>
-<td><p>axial force of a sub-section under a given strain-distribution</p></td>
-<td><p>Formulas <a class="reference internal" href="sections.html#equation-eq-theory-section-axial-force-rectangle">(4)</a> and <a class="reference internal" href="sections.html#equation-eq-theory-section-axial-force-circle">(5)</a> in <a class="reference internal" href="sections.html#theory-sections-sections-axial-force"><span class="std std-ref">Axial force</span></a></p></td>
-</tr>
-<tr class="row-odd"><td><p><span class="math notranslate nohighlight">\(r_i\)</span></p></td>
-<td><p>lever arm of axial force <span class="math notranslate nohighlight">\(N_i\)</span> of a sub-section under a given strain-distribution</p></td>
-<td><p>Formulas <a class="reference internal" href="sections.html#equation-eq-theory-section-lever-arm-rectangle">(6)</a> and <a class="reference internal" href="sections.html#equation-eq-theory-section-lever-arm-circle">(7)</a> in <a class="reference internal" href="sections.html#theory-sections-sections-lever-arm"><span class="std std-ref">Lever arm</span></a></p></td>
-</tr>
-<tr class="row-even"><td><p><span class="math notranslate nohighlight">\(x\)</span></p></td>
-<td><p>point along the beam (X-Axis)</p></td>
-<td></td>
-</tr>
-<tr class="row-odd"><td><p><span class="math notranslate nohighlight">\(y\)</span></p></td>
-<td><p>point at a distance perpendicular to <span class="math notranslate nohighlight">\(x\)</span> in horizontal direction (Y-Axis)</p></td>
-<td></td>
-</tr>
-<tr class="row-even"><td><p><span class="math notranslate nohighlight">\(z\)</span></p></td>
-<td><p>point at a distance perpendicular to <span class="math notranslate nohighlight">\(x\)</span> in vertical direction (Z-Axis)</p></td>
-<td></td>
-</tr>
-<tr class="row-odd"><td><p><span class="math notranslate nohighlight">\(z_\mathrm{n}\)</span></p></td>
-<td><p>neutral axis as point in z-direction where strains are zero</p></td>
-<td></td>
-</tr>
-<tr class="row-even"><td><p><span class="math notranslate nohighlight">\(z_\mathrm{top}\)</span></p></td>
-<td><p>vertical position of the top edge of a rectangle or trapezoid</p></td>
-<td></td>
-</tr>
-<tr class="row-odd"><td><p><span class="math notranslate nohighlight">\(z_\mathrm{bottom}\)</span></p></td>
-<td><p>vertical position of the bottom edge of a rectangle or trapezoid</p></td>
-<td></td>
-</tr>
-<tr class="row-even"><td><p><span class="math notranslate nohighlight">\(w\)</span></p></td>
-<td><p>crack opening width of concrete</p></td>
-<td><p>Formula <a class="reference internal" href="materials.html#equation-eq-theory-materials-concrete-crack-opening">(9)</a> in  <a class="reference internal" href="materials.html#theory-materials-concrete"><span class="std std-ref">Concrete</span></a></p></td>
-</tr>
-</tbody>
-</table>
-</div>
 </section>
 <section id="greek-letters">
 <h2>Greek letters<a class="headerlink" href="#greek-letters" title="Permalink to this heading">#</a></h2>
@@ -621,7 +473,14 @@
             
           </div>
           <div class="right-details">
-            
+            <div class="icons">
+              <a class="muted-link " href="https://github.com/JohannesSchorr/M-N-Kappa" aria-label="GitHub">
+                <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 16 16">
+                    <path fill-rule="evenodd" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0 0 16 8c0-4.42-3.58-8-8-8z"></path>
+                </svg>
+            </a>
+              
+            </div>
           </div>
         </div>
         

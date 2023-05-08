@@ -9,7 +9,7 @@
     <link rel="stylesheet" type="text/css" href="_static/styles/furo.css?digest=91d0f0d1c444bdcb17a68e833c7a53903343c195" />
     <link rel="stylesheet" type="text/css" href="_static/altair-plot.css" />
     <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
-    <link rel="stylesheet" type="text/css" href="_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+    <link rel="stylesheet" type="text/css" href="_static/design-style.1e8bd061cd6da7fc9cf755528e8ffc24.min.css" />
     <link rel="stylesheet" type="text/css" href="_static/styles/furo-extensions.css?digest=30d1aed668e5c3a91c3e3bf6a60b675221979f0e" />
     <link rel="stylesheet" type="text/css" href="_static/css/custom.css" />
     
@@ -148,7 +148,7 @@
       <div class="sidebar-sticky"><a class="sidebar-brand centered" href="index.html">
   
   <div class="sidebar-logo-container">
-    <img class="sidebar-logo" src="_static/m_kappa_logo.png" alt="Logo"/>
+    <img class="sidebar-logo" src="_static/m_n_kappa_logo.png" alt="Logo"/>
   </div>
   
   <span class="sidebar-brand-text"><i>M</i>-<i>N</i>-<i>&#954</i></span>
@@ -187,8 +187,10 @@
 <li class="toctree-l2"><a class="reference internal" href="theory/sections.html">Sections and cross-sections</a></li>
 <li class="toctree-l2"><a class="reference internal" href="theory/strain_based_design.html">Strain based design</a></li>
 <li class="toctree-l2"><a class="reference internal" href="theory/m_kappa_curve.html"><span class="math notranslate nohighlight">\(M\)</span>-<span class="math notranslate nohighlight">\(\kappa\)</span>-curve</a></li>
+<li class="toctree-l2"><a class="reference internal" href="theory/m_n_curvature_epsilon.html"><span class="math notranslate nohighlight">\(M\)</span>-<span class="math notranslate nohighlight">\(N\)</span>-<span class="math notranslate nohighlight">\(\kappa\)</span>-<span class="math notranslate nohighlight">\(\varepsilon_\mathrm{\Delta}\)</span>-curve</a></li>
 <li class="toctree-l2"><a class="reference internal" href="theory/effective_widths.html">Effective widths</a></li>
 <li class="toctree-l2"><a class="reference internal" href="theory/loading.html">Loading</a></li>
+<li class="toctree-l2"><a class="reference internal" href="theory/slip.html">Slip</a></li>
 <li class="toctree-l2"><a class="reference internal" href="theory/deformations.html">Deformations</a></li>
 </ul>
 </li>
@@ -215,9 +217,16 @@
 <li class="toctree-l2"><a class="reference internal" href="api/m_n_kappa.Crosssection.html">m_n_kappa.Crosssection</a></li>
 <li class="toctree-l2"><a class="reference internal" href="api/m_n_kappa.MKappaByStrainPosition.html">m_n_kappa.MKappaByStrainPosition</a></li>
 <li class="toctree-l2"><a class="reference internal" href="api/m_n_kappa.MKappaByConstantCurvature.html">m_n_kappa.MKappaByConstantCurvature</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/m_n_kappa.MomentAxialForce.html">m_n_kappa.MomentAxialForce</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/m_n_kappa.MomentAxialForceCurvature.html">m_n_kappa.MomentAxialForceCurvature</a></li>
 <li class="toctree-l2"><a class="reference internal" href="api/m_n_kappa.MKappaCurve.html">m_n_kappa.MKappaCurve</a></li>
 <li class="toctree-l2"><a class="reference internal" href="api/m_n_kappa.curves_m_kappa.MKappaCurvePoint.html">m_n_kappa.curves_m_kappa.MKappaCurvePoint</a></li>
 <li class="toctree-l2"><a class="reference internal" href="api/m_n_kappa.curves_m_kappa.MKappaCurvePoints.html">m_n_kappa.curves_m_kappa.MKappaCurvePoints</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/m_n_kappa.MNCurve.html">m_n_kappa.MNCurve</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/m_n_kappa.MNKappaCurve.html">m_n_kappa.MNKappaCurve</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/m_n_kappa.LoadSlip.html">m_n_kappa.LoadSlip</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/m_n_kappa.ShearConnector.html">m_n_kappa.ShearConnector</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/m_n_kappa.HeadedStud.html">m_n_kappa.HeadedStud</a></li>
 <li class="toctree-l2"><a class="reference internal" href="api/m_n_kappa.SingleSpanUniformLoad.html">m_n_kappa.SingleSpanUniformLoad</a></li>
 <li class="toctree-l2"><a class="reference internal" href="api/m_n_kappa.SingleLoad.html">m_n_kappa.SingleLoad</a></li>
 <li class="toctree-l2"><a class="reference internal" href="api/m_n_kappa.SingleSpanSingleLoads.html">m_n_kappa.SingleSpanSingleLoads</a></li>
@@ -229,6 +238,7 @@
 <li class="toctree-l1 has-children"><a class="reference internal" href="api_developers.html">API for developers</a><input class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" role="switch" type="checkbox"/><label for="toctree-checkbox-6"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
 <li class="toctree-l2"><a class="reference internal" href="api/m_n_kappa.general.StrainPosition.html">m_n_kappa.general.StrainPosition</a></li>
 <li class="toctree-l2"><a class="reference internal" href="api/m_n_kappa.general.EffectiveWidths.html">m_n_kappa.general.EffectiveWidths</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/m_n_kappa.general.NotSuccessfulReason.html">m_n_kappa.general.NotSuccessfulReason</a></li>
 <li class="toctree-l2"><a class="reference internal" href="api/m_n_kappa.general.curvature.html">m_n_kappa.general.curvature</a></li>
 <li class="toctree-l2"><a class="reference internal" href="api/m_n_kappa.general.curvature_by_points.html">m_n_kappa.general.curvature_by_points</a></li>
 <li class="toctree-l2"><a class="reference internal" href="api/m_n_kappa.general.strain.html">m_n_kappa.general.strain</a></li>
@@ -258,20 +268,33 @@
 <li class="toctree-l2"><a class="reference internal" href="api/m_n_kappa.crosssection.moment.html">m_n_kappa.crosssection.moment</a></li>
 <li class="toctree-l2"><a class="reference internal" href="api/m_n_kappa.crosssection.determine_curvatures.html">m_n_kappa.crosssection.determine_curvatures</a></li>
 <li class="toctree-l2"><a class="reference internal" href="api/m_n_kappa.crosssection.compute_neutral_axis.html">m_n_kappa.crosssection.compute_neutral_axis</a></li>
-<li class="toctree-l2"><a class="reference internal" href="api/m_n_kappa.curvature_boundaries.MaximumCurvature.html">m_n_kappa.curvature_boundaries.MaximumCurvature</a></li>
-<li class="toctree-l2"><a class="reference internal" href="api/m_n_kappa.curvature_boundaries.MinimumCurvature.html">m_n_kappa.curvature_boundaries.MinimumCurvature</a></li>
-<li class="toctree-l2"><a class="reference internal" href="api/m_n_kappa.curvature_boundaries.BoundaryValues.html">m_n_kappa.curvature_boundaries.BoundaryValues</a></li>
-<li class="toctree-l2"><a class="reference internal" href="api/m_n_kappa.curvature_boundaries.Boundaries.html">m_n_kappa.curvature_boundaries.Boundaries</a></li>
-<li class="toctree-l2"><a class="reference internal" href="api/m_n_kappa.curvature_boundaries.compute_curvatures.html">m_n_kappa.curvature_boundaries.compute_curvatures</a></li>
-<li class="toctree-l2"><a class="reference internal" href="api/m_n_kappa.curvature_boundaries.remove_higher_strains.html">m_n_kappa.curvature_boundaries.remove_higher_strains</a></li>
-<li class="toctree-l2"><a class="reference internal" href="api/m_n_kappa.curvature_boundaries.remove_smaller_strains.html">m_n_kappa.curvature_boundaries.remove_smaller_strains</a></li>
-<li class="toctree-l2"><a class="reference internal" href="api/m_n_kappa.curvature_boundaries.get_lower_positions.html">m_n_kappa.curvature_boundaries.get_lower_positions</a></li>
-<li class="toctree-l2"><a class="reference internal" href="api/m_n_kappa.curvature_boundaries.get_higher_positions.html">m_n_kappa.curvature_boundaries.get_higher_positions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/m_n_kappa.boundaries.MaximumCurvature.html">m_n_kappa.boundaries.MaximumCurvature</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/m_n_kappa.boundaries.MinimumCurvature.html">m_n_kappa.boundaries.MinimumCurvature</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/m_n_kappa.boundaries.BoundaryValues.html">m_n_kappa.boundaries.BoundaryValues</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/m_n_kappa.boundaries.Boundaries.html">m_n_kappa.boundaries.Boundaries</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/m_n_kappa.boundaries.compute_curvatures.html">m_n_kappa.boundaries.compute_curvatures</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/m_n_kappa.boundaries.remove_higher_strains.html">m_n_kappa.boundaries.remove_higher_strains</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/m_n_kappa.boundaries.remove_smaller_strains.html">m_n_kappa.boundaries.remove_smaller_strains</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/m_n_kappa.boundaries.get_lower_positions.html">m_n_kappa.boundaries.get_lower_positions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/m_n_kappa.boundaries.get_higher_positions.html">m_n_kappa.boundaries.get_higher_positions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/m_n_kappa.points.Point.html">m_n_kappa.points.Point</a></li>
 <li class="toctree-l2"><a class="reference internal" href="api/m_n_kappa.points.Computation.html">m_n_kappa.points.Computation</a></li>
 <li class="toctree-l2"><a class="reference internal" href="api/m_n_kappa.points.MKappa.html">m_n_kappa.points.MKappa</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/m_n_kappa.points.MNByStrain.html">m_n_kappa.points.MNByStrain</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/m_n_kappa.points.AxialForcePoint.html">m_n_kappa.points.AxialForcePoint</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/m_n_kappa.curves_m_n_kappa.MNKappaCurvePoint.html">m_n_kappa.curves_m_n_kappa.MNKappaCurvePoint</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/m_n_kappa.curves_m_n_kappa.MNKappaCurvePoints.html">m_n_kappa.curves_m_n_kappa.MNKappaCurvePoints</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/m_n_kappa.curves_m_n_kappa.MNCurvatureCurve.html">m_n_kappa.curves_m_n_kappa.MNCurvatureCurve</a></li>
 <li class="toctree-l2"><a class="reference internal" href="api/m_n_kappa.solver.Solver.html">m_n_kappa.solver.Solver</a></li>
 <li class="toctree-l2"><a class="reference internal" href="api/m_n_kappa.solver.Bisection.html">m_n_kappa.solver.Bisection</a></li>
 <li class="toctree-l2"><a class="reference internal" href="api/m_n_kappa.solver.Newton.html">m_n_kappa.solver.Newton</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/m_n_kappa.fitting.GaussNewton.html">m_n_kappa.fitting.GaussNewton</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/m_n_kappa.fitting.LevenbergMarquardt.html">m_n_kappa.fitting.LevenbergMarquardt</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/m_n_kappa.matrices.Vector.html">m_n_kappa.matrices.Vector</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/m_n_kappa.matrices.Matrix.html">m_n_kappa.matrices.Matrix</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/m_n_kappa.matrices.Jacobian.html">m_n_kappa.matrices.Jacobian</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/m_n_kappa.matrices.Identity.html">m_n_kappa.matrices.Identity</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/m_n_kappa.matrices.LinearEquationsSystem.html">m_n_kappa.matrices.LinearEquationsSystem</a></li>
 <li class="toctree-l2"><a class="reference internal" href="api/m_n_kappa.loading.ABCSingleSpan.html">m_n_kappa.loading.ABCSingleSpan</a></li>
 </ul>
 </li>
@@ -318,7 +341,7 @@
           
 <section class="genindex-section">
   <h1 id="index">Index</h1>
-  <div class="genindex-jumpbox"><a href="#A"><strong>A</strong></a> | <a href="#B"><strong>B</strong></a> | <a href="#C"><strong>C</strong></a> | <a href="#D"><strong>D</strong></a> | <a href="#E"><strong>E</strong></a> | <a href="#F"><strong>F</strong></a> | <a href="#G"><strong>G</strong></a> | <a href="#H"><strong>H</strong></a> | <a href="#I"><strong>I</strong></a> | <a href="#K"><strong>K</strong></a> | <a href="#L"><strong>L</strong></a> | <a href="#M"><strong>M</strong></a> | <a href="#N"><strong>N</strong></a> | <a href="#P"><strong>P</strong></a> | <a href="#R"><strong>R</strong></a> | <a href="#S"><strong>S</strong></a> | <a href="#T"><strong>T</strong></a> | <a href="#U"><strong>U</strong></a> | <a href="#V"><strong>V</strong></a> | <a href="#W"><strong>W</strong></a> | <a href="#X"><strong>X</strong></a> | <a href="#Y"><strong>Y</strong></a></div>
+  <div class="genindex-jumpbox"><a href="#A"><strong>A</strong></a> | <a href="#B"><strong>B</strong></a> | <a href="#C"><strong>C</strong></a> | <a href="#D"><strong>D</strong></a> | <a href="#E"><strong>E</strong></a> | <a href="#F"><strong>F</strong></a> | <a href="#G"><strong>G</strong></a> | <a href="#H"><strong>H</strong></a> | <a href="#I"><strong>I</strong></a> | <a href="#J"><strong>J</strong></a> | <a href="#K"><strong>K</strong></a> | <a href="#L"><strong>L</strong></a> | <a href="#M"><strong>M</strong></a> | <a href="#N"><strong>N</strong></a> | <a href="#O"><strong>O</strong></a> | <a href="#P"><strong>P</strong></a> | <a href="#Q"><strong>Q</strong></a> | <a href="#R"><strong>R</strong></a> | <a href="#S"><strong>S</strong></a> | <a href="#T"><strong>T</strong></a> | <a href="#U"><strong>U</strong></a> | <a href="#V"><strong>V</strong></a> | <a href="#W"><strong>W</strong></a> | <a href="#X"><strong>X</strong></a> | <a href="#Y"><strong>Y</strong></a></div>
 </section>
 <section id="A" class="genindex-section">
   <h2>A</h2>
@@ -326,8 +349,24 @@
     <td style="width: 33%; vertical-align: top;"><ul>
         <li><a href="api/m_n_kappa.loading.ABCSingleSpan.html#m_n_kappa.loading.ABCSingleSpan">ABCSingleSpan (class in m_n_kappa.loading)</a>
 </li>
-        <li><a href="api/m_n_kappa.curves_m_kappa.MKappaCurvePoints.html#m_n_kappa.curves_m_kappa.MKappaCurvePoints.add">add() (m_n_kappa.curves_m_kappa.MKappaCurvePoints method)</a>
+        <li><a href="api/m_n_kappa.curves_m_n_kappa.MNKappaCurvePoint.html#m_n_kappa.curves_m_n_kappa.MNKappaCurvePoint.absolute_axial_force">absolute_axial_force (m_n_kappa.curves_m_n_kappa.MNKappaCurvePoint property)</a>
 </li>
+        <li><a href="api/m_n_kappa.curves_m_n_kappa.MNKappaCurvePoint.html#m_n_kappa.curves_m_n_kappa.MNKappaCurvePoint.absolute_strain_difference">absolute_strain_difference (m_n_kappa.curves_m_n_kappa.MNKappaCurvePoint property)</a>
+</li>
+        <li><a href="api/m_n_kappa.curves_m_kappa.MKappaCurvePoints.html#m_n_kappa.curves_m_kappa.MKappaCurvePoints.add">add() (m_n_kappa.curves_m_kappa.MKappaCurvePoints method)</a>
+
+        <ul>
+          <li><a href="api/m_n_kappa.curves_m_n_kappa.MNKappaCurvePoints.html#m_n_kappa.curves_m_n_kappa.MNKappaCurvePoints.add">(m_n_kappa.curves_m_n_kappa.MNKappaCurvePoints method)</a>
+</li>
+          <li><a href="api/m_n_kappa.matrices.Identity.html#m_n_kappa.matrices.Identity.add">(m_n_kappa.matrices.Identity method)</a>
+</li>
+          <li><a href="api/m_n_kappa.matrices.Jacobian.html#m_n_kappa.matrices.Jacobian.add">(m_n_kappa.matrices.Jacobian method)</a>
+</li>
+          <li><a href="api/m_n_kappa.matrices.Matrix.html#m_n_kappa.matrices.Matrix.add">(m_n_kappa.matrices.Matrix method)</a>
+</li>
+          <li><a href="api/m_n_kappa.matrices.Vector.html#m_n_kappa.matrices.Vector.add">(m_n_kappa.matrices.Vector method)</a>
+</li>
+        </ul></li>
         <li><a href="api/m_n_kappa.Crosssection.html#m_n_kappa.Crosssection.add_section">add_section() (m_n_kappa.Crosssection method)</a>
 
         <ul>
@@ -342,14 +381,30 @@
           <li><a href="api/m_n_kappa.crosssection.CrossSectionBoundaries.html#m_n_kappa.crosssection.CrossSectionBoundaries.add_section">(m_n_kappa.crosssection.CrossSectionBoundaries method)</a>
 </li>
         </ul></li>
-        <li><a href="api/m_n_kappa.curvature_boundaries.MinimumCurvature.html#m_n_kappa.curvature_boundaries.MinimumCurvature.all">all (m_n_kappa.curvature_boundaries.MinimumCurvature property)</a>
+        <li><a href="api/m_n_kappa.boundaries.MinimumCurvature.html#m_n_kappa.boundaries.MinimumCurvature.all">all (m_n_kappa.boundaries.MinimumCurvature property)</a>
 </li>
+        <li><a href="api/m_n_kappa.HeadedStud.html#m_n_kappa.HeadedStud.alpha">alpha() (m_n_kappa.HeadedStud method)</a>
+</li>
+        <li><a href="api/m_n_kappa.matrices.Identity.html#m_n_kappa.matrices.Identity.append">append() (m_n_kappa.matrices.Identity method)</a>
+
+        <ul>
+          <li><a href="api/m_n_kappa.matrices.Jacobian.html#m_n_kappa.matrices.Jacobian.append">(m_n_kappa.matrices.Jacobian method)</a>
+</li>
+          <li><a href="api/m_n_kappa.matrices.Matrix.html#m_n_kappa.matrices.Matrix.append">(m_n_kappa.matrices.Matrix method)</a>
+</li>
+          <li><a href="api/m_n_kappa.matrices.Vector.html#m_n_kappa.matrices.Vector.append">(m_n_kappa.matrices.Vector method)</a>
+</li>
+        </ul></li>
         <li><a href="api/m_n_kappa.MKappaByConstantCurvature.html#m_n_kappa.MKappaByConstantCurvature.applied_axial_force">applied_axial_force (m_n_kappa.MKappaByConstantCurvature property)</a>
 
         <ul>
           <li><a href="api/m_n_kappa.MKappaByStrainPosition.html#m_n_kappa.MKappaByStrainPosition.applied_axial_force">(m_n_kappa.MKappaByStrainPosition property)</a>
 </li>
           <li><a href="api/m_n_kappa.points.MKappa.html#m_n_kappa.points.MKappa.applied_axial_force">(m_n_kappa.points.MKappa property)</a>
+</li>
+          <li><a href="api/m_n_kappa.points.MNByStrain.html#m_n_kappa.points.MNByStrain.applied_axial_force">(m_n_kappa.points.MNByStrain property)</a>
+</li>
+          <li><a href="api/m_n_kappa.points.Point.html#m_n_kappa.points.Point.applied_axial_force">(m_n_kappa.points.Point property)</a>
 </li>
         </ul></li>
         <li><a href="api/m_n_kappa.MKappaByConstantCurvature.html#m_n_kappa.MKappaByConstantCurvature.applied_curvature">applied_curvature (m_n_kappa.MKappaByConstantCurvature property)</a>
@@ -369,7 +424,17 @@
         <ul>
           <li><a href="api/m_n_kappa.MKappaByStrainPosition.html#m_n_kappa.MKappaByStrainPosition.axial_force">(m_n_kappa.MKappaByStrainPosition property)</a>
 </li>
+          <li><a href="api/m_n_kappa.MomentAxialForce.html#m_n_kappa.MomentAxialForce.axial_force">(m_n_kappa.MomentAxialForce property)</a>
+</li>
+          <li><a href="api/m_n_kappa.MomentAxialForceCurvature.html#m_n_kappa.MomentAxialForceCurvature.axial_force">(m_n_kappa.MomentAxialForceCurvature property)</a>
+</li>
+          <li><a href="api/m_n_kappa.points.AxialForcePoint.html#m_n_kappa.points.AxialForcePoint.axial_force">(m_n_kappa.points.AxialForcePoint property)</a>
+</li>
           <li><a href="api/m_n_kappa.points.MKappa.html#m_n_kappa.points.MKappa.axial_force">(m_n_kappa.points.MKappa property)</a>
+</li>
+          <li><a href="api/m_n_kappa.points.MNByStrain.html#m_n_kappa.points.MNByStrain.axial_force">(m_n_kappa.points.MNByStrain property)</a>
+</li>
+          <li><a href="api/m_n_kappa.points.Point.html#m_n_kappa.points.Point.axial_force">(m_n_kappa.points.Point property)</a>
 </li>
           <li><a href="api/m_n_kappa.section.ComputationSection.html#m_n_kappa.section.ComputationSection.axial_force">(m_n_kappa.section.ComputationSection property)</a>
 </li>
@@ -380,6 +445,18 @@
         </ul></li>
         <li><a href="api/m_n_kappa.crosssection.axial_force.html#m_n_kappa.crosssection.axial_force">axial_force() (in module m_n_kappa.crosssection)</a>
 </li>
+        <li><a href="api/m_n_kappa.MKappaByConstantCurvature.html#m_n_kappa.MKappaByConstantCurvature.axial_force_equilibrium">axial_force_equilibrium() (m_n_kappa.MKappaByConstantCurvature method)</a>
+
+        <ul>
+          <li><a href="api/m_n_kappa.MKappaByStrainPosition.html#m_n_kappa.MKappaByStrainPosition.axial_force_equilibrium">(m_n_kappa.MKappaByStrainPosition method)</a>
+</li>
+          <li><a href="api/m_n_kappa.points.MKappa.html#m_n_kappa.points.MKappa.axial_force_equilibrium">(m_n_kappa.points.MKappa method)</a>
+</li>
+          <li><a href="api/m_n_kappa.points.MNByStrain.html#m_n_kappa.points.MNByStrain.axial_force_equilibrium">(m_n_kappa.points.MNByStrain method)</a>
+</li>
+          <li><a href="api/m_n_kappa.points.Point.html#m_n_kappa.points.Point.axial_force_equilibrium">(m_n_kappa.points.Point method)</a>
+</li>
+        </ul></li>
         <li><a href="api/m_n_kappa.MKappaByConstantCurvature.html#m_n_kappa.MKappaByConstantCurvature.axial_force_tolerance">axial_force_tolerance (m_n_kappa.MKappaByConstantCurvature property)</a>
 
         <ul>
@@ -387,7 +464,19 @@
 </li>
           <li><a href="api/m_n_kappa.points.MKappa.html#m_n_kappa.points.MKappa.axial_force_tolerance">(m_n_kappa.points.MKappa property)</a>
 </li>
+          <li><a href="api/m_n_kappa.points.MNByStrain.html#m_n_kappa.points.MNByStrain.axial_force_tolerance">(m_n_kappa.points.MNByStrain property)</a>
+</li>
+          <li><a href="api/m_n_kappa.points.Point.html#m_n_kappa.points.Point.axial_force_tolerance">(m_n_kappa.points.Point property)</a>
+</li>
         </ul></li>
+        <li><a href="api/m_n_kappa.curves_m_n_kappa.MNCurvatureCurve.html#m_n_kappa.curves_m_n_kappa.MNCurvatureCurve.axial_forces">axial_forces (m_n_kappa.curves_m_n_kappa.MNCurvatureCurve property)</a>
+
+        <ul>
+          <li><a href="api/m_n_kappa.curves_m_n_kappa.MNKappaCurvePoints.html#m_n_kappa.curves_m_n_kappa.MNKappaCurvePoints.axial_forces">(m_n_kappa.curves_m_n_kappa.MNKappaCurvePoints property)</a>
+</li>
+        </ul></li>
+        <li><a href="api/m_n_kappa.points.AxialForcePoint.html#m_n_kappa.points.AxialForcePoint">AxialForcePoint (class in m_n_kappa.points)</a>
+</li>
     </ul></td>
   </tr></table>
 </section>
@@ -396,6 +485,12 @@
   <h2>B</h2>
   <table style="width: 100%" class="indextable genindextable"><tr>
     <td style="width: 33%; vertical-align: top;"><ul>
+        <li><a href="api/m_n_kappa.HeadedStud.html#m_n_kappa.HeadedStud.b_o">b_o (m_n_kappa.HeadedStud property)</a>
+</li>
+        <li><a href="api/m_n_kappa.matrices.LinearEquationsSystem.html#m_n_kappa.matrices.LinearEquationsSystem.back_substitution">back_substitution() (m_n_kappa.matrices.LinearEquationsSystem static method)</a>
+</li>
+        <li><a href="api/m_n_kappa.matrices.Jacobian.html#m_n_kappa.matrices.Jacobian.backward_difference_quotient">backward_difference_quotient() (m_n_kappa.matrices.Jacobian method)</a>
+</li>
         <li><a href="api/m_n_kappa.Beam.html#m_n_kappa.Beam">Beam (class in m_n_kappa)</a>
 </li>
         <li><a href="api/m_n_kappa.Beam.html#m_n_kappa.Beam.bending_widths">bending_widths() (m_n_kappa.Beam method)</a>
@@ -417,11 +512,15 @@
 </li>
           <li><a href="api/m_n_kappa.crosssection.CrossSectionBoundaries.html#m_n_kappa.crosssection.CrossSectionBoundaries.bottom_edge">(m_n_kappa.crosssection.CrossSectionBoundaries property)</a>
 </li>
+          <li><a href="api/m_n_kappa.Geometry.html#m_n_kappa.Geometry.bottom_edge">(m_n_kappa.Geometry property)</a>
+</li>
           <li><a href="api/m_n_kappa.Rectangle.html#m_n_kappa.Rectangle.bottom_edge">(m_n_kappa.Rectangle property)</a>
 </li>
           <li><a href="api/m_n_kappa.Trapezoid.html#m_n_kappa.Trapezoid.bottom_edge">(m_n_kappa.Trapezoid property)</a>
 </li>
         </ul></li>
+    </ul></td>
+    <td style="width: 33%; vertical-align: top;"><ul>
         <li><a href="api/m_n_kappa.Section.html#m_n_kappa.Section.bottom_edge_maximum_strain">bottom_edge_maximum_strain (m_n_kappa.Section property)</a>
 
         <ul>
@@ -432,8 +531,6 @@
           <li><a href="api/m_n_kappa.section.ComputationSectionStrain.html#m_n_kappa.section.ComputationSectionStrain.bottom_edge_maximum_strain">(m_n_kappa.section.ComputationSectionStrain property)</a>
 </li>
         </ul></li>
-    </ul></td>
-    <td style="width: 33%; vertical-align: top;"><ul>
         <li><a href="api/m_n_kappa.Section.html#m_n_kappa.Section.bottom_edge_minimum_strain">bottom_edge_minimum_strain (m_n_kappa.Section property)</a>
 
         <ul>
@@ -450,11 +547,11 @@
 </li>
         <li><a href="api/m_n_kappa.Trapezoid.html#m_n_kappa.Trapezoid.bottom_width">bottom_width (m_n_kappa.Trapezoid property)</a>
 </li>
-        <li><a href="api/m_n_kappa.curvature_boundaries.Boundaries.html#m_n_kappa.curvature_boundaries.Boundaries">Boundaries (class in m_n_kappa.curvature_boundaries)</a>
+        <li><a href="api/m_n_kappa.boundaries.Boundaries.html#m_n_kappa.boundaries.Boundaries">Boundaries (class in m_n_kappa.boundaries)</a>
 </li>
         <li><a href="api/m_n_kappa.MKappaCurve.html#m_n_kappa.MKappaCurve.boundaries">boundaries (m_n_kappa.MKappaCurve property)</a>
 </li>
-        <li><a href="api/m_n_kappa.curvature_boundaries.BoundaryValues.html#m_n_kappa.curvature_boundaries.BoundaryValues">BoundaryValues (class in m_n_kappa.curvature_boundaries)</a>
+        <li><a href="api/m_n_kappa.boundaries.BoundaryValues.html#m_n_kappa.boundaries.BoundaryValues">BoundaryValues (class in m_n_kappa.boundaries)</a>
 </li>
     </ul></td>
   </tr></table>
@@ -474,6 +571,8 @@
           <li><a href="api/m_n_kappa.material.ConcreteCompressionParabolaRectangle.html#m_n_kappa.material.ConcreteCompressionParabolaRectangle.c">(m_n_kappa.material.ConcreteCompressionParabolaRectangle property)</a>
 </li>
         </ul></li>
+        <li><a href="api/m_n_kappa.matrices.Jacobian.html#m_n_kappa.matrices.Jacobian.center_difference_quotient">center_difference_quotient() (m_n_kappa.matrices.Jacobian method)</a>
+</li>
         <li><a href="api/m_n_kappa.Rectangle.html#m_n_kappa.Rectangle.centroid">centroid (m_n_kappa.Rectangle property)</a>
 
         <ul>
@@ -488,6 +587,32 @@
 </li>
         <li><a href="api/m_n_kappa.Circle.html#m_n_kappa.Circle">Circle (class in m_n_kappa)</a>
 </li>
+        <li><a href="api/m_n_kappa.matrices.LinearEquationsSystem.html#m_n_kappa.matrices.LinearEquationsSystem.coefficients">coefficients (m_n_kappa.matrices.LinearEquationsSystem property)</a>
+</li>
+        <li><a href="api/m_n_kappa.matrices.Identity.html#m_n_kappa.matrices.Identity.column">column() (m_n_kappa.matrices.Identity method)</a>
+
+        <ul>
+          <li><a href="api/m_n_kappa.matrices.Jacobian.html#m_n_kappa.matrices.Jacobian.column">(m_n_kappa.matrices.Jacobian method)</a>
+</li>
+          <li><a href="api/m_n_kappa.matrices.Matrix.html#m_n_kappa.matrices.Matrix.column">(m_n_kappa.matrices.Matrix method)</a>
+</li>
+        </ul></li>
+        <li><a href="api/m_n_kappa.matrices.Identity.html#m_n_kappa.matrices.Identity.column_number">column_number (m_n_kappa.matrices.Identity property)</a>
+
+        <ul>
+          <li><a href="api/m_n_kappa.matrices.Jacobian.html#m_n_kappa.matrices.Jacobian.column_number">(m_n_kappa.matrices.Jacobian property)</a>
+</li>
+          <li><a href="api/m_n_kappa.matrices.Matrix.html#m_n_kappa.matrices.Matrix.column_number">(m_n_kappa.matrices.Matrix property)</a>
+</li>
+        </ul></li>
+        <li><a href="api/m_n_kappa.matrices.Identity.html#m_n_kappa.matrices.Identity.column_vector">column_vector() (m_n_kappa.matrices.Identity method)</a>
+
+        <ul>
+          <li><a href="api/m_n_kappa.matrices.Jacobian.html#m_n_kappa.matrices.Jacobian.column_vector">(m_n_kappa.matrices.Jacobian method)</a>
+</li>
+          <li><a href="api/m_n_kappa.matrices.Matrix.html#m_n_kappa.matrices.Matrix.column_vector">(m_n_kappa.matrices.Matrix method)</a>
+</li>
+        </ul></li>
         <li><a href="api/m_n_kappa.geometry.ComposedGeometry.html#m_n_kappa.geometry.ComposedGeometry">ComposedGeometry (class in m_n_kappa.geometry)</a>
 </li>
         <li><a href="api/m_n_kappa.Concrete.html#m_n_kappa.Concrete.compression">compression (m_n_kappa.Concrete property)</a>
@@ -517,6 +642,10 @@
 </li>
           <li><a href="api/m_n_kappa.points.MKappa.html#m_n_kappa.points.MKappa.computations">(m_n_kappa.points.MKappa property)</a>
 </li>
+          <li><a href="api/m_n_kappa.points.MNByStrain.html#m_n_kappa.points.MNByStrain.computations">(m_n_kappa.points.MNByStrain property)</a>
+</li>
+          <li><a href="api/m_n_kappa.points.Point.html#m_n_kappa.points.Point.computations">(m_n_kappa.points.Point property)</a>
+</li>
         </ul></li>
         <li><a href="api/m_n_kappa.section.ComputationSection.html#m_n_kappa.section.ComputationSection">ComputationSection (class in m_n_kappa.section)</a>
 </li>
@@ -524,10 +653,10 @@
 </li>
         <li><a href="api/m_n_kappa.section.ComputationSectionStrain.html#m_n_kappa.section.ComputationSectionStrain">ComputationSectionStrain (class in m_n_kappa.section)</a>
 </li>
-        <li><a href="api/m_n_kappa.curvature_boundaries.MaximumCurvature.html#m_n_kappa.curvature_boundaries.MaximumCurvature.compute">compute() (m_n_kappa.curvature_boundaries.MaximumCurvature method)</a>
+        <li><a href="api/m_n_kappa.boundaries.MaximumCurvature.html#m_n_kappa.boundaries.MaximumCurvature.compute">compute() (m_n_kappa.boundaries.MaximumCurvature method)</a>
 
         <ul>
-          <li><a href="api/m_n_kappa.curvature_boundaries.MinimumCurvature.html#m_n_kappa.curvature_boundaries.MinimumCurvature.compute">(m_n_kappa.curvature_boundaries.MinimumCurvature method)</a>
+          <li><a href="api/m_n_kappa.boundaries.MinimumCurvature.html#m_n_kappa.boundaries.MinimumCurvature.compute">(m_n_kappa.boundaries.MinimumCurvature method)</a>
 </li>
           <li><a href="api/m_n_kappa.MKappaByConstantCurvature.html#m_n_kappa.MKappaByConstantCurvature.compute">(m_n_kappa.MKappaByConstantCurvature method)</a>
 </li>
@@ -540,7 +669,7 @@
           <li><a href="api/m_n_kappa.solver.Newton.html#m_n_kappa.solver.Newton.compute">(m_n_kappa.solver.Newton method)</a>
 </li>
         </ul></li>
-        <li><a href="api/m_n_kappa.curvature_boundaries.compute_curvatures.html#m_n_kappa.curvature_boundaries.compute_curvatures">compute_curvatures() (in module m_n_kappa.curvature_boundaries)</a>
+        <li><a href="api/m_n_kappa.boundaries.compute_curvatures.html#m_n_kappa.boundaries.compute_curvatures">compute_curvatures() (in module m_n_kappa.boundaries)</a>
 </li>
         <li><a href="api/m_n_kappa.crosssection.compute_neutral_axis.html#m_n_kappa.crosssection.compute_neutral_axis">compute_neutral_axis() (in module m_n_kappa.crosssection)</a>
 </li>
@@ -571,6 +700,10 @@
 </li>
           <li><a href="api/m_n_kappa.points.MKappa.html#m_n_kappa.points.MKappa.computed_cross_section">(m_n_kappa.points.MKappa property)</a>
 </li>
+          <li><a href="api/m_n_kappa.points.MNByStrain.html#m_n_kappa.points.MNByStrain.computed_cross_section">(m_n_kappa.points.MNByStrain property)</a>
+</li>
+          <li><a href="api/m_n_kappa.points.Point.html#m_n_kappa.points.Point.computed_cross_section">(m_n_kappa.points.Point property)</a>
+</li>
         </ul></li>
     </ul></td>
     <td style="width: 33%; vertical-align: top;"><ul>
@@ -592,6 +725,14 @@
           <li><a href="api/m_n_kappa.crosssection.ComputationCrosssectionStrain.html#m_n_kappa.crosssection.ComputationCrosssectionStrain.computed_slab_sections">(m_n_kappa.crosssection.ComputationCrosssectionStrain property)</a>
 </li>
           <li><a href="api/m_n_kappa.crosssection.ComputationCrosssectionStrainAdd.html#m_n_kappa.crosssection.ComputationCrosssectionStrainAdd.computed_slab_sections">(m_n_kappa.crosssection.ComputationCrosssectionStrainAdd property)</a>
+</li>
+        </ul></li>
+        <li><a href="api/m_n_kappa.MomentAxialForce.html#m_n_kappa.MomentAxialForce.computed_sub_cross_sections">computed_sub_cross_sections (m_n_kappa.MomentAxialForce property)</a>
+
+        <ul>
+          <li><a href="api/m_n_kappa.MomentAxialForceCurvature.html#m_n_kappa.MomentAxialForceCurvature.computed_sub_cross_sections">(m_n_kappa.MomentAxialForceCurvature property)</a>
+</li>
+          <li><a href="api/m_n_kappa.points.AxialForcePoint.html#m_n_kappa.points.AxialForcePoint.computed_sub_cross_sections">(m_n_kappa.points.AxialForcePoint property)</a>
 </li>
         </ul></li>
         <li><a href="api/m_n_kappa.Concrete.html#m_n_kappa.Concrete">Concrete (class in m_n_kappa)</a>
@@ -622,9 +763,15 @@
 </li>
         <li><a href="api/m_n_kappa.material.ConcreteTension.html#m_n_kappa.material.ConcreteTension.consider_opening_behaviour">consider_opening_behaviour (m_n_kappa.material.ConcreteTension property)</a>
 </li>
-        <li><a href="api/m_n_kappa.MKappaByConstantCurvature.html#m_n_kappa.MKappaByConstantCurvature.cross_section">cross_section (m_n_kappa.MKappaByConstantCurvature property)</a>
+        <li><a href="api/m_n_kappa.Beam.html#m_n_kappa.Beam.consider_widths">consider_widths (m_n_kappa.Beam property)</a>
+</li>
+        <li><a href="api/m_n_kappa.matrices.LinearEquationsSystem.html#m_n_kappa.matrices.LinearEquationsSystem.constants">constants (m_n_kappa.matrices.LinearEquationsSystem property)</a>
+</li>
+        <li><a href="api/m_n_kappa.Beam.html#m_n_kappa.Beam.cross_section">cross_section (m_n_kappa.Beam property)</a>
 
         <ul>
+          <li><a href="api/m_n_kappa.MKappaByConstantCurvature.html#m_n_kappa.MKappaByConstantCurvature.cross_section">(m_n_kappa.MKappaByConstantCurvature property)</a>
+</li>
           <li><a href="api/m_n_kappa.MKappaByStrainPosition.html#m_n_kappa.MKappaByStrainPosition.cross_section">(m_n_kappa.MKappaByStrainPosition property)</a>
 </li>
           <li><a href="api/m_n_kappa.MKappaCurve.html#m_n_kappa.MKappaCurve.cross_section">(m_n_kappa.MKappaCurve property)</a>
@@ -633,7 +780,13 @@
 </li>
           <li><a href="api/m_n_kappa.points.MKappa.html#m_n_kappa.points.MKappa.cross_section">(m_n_kappa.points.MKappa property)</a>
 </li>
+          <li><a href="api/m_n_kappa.points.MNByStrain.html#m_n_kappa.points.MNByStrain.cross_section">(m_n_kappa.points.MNByStrain property)</a>
+</li>
+          <li><a href="api/m_n_kappa.points.Point.html#m_n_kappa.points.Point.cross_section">(m_n_kappa.points.Point property)</a>
+</li>
         </ul></li>
+        <li><a href="api/m_n_kappa.curves_m_n_kappa.MNKappaCurvePoints.html#m_n_kappa.curves_m_n_kappa.MNKappaCurvePoints.cross_section_axial_forces">cross_section_axial_forces() (m_n_kappa.curves_m_n_kappa.MNKappaCurvePoints method)</a>
+</li>
         <li><a href="api/m_n_kappa.Crosssection.html#m_n_kappa.Crosssection">Crosssection (class in m_n_kappa)</a>
 </li>
         <li><a href="api/m_n_kappa.crosssection.CrossSectionBoundaries.html#m_n_kappa.crosssection.CrossSectionBoundaries">CrossSectionBoundaries (class in m_n_kappa.crosssection)</a>
@@ -657,6 +810,12 @@
 </li>
           <li><a href="api/m_n_kappa.MKappaByStrainPosition.html#m_n_kappa.MKappaByStrainPosition.curvature">(m_n_kappa.MKappaByStrainPosition property)</a>
 </li>
+          <li><a href="api/m_n_kappa.MomentAxialForce.html#m_n_kappa.MomentAxialForce.curvature">(m_n_kappa.MomentAxialForce property)</a>
+</li>
+          <li><a href="api/m_n_kappa.MomentAxialForceCurvature.html#m_n_kappa.MomentAxialForceCurvature.curvature">(m_n_kappa.MomentAxialForceCurvature property)</a>
+</li>
+          <li><a href="api/m_n_kappa.points.AxialForcePoint.html#m_n_kappa.points.AxialForcePoint.curvature">(m_n_kappa.points.AxialForcePoint property)</a>
+</li>
           <li><a href="api/m_n_kappa.points.MKappa.html#m_n_kappa.points.MKappa.curvature">(m_n_kappa.points.MKappa property)</a>
 </li>
           <li><a href="api/m_n_kappa.section.ComputationSectionCurvature.html#m_n_kappa.section.ComputationSectionCurvature.curvature">(m_n_kappa.section.ComputationSectionCurvature property)</a>
@@ -667,14 +826,26 @@
         <ul>
           <li><a href="api/m_n_kappa.curves_m_kappa.MKappaCurvePoints.html#m_n_kappa.curves_m_kappa.MKappaCurvePoints.curvature">(m_n_kappa.curves_m_kappa.MKappaCurvePoints method)</a>
 </li>
+          <li><a href="api/m_n_kappa.curves_m_n_kappa.MNKappaCurvePoints.html#m_n_kappa.curves_m_n_kappa.MNKappaCurvePoints.curvature">(m_n_kappa.curves_m_n_kappa.MNKappaCurvePoints method)</a>
+</li>
         </ul></li>
         <li><a href="api/m_n_kappa.Node.html#m_n_kappa.Node.curvature_by">curvature_by() (m_n_kappa.Node method)</a>
 </li>
         <li><a href="api/m_n_kappa.general.curvature_by_points.html#m_n_kappa.general.curvature_by_points">curvature_by_points() (in module m_n_kappa.general)</a>
 </li>
         <li><a href="api/m_n_kappa.curves_m_kappa.MKappaCurvePoint.html#m_n_kappa.curves_m_kappa.MKappaCurvePoint.curvature_moment">curvature_moment() (m_n_kappa.curves_m_kappa.MKappaCurvePoint method)</a>
+
+        <ul>
+          <li><a href="api/m_n_kappa.curves_m_n_kappa.MNKappaCurvePoint.html#m_n_kappa.curves_m_n_kappa.MNKappaCurvePoint.curvature_moment">(m_n_kappa.curves_m_n_kappa.MNKappaCurvePoint method)</a>
 </li>
+        </ul></li>
         <li><a href="api/m_n_kappa.curves_m_kappa.MKappaCurvePoints.html#m_n_kappa.curves_m_kappa.MKappaCurvePoints.curvatures">curvatures (m_n_kappa.curves_m_kappa.MKappaCurvePoints property)</a>
+
+        <ul>
+          <li><a href="api/m_n_kappa.curves_m_n_kappa.MNKappaCurvePoints.html#m_n_kappa.curves_m_n_kappa.MNKappaCurvePoints.curvatures">(m_n_kappa.curves_m_n_kappa.MNKappaCurvePoints property)</a>
+</li>
+        </ul></li>
+        <li><a href="api/m_n_kappa.Node.html#m_n_kappa.Node.curve_points">curve_points (m_n_kappa.Node property)</a>
 </li>
     </ul></td>
   </tr></table>
@@ -684,6 +855,10 @@
   <h2>D</h2>
   <table style="width: 100%" class="indextable genindextable"><tr>
     <td style="width: 33%; vertical-align: top;"><ul>
+        <li><a href="api/m_n_kappa.HeadedStud.html#m_n_kappa.HeadedStud.d">d (m_n_kappa.HeadedStud property)</a>
+</li>
+        <li><a href="api/m_n_kappa.fitting.LevenbergMarquardt.html#m_n_kappa.fitting.LevenbergMarquardt.damping_factor">damping_factor (m_n_kappa.fitting.LevenbergMarquardt property)</a>
+</li>
         <li><a href="api/m_n_kappa.solver.Bisection.html#m_n_kappa.solver.Bisection.data">data (m_n_kappa.solver.Bisection property)</a>
 
         <ul>
@@ -692,12 +867,40 @@
           <li><a href="api/m_n_kappa.solver.Solver.html#m_n_kappa.solver.Solver.data">(m_n_kappa.solver.Solver property)</a>
 </li>
         </ul></li>
+        <li><a href="api/m_n_kappa.Crosssection.html#m_n_kappa.Crosssection.decisive_maximum_negative_strain_position">decisive_maximum_negative_strain_position() (m_n_kappa.Crosssection method)</a>
+
+        <ul>
+          <li><a href="api/m_n_kappa.crosssection.ComputationCrosssection.html#m_n_kappa.crosssection.ComputationCrosssection.decisive_maximum_negative_strain_position">(m_n_kappa.crosssection.ComputationCrosssection method)</a>
+</li>
+          <li><a href="api/m_n_kappa.crosssection.ComputationCrosssectionCurvature.html#m_n_kappa.crosssection.ComputationCrosssectionCurvature.decisive_maximum_negative_strain_position">(m_n_kappa.crosssection.ComputationCrosssectionCurvature method)</a>
+</li>
+          <li><a href="api/m_n_kappa.crosssection.ComputationCrosssectionStrain.html#m_n_kappa.crosssection.ComputationCrosssectionStrain.decisive_maximum_negative_strain_position">(m_n_kappa.crosssection.ComputationCrosssectionStrain method)</a>
+</li>
+          <li><a href="api/m_n_kappa.crosssection.ComputationCrosssectionStrainAdd.html#m_n_kappa.crosssection.ComputationCrosssectionStrainAdd.decisive_maximum_negative_strain_position">(m_n_kappa.crosssection.ComputationCrosssectionStrainAdd method)</a>
+</li>
+          <li><a href="api/m_n_kappa.crosssection.CrossSectionBoundaries.html#m_n_kappa.crosssection.CrossSectionBoundaries.decisive_maximum_negative_strain_position">(m_n_kappa.crosssection.CrossSectionBoundaries method)</a>
+</li>
+        </ul></li>
+        <li><a href="api/m_n_kappa.Crosssection.html#m_n_kappa.Crosssection.decisive_maximum_positive_strain_position">decisive_maximum_positive_strain_position() (m_n_kappa.Crosssection method)</a>
+
+        <ul>
+          <li><a href="api/m_n_kappa.crosssection.ComputationCrosssection.html#m_n_kappa.crosssection.ComputationCrosssection.decisive_maximum_positive_strain_position">(m_n_kappa.crosssection.ComputationCrosssection method)</a>
+</li>
+          <li><a href="api/m_n_kappa.crosssection.ComputationCrosssectionCurvature.html#m_n_kappa.crosssection.ComputationCrosssectionCurvature.decisive_maximum_positive_strain_position">(m_n_kappa.crosssection.ComputationCrosssectionCurvature method)</a>
+</li>
+          <li><a href="api/m_n_kappa.crosssection.ComputationCrosssectionStrain.html#m_n_kappa.crosssection.ComputationCrosssectionStrain.decisive_maximum_positive_strain_position">(m_n_kappa.crosssection.ComputationCrosssectionStrain method)</a>
+</li>
+          <li><a href="api/m_n_kappa.crosssection.ComputationCrosssectionStrainAdd.html#m_n_kappa.crosssection.ComputationCrosssectionStrainAdd.decisive_maximum_positive_strain_position">(m_n_kappa.crosssection.ComputationCrosssectionStrainAdd method)</a>
+</li>
+          <li><a href="api/m_n_kappa.crosssection.CrossSectionBoundaries.html#m_n_kappa.crosssection.CrossSectionBoundaries.decisive_maximum_positive_strain_position">(m_n_kappa.crosssection.CrossSectionBoundaries method)</a>
+</li>
+        </ul></li>
+    </ul></td>
+    <td style="width: 33%; vertical-align: top;"><ul>
         <li><a href="api/m_n_kappa.Beam.html#m_n_kappa.Beam.deformation">deformation() (m_n_kappa.Beam method)</a>
 </li>
         <li><a href="api/m_n_kappa.Beam.html#m_n_kappa.Beam.deformation_over_beam_length">deformation_over_beam_length() (m_n_kappa.Beam method)</a>
 </li>
-    </ul></td>
-    <td style="width: 33%; vertical-align: top;"><ul>
         <li><a href="api/m_n_kappa.Beam.html#m_n_kappa.Beam.deformations">deformations() (m_n_kappa.Beam method)</a>
 </li>
         <li><a href="api/m_n_kappa.Beam.html#m_n_kappa.Beam.deformations_at_maximum_deformation_position">deformations_at_maximum_deformation_position() (m_n_kappa.Beam method)</a>
@@ -706,7 +909,17 @@
 </li>
         <li><a href="api/m_n_kappa.crosssection.determine_curvatures.html#m_n_kappa.crosssection.determine_curvatures">determine_curvatures() (in module m_n_kappa.crosssection)</a>
 </li>
+        <li><a href="api/m_n_kappa.matrices.Identity.html#m_n_kappa.matrices.Identity.diagonal">diagonal() (m_n_kappa.matrices.Identity method)</a>
+
+        <ul>
+          <li><a href="api/m_n_kappa.matrices.Jacobian.html#m_n_kappa.matrices.Jacobian.diagonal">(m_n_kappa.matrices.Jacobian method)</a>
+</li>
+          <li><a href="api/m_n_kappa.matrices.Matrix.html#m_n_kappa.matrices.Matrix.diagonal">(m_n_kappa.matrices.Matrix method)</a>
+</li>
+        </ul></li>
         <li><a href="api/m_n_kappa.Circle.html#m_n_kappa.Circle.diameter">diameter (m_n_kappa.Circle property)</a>
+</li>
+        <li><a href="api/m_n_kappa.matrices.Jacobian.html#m_n_kappa.matrices.Jacobian.differentiation_type">differentiation_type (m_n_kappa.matrices.Jacobian property)</a>
 </li>
     </ul></td>
   </tr></table>
@@ -776,6 +989,16 @@
 </li>
         <li><a href="api/m_n_kappa.Beam.html#m_n_kappa.Beam.element_standard_length">element_standard_length (m_n_kappa.Beam property)</a>
 </li>
+        <li><a href="api/m_n_kappa.matrices.Vector.html#m_n_kappa.matrices.Vector.entries">entries (m_n_kappa.matrices.Vector property)</a>
+</li>
+        <li><a href="api/m_n_kappa.matrices.Identity.html#m_n_kappa.matrices.Identity.entry">entry() (m_n_kappa.matrices.Identity method)</a>
+
+        <ul>
+          <li><a href="api/m_n_kappa.matrices.Jacobian.html#m_n_kappa.matrices.Jacobian.entry">(m_n_kappa.matrices.Jacobian method)</a>
+</li>
+          <li><a href="api/m_n_kappa.matrices.Matrix.html#m_n_kappa.matrices.Matrix.entry">(m_n_kappa.matrices.Matrix method)</a>
+</li>
+        </ul></li>
         <li><a href="api/m_n_kappa.Concrete.html#m_n_kappa.Concrete.epsilon_y">epsilon_y (m_n_kappa.Concrete property)</a>
 
         <ul>
@@ -811,6 +1034,8 @@
         <li><a href="api/m_n_kappa.Concrete.html#m_n_kappa.Concrete.f_cm">f_cm (m_n_kappa.Concrete property)</a>
 
         <ul>
+          <li><a href="api/m_n_kappa.HeadedStud.html#m_n_kappa.HeadedStud.f_cm">(m_n_kappa.HeadedStud property)</a>
+</li>
           <li><a href="api/m_n_kappa.material.ConcreteCompression.html#m_n_kappa.material.ConcreteCompression.f_cm">(m_n_kappa.material.ConcreteCompression property)</a>
 </li>
           <li><a href="api/m_n_kappa.material.ConcreteCompressionBiLinear.html#m_n_kappa.material.ConcreteCompressionBiLinear.f_cm">(m_n_kappa.material.ConcreteCompressionBiLinear property)</a>
@@ -822,13 +1047,31 @@
           <li><a href="api/m_n_kappa.material.ConcreteTension.html#m_n_kappa.material.ConcreteTension.f_cm">(m_n_kappa.material.ConcreteTension property)</a>
 </li>
         </ul></li>
-    </ul></td>
-    <td style="width: 33%; vertical-align: top;"><ul>
         <li><a href="api/m_n_kappa.material.ConcreteTension.html#m_n_kappa.material.ConcreteTension.f_ctm">f_ctm (m_n_kappa.material.ConcreteTension property)</a>
 </li>
+        <li><a href="api/m_n_kappa.fitting.GaussNewton.html#m_n_kappa.fitting.GaussNewton.f_i">f_i (m_n_kappa.fitting.GaussNewton property)</a>
+
+        <ul>
+          <li><a href="api/m_n_kappa.fitting.LevenbergMarquardt.html#m_n_kappa.fitting.LevenbergMarquardt.f_i">(m_n_kappa.fitting.LevenbergMarquardt property)</a>
+</li>
+          <li><a href="api/m_n_kappa.matrices.Jacobian.html#m_n_kappa.matrices.Jacobian.f_i">(m_n_kappa.matrices.Jacobian property)</a>
+</li>
+        </ul></li>
+    </ul></td>
+    <td style="width: 33%; vertical-align: top;"><ul>
         <li><a href="api/m_n_kappa.Reinforcement.html#m_n_kappa.Reinforcement.f_s">f_s (m_n_kappa.Reinforcement property)</a>
 </li>
         <li><a href="api/m_n_kappa.Reinforcement.html#m_n_kappa.Reinforcement.f_su">f_su (m_n_kappa.Reinforcement property)</a>
+</li>
+        <li><a href="api/m_n_kappa.HeadedStud.html#m_n_kappa.HeadedStud.f_u">f_u (m_n_kappa.HeadedStud property)</a>
+</li>
+        <li><a href="api/m_n_kappa.fitting.GaussNewton.html#m_n_kappa.fitting.GaussNewton.f_x">f_x (m_n_kappa.fitting.GaussNewton property)</a>
+
+        <ul>
+          <li><a href="api/m_n_kappa.fitting.LevenbergMarquardt.html#m_n_kappa.fitting.LevenbergMarquardt.f_x">(m_n_kappa.fitting.LevenbergMarquardt property)</a>
+</li>
+        </ul></li>
+        <li><a href="api/m_n_kappa.matrices.Jacobian.html#m_n_kappa.matrices.Jacobian.f_xi">f_xi (m_n_kappa.matrices.Jacobian property)</a>
 </li>
         <li><a href="api/m_n_kappa.Reinforcement.html#m_n_kappa.Reinforcement.f_y">f_y (m_n_kappa.Reinforcement property)</a>
 
@@ -842,6 +1085,8 @@
           <li><a href="api/m_n_kappa.Steel.html#m_n_kappa.Steel.failure_strain">(m_n_kappa.Steel property)</a>
 </li>
         </ul></li>
+        <li><a href="api/m_n_kappa.matrices.Jacobian.html#m_n_kappa.matrices.Jacobian.forward_difference_quotient">forward_difference_quotient() (m_n_kappa.matrices.Jacobian method)</a>
+</li>
         <li><a href="api/m_n_kappa.material.ConcreteTension.html#m_n_kappa.material.ConcreteTension.fracture_energy">fracture_energy (m_n_kappa.material.ConcreteTension property)</a>
 </li>
         <li><a href="api/m_n_kappa.solver.Newton.html#m_n_kappa.solver.Newton.function">function (m_n_kappa.solver.Newton property)</a>
@@ -854,16 +1099,10 @@
   <h2>G</h2>
   <table style="width: 100%" class="indextable genindextable"><tr>
     <td style="width: 33%; vertical-align: top;"><ul>
+        <li><a href="api/m_n_kappa.fitting.GaussNewton.html#m_n_kappa.fitting.GaussNewton">GaussNewton (class in m_n_kappa.fitting)</a>
+</li>
         <li><a href="api/m_n_kappa.geometry.ComposedGeometry.html#m_n_kappa.geometry.ComposedGeometry.geometries">geometries (m_n_kappa.geometry.ComposedGeometry property)</a>
-
-        <ul>
-          <li><a href="api/m_n_kappa.IProfile.html#m_n_kappa.IProfile.geometries">(m_n_kappa.IProfile attribute)</a>
 </li>
-          <li><a href="api/m_n_kappa.RebarLayer.html#m_n_kappa.RebarLayer.geometries">(m_n_kappa.RebarLayer attribute)</a>
-</li>
-          <li><a href="api/m_n_kappa.UPEProfile.html#m_n_kappa.UPEProfile.geometries">(m_n_kappa.UPEProfile attribute)</a>
-</li>
-        </ul></li>
         <li><a href="api/m_n_kappa.Geometry.html#m_n_kappa.Geometry">Geometry (class in m_n_kappa)</a>
 </li>
         <li><a href="api/m_n_kappa.Section.html#m_n_kappa.Section.geometry">geometry (m_n_kappa.Section property)</a>
@@ -892,7 +1131,7 @@
           <li><a href="api/m_n_kappa.crosssection.CrossSectionBoundaries.html#m_n_kappa.crosssection.CrossSectionBoundaries.get_boundary_conditions">(m_n_kappa.crosssection.CrossSectionBoundaries method)</a>
 </li>
         </ul></li>
-        <li><a href="api/m_n_kappa.curvature_boundaries.get_higher_positions.html#m_n_kappa.curvature_boundaries.get_higher_positions">get_higher_positions() (in module m_n_kappa.curvature_boundaries)</a>
+        <li><a href="api/m_n_kappa.boundaries.get_higher_positions.html#m_n_kappa.boundaries.get_higher_positions">get_higher_positions() (in module m_n_kappa.boundaries)</a>
 </li>
         <li><a href="api/m_n_kappa.Rectangle.html#m_n_kappa.Rectangle.get_horizontal_edges">get_horizontal_edges() (m_n_kappa.Rectangle method)</a>
 </li>
@@ -906,9 +1145,7 @@
           <li><a href="api/m_n_kappa.Steel.html#m_n_kappa.Steel.get_intermediate_strains">(m_n_kappa.Steel method)</a>
 </li>
         </ul></li>
-    </ul></td>
-    <td style="width: 33%; vertical-align: top;"><ul>
-        <li><a href="api/m_n_kappa.curvature_boundaries.get_lower_positions.html#m_n_kappa.curvature_boundaries.get_lower_positions">get_lower_positions() (in module m_n_kappa.curvature_boundaries)</a>
+        <li><a href="api/m_n_kappa.boundaries.get_lower_positions.html#m_n_kappa.boundaries.get_lower_positions">get_lower_positions() (in module m_n_kappa.boundaries)</a>
 </li>
         <li><a href="api/m_n_kappa.crosssection.ComputationCrosssectionCurvature.html#m_n_kappa.crosssection.ComputationCrosssectionCurvature.get_material_points_inside_curvature">get_material_points_inside_curvature() (m_n_kappa.crosssection.ComputationCrosssectionCurvature method)</a>
 </li>
@@ -920,6 +1157,22 @@
           <li><a href="api/m_n_kappa.Reinforcement.html#m_n_kappa.Reinforcement.get_material_stress">(m_n_kappa.Reinforcement method)</a>
 </li>
           <li><a href="api/m_n_kappa.Steel.html#m_n_kappa.Steel.get_material_stress">(m_n_kappa.Steel method)</a>
+</li>
+        </ul></li>
+    </ul></td>
+    <td style="width: 33%; vertical-align: top;"><ul>
+        <li><a href="api/m_n_kappa.Crosssection.html#m_n_kappa.Crosssection.get_sub_cross_sections">get_sub_cross_sections() (m_n_kappa.Crosssection method)</a>
+
+        <ul>
+          <li><a href="api/m_n_kappa.crosssection.ComputationCrosssection.html#m_n_kappa.crosssection.ComputationCrosssection.get_sub_cross_sections">(m_n_kappa.crosssection.ComputationCrosssection method)</a>
+</li>
+          <li><a href="api/m_n_kappa.crosssection.ComputationCrosssectionCurvature.html#m_n_kappa.crosssection.ComputationCrosssectionCurvature.get_sub_cross_sections">(m_n_kappa.crosssection.ComputationCrosssectionCurvature method)</a>
+</li>
+          <li><a href="api/m_n_kappa.crosssection.ComputationCrosssectionStrain.html#m_n_kappa.crosssection.ComputationCrosssectionStrain.get_sub_cross_sections">(m_n_kappa.crosssection.ComputationCrosssectionStrain method)</a>
+</li>
+          <li><a href="api/m_n_kappa.crosssection.ComputationCrosssectionStrainAdd.html#m_n_kappa.crosssection.ComputationCrosssectionStrainAdd.get_sub_cross_sections">(m_n_kappa.crosssection.ComputationCrosssectionStrainAdd method)</a>
+</li>
+          <li><a href="api/m_n_kappa.crosssection.CrossSectionBoundaries.html#m_n_kappa.crosssection.CrossSectionBoundaries.get_sub_cross_sections">(m_n_kappa.crosssection.CrossSectionBoundaries method)</a>
 </li>
         </ul></li>
         <li><a href="api/m_n_kappa.Crosssection.html#m_n_kappa.Crosssection.girder_sections">girder_sections (m_n_kappa.Crosssection property)</a>
@@ -964,6 +1217,12 @@
   <h2>H</h2>
   <table style="width: 100%" class="indextable genindextable"><tr>
     <td style="width: 33%; vertical-align: top;"><ul>
+        <li><a href="api/m_n_kappa.matrices.Jacobian.html#m_n_kappa.matrices.Jacobian.h">h (m_n_kappa.matrices.Jacobian property)</a>
+</li>
+        <li><a href="api/m_n_kappa.HeadedStud.html#m_n_kappa.HeadedStud.h_p">h_p (m_n_kappa.HeadedStud property)</a>
+</li>
+        <li><a href="api/m_n_kappa.HeadedStud.html#m_n_kappa.HeadedStud.h_sc">h_sc (m_n_kappa.HeadedStud property)</a>
+</li>
         <li><a href="api/m_n_kappa.Crosssection.html#m_n_kappa.Crosssection.half_point">half_point (m_n_kappa.Crosssection property)</a>
 
         <ul>
@@ -978,6 +1237,10 @@
           <li><a href="api/m_n_kappa.crosssection.CrossSectionBoundaries.html#m_n_kappa.crosssection.CrossSectionBoundaries.half_point">(m_n_kappa.crosssection.CrossSectionBoundaries property)</a>
 </li>
         </ul></li>
+    </ul></td>
+    <td style="width: 33%; vertical-align: top;"><ul>
+        <li><a href="api/m_n_kappa.HeadedStud.html#m_n_kappa.HeadedStud">HeadedStud (class in m_n_kappa)</a>
+</li>
         <li><a href="api/m_n_kappa.Crosssection.html#m_n_kappa.Crosssection.height">height (m_n_kappa.Crosssection property)</a>
 
         <ul>
@@ -1004,20 +1267,24 @@
   <h2>I</h2>
   <table style="width: 100%" class="indextable genindextable"><tr>
     <td style="width: 33%; vertical-align: top;"><ul>
+        <li><a href="api/m_n_kappa.matrices.Identity.html#m_n_kappa.matrices.Identity">Identity (class in m_n_kappa.matrices)</a>
+</li>
         <li><a href="api/m_n_kappa.MKappaCurve.html#m_n_kappa.MKappaCurve.include_negative_curvature">include_negative_curvature (m_n_kappa.MKappaCurve property)</a>
-</li>
-        <li><a href="api/m_n_kappa.MKappaCurve.html#m_n_kappa.MKappaCurve.include_positive_curvature">include_positive_curvature (m_n_kappa.MKappaCurve property)</a>
-</li>
-        <li><a href="api/m_n_kappa.Node.html#m_n_kappa.Node.incremental_deformation">incremental_deformation() (m_n_kappa.Node method)</a>
-</li>
-        <li><a href="api/m_n_kappa.MKappaByConstantCurvature.html#m_n_kappa.MKappaByConstantCurvature.initialize">initialize() (m_n_kappa.MKappaByConstantCurvature method)</a>
 
         <ul>
-          <li><a href="api/m_n_kappa.MKappaByStrainPosition.html#m_n_kappa.MKappaByStrainPosition.initialize">(m_n_kappa.MKappaByStrainPosition method)</a>
-</li>
-          <li><a href="api/m_n_kappa.points.MKappa.html#m_n_kappa.points.MKappa.initialize">(m_n_kappa.points.MKappa method)</a>
+          <li><a href="api/m_n_kappa.MNKappaCurve.html#m_n_kappa.MNKappaCurve.include_negative_curvature">(m_n_kappa.MNKappaCurve property)</a>
 </li>
         </ul></li>
+        <li><a href="api/m_n_kappa.MKappaCurve.html#m_n_kappa.MKappaCurve.include_positive_curvature">include_positive_curvature (m_n_kappa.MKappaCurve property)</a>
+
+        <ul>
+          <li><a href="api/m_n_kappa.MNKappaCurve.html#m_n_kappa.MNKappaCurve.include_positive_curvature">(m_n_kappa.MNKappaCurve property)</a>
+</li>
+        </ul></li>
+        <li><a href="api/m_n_kappa.Node.html#m_n_kappa.Node.incremental_deformation">incremental_deformation() (m_n_kappa.Node method)</a>
+</li>
+        <li><a href="api/m_n_kappa.fitting.LevenbergMarquardt.html#m_n_kappa.fitting.LevenbergMarquardt.info">info() (m_n_kappa.fitting.LevenbergMarquardt method)</a>
+</li>
         <li><a href="api/m_n_kappa.MKappaByConstantCurvature.html#m_n_kappa.MKappaByConstantCurvature.initialize_boundary_curvatures">initialize_boundary_curvatures() (m_n_kappa.MKappaByConstantCurvature method)</a>
 </li>
     </ul></td>
@@ -1026,22 +1293,32 @@
 </li>
         <li><a href="api/m_n_kappa.IProfile.html#m_n_kappa.IProfile">IProfile (class in m_n_kappa)</a>
 </li>
-        <li><a href="api/m_n_kappa.MKappaByConstantCurvature.html#m_n_kappa.MKappaByConstantCurvature.iterate">iterate() (m_n_kappa.MKappaByConstantCurvature method)</a>
+        <li><a href="api/m_n_kappa.fitting.GaussNewton.html#m_n_kappa.fitting.GaussNewton.iteration">iteration (m_n_kappa.fitting.GaussNewton property)</a>
 
         <ul>
-          <li><a href="api/m_n_kappa.MKappaByStrainPosition.html#m_n_kappa.MKappaByStrainPosition.iterate">(m_n_kappa.MKappaByStrainPosition method)</a>
+          <li><a href="api/m_n_kappa.fitting.LevenbergMarquardt.html#m_n_kappa.fitting.LevenbergMarquardt.iteration">(m_n_kappa.fitting.LevenbergMarquardt property)</a>
 </li>
-          <li><a href="api/m_n_kappa.points.MKappa.html#m_n_kappa.points.MKappa.iterate">(m_n_kappa.points.MKappa method)</a>
+          <li><a href="api/m_n_kappa.MKappaByConstantCurvature.html#m_n_kappa.MKappaByConstantCurvature.iteration">(m_n_kappa.MKappaByConstantCurvature property)</a>
 </li>
-        </ul></li>
-        <li><a href="api/m_n_kappa.MKappaByConstantCurvature.html#m_n_kappa.MKappaByConstantCurvature.iteration">iteration (m_n_kappa.MKappaByConstantCurvature property)</a>
-
-        <ul>
           <li><a href="api/m_n_kappa.MKappaByStrainPosition.html#m_n_kappa.MKappaByStrainPosition.iteration">(m_n_kappa.MKappaByStrainPosition property)</a>
 </li>
           <li><a href="api/m_n_kappa.points.MKappa.html#m_n_kappa.points.MKappa.iteration">(m_n_kappa.points.MKappa property)</a>
 </li>
+          <li><a href="api/m_n_kappa.points.MNByStrain.html#m_n_kappa.points.MNByStrain.iteration">(m_n_kappa.points.MNByStrain property)</a>
+</li>
+          <li><a href="api/m_n_kappa.points.Point.html#m_n_kappa.points.Point.iteration">(m_n_kappa.points.Point property)</a>
+</li>
         </ul></li>
+    </ul></td>
+  </tr></table>
+</section>
+
+<section id="J" class="genindex-section">
+  <h2>J</h2>
+  <table style="width: 100%" class="indextable genindextable"><tr>
+    <td style="width: 33%; vertical-align: top;"><ul>
+        <li><a href="api/m_n_kappa.matrices.Jacobian.html#m_n_kappa.matrices.Jacobian">Jacobian (class in m_n_kappa.matrices)</a>
+</li>
     </ul></td>
   </tr></table>
 </section>
@@ -1053,6 +1330,12 @@
         <li><a href="api/m_n_kappa.material.ConcreteCompressionNonlinear.html#m_n_kappa.material.ConcreteCompressionNonlinear.k">k() (m_n_kappa.material.ConcreteCompressionNonlinear method)</a>
 </li>
     </ul></td>
+    <td style="width: 33%; vertical-align: top;"><ul>
+        <li><a href="api/m_n_kappa.HeadedStud.html#m_n_kappa.HeadedStud.k_t">k_t() (m_n_kappa.HeadedStud method)</a>
+</li>
+        <li><a href="api/m_n_kappa.general.NotSuccessfulReason.html#m_n_kappa.general.NotSuccessfulReason.keywords">keywords (m_n_kappa.general.NotSuccessfulReason property)</a>
+</li>
+    </ul></td>
   </tr></table>
 </section>
 
@@ -1061,7 +1344,11 @@
   <table style="width: 100%" class="indextable genindextable"><tr>
     <td style="width: 33%; vertical-align: top;"><ul>
         <li><a href="api/m_n_kappa.Rectangle.html#m_n_kappa.Rectangle.left_edge">left_edge (m_n_kappa.Rectangle property)</a>
+
+        <ul>
+          <li><a href="api/m_n_kappa.Trapezoid.html#m_n_kappa.Trapezoid.left_edge">(m_n_kappa.Trapezoid property)</a>
 </li>
+        </ul></li>
         <li><a href="api/m_n_kappa.Crosssection.html#m_n_kappa.Crosssection.left_edge">left_edge() (m_n_kappa.Crosssection method)</a>
 
         <ul>
@@ -1075,9 +1362,9 @@
 </li>
           <li><a href="api/m_n_kappa.crosssection.CrossSectionBoundaries.html#m_n_kappa.crosssection.CrossSectionBoundaries.left_edge">(m_n_kappa.crosssection.CrossSectionBoundaries method)</a>
 </li>
-          <li><a href="api/m_n_kappa.Trapezoid.html#m_n_kappa.Trapezoid.left_edge">(m_n_kappa.Trapezoid method)</a>
-</li>
         </ul></li>
+        <li><a href="api/m_n_kappa.Trapezoid.html#m_n_kappa.Trapezoid.left_edge_at">left_edge_at() (m_n_kappa.Trapezoid method)</a>
+</li>
         <li><a href="api/m_n_kappa.Beam.html#m_n_kappa.Beam.length">length (m_n_kappa.Beam property)</a>
 
         <ul>
@@ -1090,6 +1377,10 @@
           <li><a href="api/m_n_kappa.SingleSpanUniformLoad.html#m_n_kappa.SingleSpanUniformLoad.length">(m_n_kappa.SingleSpanUniformLoad property)</a>
 </li>
         </ul></li>
+        <li><a href="api/m_n_kappa.matrices.Vector.html#m_n_kappa.matrices.Vector.length">length() (m_n_kappa.matrices.Vector method)</a>
+</li>
+        <li><a href="api/m_n_kappa.fitting.LevenbergMarquardt.html#m_n_kappa.fitting.LevenbergMarquardt">LevenbergMarquardt (class in m_n_kappa.fitting)</a>
+</li>
         <li><a href="api/m_n_kappa.section.ComputationSection.html#m_n_kappa.section.ComputationSection.lever_arm">lever_arm() (m_n_kappa.section.ComputationSection method)</a>
 
         <ul>
@@ -1098,8 +1389,16 @@
           <li><a href="api/m_n_kappa.section.ComputationSectionStrain.html#m_n_kappa.section.ComputationSectionStrain.lever_arm">(m_n_kappa.section.ComputationSectionStrain method)</a>
 </li>
         </ul></li>
+        <li><a href="api/m_n_kappa.fitting.GaussNewton.html#m_n_kappa.fitting.GaussNewton.line_search_step_size">line_search_step_size (m_n_kappa.fitting.GaussNewton property)</a>
+
+        <ul>
+          <li><a href="api/m_n_kappa.fitting.LevenbergMarquardt.html#m_n_kappa.fitting.LevenbergMarquardt.line_search_step_size">(m_n_kappa.fitting.LevenbergMarquardt property)</a>
+</li>
+        </ul></li>
     </ul></td>
     <td style="width: 33%; vertical-align: top;"><ul>
+        <li><a href="api/m_n_kappa.matrices.LinearEquationsSystem.html#m_n_kappa.matrices.LinearEquationsSystem">LinearEquationsSystem (class in m_n_kappa.matrices)</a>
+</li>
         <li><a href="api/m_n_kappa.Beam.html#m_n_kappa.Beam.load">load (m_n_kappa.Beam property)</a>
 
         <ul>
@@ -1126,6 +1425,12 @@
           <li><a href="api/m_n_kappa.SingleSpanUniformLoad.html#m_n_kappa.SingleSpanUniformLoad.load_distribution_factor">(m_n_kappa.SingleSpanUniformLoad method)</a>
 </li>
         </ul></li>
+        <li><a href="api/m_n_kappa.HeadedStud.html#m_n_kappa.HeadedStud.load_slips">load_slips (m_n_kappa.HeadedStud property)</a>
+
+        <ul>
+          <li><a href="api/m_n_kappa.ShearConnector.html#m_n_kappa.ShearConnector.load_slips">(m_n_kappa.ShearConnector property)</a>
+</li>
+        </ul></li>
         <li><a href="api/m_n_kappa.Beam.html#m_n_kappa.Beam.load_steps">load_steps (m_n_kappa.Beam property)</a>
 </li>
         <li><a href="api/m_n_kappa.loading.ABCSingleSpan.html#m_n_kappa.loading.ABCSingleSpan.loading">loading (m_n_kappa.loading.ABCSingleSpan property)</a>
@@ -1140,6 +1445,8 @@
         </ul></li>
         <li><a href="api/m_n_kappa.SingleSpanSingleLoads.html#m_n_kappa.SingleSpanSingleLoads.loads">loads (m_n_kappa.SingleSpanSingleLoads property)</a>
 </li>
+        <li><a href="api/m_n_kappa.LoadSlip.html#m_n_kappa.LoadSlip">LoadSlip (class in m_n_kappa)</a>
+</li>
     </ul></td>
   </tr></table>
 </section>
@@ -1148,9 +1455,11 @@
   <h2>M</h2>
   <table style="width: 100%" class="indextable genindextable"><tr>
     <td style="width: 33%; vertical-align: top;"><ul>
-        <li><a href="api/m_n_kappa.Node.html#m_n_kappa.Node.m_kappa_curve">m_kappa_curve (m_n_kappa.Node property)</a>
-</li>
         <li><a href="api/m_n_kappa.MKappaCurve.html#m_n_kappa.MKappaCurve.m_kappa_points">m_kappa_points (m_n_kappa.MKappaCurve property)</a>
+</li>
+        <li><a href="api/m_n_kappa.MNKappaCurve.html#m_n_kappa.MNKappaCurve.m_n_curve">m_n_curve (m_n_kappa.MNKappaCurve property)</a>
+</li>
+        <li><a href="api/m_n_kappa.curves_m_n_kappa.MNKappaCurvePoint.html#m_n_kappa.curves_m_n_kappa.MNKappaCurvePoint.m_n_kappa">m_n_kappa() (m_n_kappa.curves_m_n_kappa.MNKappaCurvePoint method)</a>
 </li>
         <li><a href="api/m_n_kappa.Material.html#m_n_kappa.Material">Material (class in m_n_kappa)</a>
 </li>
@@ -1177,15 +1486,45 @@
 </li>
         </ul></li>
         <li><a href="api/m_n_kappa.curves_m_kappa.MKappaCurvePoints.html#m_n_kappa.curves_m_kappa.MKappaCurvePoints.materials">materials (m_n_kappa.curves_m_kappa.MKappaCurvePoints property)</a>
-</li>
-        <li><a href="api/m_n_kappa.MKappaByStrainPosition.html#m_n_kappa.MKappaByStrainPosition.maximum_curvature">maximum_curvature (m_n_kappa.MKappaByStrainPosition property)</a>
-</li>
-        <li><a href="api/m_n_kappa.MKappaByConstantCurvature.html#m_n_kappa.MKappaByConstantCurvature.maximum_iterations">maximum_iterations (m_n_kappa.MKappaByConstantCurvature property)</a>
 
         <ul>
+          <li><a href="api/m_n_kappa.curves_m_n_kappa.MNKappaCurvePoints.html#m_n_kappa.curves_m_n_kappa.MNKappaCurvePoints.materials">(m_n_kappa.curves_m_n_kappa.MNKappaCurvePoints property)</a>
+</li>
+        </ul></li>
+        <li><a href="api/m_n_kappa.matrices.Matrix.html#m_n_kappa.matrices.Matrix">Matrix (class in m_n_kappa.matrices)</a>
+</li>
+        <li><a href="api/m_n_kappa.matrices.Identity.html#m_n_kappa.matrices.Identity.matrix">matrix (m_n_kappa.matrices.Identity property)</a>
+
+        <ul>
+          <li><a href="api/m_n_kappa.matrices.Jacobian.html#m_n_kappa.matrices.Jacobian.matrix">(m_n_kappa.matrices.Jacobian property)</a>
+</li>
+          <li><a href="api/m_n_kappa.matrices.Matrix.html#m_n_kappa.matrices.Matrix.matrix">(m_n_kappa.matrices.Matrix property)</a>
+</li>
+        </ul></li>
+        <li><a href="api/m_n_kappa.curves_m_n_kappa.MNKappaCurvePoints.html#m_n_kappa.curves_m_n_kappa.MNKappaCurvePoints.max">max() (m_n_kappa.curves_m_n_kappa.MNKappaCurvePoints method)</a>
+</li>
+        <li><a href="api/m_n_kappa.fitting.GaussNewton.html#m_n_kappa.fitting.GaussNewton.max_line_search_iterations">max_line_search_iterations (m_n_kappa.fitting.GaussNewton property)</a>
+
+        <ul>
+          <li><a href="api/m_n_kappa.fitting.LevenbergMarquardt.html#m_n_kappa.fitting.LevenbergMarquardt.max_line_search_iterations">(m_n_kappa.fitting.LevenbergMarquardt property)</a>
+</li>
+        </ul></li>
+        <li><a href="api/m_n_kappa.MKappaByStrainPosition.html#m_n_kappa.MKappaByStrainPosition.maximum_curvature">maximum_curvature (m_n_kappa.MKappaByStrainPosition property)</a>
+</li>
+        <li><a href="api/m_n_kappa.fitting.GaussNewton.html#m_n_kappa.fitting.GaussNewton.maximum_iterations">maximum_iterations (m_n_kappa.fitting.GaussNewton property)</a>
+
+        <ul>
+          <li><a href="api/m_n_kappa.fitting.LevenbergMarquardt.html#m_n_kappa.fitting.LevenbergMarquardt.maximum_iterations">(m_n_kappa.fitting.LevenbergMarquardt property)</a>
+</li>
+          <li><a href="api/m_n_kappa.MKappaByConstantCurvature.html#m_n_kappa.MKappaByConstantCurvature.maximum_iterations">(m_n_kappa.MKappaByConstantCurvature property)</a>
+</li>
           <li><a href="api/m_n_kappa.MKappaByStrainPosition.html#m_n_kappa.MKappaByStrainPosition.maximum_iterations">(m_n_kappa.MKappaByStrainPosition property)</a>
 </li>
           <li><a href="api/m_n_kappa.points.MKappa.html#m_n_kappa.points.MKappa.maximum_iterations">(m_n_kappa.points.MKappa property)</a>
+</li>
+          <li><a href="api/m_n_kappa.points.MNByStrain.html#m_n_kappa.points.MNByStrain.maximum_iterations">(m_n_kappa.points.MNByStrain property)</a>
+</li>
+          <li><a href="api/m_n_kappa.points.Point.html#m_n_kappa.points.Point.maximum_iterations">(m_n_kappa.points.Point property)</a>
 </li>
         </ul></li>
         <li><a href="api/m_n_kappa.loading.ABCSingleSpan.html#m_n_kappa.loading.ABCSingleSpan.maximum_moment">maximum_moment (m_n_kappa.loading.ABCSingleSpan property)</a>
@@ -1199,7 +1538,11 @@
 </li>
         </ul></li>
         <li><a href="api/m_n_kappa.curves_m_kappa.MKappaCurvePoints.html#m_n_kappa.curves_m_kappa.MKappaCurvePoints.maximum_moment">maximum_moment() (m_n_kappa.curves_m_kappa.MKappaCurvePoints method)</a>
+
+        <ul>
+          <li><a href="api/m_n_kappa.curves_m_n_kappa.MNKappaCurvePoints.html#m_n_kappa.curves_m_n_kappa.MNKappaCurvePoints.maximum_moment">(m_n_kappa.curves_m_n_kappa.MNKappaCurvePoints method)</a>
 </li>
+        </ul></li>
         <li><a href="api/m_n_kappa.crosssection.CrossSectionBoundaries.html#m_n_kappa.crosssection.CrossSectionBoundaries.maximum_negative_curvature">maximum_negative_curvature (m_n_kappa.crosssection.CrossSectionBoundaries property)</a>
 </li>
         <li><a href="api/m_n_kappa.Crosssection.html#m_n_kappa.Crosssection.maximum_negative_strain">maximum_negative_strain() (m_n_kappa.Crosssection method)</a>
@@ -1224,7 +1567,19 @@
           <li><a href="api/m_n_kappa.section.ComputationSectionStrain.html#m_n_kappa.section.ComputationSectionStrain.maximum_negative_strain">(m_n_kappa.section.ComputationSectionStrain method)</a>
 </li>
         </ul></li>
+        <li><a href="api/m_n_kappa.Section.html#m_n_kappa.Section.maximum_negative_strain_position">maximum_negative_strain_position() (m_n_kappa.Section method)</a>
+
+        <ul>
+          <li><a href="api/m_n_kappa.section.ComputationSection.html#m_n_kappa.section.ComputationSection.maximum_negative_strain_position">(m_n_kappa.section.ComputationSection method)</a>
+</li>
+          <li><a href="api/m_n_kappa.section.ComputationSectionCurvature.html#m_n_kappa.section.ComputationSectionCurvature.maximum_negative_strain_position">(m_n_kappa.section.ComputationSectionCurvature method)</a>
+</li>
+          <li><a href="api/m_n_kappa.section.ComputationSectionStrain.html#m_n_kappa.section.ComputationSectionStrain.maximum_negative_strain_position">(m_n_kappa.section.ComputationSectionStrain method)</a>
+</li>
+        </ul></li>
         <li><a href="api/m_n_kappa.MKappaByConstantCurvature.html#m_n_kappa.MKappaByConstantCurvature.maximum_neutral_axis">maximum_neutral_axis (m_n_kappa.MKappaByConstantCurvature property)</a>
+</li>
+        <li><a href="api/m_n_kappa.curves_m_kappa.MKappaCurvePoints.html#m_n_kappa.curves_m_kappa.MKappaCurvePoints.maximum_neutral_axis">maximum_neutral_axis() (m_n_kappa.curves_m_kappa.MKappaCurvePoints method)</a>
 </li>
         <li><a href="api/m_n_kappa.crosssection.CrossSectionBoundaries.html#m_n_kappa.crosssection.CrossSectionBoundaries.maximum_positive_curvature">maximum_positive_curvature (m_n_kappa.crosssection.CrossSectionBoundaries property)</a>
 </li>
@@ -1250,6 +1605,16 @@
           <li><a href="api/m_n_kappa.section.ComputationSectionStrain.html#m_n_kappa.section.ComputationSectionStrain.maximum_positive_strain">(m_n_kappa.section.ComputationSectionStrain method)</a>
 </li>
         </ul></li>
+        <li><a href="api/m_n_kappa.Section.html#m_n_kappa.Section.maximum_positive_strain_position">maximum_positive_strain_position() (m_n_kappa.Section method)</a>
+
+        <ul>
+          <li><a href="api/m_n_kappa.section.ComputationSection.html#m_n_kappa.section.ComputationSection.maximum_positive_strain_position">(m_n_kappa.section.ComputationSection method)</a>
+</li>
+          <li><a href="api/m_n_kappa.section.ComputationSectionCurvature.html#m_n_kappa.section.ComputationSectionCurvature.maximum_positive_strain_position">(m_n_kappa.section.ComputationSectionCurvature method)</a>
+</li>
+          <li><a href="api/m_n_kappa.section.ComputationSectionStrain.html#m_n_kappa.section.ComputationSectionStrain.maximum_positive_strain_position">(m_n_kappa.section.ComputationSectionStrain method)</a>
+</li>
+        </ul></li>
     </ul></td>
     <td style="width: 33%; vertical-align: top;"><ul>
         <li><a href="api/m_n_kappa.Concrete.html#m_n_kappa.Concrete.maximum_strain">maximum_strain (m_n_kappa.Concrete property)</a>
@@ -1270,14 +1635,24 @@
           <li><a href="api/m_n_kappa.solver.Solver.html#m_n_kappa.solver.Solver.maximum_variable">(m_n_kappa.solver.Solver property)</a>
 </li>
         </ul></li>
-        <li><a href="api/m_n_kappa.curvature_boundaries.MaximumCurvature.html#m_n_kappa.curvature_boundaries.MaximumCurvature">MaximumCurvature (class in m_n_kappa.curvature_boundaries)</a>
+        <li><a href="api/m_n_kappa.boundaries.MaximumCurvature.html#m_n_kappa.boundaries.MaximumCurvature">MaximumCurvature (class in m_n_kappa.boundaries)</a>
 </li>
         <li><a href="api/m_n_kappa.Beam.html#m_n_kappa.Beam.membran_widths">membran_widths() (m_n_kappa.Beam method)</a>
+</li>
+        <li><a href="api/m_n_kappa.curves_m_n_kappa.MNKappaCurvePoints.html#m_n_kappa.curves_m_n_kappa.MNKappaCurvePoints.min">min() (m_n_kappa.curves_m_n_kappa.MNKappaCurvePoints method)</a>
 </li>
         <li><a href="api/m_n_kappa.MKappaByStrainPosition.html#m_n_kappa.MKappaByStrainPosition.minimum_curvature">minimum_curvature (m_n_kappa.MKappaByStrainPosition property)</a>
 </li>
         <li><a href="api/m_n_kappa.MKappaByConstantCurvature.html#m_n_kappa.MKappaByConstantCurvature.minimum_neutral_axis">minimum_neutral_axis (m_n_kappa.MKappaByConstantCurvature property)</a>
 </li>
+        <li><a href="api/m_n_kappa.curves_m_kappa.MKappaCurvePoints.html#m_n_kappa.curves_m_kappa.MKappaCurvePoints.minimum_neutral_axis">minimum_neutral_axis() (m_n_kappa.curves_m_kappa.MKappaCurvePoints method)</a>
+</li>
+        <li><a href="api/m_n_kappa.fitting.GaussNewton.html#m_n_kappa.fitting.GaussNewton.minimum_residuum_change">minimum_residuum_change (m_n_kappa.fitting.GaussNewton property)</a>
+
+        <ul>
+          <li><a href="api/m_n_kappa.fitting.LevenbergMarquardt.html#m_n_kappa.fitting.LevenbergMarquardt.minimum_residuum_change">(m_n_kappa.fitting.LevenbergMarquardt property)</a>
+</li>
+        </ul></li>
         <li><a href="api/m_n_kappa.Concrete.html#m_n_kappa.Concrete.minimum_strain">minimum_strain (m_n_kappa.Concrete property)</a>
 
         <ul>
@@ -1296,7 +1671,7 @@
           <li><a href="api/m_n_kappa.solver.Solver.html#m_n_kappa.solver.Solver.minimum_variable">(m_n_kappa.solver.Solver property)</a>
 </li>
         </ul></li>
-        <li><a href="api/m_n_kappa.curvature_boundaries.MinimumCurvature.html#m_n_kappa.curvature_boundaries.MinimumCurvature">MinimumCurvature (class in m_n_kappa.curvature_boundaries)</a>
+        <li><a href="api/m_n_kappa.boundaries.MinimumCurvature.html#m_n_kappa.boundaries.MinimumCurvature">MinimumCurvature (class in m_n_kappa.boundaries)</a>
 </li>
         <li><a href="api/m_n_kappa.points.MKappa.html#m_n_kappa.points.MKappa">MKappa (class in m_n_kappa.points)</a>
 </li>
@@ -1310,6 +1685,18 @@
 </li>
         <li><a href="api/m_n_kappa.curves_m_kappa.MKappaCurvePoints.html#m_n_kappa.curves_m_kappa.MKappaCurvePoints">MKappaCurvePoints (class in m_n_kappa.curves_m_kappa)</a>
 </li>
+        <li><a href="api/m_n_kappa.points.MNByStrain.html#m_n_kappa.points.MNByStrain">MNByStrain (class in m_n_kappa.points)</a>
+</li>
+        <li><a href="api/m_n_kappa.curves_m_n_kappa.MNCurvatureCurve.html#m_n_kappa.curves_m_n_kappa.MNCurvatureCurve">MNCurvatureCurve (class in m_n_kappa.curves_m_n_kappa)</a>
+</li>
+        <li><a href="api/m_n_kappa.MNCurve.html#m_n_kappa.MNCurve">MNCurve (class in m_n_kappa)</a>
+</li>
+        <li><a href="api/m_n_kappa.MNKappaCurve.html#m_n_kappa.MNKappaCurve">MNKappaCurve (class in m_n_kappa)</a>
+</li>
+        <li><a href="api/m_n_kappa.curves_m_n_kappa.MNKappaCurvePoint.html#m_n_kappa.curves_m_n_kappa.MNKappaCurvePoint">MNKappaCurvePoint (class in m_n_kappa.curves_m_n_kappa)</a>
+</li>
+        <li><a href="api/m_n_kappa.curves_m_n_kappa.MNKappaCurvePoints.html#m_n_kappa.curves_m_n_kappa.MNKappaCurvePoints">MNKappaCurvePoints (class in m_n_kappa.curves_m_n_kappa)</a>
+</li>
         <li><a href="api/m_n_kappa.MKappaByConstantCurvature.html#m_n_kappa.MKappaByConstantCurvature.moment">moment (m_n_kappa.MKappaByConstantCurvature property)</a>
 
         <ul>
@@ -1317,11 +1704,25 @@
 </li>
           <li><a href="api/m_n_kappa.points.MKappa.html#m_n_kappa.points.MKappa.moment">(m_n_kappa.points.MKappa property)</a>
 </li>
+          <li><a href="api/m_n_kappa.points.MNByStrain.html#m_n_kappa.points.MNByStrain.moment">(m_n_kappa.points.MNByStrain property)</a>
+</li>
+          <li><a href="api/m_n_kappa.points.Point.html#m_n_kappa.points.Point.moment">(m_n_kappa.points.Point property)</a>
+</li>
         </ul></li>
         <li><a href="api/m_n_kappa.crosssection.moment.html#m_n_kappa.crosssection.moment">moment() (in module m_n_kappa.crosssection)</a>
 
         <ul>
+          <li><a href="api/m_n_kappa.curves_m_kappa.MKappaCurvePoints.html#m_n_kappa.curves_m_kappa.MKappaCurvePoints.moment">(m_n_kappa.curves_m_kappa.MKappaCurvePoints method)</a>
+</li>
+          <li><a href="api/m_n_kappa.curves_m_n_kappa.MNKappaCurvePoints.html#m_n_kappa.curves_m_n_kappa.MNKappaCurvePoints.moment">(m_n_kappa.curves_m_n_kappa.MNKappaCurvePoints method)</a>
+</li>
           <li><a href="api/m_n_kappa.loading.ABCSingleSpan.html#m_n_kappa.loading.ABCSingleSpan.moment">(m_n_kappa.loading.ABCSingleSpan method)</a>
+</li>
+          <li><a href="api/m_n_kappa.MomentAxialForce.html#m_n_kappa.MomentAxialForce.moment">(m_n_kappa.MomentAxialForce method)</a>
+</li>
+          <li><a href="api/m_n_kappa.MomentAxialForceCurvature.html#m_n_kappa.MomentAxialForceCurvature.moment">(m_n_kappa.MomentAxialForceCurvature method)</a>
+</li>
+          <li><a href="api/m_n_kappa.points.AxialForcePoint.html#m_n_kappa.points.AxialForcePoint.moment">(m_n_kappa.points.AxialForcePoint method)</a>
 </li>
           <li><a href="api/m_n_kappa.section.ComputationSection.html#m_n_kappa.section.ComputationSection.moment">(m_n_kappa.section.ComputationSection method)</a>
 </li>
@@ -1338,11 +1739,33 @@
           <li><a href="api/m_n_kappa.SingleSpanUniformLoad.html#m_n_kappa.SingleSpanUniformLoad.moment">(m_n_kappa.SingleSpanUniformLoad method)</a>
 </li>
         </ul></li>
-        <li><a href="api/m_n_kappa.SingleSpanSingleLoads.html#m_n_kappa.SingleSpanSingleLoads.moment_by">moment_by() (m_n_kappa.SingleSpanSingleLoads method)</a>
+        <li><a href="api/m_n_kappa.SingleSpanSingleLoads.html#m_n_kappa.SingleSpanSingleLoads.moment_by">moment_by() (m_n_kappa.SingleSpanSingleLoads static method)</a>
 </li>
         <li><a href="api/m_n_kappa.curves_m_kappa.MKappaCurvePoint.html#m_n_kappa.curves_m_kappa.MKappaCurvePoint.moment_curvature">moment_curvature() (m_n_kappa.curves_m_kappa.MKappaCurvePoint method)</a>
+
+        <ul>
+          <li><a href="api/m_n_kappa.curves_m_n_kappa.MNKappaCurvePoint.html#m_n_kappa.curves_m_n_kappa.MNKappaCurvePoint.moment_curvature">(m_n_kappa.curves_m_n_kappa.MNKappaCurvePoint method)</a>
+</li>
+        </ul></li>
+        <li><a href="api/m_n_kappa.MomentAxialForce.html#m_n_kappa.MomentAxialForce">MomentAxialForce (class in m_n_kappa)</a>
+</li>
+        <li><a href="api/m_n_kappa.MomentAxialForceCurvature.html#m_n_kappa.MomentAxialForceCurvature">MomentAxialForceCurvature (class in m_n_kappa)</a>
 </li>
         <li><a href="api/m_n_kappa.curves_m_kappa.MKappaCurvePoints.html#m_n_kappa.curves_m_kappa.MKappaCurvePoints.moments">moments (m_n_kappa.curves_m_kappa.MKappaCurvePoints property)</a>
+
+        <ul>
+          <li><a href="api/m_n_kappa.curves_m_n_kappa.MNKappaCurvePoints.html#m_n_kappa.curves_m_n_kappa.MNKappaCurvePoints.moments">(m_n_kappa.curves_m_n_kappa.MNKappaCurvePoints property)</a>
+</li>
+        </ul></li>
+        <li><a href="api/m_n_kappa.matrices.Identity.html#m_n_kappa.matrices.Identity.multiply_by">multiply_by() (m_n_kappa.matrices.Identity method)</a>
+
+        <ul>
+          <li><a href="api/m_n_kappa.matrices.Jacobian.html#m_n_kappa.matrices.Jacobian.multiply_by">(m_n_kappa.matrices.Jacobian method)</a>
+</li>
+          <li><a href="api/m_n_kappa.matrices.Matrix.html#m_n_kappa.matrices.Matrix.multiply_by">(m_n_kappa.matrices.Matrix method)</a>
+</li>
+        </ul></li>
+        <li><a href="api/m_n_kappa.matrices.Vector.html#m_n_kappa.matrices.Vector.multiply_scalar">multiply_scalar() (m_n_kappa.matrices.Vector method)</a>
 </li>
     </ul></td>
   </tr></table>
@@ -1354,15 +1777,21 @@
     <td style="width: 33%; vertical-align: top;"><ul>
         <li><a href="api/m_n_kappa.material.ConcreteCompressionParabolaRectangle.html#m_n_kappa.material.ConcreteCompressionParabolaRectangle.n">n (m_n_kappa.material.ConcreteCompressionParabolaRectangle property)</a>
 </li>
-        <li><a href="api/m_n_kappa.curvature_boundaries.MaximumCurvature.html#m_n_kappa.curvature_boundaries.MaximumCurvature.negative">negative (m_n_kappa.curvature_boundaries.MaximumCurvature property)</a>
+        <li><a href="api/m_n_kappa.curves_m_n_kappa.MNKappaCurvePoint.html#m_n_kappa.curves_m_n_kappa.MNKappaCurvePoint.n_m_kappa">n_m_kappa() (m_n_kappa.curves_m_n_kappa.MNKappaCurvePoint method)</a>
+</li>
+        <li><a href="api/m_n_kappa.HeadedStud.html#m_n_kappa.HeadedStud.n_r">n_r (m_n_kappa.HeadedStud property)</a>
+</li>
+        <li><a href="api/m_n_kappa.boundaries.MaximumCurvature.html#m_n_kappa.boundaries.MaximumCurvature.negative">negative (m_n_kappa.boundaries.MaximumCurvature property)</a>
 
         <ul>
-          <li><a href="api/m_n_kappa.curvature_boundaries.MinimumCurvature.html#m_n_kappa.curvature_boundaries.MinimumCurvature.negative">(m_n_kappa.curvature_boundaries.MinimumCurvature property)</a>
+          <li><a href="api/m_n_kappa.boundaries.MinimumCurvature.html#m_n_kappa.boundaries.MinimumCurvature.negative">(m_n_kappa.boundaries.MinimumCurvature property)</a>
 </li>
           <li><a href="api/m_n_kappa.MKappaCurve.html#m_n_kappa.MKappaCurve.negative">(m_n_kappa.MKappaCurve property)</a>
 </li>
         </ul></li>
         <li><a href="api/m_n_kappa.general.negative_sign.html#m_n_kappa.general.negative_sign">negative_sign() (in module m_n_kappa.general)</a>
+</li>
+        <li><a href="api/m_n_kappa.MomentAxialForceCurvature.html#m_n_kappa.MomentAxialForceCurvature.neutral_axes">neutral_axes (m_n_kappa.MomentAxialForceCurvature property)</a>
 </li>
         <li><a href="api/m_n_kappa.crosssection.ComputationCrosssectionCurvature.html#m_n_kappa.crosssection.ComputationCrosssectionCurvature.neutral_axis">neutral_axis (m_n_kappa.crosssection.ComputationCrosssectionCurvature property)</a>
 
@@ -1376,32 +1805,78 @@
           <li><a href="api/m_n_kappa.section.ComputationSectionCurvature.html#m_n_kappa.section.ComputationSectionCurvature.neutral_axis">(m_n_kappa.section.ComputationSectionCurvature property)</a>
 </li>
         </ul></li>
-    </ul></td>
-    <td style="width: 33%; vertical-align: top;"><ul>
         <li><a href="api/m_n_kappa.general.neutral_axis.html#m_n_kappa.general.neutral_axis">neutral_axis() (in module m_n_kappa.general)</a>
 </li>
+        <li><a href="api/m_n_kappa.HeadedStud.html#m_n_kappa.HeadedStud.new">new() (m_n_kappa.HeadedStud method)</a>
+
+        <ul>
+          <li><a href="api/m_n_kappa.ShearConnector.html#m_n_kappa.ShearConnector.new">(m_n_kappa.ShearConnector method)</a>
+</li>
+        </ul></li>
         <li><a href="api/m_n_kappa.solver.Newton.html#m_n_kappa.solver.Newton">Newton (class in m_n_kappa.solver)</a>
 </li>
         <li><a href="api/m_n_kappa.Node.html#m_n_kappa.Node">Node (class in m_n_kappa)</a>
 </li>
         <li><a href="api/m_n_kappa.Beam.html#m_n_kappa.Beam.nodes">nodes (m_n_kappa.Beam property)</a>
 </li>
+    </ul></td>
+    <td style="width: 33%; vertical-align: top;"><ul>
         <li><a href="api/m_n_kappa.Beam.html#m_n_kappa.Beam.nodes_at">nodes_at() (m_n_kappa.Beam method)</a>
 </li>
         <li><a href="api/m_n_kappa.Beam.html#m_n_kappa.Beam.nodes_at_decisive_position">nodes_at_decisive_position() (m_n_kappa.Beam method)</a>
 </li>
-        <li><a href="api/m_n_kappa.MKappaCurve.html#m_n_kappa.MKappaCurve.not_successful">not_successful (m_n_kappa.MKappaCurve property)</a>
+        <li><a href="api/m_n_kappa.matrices.Vector.html#m_n_kappa.matrices.Vector.norm">norm() (m_n_kappa.matrices.Vector method)</a>
 </li>
-        <li><a href="api/m_n_kappa.MKappaByConstantCurvature.html#m_n_kappa.MKappaByConstantCurvature.not_successful_reason">not_successful_reason (m_n_kappa.MKappaByConstantCurvature property)</a>
+        <li><a href="api/m_n_kappa.curves_m_n_kappa.MNCurvatureCurve.html#m_n_kappa.curves_m_n_kappa.MNCurvatureCurve.not_successful_reason">not_successful_reason (m_n_kappa.curves_m_n_kappa.MNCurvatureCurve property)</a>
 
         <ul>
+          <li><a href="api/m_n_kappa.fitting.GaussNewton.html#m_n_kappa.fitting.GaussNewton.not_successful_reason">(m_n_kappa.fitting.GaussNewton property)</a>
+</li>
+          <li><a href="api/m_n_kappa.fitting.LevenbergMarquardt.html#m_n_kappa.fitting.LevenbergMarquardt.not_successful_reason">(m_n_kappa.fitting.LevenbergMarquardt property)</a>
+</li>
+          <li><a href="api/m_n_kappa.MKappaByConstantCurvature.html#m_n_kappa.MKappaByConstantCurvature.not_successful_reason">(m_n_kappa.MKappaByConstantCurvature property)</a>
+</li>
           <li><a href="api/m_n_kappa.MKappaByStrainPosition.html#m_n_kappa.MKappaByStrainPosition.not_successful_reason">(m_n_kappa.MKappaByStrainPosition property)</a>
+</li>
+          <li><a href="api/m_n_kappa.MKappaCurve.html#m_n_kappa.MKappaCurve.not_successful_reason">(m_n_kappa.MKappaCurve property)</a>
+</li>
+          <li><a href="api/m_n_kappa.MNCurve.html#m_n_kappa.MNCurve.not_successful_reason">(m_n_kappa.MNCurve property)</a>
+</li>
+          <li><a href="api/m_n_kappa.MNKappaCurve.html#m_n_kappa.MNKappaCurve.not_successful_reason">(m_n_kappa.MNKappaCurve property)</a>
+</li>
+          <li><a href="api/m_n_kappa.MomentAxialForce.html#m_n_kappa.MomentAxialForce.not_successful_reason">(m_n_kappa.MomentAxialForce property)</a>
+</li>
+          <li><a href="api/m_n_kappa.MomentAxialForceCurvature.html#m_n_kappa.MomentAxialForceCurvature.not_successful_reason">(m_n_kappa.MomentAxialForceCurvature property)</a>
+</li>
+          <li><a href="api/m_n_kappa.points.AxialForcePoint.html#m_n_kappa.points.AxialForcePoint.not_successful_reason">(m_n_kappa.points.AxialForcePoint property)</a>
 </li>
           <li><a href="api/m_n_kappa.points.MKappa.html#m_n_kappa.points.MKappa.not_successful_reason">(m_n_kappa.points.MKappa property)</a>
 </li>
+          <li><a href="api/m_n_kappa.points.MNByStrain.html#m_n_kappa.points.MNByStrain.not_successful_reason">(m_n_kappa.points.MNByStrain property)</a>
+</li>
+          <li><a href="api/m_n_kappa.points.Point.html#m_n_kappa.points.Point.not_successful_reason">(m_n_kappa.points.Point property)</a>
+</li>
         </ul></li>
+        <li><a href="api/m_n_kappa.general.NotSuccessfulReason.html#m_n_kappa.general.NotSuccessfulReason">NotSuccessfulReason (class in m_n_kappa.general)</a>
+</li>
         <li><a href="api/m_n_kappa.Node.html#m_n_kappa.Node.number">number (m_n_kappa.Node property)</a>
 </li>
+    </ul></td>
+  </tr></table>
+</section>
+
+<section id="O" class="genindex-section">
+  <h2>O</h2>
+  <table style="width: 100%" class="indextable genindextable"><tr>
+    <td style="width: 33%; vertical-align: top;"><ul>
+        <li><a href="api/m_n_kappa.matrices.Identity.html#m_n_kappa.matrices.Identity.orthonormal_triangular">orthonormal_triangular() (m_n_kappa.matrices.Identity method)</a>
+
+        <ul>
+          <li><a href="api/m_n_kappa.matrices.Jacobian.html#m_n_kappa.matrices.Jacobian.orthonormal_triangular">(m_n_kappa.matrices.Jacobian method)</a>
+</li>
+          <li><a href="api/m_n_kappa.matrices.Matrix.html#m_n_kappa.matrices.Matrix.orthonormal_triangular">(m_n_kappa.matrices.Matrix method)</a>
+</li>
+        </ul></li>
     </ul></td>
   </tr></table>
 </section>
@@ -1410,12 +1885,46 @@
   <h2>P</h2>
   <table style="width: 100%" class="indextable genindextable"><tr>
     <td style="width: 33%; vertical-align: top;"><ul>
-        <li><a href="api/m_n_kappa.material.StressStrain.html#m_n_kappa.material.StressStrain.pair">pair() (m_n_kappa.material.StressStrain method)</a>
+        <li><a href="api/m_n_kappa.HeadedStud.html#m_n_kappa.HeadedStud.P">P (m_n_kappa.HeadedStud property)</a>
+</li>
+        <li><a href="api/m_n_kappa.HeadedStud.html#m_n_kappa.HeadedStud.P_cm">P_cm() (m_n_kappa.HeadedStud method)</a>
+</li>
+        <li><a href="api/m_n_kappa.HeadedStud.html#m_n_kappa.HeadedStud.P_max">P_max (m_n_kappa.HeadedStud property)</a>
+
+        <ul>
+          <li><a href="api/m_n_kappa.ShearConnector.html#m_n_kappa.ShearConnector.P_max">(m_n_kappa.ShearConnector property)</a>
+</li>
+        </ul></li>
+        <li><a href="api/m_n_kappa.HeadedStud.html#m_n_kappa.HeadedStud.P_sm">P_sm() (m_n_kappa.HeadedStud method)</a>
+</li>
+        <li><a href="api/m_n_kappa.LoadSlip.html#m_n_kappa.LoadSlip.pair">pair() (m_n_kappa.LoadSlip method)</a>
+
+        <ul>
+          <li><a href="api/m_n_kappa.material.StressStrain.html#m_n_kappa.material.StressStrain.pair">(m_n_kappa.material.StressStrain method)</a>
+</li>
+        </ul></li>
+        <li><a href="api/m_n_kappa.points.Point.html#m_n_kappa.points.Point">Point (class in m_n_kappa.points)</a>
 </li>
         <li><a href="api/m_n_kappa.curves_m_kappa.MKappaCurvePoints.html#m_n_kappa.curves_m_kappa.MKappaCurvePoints.points">points (m_n_kappa.curves_m_kappa.MKappaCurvePoints property)</a>
+
+        <ul>
+          <li><a href="api/m_n_kappa.curves_m_n_kappa.MNCurvatureCurve.html#m_n_kappa.curves_m_n_kappa.MNCurvatureCurve.points">(m_n_kappa.curves_m_n_kappa.MNCurvatureCurve property)</a>
 </li>
-        <li><a href="api/m_n_kappa.Node.html#m_n_kappa.Node.position">position (m_n_kappa.Node property)</a>
+          <li><a href="api/m_n_kappa.curves_m_n_kappa.MNKappaCurvePoints.html#m_n_kappa.curves_m_n_kappa.MNKappaCurvePoints.points">(m_n_kappa.curves_m_n_kappa.MNKappaCurvePoints property)</a>
 </li>
+          <li><a href="api/m_n_kappa.MNCurve.html#m_n_kappa.MNCurve.points">(m_n_kappa.MNCurve property)</a>
+</li>
+          <li><a href="api/m_n_kappa.MNKappaCurve.html#m_n_kappa.MNKappaCurve.points">(m_n_kappa.MNKappaCurve property)</a>
+</li>
+        </ul></li>
+        <li><a href="api/m_n_kappa.HeadedStud.html#m_n_kappa.HeadedStud.position">position (m_n_kappa.HeadedStud property)</a>
+
+        <ul>
+          <li><a href="api/m_n_kappa.Node.html#m_n_kappa.Node.position">(m_n_kappa.Node property)</a>
+</li>
+          <li><a href="api/m_n_kappa.ShearConnector.html#m_n_kappa.ShearConnector.position">(m_n_kappa.ShearConnector property)</a>
+</li>
+        </ul></li>
         <li><a href="api/m_n_kappa.general.position.html#m_n_kappa.general.position">position() (in module m_n_kappa.general)</a>
 </li>
         <li><a href="api/m_n_kappa.loading.ABCSingleSpan.html#m_n_kappa.loading.ABCSingleSpan.position_of_maximum_deformation">position_of_maximum_deformation() (m_n_kappa.loading.ABCSingleSpan method)</a>
@@ -1428,10 +1937,14 @@
           <li><a href="api/m_n_kappa.SingleSpanUniformLoad.html#m_n_kappa.SingleSpanUniformLoad.position_of_maximum_deformation">(m_n_kappa.SingleSpanUniformLoad method)</a>
 </li>
         </ul></li>
+    </ul></td>
+    <td style="width: 33%; vertical-align: top;"><ul>
         <li><a href="api/m_n_kappa.Beam.html#m_n_kappa.Beam.positions">positions (m_n_kappa.Beam property)</a>
 
         <ul>
           <li><a href="api/m_n_kappa.curves_m_kappa.MKappaCurvePoints.html#m_n_kappa.curves_m_kappa.MKappaCurvePoints.positions">(m_n_kappa.curves_m_kappa.MKappaCurvePoints property)</a>
+</li>
+          <li><a href="api/m_n_kappa.curves_m_n_kappa.MNKappaCurvePoints.html#m_n_kappa.curves_m_n_kappa.MNKappaCurvePoints.positions">(m_n_kappa.curves_m_n_kappa.MNKappaCurvePoints property)</a>
 </li>
           <li><a href="api/m_n_kappa.loading.ABCSingleSpan.html#m_n_kappa.loading.ABCSingleSpan.positions">(m_n_kappa.loading.ABCSingleSpan property)</a>
 </li>
@@ -1442,8 +1955,6 @@
           <li><a href="api/m_n_kappa.SingleSpanUniformLoad.html#m_n_kappa.SingleSpanUniformLoad.positions">(m_n_kappa.SingleSpanUniformLoad property)</a>
 </li>
         </ul></li>
-    </ul></td>
-    <td style="width: 33%; vertical-align: top;"><ul>
         <li><a href="api/m_n_kappa.loading.ABCSingleSpan.html#m_n_kappa.loading.ABCSingleSpan.positions_of_maximum_moment">positions_of_maximum_moment() (m_n_kappa.loading.ABCSingleSpan method)</a>
 
         <ul>
@@ -1454,15 +1965,33 @@
           <li><a href="api/m_n_kappa.SingleSpanUniformLoad.html#m_n_kappa.SingleSpanUniformLoad.positions_of_maximum_moment">(m_n_kappa.SingleSpanUniformLoad method)</a>
 </li>
         </ul></li>
-        <li><a href="api/m_n_kappa.curvature_boundaries.MaximumCurvature.html#m_n_kappa.curvature_boundaries.MaximumCurvature.positive">positive (m_n_kappa.curvature_boundaries.MaximumCurvature property)</a>
+        <li><a href="api/m_n_kappa.boundaries.MaximumCurvature.html#m_n_kappa.boundaries.MaximumCurvature.positive">positive (m_n_kappa.boundaries.MaximumCurvature property)</a>
 
         <ul>
-          <li><a href="api/m_n_kappa.curvature_boundaries.MinimumCurvature.html#m_n_kappa.curvature_boundaries.MinimumCurvature.positive">(m_n_kappa.curvature_boundaries.MinimumCurvature property)</a>
+          <li><a href="api/m_n_kappa.boundaries.MinimumCurvature.html#m_n_kappa.boundaries.MinimumCurvature.positive">(m_n_kappa.boundaries.MinimumCurvature property)</a>
 </li>
           <li><a href="api/m_n_kappa.MKappaCurve.html#m_n_kappa.MKappaCurve.positive">(m_n_kappa.MKappaCurve property)</a>
 </li>
         </ul></li>
+        <li><a href="api/m_n_kappa.curves_m_n_kappa.MNCurvatureCurve.html#m_n_kappa.curves_m_n_kappa.MNCurvatureCurve.positive_curvature">positive_curvature (m_n_kappa.curves_m_n_kappa.MNCurvatureCurve property)</a>
+
+        <ul>
+          <li><a href="api/m_n_kappa.MKappaByStrainPosition.html#m_n_kappa.MKappaByStrainPosition.positive_curvature">(m_n_kappa.MKappaByStrainPosition property)</a>
+</li>
+          <li><a href="api/m_n_kappa.MomentAxialForceCurvature.html#m_n_kappa.MomentAxialForceCurvature.positive_curvature">(m_n_kappa.MomentAxialForceCurvature property)</a>
+</li>
+        </ul></li>
         <li><a href="api/m_n_kappa.general.positive_sign.html#m_n_kappa.general.positive_sign">positive_sign() (in module m_n_kappa.general)</a>
+</li>
+    </ul></td>
+  </tr></table>
+</section>
+
+<section id="Q" class="genindex-section">
+  <h2>Q</h2>
+  <table style="width: 100%" class="indextable genindextable"><tr>
+    <td style="width: 33%; vertical-align: top;"><ul>
+        <li><a href="api/m_n_kappa.matrices.LinearEquationsSystem.html#m_n_kappa.matrices.LinearEquationsSystem.qr_decomposition">qr_decomposition() (m_n_kappa.matrices.LinearEquationsSystem method)</a>
 </li>
     </ul></td>
   </tr></table>
@@ -1480,16 +2009,24 @@
 </li>
         <li><a href="api/m_n_kappa.general.remove_duplicates.html#m_n_kappa.general.remove_duplicates">remove_duplicates() (in module m_n_kappa.general)</a>
 </li>
-        <li><a href="api/m_n_kappa.curvature_boundaries.remove_higher_strains.html#m_n_kappa.curvature_boundaries.remove_higher_strains">remove_higher_strains() (in module m_n_kappa.curvature_boundaries)</a>
+        <li><a href="api/m_n_kappa.boundaries.remove_higher_strains.html#m_n_kappa.boundaries.remove_higher_strains">remove_higher_strains() (in module m_n_kappa.boundaries)</a>
 </li>
-        <li><a href="api/m_n_kappa.curvature_boundaries.remove_smaller_strains.html#m_n_kappa.curvature_boundaries.remove_smaller_strains">remove_smaller_strains() (in module m_n_kappa.curvature_boundaries)</a>
+        <li><a href="api/m_n_kappa.boundaries.remove_smaller_strains.html#m_n_kappa.boundaries.remove_smaller_strains">remove_smaller_strains() (in module m_n_kappa.boundaries)</a>
+</li>
+        <li><a href="api/m_n_kappa.matrices.Vector.html#m_n_kappa.matrices.Vector.replace">replace() (m_n_kappa.matrices.Vector method)</a>
 </li>
         <li><a href="api/m_n_kappa.curves_m_kappa.MKappaCurvePoints.html#m_n_kappa.curves_m_kappa.MKappaCurvePoints.results_as_dict">results_as_dict() (m_n_kappa.curves_m_kappa.MKappaCurvePoints method)</a>
+
+        <ul>
+          <li><a href="api/m_n_kappa.curves_m_n_kappa.MNKappaCurvePoints.html#m_n_kappa.curves_m_n_kappa.MNKappaCurvePoints.results_as_dict">(m_n_kappa.curves_m_n_kappa.MNKappaCurvePoints method)</a>
 </li>
-    </ul></td>
-    <td style="width: 33%; vertical-align: top;"><ul>
+        </ul></li>
         <li><a href="api/m_n_kappa.Rectangle.html#m_n_kappa.Rectangle.right_edge">right_edge (m_n_kappa.Rectangle property)</a>
+
+        <ul>
+          <li><a href="api/m_n_kappa.Trapezoid.html#m_n_kappa.Trapezoid.right_edge">(m_n_kappa.Trapezoid property)</a>
 </li>
+        </ul></li>
         <li><a href="api/m_n_kappa.Crosssection.html#m_n_kappa.Crosssection.right_edge">right_edge() (m_n_kappa.Crosssection method)</a>
 
         <ul>
@@ -1503,7 +2040,33 @@
 </li>
           <li><a href="api/m_n_kappa.crosssection.CrossSectionBoundaries.html#m_n_kappa.crosssection.CrossSectionBoundaries.right_edge">(m_n_kappa.crosssection.CrossSectionBoundaries method)</a>
 </li>
-          <li><a href="api/m_n_kappa.Trapezoid.html#m_n_kappa.Trapezoid.right_edge">(m_n_kappa.Trapezoid method)</a>
+        </ul></li>
+    </ul></td>
+    <td style="width: 33%; vertical-align: top;"><ul>
+        <li><a href="api/m_n_kappa.Trapezoid.html#m_n_kappa.Trapezoid.right_edge_at">right_edge_at() (m_n_kappa.Trapezoid method)</a>
+</li>
+        <li><a href="api/m_n_kappa.matrices.Identity.html#m_n_kappa.matrices.Identity.row">row() (m_n_kappa.matrices.Identity method)</a>
+
+        <ul>
+          <li><a href="api/m_n_kappa.matrices.Jacobian.html#m_n_kappa.matrices.Jacobian.row">(m_n_kappa.matrices.Jacobian method)</a>
+</li>
+          <li><a href="api/m_n_kappa.matrices.Matrix.html#m_n_kappa.matrices.Matrix.row">(m_n_kappa.matrices.Matrix method)</a>
+</li>
+        </ul></li>
+        <li><a href="api/m_n_kappa.matrices.Identity.html#m_n_kappa.matrices.Identity.row_number">row_number (m_n_kappa.matrices.Identity property)</a>
+
+        <ul>
+          <li><a href="api/m_n_kappa.matrices.Jacobian.html#m_n_kappa.matrices.Jacobian.row_number">(m_n_kappa.matrices.Jacobian property)</a>
+</li>
+          <li><a href="api/m_n_kappa.matrices.Matrix.html#m_n_kappa.matrices.Matrix.row_number">(m_n_kappa.matrices.Matrix property)</a>
+</li>
+        </ul></li>
+        <li><a href="api/m_n_kappa.matrices.Identity.html#m_n_kappa.matrices.Identity.row_vector">row_vector() (m_n_kappa.matrices.Identity method)</a>
+
+        <ul>
+          <li><a href="api/m_n_kappa.matrices.Jacobian.html#m_n_kappa.matrices.Jacobian.row_vector">(m_n_kappa.matrices.Jacobian method)</a>
+</li>
+          <li><a href="api/m_n_kappa.matrices.Matrix.html#m_n_kappa.matrices.Matrix.row_vector">(m_n_kappa.matrices.Matrix method)</a>
 </li>
         </ul></li>
     </ul></td>
@@ -1514,6 +2077,14 @@
   <h2>S</h2>
   <table style="width: 100%" class="indextable genindextable"><tr>
     <td style="width: 33%; vertical-align: top;"><ul>
+        <li><a href="api/m_n_kappa.HeadedStud.html#m_n_kappa.HeadedStud.s_max">s_max (m_n_kappa.HeadedStud property)</a>
+
+        <ul>
+          <li><a href="api/m_n_kappa.ShearConnector.html#m_n_kappa.ShearConnector.s_max">(m_n_kappa.ShearConnector property)</a>
+</li>
+        </ul></li>
+        <li><a href="api/m_n_kappa.matrices.Vector.html#m_n_kappa.matrices.Vector.scalar_product">scalar_product() (m_n_kappa.matrices.Vector method)</a>
+</li>
         <li><a href="api/m_n_kappa.Section.html#m_n_kappa.Section">Section (class in m_n_kappa)</a>
 </li>
         <li><a href="api/m_n_kappa.section.ComputationSection.html#m_n_kappa.section.ComputationSection.section">section (m_n_kappa.section.ComputationSection property)</a>
@@ -1598,6 +2169,14 @@
           <li><a href="api/m_n_kappa.crosssection.CrossSectionBoundaries.html#m_n_kappa.crosssection.CrossSectionBoundaries.sections_of_type">(m_n_kappa.crosssection.CrossSectionBoundaries method)</a>
 </li>
         </ul></li>
+        <li><a href="api/m_n_kappa.HeadedStud.html#m_n_kappa.HeadedStud.shear_load">shear_load() (m_n_kappa.HeadedStud method)</a>
+
+        <ul>
+          <li><a href="api/m_n_kappa.ShearConnector.html#m_n_kappa.ShearConnector.shear_load">(m_n_kappa.ShearConnector method)</a>
+</li>
+        </ul></li>
+        <li><a href="api/m_n_kappa.ShearConnector.html#m_n_kappa.ShearConnector">ShearConnector (class in m_n_kappa)</a>
+</li>
         <li><a href="api/m_n_kappa.Circle.html#m_n_kappa.Circle.sides">sides (m_n_kappa.Circle property)</a>
 
         <ul>
@@ -1668,8 +2247,20 @@
           <li><a href="api/m_n_kappa.crosssection.ComputationCrosssectionStrainAdd.html#m_n_kappa.crosssection.ComputationCrosssectionStrainAdd.slab_sections_moment">(m_n_kappa.crosssection.ComputationCrosssectionStrainAdd method)</a>
 </li>
         </ul></li>
-    </ul></td>
-    <td style="width: 33%; vertical-align: top;"><ul>
+        <li><a href="api/m_n_kappa.HeadedStud.html#m_n_kappa.HeadedStud.slip">slip() (m_n_kappa.HeadedStud method)</a>
+
+        <ul>
+          <li><a href="api/m_n_kappa.ShearConnector.html#m_n_kappa.ShearConnector.slip">(m_n_kappa.ShearConnector method)</a>
+</li>
+        </ul></li>
+        <li><a href="api/m_n_kappa.HeadedStud.html#m_n_kappa.HeadedStud.slips">slips() (m_n_kappa.HeadedStud method)</a>
+
+        <ul>
+          <li><a href="api/m_n_kappa.ShearConnector.html#m_n_kappa.ShearConnector.slips">(m_n_kappa.ShearConnector method)</a>
+</li>
+        </ul></li>
+        <li><a href="api/m_n_kappa.matrices.LinearEquationsSystem.html#m_n_kappa.matrices.LinearEquationsSystem.solve">solve() (m_n_kappa.matrices.LinearEquationsSystem method)</a>
+</li>
         <li><a href="api/m_n_kappa.solver.Solver.html#m_n_kappa.solver.Solver">Solver (class in m_n_kappa.solver)</a>
 </li>
         <li><a href="api/m_n_kappa.MKappaByConstantCurvature.html#m_n_kappa.MKappaByConstantCurvature.solver">solver (m_n_kappa.MKappaByConstantCurvature property)</a>
@@ -1678,6 +2269,10 @@
           <li><a href="api/m_n_kappa.MKappaByStrainPosition.html#m_n_kappa.MKappaByStrainPosition.solver">(m_n_kappa.MKappaByStrainPosition property)</a>
 </li>
           <li><a href="api/m_n_kappa.points.MKappa.html#m_n_kappa.points.MKappa.solver">(m_n_kappa.points.MKappa property)</a>
+</li>
+          <li><a href="api/m_n_kappa.points.MNByStrain.html#m_n_kappa.points.MNByStrain.solver">(m_n_kappa.points.MNByStrain property)</a>
+</li>
+          <li><a href="api/m_n_kappa.points.Point.html#m_n_kappa.points.Point.solver">(m_n_kappa.points.Point property)</a>
 </li>
         </ul></li>
         <li><a href="api/m_n_kappa.Concrete.html#m_n_kappa.Concrete.sort_strains">sort_strains() (m_n_kappa.Concrete method)</a>
@@ -1700,6 +2295,8 @@
           <li><a href="api/m_n_kappa.Steel.html#m_n_kappa.Steel.sort_strains_ascending">(m_n_kappa.Steel method)</a>
 </li>
         </ul></li>
+    </ul></td>
+    <td style="width: 33%; vertical-align: top;"><ul>
         <li><a href="api/m_n_kappa.Concrete.html#m_n_kappa.Concrete.sort_strains_descending">sort_strains_descending() (m_n_kappa.Concrete method)</a>
 
         <ul>
@@ -1727,19 +2324,67 @@
         <ul>
           <li><a href="api/m_n_kappa.crosssection.ComputationCrosssectionStrainAdd.html#m_n_kappa.crosssection.ComputationCrosssectionStrainAdd.strain">(m_n_kappa.crosssection.ComputationCrosssectionStrainAdd property)</a>
 </li>
+          <li><a href="api/m_n_kappa.MomentAxialForce.html#m_n_kappa.MomentAxialForce.strain">(m_n_kappa.MomentAxialForce property)</a>
+</li>
+          <li><a href="api/m_n_kappa.points.MNByStrain.html#m_n_kappa.points.MNByStrain.strain">(m_n_kappa.points.MNByStrain property)</a>
+</li>
           <li><a href="api/m_n_kappa.section.ComputationSectionStrain.html#m_n_kappa.section.ComputationSectionStrain.strain">(m_n_kappa.section.ComputationSectionStrain property)</a>
 </li>
         </ul></li>
         <li><a href="api/m_n_kappa.general.strain.html#m_n_kappa.general.strain">strain() (in module m_n_kappa.general)</a>
 </li>
-        <li><a href="api/m_n_kappa.MKappaByStrainPosition.html#m_n_kappa.MKappaByStrainPosition.strain_position">strain_position (m_n_kappa.MKappaByStrainPosition property)</a>
+        <li><a href="api/m_n_kappa.MomentAxialForce.html#m_n_kappa.MomentAxialForce.strain_difference">strain_difference (m_n_kappa.MomentAxialForce property)</a>
+
+        <ul>
+          <li><a href="api/m_n_kappa.MomentAxialForceCurvature.html#m_n_kappa.MomentAxialForceCurvature.strain_difference">(m_n_kappa.MomentAxialForceCurvature property)</a>
 </li>
+          <li><a href="api/m_n_kappa.points.AxialForcePoint.html#m_n_kappa.points.AxialForcePoint.strain_difference">(m_n_kappa.points.AxialForcePoint property)</a>
+</li>
+        </ul></li>
+        <li><a href="api/m_n_kappa.curves_m_n_kappa.MNKappaCurvePoints.html#m_n_kappa.curves_m_n_kappa.MNKappaCurvePoints.strain_differences">strain_differences (m_n_kappa.curves_m_n_kappa.MNKappaCurvePoints property)</a>
+</li>
+        <li><a href="api/m_n_kappa.MKappaByStrainPosition.html#m_n_kappa.MKappaByStrainPosition.strain_position">strain_position (m_n_kappa.MKappaByStrainPosition property)</a>
+
+        <ul>
+          <li><a href="api/m_n_kappa.MomentAxialForceCurvature.html#m_n_kappa.MomentAxialForceCurvature.strain_position">(m_n_kappa.MomentAxialForceCurvature property)</a>
+</li>
+        </ul></li>
+        <li><a href="api/m_n_kappa.curves_m_n_kappa.MNCurvatureCurve.html#m_n_kappa.curves_m_n_kappa.MNCurvatureCurve.strain_positions">strain_positions (m_n_kappa.curves_m_n_kappa.MNCurvatureCurve property)</a>
+
+        <ul>
+          <li><a href="api/m_n_kappa.MNCurve.html#m_n_kappa.MNCurve.strain_positions">(m_n_kappa.MNCurve property)</a>
+</li>
+        </ul></li>
+        <li><a href="api/m_n_kappa.Crosssection.html#m_n_kappa.Crosssection.strain_positions">strain_positions() (m_n_kappa.Crosssection method)</a>
+
+        <ul>
+          <li><a href="api/m_n_kappa.crosssection.ComputationCrosssection.html#m_n_kappa.crosssection.ComputationCrosssection.strain_positions">(m_n_kappa.crosssection.ComputationCrosssection method)</a>
+</li>
+          <li><a href="api/m_n_kappa.crosssection.ComputationCrosssectionCurvature.html#m_n_kappa.crosssection.ComputationCrosssectionCurvature.strain_positions">(m_n_kappa.crosssection.ComputationCrosssectionCurvature method)</a>
+</li>
+          <li><a href="api/m_n_kappa.crosssection.ComputationCrosssectionStrain.html#m_n_kappa.crosssection.ComputationCrosssectionStrain.strain_positions">(m_n_kappa.crosssection.ComputationCrosssectionStrain method)</a>
+</li>
+          <li><a href="api/m_n_kappa.crosssection.ComputationCrosssectionStrainAdd.html#m_n_kappa.crosssection.ComputationCrosssectionStrainAdd.strain_positions">(m_n_kappa.crosssection.ComputationCrosssectionStrainAdd method)</a>
+</li>
+          <li><a href="api/m_n_kappa.crosssection.CrossSectionBoundaries.html#m_n_kappa.crosssection.CrossSectionBoundaries.strain_positions">(m_n_kappa.crosssection.CrossSectionBoundaries method)</a>
+</li>
+          <li><a href="api/m_n_kappa.Section.html#m_n_kappa.Section.strain_positions">(m_n_kappa.Section method)</a>
+</li>
+          <li><a href="api/m_n_kappa.section.ComputationSection.html#m_n_kappa.section.ComputationSection.strain_positions">(m_n_kappa.section.ComputationSection method)</a>
+</li>
+          <li><a href="api/m_n_kappa.section.ComputationSectionCurvature.html#m_n_kappa.section.ComputationSectionCurvature.strain_positions">(m_n_kappa.section.ComputationSectionCurvature method)</a>
+</li>
+          <li><a href="api/m_n_kappa.section.ComputationSectionStrain.html#m_n_kappa.section.ComputationSectionStrain.strain_positions">(m_n_kappa.section.ComputationSectionStrain method)</a>
+</li>
+        </ul></li>
         <li><a href="api/m_n_kappa.general.StrainPosition.html#m_n_kappa.general.StrainPosition">StrainPosition (class in m_n_kappa.general)</a>
 </li>
         <li><a href="api/m_n_kappa.Concrete.html#m_n_kappa.Concrete.strains">strains (m_n_kappa.Concrete property)</a>
 
         <ul>
           <li><a href="api/m_n_kappa.curves_m_kappa.MKappaCurvePoints.html#m_n_kappa.curves_m_kappa.MKappaCurvePoints.strains">(m_n_kappa.curves_m_kappa.MKappaCurvePoints property)</a>
+</li>
+          <li><a href="api/m_n_kappa.curves_m_n_kappa.MNKappaCurvePoints.html#m_n_kappa.curves_m_n_kappa.MNKappaCurvePoints.strains">(m_n_kappa.curves_m_n_kappa.MNKappaCurvePoints property)</a>
 </li>
           <li><a href="api/m_n_kappa.Material.html#m_n_kappa.Material.strains">(m_n_kappa.Material property)</a>
 </li>
@@ -1822,12 +2467,50 @@
         </ul></li>
         <li><a href="api/m_n_kappa.material.StressStrain.html#m_n_kappa.material.StressStrain">StressStrain (class in m_n_kappa.material)</a>
 </li>
-        <li><a href="api/m_n_kappa.MKappaByConstantCurvature.html#m_n_kappa.MKappaByConstantCurvature.successful">successful (m_n_kappa.MKappaByConstantCurvature property)</a>
+        <li><a href="api/m_n_kappa.curves_m_n_kappa.MNCurvatureCurve.html#m_n_kappa.curves_m_n_kappa.MNCurvatureCurve.sub_cross_sections">sub_cross_sections (m_n_kappa.curves_m_n_kappa.MNCurvatureCurve property)</a>
 
         <ul>
+          <li><a href="api/m_n_kappa.MNCurve.html#m_n_kappa.MNCurve.sub_cross_sections">(m_n_kappa.MNCurve property)</a>
+</li>
+          <li><a href="api/m_n_kappa.MNKappaCurve.html#m_n_kappa.MNKappaCurve.sub_cross_sections">(m_n_kappa.MNKappaCurve property)</a>
+</li>
+          <li><a href="api/m_n_kappa.MomentAxialForce.html#m_n_kappa.MomentAxialForce.sub_cross_sections">(m_n_kappa.MomentAxialForce property)</a>
+</li>
+          <li><a href="api/m_n_kappa.MomentAxialForceCurvature.html#m_n_kappa.MomentAxialForceCurvature.sub_cross_sections">(m_n_kappa.MomentAxialForceCurvature property)</a>
+</li>
+          <li><a href="api/m_n_kappa.points.AxialForcePoint.html#m_n_kappa.points.AxialForcePoint.sub_cross_sections">(m_n_kappa.points.AxialForcePoint property)</a>
+</li>
+        </ul></li>
+        <li><a href="api/m_n_kappa.matrices.Identity.html#m_n_kappa.matrices.Identity.subtract">subtract() (m_n_kappa.matrices.Identity method)</a>
+
+        <ul>
+          <li><a href="api/m_n_kappa.matrices.Jacobian.html#m_n_kappa.matrices.Jacobian.subtract">(m_n_kappa.matrices.Jacobian method)</a>
+</li>
+          <li><a href="api/m_n_kappa.matrices.Matrix.html#m_n_kappa.matrices.Matrix.subtract">(m_n_kappa.matrices.Matrix method)</a>
+</li>
+          <li><a href="api/m_n_kappa.matrices.Vector.html#m_n_kappa.matrices.Vector.subtract">(m_n_kappa.matrices.Vector method)</a>
+</li>
+        </ul></li>
+        <li><a href="api/m_n_kappa.fitting.GaussNewton.html#m_n_kappa.fitting.GaussNewton.successful">successful (m_n_kappa.fitting.GaussNewton property)</a>
+
+        <ul>
+          <li><a href="api/m_n_kappa.fitting.LevenbergMarquardt.html#m_n_kappa.fitting.LevenbergMarquardt.successful">(m_n_kappa.fitting.LevenbergMarquardt property)</a>
+</li>
+          <li><a href="api/m_n_kappa.MKappaByConstantCurvature.html#m_n_kappa.MKappaByConstantCurvature.successful">(m_n_kappa.MKappaByConstantCurvature property)</a>
+</li>
           <li><a href="api/m_n_kappa.MKappaByStrainPosition.html#m_n_kappa.MKappaByStrainPosition.successful">(m_n_kappa.MKappaByStrainPosition property)</a>
 </li>
+          <li><a href="api/m_n_kappa.MomentAxialForce.html#m_n_kappa.MomentAxialForce.successful">(m_n_kappa.MomentAxialForce property)</a>
+</li>
+          <li><a href="api/m_n_kappa.MomentAxialForceCurvature.html#m_n_kappa.MomentAxialForceCurvature.successful">(m_n_kappa.MomentAxialForceCurvature property)</a>
+</li>
+          <li><a href="api/m_n_kappa.points.AxialForcePoint.html#m_n_kappa.points.AxialForcePoint.successful">(m_n_kappa.points.AxialForcePoint property)</a>
+</li>
           <li><a href="api/m_n_kappa.points.MKappa.html#m_n_kappa.points.MKappa.successful">(m_n_kappa.points.MKappa property)</a>
+</li>
+          <li><a href="api/m_n_kappa.points.MNByStrain.html#m_n_kappa.points.MNByStrain.successful">(m_n_kappa.points.MNByStrain property)</a>
+</li>
+          <li><a href="api/m_n_kappa.points.Point.html#m_n_kappa.points.Point.successful">(m_n_kappa.points.Point property)</a>
 </li>
         </ul></li>
     </ul></td>
@@ -1856,6 +2539,14 @@
         </ul></li>
         <li><a href="api/m_n_kappa.Concrete.html#m_n_kappa.Concrete.tension_stress_strain_type">tension_stress_strain_type (m_n_kappa.Concrete property)</a>
 </li>
+        <li><a href="api/m_n_kappa.matrices.Vector.html#m_n_kappa.matrices.Vector.tensor_product">tensor_product() (m_n_kappa.matrices.Vector method)</a>
+</li>
+        <li><a href="api/m_n_kappa.fitting.GaussNewton.html#m_n_kappa.fitting.GaussNewton.tolerance">tolerance (m_n_kappa.fitting.GaussNewton property)</a>
+
+        <ul>
+          <li><a href="api/m_n_kappa.fitting.LevenbergMarquardt.html#m_n_kappa.fitting.LevenbergMarquardt.tolerance">(m_n_kappa.fitting.LevenbergMarquardt property)</a>
+</li>
+        </ul></li>
         <li><a href="api/m_n_kappa.Circle.html#m_n_kappa.Circle.top_edge">top_edge (m_n_kappa.Circle property)</a>
 
         <ul>
@@ -1870,6 +2561,8 @@
           <li><a href="api/m_n_kappa.crosssection.ComputationCrosssectionStrainAdd.html#m_n_kappa.crosssection.ComputationCrosssectionStrainAdd.top_edge">(m_n_kappa.crosssection.ComputationCrosssectionStrainAdd property)</a>
 </li>
           <li><a href="api/m_n_kappa.crosssection.CrossSectionBoundaries.html#m_n_kappa.crosssection.CrossSectionBoundaries.top_edge">(m_n_kappa.crosssection.CrossSectionBoundaries property)</a>
+</li>
+          <li><a href="api/m_n_kappa.Geometry.html#m_n_kappa.Geometry.top_edge">(m_n_kappa.Geometry property)</a>
 </li>
           <li><a href="api/m_n_kappa.Rectangle.html#m_n_kappa.Rectangle.top_edge">(m_n_kappa.Rectangle property)</a>
 </li>
@@ -1922,6 +2615,14 @@
           <li><a href="api/m_n_kappa.crosssection.ComputationCrosssectionStrain.html#m_n_kappa.crosssection.ComputationCrosssectionStrain.total_moment">(m_n_kappa.crosssection.ComputationCrosssectionStrain method)</a>
 </li>
           <li><a href="api/m_n_kappa.crosssection.ComputationCrosssectionStrainAdd.html#m_n_kappa.crosssection.ComputationCrosssectionStrainAdd.total_moment">(m_n_kappa.crosssection.ComputationCrosssectionStrainAdd method)</a>
+</li>
+        </ul></li>
+        <li><a href="api/m_n_kappa.matrices.Identity.html#m_n_kappa.matrices.Identity.transpose">transpose() (m_n_kappa.matrices.Identity method)</a>
+
+        <ul>
+          <li><a href="api/m_n_kappa.matrices.Jacobian.html#m_n_kappa.matrices.Jacobian.transpose">(m_n_kappa.matrices.Jacobian method)</a>
+</li>
+          <li><a href="api/m_n_kappa.matrices.Matrix.html#m_n_kappa.matrices.Matrix.transpose">(m_n_kappa.matrices.Matrix method)</a>
 </li>
         </ul></li>
         <li><a href="api/m_n_kappa.loading.ABCSingleSpan.html#m_n_kappa.loading.ABCSingleSpan.transversal_shear">transversal_shear() (m_n_kappa.loading.ABCSingleSpan method)</a>
@@ -1978,14 +2679,28 @@
   <h2>V</h2>
   <table style="width: 100%" class="indextable genindextable"><tr>
     <td style="width: 33%; vertical-align: top;"><ul>
-        <li><a href="api/m_n_kappa.solver.Bisection.html#m_n_kappa.solver.Bisection.variable">variable (m_n_kappa.solver.Bisection property)</a>
+        <li><a href="api/m_n_kappa.MKappaByConstantCurvature.html#m_n_kappa.MKappaByConstantCurvature.variable">variable (m_n_kappa.MKappaByConstantCurvature property)</a>
 
         <ul>
+          <li><a href="api/m_n_kappa.MKappaByStrainPosition.html#m_n_kappa.MKappaByStrainPosition.variable">(m_n_kappa.MKappaByStrainPosition property)</a>
+</li>
+          <li><a href="api/m_n_kappa.points.MKappa.html#m_n_kappa.points.MKappa.variable">(m_n_kappa.points.MKappa property)</a>
+</li>
+          <li><a href="api/m_n_kappa.points.MNByStrain.html#m_n_kappa.points.MNByStrain.variable">(m_n_kappa.points.MNByStrain property)</a>
+</li>
+          <li><a href="api/m_n_kappa.points.Point.html#m_n_kappa.points.Point.variable">(m_n_kappa.points.Point property)</a>
+</li>
+          <li><a href="api/m_n_kappa.solver.Bisection.html#m_n_kappa.solver.Bisection.variable">(m_n_kappa.solver.Bisection property)</a>
+</li>
           <li><a href="api/m_n_kappa.solver.Newton.html#m_n_kappa.solver.Newton.variable">(m_n_kappa.solver.Newton property)</a>
 </li>
           <li><a href="api/m_n_kappa.solver.Solver.html#m_n_kappa.solver.Solver.variable">(m_n_kappa.solver.Solver property)</a>
 </li>
         </ul></li>
+    </ul></td>
+    <td style="width: 33%; vertical-align: top;"><ul>
+        <li><a href="api/m_n_kappa.matrices.Vector.html#m_n_kappa.matrices.Vector">Vector (class in m_n_kappa.matrices)</a>
+</li>
     </ul></td>
   </tr></table>
 </section>
@@ -2028,6 +2743,22 @@
   <h2>X</h2>
   <table style="width: 100%" class="indextable genindextable"><tr>
     <td style="width: 33%; vertical-align: top;"><ul>
+        <li><a href="api/m_n_kappa.fitting.GaussNewton.html#m_n_kappa.fitting.GaussNewton.x_0">x_0 (m_n_kappa.fitting.GaussNewton property)</a>
+
+        <ul>
+          <li><a href="api/m_n_kappa.fitting.LevenbergMarquardt.html#m_n_kappa.fitting.LevenbergMarquardt.x_0">(m_n_kappa.fitting.LevenbergMarquardt property)</a>
+</li>
+        </ul></li>
+        <li><a href="api/m_n_kappa.fitting.GaussNewton.html#m_n_kappa.fitting.GaussNewton.x_i">x_i (m_n_kappa.fitting.GaussNewton property)</a>
+
+        <ul>
+          <li><a href="api/m_n_kappa.fitting.LevenbergMarquardt.html#m_n_kappa.fitting.LevenbergMarquardt.x_i">(m_n_kappa.fitting.LevenbergMarquardt property)</a>
+</li>
+          <li><a href="api/m_n_kappa.matrices.Jacobian.html#m_n_kappa.matrices.Jacobian.x_i">(m_n_kappa.matrices.Jacobian property)</a>
+</li>
+        </ul></li>
+    </ul></td>
+    <td style="width: 33%; vertical-align: top;"><ul>
         <li><a href="api/m_n_kappa.solver.Bisection.html#m_n_kappa.solver.Bisection.x_n">x_n (m_n_kappa.solver.Bisection property)</a>
 
         <ul>
@@ -2036,8 +2767,6 @@
           <li><a href="api/m_n_kappa.solver.Solver.html#m_n_kappa.solver.Solver.x_n">(m_n_kappa.solver.Solver property)</a>
 </li>
         </ul></li>
-    </ul></td>
-    <td style="width: 33%; vertical-align: top;"><ul>
         <li><a href="api/m_n_kappa.solver.Bisection.html#m_n_kappa.solver.Bisection.x_n_plus_1">x_n_plus_1 (m_n_kappa.solver.Bisection property)</a>
 
         <ul>
@@ -2090,7 +2819,14 @@
             
           </div>
           <div class="right-details">
-            
+            <div class="icons">
+              <a class="muted-link " href="https://github.com/JohannesSchorr/M-N-Kappa" aria-label="GitHub">
+                <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 16 16">
+                    <path fill-rule="evenodd" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0 0 16 8c0-4.42-3.58-8-8-8z"></path>
+                </svg>
+            </a>
+              
+            </div>
           </div>
         </div>
         

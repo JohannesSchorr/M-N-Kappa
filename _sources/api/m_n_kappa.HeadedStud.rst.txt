@@ -1,0 +1,61 @@
+﻿m\_n\_kappa.HeadedStud
+======================
+
+.. currentmodule:: m_n_kappa
+
+.. autoclass:: HeadedStud
+
+   
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      
+         ~HeadedStud.P_cm
+      
+      
+         ~HeadedStud.P_sm
+      
+      
+      
+         ~HeadedStud.alpha
+      
+      
+         ~HeadedStud.k_t
+      
+      
+         ~HeadedStud.new
+      
+      
+         ~HeadedStud.shear_load
+      
+      
+         ~HeadedStud.slip
+      
+      
+         ~HeadedStud.slips
+      
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+   
+      ~HeadedStud.P
+      ~HeadedStud.P_max
+      ~HeadedStud.b_o
+      ~HeadedStud.d
+      ~HeadedStud.f_cm
+      ~HeadedStud.f_u
+      ~HeadedStud.h_p
+      ~HeadedStud.h_sc
+      ~HeadedStud.load_slips
+      ~HeadedStud.n_r
+      ~HeadedStud.position
+      ~HeadedStud.s_max
+   
+   

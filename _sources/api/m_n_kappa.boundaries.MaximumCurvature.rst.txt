@@ -1,0 +1,35 @@
+﻿m\_n\_kappa.boundaries.MaximumCurvature
+=======================================
+
+.. currentmodule:: m_n_kappa.boundaries
+
+.. autoclass:: MaximumCurvature
+
+   
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      
+      
+         ~MaximumCurvature.compute
+      
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+   
+      ~MaximumCurvature.curvature
+      ~MaximumCurvature.start
+      ~MaximumCurvature.other
+      ~MaximumCurvature.maximum_positive_section_strains
+      ~MaximumCurvature.maximum_negative_section_strains
+      ~MaximumCurvature.negative
+      ~MaximumCurvature.positive
+   
+   

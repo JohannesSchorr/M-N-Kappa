@@ -19,10 +19,19 @@
          ~CrossSectionBoundaries.concrete_slab_width
       
       
+         ~CrossSectionBoundaries.decisive_maximum_negative_strain_position
+      
+      
+         ~CrossSectionBoundaries.decisive_maximum_positive_strain_position
+      
+      
          ~CrossSectionBoundaries.get_boundaries
       
       
          ~CrossSectionBoundaries.get_boundary_conditions
+      
+      
+         ~CrossSectionBoundaries.get_sub_cross_sections
       
       
          ~CrossSectionBoundaries.left_edge
@@ -41,6 +50,9 @@
       
       
          ~CrossSectionBoundaries.sections_of_type
+      
+      
+         ~CrossSectionBoundaries.strain_positions
       
    
    

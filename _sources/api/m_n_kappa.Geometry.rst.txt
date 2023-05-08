@@ -30,7 +30,9 @@
 
    .. autosummary::
    
+      ~Geometry.bottom_edge
       ~Geometry.edges
       ~Geometry.sides
+      ~Geometry.top_edge
    
    

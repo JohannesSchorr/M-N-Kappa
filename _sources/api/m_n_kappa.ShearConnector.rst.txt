@@ -1,0 +1,41 @@
+﻿m\_n\_kappa.ShearConnector
+==========================
+
+.. currentmodule:: m_n_kappa
+
+.. autoclass:: ShearConnector
+
+   
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      
+      
+         ~ShearConnector.new
+      
+      
+         ~ShearConnector.shear_load
+      
+      
+         ~ShearConnector.slip
+      
+      
+         ~ShearConnector.slips
+      
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+   
+      ~ShearConnector.P_max
+      ~ShearConnector.load_slips
+      ~ShearConnector.position
+      ~ShearConnector.s_max
+   
+   

@@ -32,5 +32,6 @@
       ~MKappaCurvePoint.neutral_axis
       ~MKappaCurvePoint.cross_section
       ~MKappaCurvePoint.strain_position
+      ~MKappaCurvePoint.checks
    
    

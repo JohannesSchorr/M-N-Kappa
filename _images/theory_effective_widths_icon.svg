@@ -2,13 +2,13 @@
 <!-- Created with Inkscape (http://www.inkscape.org/) -->
 
 <svg
-   width="100mm"
-   height="66mm"
-   viewBox="0 0 100 66"
+   width="50mm"
+   height="50mm"
+   viewBox="0 0 50 50"
    version="1.1"
    id="svg50957"
    inkscape:version="1.2.2 (732a01da63, 2022-12-09)"
-   sodipodi:docname="theory_effective_widths_badget.svg"
+   sodipodi:docname="theory_effective_widths_icon.svg"
    inkscape:export-filename="theory_coordinates_badget.png"
    inkscape:export-xdpi="96"
    inkscape:export-ydpi="96"
@@ -28,13 +28,13 @@
      inkscape:document-units="mm"
      showgrid="false"
      showguides="true"
-     inkscape:zoom="5.6606889"
-     inkscape:cx="190.34786"
-     inkscape:cy="68.984537"
-     inkscape:window-width="1280"
-     inkscape:window-height="668"
-     inkscape:window-x="-6"
-     inkscape:window-y="-6"
+     inkscape:zoom="2.8303445"
+     inkscape:cx="157.04802"
+     inkscape:cy="132.49271"
+     inkscape:window-width="1920"
+     inkscape:window-height="1027"
+     inkscape:window-x="-8"
+     inkscape:window-y="-8"
      inkscape:window-maximized="1"
      inkscape:current-layer="layer1" />
   <defs
@@ -126,8 +126,8 @@
        id="rect51130"
        width="49.504951"
        height="49.504951"
-       x="25.247524"
-       y="8.2475243"
+       x="0.2475245"
+       y="0.2475245"
        rx="4.9504952"
        ry="4.9504952" />
     <rect
@@ -135,48 +135,48 @@
        id="rect68722"
        width="33.114693"
        height="7.1093693"
-       x="33.488873"
-       y="23.236599" />
+       x="8.4888725"
+       y="15.236599" />
     <rect
        style="fill:#ffffff;fill-opacity:1;fill-rule:evenodd;stroke:#ffffff;stroke-width:0.499999;stroke-dasharray:none"
        id="rect68724"
        width="19.270134"
        height="1.4967093"
-       x="40.59824"
-       y="30.378067" />
+       x="15.59824"
+       y="22.378067" />
     <rect
        style="fill:#ffffff;fill-opacity:1;fill-rule:evenodd;stroke:#ffffff;stroke-width:0.499999;stroke-dasharray:none"
        id="rect68724-8"
        width="19.270134"
        height="1.4967093"
-       x="40.59824"
-       y="49.017235" />
+       x="15.59824"
+       y="41.017235" />
     <rect
        style="fill:#ffffff;fill-opacity:1;fill-rule:evenodd;stroke:#ffffff;stroke-width:0.487429;stroke-dasharray:none"
        id="rect68724-3"
        width="1.5816998"
        height="17.329546"
-       x="49.442455"
-       y="31.874777" />
+       x="24.442455"
+       y="23.874777" />
     <path
        style="fill:#ffffff;fill-opacity:1;fill-rule:evenodd;stroke:#ffffff;stroke-width:0.499999;stroke-dasharray:none"
-       d="M 36.147444,19.733187 V 16.655494"
+       d="M 11.147444,11.733187 V 8.6554942"
        id="path69021" />
     <path
        style="fill:#ffffff;fill-opacity:1;fill-rule:evenodd;stroke:#ffffff;stroke-width:0.499999;stroke-dasharray:none"
-       d="M 50.049999,19.686447 V 16.608754"
+       d="M 25.049999,11.686447 V 8.6087542"
        id="path69021-4" />
     <path
        style="fill:#ffffff;fill-opacity:1;fill-rule:evenodd;stroke:#ffffff;stroke-width:0.499999;stroke-dasharray:none"
-       d="M 63.927367,19.686448 V 16.608755"
+       d="M 38.927367,11.686448 V 8.6087552"
        id="path69021-0" />
     <path
-       style="fill:#ffffff;fill-rule:evenodd;stroke:#ffffff;stroke-width:0.497;stroke-dasharray:none;marker-start:url(#marker3243);marker-end:url(#marker3400);fill-opacity:1"
-       d="m 52.079116,18.177782 h 9.843353"
+       style="fill:#ffffff;fill-opacity:1;fill-rule:evenodd;stroke:#ffffff;stroke-width:0.497;stroke-dasharray:none;marker-start:url(#marker3243);marker-end:url(#marker3400)"
+       d="m 27.079116,10.177782 h 9.843353"
        id="path2188" />
     <path
        style="display:inline;fill:#ffffff;fill-opacity:1;fill-rule:evenodd;stroke:#ffffff;stroke-width:0.497;stroke-dasharray:none;marker-start:url(#marker3243-1);marker-end:url(#marker3400-1)"
-       d="m 38.173049,18.182048 h 9.843353"
+       d="m 13.173049,10.182048 h 9.843353"
        id="path2188-8" />
   </g>
 </svg>

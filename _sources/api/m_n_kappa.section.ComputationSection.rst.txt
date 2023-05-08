@@ -22,13 +22,22 @@
          ~ComputationSection.maximum_negative_strain
       
       
+         ~ComputationSection.maximum_negative_strain_position
+      
+      
          ~ComputationSection.maximum_positive_strain
+      
+      
+         ~ComputationSection.maximum_positive_strain_position
       
       
          ~ComputationSection.moment
       
       
          ~ComputationSection.section_strains
+      
+      
+         ~ComputationSection.strain_positions
       
    
    

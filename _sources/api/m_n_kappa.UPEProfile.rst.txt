@@ -15,13 +15,13 @@
 
    .. autosummary::
    
-      ~UPEProfile.centroid_y
-      ~UPEProfile.geometries
-      ~UPEProfile.h
-      ~UPEProfile.h_w
       ~UPEProfile.top_edge
       ~UPEProfile.t_f
       ~UPEProfile.b_f
       ~UPEProfile.t_w
+      ~UPEProfile.h_w
+      ~UPEProfile.h
+      ~UPEProfile.centroid_y
+      ~UPEProfile.geometries
    
    

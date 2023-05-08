@@ -19,7 +19,16 @@
          ~ComputationCrosssection.concrete_slab_width
       
       
+         ~ComputationCrosssection.decisive_maximum_negative_strain_position
+      
+      
+         ~ComputationCrosssection.decisive_maximum_positive_strain_position
+      
+      
          ~ComputationCrosssection.get_boundary_conditions
+      
+      
+         ~ComputationCrosssection.get_sub_cross_sections
       
       
          ~ComputationCrosssection.girder_sections_axial_force
@@ -50,6 +59,9 @@
       
       
          ~ComputationCrosssection.slab_sections_moment
+      
+      
+         ~ComputationCrosssection.strain_positions
       
       
          ~ComputationCrosssection.total_axial_force

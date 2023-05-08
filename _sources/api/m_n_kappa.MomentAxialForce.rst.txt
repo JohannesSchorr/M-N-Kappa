@@ -1,0 +1,36 @@
+﻿m\_n\_kappa.MomentAxialForce
+============================
+
+.. currentmodule:: m_n_kappa
+
+.. autoclass:: MomentAxialForce
+
+   
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      
+      
+         ~MomentAxialForce.moment
+      
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+   
+      ~MomentAxialForce.axial_force
+      ~MomentAxialForce.computed_sub_cross_sections
+      ~MomentAxialForce.curvature
+      ~MomentAxialForce.not_successful_reason
+      ~MomentAxialForce.strain
+      ~MomentAxialForce.strain_difference
+      ~MomentAxialForce.sub_cross_sections
+      ~MomentAxialForce.successful
+   
+   

@@ -1,6 +1,6 @@
 :hide-toc:
 
-.. image:: ./_static/logo/m_kappa_logo.svg
+.. image:: ./_static/logo/m_n_kappa_logo.svg
 
 M-N-Kappa
 *********
@@ -17,14 +17,20 @@ The resulting relationship between bending moment *M* and curvature :math:`\kapp
 empowers to compute the deformation of a beam under a given load considering
 non-linear effects like cracking of concrete, plasticizing of steel, etc.
 
+Furthermore, you may compute a composite-cross-section with two sub-cross-sections, where
+also axial-forces *N* and strain-differences :math:`\varepsilon_\mathrm{\Delta}`
+are considered.
+By this approach you may also consider the slip in the composite joint, the multi-linear
+load-slip-behaviour of shear-connectors and its effect on the deformation of the composite beam.
+
 **Features**
 
 - strain-based method considering multi-linear material models
 - distinction between bending and membran width of the concrete-slab
+- consideration of the multi-line shear-connector behaviour
 
 **Planned**
 
-- consideration of the multi-line shear-connector behaviour
 - computation of for beams with more than one span as well as cantilever beams
 
 .. grid:: 1 2 2 2

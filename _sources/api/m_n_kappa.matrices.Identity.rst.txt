@@ -1,0 +1,67 @@
+﻿m\_n\_kappa.matrices.Identity
+=============================
+
+.. currentmodule:: m_n_kappa.matrices
+
+.. autoclass:: Identity
+
+   
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      
+      
+         ~Identity.add
+      
+      
+         ~Identity.append
+      
+      
+         ~Identity.column
+      
+      
+         ~Identity.column_vector
+      
+      
+         ~Identity.diagonal
+      
+      
+         ~Identity.entry
+      
+      
+         ~Identity.multiply_by
+      
+      
+         ~Identity.orthonormal_triangular
+      
+      
+         ~Identity.replace
+      
+      
+         ~Identity.row
+      
+      
+         ~Identity.row_vector
+      
+      
+         ~Identity.subtract
+      
+      
+         ~Identity.transpose
+      
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+   
+      ~Identity.column_number
+      ~Identity.matrix
+      ~Identity.row_number
+   
+   

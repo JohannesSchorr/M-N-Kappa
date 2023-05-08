@@ -1,0 +1,25 @@
+﻿m\_n\_kappa.curves\_m\_n\_kappa.MNCurvatureCurve
+================================================
+
+.. currentmodule:: m_n_kappa.curves_m_n_kappa
+
+.. autoclass:: MNCurvatureCurve
+
+   
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+   
+      ~MNCurvatureCurve.axial_forces
+      ~MNCurvatureCurve.not_successful_reason
+      ~MNCurvatureCurve.points
+      ~MNCurvatureCurve.positive_curvature
+      ~MNCurvatureCurve.strain_positions
+      ~MNCurvatureCurve.sub_cross_sections
+   
+   

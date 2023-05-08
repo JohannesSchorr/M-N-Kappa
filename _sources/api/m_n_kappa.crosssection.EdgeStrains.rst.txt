@@ -15,8 +15,8 @@
 
    .. autosummary::
    
-      ~EdgeStrains.curvature
       ~EdgeStrains.bottom_edge_strain
       ~EdgeStrains.top_edge_strain
+      ~EdgeStrains.curvature
    
    

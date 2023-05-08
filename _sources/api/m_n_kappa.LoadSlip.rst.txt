@@ -1,0 +1,30 @@
+﻿m\_n\_kappa.LoadSlip
+====================
+
+.. currentmodule:: m_n_kappa
+
+.. autoclass:: LoadSlip
+
+   
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      
+      
+         ~LoadSlip.pair
+      
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+   
+      ~LoadSlip.load
+      ~LoadSlip.slip
+   
+   

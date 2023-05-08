@@ -1,0 +1,25 @@
+﻿m\_n\_kappa.MNKappaCurve
+========================
+
+.. currentmodule:: m_n_kappa
+
+.. autoclass:: MNKappaCurve
+
+   
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+   
+      ~MNKappaCurve.include_negative_curvature
+      ~MNKappaCurve.include_positive_curvature
+      ~MNKappaCurve.m_n_curve
+      ~MNKappaCurve.not_successful_reason
+      ~MNKappaCurve.points
+      ~MNKappaCurve.sub_cross_sections
+   
+   
