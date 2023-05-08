@@ -5,5 +5,5 @@ sphinx-design
 sphinx-toggleprompt>=0.3.1
 sphinx-copybutton>=v0.5.1
 nbsphinx>=0.8.11
-pandas=1.5.2
+pandas==1.5.2
 altair==4.2.0
