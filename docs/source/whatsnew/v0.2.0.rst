@@ -1,17 +1,49 @@
 .. _whatsnew020:
 
-What's new in 0.2.0 (?? 2023)
+What's new in 0.2.0 (8th of May 2023)
 ******************************************
 
 These are the changes in m_n_kappa 0.2.0.
-See :ref:`release` for a full changelog including other versions of pandas.
+See :ref:`release` for a full changelog including other versions of :mod:`m_n_kappa`.
 
 .. _whatsnew020.features:
 
 Features
 ========
 
-.. _whatsnew020.bug_fixes:
+.. _whatsnew020.features.computation:
 
-Bug Fixes
+Computation
+-----------
+- :math:`M`-:math:`N`-:math:`\kappa`-:math:`\varepsilon_\Delta`-curve (surface)
+  (see :ref:`theory.m_n_curvature_epsilon`)
+- beam-deformation considering :math:`M`-:math:`N`-:math:`\kappa`-:math:`\varepsilon_\mathrm{\Delta}`
+  along the beam and the load-slip-behaviour of shear-connectors
+  (see :ref:`theory.slip` & :ref:`theory.shear_connector`)
+
+.. _whatsnew020.features.templates:
+
+Templates
+---------
+A number of templates for cross-sections are provided now.
+The cross-sections are mainly steel, concrete and steel-concrete-composite.
+
+- :ref:`cross_section_template.slim_floor_i_profile`
+- :ref:`cross_section_template.asymmetric_steel_profile`
+- :ref:`cross_section_template.composite_beam`
+- :ref:`cross_section_template.composite_beam_with_longitudinal_steel_profile`
+- :ref:`cross_section_template.concrete_beam`
+- :ref:`cross_section_template.concrete_beam_with_flanges`
+- :ref:`cross_section_template.slim_floor_double_t_profile`
+- :ref:`cross_section_template.slim_floor_i_profile`
+- :ref:`cross_section_template.slim_floor_i_profile_with_concrete_flanges`
+- :ref:`cross_section_template.slim_floor_large_hat`
+- :ref:`cross_section_template.slim_floor_small_hat`
+- :ref:`cross_section_template.slim_floor_t_profile`
+- :ref:`cross_section_template.symmetric_steel_profile`
+
+
+.. .. _whatsnew020.bug_fixes:
+
+.. Bug Fixes
 =========
