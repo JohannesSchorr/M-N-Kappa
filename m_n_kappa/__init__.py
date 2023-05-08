@@ -22,4 +22,4 @@ from .loading import (
     SingleSpanSingleLoads,
     SingleSpan,
 )
-from .shearconnector import LoadSlip, ShearConnector, HeadedStud
+from .shearconnector import LoadSlip, ShearConnector, HeadedStud, equal_distanced_shear_connectors

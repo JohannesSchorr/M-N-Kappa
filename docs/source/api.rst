@@ -112,12 +112,19 @@ Shear connector
 
 .. currentmodule:: m_n_kappa
 
+.. rubric:: Classes
+
 .. autosummary::
    :toctree: api/
 
    LoadSlip
    ShearConnector
    HeadedStud
+
+.. rubric::
+   :toctree: api/
+
+   equal_distanced_shear_connectors
 
 .. _api.loading:
 
