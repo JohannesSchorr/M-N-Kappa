@@ -15,7 +15,7 @@ from .points import MKappaByStrainPosition, MKappaByConstantCurvature, MomentAxi
 from .curves_m_kappa import MKappaCurve
 from .curves_m_n_kappa import MNCurve, MNKappaCurve
 from .node import Node, CompositeNode
-from .deformation import Beam
+from .deformation import Beam, CompositeBeam
 from .loading import (
     SingleSpanUniformLoad,
     SingleLoad,

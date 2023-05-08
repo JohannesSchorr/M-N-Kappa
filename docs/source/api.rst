@@ -140,17 +140,31 @@ Loading
    SingleSpanSingleLoads
    SingleSpan
 
+.. _api.node:
+
+Node
+====
+
+.. py:currentmodule:: m_n_kappa
+
+.. autosummary::
+   :toctree: api/
+
+   Node
+   CompositeNode
+
+
 .. _api.beam:
 
-Beam
-====
+Deformation
+===========
 .. currentmodule:: m_n_kappa
 
 .. autosummary::
    :toctree: api/
 
    Beam
-   Node
+   CompositeBeam
 
 .. _api.developers:
 
