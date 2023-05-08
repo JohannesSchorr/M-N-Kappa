@@ -13,7 +13,7 @@ import sys
 project = "M-N-Kappa"
 copyright = "2023, Johannes Schorr"
 author = "Johannes Schorr"
-release = "0.1.0"
+release = "0.2.0"
 
 # -- General configuration ---------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#general-configuration
@@ -111,7 +111,7 @@ html_theme_options = {
     # "announcement": "<em>Important</em> ",
 }
 html_static_path = ["_static"]
-html_logo = "_static/logo/m_kappa_logo.png"
+html_logo = "_static/logo/m_n_kappa_logo.png"
 html_title = "<i>M</i>-<i>N</i>-<i>&#954</i>"
 html_css_files = [
     "css/custom.css",
