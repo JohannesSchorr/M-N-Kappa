@@ -1344,7 +1344,8 @@ class CrossSectionBoundaries(Crosssection):
            maximum possible positive curvature for the given cross-section
         """
         curvatures = determine_curvatures(
-            self._sections_maximum_strains, self._sections_minimum_strains
+            bottom_edge_strains=self._sections_maximum_strains,
+            top_edge_strains=self._sections_minimum_strains,
         )
         edge_strain = min(curvatures, key=operator.attrgetter("curvature"))
         return edge_strain
@@ -1358,7 +1359,8 @@ class CrossSectionBoundaries(Crosssection):
            maximum possible negative curvature for the given cross-section
         """
         curvatures = determine_curvatures(
-            self._sections_minimum_strains, self._sections_maximum_strains
+            bottom_edge_strains=self._sections_minimum_strains,
+            top_edge_strains=self._sections_maximum_strains,
         )
         edge_strains = max(curvatures, key=operator.attrgetter("curvature"))
         return edge_strains
