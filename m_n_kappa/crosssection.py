@@ -9,6 +9,7 @@ from .general import (
     StrainPosition,
     EffectiveWidths,
     EdgeStrains,
+    remove_duplicate_objects,
 )
 from .section import (
     Section,
@@ -1378,7 +1379,10 @@ class CrossSectionBoundaries(Crosssection):
             position_strain.append(section.top_edge_maximum_strain)
             position_strain.append(section.bottom_edge_maximum_strain)
         position_strain.sort(key=operator.attrgetter("position"))
-        return position_strain
+        position_strain = remove_duplicate_objects(
+            position_strain, operator.attrgetter("position", "strain", "material")
+        )
+        return list(position_strain)
 
     def _get_sections_minimum_strain(self) -> list[StrainPosition]:
         """
@@ -1393,7 +1397,10 @@ class CrossSectionBoundaries(Crosssection):
             position_strain.append(section.top_edge_minimum_strain)
             position_strain.append(section.bottom_edge_minimum_strain)
         position_strain.sort(key=operator.attrgetter("position"))
-        return position_strain
+        position_strain = remove_duplicate_objects(
+            position_strain, operator.attrgetter("position", "strain", "material")
+        )
+        return list(position_strain)
 
     def _create_computation_cross_section(
         self,
