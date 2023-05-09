@@ -551,5 +551,48 @@ class TestGetBoundariesCompositeSectionWithReinforcement(TestCase):
         )
 
 
+class TestGetBoundariesCompositeCrossSection(TestCase):
+    def setUp(self):
+        self.beam_length = 5000
+        self.t_fo = 10.7
+        self.girder = IProfile(
+            top_edge=130,
+            t_w=7.1,
+            h_w=300.0 - 2.0 * self.t_fo,
+            t_fo=self.t_fo,
+            b_fo=150.0,
+        )
+        self.steel = Steel(f_y=418.0, f_u=496.0, failure_strain=0.15)
+        self.steel_girder = self.girder + self.steel
+        self.slab = Rectangle(top_edge=0.0, bottom_edge=130 - 58, width=1250)
+        self.concrete = Concrete(
+            f_cm=45.28,
+            tension_stress_strain_type="consider opening behaviour",
+        )
+        self.concrete_slab = self.slab + self.concrete
+        self.top_layer = RebarLayer(
+            rebar_diameter=8,
+            centroid_z=20,
+            rebar_horizontal_distance=150,
+            width=1250 - 5,
+        )
+        self.rebar_material = Reinforcement(
+            f_s=500,
+            f_su=500 * 1.05,
+            failure_strain=0.025,
+        )
+        self.rebar_top_layer = self.top_layer + self.rebar_material
+        self.cross_section = (
+            self.steel_girder + self.concrete_slab + self.rebar_top_layer
+        )
+        self.boundaries = self.cross_section.get_boundary_conditions()
+
+    def test_positive_maximum_curvature(self):
+        self.assertAlmostEqual(
+            self.boundaries.positive.maximum_curvature.curvature,
+            (0.0035 + 0.15) / (130 + 300),
+        )
+
+
 if __name__ == "__main__":
     main()
