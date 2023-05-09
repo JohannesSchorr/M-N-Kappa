@@ -745,7 +745,7 @@ class CompositeBeam(Beam):
         """
         if load.loading == 0.0:
             return 0.0
-        slip = self._compute_slip(load)
+        slip = self.slip(load)
         axial_forces = self._axial_forces(slip)
 
         if self._position_in_beam(at_position):
@@ -875,7 +875,7 @@ class CompositeBeam(Beam):
         )
 
     @log.result
-    def _compute_slip(self, load: ABCSingleSpan) -> list[float]:
+    def slip(self, load: ABCSingleSpan) -> list[float]:
         """
         Compute the slip along the beam
 
