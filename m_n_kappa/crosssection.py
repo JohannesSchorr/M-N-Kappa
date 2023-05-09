@@ -1436,16 +1436,28 @@ class CrossSectionBoundaries(Crosssection):
         )
 
     def __get_curvature_start_values(
-        self, maximum_curvature: EdgeStrains, curvature_change_factor: float = 0.9
+        self, maximum_curvature: EdgeStrains, curvature_change_factor: float = 0.9999
     ) -> StrainPosition:
         """
+        Compute the start-value for the curvature
 
-        computes two scenarios:
+        computes two scenarios, each with ``curvature_change_factor`` and 1.0:
         1. change of curvature with strain on top
         2. change of curvature with strain on bottom
 
-        The subsequent
+        The subsequent smaller absolute change in curvature is assumed to be decisive.
 
+        Parameters
+        ----------
+        maximum_curvature: EdgeStrains
+            top- and bottom-edge-strain that has been determined as the maximum curvature
+        curvature_change_factor: float
+            factor the curvature is changed for comparison (Default: 0.9999)
+
+        Returns
+        -------
+        :py:class:`~m_n_kappa.StrainPosition`
+            decisive strain and corresponding position-values for the maximum curvature
         """
         cross_section_initial = self._create_computation_cross_section(
             maximum_curvature, compute_with_strain_at_top=True, factor_curvature=1.0
