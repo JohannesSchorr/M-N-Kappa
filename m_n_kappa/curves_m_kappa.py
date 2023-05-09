@@ -73,20 +73,20 @@ class MKappaCurvePoint:
     def __post_init__(self):
         log.info(f"Created {self.__repr__()}")
         self.checks = self._have_moment_and_curvature_same_sign()
-        
+
     def _have_moment_and_curvature_same_sign(self) -> bool:
         """
         check for same sign of moment and curvature
-        
+
         .. versionadded:: 0.2.0
         """
-        if self.moment == 0.0 and self.curvature == 0.0: 
+        if self.moment == 0.0 and self.curvature == 0.0:
             return True
         sign_moment = int(self.moment / abs(self.moment))
         sign_curvature = int(self.curvature / abs(self.curvature))
-        if sign_moment == sign_curvature: 
+        if sign_moment == sign_curvature:
             return True
-        else: 
+        else:
             return False
 
     def moment_curvature(self) -> list[float]:
@@ -345,15 +345,15 @@ class MKappaCurvePoints:
     def maximum_moment(self) -> float:
         """computes the maximum moment of the curve"""
         return max(self.moments)
-    
+
     def maximum_neutral_axis(self) -> float:
         """determine maximum neutral-axis"""
         return max((point.neutral_axis for point in self.points))
-    
+
     def minimum_neutral_axis(self) -> float:
         """determine minimum neutral axis"""
         return min((point.neutral_axis for point in self.points))
-    
+
 
 class MKappaCurveCurvature:
 
@@ -446,6 +446,7 @@ class MKappaCurveCurvature:
             strain_position=strain_position,
             maximum_curvature=maximum_curvature,
             minimum_curvature=minimum_curvature,
+            is_called_by_user=False,
         )
 
 
@@ -681,6 +682,7 @@ class MKappaCurve:
                     minimum_curvature=self._minimum_negative_curvature(strain_position),
                     maximum_iterations=100,
                     solver=Bisection,
+                    is_called_by_user=False,
                 )
             self._compute_values(m_kappa)
 
@@ -714,6 +716,7 @@ class MKappaCurve:
                     minimum_curvature=self._minimum_positive_curvature(strain_position),
                     maximum_iterations=100,
                     solver=Bisection,
+                    is_called_by_user=False
                 )
             self._compute_values(m_kappa)
 
@@ -780,6 +783,7 @@ class MKappaCurve:
             strain_position=position_strain,
             maximum_curvature=maximum_curvature,
             minimum_curvature=minimum_curvature,
+            is_called_by_user=False,
         )
 
     def _save_values(
