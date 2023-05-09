@@ -292,6 +292,52 @@ def remove_duplicates(list_of_lists: list) -> list:
     return [sublist for sublist, _ in groupby(list_of_lists)]
 
 
+def remove_duplicate_objects(list_with_duplicates: list, sorting_function) -> list:
+    """
+    Remove the duplicates from a list considering ``sorting_function``.
+
+    Make removal of duplicates also possible if elements of list are for example instances of a class with
+    specific attributes.
+
+    Parameters
+    ----------
+    list_with_duplicates : list
+        list with the duplicates
+    sorting_function : function
+        function to identify the duplicates
+
+    Returns
+    -------
+    list
+        duplicate-free list
+
+    Examples
+    --------
+    The ``duplicate_list`` consists of a number of :py:class:`~m_n_kappa.StrainPosition` instances.
+
+    >>> from m_n_kappa import StrainPosition
+    >>> duplicate_list = [
+    ...     StrainPosition(strain=0.1, position=10, material="Steel"),
+    ...     StrainPosition(strain=0.1, position=10, material="Steel"),
+    ...     StrainPosition(strain=0.1, position=10, material="Steel"),
+    ...     StrainPosition(strain=0.1, position=10, material="Steel"),
+    ... ]
+
+    To remove all duplicates from the list we used the Attribute-getter method by the :py:mod:`operator`-module.
+
+    >>> from m_n_kappa.curves_m_n_kappa import remove_duplicate_objects
+    >>> import operator
+    >>> remove_duplicate_objects(list_with_duplicates=duplicate_list, sorting_function=operator.attrgetter('strain'))
+    [StrainPosition(strain=0.1, position=10, material="Steel")]
+    """
+    list_with_duplicates.sort(key=sorting_function)
+    new_list = [
+        list(point)[0]
+        for _, point in groupby(list_with_duplicates, key=sorting_function)
+    ]
+    return new_list
+
+
 def positive_sign(list_of_lists: list) -> list:
     return [[abs(sublist[0]), abs(sublist[1])] for sublist in list_of_lists]
 
