@@ -27,9 +27,9 @@ General
 -------
 Concrete is in general characterised by it class.
 The classes describe the characteristic concrete compressive strength :math:`f_\mathrm{ck}`.
-Following :cite:t:`EN1992-1-1` most of the mechanical characteristic are derived from :math:`f_\mathrm{ck}`.
+Following EN 1992-1-1 [1]_ most of the mechanical characteristic are derived from :math:`f_\mathrm{ck}`.
 
-The mean concrete compressive strength :math:`f_\mathrm{cm}` according to :cite:t:`EN1992-1-1` is given in formula
+The mean concrete compressive strength :math:`f_\mathrm{cm}` according to EN 1992-1-1 [1]_ is given in formula
 :math:numref:`eq:theory.materials_f_cm`.
 
 .. math::
@@ -37,7 +37,7 @@ The mean concrete compressive strength :math:`f_\mathrm{cm}` according to :cite:
 
    f_\mathrm{cm} = f_\mathrm{ck} + 8 \text{ in N/mm²}
 
-The modulus of elasticity :math:`E_\mathrm{cm}` by :cite:t:`EN1992-1-1` is given in formula
+The modulus of elasticity :math:`E_\mathrm{cm}` by EN 1992-1-1 [1]_ is given in formula
 :math:numref:`eq:theory.materials_E_cm`.
 
 .. math::
@@ -54,11 +54,11 @@ Compression
 
 Introduction
 ^^^^^^^^^^^^
-:cite:t:`EN1992-1-1` provides three material models to define the stress-strain-relationship of concrete in
+EN 1992-1-1 [1]_ provides three material models to define the stress-strain-relationship of concrete in
 compression.
 These are :ref:`theory.materials.concrete.compression.nonlinear`, :ref:`theory.materials.concrete.compression.parabola`
 and :ref:`theory.materials.concrete.compression.bi_linear`.
-Every of these three stress-strain-relationships of the concrete according to :cite:t:`EN1992-1-1` is implemented
+Every of these three stress-strain-relationships of the concrete according to EN 1992-1-1 [1]_ is implemented
 in :py:class:`~m_n_kappa.Concrete` and may be chosen argument ``compression_stress_strain_type``.
 
 .. _theory.materials.concrete.compression.nonlinear:
@@ -71,7 +71,7 @@ Stress-strain-relationship for non-linear determination of stress-resultants and
 .. figure:: ../images/material_concrete_nonlinear-dark.svg
    :class: only-dark
 
-   Non-linear stress-strain-relationship of concrete under compression acc. :cite:t:`EN1992-1-1`
+   Non-linear stress-strain-relationship of concrete under compression acc. EN 1992-1-1 [1]_
 
 The stresses according to the non-linear determination of stress-resultants and deformations are computed by
 formula :math:numref:`eq:theory.materials.concrete.compression.nonlinear` in the range
@@ -112,7 +112,7 @@ Parabola-rectangle stress-strain-relationship for section-design
 .. figure:: ../images/material_concrete_parabola_rectangle-dark.svg
    :class: only-dark
 
-   Parabola-Rectangle stress-strain-relationship of concrete under compression acc. :cite:t:`EN1992-1-1`
+   Parabola-Rectangle stress-strain-relationship of concrete under compression acc. EN 1992-1-1 [1]_
 
 .. math::
    :label: eq:theory.materials.concrete.compression.parabola
@@ -146,7 +146,7 @@ Bi-linear stress-strain-relationship for section-design
 .. figure:: ../images/material_concrete_bilinear-dark.svg
    :class: only-dark
 
-   Bi-linear stress-strain-relationship of concrete under compression acc. :cite:t:`EN1992-1-1`
+   Bi-linear stress-strain-relationship of concrete under compression acc. EN 1992-1-1 [1]_
 
 .. math::
    :label: eq:theory.materials.concrete.compression.bi_linear
@@ -202,9 +202,10 @@ As soon as the strain reaches :math:`\varepsilon_\mathrm{ctm}` the concrete star
 Different post-failure behaviours are possible in :py:class:`~m_n_kappa.Concrete` if :math:`\varepsilon_\mathrm{c} > \varepsilon_\mathrm{ct}`.
 
 1. The resisting stresses drop immediately to :math:`\sigma_\mathrm{c} = 0`.
-2. The crack-opening behaviour follows the recommendations by :cite:t:`FIB2010`.
+2. The crack-opening behaviour follows the recommendations by fib Model Code (2010) [2]_.
 
-:cite:t:`FIB2010` defines the crack-opening behaviour as described in formula :math:numref:`eq:theory.materials.concrete_crack_opening`.
+fib Model Code (2010) [2]_ defines the crack-opening behaviour as described in formula
+:math:numref:`eq:theory.materials.concrete_crack_opening`.
 
 .. math::
    :label: eq:theory.materials.concrete_tensile
@@ -316,6 +317,10 @@ Solely the input-parameters change in :py:class:`~m_n_kappa.Reinforcement` as fo
 - Failure strain :math:`\varepsilon_\mathrm{su}`: ``epsilon_su``  (eqivalent to ``epsilon_u`` in :py:class:`~m_n_kappa.Steel`)
 - Failure strength :math:`f_\mathrm{su}`: ``f_su`` (eqivalent to ``f_u`` in :py:class:`~m_n_kappa.Steel`)
 
-.. rubric:: References
+References
+==========
 
-.. bibliography::
+.. [1] EN 1992-1-1: Eurocode 2: Design of concrete structures - Part 1-1: General rules and rules for buildings,
+       European Committee of Standardization (CEN), 2004
+.. [2] fib Model Code 2010: fib Model Code for Concrete Structures 2010,
+       International Federation for Structural Concrete, 2013, Ernst & Sohn

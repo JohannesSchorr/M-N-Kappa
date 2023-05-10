@@ -3,10 +3,10 @@
   <head><meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width,initial-scale=1"/>
     <meta name="color-scheme" content="light dark"><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
-<link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" />
+<link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" /><link rel="next" title="License" href="../license.html" /><link rel="prev" title="What’s new in 0.1.0 (28th of January 2023)" href="v0.1.0.html" />
 
     <!-- Generated with Sphinx 5.3.0 and Furo 2022.12.07 -->
-        <title>What’s new in 0.2.0 (?? 2023) - M-N-κ</title>
+        <title>What’s new in 0.2.0 (8th of May 2023) - M-N-κ</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?digest=91d0f0d1c444bdcb17a68e833c7a53903343c195" />
     <link rel="stylesheet" type="text/css" href="../_static/altair-plot.css" />
@@ -192,6 +192,7 @@
 <li class="toctree-l2"><a class="reference internal" href="../theory/m_n_curvature_epsilon.html"><span class="math notranslate nohighlight">\(M\)</span>-<span class="math notranslate nohighlight">\(N\)</span>-<span class="math notranslate nohighlight">\(\kappa\)</span>-<span class="math notranslate nohighlight">\(\varepsilon_\mathrm{\Delta}\)</span>-curve</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../theory/effective_widths.html">Effective widths</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../theory/loading.html">Loading</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../theory/shear_connectors.html">Shear-Connectors</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../theory/slip.html">Slip</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../theory/deformations.html">Deformations</a></li>
 </ul>
@@ -201,7 +202,7 @@
 </li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Development</span></p>
-<ul>
+<ul class="current">
 <li class="toctree-l1 has-children"><a class="reference internal" href="../api.html">API reference</a><input class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" role="switch" type="checkbox"/><label for="toctree-checkbox-5"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
 <li class="toctree-l2"><a class="reference internal" href="../api/m_n_kappa.Geometry.html">m_n_kappa.Geometry</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../api/m_n_kappa.Rectangle.html">m_n_kappa.Rectangle</a></li>
@@ -233,8 +234,10 @@
 <li class="toctree-l2"><a class="reference internal" href="../api/m_n_kappa.SingleLoad.html">m_n_kappa.SingleLoad</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../api/m_n_kappa.SingleSpanSingleLoads.html">m_n_kappa.SingleSpanSingleLoads</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../api/m_n_kappa.SingleSpan.html">m_n_kappa.SingleSpan</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../api/m_n_kappa.Beam.html">m_n_kappa.Beam</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../api/m_n_kappa.Node.html">m_n_kappa.Node</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api/m_n_kappa.CompositeNode.html">m_n_kappa.CompositeNode</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api/m_n_kappa.Beam.html">m_n_kappa.Beam</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api/m_n_kappa.CompositeBeam.html">m_n_kappa.CompositeBeam</a></li>
 </ul>
 </li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../api_developers.html">API for developers</a><input class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" role="switch" type="checkbox"/><label for="toctree-checkbox-6"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
@@ -298,12 +301,18 @@
 <li class="toctree-l2"><a class="reference internal" href="../api/m_n_kappa.matrices.Identity.html">m_n_kappa.matrices.Identity</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../api/m_n_kappa.matrices.LinearEquationsSystem.html">m_n_kappa.matrices.LinearEquationsSystem</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../api/m_n_kappa.loading.ABCSingleSpan.html">m_n_kappa.loading.ABCSingleSpan</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api/m_n_kappa.deformation.LoadStep.html">m_n_kappa.deformation.LoadStep</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api/m_n_kappa.deformation.Loading.html">m_n_kappa.deformation.Loading</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api/m_n_kappa.deformation.Deformation.html">m_n_kappa.deformation.Deformation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api/m_n_kappa.deformation.Deformations.html">m_n_kappa.deformation.Deformations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api/m_n_kappa.deformation.Element.html">m_n_kappa.deformation.Element</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../roadmap.html">Roadmap and To Do’s</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../contributing.html">Contributing</a></li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="index.html">Release Notes</a><input class="toctree-checkbox" id="toctree-checkbox-7" name="toctree-checkbox-7" role="switch" type="checkbox"/><label for="toctree-checkbox-7"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l1 current has-children"><a class="reference internal" href="index.html">Release Notes</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-7" name="toctree-checkbox-7" role="switch" type="checkbox"/><label for="toctree-checkbox-7"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="v0.1.0.html">What’s new in 0.1.0 (28th of January 2023)</a></li>
+<li class="toctree-l2 current current-page"><a class="current reference internal" href="#">What’s new in 0.2.0 (8th of May 2023)</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../license.html">License</a></li>
@@ -349,15 +358,43 @@
           </label>
         </div>
         <article role="main">
-          <section id="what-s-new-in-0-2-0-2023">
-<span id="whatsnew020"></span><h1>What’s new in 0.2.0 (?? 2023)<a class="headerlink" href="#what-s-new-in-0-2-0-2023" title="Permalink to this heading">#</a></h1>
+          <section id="what-s-new-in-0-2-0-8th-of-may-2023">
+<span id="whatsnew020"></span><h1>What’s new in 0.2.0 (8th of May 2023)<a class="headerlink" href="#what-s-new-in-0-2-0-8th-of-may-2023" title="Permalink to this heading">#</a></h1>
 <p>These are the changes in m_n_kappa 0.2.0.
-See <a class="reference internal" href="index.html#release"><span class="std std-ref">Release Notes</span></a> for a full changelog including other versions of pandas.</p>
+See <a class="reference internal" href="index.html#release"><span class="std std-ref">Release Notes</span></a> for a full changelog including other versions of <code class="xref py py-mod docutils literal notranslate"><span class="pre">m_n_kappa</span></code>.</p>
 <section id="features">
 <span id="whatsnew020-features"></span><h2>Features<a class="headerlink" href="#features" title="Permalink to this heading">#</a></h2>
+<section id="computation">
+<span id="whatsnew020-features-computation"></span><h3>Computation<a class="headerlink" href="#computation" title="Permalink to this heading">#</a></h3>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(M\)</span>-<span class="math notranslate nohighlight">\(N\)</span>-<span class="math notranslate nohighlight">\(\kappa\)</span>-<span class="math notranslate nohighlight">\(\varepsilon_\Delta\)</span>-curve (surface)
+(see <a class="reference internal" href="../theory/m_n_curvature_epsilon.html#theory-m-n-curvature-epsilon"><span class="std std-ref">M-N-\kappa-\varepsilon_\mathrm{\Delta}-curve</span></a>)</p></li>
+<li><p>beam-deformation considering <span class="math notranslate nohighlight">\(M\)</span>-<span class="math notranslate nohighlight">\(N\)</span>-<span class="math notranslate nohighlight">\(\kappa\)</span>-<span class="math notranslate nohighlight">\(\varepsilon_\mathrm{\Delta}\)</span>
+along the beam and the load-slip-behaviour of shear-connectors
+(see <a class="reference internal" href="../theory/slip.html#theory-slip"><span class="std std-ref">Slip</span></a> &amp; <span class="xref std std-ref">theory.shear_connector</span>)</p></li>
+</ul>
 </section>
-<section id="bug-fixes">
-<span id="whatsnew020-bug-fixes"></span><h2>Bug Fixes<a class="headerlink" href="#bug-fixes" title="Permalink to this heading">#</a></h2>
+<section id="templates">
+<span id="whatsnew020-features-templates"></span><h3>Templates<a class="headerlink" href="#templates" title="Permalink to this heading">#</a></h3>
+<p>A number of templates for cross-sections are provided now.
+The cross-sections are mainly steel, concrete and steel-concrete-composite.</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="../examples/cross_section_templates/slim_floor_i_profile.html#cross-section-template-slim-floor-i-profile"><span class="std std-ref">I-Profile slim-floor beam</span></a></p></li>
+<li><p><a class="reference internal" href="../examples/cross_section_templates/asymmetric_steel_profile.html#cross-section-template-asymmetric-steel-profile"><span class="std std-ref">Asymmetric steel profile</span></a></p></li>
+<li><p><a class="reference internal" href="../examples/cross_section_templates/composite_beam.html#cross-section-template-composite-beam"><span class="std std-ref">Composite beam</span></a></p></li>
+<li><p><a class="reference internal" href="../examples/cross_section_templates/composite_beam_with_longitudinal_steel_profile.html#cross-section-template-composite-beam-with-longitudinal-steel-profile"><span class="std std-ref">Composite beam with steel profile spanning parallel to the beam</span></a></p></li>
+<li><p><a class="reference internal" href="../examples/cross_section_templates/concrete_beam.html#cross-section-template-concrete-beam"><span class="std std-ref">Concrete beam</span></a></p></li>
+<li><p><a class="reference internal" href="../examples/cross_section_templates/concrete_beam_with_flanges.html#cross-section-template-concrete-beam-with-flanges"><span class="std std-ref">Concrete beam with flanges</span></a></p></li>
+<li><p><a class="reference internal" href="../examples/cross_section_templates/slim_floor_double_t_profile.html#cross-section-template-slim-floor-double-t-profile"><span class="std std-ref">Slim-Floor double T-profile</span></a></p></li>
+<li><p><a class="reference internal" href="../examples/cross_section_templates/slim_floor_i_profile.html#cross-section-template-slim-floor-i-profile"><span class="std std-ref">I-Profile slim-floor beam</span></a></p></li>
+<li><p><a class="reference internal" href="../examples/cross_section_templates/slim_floor_i_profile_with_concrete_flanges.html#cross-section-template-slim-floor-i-profile-with-concrete-flanges"><span class="std std-ref">I-Profile slim-floor beam with concrete slab with flanges</span></a></p></li>
+<li><p><a class="reference internal" href="../examples/cross_section_templates/slim_floor_large_hat.html#cross-section-template-slim-floor-large-hat"><span class="std std-ref">Slim-floor beam with large hat profile</span></a></p></li>
+<li><p><a class="reference internal" href="../examples/cross_section_templates/slim_floor_small_hat.html#cross-section-template-slim-floor-small-hat"><span class="std std-ref">Slim-Floor beam with small hat profile</span></a></p></li>
+<li><p><a class="reference internal" href="../examples/cross_section_templates/slim_floor_t_profile.html#cross-section-template-slim-floor-t-profile"><span class="std std-ref">T-profile slim-floor beam</span></a></p></li>
+<li><p><a class="reference internal" href="../examples/cross_section_templates/symmetric_steel_profile.html#cross-section-template-symmetric-steel-profile"><span class="std std-ref">Symmetric steel profile</span></a></p></li>
+</ul>
+<hr class="docutils" />
+</section>
 </section>
 </section>
 
@@ -366,8 +403,26 @@ See <a class="reference internal" href="index.html#release"><span class="std std
       <footer>
         
         <div class="related-pages">
-          
-          
+          <a class="next-page" href="../license.html">
+              <div class="page-info">
+                <div class="context">
+                  <span>Next</span>
+                </div>
+                <div class="title">License</div>
+              </div>
+              <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
+            </a>
+          <a class="prev-page" href="v0.1.0.html">
+              <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
+              <div class="page-info">
+                <div class="context">
+                  <span>Previous</span>
+                </div>
+                
+                <div class="title">What’s new in 0.1.0 (28th of January 2023)</div>
+                
+              </div>
+            </a>
         </div>
         <div class="bottom-of-page">
           <div class="left-details">
@@ -405,9 +460,12 @@ See <a class="reference internal" href="index.html#release"><span class="std std
         <div class="toc-tree-container">
           <div class="toc-tree">
             <ul>
-<li><a class="reference internal" href="#">What’s new in 0.2.0 (?? 2023)</a><ul>
-<li><a class="reference internal" href="#features">Features</a></li>
-<li><a class="reference internal" href="#bug-fixes">Bug Fixes</a></li>
+<li><a class="reference internal" href="#">What’s new in 0.2.0 (8th of May 2023)</a><ul>
+<li><a class="reference internal" href="#features">Features</a><ul>
+<li><a class="reference internal" href="#computation">Computation</a></li>
+<li><a class="reference internal" href="#templates">Templates</a></li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
@@ -434,5 +492,7 @@ See <a class="reference internal" href="index.html#release"><span class="std std
     <script src="https://cdn.jsdelivr.net/npm/vega-embed@6"></script>
     <script src="../_static/design-tabs.js"></script>
     <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     </body>
 </html>

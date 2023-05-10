@@ -1,0 +1,23 @@
+﻿m\_n\_kappa.deformation.Deformation
+===================================
+
+.. currentmodule:: m_n_kappa.deformation
+
+.. autoclass:: Deformation
+
+   
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+   
+      ~Deformation.position
+      ~Deformation.load
+      ~Deformation.deformation
+      ~Deformation.m_kappa_point
+   
+   

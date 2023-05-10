@@ -1,0 +1,35 @@
+﻿m\_n\_kappa.deformation.Element
+===============================
+
+.. currentmodule:: m_n_kappa.deformation
+
+.. autoclass:: Element
+
+   
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      
+      
+         ~Element.moment_position
+      
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+   
+      ~Element.nodes
+      ~Element.strain_differences
+      ~Element.axial_force
+      ~Element.length
+      ~Element.moments
+      ~Element.mean_moment
+      ~Element.mean_moment_position
+   
+   

@@ -192,6 +192,7 @@
 <li class="toctree-l2"><a class="reference internal" href="m_n_curvature_epsilon.html"><span class="math notranslate nohighlight">\(M\)</span>-<span class="math notranslate nohighlight">\(N\)</span>-<span class="math notranslate nohighlight">\(\kappa\)</span>-<span class="math notranslate nohighlight">\(\varepsilon_\mathrm{\Delta}\)</span>-curve</a></li>
 <li class="toctree-l2"><a class="reference internal" href="effective_widths.html">Effective widths</a></li>
 <li class="toctree-l2"><a class="reference internal" href="loading.html">Loading</a></li>
+<li class="toctree-l2"><a class="reference internal" href="shear_connectors.html">Shear-Connectors</a></li>
 <li class="toctree-l2"><a class="reference internal" href="slip.html">Slip</a></li>
 <li class="toctree-l2"><a class="reference internal" href="deformations.html">Deformations</a></li>
 </ul>
@@ -233,8 +234,10 @@
 <li class="toctree-l2"><a class="reference internal" href="../api/m_n_kappa.SingleLoad.html">m_n_kappa.SingleLoad</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../api/m_n_kappa.SingleSpanSingleLoads.html">m_n_kappa.SingleSpanSingleLoads</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../api/m_n_kappa.SingleSpan.html">m_n_kappa.SingleSpan</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../api/m_n_kappa.Beam.html">m_n_kappa.Beam</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../api/m_n_kappa.Node.html">m_n_kappa.Node</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api/m_n_kappa.CompositeNode.html">m_n_kappa.CompositeNode</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api/m_n_kappa.Beam.html">m_n_kappa.Beam</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api/m_n_kappa.CompositeBeam.html">m_n_kappa.CompositeBeam</a></li>
 </ul>
 </li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../api_developers.html">API for developers</a><input class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" role="switch" type="checkbox"/><label for="toctree-checkbox-6"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
@@ -298,12 +301,18 @@
 <li class="toctree-l2"><a class="reference internal" href="../api/m_n_kappa.matrices.Identity.html">m_n_kappa.matrices.Identity</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../api/m_n_kappa.matrices.LinearEquationsSystem.html">m_n_kappa.matrices.LinearEquationsSystem</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../api/m_n_kappa.loading.ABCSingleSpan.html">m_n_kappa.loading.ABCSingleSpan</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api/m_n_kappa.deformation.LoadStep.html">m_n_kappa.deformation.LoadStep</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api/m_n_kappa.deformation.Loading.html">m_n_kappa.deformation.Loading</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api/m_n_kappa.deformation.Deformation.html">m_n_kappa.deformation.Deformation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api/m_n_kappa.deformation.Deformations.html">m_n_kappa.deformation.Deformations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api/m_n_kappa.deformation.Element.html">m_n_kappa.deformation.Element</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../roadmap.html">Roadmap and To Do’s</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../contributing.html">Contributing</a></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../whatsnew/index.html">Release Notes</a><input class="toctree-checkbox" id="toctree-checkbox-7" name="toctree-checkbox-7" role="switch" type="checkbox"/><label for="toctree-checkbox-7"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
 <li class="toctree-l2"><a class="reference internal" href="../whatsnew/v0.1.0.html">What’s new in 0.1.0 (28th of January 2023)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../whatsnew/v0.2.0.html">What’s new in 0.2.0 (8th of May 2023)</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../license.html">License</a></li>
@@ -366,14 +375,14 @@ stress-strain relationships.</p>
 <span id="theory-materials-concrete-general"></span><h3>General<a class="headerlink" href="#general" title="Permalink to this heading">#</a></h3>
 <p>Concrete is in general characterised by it class.
 The classes describe the characteristic concrete compressive strength <span class="math notranslate nohighlight">\(f_\mathrm{ck}\)</span>.
-Following <span id="id1">EN 1992-1-1 [<a class="reference internal" href="#id12" title="EN 1992-1-1. Eurocode 2: design of concrete structures - part 1-1: general rules and rules for buildings. 2004.">1</a>]</span> most of the mechanical characteristic are derived from <span class="math notranslate nohighlight">\(f_\mathrm{ck}\)</span>.</p>
-<p>The mean concrete compressive strength <span class="math notranslate nohighlight">\(f_\mathrm{cm}\)</span> according to <span id="id2">EN 1992-1-1 [<a class="reference internal" href="#id12" title="EN 1992-1-1. Eurocode 2: design of concrete structures - part 1-1: general rules and rules for buildings. 2004.">1</a>]</span> is given in formula
+Following EN 1992-1-1 <a class="footnote-reference brackets" href="#id11" id="id1" role="doc-noteref"><span class="fn-bracket">[</span>1<span class="fn-bracket">]</span></a> most of the mechanical characteristic are derived from <span class="math notranslate nohighlight">\(f_\mathrm{ck}\)</span>.</p>
+<p>The mean concrete compressive strength <span class="math notranslate nohighlight">\(f_\mathrm{cm}\)</span> according to EN 1992-1-1 <a class="footnote-reference brackets" href="#id11" id="id2" role="doc-noteref"><span class="fn-bracket">[</span>1<span class="fn-bracket">]</span></a> is given in formula
 <a class="reference internal" href="#equation-eq-theory-materials-f-cm">(1)</a>.</p>
 <div class="math-wrapper docutils container" id="equation-eq-theory-materials-f-cm">
 <div class="math notranslate nohighlight" id="equation-eq-theory-materials-f-cm">
 <span class="eqno">(1)<a class="headerlink" href="#equation-eq-theory-materials-f-cm" title="Permalink to this equation">#</a></span>\[f_\mathrm{cm} = f_\mathrm{ck} + 8 \text{ in N/mm²}\]</div>
 </div>
-<p>The modulus of elasticity <span class="math notranslate nohighlight">\(E_\mathrm{cm}\)</span> by <span id="id3">EN 1992-1-1 [<a class="reference internal" href="#id12" title="EN 1992-1-1. Eurocode 2: design of concrete structures - part 1-1: general rules and rules for buildings. 2004.">1</a>]</span> is given in formula
+<p>The modulus of elasticity <span class="math notranslate nohighlight">\(E_\mathrm{cm}\)</span> by EN 1992-1-1 <a class="footnote-reference brackets" href="#id11" id="id3" role="doc-noteref"><span class="fn-bracket">[</span>1<span class="fn-bracket">]</span></a> is given in formula
 <a class="reference internal" href="#equation-eq-theory-materials-e-cm">(2)</a>.</p>
 <div class="math-wrapper docutils container" id="equation-eq-theory-materials-e-cm">
 <div class="math notranslate nohighlight" id="equation-eq-theory-materials-e-cm">
@@ -384,20 +393,20 @@ Following <span id="id1">EN 1992-1-1 [<a class="reference internal" href="#id12"
 <span id="theory-materials-concrete-compression"></span><h3>Compression<a class="headerlink" href="#compression" title="Permalink to this heading">#</a></h3>
 <section id="introduction">
 <span id="theory-materials-concrete-intro"></span><h4>Introduction<a class="headerlink" href="#introduction" title="Permalink to this heading">#</a></h4>
-<p><span id="id4">EN 1992-1-1 [<a class="reference internal" href="#id12" title="EN 1992-1-1. Eurocode 2: design of concrete structures - part 1-1: general rules and rules for buildings. 2004.">1</a>]</span> provides three material models to define the stress-strain-relationship of concrete in
+<p>EN 1992-1-1 <a class="footnote-reference brackets" href="#id11" id="id4" role="doc-noteref"><span class="fn-bracket">[</span>1<span class="fn-bracket">]</span></a> provides three material models to define the stress-strain-relationship of concrete in
 compression.
 These are <a class="reference internal" href="#theory-materials-concrete-compression-nonlinear"><span class="std std-ref">Stress-strain-relationship for non-linear determination of stress-resultants and deformations</span></a>, <a class="reference internal" href="#theory-materials-concrete-compression-parabola"><span class="std std-ref">Parabola-rectangle stress-strain-relationship for section-design</span></a>
 and <a class="reference internal" href="#theory-materials-concrete-compression-bi-linear"><span class="std std-ref">Bi-linear stress-strain-relationship for section-design</span></a>.
-Every of these three stress-strain-relationships of the concrete according to <span id="id5">EN 1992-1-1 [<a class="reference internal" href="#id12" title="EN 1992-1-1. Eurocode 2: design of concrete structures - part 1-1: general rules and rules for buildings. 2004.">1</a>]</span> is implemented
+Every of these three stress-strain-relationships of the concrete according to EN 1992-1-1 <a class="footnote-reference brackets" href="#id11" id="id5" role="doc-noteref"><span class="fn-bracket">[</span>1<span class="fn-bracket">]</span></a> is implemented
 in <a class="reference internal" href="../api/m_n_kappa.Concrete.html#m_n_kappa.Concrete" title="m_n_kappa.Concrete"><code class="xref py py-class docutils literal notranslate"><span class="pre">Concrete</span></code></a> and may be chosen argument <code class="docutils literal notranslate"><span class="pre">compression_stress_strain_type</span></code>.</p>
 </section>
 <section id="stress-strain-relationship-for-non-linear-determination-of-stress-resultants-and-deformations">
 <span id="theory-materials-concrete-compression-nonlinear"></span><h4>Stress-strain-relationship for non-linear determination of stress-resultants and deformations<a class="headerlink" href="#stress-strain-relationship-for-non-linear-determination-of-stress-resultants-and-deformations" title="Permalink to this heading">#</a></h4>
 <figure class="align-default">
 <img alt="../_images/material_concrete_nonlinear-light.svg" class="only-light" src="../_images/material_concrete_nonlinear-light.svg" /></figure>
-<figure class="align-default" id="id19">
+<figure class="align-default" id="id13">
 <img alt="../_images/material_concrete_nonlinear-dark.svg" class="only-dark" src="../_images/material_concrete_nonlinear-dark.svg" /><figcaption>
-<p><span class="caption-text">Non-linear stress-strain-relationship of concrete under compression acc. <span id="id6">EN 1992-1-1 [<a class="reference internal" href="#id12" title="EN 1992-1-1. Eurocode 2: design of concrete structures - part 1-1: general rules and rules for buildings. 2004.">1</a>]</span></span><a class="headerlink" href="#id19" title="Permalink to this image">#</a></p>
+<p><span class="caption-text">Non-linear stress-strain-relationship of concrete under compression acc. EN 1992-1-1 <a class="footnote-reference brackets" href="#id11" id="id6" role="doc-noteref"><span class="fn-bracket">[</span>1<span class="fn-bracket">]</span></a></span><a class="headerlink" href="#id13" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
 <p>The stresses according to the non-linear determination of stress-resultants and deformations are computed by
@@ -423,9 +432,9 @@ Formula <a class="reference internal" href="#equation-eq-theory-materials-concre
 <span id="theory-materials-concrete-compression-parabola"></span><h4>Parabola-rectangle stress-strain-relationship for section-design<a class="headerlink" href="#parabola-rectangle-stress-strain-relationship-for-section-design" title="Permalink to this heading">#</a></h4>
 <figure class="align-default">
 <img alt="../_images/material_concrete_parabola_rectangle-light.svg" class="only-light" src="../_images/material_concrete_parabola_rectangle-light.svg" /></figure>
-<figure class="align-default" id="id20">
+<figure class="align-default" id="id14">
 <img alt="../_images/material_concrete_parabola_rectangle-dark.svg" class="only-dark" src="../_images/material_concrete_parabola_rectangle-dark.svg" /><figcaption>
-<p><span class="caption-text">Parabola-Rectangle stress-strain-relationship of concrete under compression acc. <span id="id7">EN 1992-1-1 [<a class="reference internal" href="#id12" title="EN 1992-1-1. Eurocode 2: design of concrete structures - part 1-1: general rules and rules for buildings. 2004.">1</a>]</span></span><a class="headerlink" href="#id20" title="Permalink to this image">#</a></p>
+<p><span class="caption-text">Parabola-Rectangle stress-strain-relationship of concrete under compression acc. EN 1992-1-1 <a class="footnote-reference brackets" href="#id11" id="id7" role="doc-noteref"><span class="fn-bracket">[</span>1<span class="fn-bracket">]</span></a></span><a class="headerlink" href="#id14" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
 <div class="math-wrapper docutils container" id="equation-eq-theory-materials-concrete-compression-parabola">
@@ -444,9 +453,9 @@ Formula <a class="reference internal" href="#equation-eq-theory-materials-concre
 <span id="theory-materials-concrete-compression-bi-linear"></span><h4>Bi-linear stress-strain-relationship for section-design<a class="headerlink" href="#bi-linear-stress-strain-relationship-for-section-design" title="Permalink to this heading">#</a></h4>
 <figure class="align-default">
 <img alt="../_images/material_concrete_bilinear-light.svg" class="only-light" src="../_images/material_concrete_bilinear-light.svg" /></figure>
-<figure class="align-default" id="id21">
+<figure class="align-default" id="id15">
 <img alt="../_images/material_concrete_bilinear-dark.svg" class="only-dark" src="../_images/material_concrete_bilinear-dark.svg" /><figcaption>
-<p><span class="caption-text">Bi-linear stress-strain-relationship of concrete under compression acc. <span id="id8">EN 1992-1-1 [<a class="reference internal" href="#id12" title="EN 1992-1-1. Eurocode 2: design of concrete structures - part 1-1: general rules and rules for buildings. 2004.">1</a>]</span></span><a class="headerlink" href="#id21" title="Permalink to this image">#</a></p>
+<p><span class="caption-text">Bi-linear stress-strain-relationship of concrete under compression acc. EN 1992-1-1 <a class="footnote-reference brackets" href="#id11" id="id8" role="doc-noteref"><span class="fn-bracket">[</span>1<span class="fn-bracket">]</span></a></span><a class="headerlink" href="#id15" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
 <div class="math-wrapper docutils container" id="equation-eq-theory-materials-concrete-compression-bi-linear">
@@ -465,9 +474,9 @@ Formula <a class="reference internal" href="#equation-eq-theory-materials-concre
 <span id="theory-materials-concrete-tension"></span><h3>Tension<a class="headerlink" href="#tension" title="Permalink to this heading">#</a></h3>
 <figure class="align-default">
 <img alt="../_images/material_concrete_tension-light.svg" class="only-light" src="../_images/material_concrete_tension-light.svg" /></figure>
-<figure class="align-default" id="id22">
+<figure class="align-default" id="id16">
 <img alt="../_images/material_concrete_tension-dark.svg" class="only-dark" src="../_images/material_concrete_tension-dark.svg" /><figcaption>
-<p><span class="caption-text">Stress-strain-relationship of concrete under tension</span><a class="headerlink" href="#id22" title="Permalink to this image">#</a></p>
+<p><span class="caption-text">Stress-strain-relationship of concrete under tension</span><a class="headerlink" href="#id16" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
 <p>For a realistic load-carrying behaviour of the concrete the behaviour under tension is crucial.</p>
@@ -487,9 +496,10 @@ Formula <a class="reference internal" href="#equation-eq-theory-materials-concre
 Different post-failure behaviours are possible in <a class="reference internal" href="../api/m_n_kappa.Concrete.html#m_n_kappa.Concrete" title="m_n_kappa.Concrete"><code class="xref py py-class docutils literal notranslate"><span class="pre">Concrete</span></code></a> if <span class="math notranslate nohighlight">\(\varepsilon_\mathrm{c} &gt; \varepsilon_\mathrm{ct}\)</span>.</p>
 <ol class="arabic simple">
 <li><p>The resisting stresses drop immediately to <span class="math notranslate nohighlight">\(\sigma_\mathrm{c} = 0\)</span>.</p></li>
-<li><p>The crack-opening behaviour follows the recommendations by <span id="id9">fib Model Code 2010 [<a class="reference internal" href="#id15" title="fib Model Code 2010. Fib model code for concrete structures 2010. 2013.">2</a>]</span>.</p></li>
+<li><p>The crack-opening behaviour follows the recommendations by fib Model Code (2010) <a class="footnote-reference brackets" href="#id12" id="id9" role="doc-noteref"><span class="fn-bracket">[</span>2<span class="fn-bracket">]</span></a>.</p></li>
 </ol>
-<p><span id="id10">fib Model Code 2010 [<a class="reference internal" href="#id15" title="fib Model Code 2010. Fib model code for concrete structures 2010. 2013.">2</a>]</span> defines the crack-opening behaviour as described in formula <a class="reference internal" href="#equation-eq-theory-materials-concrete-crack-opening">(9)</a>.</p>
+<p>fib Model Code (2010) <a class="footnote-reference brackets" href="#id12" id="id10" role="doc-noteref"><span class="fn-bracket">[</span>2<span class="fn-bracket">]</span></a> defines the crack-opening behaviour as described in formula
+<a class="reference internal" href="#equation-eq-theory-materials-concrete-crack-opening">(9)</a>.</p>
 <div class="math-wrapper docutils container" id="equation-eq-theory-materials-concrete-tensile">
 <div class="math notranslate nohighlight" id="equation-eq-theory-materials-concrete-tensile">
 <span class="eqno">(8)<a class="headerlink" href="#equation-eq-theory-materials-concrete-tensile" title="Permalink to this equation">#</a></span>\[ \begin{align}\begin{aligned}\sigma_\mathrm{ct} &amp; = f_\mathrm{ctm} \cdot \left(1.0 - 0.8 \cdot \frac{w}{w_1}\right) &amp; &amp; \text{ for } w \leq w_1\\\sigma_\mathrm{ct} &amp; = f_\mathrm{ctm} \cdot \left(0.25 - 0.05 \cdot \frac{w}{w_1}\right) &amp; &amp; \text{ for } w_1 &lt; w \leq w_\mathrm{c}\end{aligned}\end{align} \]</div>
@@ -540,9 +550,9 @@ is the strain at yielding, <span class="math notranslate nohighlight">\(\varepsi
 <div class="sd-col sd-d-flex-column docutils">
 <figure class="align-default">
 <img alt="../_images/material_steel_elastic-light.svg" class="only-light" src="../_images/material_steel_elastic-light.svg" /></figure>
-<figure class="align-default" id="id23">
+<figure class="align-default" id="id17">
 <img alt="../_images/material_steel_elastic-dark.svg" class="only-dark" src="../_images/material_steel_elastic-dark.svg" /><figcaption>
-<p><span class="caption-text">Elastic stress-strain-relationship of steel</span><a class="headerlink" href="#id23" title="Permalink to this image">#</a></p>
+<p><span class="caption-text">Elastic stress-strain-relationship of steel</span><a class="headerlink" href="#id17" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
 </div>
@@ -573,20 +583,23 @@ Solely the input-parameters change in <a class="reference internal" href="../api
 <li><p>Failure strain <span class="math notranslate nohighlight">\(\varepsilon_\mathrm{su}\)</span>: <code class="docutils literal notranslate"><span class="pre">epsilon_su</span></code>  (eqivalent to <code class="docutils literal notranslate"><span class="pre">epsilon_u</span></code> in <a class="reference internal" href="../api/m_n_kappa.Steel.html#m_n_kappa.Steel" title="m_n_kappa.Steel"><code class="xref py py-class docutils literal notranslate"><span class="pre">Steel</span></code></a>)</p></li>
 <li><p>Failure strength <span class="math notranslate nohighlight">\(f_\mathrm{su}\)</span>: <code class="docutils literal notranslate"><span class="pre">f_su</span></code> (eqivalent to <code class="docutils literal notranslate"><span class="pre">f_u</span></code> in <a class="reference internal" href="../api/m_n_kappa.Steel.html#m_n_kappa.Steel" title="m_n_kappa.Steel"><code class="xref py py-class docutils literal notranslate"><span class="pre">Steel</span></code></a>)</p></li>
 </ul>
-<p class="rubric">References</p>
-<div class="docutils container" id="id11">
-<div class="citation" id="id12" role="doc-biblioentry">
+</section>
+<section id="references">
+<h2>References<a class="headerlink" href="#references" title="Permalink to this heading">#</a></h2>
+<aside class="footnote-list brackets">
+<aside class="footnote brackets" id="id11" role="note">
 <span class="label"><span class="fn-bracket">[</span>1<span class="fn-bracket">]</span></span>
 <span class="backrefs">(<a role="doc-backlink" href="#id1">1</a>,<a role="doc-backlink" href="#id2">2</a>,<a role="doc-backlink" href="#id3">3</a>,<a role="doc-backlink" href="#id4">4</a>,<a role="doc-backlink" href="#id5">5</a>,<a role="doc-backlink" href="#id6">6</a>,<a role="doc-backlink" href="#id7">7</a>,<a role="doc-backlink" href="#id8">8</a>)</span>
-<p>EN 1992-1-1. Eurocode 2: design of concrete structures - part 1-1: general rules and rules for buildings. 2004.</p>
-</div>
-<div class="citation" id="id15" role="doc-biblioentry">
+<p>EN 1992-1-1: Eurocode 2: Design of concrete structures - Part 1-1: General rules and rules for buildings,
+European Committee of Standardization (CEN), 2004</p>
+</aside>
+<aside class="footnote brackets" id="id12" role="note">
 <span class="label"><span class="fn-bracket">[</span>2<span class="fn-bracket">]</span></span>
 <span class="backrefs">(<a role="doc-backlink" href="#id9">1</a>,<a role="doc-backlink" href="#id10">2</a>)</span>
-<p>fib Model Code 2010. Fib model code for concrete structures 2010. 2013.</p>
-</div>
-</div>
-</div>
+<p>fib Model Code 2010: fib Model Code for Concrete Structures 2010,
+International Federation for Structural Concrete, 2013, Ernst &amp; Sohn</p>
+</aside>
+</aside>
 </section>
 </section>
 
@@ -668,6 +681,7 @@ Solely the input-parameters change in <a class="reference internal" href="../api
 </li>
 <li><a class="reference internal" href="#steel">Steel</a></li>
 <li><a class="reference internal" href="#reinforcement">Reinforcement</a></li>
+<li><a class="reference internal" href="#references">References</a></li>
 </ul>
 </li>
 </ul>

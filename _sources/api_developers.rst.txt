@@ -18,7 +18,7 @@ General
    EffectiveWidths
    NotSuccessfulReason
 
-.. rubric:: Functions
+.. rubric:: Methods
 
 .. autosummary::
    :toctree: api/
@@ -210,3 +210,23 @@ Loading
    :toctree: api/
 
    ABCSingleSpan
+
+Deformation
+===========
+
+.. currentmodule:: m_n_kappa.deformation
+
+.. rubric:: Classes
+
+.. autosummary::
+   :toctree: api/
+
+   LoadStep
+   Loading
+   Deformation
+   Deformations
+   Element
+
+.. rubric:: Methods
+
+   is_cross_section_in_nodes

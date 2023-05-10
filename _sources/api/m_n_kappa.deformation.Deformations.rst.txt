@@ -1,0 +1,38 @@
+﻿m\_n\_kappa.deformation.Deformations
+====================================
+
+.. currentmodule:: m_n_kappa.deformation
+
+.. autoclass:: Deformations
+
+   
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      
+      
+         ~Deformations.loadings
+      
+      
+         ~Deformations.neutral_axes
+      
+      
+         ~Deformations.positions
+      
+      
+         ~Deformations.values
+      
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+   
+      ~Deformations.deformations
+   
+   

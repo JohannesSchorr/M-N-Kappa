@@ -3,7 +3,7 @@
   <head><meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width,initial-scale=1"/>
     <meta name="color-scheme" content="light dark"><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
-<link rel="index" title="Index" href="genindex.html" /><link rel="search" title="Search" href="search.html" /><link rel="next" title="m_n_kappa.general.StrainPosition" href="api/m_n_kappa.general.StrainPosition.html" /><link rel="prev" title="m_n_kappa.Node" href="api/m_n_kappa.Node.html" />
+<link rel="index" title="Index" href="genindex.html" /><link rel="search" title="Search" href="search.html" /><link rel="next" title="m_n_kappa.general.StrainPosition" href="api/m_n_kappa.general.StrainPosition.html" /><link rel="prev" title="m_n_kappa.CompositeBeam" href="api/m_n_kappa.CompositeBeam.html" />
 
     <!-- Generated with Sphinx 5.3.0 and Furo 2022.12.07 -->
         <title>API for developers - M-N-κ</title>
@@ -192,6 +192,7 @@
 <li class="toctree-l2"><a class="reference internal" href="theory/m_n_curvature_epsilon.html"><span class="math notranslate nohighlight">\(M\)</span>-<span class="math notranslate nohighlight">\(N\)</span>-<span class="math notranslate nohighlight">\(\kappa\)</span>-<span class="math notranslate nohighlight">\(\varepsilon_\mathrm{\Delta}\)</span>-curve</a></li>
 <li class="toctree-l2"><a class="reference internal" href="theory/effective_widths.html">Effective widths</a></li>
 <li class="toctree-l2"><a class="reference internal" href="theory/loading.html">Loading</a></li>
+<li class="toctree-l2"><a class="reference internal" href="theory/shear_connectors.html">Shear-Connectors</a></li>
 <li class="toctree-l2"><a class="reference internal" href="theory/slip.html">Slip</a></li>
 <li class="toctree-l2"><a class="reference internal" href="theory/deformations.html">Deformations</a></li>
 </ul>
@@ -233,8 +234,10 @@
 <li class="toctree-l2"><a class="reference internal" href="api/m_n_kappa.SingleLoad.html">m_n_kappa.SingleLoad</a></li>
 <li class="toctree-l2"><a class="reference internal" href="api/m_n_kappa.SingleSpanSingleLoads.html">m_n_kappa.SingleSpanSingleLoads</a></li>
 <li class="toctree-l2"><a class="reference internal" href="api/m_n_kappa.SingleSpan.html">m_n_kappa.SingleSpan</a></li>
-<li class="toctree-l2"><a class="reference internal" href="api/m_n_kappa.Beam.html">m_n_kappa.Beam</a></li>
 <li class="toctree-l2"><a class="reference internal" href="api/m_n_kappa.Node.html">m_n_kappa.Node</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/m_n_kappa.CompositeNode.html">m_n_kappa.CompositeNode</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/m_n_kappa.Beam.html">m_n_kappa.Beam</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/m_n_kappa.CompositeBeam.html">m_n_kappa.CompositeBeam</a></li>
 </ul>
 </li>
 <li class="toctree-l1 current has-children current-page"><a class="current reference internal" href="#">API for developers</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" role="switch" type="checkbox"/><label for="toctree-checkbox-6"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
@@ -298,12 +301,18 @@
 <li class="toctree-l2"><a class="reference internal" href="api/m_n_kappa.matrices.Identity.html">m_n_kappa.matrices.Identity</a></li>
 <li class="toctree-l2"><a class="reference internal" href="api/m_n_kappa.matrices.LinearEquationsSystem.html">m_n_kappa.matrices.LinearEquationsSystem</a></li>
 <li class="toctree-l2"><a class="reference internal" href="api/m_n_kappa.loading.ABCSingleSpan.html">m_n_kappa.loading.ABCSingleSpan</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/m_n_kappa.deformation.LoadStep.html">m_n_kappa.deformation.LoadStep</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/m_n_kappa.deformation.Loading.html">m_n_kappa.deformation.Loading</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/m_n_kappa.deformation.Deformation.html">m_n_kappa.deformation.Deformation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/m_n_kappa.deformation.Deformations.html">m_n_kappa.deformation.Deformations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/m_n_kappa.deformation.Element.html">m_n_kappa.deformation.Element</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="roadmap.html">Roadmap and To Do’s</a></li>
 <li class="toctree-l1"><a class="reference internal" href="contributing.html">Contributing</a></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="whatsnew/index.html">Release Notes</a><input class="toctree-checkbox" id="toctree-checkbox-7" name="toctree-checkbox-7" role="switch" type="checkbox"/><label for="toctree-checkbox-7"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
 <li class="toctree-l2"><a class="reference internal" href="whatsnew/v0.1.0.html">What’s new in 0.1.0 (28th of January 2023)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="whatsnew/v0.2.0.html">What’s new in 0.2.0 (8th of May 2023)</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="license.html">License</a></li>
@@ -369,7 +378,7 @@
 </tbody>
 </table>
 </div>
-<p class="rubric">Functions</p>
+<p class="rubric">Methods</p>
 <div class="table-wrapper autosummary longtable docutils container">
 <table class="autosummary longtable docutils align-default">
 <tbody>
@@ -669,6 +678,31 @@
 </table>
 </div>
 </section>
+<section id="deformation">
+<h2>Deformation<a class="headerlink" href="#deformation" title="Permalink to this heading">#</a></h2>
+<p class="rubric">Classes</p>
+<div class="table-wrapper autosummary longtable docutils container">
+<table class="autosummary longtable docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/m_n_kappa.deformation.LoadStep.html#m_n_kappa.deformation.LoadStep" title="m_n_kappa.deformation.LoadStep"><code class="xref py py-obj docutils literal notranslate"><span class="pre">LoadStep</span></code></a>(load, point)</p></td>
+<td><p>Load-step re-computed from a <a class="reference internal" href="api/m_n_kappa.curves_m_kappa.MKappaCurvePoint.html#m_n_kappa.curves_m_kappa.MKappaCurvePoint" title="m_n_kappa.curves_m_kappa.MKappaCurvePoint"><code class="xref py py-class docutils literal notranslate"><span class="pre">MKappaCurvePoint</span></code></a></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/m_n_kappa.deformation.Loading.html#m_n_kappa.deformation.Loading" title="m_n_kappa.deformation.Loading"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Loading</span></code></a>(beam_length, nodes[, load])</p></td>
+<td><p>compute the load-steps by analysis of decisive m-kappa-curve</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/m_n_kappa.deformation.Deformation.html#m_n_kappa.deformation.Deformation" title="m_n_kappa.deformation.Deformation"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Deformation</span></code></a>(position, load, deformation[, ...])</p></td>
+<td><p>container for computed deformations</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/m_n_kappa.deformation.Deformations.html#m_n_kappa.deformation.Deformations" title="m_n_kappa.deformation.Deformations"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Deformations</span></code></a>(deformations)</p></td>
+<td><p>container for number of deformations</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/m_n_kappa.deformation.Element.html#m_n_kappa.deformation.Element" title="m_n_kappa.deformation.Element"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Element</span></code></a>(nodes, strain_differences, axial_force)</p></td>
+<td><p></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
 </section>
 
         </article>
@@ -685,14 +719,14 @@
               </div>
               <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
             </a>
-          <a class="prev-page" href="api/m_n_kappa.Node.html">
+          <a class="prev-page" href="api/m_n_kappa.CompositeBeam.html">
               <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
               <div class="page-info">
                 <div class="context">
                   <span>Previous</span>
                 </div>
                 
-                <div class="title">m_n_kappa.Node</div>
+                <div class="title">m_n_kappa.CompositeBeam</div>
                 
               </div>
             </a>
@@ -752,6 +786,7 @@
 <li><a class="reference internal" href="#fitting">Fitting</a></li>
 <li><a class="reference internal" href="#matrices">Matrices</a></li>
 <li><a class="reference internal" href="#loading">Loading</a></li>
+<li><a class="reference internal" href="#deformation">Deformation</a></li>
 </ul>
 </li>
 </ul>

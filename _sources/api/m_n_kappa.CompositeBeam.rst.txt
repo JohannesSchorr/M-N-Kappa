@@ -1,0 +1,66 @@
+﻿m\_n\_kappa.CompositeBeam
+=========================
+
+.. currentmodule:: m_n_kappa
+
+.. autoclass:: CompositeBeam
+
+   
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      
+      
+         ~CompositeBeam.bending_widths
+      
+      
+         ~CompositeBeam.deformation
+      
+      
+         ~CompositeBeam.deformation_over_beam_length
+      
+      
+         ~CompositeBeam.deformations
+      
+      
+         ~CompositeBeam.deformations_at_maximum_deformation_position
+      
+      
+         ~CompositeBeam.deformations_at_maximum_moment_position
+      
+      
+         ~CompositeBeam.membran_widths
+      
+      
+         ~CompositeBeam.nodes_at
+      
+      
+         ~CompositeBeam.nodes_at_decisive_position
+      
+      
+         ~CompositeBeam.slip
+      
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+   
+      ~CompositeBeam.additional_positions
+      ~CompositeBeam.consider_widths
+      ~CompositeBeam.cross_section
+      ~CompositeBeam.element_number
+      ~CompositeBeam.element_standard_length
+      ~CompositeBeam.length
+      ~CompositeBeam.load
+      ~CompositeBeam.load_steps
+      ~CompositeBeam.nodes
+      ~CompositeBeam.positions
+      ~CompositeBeam.shear_connectors
+   
+   

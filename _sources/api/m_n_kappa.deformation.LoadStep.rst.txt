@@ -1,0 +1,21 @@
+﻿m\_n\_kappa.deformation.LoadStep
+================================
+
+.. currentmodule:: m_n_kappa.deformation
+
+.. autoclass:: LoadStep
+
+   
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+   
+      ~LoadStep.load
+      ~LoadStep.point
+   
+   

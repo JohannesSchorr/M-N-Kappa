@@ -1,0 +1,58 @@
+﻿m\_n\_kappa.CompositeNode
+=========================
+
+.. currentmodule:: m_n_kappa
+
+.. autoclass:: CompositeNode
+
+   
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      
+      
+         ~CompositeNode.curvature_by
+      
+      
+         ~CompositeNode.has_shear_connector
+      
+      
+         ~CompositeNode.incremental_deformation
+      
+      
+         ~CompositeNode.max_axial_force
+      
+      
+         ~CompositeNode.maximum_slip
+      
+      
+         ~CompositeNode.min_axial_force
+      
+      
+         ~CompositeNode.moment_by
+      
+      
+         ~CompositeNode.shear_connectors_load_slip
+      
+      
+         ~CompositeNode.shear_force
+      
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+   
+      ~CompositeNode.cross_section
+      ~CompositeNode.curve_points
+      ~CompositeNode.node_number
+      ~CompositeNode.number
+      ~CompositeNode.position
+      ~CompositeNode.shear_connectors
+   
+   

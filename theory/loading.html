@@ -3,7 +3,7 @@
   <head><meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width,initial-scale=1"/>
     <meta name="color-scheme" content="light dark"><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
-<link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" /><link rel="next" title="Slip" href="slip.html" /><link rel="prev" title="Effective widths" href="effective_widths.html" />
+<link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" /><link rel="next" title="Shear-Connectors" href="shear_connectors.html" /><link rel="prev" title="Effective widths" href="effective_widths.html" />
 
     <!-- Generated with Sphinx 5.3.0 and Furo 2022.12.07 -->
         <title>Loading - M-N-κ</title>
@@ -192,6 +192,7 @@
 <li class="toctree-l2"><a class="reference internal" href="m_n_curvature_epsilon.html"><span class="math notranslate nohighlight">\(M\)</span>-<span class="math notranslate nohighlight">\(N\)</span>-<span class="math notranslate nohighlight">\(\kappa\)</span>-<span class="math notranslate nohighlight">\(\varepsilon_\mathrm{\Delta}\)</span>-curve</a></li>
 <li class="toctree-l2"><a class="reference internal" href="effective_widths.html">Effective widths</a></li>
 <li class="toctree-l2 current current-page"><a class="current reference internal" href="#">Loading</a></li>
+<li class="toctree-l2"><a class="reference internal" href="shear_connectors.html">Shear-Connectors</a></li>
 <li class="toctree-l2"><a class="reference internal" href="slip.html">Slip</a></li>
 <li class="toctree-l2"><a class="reference internal" href="deformations.html">Deformations</a></li>
 </ul>
@@ -233,8 +234,10 @@
 <li class="toctree-l2"><a class="reference internal" href="../api/m_n_kappa.SingleLoad.html">m_n_kappa.SingleLoad</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../api/m_n_kappa.SingleSpanSingleLoads.html">m_n_kappa.SingleSpanSingleLoads</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../api/m_n_kappa.SingleSpan.html">m_n_kappa.SingleSpan</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../api/m_n_kappa.Beam.html">m_n_kappa.Beam</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../api/m_n_kappa.Node.html">m_n_kappa.Node</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api/m_n_kappa.CompositeNode.html">m_n_kappa.CompositeNode</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api/m_n_kappa.Beam.html">m_n_kappa.Beam</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api/m_n_kappa.CompositeBeam.html">m_n_kappa.CompositeBeam</a></li>
 </ul>
 </li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../api_developers.html">API for developers</a><input class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" role="switch" type="checkbox"/><label for="toctree-checkbox-6"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
@@ -298,12 +301,18 @@
 <li class="toctree-l2"><a class="reference internal" href="../api/m_n_kappa.matrices.Identity.html">m_n_kappa.matrices.Identity</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../api/m_n_kappa.matrices.LinearEquationsSystem.html">m_n_kappa.matrices.LinearEquationsSystem</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../api/m_n_kappa.loading.ABCSingleSpan.html">m_n_kappa.loading.ABCSingleSpan</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api/m_n_kappa.deformation.LoadStep.html">m_n_kappa.deformation.LoadStep</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api/m_n_kappa.deformation.Loading.html">m_n_kappa.deformation.Loading</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api/m_n_kappa.deformation.Deformation.html">m_n_kappa.deformation.Deformation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api/m_n_kappa.deformation.Deformations.html">m_n_kappa.deformation.Deformations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api/m_n_kappa.deformation.Element.html">m_n_kappa.deformation.Element</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../roadmap.html">Roadmap and To Do’s</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../contributing.html">Contributing</a></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../whatsnew/index.html">Release Notes</a><input class="toctree-checkbox" id="toctree-checkbox-7" name="toctree-checkbox-7" role="switch" type="checkbox"/><label for="toctree-checkbox-7"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
 <li class="toctree-l2"><a class="reference internal" href="../whatsnew/v0.1.0.html">What’s new in 0.1.0 (28th of January 2023)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../whatsnew/v0.2.0.html">What’s new in 0.2.0 (8th of May 2023)</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../license.html">License</a></li>
@@ -368,12 +377,12 @@
       <footer>
         
         <div class="related-pages">
-          <a class="next-page" href="slip.html">
+          <a class="next-page" href="shear_connectors.html">
               <div class="page-info">
                 <div class="context">
                   <span>Next</span>
                 </div>
-                <div class="title">Slip</div>
+                <div class="title">Shear-Connectors</div>
               </div>
               <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
             </a>

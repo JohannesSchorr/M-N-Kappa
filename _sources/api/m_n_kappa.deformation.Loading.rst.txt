@@ -1,0 +1,43 @@
+﻿m\_n\_kappa.deformation.Loading
+===============================
+
+.. currentmodule:: m_n_kappa.deformation
+
+.. autoclass:: Loading
+
+   
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      
+      
+         ~Loading.decisive_m_kappa_curve
+      
+      
+         ~Loading.decisive_position
+      
+      
+         ~Loading.load_steps
+      
+      
+         ~Loading.m_kappa_curve_at
+      
+      
+         ~Loading.maximum_resistance_moments
+      
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+   
+      ~Loading.beam_length
+      ~Loading.nodes
+      ~Loading.load
+   
+   
